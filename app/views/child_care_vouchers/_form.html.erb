@@ -1,0 +1,29 @@
+<%= form_for(@child_care_voucher) do |f| %>
+  <% if @child_care_voucher.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@child_care_voucher.errors.count, "error") %> prohibited this child_care_voucher from being saved:</h2>
+
+      <ul>
+      <% @child_care_voucher.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :ccdf_dependent_no %><br>
+    <%= f.number_field :ccdf_dependent_no %>
+  </div>
+  <div class="field">
+    <%= f.label :ccdf_eligible_children %><br>
+    <%= f.number_field :ccdf_eligible_children %>
+  </div>
+  <div class="field">
+    <%= f.label :ccdf_gross_income %><br>
+    <%= f.text_field :ccdf_gross_income %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

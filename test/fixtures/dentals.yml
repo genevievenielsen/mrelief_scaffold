@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dental_gross_income: 9.99
+  dental_household_size: 1
+
+two:
+  dental_gross_income: 9.99
+  dental_household_size: 1

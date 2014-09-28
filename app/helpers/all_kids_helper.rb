@@ -1,0 +1,2 @@
+module AllKidsHelper
+end

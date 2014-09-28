@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hs_dependent_no: 1
+  hs_gross_income: 9.99
+
+two:
+  hs_dependent_no: 1
+  hs_gross_income: 9.99

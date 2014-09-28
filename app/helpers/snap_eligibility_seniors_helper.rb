@@ -1,0 +1,2 @@
+module SnapEligibilitySeniorsHelper
+end

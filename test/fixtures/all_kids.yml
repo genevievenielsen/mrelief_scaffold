@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  kids_household_size: 1
+  assist_gross_income: 9.99
+  share_gross_income: 9.99
+  premium_1_gross_income: 9.99
+  premium_2_gross_income: 9.99
+
+two:
+  kids_household_size: 1
+  assist_gross_income: 9.99
+  share_gross_income: 9.99
+  premium_1_gross_income: 9.99
+  premium_2_gross_income: 9.99

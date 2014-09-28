@@ -1,0 +1,27 @@
+<h1>Listing head_starts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Hs dependent no</th>
+      <th>Hs gross income</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @head_starts.each do |head_start| %>
+      <tr>
+        <td><%= head_start.hs_dependent_no %></td>
+        <td><%= head_start.hs_gross_income %></td>
+        <td><%= link_to 'Show', head_start %></td>
+        <td><%= link_to 'Edit', edit_head_start_path(head_start) %></td>
+        <td><%= link_to 'Destroy', head_start, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Head start', new_head_start_path %>

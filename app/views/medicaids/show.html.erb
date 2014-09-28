@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Medicaid household size:</strong>
+  <%= @medicaid.medicaid_household_size %>
+</p>
+
+<p>
+  <strong>Medicaid gross income:</strong>
+  <%= @medicaid.medicaid_gross_income %>
+</p>
+
+<%= link_to 'Edit', edit_medicaid_path(@medicaid) %> |
+<%= link_to 'Back', medicaids_path %>

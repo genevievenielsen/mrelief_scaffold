@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ccdf dependent no:</strong>
+  <%= @child_care_voucher.ccdf_dependent_no %>
+</p>
+
+<p>
+  <strong>Ccdf eligible children:</strong>
+  <%= @child_care_voucher.ccdf_eligible_children %>
+</p>
+
+<p>
+  <strong>Ccdf gross income:</strong>
+  <%= @child_care_voucher.ccdf_gross_income %>
+</p>
+
+<%= link_to 'Edit', edit_child_care_voucher_path(@child_care_voucher) %> |
+<%= link_to 'Back', child_care_vouchers_path %>

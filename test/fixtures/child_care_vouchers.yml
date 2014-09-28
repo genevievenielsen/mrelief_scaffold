@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ccdf_dependent_no: 1
+  ccdf_eligible_children: 1
+  ccdf_gross_income: 9.99
+
+two:
+  ccdf_dependent_no: 1
+  ccdf_eligible_children: 1
+  ccdf_gross_income: 9.99

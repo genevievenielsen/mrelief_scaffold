@@ -1,0 +1,25 @@
+<%= form_for(@wic) do |f| %>
+  <% if @wic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@wic.errors.count, "error") %> prohibited this wic from being saved:</h2>
+
+      <ul>
+      <% @wic.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :wic_household_size %><br>
+    <%= f.number_field :wic_household_size %>
+  </div>
+  <div class="field">
+    <%= f.label :wic_gross_income %><br>
+    <%= f.text_field :wic_gross_income %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

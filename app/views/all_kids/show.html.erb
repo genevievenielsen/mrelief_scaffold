@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Kids household size:</strong>
+  <%= @all_kid.kids_household_size %>
+</p>
+
+<p>
+  <strong>Assist gross income:</strong>
+  <%= @all_kid.assist_gross_income %>
+</p>
+
+<p>
+  <strong>Share gross income:</strong>
+  <%= @all_kid.share_gross_income %>
+</p>
+
+<p>
+  <strong>Premium 1 gross income:</strong>
+  <%= @all_kid.premium_1_gross_income %>
+</p>
+
+<p>
+  <strong>Premium 2 gross income:</strong>
+  <%= @all_kid.premium_2_gross_income %>
+</p>
+
+<%= link_to 'Edit', edit_all_kid_path(@all_kid) %> |
+<%= link_to 'Back', all_kids_path %>

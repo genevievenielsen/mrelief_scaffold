@@ -1,0 +1,29 @@
+<%= form_for(@rental_assistance) do |f| %>
+  <% if @rental_assistance.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@rental_assistance.errors.count, "error") %> prohibited this rental_assistance from being saved:</h2>
+
+      <ul>
+      <% @rental_assistance.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :rental_dependent_no %><br>
+    <%= f.number_field :rental_dependent_no %>
+  </div>
+  <div class="field">
+    <%= f.label :rental_gross_income %><br>
+    <%= f.text_field :rental_gross_income %>
+  </div>
+  <div class="field">
+    <%= f.label :rental_status %><br>
+    <%= f.number_field :rental_status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

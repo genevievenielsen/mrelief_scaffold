@@ -1,0 +1,27 @@
+<h1>Listing auto_repair_assistances</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Auto household size</th>
+      <th>Auto gross income</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @auto_repair_assistances.each do |auto_repair_assistance| %>
+      <tr>
+        <td><%= auto_repair_assistance.auto_household_size %></td>
+        <td><%= auto_repair_assistance.auto_gross_income %></td>
+        <td><%= link_to 'Show', auto_repair_assistance %></td>
+        <td><%= link_to 'Edit', edit_auto_repair_assistance_path(auto_repair_assistance) %></td>
+        <td><%= link_to 'Destroy', auto_repair_assistance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Auto repair assistance', new_auto_repair_assistance_path %>

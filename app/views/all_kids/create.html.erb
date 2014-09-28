@@ -1,0 +1,24 @@
+
+<% if @eligible %>
+
+
+     <% if @assist_eligible %>
+            <h4>Based on your household size and income, you likely qualify for All Kids Assist.</h4>
+          <% elsif @share_eligible %>
+            <h4>Based on your household size and income, you likely qualify for All Kids Share.</h4>
+
+          <% elsif @premium1_eligible %>
+            <h4>Based on your household size and income, you likely qualify for All Kids Premium Level 1.</h4>
+
+          <% elsif @premium2_eligible %>
+            <h4>Based on your household size and income, you likely qualify for All Kids Premium Level 2.</h4>
+
+      <% end %>
+
+<% else %>
+
+
+<% end %>
+
+
+

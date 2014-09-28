@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Rta dependent no:</strong>
+  <%= @rta_free_ride.rta_dependent_no %>
+</p>
+
+<p>
+  <strong>Rta gross income:</strong>
+  <%= @rta_free_ride.rta_gross_income %>
+</p>
+
+<%= link_to 'Edit', edit_rta_free_ride_path(@rta_free_ride) %> |
+<%= link_to 'Back', rta_free_rides_path %>

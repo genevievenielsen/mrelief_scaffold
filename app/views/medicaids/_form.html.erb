@@ -1,0 +1,25 @@
+<%= form_for(@medicaid) do |f| %>
+  <% if @medicaid.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@medicaid.errors.count, "error") %> prohibited this medicaid from being saved:</h2>
+
+      <ul>
+      <% @medicaid.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :medicaid_household_size %><br>
+    <%= f.number_field :medicaid_household_size %>
+  </div>
+  <div class="field">
+    <%= f.label :medicaid_gross_income %><br>
+    <%= f.text_field :medicaid_gross_income %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,2 @@
+module SnapEligibilitiesHelper
+end

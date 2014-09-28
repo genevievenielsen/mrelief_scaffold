@@ -1,0 +1,37 @@
+<%= form_for(@all_kid) do |f| %>
+  <% if @all_kid.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@all_kid.errors.count, "error") %> prohibited this all_kid from being saved:</h2>
+
+      <ul>
+      <% @all_kid.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :kids_household_size %><br>
+    <%= f.number_field :kids_household_size %>
+  </div>
+  <div class="field">
+    <%= f.label :assist_gross_income %><br>
+    <%= f.text_field :assist_gross_income %>
+  </div>
+  <div class="field">
+    <%= f.label :share_gross_income %><br>
+    <%= f.text_field :share_gross_income %>
+  </div>
+  <div class="field">
+    <%= f.label :premium_1_gross_income %><br>
+    <%= f.text_field :premium_1_gross_income %>
+  </div>
+  <div class="field">
+    <%= f.label :premium_2_gross_income %><br>
+    <%= f.text_field :premium_2_gross_income %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

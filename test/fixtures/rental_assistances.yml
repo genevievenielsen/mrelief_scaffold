@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rental_dependent_no: 1
+  rental_gross_income: 9.99
+  rental_status: 1
+
+two:
+  rental_dependent_no: 1
+  rental_gross_income: 9.99
+  rental_status: 1

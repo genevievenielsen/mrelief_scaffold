@@ -1,0 +1,2 @@
+module RtaFreeRidesHelper
+end
