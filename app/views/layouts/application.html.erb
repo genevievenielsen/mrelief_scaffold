@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>MreliefScaffold</title>
+  <title>Mrelief</title>
 
-
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:600,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="assets/sitestyles.css">
 
   <style>
     /* Only necessary if you are using navbar-fixed-top */
@@ -26,6 +27,7 @@
 <body>
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
@@ -33,39 +35,30 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="/" class="navbar-brand"><%= Rails.application.class.parent_name %></a>
+      <a href="/" class="navbar-brand logo">mRelief</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <!-- <li><a href="/wics">Wics</a></li>
-        <li><a href="/visions">Visions</a></li>
-        <li><a href="/snap_eligibility_seniors">Snap Eligibility Seniors</a></li>
-        <li><a href="/snap_eligibilities">Snap Eligibilities</a></li>
-        <li><a href="/rta_free_rides">Rta Free Rides</a></li>
-        <li><a href="/rental_assistances">Rental Assistances</a></li>
+      <ul class="nav navbar-nav navbar-right">
         <li><a href="/programs">Programs</a></li>
-        <li><a href="/medicaids">Medicaids</a></li>
-        <li><a href="/housing_assistances">Housing Assistances</a></li>
-        <li><a href="/head_starts">Head Starts</a></li>
-        <li><a href="/family_nutritions">Family Nutritions</a></li>
-        <li><a href="/early_head_starts">Early Head Starts</a></li>
-        <li><a href="/dentals">Dentals</a></li>
-        <li><a href="/child_care_vouchers">Child Care Vouchers</a></li>
-        <li><a href="/auto_repair_assistances">Auto Repair Assistances</a></li>
-        <li><a href="/all_kids">All Kids</a></li>
-        <li><a href="/all_city_programs">All City Programs</a></li>
-        <li><a href="#">About</a></li> -->
-        <li><a href="/programs">Programs</a></li>
-        <li><a href="/how_mrelief_works">How mRelief Works</a></li>
+        <li><a href="/how_mrelief_works">How Mrelief Works</a></li>
         <li><a href="/about_us">About Us</a></li>
         <li><a href="/contact_us">Contact Us</a></li>
       </ul>
 
-
+     <!--  <ul class="nav navbar-nav navbar-right">
+        <% if false %>
+          <li><a href="/users/edit">Oscar the Grouch</a></li>
+          <li><a href="/users/sign_out" data-method="delete">Sign out</a></li>
+        <% else %>
+          <li><a href="/users/sign_up">Sign up</a></li>
+          <li><a href="/users/sign_in">Sign in</a></li>
+        <% end %>
+      </ul> -->
     </div><!-- /.navbar-collapse -->
   </nav>
+  </div>
 
   <div class="container">
     <% if notice.present? %>
