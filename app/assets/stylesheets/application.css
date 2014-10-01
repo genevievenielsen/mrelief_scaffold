@@ -17,5 +17,50 @@ ul {
 h1,h2,h3 {
   font-family: 'Source Sans Pro', sans-serif;
   text-align: center;
-
 }
+
+p{
+  text-align: center;
+}
+
+/*HOMEPAGE*/
+
+.homepage-marquee {
+  padding:100px 0 40px 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.subhead {
+  font-size: 20px;
+  text-align: center;
+}
+
+.btn {
+  font-family: 'Source Sans Pro', sans-serif;
+  margin: 40px auto 60px auto;
+}
+
+.homepage-btn {
+  margin: 0px auto 0px auto;
+  width: 220px;
+}
+
+.divider {
+ border-bottom: 1px solid #CCCCCC;
+ margin-bottom: 40px;
+}
+
+.logo-padding {
+  padding: 30px 30px 20px 30px;
+}
+
+.footer {
+  padding: 30px 0 40px 0;
+  border-top: 1px solid #CCCCCC;
+  background-color:#f4f4f4;
+  border-bottom:none;
+  width: 100%;
+}
+

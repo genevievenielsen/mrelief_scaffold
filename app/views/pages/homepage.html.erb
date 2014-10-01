@@ -1,11 +1,29 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <%= image_tag("homepage_marquee.png", :class => "img-responsive col-md-8 col-md-offset-2 homepage-marquee") %>
+    <%= image_tag("homepage_marquee.png", :class => "img-responsive homepage-marquee") %>
   </div>
-  <div class="row">
+  <div class="row divider">
     <h1>Check your eligibility for benefits in Chicago & Illinois</h1>
     <p class="subhead">Eligibility requirements can be difficult to find, we've created a process that makes it easy</p>
-    <button type="button" class="btn btn-success btn-lg homepage-btn">Find out if you qualify</button >
+    <div class="homepage-btn">
+    <%= link_to("Find out if you qualify", "/programs", :class => "btn btn-success btn-lg", :role => "button") %>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <h2>A Little More About Us</h2>
+    <p class="col-md-10 col-md-offset-1">We are ruby developers and alumni of The Starter League’s Web Development program, based in Chicago. Our additional expertise include Public Policy, Economics, and Design. Working in partnership with Mayor Rahm Emmanuel’s Innovation Delivery Team and Chicago’s City Centers, we have also received tremendous support from civic tech group, Open City and their "Open Gov Hack Night", a group of developers and open data lovers dedicated to open government data in the city of Chicago.</p>
+      <div class="col-md-11 col-md-offset-1">
+        <%= image_tag("opencity.jpg", :class => "logo-padding") %>
+        <%= image_tag("tsl.jpg", :class => "logo-padding") %>
+        <%= image_tag("cityofchicago.jpg", :class => "logo-padding") %>
+        <%= image_tag("smartchicagologo.jpg", :class => "logo-padding") %>
+        <%= image_tag("pblogo.jpg", :class => "logo-padding") %>
+      </div>
+      <div class="col-md-6 col-md-offset-5">
+          <%= link_to("Learn more about us", "/about_us", :class => "btn btn-primary") %>
+      </div>
   </div>
 </div>
 
