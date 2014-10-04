@@ -1,5 +1,83 @@
-<h1>New head_start</h1>
+<div class= "container">
 
-<%= render 'form' %>
+<div class="page-header col-md-10 col-md-offset-1" style="border:none;">
+  <h1>Do I qualify for Head Start?</h1>
 
-<%= link_to 'Back', head_starts_path %>
+<div class="subhead">
+  <p>Head Start provides educational and early childhood development activities that promote school readiness for three to five year old children from low-income families. It includes free medical, dental, and mental health services and nutritious meals, as well as parent education and training.</p>
+  </div>
+
+  <p>You can find more information on Head Start <a href="http://chicagoearlylearning.org/faq">here.</a></p>
+</div>
+
+<% if @head_start.errors.any? %>
+  <% @head_start.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="row">
+  <div class="panel panel-default col-md-8 col-md-offset-2">
+  <div class="panel-body">
+    <form action="/create_head_start" role="form">
+
+<!-- Label and input for child-birthdate -->
+
+<div class="form-group col-sm-12">
+<p class="allthatapply">If you are either pregnant or have a child who is between 3 and 5 years old, you may be eligible for Head Start.</p>
+    <label for="child_birthdate" id="case_management" >Is the applicant child 3-years-old by Sep. 1st and not 5-years-old before Sep. 1st?</label>
+
+  <div class="row">
+    <div class="col-sm-6">
+        <div id="child-birthdate">
+         <%= radio_button_tag 'child_birthdate', 'yes' %> yes
+        <%= radio_button_tag 'child_birthdate', 'no' %> no
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Label and input for hs_dependent_no -->
+
+   <div class="form-group col-md-12">
+    <label for="hs_dependent_no">How many
+        dependents (including yourself) are in your household?
+    </label>
+    <%= link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "Number of people living in your household, including yourself."} %>
+
+    <div class="row">
+    <div class="col-md-4">
+      <input type="text" id="hs_dependent_no" name="hs_dependent_no" placeholder="For example: 3" class="form-control" value="<%= @head_start.hs_dependent_no %>" required>
+    </div>
+  </div>
+  </div>
+
+
+
+  <!-- Label and input for hs_gross_income -->
+   <div class="form-group col-sm-9">
+    <label for="hs_gross_income">
+      What is your gross annual income?
+    </label>
+       <%= link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "Your income per year before tax deductions."} %>
+
+    <div class="input-group">
+      <span class="input-group-addon">$</span>
+        <input  <input type="text" id="hs_gross_income" name="hs_gross_income" placeholder="For example: 30000" class="form-control" value="<%= @head_start.hs_gross_income %>" required>
+      <span class="input-group-addon">.00</span>
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-primary">Find out if I qualify</button>
+    </div>
+  </div>
+
+
+</form>
+</div>
+</div>
+</div>

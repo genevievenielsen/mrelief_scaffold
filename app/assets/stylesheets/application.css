@@ -14,13 +14,13 @@ ul {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-h1,h2,h3 {
+h1,h2,h3,h4 {
   font-family: 'Source Sans Pro', sans-serif;
-  text-align: center;
+  /*text-align: center;*/
 }
 
-p{
-  text-align: center;
+p {
+  /*text-align: center;*/
 }
 
 /*HOMEPAGE*/
@@ -56,6 +56,7 @@ p{
   padding: 30px 30px 20px 30px;
 }
 
+
 .footer {
   padding: 30px 0 40px 0;
   border-top: 1px solid #CCCCCC;
@@ -70,3 +71,72 @@ p{
   padding-top: 30px;
 }
 
+/*ALL PROGRAMS*/
+
+a:hover {
+  text-decoration: none;
+}
+
+
+.allprograms-background{
+  background-color: #f2f2f2;
+}
+
+
+/*.btn-full {
+  width: 100%;
+  border-radius: 0px;
+}
+*/
+.thumbnail{
+  height: 170px;
+  text-align: center;
+  padding: 0 30px 30px 30px;
+}
+
+.btn-program{
+  position: absolute;
+  bottom:0;
+  left: 0;
+  width: 100%;
+  border-radius: 0;
+
+}
+
+.program-heading{
+  text-align: center;
+  padding-bottom: 30px;
+  color: #4582ec;
+}
+
+/*PROGRAM PAGE*/
+
+.page-header {
+  border:none;
+  text-align: center;
+}
+
+.panel {
+  /*width: 960px;*/
+  padding-top:15px;
+/*  display: block;
+  margin-left: auto;
+  margin-right: auto;*/
+}
+
+.allthatapply{
+  font-weight: bold;
+  text-align: left;
+}
+
+ /*HOW*/
+ .left-align{
+  text-align: left;
+ }
+
+.bluedivider{
+  background-color: #4582ec;
+  margin: 20px 0 10px 0;
+  height: 10px;
+  width: 40px;
+}
