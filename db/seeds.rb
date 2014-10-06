@@ -716,7 +716,7 @@ c.save
 
 p = Program.new
 p.name = "Food Stamps"
-p.url = "/mrelief"
+p.url = "/snap_eligibilities/new"
 p.description = "Nutrition assistance to low-income people and families"
 p.location = "chicago"
 p.save

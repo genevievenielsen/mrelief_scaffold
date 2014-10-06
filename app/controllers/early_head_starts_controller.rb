@@ -1,6 +1,7 @@
 class EarlyHeadStartsController < ApplicationController
   before_action :set_early_head_start, only: [:show, :edit, :update, :destroy]
-
+  skip_before_action :authenticate_user!, :only => :index
+  skip_before_filter :verify_authenticity_token
 
   # GET /early_head_starts/new
  def new

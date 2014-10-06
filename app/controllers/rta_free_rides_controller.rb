@@ -1,6 +1,7 @@
 class RtaFreeRidesController < ApplicationController
   before_action :set_rta_free_ride, only: [:show, :edit, :update, :destroy]
-
+  skip_before_action :authenticate_user!, :only => :index
+  skip_before_filter :verify_authenticity_token
 
   def new
     @rta_free_ride = RtaFreeRide.new

@@ -1,5 +1,7 @@
 class AllKidsController < ApplicationController
   before_action :set_all_kid, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, :only => :index
+  skip_before_filter :verify_authenticity_token
 
   # GET /all_kids
   # GET /all_kids.json
@@ -77,15 +79,7 @@ class AllKidsController < ApplicationController
 
     end
 
-    respond_to do |format|
-      if @all_kid.save
-        format.html { redirect_to @all_kid, notice: 'All kid was successfully created.' }
-        format.json { render :show, status: :created, location: @all_kid }
-      else
-        format.html { render :new }
-        format.json { render json: @all_kid.errors, status: :unprocessable_entity }
-      end
-    end
+
   end
 
 

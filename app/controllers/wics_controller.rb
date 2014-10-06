@@ -1,5 +1,7 @@
 class WicsController < ApplicationController
   before_action :set_wic, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, :only => :index
+  skip_before_filter :verify_authenticity_token
 
 
 
