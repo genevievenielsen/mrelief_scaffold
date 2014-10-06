@@ -1,0 +1,198 @@
+// Font styles ----------------------------------------------------------------
+// ----------------------------------------------------------------------------
+$font-base: 16px;
+$font-family: helvetica, arial, sans-serif;
+$font-weight: normal;
+
+
+// Color Variables ------------------------------------------------------------
+// ----------------------------------------------------------------------------
+$color-white: #fff;
+$color-black: #000;
+$color-gray-light: #eee;
+$color-gray-medium: #ccc;
+$color-gray-medium-variant: darken($color-gray-medium, 20%);
+
+$color-primary: #2ea0eb;
+$color-secondary: #ff7a4d;
+$color-success: #89d085;
+$color-danger: #ff7373;
+
+
+// Mixins ---------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+
+// REM conversion
+@mixin rem($property, $values) {
+  // Create a couple of empty lists as output buffers.
+  $font-size: $font-base; // should be consistent with your html/body font-size
+  $px-values: ();
+  $rem-values: ();
+
+  // Loop through the $values list
+  @each $value in $values {
+    // For each property value, if it's in rem or px, derive both rem and
+    // px values for it and add those to the end of the appropriate buffer.
+    // Ensure all pixel values are rounded to the nearest pixel.
+    @if $value == 0 or $value == 0px {
+      // 0 -- use it without a unit
+      $px-values: join($px-values, 0);
+      $rem-values: join($rem-values, 0);
+    } @else if type-of($value) == number and not unitless($value) and (unit($value) == px) {
+      // px value given - calculate rem value from font-size
+      $new-rem-value: $value / $font-size;
+      $px-values: join($px-values, round($value));
+      $rem-values: join($rem-values, #{$new-rem-value}rem);
+    } @else {
+      // unitless value - use those directly as rem and calculate the px-fallback
+      $px-values: join($px-values, round($value * $font-size));
+      $rem-values: join($rem-values, #{$value}rem);
+    }
+  }
+
+  // output the converted rules
+  #{$property}: $px-values;
+  #{$property}: $rem-values;
+}
+
+// Change btn colors
+@mixin btn-color($btn-color) {
+  background: $btn-color;
+  box-shadow: inset 0 0 0 1px mix($color-black, $btn-color, 20%);
+
+  &:hover {
+    background: mix($color-white, $btn-color, 10%);
+    box-shadow: inset 0 0 0 1px mix($color-black, $btn-color, 25%);
+  }
+
+  &:active {
+    @include rem(top, 1px);
+    box-shadow: 0 0 0 0;
+  }
+}
+
+
+
+// Basic styles ---------------------------------------------------------------
+// ----------------------------------------------------------------------------
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: $font-family;
+  font-size: $font-base/16px * 100%;
+  font-weight: $font-weight;
+}
+
+body {
+  @include rem(margin, 25px);
+}
+
+.cf:before,
+.cf:after { content: ''; display: table; }
+.cf:after { clear: both; }
+
+
+// Calculator body ------------------------------------------------------------
+.calculator {
+  @include rem(border-radius, 1px);
+  @include rem(padding, 20px);
+  @include rem(width, 301px);
+  background: $color-gray-light;
+  box-shadow: inset 0 0 0 1px $color-gray-medium;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+
+// Top portion ----------------------------------------------------------------
+// Screen
+.screen {
+  @include rem(border-radius, 1px);
+  @include rem(height, 40px);
+  @include rem(letter-spacing, 1px);
+  @include rem(line-height, 40px);
+  @include rem(padding, 0 10px);
+  @include rem(width, 194px);
+  background: rgba(250, 250, 250, .7);
+  box-shadow: inset 0 1px rgba(0, 0, 0, .2),
+              inset 0 0 1px 1px rgba(0, 0, 0, .1);
+  color: $color-gray-medium-variant;
+  float: right;
+  font-weight: bold;
+  text-align: right;
+}
+
+// Calc button styles ---------------------------------------------------------
+.btn-calc {
+  @include rem(border-radius, 1px);
+  @include rem(height, 36px);
+  @include rem(line-height, 36px);
+  @include rem(margin, 0 7px 15px 0);
+  @include rem(width, 60px);
+  background: $color-white;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .2);
+  color: $color-gray-medium-variant;
+  cursor: pointer;
+  float: left;
+  position: relative;
+  text-align: center;
+  transition: box-shadow .01s ease-in-out,
+              color .01s ease-in-out,
+              top .01s ease-in-out;
+  top: 0;
+  user-select: none;
+
+  &:hover {
+    background: $color-primary;
+    box-shadow: inset 0 0 0 1px mix($color-black, $color-primary, 25%);
+    color: $color-white;
+  }
+
+  &:active {
+    @include rem(top, 1px);
+    box-shadow: 0 0 0 0;
+  }
+
+  &:nth-child(4n) {
+    margin-right: 0;
+  }
+}
+
+// style different type of keys (operators/evaluate/clear) differently
+.operator {
+  @include btn-color($color-secondary);
+  color: $color-white;
+}
+
+// Evaluate button
+.eval {
+  @include btn-color($color-success);
+  color: $color-white;
+}
+
+// Clear button
+.clear {
+  @include btn-color($color-danger);
+  color: $color-white;
+  float: left;
+}
+
+// Close button
+.close {
+  @include rem(padding, 10px 30px);
+  background: $color-gray-medium-variant;
+  color: $color-white;
+  display: block;
+  margin-left: 0;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover {
+    background: darken($color-gray-medium-variant, 15%);
+  }
+}
