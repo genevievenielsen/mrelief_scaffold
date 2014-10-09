@@ -23,6 +23,10 @@
   box-sizing:border-box;
 }
 
+header{
+  margin-top: 60px;
+}
+
 body{
   margin-left: 0px;
   margin-right: 0px;
@@ -177,6 +181,11 @@ a:hover {
   border:none;
   text-align: center;
   margin-top: 80px;
+}
+
+.subsection{
+  text-align: center;
+  margin-top: 40px;
 }
 
 .panel {
