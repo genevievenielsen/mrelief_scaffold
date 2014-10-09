@@ -1,14 +1,16 @@
-<div class="container" style="padding-bottom:150px">
+<div class="container">
 
 <% if @eligible %>
-  <div class="page-header" style="border:none">
-      <h1>Do I qualify for All Kids?</h1>
-        <p class="page lead">The All Kids program offers many Illinois children comprehensive healthcare that includes doctors visits, hospital stays, prescription drugs, vision care, dental care and medical devices like eyeglasses and asthma inhalers.</p>
+  <div class="page-header">
+      <!-- <h1>Do I qualify for All Kids?</h1> -->
+        <!-- <p class="subhead">The All Kids program offers many Illinois children comprehensive healthcare that includes doctors visits, hospital stays, prescription drugs, vision care, dental care and medical devices like eyeglasses and asthma inhalers.</p> -->
   </div>
 
-      <div class="panel panel-default" style="margin: 0 0 40px 0">
-        <div class="panel-body">
-          <p style="font-size:32px; font-style:italic">You may be in luck!</p>
+
+ <div class="row" style="text-align:center;">
+    <div class="col-md-8 col-md-offset-2">
+        <i class="fa fa-check-circle fa-5x"></i>
+          <h1>You may be in luck!</h1>
 
 
           <% if @assist_eligible %>
@@ -24,26 +26,70 @@
 
           <% end %>
           <br>
-          <%= link_to "Click Here", "https://abe.illinois.gov/abe/access/accessController?id=0.9912272225853554", :class => "btn btn-primary btn-sm" %> to complete your application online.</p>
+
+          <p class="subhead">To complete your application online</p>
+          <%= link_to "Click Here", "https://abe.illinois.gov/abe/access/accessController?id=0.9912272225853554", :class => "btn btn-success btn-resolution" %>
+          </div>
+          </div>
 
       <% else %>
 
-  <div class="page-header" style="border:none">
+ <!--  <div class="page-header">
           <h1>Do I qualify for All Kids?</h1>
           <p class="page lead">The All Kids program offers many Illinois children comprehensive healthcare that includes doctors visits, hospital stays, prescription drugs, vision care, dental care and medical devices like eyeglasses and asthma inhalers.</p>
-  </div>
+  </div> -->
 
-      <div class="panel panel-default" style="margin: 0 0 40px 0">
-        <div class="panel-body">
-          <p style="font-size:32px; font-style:italic">We apologize.</p>
+      <!-- <div class="panel panel-default" style="margin: 0 0 40px 0">
+        <div class="panel-body"> -->
+<br>
+<br>
+  <div class="row" style="text-align:center;">
+    <div class="col-md-8 col-md-offset-2">
+        <!-- <i class="fa fa-times-circle fa-5x"></i> -->
+          <h1>Something else in mind!</h1>
 
-            <p>Based on your household size and income, you likely do not qualify for All Kids. However, if you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.
-            <%= link_to "Click Here", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-primary btn-sm" %> to learn more about fees.  Get Covered Illinois is a resource that helps families register for insurance at in-person events.
-            <%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-primary btn-sm" %> to find Get Covered Illinois events in your area. You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.
-            </p>
+            <h4>So, it looks like you possibly don't qualify for <a href="/all_kids/new"> All Kids</a>. However, our friends at
+            Purple Binder found some other resources that might help. If you and your family don't have health coverage in 2014, you may have to pay a fee - and all of your health care.
+            </h4>
+
+            <br>
+            <br>
+
+
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-6">
+
+            <p class="subhead">To learn more about fees<br> from Get Covered</p>
+            <%= link_to "Click Here", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution" %>
+          </div>
+
+          <div class="col-md-6 col-sm-6 col-xs-6">
+
+            <p class="subhead"> To find Get Covered <br>Illinois events in your area</p>
+            <%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution" %>
+          </div>
+        </div>
+
+        <br>
+        <br>
+        <br>
+
+          <div>
+            <p> Get Covered Illinois is a resource that helps families register for insurance at in-person events.<br>You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.</p>
+          </div>
+
+          <br>
+
+
+          <%= image_tag("pblogo.jpg", :class => "logo-padding") %>
+
 
 
         <% end %>
       </div>
 </div>
+<br>
+<br>
+<br>
+
 

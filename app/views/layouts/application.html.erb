@@ -6,14 +6,12 @@
 
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:600,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="assets/sitestyles.css">
 
   <style>
     /* Only necessary if you are using navbar-fixed-top */
-    body {
-      padding-top: 50px;
-    }
+
   </style>
 
   <%= stylesheet_link_tag    "application", :media => "all" %>
@@ -24,6 +22,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -46,41 +45,17 @@
         <li><a href="/about_us">About Us</a></li>
         <li><a href="/contact_us">Contact Us</a></li>
       </ul>
-
-     <!--  <ul class="nav navbar-nav navbar-right">
-        <% if false %>
-          <li><a href="/users/edit">Oscar the Grouch</a></li>
-          <li><a href="/users/sign_out" data-method="delete">Sign out</a></li>
-        <% else %>
-          <li><a href="/users/sign_up">Sign up</a></li>
-          <li><a href="/users/sign_in">Sign in</a></li>
-        <% end %>
-      </ul> -->
-    </div><!-- /.navbar-collapse -->
   </nav>
   </div>
 
-  <div class="">
-    <% if notice.present? %>
-      <div class="alert alert-dismissable alert-success">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <%= notice %>
-      </div>
-    <% end %>
-
-    <% if alert.present? %>
-      <div class="alert alert-dismissable alert-warning">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <%= alert %>
-      </div>
-
-    <% end %>
 
     <%= yield %>
+
     </div>
+</div>
+</div>
 
-
-    <div class="navbar-default footer" role="navigation">
+    <footer class="navbar-default footer" role="navigation">
       <div class="container">
       <div class="col-md-2">
         <div class="row">
@@ -95,9 +70,8 @@
         <div class="col-md-10 col-sm-12 col-xs-12">
            <p id="disclaimer"> *If you have a disability, are not a US citizen, and/or your relative is a caregiver, we have not yet factored your status into our eligibility forms. We look forward to an update soon and will keep you posted.  mRelief does not predict with 100% accuracy whether users will definitely be approved for benefits; but instead provides users with information about whether it is worth it to invest the time required for the application process.</p>
         </div>
-        </div>
       </div>
-      </div>
+    </footer>
 
     </div>
   </div>

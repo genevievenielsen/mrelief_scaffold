@@ -1,29 +1,28 @@
-<div class="container-fluid">
+<header>
+<div class="container">
   <div class="row">
     <%= image_tag("homepage_marquee.png", :class => "img-responsive homepage-marquee") %>
   </div>
-  <div class="row divider">
+  <div class="row">
     <h1 style="text-align:center;">Check your eligibility for benefits in Chicago & Illinois</h1>
     <p class="subhead">Eligibility requirements can be difficult to find, we've created a process that makes it easy</p>
-    <div class="homepage-btn">
-    <%= link_to("Find out if you qualify", "/programs", :class => "btn btn-success btn-lg", :role => "button") %>
+    <div style="text-align:center;">
+    <%= link_to("Get Started", "/programs", :class => "btn btn-primary btn-lg", :role => "button") %>
     </div>
-  </div>
+    </div>
+  </header>
 
+<hr>
 
-<div class="container">
+<div>
   <div class="row">
     <h2 class="page-header">A Little More About Us</h2>
     <p class="col-md-10 col-md-offset-1" style="text-align:center;">We are ruby developers and alumni of The Starter League’s Web Development program, based in Chicago. Our additional expertise include Public Policy, Economics, and Design. Working in partnership with Mayor Rahm Emmanuel’s Innovation Delivery Team and Chicago’s City Centers, we have also received tremendous support from civic tech group, Open City and their "Open Gov Hack Night", a group of developers and open data lovers dedicated to open government data in the city of Chicago.</p>
-      <div class="col-md-11 col-md-offset-1">
-        <%= image_tag("opencity.jpg", :class => "logo-padding") %>
-        <%= image_tag("tsl.jpg", :class => "logo-padding") %>
-        <%= image_tag("cityofchicago.jpg", :class => "logo-padding") %>
-        <%= image_tag("smartchicagologo.jpg", :class => "logo-padding") %>
-        <%= image_tag("pblogo.jpg", :class => "logo-padding") %>
+      <div class="col-md-12" style="text-align:center;">
+        <%= image_tag("logos.jpg", :class => "") %>
       </div>
-      <div class="col-md-6 col-md-offset-5">
-          <%= link_to("Learn more about us", "/about_us", :class => "btn btn-primary") %>
+      <div style="text-align:center;">
+          <%= link_to("Learn More About Us", "/about_us", :class => "btn btn-info") %>
       </div>
   </div>
   </div>

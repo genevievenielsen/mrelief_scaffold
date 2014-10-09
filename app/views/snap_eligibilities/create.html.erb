@@ -1,9 +1,87 @@
-  <% if @eligible == 'yes' %>
+<div class="container">
+
+<% if @eligible == 'yes' %>
+<div class="page-header"></div>
+
+      <div class="row" style="text-align:center;">
+         <div class="col-md-8 col-md-offset-2">
+             <i class="fa fa-check-circle fa-5x"></i>
+              <h1>You may be in luck!</h1>
+              <h4>Based on your household size and income, you likely qualify for food stamps.</h4>
+
+        <br>
+        <br>
+        <br>
+
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-6">
+            <p class="subhead"> To find a resource center near you:</p>
+          <%= link_to "Click Here", "http://abe.illinois.gov", :class => "btn btn-success btn-resolution" %>
+          </div>
+
+          <div class="col-md-6 col-sm-6 col-xs-6">
+            <p class="subhead"> To apply online before you visit:</p>
+          <%= link_to "Click Here", "https://abe.illinois.gov/abe/access/accessController?id=0.3971759164763745", :class => "btn btn-success btn-resolution" %>
+          </div>
+
+      </div>
+    </div>
+
+    <% elsif @eligible == 'maybe' %>
+    <div class="page-header"></div>
+
+      <div class="row" style="text-align:center;">
+        <div class="col-md-8 col-md-offset-2">
+          <i class="fa fa-exclamation-circle fa-5x"></i>
+            <h1>Something else in mind!</h1>
+            <h4>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a Food Stamp expert that can share more information on your probable eligibility.</h4>
+
+            <p>Call 312.341.1070 to find a Legal Assistance Foundation (LAF) Paralegal to discuss your food stamp eligibility.</p>
+
+            <br>
+
+              <br>
+
+              <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                  <p class="subhead"> To find a resource center near you:</p>
+                <%= link_to "Click Here", "http://abe.illinois.gov", :class => "btn btn-success btn-resolution" %>
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                  <p class="subhead"> To apply online before you visit:</p>
+                <%= link_to "Click Here", "https://abe.illinois.gov/abe/access/accessController?id=0.3971759164763745", :class => "btn btn-success btn-resolution" %>
+                </div>
+
+            </div>
+          </div>
+      </div>
+    </div>
 
 
-  <% elsif @eligible == 'maybe' %>
+      <% elsif @eligible == 'no' %>
+<div class="page-header"></div>
 
+      <div class="row" style="text-align:center;">
+        <div class="col-md-8 col-md-offset-2">
+            <h1>Something else in mind!</h1>
+            <h4>Based on your household size and income, you likely do not qualify for food stamps.</h4>
 
-  <% elsif @eligible == 'no' %>
+            <br>
 
-  <% end %>
+          <div class="row">
+            <p class="subhead">Direct2Food is an online resource that will help you locate the food pantries, soup kitchens, and meal programs closest to you. To find resources near you</p>
+            <%= link_to "Click Here", "http://www.direct2food.org/", :class => "btn btn-success btn-resolution" %>
+          </div>
+
+          <br>
+          <p> If you need food assistance, text FOOD to 877-877 to find a meal site near you.</p>
+
+        <% end %>
+      </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>

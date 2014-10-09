@@ -17,6 +17,16 @@
  *= require_self
  */
 
+*{
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  box-sizing:border-box;
+}
+
+body{
+  margin-left: 0px;
+  margin-right: 0px;
+}
 
 .logo {
   font-family: 'Droid Serif', serif;
@@ -29,20 +39,50 @@
   border-bottom: 1px solid #CCCCCC;
 }
 
+.navbar-default .navbar-nav>li>a{
+ color: #333333;
+}
+
+.navbar-default .navbar-nav>li>a:hover{
+  color: #0056ec;
+}
+
+.nav li a{
+  border: white;
+}
+
+.nav li a:hover{
+  border: white;
+  color: red;
+
+}
+
 ul {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-h1,h2,h3,h4 {
+h1,h2,h3 {
   font-family: 'Source Sans Pro', sans-serif;
   /*text-align: center;*/
 }
 
+h4 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: normal 400;
+}
+
 p {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: normal 400;
   /*text-align: center;*/
 }
 
 /*HOMEPAGE*/
+
+.header-background{
+  background-color: #4582ec;
+  color:white;
+}
 
 .homepage-marquee {
   padding:100px 0 40px 0;
@@ -59,17 +99,17 @@ p {
 .btn {
   font-family: 'Source Sans Pro', sans-serif;
   margin: 40px auto 60px auto;
+  border-radius: 0px;
+}
+
+.program-btn {
+  margin: 30px auto 0px auto;
 }
 
 .homepage-btn {
   margin: 0px auto 0px auto;
-  width: 220px;
 }
 
-.divider {
- border-bottom: 1px solid #CCCCCC;
- margin-bottom: 40px;
-}
 
 .logo-padding {
   padding: 30px 30px 20px 30px;
@@ -77,11 +117,11 @@ p {
 
 
 .footer {
+  margin-top: 30px;
   padding: 30px 0 40px 0;
   border-top: 1px solid #CCCCCC;
-  background-color:#f4f4f4;
+  /*background-color:#f4f4f4;*/
   border-bottom:none;
-  width: 100%;
 }
 
 #disclaimer {
@@ -98,7 +138,7 @@ a:hover {
 
 
 .allprograms-background{
-  background-color: #f2f2f2;
+  background-color: #F4F4F4;
 }
 
 
@@ -109,8 +149,11 @@ a:hover {
 */
 .thumbnail{
   height: 170px;
+  background-color: #fbfbfb;
   text-align: center;
   padding: 0 30px 30px 30px;
+  border: 2px solid #D7D7D7;
+  border-radius: 0;
 }
 
 .btn-program{
@@ -133,11 +176,14 @@ a:hover {
 .page-header {
   border:none;
   text-align: center;
+  margin-top: 80px;
 }
 
 .panel {
   /*width: 960px;*/
   padding-top:15px;
+  font-family: 'Source Sans Pro', sans-serif;
+  background-color: #FAFAFA;
 /*  display: block;
   margin-left: auto;
   margin-right: auto;*/
@@ -158,4 +204,12 @@ a:hover {
   margin: 20px 0 10px 0;
   height: 10px;
   width: 40px;
+}
+
+.btn-resolution{
+  margin: 10px auto 10px auto;
+}
+
+.form-group{
+  font-family: 'Source Sans Pro', sans-serif;
 }
