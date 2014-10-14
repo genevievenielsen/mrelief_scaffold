@@ -39,6 +39,20 @@ body{
   font-size: 24px;
 }
 
+.btn-donate {
+  border-radius: 0px !important;
+  background-color: #3fad46;
+  color: white !important;
+
+}
+
+.btn-donate:hover {
+  border-radius: 0px !important;
+  background-color: #349a3a !important;
+  color: white !important;
+
+}
+
 .navbar {
   border-bottom: 1px solid #CCCCCC;
 }
@@ -57,8 +71,6 @@ body{
 
 .nav li a:hover{
   border: white;
-  color: red;
-
 }
 
 ul {
@@ -105,6 +117,7 @@ p {
   margin: 40px auto 60px auto;
   border-radius: 0px;
 }
+
 
 .program-btn {
   margin: 30px auto 0px auto;

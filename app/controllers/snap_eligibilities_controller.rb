@@ -60,6 +60,8 @@ class SnapEligibilitiesController < ApplicationController
           @eligible = 'maybe'
         end
 
+
+
       # this is the logic for disability
       if params[:disabled].present?
 
