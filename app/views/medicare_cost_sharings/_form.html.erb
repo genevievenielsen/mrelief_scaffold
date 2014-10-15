@@ -1,0 +1,29 @@
+<%= form_for(@medicare_cost_sharing) do |f| %>
+  <% if @medicare_cost_sharing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@medicare_cost_sharing.errors.count, "error") %> prohibited this medicare_cost_sharing from being saved:</h2>
+
+      <ul>
+      <% @medicare_cost_sharing.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :household_size %><br>
+    <%= f.number_field :household_size %>
+  </div>
+  <div class="field">
+    <%= f.label :medicare_cost_sharing %><br>
+    <%= f.text_field :medicare_cost_sharing %>
+  </div>
+  <div class="field">
+    <%= f.label :premium_only %><br>
+    <%= f.text_field :premium_only %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

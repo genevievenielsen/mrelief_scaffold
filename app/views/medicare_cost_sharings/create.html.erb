@@ -1,0 +1,49 @@
+<div class="container" style="padding-bottom:150px">
+
+ <div class="page-header" style="border:none">
+    <h1>Do I qualify for the Medicare Cost Sharing Program?</h1>
+    <p class="page lead">If you are receiving Medicare through the Social Security Administration, you may qualify for a Medicare cost sharing program that will pay your Medicare Part B premium and -- depending on your income -- your Medicare deductibles and co-pays. </p>
+  </div>
+
+<% if @eligible == 'yes' %>
+  <div class="page-header"></div>
+
+    <div class="row" style="text-align:center;">
+      <div class="col-md-8 col-md-offset-2">
+        <i class="fa fa-exclamation-circle fa-5x"></i>
+          <h1>You may be in luck!</h1>
+           <h4>Based on your answers, you may qualify for a Medicare Cost Sharing Program.  Important Note:  If you previously opted out of Medicare part B, the Medicare cost sharing program, you may be able to get your Medicare premium paid now. Please contact or visit your LAF paralegal to re-enroll for Medicare Part B. You can see the nearest Community Service Center near you.</h4>
+          <br>
+          <div class="col-md-offset-3 col-md-6 col-sm-6 text-center" style="text-align:center;">
+            <ul class="list-group" style="text-align:left;">
+              <li class="list-group-item" style="font-weight:bold"><%= @lafcenter.center %> </li>
+              <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @user_zipcode %> </li>
+              <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @lafcenter.telephone %> </li>
+              <li class="list-group-item"><%= @lafcenter.spanish %> </li>
+            </ul>
+
+          <br>
+          <br>
+        </div>
+    </div>
+    <div class="row img-responsive">
+      <img src="assets/LAFlogo.jpg">
+    </div>
+  </div>
+
+
+<% else %>
+
+    <div class="panel panel-default" style="margin: 0 0 40px 0">
+        <div class="panel-body">
+          <p style="font-size:32px; font-style:italic">We apologize.</p>
+
+          <h4>Based on your answers, you do not currently qualify for Medicare Cost Sharing. However, the Senior Health Insurance Program (SHIP), which is a free statewide health insurance counseling service for Medicare beneficiaries and their caregivers may be able to provide you with more information on what you do qualify for. To contact SHIP, please call (800) 252-8966 or email AGING.SHIP@illinois.gov. Below, see resources to free or reduced clinics near you. </h4>
+
+        </div>
+      </div>
+
+<% end %>
+
+
+</div>

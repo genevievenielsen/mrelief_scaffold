@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  household_size: 1
+  medicare_cost_sharing: 9.99
+  premium_only: 9.99
+
+two:
+  household_size: 1
+  medicare_cost_sharing: 9.99
+  premium_only: 9.99

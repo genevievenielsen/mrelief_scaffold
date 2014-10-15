@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140926015734) do
+ActiveRecord::Schema.define(version: 20141015112843) do
 
   create_table "all_city_programs", force: true do |t|
     t.datetime "created_at"
@@ -78,9 +78,37 @@ ActiveRecord::Schema.define(version: 20140926015734) do
     t.datetime "updated_at"
   end
 
+  create_table "laf_centers", force: true do |t|
+    t.string   "zipcode"
+    t.string   "city"
+    t.string   "center"
+    t.string   "address"
+    t.string   "contact"
+    t.string   "telephone"
+    t.string   "spanish"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "medicaids", force: true do |t|
     t.integer  "medicaid_household_size"
     t.decimal  "medicaid_gross_income"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "medicare_cost_sharings", force: true do |t|
+    t.integer  "household_size"
+    t.decimal  "medicare_cost_sharing"
+    t.decimal  "premium_only"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "organizations", force: true do |t|
+    t.string   "organization_id"
+    t.string   "name"
+    t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -108,6 +136,21 @@ ActiveRecord::Schema.define(version: 20140926015734) do
     t.decimal  "rta_gross_income"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "service_centers", force: true do |t|
+    t.string   "name"
+    t.string   "latitude"
+    t.string   "longitude"
+    t.string   "street"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "phone"
+    t.string   "organization"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "description"
   end
 
   create_table "snap_eligibilities", force: true do |t|

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Snap dependent no:</strong>
+  <%= @snap_eligibility_senior.snap_dependent_no %>
+</p>
+
+<p>
+  <strong>Snap gross income:</strong>
+  <%= @snap_eligibility_senior.snap_gross_income %>
+</p>
+
+<%= link_to 'Edit', edit_snap_eligibility_senior_path(@snap_eligibility_senior) %> |
+<%= link_to 'Back', snap_eligibility_seniors_path %>

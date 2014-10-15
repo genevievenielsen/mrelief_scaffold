@@ -29,8 +29,8 @@
   <% chicago_programs = Program.where(:location => "chicago") %>
   <% chicago_programs.each_with_index do |program| %>
 
-      <div class="col-md-4">
-        <a href="<%= program.url %>" class="thumbnail">
+      <div class="col-md-4" >
+        <a href="<%= program.url %>" class="thumbnail" style="padding:0 20px 20px 20px">
           <span class="caption">
             <h3><%= program.name %></h3>
             <p><%= program.description %></p>
