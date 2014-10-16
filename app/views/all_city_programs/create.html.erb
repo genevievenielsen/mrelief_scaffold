@@ -54,19 +54,19 @@ Here is the code for the all city response page -
 
   <% end %>
 
-  <% if @eligible_rental == 'yes' %>
+<!--   <%# if @eligible_rental == 'yes' %>
 
     <div class="panel panel-default" style="margin: 0 0 40px 0">
       <div class="panel-body">
         <p style="font-size:32px; font-style:italic">You may be in luck!</p>
 
         <p>Based on your rental status, household size and income, you likely qualify for rental assistance.
-      Applications can be filed at any of the City’s six Community Service Centers. For more information about Emergency Rental Assistance, visit your local Community Service Center <%= link_to "here", "http://www.cityofchicago.org/city/en/depts/fss/provdrs/serv/svcs/community_servicecenterlocations.html"%> or call 3-1-1.</p>
+      Applications can be filed at any of the City’s six Community Service Centers. For more information about Emergency Rental Assistance, visit your local Community Service Center <%#= link_to "here", "http://www.cityofchicago.org/city/en/depts/fss/provdrs/serv/svcs/community_servicecenterlocations.html"%> or call 3-1-1.</p>
       </div>
     </div>
 
 
-    <% elsif @eligible_rental == 'no' %>
+    <%# elsif @eligible_rental == 'no' %>
 
       <div class="panel panel-default" style="margin: 0 0 40px 0">
         <div class="panel-body">
@@ -75,7 +75,7 @@ Here is the code for the all city response page -
         </div>
 
       </div>
-  <% end %>
+  <%# end %> -->
 
   <% if @eligible_rta == 'yes' %>
 

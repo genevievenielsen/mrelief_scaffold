@@ -235,3 +235,7 @@ a:hover {
 .form-group{
   font-family: 'Source Sans Pro', sans-serif;
 }
+
+.thumbnail {
+  padding: 0 20px 20px 20px;
+}

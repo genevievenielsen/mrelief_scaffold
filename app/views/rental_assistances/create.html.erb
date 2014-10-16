@@ -1,7 +1,8 @@
-  <% if @eligible %>
+ <% if @eligible == "yes" %>
+
+ <% elsif @eligible == "maybe" %>
 
 
-  <% else %>
-
+  <% elsif @eligible == "no" %>
 
   <% end %>

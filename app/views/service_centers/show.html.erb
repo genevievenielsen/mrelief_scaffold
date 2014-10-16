@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @service_center.name %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @service_center.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @service_center.longitude %>
+</p>
+
+<p>
+  <strong>Street:</strong>
+  <%= @service_center.street %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @service_center.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @service_center.state %>
+</p>
+
+<p>
+  <strong>Zip:</strong>
+  <%= @service_center.zip %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @service_center.phone %>
+</p>
+
+<p>
+  <strong>Organization:</strong>
+  <%= @service_center.organization %>
+</p>
+
+<%= link_to 'Edit', edit_service_center_path(@service_center) %> |
+<%= link_to 'Back', service_centers_path %>

@@ -1,6 +1,6 @@
 class AllKidsController < ApplicationController
   before_action :set_all_kid, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authenticate_user!, :only => :index
+   skip_before_action :authenticate_user!, :only => :index
   skip_before_filter :verify_authenticity_token
 
   # GET /all_kids
@@ -17,10 +17,10 @@ class AllKidsController < ApplicationController
   # POST /all_kids
   # POST /all_kids.json
   def create
-    @all_kid = AllKid.new#(all_kid_params)
+
 
     # if the params hash contains a letter
-    if params[:kids_household_size] !~ /\D/  # returns true if all numbers
+     if params[:kids_household_size] !~ /\D/  # returns true if all numbers
       kids_household_size = params[:kids_household_size].to_i
     else
       kids_household_size = params[:kids_household_size].in_numbers
@@ -39,6 +39,10 @@ class AllKidsController < ApplicationController
       kids_gross_income = kids_gross_income.in_numbers
     end
 
+    if params[:pregnant] == 'yes'
+      kids_household_size = kids_household_size + 1
+    end
+
     if kids_gross_income.present? && kids_household_size.present?
 
       kids_eligibility = AllKid.find_by({ :kids_household_size => kids_household_size })
@@ -49,7 +53,7 @@ class AllKidsController < ApplicationController
          @eligible = true
        end
 
-       if @eligible = true
+       if @eligible ==   true
         # now find out which version they are eligible for
         if kids_gross_income <= kids_eligibility.assist_gross_income
           @assist_eligible = true
@@ -74,6 +78,10 @@ class AllKidsController < ApplicationController
         end
 
         if kids_gross_income > kids_eligibility.premium_2_gross_income
+          @eligible = false
+        end
+
+        if kids_household_size == 1
           @eligible = false
         end
 
