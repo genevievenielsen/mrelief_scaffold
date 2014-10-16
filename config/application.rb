@@ -20,7 +20,7 @@ module MreliefScaffold
     }
 
     config.action_mailer.default_url_options = {
-      :host => "http://mrelief.herokuapp.com/"
+      :host => "http://localhost:3000/"
     }
 
   end
