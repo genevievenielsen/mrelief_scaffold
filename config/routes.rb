@@ -8,8 +8,9 @@ Rails.application.routes.draw do
 
   resources :laf_centers
 
+
   get('/about_us', { :controller => 'pages', :action => 'about_us' })
-  get('/contact_us', { :controller => 'pages', :action => 'contact_us' })
+  post('/contact_us', { :controller => 'pages', :action => 'contact_us' })
   get('/how_mrelief_works', { :controller => 'pages', :action => 'how_mrelief_works' })
   get("/", { :controller => "pages", :action => "homepage" })
 
