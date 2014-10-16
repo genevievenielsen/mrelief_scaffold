@@ -39,8 +39,55 @@
             <h1>Something else in mind!</h1>
             <h4>Based on your household size and income, you likely do not qualify for food stamps.</h4>
 
+              <p> However, if you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.
+
+              <%= link_to "Click Here", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution" %> to learn more about fees.
+
+              <br>
+              Get Covered Illinois is a resource that helps families register for insurance at in-person events.
+              <%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution" %> to find Get Covered Illinois events in your area. You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.
+
+
+              </p>
+
+              <p>Here are some additional resources from Purple Binder:</p>
+            <% if @medical_resources.count >= 2 %>
+              <%= @medical_resources.first.name %>  <br>
+              <%= @medical_resources.first.street %> <br>
+              <%= @medical_resources.first.city %> <br>
+              <%= @medical_resources.first.state %>, <%= @medical_resources.first.zip %> <br>
+              <%= @medical_resources.first.phone %> <br>
+              <br>
+              <%= @medical_resources.second.name %> <br>
+              <%= @medical_resources.second.street %> <br>
+              <%= @medical_resources.second.city %> <br>
+              <%= @medical_resources.second.state %>, <%= @medical_resources.second.zip %> <br>
+              <%= @medical_resources.second.phone %> <br>
+            <% end %>
+
+              <% if @medical_resources_first.present? %>
+                <%= @medical_resources_first.name %> <br>
+                <%= @medical_resources_first.street %> <br>
+                <%= @medical_resources_first.city %> <br>
+                <%= @medical_resources_first.state %>, <%= @medical_resources_first.zip %> <br>
+                <%= @medical_resources_first.phone %> <br>
+
+                <br>
+                <%= @medical_resources_second.name %> <br>
+                <%= @medical_resources_second.street %> <br>
+                <%= @medical_resources_second.city %> <br>
+                <%= @medical_resources_second.state %>, <%= @medical_resources_second.zip %> <br>
+                <%= @medical_resources_second.phone %> <br>
+              <% end %>
+
+
             <br>
         </div>
+
+        <div class="row img-responsive">
+          <img src="assets/pblogo.jpg">
+        </div>
+
       </div>
 
 <% end %>

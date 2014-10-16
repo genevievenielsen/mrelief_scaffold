@@ -44,7 +44,7 @@ class MedicaidsController < ApplicationController
         end
     end
 
-    @user_zipcode = params[:zipcode]
+   @user_zipcode = params[:zipcode]
    @zipcode = @user_zipcode << ".0"
    @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
 
@@ -56,11 +56,12 @@ class MedicaidsController < ApplicationController
     end
 
 
+    @pb_zipcode = @user_zipcode.chomp(".0")
       @medical_resources = primarycare
       @medical_resources_zip = []
 
       primarycare.each do |center|
-        if center.zip.match(@user_zipcode)
+        if center.zip.match(@pb_zipcode)
           @medical_resources_zip.push(center)
         end
       end
