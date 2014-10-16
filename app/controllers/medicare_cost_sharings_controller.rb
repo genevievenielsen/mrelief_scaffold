@@ -1,6 +1,10 @@
 class MedicareCostSharingsController < ApplicationController
   before_action :set_medicare_cost_sharing, only: [:show, :edit, :update, :destroy]
 
+  skip_before_action :authenticate_user!, :only => :index
+  skip_before_filter :verify_authenticity_token
+
+
   def new
     @medicare_cost_sharing = MedicareCostSharing.new
   end
@@ -91,14 +95,14 @@ class MedicareCostSharingsController < ApplicationController
 
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_medicare_cost_sharing
-      @medicare_cost_sharing = MedicareCostSharing.find(params[:id])
-    end
+  # private
+  #   # Use callbacks to share common setup or constraints between actions.
+  #   def set_medicare_cost_sharing
+  #     @medicare_cost_sharing = MedicareCostSharing.find(params[:id])
+  #   end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def medicare_cost_sharing_params
-      params.require(:medicare_cost_sharing).permit(:household_size, :medicare_cost_sharing, :premium_only)
-    end
+  #   # Never trust parameters from the scary internet, only allow the white list through.
+  #   def medicare_cost_sharing_params
+  #     params.require(:medicare_cost_sharing).permit(:household_size, :medicare_cost_sharing, :premium_only)
+  #   end
 end
