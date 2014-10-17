@@ -1,6 +1,6 @@
 class NotificationsMailer < ActionMailer::Base
 
-  default :from => params[:email]
+  default :from => "mrelief.form@gmail.com"
   default :to => "mrelief.form@gmail.com"
 
   def new_message(message)

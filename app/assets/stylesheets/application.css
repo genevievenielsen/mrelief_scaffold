@@ -1,4 +1,4 @@
-/*
+  /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
@@ -201,6 +201,7 @@ a:hover {
   margin-top: 40px;
 }
 
+
 .panel {
   /*width: 960px;*/
   padding-top:15px;
@@ -209,6 +210,20 @@ a:hover {
 /*  display: block;
   margin-left: auto;
   margin-right: auto;*/
+}
+
+.allcitypanel{
+  background-color: #ececec;
+  padding: 0px;
+  border-radius: 0px;
+}
+
+.allcityheading{
+  padding: 0px 15px 15px;
+}
+
+.list-group-item{
+  padding-bottom: 30px;
 }
 
 .table {

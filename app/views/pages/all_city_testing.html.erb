@@ -1,14 +1,8 @@
-<!-- Here is the code for the all city response page - -->
-
-
-
 <div class="container" style="padding-bottom:150px">
 <div class="page-header">
   <h1>Do I qualify for All City Programs within mRelief?</h1>
   <p class="subhead">Programs include Food Stamps, RTA Ride Free, All Kids and Medicaid</p>
 </div>
-
-<% if @eligible_snap == 'yes' %>
 
 <div class="panel panel-default allcitypanel">
   <div class="allcityheading">
@@ -24,18 +18,40 @@
         <%= link_to "Click Here to apply online before you visit", "https://abe.illinois.gov/abe/access/accessController?id=0.3971759164763745", :class => "btn btn-success btn-resolution" %>
         </li>
       <!-- RTA -->
-      <li class="list-group-item">
+      <!-- <li class="list-group-item">
         <h3>RTA</h3>
         <%= link_to "Click here to apply online", "https://idoaweb.aging.illinois.gov/baa/Welcome.aspx", :class => "btn btn-success btn-resolution" %>
+        </li> -->
+    </ul>
+  </div>
+
+
+<div class="panel panel-default allcitypanel">
+  <div class="allcityheading">
+      <h2>You may be in luck! ( <%= @count %> programs )</h2>
+      <p class="subhead" style="text-align:left;">Below are the programs you may qualify for:</p>
+  </div>
+
+    <ul class="list-group">
+    <!-- Food Stamps -->
+      <li class="list-group-item">
+        <h3>Food Stamps</h3>
+        <%= link_to "Click here to find a resource center near you", "http://abe.illinois.gov", :class => "btn btn-success btn-resolution" %>
+        <%= link_to "Click Here to apply online before you visit", "https://abe.illinois.gov/abe/access/accessController?id=0.3971759164763745", :class => "btn btn-success btn-resolution" %>
         </li>
+      <!-- RTA -->
+      <!-- <li class="list-group-item">
+        <h3>RTA</h3>
+        <%= link_to "Click here to apply online", "https://idoaweb.aging.illinois.gov/baa/Welcome.aspx", :class => "btn btn-success btn-resolution" %>
+        </li> -->
     </ul>
   </div>
 </div>
 
 
 
-    <% elsif @eligible_snap == 'maybe' %>
-    <!-- <br>
+
+    <br>
         <br>
       <div class="panel panel-default" style="margin: 0 0 40px 0">
         <div class="row" style="text-align:center;">
@@ -48,10 +64,10 @@
 
                   <div class="col-md-offset-3 col-md-6 col-sm-6 text-center" style="text-align:center;">
                     <ul class="list-group" style="text-align:left;">
-                      <li class="list-group-item" style="font-weight:bold"><%= @lafcenter.center %> </li>
-                      <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @user_zipcode %> </li>
-                      <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @lafcenter.telephone %> </li>
-                      <li class="list-group-item"><%= @lafcenter.spanish %> </li>
+                      <li class="list-group-item" style="font-weight:bold">LA</li>
+                      <li class="list-group-item"><i class="fa fa-map-marker"></i>  30 N Racine </li>
+                      <li class="list-group-item"><i class="fa fa-phone"></i>  847-767-2332</li>
+                      <li class="list-group-item">Monday</li>
                     </ul>
 
                   <br>
@@ -59,12 +75,12 @@
                     <br>
 
 
-                </div> -->
+                </div>
 
     </div>
 
 
-      <% elsif @eligible_snap == 'no' %>
+
 
       <div class="panel panel-default allcitypanel">
         <div class="allcityheading">
@@ -88,7 +104,7 @@
         </div>
       </div>
 
-      <!-- <div class="row" style="text-align:center;">
+   <div class="row" style="text-align:center;">
         <div class="col-md-8 col-md-offset-2">
             <h1>Something else in mind!</h1>
             <h4>Based on your household size and income, you likely do not qualify for food stamps.</h4>
@@ -112,75 +128,32 @@
 
           <div class="row">
 
-          <% if @food_resources_zip.count >= 2 %>
+
             <div class="col-md-6 col-sm-6">
               <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @food_resources_zip.first.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @food_resources_zip.first.street %>  <%= @food_resources_zip.first.city %> <%= @food_resources_zip.first.state %>, <%= @food_resources_zip.first.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @food_resources_zip.first.phone %> </li>
+                <li class="list-group-item" style="font-weight:bold">Food Pantry </li>
+                <li class="list-group-item"><i class="fa fa-map-marker"></i>  30 N Racine Chicago IL, 60654 </li>
+                <li class="list-group-item"><i class="fa fa-phone"></i>  847-767-2332 </li>
               </ul>
             </div>
 
             <div class="col-md-6 col-sm-6">
               <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @food_resources_zip.second.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @food_resources_zip.second.street %>  <%= @food_resources_zip.second.city %> <%= @food_resources_zip.second.state %>, <%= @food_resources_zip.second.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @food_resources_zip.second.phone %> </li>
+                <li class="list-group-item" style="font-weight:bold">Food Pantry </li>
+                <li class="list-group-item"><i class="fa fa-map-marker"></i>  30 N Racine Chicago IL, 60654  </li>
+                <li class="list-group-item"><i class="fa fa-phone"></i>  847-767-2332 </li>
               </ul>
-            </div> -->
-            <% end %>
+            </div>
+
           </div>
 
-          <div class="row">
-          <% if @food_resources_first.present? %>
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @food_resources_first.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @food_resources_first.street %>  <%= @food_resources_first.city %> <%= @food_resources_first.state %>, <%= @food_resources_first.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @food_resources_first.phone %> </li>
-              </ul>
-            </div>
 
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @food_resources_second.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @food_resources_second.street %>  <%= @food_resources_second.city %> <%= @food_resources_second.state %>, <%= @food_resources_second.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @food_resources_second.phone %> </li>
-              </ul>
-            </div>
-            <% end %>
           </div>
 
           <div class="row img-responsive">
             <img src="assets/pblogo.jpg">
           </div>
 
-  <% end %>
-
-<!--   <%# if @eligible_rental == 'yes' %>
-
-    <div class="panel panel-default" style="margin: 0 0 40px 0">
-      <div class="panel-body">
-        <p style="font-size:32px; font-style:italic">You may be in luck!</p>
-
-        <p>Based on your rental status, household size and income, you likely qualify for rental assistance.
-      Applications can be filed at any of the City’s six Community Service Centers. For more information about Emergency Rental Assistance, visit your local Community Service Center <%#= link_to "here", "http://www.cityofchicago.org/city/en/depts/fss/provdrs/serv/svcs/community_servicecenterlocations.html"%> or call 3-1-1.</p>
-      </div>
-    </div>
-
-
-    <%# elsif @eligible_rental == 'no' %>
-
-      <div class="panel panel-default" style="margin: 0 0 40px 0">
-        <div class="panel-body">
-          <p style="font-size:32px; font-style:italic">We apologize.</p>
-        <p>Based on your household size and income, and other factors, you do not qualify for rental assistance. The financial assistance program provides essential relief services to persons in need of shelter, food, utility payments, medication and other items. Contact Emergency Fund directly at (312) 379-0301 for rent assistance.</p>
-        </div>
-
-      </div>
-  <%# end %> -->
-
-  <% if @eligible_rta == 'yes' %>
 
       <div class="panel panel-default" style="margin: 0 0 40px 0">
         <div class="panel-body">
@@ -190,7 +163,7 @@
         </div>
       </div>
 
-  <% elsif @eligible_rta == 'no' %>
+
 <div class="container">
   <div class="panel panel-default allcitypanel">
     <div class="allcityheading">
@@ -211,10 +184,7 @@
   </div>
 </div>
 
-  <% end %>
 
-
-  <% if @eligible_all_kids == 'yes' %>
 
       <div class="panel panel-default" style="margin: 0 0 40px 0">
         <div class="panel-body">
@@ -236,7 +206,7 @@
           <br>
           <%= link_to "Click Here", "https://abe.illinois.gov/abe/access/accessController?id=0.9912272225853554", :class => "btn btn-primary btn-sm" %> to complete your application online.</p>
 
-      <% elsif @eligible_all_kids == 'no' %>
+
 
       <div class="panel panel-default" style="margin: 0 0 40px 0">
         <div class="panel-body">
@@ -248,11 +218,10 @@
             </p>
 
 
-        <% end %>
+
       </div>
   </div>
 
-  <% if @eligible_medicaid == 'yes' %>
       <div class="panel panel-default" style="margin: 0 0 40px 0">
         <div class="panel-body">
           <p style="font-size:32px; font-style:italic">You may be in luck!</p>
@@ -263,7 +232,6 @@
       </div>
     </div>
 
-    <% elsif @eligible_medicaid == 'maybe' %>
     <br>
         <br>
       <div class="panel panel-default" style="margin: 0 0 40px 0">
@@ -276,7 +244,7 @@
     </div>
 
 
-      <% elsif @eligible_medicaid == 'no' %>
+
 
       <div class="panel panel-default" style="margin: 0 0 40px 0">
         <div class="panel-body">
@@ -295,6 +263,6 @@
             </p>
 
 
-        <% end %>
+
       </div>
 </div>

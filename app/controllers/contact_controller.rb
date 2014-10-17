@@ -1,22 +1,24 @@
 class ContactController < ApplicationController
 
   def index
-    @message = Feedback.new
+    @message = {}
   end
 
   def create
-    @message = Feedback.new(params[:message])
-    @message.contact_first_name = params[:contact_first_name]
-    @message.contact_last_name = params[:contact_last_name]
-    @message.contact_email = params[:contact_email]
-    @message.advertising_options = params[:advertising_options]
-    @message.feedback = params[:feedback]
+    hash = {
+      :contact_first_name => params[:contact_first_name],
+      :contact_last_name => params[:contact_last_name],
+      :contact_email => params[:contact_email],
+      :advertising_options => params[:advertising_options],
+      :feedback => params[:feedback],
+    }
+    @message = Feedback.new(hash)
 
 
 
     if @message.valid?
       NotificationsMailer.new_message(@message).deliver
-      redirect_to(root_path, :notice => "Message was successfully sent.")
+      redirect_to( "/", :notice => "Message was successfully sent.")
     else
       flash.now.alert = "Please fill all fields."
       render :new
