@@ -1,8 +1,12 @@
 source 'https://rubygems.org'
 ruby "2.1.2"
 
+<<<<<<< HEAD
 # gem 'roo'
 # gem "spreadsheet"
+=======
+
+>>>>>>> 328d807f596e361ce454d94fa4bae8fe7d1b85aa
 
 gem 'font-awesome-rails'
 

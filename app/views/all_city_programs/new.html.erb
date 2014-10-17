@@ -1,7 +1,9 @@
 <div class= "container">
 
 <div class="page-header" style="border:none">
-  <h1>Do I qualify for Food Stamps, Rental Assistance, RTA Ride Free, All Kids and Medicaid?</h1>
+  <h1>Do I qualify for All City Programs within mRelief?</h1>
+  <p class="subhead">Programs include Food Stamps, RTA Ride Free, All Kids and Medicaid</p>
+</div>
 
 
    <!--  <%# if @snap_eligibility.errors.any? %> -->
@@ -24,7 +26,9 @@
       <input type="text" id="age" name="age" placeholder="For example: 27" class="form-control" required>
   </div>
 
+
   <!-- Label and input for snap_dependent_no -->
+
   <div class="form-group col-sm-9">
     <label for="dependent_no">What is the number of people living in your household including yourself?</label>
       <%= link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "This should include the number of people who purchase and prepare food with you."} %>
@@ -35,7 +39,16 @@
     </div>
   </div>
 
+
+   <div class="form-group col-sm-9 pull-left">
+      <label for="zipcode">What is your zipcode?</label>
+        <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" required>
+  </div>
+
+
+
   <!-- Label and input for snap_gross_income -->
+
   <div class="form-group col-sm-9">
     <label for="monthly_gross_income">
       What is your gross monthly income?
@@ -174,7 +187,7 @@ Affairs.   <br>
       <button type="submit" class="btn btn-primary">See if I qualify</button>
     </div>
   </div>
-</div>
+
 </form>
 
 

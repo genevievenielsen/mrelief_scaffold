@@ -21,3 +21,14 @@ class LafCentersController < ApplicationController
 
 
 end
+
+
+
+
+    # l = LafCenter.all
+
+    # l.each do |center|
+    #   puts "LafCenter.create(:zipcode => '#{center.zipcode}', :city => '#{center.city}', :center => '#{center.center}',
+    #     :address => '#{center.address}', :contact => '#{center.contact}', :telephone => '#{center.telephone}', :spanish => '#{center.spanish}')"
+    # end
+

@@ -211,6 +211,10 @@ a:hover {
   margin-right: auto;*/
 }
 
+.table {
+  border:#FAFAFA;
+}
+
 .allthatapply{
   font-weight: bold;
   text-align: left;
