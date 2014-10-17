@@ -1,12 +1,13 @@
 <div class= "container">
 
+<div class="row">
     <div class="page-header col-md-10 col-md-offset-1" style="border:none;">
       <h2>Do I qualify for Food Stamps?</h2>
         <p class="subhead">Food stamps, or Supplemental Nutrition Assistance Program (SNAP),<br> helps low-income people and families buy the food they need for good health.</p>
         <p>Benefits are provided on the Illinois Link Card - an electronic card that is accepted at most grocery stores.</p>
         <p>You can find more information about SNAP/food stamps <a href="http://www.dhs.state.il.us/page.aspx?item=30357">here.</a></p>
     </div>
-
+</div>
 
     <% if @snap_eligibility.errors.any? %>
       <% @snap_eligibility.errors.full_messages.each do |message| %>

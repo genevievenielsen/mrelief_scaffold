@@ -819,6 +819,13 @@ p.description = "Medicare Assistance"
 p.location = "chicago"
 p.save
 
+p = Program.new
+p.url = "/all_city_programs/new"
+p.name = "All City Programs"
+p.description = "All Chicago Programs within mRelief"
+p.location = "chicago"
+p.save
+
 a = AutoRepairAssistance.new
 a.auto_household_size = 1
 a.auto_gross_income = 3646.88
