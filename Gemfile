@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 ruby "2.1.2"
 
-gem 'roo'
-gem "spreadsheet"
+# gem 'roo'
+# gem "spreadsheet"
 
 gem 'font-awesome-rails'
 
