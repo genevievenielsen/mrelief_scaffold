@@ -20,8 +20,23 @@
         <li class="list-group-item">
           <h3 class="allcityheader">RTA Free</h3>
           <%= link_to "Click here to apply online", "https://idoaweb.aging.illinois.gov/baa/Welcome.aspx", :class => "btn btn-success btn-resolution" %>
-          <p> Call 312-913-3110 for information about the Reduced Fare Program. <br> Or, if you are a low-income woman exploring other transportation assistance options, go to <a href="https://www.womenwithdrive.org"> www.womenwithdrive.org </a>, to view their offerings.
-           </p>
+        </li>
+        <li class="list-group-item">
+          <h3 class="allcityheader">All Kids</h3>
+           <%= link_to "Click Here to complete your application online", "https://abe.illinois.gov/abe/access/accessController?id=0.9912272225853554", :class => "btn btn-success btn-resolution" %>
+           <%# if @assist_eligible == 'yes' %>
+             <p>Based on your household size and income, you likely qualify for All Kids Assist.</p>
+           <%# elsif @share_eligible == 'yes' %>
+             <p>Based on your household size and income, you likely qualify for All Kids Share.</p>
+           <%# elsif @premium1_eligible == 'yes' %>
+             <p>Based on your household size and income, you likely qualify for All Kids Premium Level 1.</p>
+           <%# elsif @premium2_eligible == 'yes' %>
+             <p>Based on your household size and income, you likely qualify for All Kids Premium Level 2.</p>
+           <%# end %>
+        </li>
+        <li class="list-group-item">
+          <h3 class="allcityheader">Medicaid</h3>
+          <%= link_to "Click Here for more information", "https://abe.illinois.gov/abe/access/accessController?id=0.9152558493190114 ", :class => "btn btn-success btn-resolution" %>
         </li>
     </ul>
   </div>
@@ -37,19 +52,24 @@
     <!-- Food Stamps -->
       <li class="list-group-item">
         <h3 class="allcityheader">Food Stamps</h3>
-        <%= link_to "Click here to find a resource center near you", "http://abe.illinois.gov", :class => "btn btn-success btn-resolution" %>
-        <%= link_to "Click Here to apply online before you visit", "https://abe.illinois.gov/abe/access/accessController?id=0.3971759164763745", :class => "btn btn-success btn-resolution" %>
+       <p>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a Food Stamp expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your food stamp eligibility with you. </p>
+
         <div class="sectiondivider"></div>
-        <h4>Some additional resources from Purple Binder:</h4>
-        <p>Food Pantry | 30 N Racine Chicago IL, 60654 | 847-767-2332</p>
-        <p>Food Pantry | 30 N Racine Chicago IL, 60654 | 847-767-2332</p>
+        <h4>The LAF expert nearest you:</h4>
+        <p> Garfield Community Service Center | 10 South Kedzie Ave. Chicago, 60611 | 847-767-2332 | Spanish Speaker: None </p>
+
       </li>
 
-      <!-- RTA -->
-      <!-- <li class="list-group-item">
-        <h3>RTA</h3>
-        <%= link_to "Click here to apply online", "https://idoaweb.aging.illinois.gov/baa/Welcome.aspx", :class => "btn btn-success btn-resolution" %>
-        </li> -->
+      <li class="list-group-item">
+        <h3 class="allcityheader">Medicaid</h3>
+        <p>You may need to discuss your situation with a Medicaid expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your Medicaid eligibility with you.</p>
+
+         <div class="sectiondivider"></div>
+        <h4>The LAF expert nearest you:</h4>
+        <p> Garfield Community Service Center | 10 South Kedzie Ave. Chicago, 60611 | 847-767-2332 | Spanish Speaker: None </p>
+
+      </li>
+
     </ul>
   </div>
 
@@ -65,10 +85,6 @@
     <!-- Food Stamps -->
       <li class="list-group-item">
         <h3 class="allcityheader">Food Stamps</h3>
-        <%= link_to "Click here to find a resource center near you", "http://abe.illinois.gov", :class => "btn btn-success btn-resolution" %>
-        <%= link_to "Click Here to apply online before you visit", "https://abe.illinois.gov/abe/access/accessController?id=0.3971759164763745", :class => "btn btn-success btn-resolution" %>
-
-        <div class="sectiondivider"></div>
 
         <p>Direct2Food is an online resource that will help you locate the food pantries, soup kitchens, and meal programs closest to you. <br> If you need food assistance, text FOOD to 877-877 to find a meal site near you.</p>
         <%= link_to "Click Here to find resources near you", "http://www.direct2food.org/", :class => "btn btn-success btn-resolution" %>
@@ -79,12 +95,27 @@
         <p>Food Pantry | 30 N Racine Chicago IL, 60654 | 847-767-2332</p>
       </li>
       <li class="list-group-item">
+        <h3 class="allcityheader">RTA Ride Free</h3>
+        <p> Call 312-913-3110 for information about the Reduced Fare Program. <br> Or, if you are a low-income woman exploring other transportation assistance options, go to <a href="https://www.womenwithdrive.org"> www.womenwithdrive.org </a>, to view their offerings.
+           </p>
+      </li>
+
+      <li class="list-group-item">
         <h3 class="allcityheader">All Kids</h3>
         <p>If you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.</p>
         <%= link_to "Click Here to learn more about fees", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution" %>
 
         <%= link_to "Click Here to find Get Covered Illinois events in your area", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution" %>
         <p>You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.</p>
+      </li>
+
+      <li class="list-group-item">
+        <h3 class="allcityheader">Medicaid</h3>
+        <p> If you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.</p>
+
+        <%= link_to "Click Here to learn more about fees", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution" %>
+        <p>Get Covered Illinois is a resource that helps families register for insurance at in-person events.</p>
+        <%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution" %> to find Get Covered Illinois events in your area. You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.
       </li>
     </ul>
   </div>

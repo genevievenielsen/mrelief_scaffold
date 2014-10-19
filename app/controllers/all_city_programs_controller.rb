@@ -98,6 +98,28 @@ class AllCityProgramsController < ApplicationController
       zipcode = @user_zipcode << ".0"
       @lafcenter = LafCenter.find_by(:zipcode => zipcode)
 
+      #this is the logic for the community resources
+      @user_zipcode = @user_zipcode.chomp(".0")
+      @food_resources = ServiceCenter.where(:description => "food pantry")
+      @food_resources_zip = @food_resources.where(:zip => @user_zipcode)
+
+        #in this case there are 2 food pantries in the user's zip
+        if @food_resources_zip.count >= 2
+           @food_resources = @food_resources_zip
+        end
+
+        #in this case there is 1 food pantry in the user's zip
+        if @food_resources_zip.count == 1
+           @food_resources_first = @food_resources_zip.first
+           @food_resources_second = @food_resources.first
+        end
+
+        #in this caser there are no food pantries in the user's zip
+        if  @food_resources_zip.count == 0
+            @food_resources_first = @food_resources.first
+            @food_resources_second = @food_resources.second
+        end
+
       # this is the logic for disability
       if params[:disabled].present?
 
@@ -221,21 +243,49 @@ class AllCityProgramsController < ApplicationController
 
     end #this ends the present if statement
 
-    @count = 0
+    @eligible_count = 0
     if  @eligible_snap == "yes"
-      @count = @count + 1
+      @eligible_count = @eligible_count + 1
     end
 
     if @eligible_all_kids == "yes"
-      @count = @count + 1
+      @eligible_count = @eligible_count + 1
     end
 
-    if @eligible_all_kids == 'yes'
-      @count = @count + 1
+    if @eligible_rta == 'yes'
+      @eligible_count = @eligible_count + 1
     end
     if @eligible_medicaid == 'yes'
-      @count = @count + 1
+      @eligible_count = @eligible_count + 1
     end
+
+    @ineligible_count = 0
+    if  @eligible_snap == "no"
+      @ineligible_count = @ineligible_count + 1
+    end
+
+    if @eligible_all_kids == "no"
+      @ineligible_count = @ineligible_count + 1
+    end
+
+    if @eligible_rta == 'no'
+      @ineligible_count = @ineligible_count + 1
+    end
+    if @eligible_medicaid == 'no'
+      @ineligible_count = @ineligible_count + 1
+    end
+
+    @indeterminate_count = 0
+    if  @eligible_snap == "maybe"
+      @indeterminate_count = @indeterminate_count + 1
+    end
+
+
+    if @eligible_medicaid == 'maybe'
+      @indeterminate_count = @indeterminate_count + 1
+    end
+
+
   end
 
 

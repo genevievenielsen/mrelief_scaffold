@@ -1,300 +1,166 @@
-<!-- Here is the code for the all city response page - -->
-
-
-
 <div class="container" style="padding-bottom:150px">
 <div class="page-header">
   <h1>Do I qualify for All City Programs within mRelief?</h1>
   <p class="subhead">Programs include Food Stamps, RTA Ride Free, All Kids and Medicaid</p>
 </div>
 
-<% if @eligible_snap == 'yes' %>
 
+<% if @eligible_count > 0 %>
 <div class="panel panel-default allcitypanel">
   <div class="allcityheading">
-      <h2>You may be in luck! ( <%= @count %> programs )</h2>
+      <h2>You may be in luck! ( <%= pluralize(@eligible_count, 'program') %>)</h2>
+
+
       <p class="subhead" style="text-align:left;">Below are the programs you may qualify for:</p>
   </div>
 
     <ul class="list-group">
     <!-- Food Stamps -->
+      <% if @eligible_snap == 'yes' %>
       <li class="list-group-item">
-        <h3>Food Stamps</h3>
+        <h3 class="allcityheader">Food Stamps</h3>
         <%= link_to "Click here to find a resource center near you", "http://abe.illinois.gov", :class => "btn btn-success btn-resolution" %>
         <%= link_to "Click Here to apply online before you visit", "https://abe.illinois.gov/abe/access/accessController?id=0.3971759164763745", :class => "btn btn-success btn-resolution" %>
         </li>
-      <!-- RTA -->
-      <li class="list-group-item">
-        <h3>RTA</h3>
-        <%= link_to "Click here to apply online", "https://idoaweb.aging.illinois.gov/baa/Welcome.aspx", :class => "btn btn-success btn-resolution" %>
+        <% end %>
+
+        <% if @eligible_rta == 'yes' %>
+        <li class="list-group-item">
+          <h3 class="allcityheader">RTA Free</h3>
+          <%= link_to "Click here to apply online", "https://idoaweb.aging.illinois.gov/baa/Welcome.aspx", :class => "btn btn-success btn-resolution" %>
         </li>
+        <% end %>
+
+        <% if @eligible_all_kids == 'yes' %>
+        <li class="list-group-item">
+          <h3 class="allcityheader">All Kids</h3>
+           <%= link_to "Click Here to complete your application online", "https://abe.illinois.gov/abe/access/accessController?id=0.9912272225853554", :class => "btn btn-success btn-resolution" %>
+           <% if @assist_eligible == 'yes' %>
+             <p>Based on your household size and income, you likely qualify for All Kids Assist.</p>
+           <% elsif @share_eligible == 'yes' %>
+             <p>Based on your household size and income, you likely qualify for All Kids Share.</p>
+           <% elsif @premium1_eligible == 'yes' %>
+             <p>Based on your household size and income, you likely qualify for All Kids Premium Level 1.</p>
+           <% elsif @premium2_eligible == 'yes' %>
+             <p>Based on your household size and income, you likely qualify for All Kids Premium Level 2.</p>
+           <% end %>
+        </li>
+        <% end %>
+
+        <% if @eligible_medicaid == 'yes' %>
+        <li class="list-group-item">
+          <h3 class="allcityheader">Medicaid</h3>
+          <%= link_to "Click Here for more information", "https://abe.illinois.gov/abe/access/accessController?id=0.9152558493190114 ", :class => "btn btn-success btn-resolution" %>
+        </li>
+        <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+<% if @indeterminate_count > 0  %>
+<div class="panel panel-default allcitypanel">
+  <div class="allcityheading">
+      <h2>Something else in mind!( <%= pluralize(@indeterminate_count, 'program') %>)</h2>
+      <p class="subhead" style="text-align:left;">Based on the information received, we cannot determine your eligibility at this time.</p>
+  </div>
+
+    <ul class="list-group">
+    <!-- Food Stamps -->
+      <% if @eligible_snap == "maybe" %>
+      <li class="list-group-item">
+        <h3 class="allcityheader">Food Stamps</h3>
+       <p>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a Food Stamp expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your food stamp eligibility with you. </p>
+
+        <div class="sectiondivider"></div>
+        <h4>The LAF expert nearest you:</h4>
+        <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @user_zipcode %> | <%= @lafcenter.telephone %>  | <%= @lafcenter.spanish %> </p>
+
+      </li>
+      <% end %>
+
+      <% if @eligible_medicaid == "maybe" %>
+      <li class="list-group-item">
+        <h3 class="allcityheader">Medicaid</h3>
+        <p>You may need to discuss your situation with a Medicaid expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your Medicaid eligibility with you.</p>
+
+         <div class="sectiondivider"></div>
+        <h4>The LAF expert nearest you:</h4>
+        <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @user_zipcode %> | <%= @lafcenter.telephone %>  | <%= @lafcenter.spanish %> </p>
+
+      </li>
+      <% end %>
+
+    </ul>
+  </div>
+  <% end %>
+
+<% if @ineligible_count > 0 %>
+<div class="panel panel-default allcitypanel">
+  <div class="allcityheading">
+      <h2>Do not likely qualify ( <%= pluralize(@ineligible_count, 'program') %> )</h2>
+      <p class="subhead" style="text-align:left;">Below are the programs you may not qualify for:</p>
+  </div>
+
+    <ul class="list-group">
+    <!-- Food Stamps -->
+    <% if @eligible_snap == "no" %>
+      <li class="list-group-item">
+        <h3 class="allcityheader">Food Stamps</h3>
+
+        <p>Direct2Food is an online resource that will help you locate the food pantries, soup kitchens, and meal programs closest to you. <br> If you need food assistance, text FOOD to 877-877 to find a meal site near you.</p>
+        <%= link_to "Click Here to find resources near you", "http://www.direct2food.org/", :class => "btn btn-success btn-resolution" %>
+        <div class="sectiondivider"></div>
+
+        <h4>Some additional resources from Purple Binder:</h4>
+
+        <% if @food_resources_zip.count >= 2 %>
+        <p><%= @food_resources_zip.first.name %> | <%= @food_resources_zip.first.street %>  <%= @food_resources_zip.first.city %> <%= @food_resources_zip.first.state %>, <%= @food_resources_zip.first.zip %> | <%= @food_resources_zip.first.phone %> </p>
+
+        <p><%= @food_resources_zip.second.name %> | <%= @food_resources_zip.second.street %>  <%= @food_resources_zip.second.city %> <%= @food_resources_zip.second.state %>, <%= @food_resources_zip.second.zip %> | <%= @food_resources_zip.second.phone %> </p>
+        <% end %>
+
+        <% if @food_resources_first.present? %>
+        <p><%= @food_resources_first.name %> | <%= @food_resources_first.street %>  <%= @food_resources_first.city %> <%= @food_resources_first.state %>, <%= @food_resources_first.zip %> | <%= @food_resources_first.phone %> </p>
+
+        <p><%= @food_resources_second.name %> | <%= @food_resources_second.street %>  <%= @food_resources_second.city %> <%= @food_resources_second.state %>, <%= @food_resources_second.zip %> | <%= @food_resources_second.phone %> </p>
+
+        <% end %>
+      </li>
+      <% end %>
+
+      <% if @eligible_rta == "no" %>
+      <li class="list-group-item">
+        <h3 class="allcityheader">RTA Ride Free</h3>
+        <p> Call 312-913-3110 for information about the Reduced Fare Program. <br> Or, if you are a low-income woman exploring other transportation assistance options, go to <a href="https://www.womenwithdrive.org"> www.womenwithdrive.org </a>, to view their offerings.
+           </p>
+      </li>
+      <% end %>
+
+      <% if @eligible_all_kids == "no" %>
+      <li class="list-group-item">
+        <h3 class="allcityheader">All Kids</h3>
+        <p>If you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.</p>
+        <%= link_to "Click Here to learn more about fees", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution" %>
+
+        <%= link_to "Click Here to find Get Covered Illinois events in your area", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution" %>
+        <p>You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.</p>
+      </li>
+      <% end %>
+
+      <% if @eligible_medicaid == "no" %>
+      <li class="list-group-item">
+        <h3 class="allcityheader">Medicaid</h3>
+        <p> If you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.</p>
+
+        <%= link_to "Click Here to learn more about fees", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution" %>
+        <p>Get Covered Illinois is a resource that helps families register for insurance at in-person events.</p>
+        <%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution" %> to find Get Covered Illinois events in your area. You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.
+      </li>
+      <% end %>
     </ul>
   </div>
 </div>
+<% end %>
 
 
 
-    <% elsif @eligible_snap == 'maybe' %>
-    <!-- <br>
-        <br>
-      <div class="panel panel-default" style="margin: 0 0 40px 0">
-        <div class="row" style="text-align:center;">
-              <div class="col-md-8 col-md-offset-2">
-                <i class="fa fa-exclamation-circle fa-5x"></i>
-                  <h1>Something else in mind!</h1>
-                   <h4>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a Food Stamp expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your food stamp eligibility with you. </h4>
-                  <br>
-
-
-                  <div class="col-md-offset-3 col-md-6 col-sm-6 text-center" style="text-align:center;">
-                    <ul class="list-group" style="text-align:left;">
-                      <li class="list-group-item" style="font-weight:bold"><%= @lafcenter.center %> </li>
-                      <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @user_zipcode %> </li>
-                      <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @lafcenter.telephone %> </li>
-                      <li class="list-group-item"><%= @lafcenter.spanish %> </li>
-                    </ul>
-
-                  <br>
-
-                    <br>
-
-
-                </div> -->
-
-    </div>
-
-
-      <% elsif @eligible_snap == 'no' %>
-
-      <div class="panel panel-default allcitypanel">
-        <div class="allcityheading">
-            <h2>Do not likey qualify! ( <%= @count %> programs )</h2>
-            <p class="subhead" style="text-align:left;">Below are the programs you may not qualify for:</p>
-        </div>
-
-          <ul class="list-group">
-          <!-- Food Stamps -->
-            <li class="list-group-item">
-              <h3>Food Stamps</h3>
-              <%= link_to "Click here to find a resource center near you", "http://abe.illinois.gov", :class => "btn btn-success btn-resolution" %>
-              <%= link_to "Click Here to apply online before you visit", "https://abe.illinois.gov/abe/access/accessController?id=0.3971759164763745", :class => "btn btn-success btn-resolution" %>
-              </li>
-            <!-- RTA -->
-            <li class="list-group-item">
-              <h3>RTA</h3>
-              <%= link_to "Click here to apply online", "https://idoaweb.aging.illinois.gov/baa/Welcome.aspx", :class => "btn btn-success btn-resolution" %>
-              </li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- <div class="row" style="text-align:center;">
-        <div class="col-md-8 col-md-offset-2">
-            <h1>Something else in mind!</h1>
-            <h4>Based on your household size and income, you likely do not qualify for food stamps.</h4>
-
-            <br>
-
-          <div class="row">
-            <p class="subhead">Direct2Food is an online resource that will help you locate the food pantries, soup kitchens, and meal programs closest to you. To find resources near you</p>
-            <%= link_to "Click Here", "http://www.direct2food.org/", :class => "btn btn-success btn-resolution" %>
-          </div>
-
-          <br>
-          <p> If you need food assistance, text FOOD to 877-877 to find a meal site near you.</p>
-
-          <br>
-
-          <div class="row">
-            <h4>Here are some additional resources from Purple Binder:</h4>
-          </div>
-          <br>
-
-          <div class="row">
-
-          <% if @food_resources_zip.count >= 2 %>
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @food_resources_zip.first.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @food_resources_zip.first.street %>  <%= @food_resources_zip.first.city %> <%= @food_resources_zip.first.state %>, <%= @food_resources_zip.first.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @food_resources_zip.first.phone %> </li>
-              </ul>
-            </div>
-
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @food_resources_zip.second.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @food_resources_zip.second.street %>  <%= @food_resources_zip.second.city %> <%= @food_resources_zip.second.state %>, <%= @food_resources_zip.second.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @food_resources_zip.second.phone %> </li>
-              </ul>
-            </div> -->
-            <% end %>
-          </div>
-
-          <div class="row">
-          <% if @food_resources_first.present? %>
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @food_resources_first.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @food_resources_first.street %>  <%= @food_resources_first.city %> <%= @food_resources_first.state %>, <%= @food_resources_first.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @food_resources_first.phone %> </li>
-              </ul>
-            </div>
-
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @food_resources_second.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @food_resources_second.street %>  <%= @food_resources_second.city %> <%= @food_resources_second.state %>, <%= @food_resources_second.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @food_resources_second.phone %> </li>
-              </ul>
-            </div>
-            <% end %>
-          </div>
-
-          <div class="row img-responsive">
-            <img src="assets/pblogo.jpg">
-          </div>
-
-  <% end %>
-
-<!--   <%# if @eligible_rental == 'yes' %>
-
-    <div class="panel panel-default" style="margin: 0 0 40px 0">
-      <div class="panel-body">
-        <p style="font-size:32px; font-style:italic">You may be in luck!</p>
-
-        <p>Based on your rental status, household size and income, you likely qualify for rental assistance.
-      Applications can be filed at any of the City’s six Community Service Centers. For more information about Emergency Rental Assistance, visit your local Community Service Center <%#= link_to "here", "http://www.cityofchicago.org/city/en/depts/fss/provdrs/serv/svcs/community_servicecenterlocations.html"%> or call 3-1-1.</p>
-      </div>
-    </div>
-
-
-    <%# elsif @eligible_rental == 'no' %>
-
-      <div class="panel panel-default" style="margin: 0 0 40px 0">
-        <div class="panel-body">
-          <p style="font-size:32px; font-style:italic">We apologize.</p>
-        <p>Based on your household size and income, and other factors, you do not qualify for rental assistance. The financial assistance program provides essential relief services to persons in need of shelter, food, utility payments, medication and other items. Contact Emergency Fund directly at (312) 379-0301 for rent assistance.</p>
-        </div>
-
-      </div>
-  <%# end %> -->
-
-  <% if @eligible_rta == 'yes' %>
-
-      <div class="panel panel-default" style="margin: 0 0 40px 0">
-        <div class="panel-body">
-          <p style="font-size:32px; font-style:italic">You may be in luck!</p>
-
-          <p>Based on your age, household size, and income, you likely qualify for RTA Ride Free. <p> Feel free to apply online <%= link_to "here", "https://idoaweb.aging.illinois.gov/baa/Welcome.aspx"%> before you visit.</p> </p>
-        </div>
-      </div>
-
-  <% elsif @eligible_rta == 'no' %>
-<div class="container">
-  <div class="panel panel-default allcitypanel">
-    <div class="allcityheading">
-        <h2>Do not likely qualify! ( <%= @count %> programs )</h2>
-        <p class="subhead" style="text-align:left;">Below are the programs you may not qualify for:</p>
-    </div>
-
-      <ul class="list-group">
-        <!-- RTA -->
-        <li class="list-group-item">
-          <h3>RTA Free</h3>
-          <%= link_to "Click here to apply online", "https://idoaweb.aging.illinois.gov/baa/Welcome.aspx", :class => "btn btn-success btn-resolution" %>
-          <p> Call 312-913-3110 for information about the Reduced Fare Program. <br> Or, if you are a low-income woman exploring other transportation assistance options, go to <a href="https://www.womenwithdrive.org"> www.womenwithdrive.org </a>, to view their offerings.
-           </p>
-          </li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-  <% end %>
-
-
-  <% if @eligible_all_kids == 'yes' %>
-
-      <div class="panel panel-default" style="margin: 0 0 40px 0">
-        <div class="panel-body">
-          <p style="font-size:32px; font-style:italic">You may be in luck!</p>
-
-
-          <% if @assist_eligible == 'yes' %>
-            <h4>Based on your household size and income, you likely qualify for All Kids Assist.</h4>
-          <% elsif @share_eligible == 'yes' %>
-            <h4>Based on your household size and income, you likely qualify for All Kids Share.</h4>
-
-          <% elsif @premium1_eligible == 'yes' %>
-            <h4>Based on your household size and income, you likely qualify for All Kids Premium Level 1.</h4>
-
-          <% elsif @premium2_eligible == 'yes' %>
-            <h4>Based on your household size and income, you likely qualify for All Kids Premium Level 2.</h4>
-
-          <% end %>
-          <br>
-          <%= link_to "Click Here", "https://abe.illinois.gov/abe/access/accessController?id=0.9912272225853554", :class => "btn btn-primary btn-sm" %> to complete your application online.</p>
-
-      <% elsif @eligible_all_kids == 'no' %>
-
-      <div class="panel panel-default" style="margin: 0 0 40px 0">
-        <div class="panel-body">
-          <p style="font-size:32px; font-style:italic">We apologize.</p>
-
-            <p>Based on your household size and income, you likely do not qualify for All Kids. However, if you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.
-            <%= link_to "Click Here", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-primary btn-sm" %> to learn more about fees.  Get Covered Illinois is a resource that helps families register for insurance at in-person events.
-            <%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-primary btn-sm" %> to find Get Covered Illinois events in your area. You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.
-            </p>
-
-
-        <% end %>
-      </div>
-  </div>
-
-  <% if @eligible_medicaid == 'yes' %>
-      <div class="panel panel-default" style="margin: 0 0 40px 0">
-        <div class="panel-body">
-          <p style="font-size:32px; font-style:italic">You may be in luck!</p>
-            <h4>Based on your household size and income, you likely qualify for Medicaid.</h4>
-
-          <%= link_to "Click Here", "https://abe.illinois.gov/abe/access/accessController?id=0.9152558493190114 ", :class => "btn btn-primary btn-sm" %>
-          <br>
-      </div>
-    </div>
-
-    <% elsif @eligible_medicaid == 'maybe' %>
-    <br>
-        <br>
-      <div class="panel panel-default" style="margin: 0 0 40px 0">
-        <div class="panel-body">
-            <h4>Based on the information received, we cannot determine your eligibility for Medicaid at this time. </h4>
-            <p class="lead"> You may need to discuss your situation with a Food Stamp expert that can share more information on your probable eligibility. Call 312.341.1070 to find a Legal Assistance Foundation (LAF) Paralegal near you to discuss your Medicaid eligibility.</p>
-
-            <br>
-      </div>
-    </div>
-
-
-      <% elsif @eligible_medicaid == 'no' %>
-
-      <div class="panel panel-default" style="margin: 0 0 40px 0">
-        <div class="panel-body">
-          <p style="font-size:32px; font-style:italic">We apologize.</p>
-            <h4>Based on your household size and income, you likely do not qualify for Medicaid. </h4>
-
-            <p> However, if you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.
-
-            <%= link_to "Click Here", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-primary btn-sm" %> to learn more about fees.
-
-            <br>
-            Get Covered Illinois is a resource that helps families register for insurance at in-person events.
-            <%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-primary btn-sm" %> to find Get Covered Illinois events in your area. You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.
-
-
-            </p>
-
-
-        <% end %>
-      </div>
-</div>
