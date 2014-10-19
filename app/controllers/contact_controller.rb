@@ -2,6 +2,7 @@ class ContactController < ApplicationController
 
   def index
     @message = {}
+    @password = ENV['gmail_password']
   end
 
   def create

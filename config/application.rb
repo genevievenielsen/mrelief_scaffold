@@ -8,15 +8,15 @@ Bundler.require(*Rails.groups)
 
 module MreliefScaffold
   class Application < Rails::Application
-
+    config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
       :address              => "smtp.gmail.com",
       :port                 => 587,
-      :domain               => ENV["GMAIL_DOMAIN"],
-      :user_name            => ENV["GMAIL_USERNAME"],
-      :password             => ENV["GMAIL_PASSWORD"],
+      :domain               => "smtp.gmail.com",
+      :user_name            => ENV['user_name'],
+      :password             => ENV['gmail_password'],
       :authentication       => :plain,
-      :enable_starttls_auto => true
+      :enable_starttls_auto => false
     }
 
     config.action_mailer.default_url_options = {
