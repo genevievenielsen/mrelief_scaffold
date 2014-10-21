@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :tanifs
+
   resources :service_centers
 
   resources :medicare_cost_sharings

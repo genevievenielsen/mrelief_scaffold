@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  household_size: 1
+  earned_income: 9.99
+  tanif_payment: 1
+  max_income: 9.99
+
+two:
+  household_size: 1
+  earned_income: 9.99
+  tanif_payment: 1
+  max_income: 9.99

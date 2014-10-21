@@ -1,0 +1,178 @@
+<div class= "container">
+
+<div class="row">
+    <div class="page-header col-md-10 col-md-offset-1" style="border:none;">
+      <h2>Do I qualify for TANF?</h2>
+        <p class="subhead">If you are a resident of Illinois and related to a child that you are caring for, you may qualify for the Temporary Assistance for Needy Families (TANF) program.</p>
+        <p>Note: At the current moment, this form estimates eligibility for single families, not a household with multiple families.</p>
+    </div>
+</div>
+
+    <% if @tanif.errors.any? %>
+      <% @tanif.errors.full_messages.each do |message| %>
+        <div class="alert alert-dismissable alert-danger">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+
+<div class="row">
+<div class="panel panel-default col-md-8 col-md-offset-2">
+  <div class="panel-body">
+    <form action="/tanifs" role="form" method="post">
+
+
+  <!-- Label and input for household_size -->
+
+<div class="row">
+  <div class="form-group col-md-12">
+    <label for="household_size">What is your household size?</label>
+      <%= link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "The number of people in your household including yourself."} %>
+
+    <div class="row">
+      <div class="col-md-6">
+        <input type="text" id="household_size" name="household_size" placeholder="For example: 3" class="form-control"  required>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Label and input for max_income -->
+<div class="row">
+  <div class="form-group col-md-9">
+    <label for="max_income">
+      How much do you anticipate to earn in gross income in the next 30 days?
+    </label>
+      <%= link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "This should include income you earn from your work, self employment and rental income (contributions from people who live with you.) This should NOT include child support or SSI benefits."} %>
+
+
+
+    <div class="input-group">
+      <span class="input-group-addon">$</span>
+       <input type="text" id="max_income" name="max_income" placeholder="For example: 1000"class="form-control" required>
+      <span class="input-group-addon">.00</span>
+    </div>
+    </div>
+  </div>
+
+<%= render 'programs/zipcode_question' %>
+
+<div class="row">
+  <div class="form-group col-md-12">
+
+    <label for="anticipate_income" id="anticipate_income">Do you anticipate getting any other source of income outside of your job, child support or SSI? </label>
+
+    <div id="anticipate_income">
+        <%= radio_button_tag 'anticipate_income', 'yes' %> yes
+        <%= radio_button_tag 'anticipate_income', 'no' %> no
+    </div>
+  </div>
+</div>
+
+ <!-- Label and input for expect_child_support -->
+<div class="row">
+  <div class="form-group col-md-9">
+    <label for="expect_child_support">
+      How much do you expect to receive in child support in the next 30 days?
+    </label>
+
+
+    <div class="input-group">
+      <span class="input-group-addon">$</span>
+       <input type="text" id="expect_child_support" name="expect_child_support" placeholder="For example: 500"class="form-control" required>
+      <span class="input-group-addon">.00</span>
+    </div>
+    </div>
+  </div>
+
+   <!-- Label and input for expect_ssi -->
+<div class="row">
+  <div class="form-group col-md-9">
+    <label for="expect_ssi">
+      How much do you expect to receive in SSI in the next 30 days?
+    </label>
+
+
+    <div class="input-group">
+      <span class="input-group-addon">$</span>
+       <input type="text" id="expect_ssi" name="expect_ssi" placeholder="For example: 500"class="form-control" required>
+      <span class="input-group-addon">.00</span>
+    </div>
+    </div>
+  </div>
+
+
+<div class="row">
+  <div class="form-group col-md-12">
+    <label for="child" id="child">Are you pregnant or responsible for a child under 19 years of age?</label>
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-6">
+          <div id="child"  class="pull-left">
+            <%= radio_button_tag 'child', 'yes' %> yes
+            <%= radio_button_tag 'child', 'no' %> no
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="form-group col-md-12">
+    <label for="teen_parent" id="teen_parent"> Are you a teen parent? </label>
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-6">
+          <div id="teen_parent"  class="pull-left">
+            <%= radio_button_tag 'teen_parent', 'yes' %> yes
+            <%= radio_button_tag 'teen_parent', 'no' %> no
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group col-md-12">
+    <label for="citizen" id="citizen">Are you a citizen of the United States? </label>
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-6">
+          <div id="citizen"  class="pull-left">
+            <%= radio_button_tag 'citizen', 'yes' %> yes
+            <%= radio_button_tag 'citizen', 'no' %> no
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+    <div class="row">
+      <div class="col-md-6">
+        <%= render "programs/calculator" %>
+      </div>
+    </div>
+
+    <div>
+      <button type="submit" class="btn btn-primary program-btn ">See if I qualify</button>
+    </div>
+  </div>
+</form>
+</div>
+</div>
+
+
+
+
+</div>
+</div>
+</div>

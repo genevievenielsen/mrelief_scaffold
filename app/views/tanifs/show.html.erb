@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Household size:</strong>
+  <%= @tanif.household_size %>
+</p>
+
+<p>
+  <strong>Earned income:</strong>
+  <%= @tanif.earned_income %>
+</p>
+
+<p>
+  <strong>Tanif payment:</strong>
+  <%= @tanif.tanif_payment %>
+</p>
+
+<p>
+  <strong>Max income:</strong>
+  <%= @tanif.max_income %>
+</p>
+
+<%= link_to 'Edit', edit_tanif_path(@tanif) %> |
+<%= link_to 'Back', tanifs_path %>

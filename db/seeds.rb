@@ -826,6 +826,13 @@ p.description = "All Chicago Programs within mRelief"
 p.location = "chicago"
 p.save
 
+p = Program.new
+p.url = "/tanifs/new"
+p.name = "TANF"
+p.description = "Cash Assistance Program"
+p.location = "chicago"
+p.save
+
 a = AutoRepairAssistance.new
 a.auto_household_size = 1
 a.auto_gross_income = 3646.88
@@ -2013,10 +2020,132 @@ m.medicare_cost_sharing = 7059
 m.premium_only = 9993
 m.save
 
+t = Tanif.new
+t.household_size = 1
+t.earned_income = 243.00
+t.tanif_payment = 243
+t.max_income = 486.00
+t.save
 
 
+t = Tanif.new
+t.household_size = 2
+t.earned_income = 337.00
+t.tanif_payment = 318
+t.max_income = 655.00
+t.save
 
+t = Tanif.new
+t.household_size = 3
+t.earned_income = 393.00
+t.tanif_payment = 432
+t.max_income = 825.00
+t.save
 
+t = Tanif.new
+t.household_size = 4
+t.earned_income = 520.00
+t.tanif_payment = 474
+t.max_income = 994.00
+t.save
+
+t = Tanif.new
+t.household_size = 5
+t.earned_income = 608.00
+t.tanif_payment = 555
+t.max_income = 1163.00
+t.save
+
+t = Tanif.new
+t.household_size = 6
+t.earned_income = 709.00
+t.tanif_payment = 623
+t.max_income = 1332.00
+t.save
+
+t = Tanif.new
+t.household_size = 7
+t.earned_income = 844.00
+t.tanif_payment = 657
+t.max_income = 1501.00
+t.save
+
+t = Tanif.new
+t.household_size = 8
+t.earned_income = 979.00
+t.tanif_payment = 691
+t.max_income = 1670.00
+t.save
+
+t = Tanif.new
+t.household_size = 9
+t.earned_income = 1113.00
+t.tanif_payment = 727
+t.max_income = 1840.00
+t.save
+
+t = Tanif.new
+t.household_size = 10
+t.earned_income = 1244.00
+t.tanif_payment = 765
+t.max_income = 2009.00
+t.save
+
+t = Tanif.new
+t.household_size = 11
+t.earned_income = 1371.00
+t.tanif_payment = 807
+t.max_income = 2178.00
+t.save
+
+t = Tanif.new
+t.household_size = 12
+t.earned_income = 1499.00
+t.tanif_payment = 848
+t.max_income = 2347.00
+t.save
+
+t = Tanif.new
+t.household_size = 13
+t.earned_income = 1622.00
+t.tanif_payment = 894
+t.max_income = 2516.00
+t.save
+
+t = Tanif.new
+t.household_size = 14
+t.earned_income = 1744.00
+t.tanif_payment = 941
+t.max_income = 2685.00
+t.save
+
+t = Tanif.new
+t.household_size = 15
+t.earned_income = 1864.00
+t.tanif_payment = 991
+t.max_income = 2855.00
+t.save
+
+t = Tanif.new
+t.household_size = 16
+t.earned_income = 1981.00
+t.tanif_payment = 1043
+t.max_income = 3024
+t.save
+
+t = Tanif.new
+t.household_size = 17
+t.earned_income = 2095.00
+t.tanif_payment = 1098
+t.max_income = 3193.00
+t.save
+
+t = Tanif.new
+t.household_size = 18
+t.earned_income = 2206.00
+t.tanif_payment = 1156
+t.max_income = 3362.00
+t.save
 
 
 ServiceCenter.create(:name => 'Food Pantry',
