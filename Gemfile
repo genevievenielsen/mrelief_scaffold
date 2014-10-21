@@ -4,7 +4,7 @@ ruby "2.1.2"
 
 # gem 'roo'
 # gem "spreadsheet"
-
+gem 'rails_12factor', group: :production
 
 gem 'font-awesome-rails'
 
