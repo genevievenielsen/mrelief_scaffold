@@ -2,7 +2,7 @@
 
 <div class="page-header" style="border:none">
   <h1>Do I qualify for All City Programs within mRelief?</h1>
-  <p class="subhead">Programs include Food Stamps, RTA Ride Free, All Kids and Medicaid</p>
+  <p class="subhead">Programs include Food Stamps, RTA Ride Free, All Kids, Medicare Cost Sharing and Medicaid</p>
 </div>
 
 
@@ -38,6 +38,17 @@
       <input type="text" id="dependent_no" name="dependent_no" placeholder="For example: 3" class="form-control" required>
     </div>
   </div>
+
+
+   <div class="form-group col-sm-9">
+    <label for="medicare_household_size">How many people in your household receive Medicare?</label>
+      <%= link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "This should include the number of people who purchase and prepare food with you."} %>
+
+    <div>
+      <input type="text" id="medicare_household_size" name="medicare_household_size" placeholder="For example: 2" class="form-control"  required>
+    </div>
+  </div>
+
 
 
    <div class="form-group col-sm-9 pull-left">
@@ -92,7 +103,17 @@
 </div>
 </div>
 
-<div class="form-group col-sm-12">
+
+  <div class="form-group col-md-9">
+  <label for="assets">Please estimate the value of your assets. (Exclude the value of your home and car.)</label>
+    <%= link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "Personal property is anything owned by a person that is not land or permanently affixed to land. This includes such items as: money in checking and savings accounts;stocks, bonds, savings certificates, and other securities;farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property."} %>
+
+  <div>
+    <input type="text" id="assets" name="assets" placeholder="For example: 5000" class="form-control" required>
+  </div>
+</div>
+<br>
+<div class="form-group col-sm-9 pull-left">
 
     <label for="education" id="education" >Are you enrolled in college or an institution of higher education ? </label>
 
