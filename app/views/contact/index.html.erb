@@ -1,13 +1,19 @@
+
 <div class="container">
   <div class="row">
   <div class="page-header"></div>
+  <%= notice %>
+  <%= alert %>
 
       <div class="col-md-8 col-md-offset-2">
+
 
         <h3>We would love to know what you think about mRelief: <%= @password %></h3>
         <br>
 
-      <%= form_tag("#") do %>
+
+
+      <%= form_tag(contact_index_url) do %>
         <div class="form-group">
           <%= label_tag(:contact_first_name, "First Name") %>
           <%= text_field_tag(:contact_first_name, nil, {:class => "form-control"}) %>

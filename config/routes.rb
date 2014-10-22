@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :tanifs
+
   resources :service_centers
 
   resources :medicare_cost_sharings
@@ -15,7 +17,7 @@ Rails.application.routes.draw do
   get('/how_mrelief_works', { :controller => 'pages', :action => 'how_mrelief_works' })
   get("/", { :controller => "pages", :action => "homepage" })
 
-  resources :contact , only: [:index, :create]
+  resources :contact, only: [:index, :create]
 
   resources :wics
 

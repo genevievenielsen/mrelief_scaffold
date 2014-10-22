@@ -1,8 +1,104 @@
 
   <% if @eligible %>
+    <div class="page-header"></div>
+
+          <div class="row" style="text-align:center;">
+             <div class="col-md-8 col-md-offset-2">
+                 <i class="fa fa-check-circle fa-5x"></i>
+                  <h1>You may be in luck!</h1>
+                  <h4>Based on your household size and income, you likely qualify for Head Start.</h4>
+
+            <br>
+            <br>
+            <br>
+
+
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-6">
+                <p class="subhead"> The Illinois Head Start Association can help you find a Head Start program near you.</p>
+              <%= link_to "Click Here to visit their website", "http://abe.illinois.gov", :class => "btn btn-success btn-resolution" %>
+              </div>
+              <p class="subhead">or call at 217-241-3511.</p>
+          </div>
+        </div>
+
 
 
   <% else %>
+
+     <div class="page-header"></div>
+
+           <div class="row" style="text-align:center;">
+             <div class="col-md-8 col-md-offset-2">
+                 <h1>Something else in mind!</h1>
+                 <h4>Based on your household size and income, you likely do not qualify for Head Start. </h4>
+
+                 <br>
+
+
+
+
+               <div class="row">
+                 <p class="subhead">Many programs for young children have a combination of funding sources. To find early learning programs near you </p>
+                 <%= link_to "Click Here ", "http://chicagoearlylearning.org", :class => "btn btn-success btn-resolution" %>
+                 <p class="subhead">or call the hotline at (312) 229-1690.</p>
+               </div>
+
+               <br>
+               <br>
+
+              <!--  <div class="row">
+                 <h4>Here are some additional resources from Purple Binder:</h4>
+               </div>
+               <br>
+
+               <div class="row">
+
+               <%# if @food_resources_zip.count >= 2 %>
+                 <div class="col-md-6 col-sm-6">
+                   <ul class="list-group" style="text-align:left;">
+                     <li class="list-group-item" style="font-weight:bold"><%#= @food_resources_zip.first.name %>  </li>
+                     <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%#= @food_resources_zip.first.street %>  <%#= @food_resources_zip.first.city %> <%#= @food_resources_zip.first.state %>, <%#= @food_resources_zip.first.zip %> </li>
+                     <li class="list-group-item"><i class="fa fa-phone"></i>  <%#= @food_resources_zip.first.phone %> </li>
+                   </ul>
+                 </div>
+
+                 <div class="col-md-6 col-sm-6">
+                   <ul class="list-group" style="text-align:left;">
+                     <li class="list-group-item" style="font-weight:bold"><%#=# @food_resources_zip.second.name %>  </li>
+                     <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%#= @food_resources_zip.second.street %>  <%#= @food_resources_zip.second.city %> <%#= @food_resources_zip.second.state %>, <%#= @food_resources_zip.second.zip %> </li>
+                     <li class="list-group-item"><i class="fa fa-phone"></i>  <%#= @food_resources_zip.second.phone %> </li>
+                   </ul>
+                 </div>
+                 <%# end %>
+               </div>
+
+
+               <div class="row">
+               <%# if @food_resources_first.present? %>
+                 <div class="col-md-6 col-sm-6">
+                   <ul class="list-group" style="text-align:left;">
+                     <li class="list-group-item" style="font-weight:bold"><%#= @food_resources_first.name %>  </li>
+                     <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%#= @food_resources_first.street %>  <%#= @food_resources_first.city %> <%#= @food_resources_first.state %>, <%#= @food_resources_first.zip %> </li>
+                     <li class="list-group-item"><i class="fa fa-phone"></i>  <%#= @food_resources_first.phone %> </li>
+                   </ul>
+                 </div>
+
+                 <div class="col-md-6 col-sm-6">
+                   <ul class="list-group" style="text-align:left;">
+                     <li class="list-group-item" style="font-weight:bold"><%#= @food_resources_second.name %>  </li>
+                     <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%#= @food_resources_second.street %>  <%#= @food_resources_second.city %> <%#= @food_resources_second.state %>, <%#= @food_resources_second.zip %> </li>
+                     <li class="list-group-item"><i class="fa fa-phone"></i>  <%#= @food_resources_second.phone %> </li>
+                   </ul>
+                 </div>
+                 <%# end %>
+               </div> -->
+
+
+             <!--   <div class="row img-responsive">
+                 <img src="assets/pblogo.jpg">
+               </div>
+    -->
 
 
   <% end %>

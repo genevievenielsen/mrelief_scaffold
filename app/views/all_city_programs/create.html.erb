@@ -1,14 +1,14 @@
 <div class="container" style="padding-bottom:150px">
 <div class="page-header">
   <h1>Do I qualify for All City Programs within mRelief?</h1>
-  <p class="subhead">Programs include Food Stamps, RTA Ride Free, All Kids and Medicaid</p>
+  <p class="subhead">Programs include Food Stamps, RTA Ride Free, All Kids, Medicare Cost Sharing and Medicaid</p>
 </div>
 
 
 <% if @eligible_count > 0 %>
 <div class="panel panel-default allcitypanel">
   <div class="allcityheading">
-      <h2>You may be in luck! ( <%= pluralize(@eligible_count, 'program') %>)</h2>
+      <h2>You may qualify ( <%= pluralize(@eligible_count, 'program') %>)</h2>
 
 
       <p class="subhead" style="text-align:left;">Below are the programs you may qualify for:</p>
@@ -53,6 +53,16 @@
           <%= link_to "Click Here for more information", "https://abe.illinois.gov/abe/access/accessController?id=0.9152558493190114 ", :class => "btn btn-success btn-resolution" %>
         </li>
         <% end %>
+        <% if @eligible_medicare_cost_sharing == "yes" %>
+          <li class="list-group-item">
+            <h3 class="allcityheader">Medicare Cost Sharing </h3>
+            <p>Important Note:  If you previously opted out of Medicare part B, the Medicare cost sharing program, you may be able to get your Medicare premium paid now. Please contact or visit your LAF paralegal to re-enroll for Medicare Part B. You can see the nearest Community Service Center near you.</p>
+            <div class="sectiondivider"></div>
+            <h4>The LAF expert nearest you:</h4>
+            <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @user_zipcode %> | <%= @lafcenter.telephone %>  | <%= @lafcenter.spanish %> </p>
+          </li>
+        <% end %>
+
     </ul>
   </div>
   <% end %>
@@ -152,6 +162,15 @@
         <h3 class="allcityheader">Medicaid</h3>
         <p> If you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.</p>
 
+        <%= link_to "Click Here to learn more about fees", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution" %>
+        <p>Get Covered Illinois is a resource that helps families register for insurance at in-person events.</p>
+        <%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution" %> to find Get Covered Illinois events in your area. You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.
+      </li>
+      <% end %>
+      <% if @eligible_medicare_cost_sharing == "no" %>
+        <li class="list-group-item">
+        <h3 class="allcityheader">Medicare Cost Sharing</h3>
+        <p> However, if you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.</p>
         <%= link_to "Click Here to learn more about fees", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution" %>
         <p>Get Covered Illinois is a resource that helps families register for insurance at in-person events.</p>
         <%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution" %> to find Get Covered Illinois events in your area. You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.
