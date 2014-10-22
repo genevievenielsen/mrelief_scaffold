@@ -21,6 +21,12 @@ class AllCityProgramsController < ApplicationController
       dependent_no = params[:dependent_no].in_numbers
     end
 
+    if params[:medicare_household_size] !~ /\D/
+      medicare_household_size = params[:medicare_household_size].to_i
+    else
+      medicare_household_size = params[:medicare_household_size].in_numbers
+    end
+
     if params[:age] !~ /\D/
       age = params[:age].to_i
     else
@@ -61,6 +67,18 @@ class AllCityProgramsController < ApplicationController
         annual_gross_income.slice!"dollars"
       end
       annual_gross_income = annual_gross_income.in_numbers
+    end
+
+    assets = params[:assets]
+    assets = assets.gsub(/[^0-9\.]/, '')
+
+    if assets !~ /\D/
+      assets = assets.to_i
+    else
+      if assets.include?("dollars")
+        assets.slice!"dollars"
+      end
+      assets = assets.in_numbers
     end
 
 
@@ -241,6 +259,41 @@ class AllCityProgramsController < ApplicationController
           @eligible_all_kids = "no"
         end
 
+
+    #this is the logic for medicare cost sharing
+    if medicare_household_size == 0
+      @eligible_medicare_cost_sharing = "no"
+
+    elsif dependent_no == 1 && assets > 7160
+      @eligible_medicare_cost_sharing = "no"
+
+    elsif dependent_no > 1 && assets > 10750
+      @eligible_medicare_cost_sharing = "no"
+
+    else
+      if medicare_household_size == 1
+        monthly_gross_income = monthly_gross_income - 25
+      elsif medicare_household_size == 2
+        monthly_gross_income = monthly_gross_income - 50
+      end
+
+      medicare_sharing_eligibility = MedicareCostSharing.find_by({ :household_size => dependent_no })
+
+      if monthly_gross_income < medicare_sharing_eligibility.premium_only
+        @eligible_medicare_cost_sharing = "yes"
+
+        if monthly_gross_income < medicare_sharing_eligibility.medicare_cost_sharing
+          @eligible_p_d_c = "yes"
+
+        elsif monthly_gross_income >= medicare_sharing_eligibility.medicare_cost_sharing
+          @eligible_p = "yes"
+
+        end
+
+      end
+
+     end
+
     end #this ends the present if statement
 
     @eligible_count = 0
@@ -258,6 +311,10 @@ class AllCityProgramsController < ApplicationController
     if @eligible_medicaid == 'yes'
       @eligible_count = @eligible_count + 1
     end
+    if @eligible_medicare_cost_sharing == 'yes'
+      @eligible_count = @eligible_count + 1
+    end
+
 
     @ineligible_count = 0
     if  @eligible_snap == "no"
@@ -274,6 +331,10 @@ class AllCityProgramsController < ApplicationController
     if @eligible_medicaid == 'no'
       @ineligible_count = @ineligible_count + 1
     end
+    if @eligible_medicare_cost_sharing == 'no'
+      @ineligible_count = @ineligible_count + 1
+    end
+
 
     @indeterminate_count = 0
     if  @eligible_snap == "maybe"

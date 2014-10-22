@@ -1,0 +1,33 @@
+<%= form_for(@tanif) do |f| %>
+  <% if @tanif.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tanif.errors.count, "error") %> prohibited this tanif from being saved:</h2>
+
+      <ul>
+      <% @tanif.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :household_size %><br>
+    <%= f.number_field :household_size %>
+  </div>
+  <div class="field">
+    <%= f.label :earned_income %><br>
+    <%= f.text_field :earned_income %>
+  </div>
+  <div class="field">
+    <%= f.label :tanif_payment %><br>
+    <%= f.number_field :tanif_payment %>
+  </div>
+  <div class="field">
+    <%= f.label :max_income %><br>
+    <%= f.text_field :max_income %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -4,7 +4,7 @@ ruby "2.1.2"
 
 # gem 'roo'
 # gem "spreadsheet"
-
+gem 'rails_12factor', group: :production
 
 gem 'font-awesome-rails'
 
@@ -63,5 +63,9 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+<<<<<<< HEAD
  # gem 'figaro', '~> 1.0.0'
+=======
+#gem 'figaro', '~> 1.0.0'
+>>>>>>> e124f36feaeb4fefbea27c057b50990eb7b14f84
 

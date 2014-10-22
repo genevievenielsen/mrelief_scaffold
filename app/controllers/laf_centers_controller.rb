@@ -1,4 +1,4 @@
-require 'roo'
+# require 'roo'
 class LafCentersController < ApplicationController
   before_action :set_laf_center, only: [:show, :edit, :update, :destroy]
 
