@@ -13,10 +13,10 @@ module MreliefScaffold
       :address              => "smtp.gmail.com",
       :port                 => 587,
       :domain               => "smtp.gmail.com",
-      :user_name            => ENV['user_name'],
-      :password             => ENV['gmail_password'],
+      :user_name            => ENV["user_name"],
+      :password             => ENV["password"],
       :authentication       => :plain,
-      :enable_starttls_auto => false
+      :enable_starttls_auto => true
     }
 
     config.action_mailer.default_url_options = {
