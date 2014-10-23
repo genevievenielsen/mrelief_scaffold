@@ -14,7 +14,7 @@ module MreliefScaffold
     config.action_mailer.smtp_settings = {
       :address              => "smtp.gmail.com",
       :port                 => 587,
-      :domain               => "smtp.gmail.com",
+      :domain               => "mreliefv2.herokuapp.com",
       :user_name            => ENV["user_name"],
       :password             => ENV["password"],
       :authentication       => :plain,
