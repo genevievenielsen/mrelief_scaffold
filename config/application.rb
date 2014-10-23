@@ -31,7 +31,7 @@ module MreliefScaffold
       :address => "smtp.mailgun.org",
       :port => 587,
       :domain => "mrelief.mailgun.com",
-      :user_name => "postmaster@MYDOMAIN.mailgun.org",
+      :user_name => "postmaster@mrelief.mailgun.org",
       :password => ENV["mailgun_password"]
     }
 
