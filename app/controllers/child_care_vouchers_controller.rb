@@ -53,6 +53,49 @@ class ChildCareVouchersController < ApplicationController
      else
        redirect_to :back, :notice => "All fields are required."
      end
+
+     @user_zipcode = params[:zipcode]
+     @zipcode = @user_zipcode << ".0"
+     @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
+
+     childcare = []
+     ServiceCenter.all.each do |center|
+       if center.description.match("child care")
+         childcare.push(center)
+       end
+     end
+
+
+     @pb_zipcode = @user_zipcode.chomp(".0")
+       @child_resources = childcare
+       @child_resources_zip = []
+
+       childcare.each do |center|
+         if center.zip.match(@pb_zipcode)
+           @child_resources_zip.push(center)
+         end
+       end
+
+
+       #@child_resources.where(:zip => @user_zipcode)
+
+         #in this case there are 2 medical centers in the user's zip
+         if @child_resources_zip.count >= 2
+            @child_resources = @child_resources_zip
+         end
+
+         #in this case there is 1 medical center in the user's zip
+         if @child_resources_zip.count == 1
+            @child_resources_first = @child_resources_zip.first
+            @child_resources_second = @child_resources.first
+         end
+
+         #in this caser there are no medical centers in the user's zip
+         if  @child_resources_zip.count == 0
+             @child_resources_first = @child_resources.first
+             @child_resources_second = @child_resources.second
+         end
+
     end
 
 

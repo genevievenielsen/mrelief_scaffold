@@ -2670,6 +2670,118 @@ ServiceCenter.create(:name => 'Henson School-Based Health Clinic',
         :description => 'individual therapy * group therapy * primary care'
     )
 
+ServiceCenter.create(:name => 'Child Development',
+        :latitude => '-87.6446784',
+        :longitude => '41.8855362',
+        :street => '651 West Lake Street',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60661',
+        :phone => '(312) 655-8592',
+        :organization => '4078',
+        :description => 'child care * early childhood education * head start'
+    )
+ServiceCenter.create(:name => 'Tuition-Based Preschool',
+        :latitude => '-87.6545797',
+        :longitude => '41.8784186',
+        :street => '225 S Aberdeen Street',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60607',
+        :phone => '773-534-7790',
+        :organization => '1616',
+        :description => 'child care * preschool'
+    )
+ServiceCenter.create(:name => 'Therapeutical Educational Division Services',
+        :latitude => '-87.66194',
+        :longitude => '41.882535',
+        :street => '1359 W Washington Blvd ',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60607',
+        :phone => '(773) 375-1999',
+        :organization => '310',
+        :description => 'child care * tutoring * advocacy'
+    )
+ServiceCenter.create(:name => 'Early Childhood Education',
+        :latitude => '-87.6610539',
+        :longitude => '41.89317',
+        :street => '1347 W Erie Street',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60642',
+        :phone => '312-432-2218',
+        :organization => '135',
+        :description => 'full day childcare * bilingual and bicultural child care program * counseling and parent workshops'
+    )
+ServiceCenter.create(:name => 'Guadalupano Family Center - Child Care',
+        :latitude => '-87.6685955',
+        :longitude => '41.8573063',
+        :street => '1814 S Paulina Street',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60608',
+        :phone => '312-666-3883',
+        :organization => '363',
+        :description => 'child care * early childhood education * head start'
+    )
+ServiceCenter.create(:name => 'Child Care',
+        :latitude => '-87.6486677',
+        :longitude => '41.8356318',
+        :street => '844 W 32nd Street',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60608',
+        :phone => '312-326-2282',
+        :organization => '417',
+        :description => 'child care * head start * preschool age'
+    )
+ServiceCenter.create(:name => 'Mujeres Latinas en Acción',
+        :latitude => '-87.679369',
+        :longitude => '41.8531697',
+        :street => '2124 W. 21 Pl.',
+        :city => 'Chicago',
+        :state => 'Il',
+        :zip => '60608',
+        :phone => '773-890-7676',
+        :organization => '4292',
+        :description => 'case management * domestic violence * child care'
+    )
+ServiceCenter.create(:name => 'Child Care',
+        :latitude => '-87.648025',
+        :longitude => '41.921758',
+        :street => '2145 N Halsted Street',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60614',
+        :phone => '312-943-6776',
+        :organization => '529',
+        :description => 'senior services * child care * homeless outreach'
+    )
+ServiceCenter.create(:name => 'Nia Family Center- Child Care',
+        :latitude => '-87.7176924',
+        :longitude => '41.8947199',
+        :street => '744 N Monticello Avenue',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60624',
+        :phone => '312-722-0115',
+        :organization => '363',
+        :description => 'child care * early childhood education * head start'
+    )
+ServiceCenter.create(:name => 'Paulo Freire Family Center - Child Care',
+        :latitude => '-87.6672204',
+        :longitude => '41.8158224',
+        :street => '1653 W. 43rd Street',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60609',
+        :phone => '773-826-6260',
+        :organization => '363',
+        :description => 'child care * early childhood education * after school programs'
+    )
+
+
 
 LafCenter.create(:zipcode => '60601.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
         :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'None')
