@@ -50,7 +50,7 @@ class MedicaidsController < ApplicationController
 
     primarycare = []
     ServiceCenter.all.each do |center|
-      if center.description.include?("primary care")
+      if center.description.match("primary care")
         primarycare.push(center)
       end
     end
