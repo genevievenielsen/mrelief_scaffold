@@ -2781,6 +2781,108 @@ ServiceCenter.create(:name => 'Paulo Freire Family Center - Child Care',
         :description => 'child care * early childhood education * after school programs'
     )
 
+#transportation
+
+ServiceCenter.create(:name => 'Non-Emergency Transportation Services Prior Approval Program',
+        :latitude => '-87.6297982',
+        :longitude => '41.8781136',
+        :street => '',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '',
+        :phone => '877-725-0569',
+        :organization => '4709',
+        :description => 'medical appointment transportation'
+    )
+ServiceCenter.create(:name => 'Reduced Fare and Free Ride Programs',
+        :latitude => '-87.6297982',
+        :longitude => '41.8781136',
+        :street => '',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '',
+        :phone => '(312) 913-3110 or (312) 932-2923',
+        :organization => '4693',
+        :description => 'transportation * free and discounted * reduced and free fares'
+    )
+ServiceCenter.create(:name => 'Transportation Program',
+        :latitude => '-87.6307095',
+        :longitude => '41.8799717',
+        :street => '125 South Clark Street',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60603',
+        :phone => '(773) 553-2860',
+        :organization => '4606',
+        :description => 'transportation for students attending school outside their neighborhood * transportation for special needs students'
+    )
+ServiceCenter.create(:name => 'Central West Case Management Unit',
+        :latitude => '-87.6484412',
+        :longitude => '41.8770296',
+        :street => '322 South Green Street',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60607',
+        :phone => '(312) 413-4220',
+        :organization => '1923',
+        :description => 'transportation * legal assistance * homemaker services'
+    )
+ServiceCenter.create(:name => 'Paratransit Transportation Services',
+        :latitude => '-87.6214808',
+        :longitude => '41.8927221',
+        :street => '230 E. Ohio St. ',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60611',
+        :phone => '312-335-1244',
+        :organization => '4706',
+        :description => 'paratransit * medical appointment transportation'
+    )
+ServiceCenter.create(:name => 'Wheelchair and Ambulatory Transportation',
+        :latitude => '-87.6319671',
+        :longitude => '41.8405609',
+        :street => 'Chicago and Suburbs',
+        :city => '',
+        :state => '',
+        :zip => '',
+        :phone => '630-668-9999',
+        :organization => '4708',
+        :description => 'paratransit * medical appointment transportation'
+    )
+ServiceCenter.create(:name => 'Youth Overnight Shelter',
+        :latitude => '-87.6953621',
+        :longitude => '41.866741',
+        :street => '2750 W Roosevelt',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60608',
+        :phone => '773-435-8424',
+        :organization => '4329',
+        :description => 'case management * emergency shelter * transportation'
+    )
+ServiceCenter.create(:name => 'After School Program',
+        :latitude => '-87.6967602',
+        :longitude => '41.9059028',
+        :street => '1343 N California Avenue',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60622',
+        :phone => '773-645-2465',
+        :organization => '4357',
+        :description => 'after school program * transportation from school'
+    )
+ServiceCenter.create(:name => 'Transportation Providers',
+        :latitude => '-87.602262',
+        :longitude => '41.823561',
+        :street => '3939 S Lake Park Ave',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60653',
+        :phone => '773-285-1090',
+        :organization => '4710',
+        :description => 'medical appointment transportation'
+    )
+
 
 
 LafCenter.create(:zipcode => '60601.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
