@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   def homepage
+    redirect_to 'http://mreliefv2.herokuapp.com/'
   end
 
   def about_us
