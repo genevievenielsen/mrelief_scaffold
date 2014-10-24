@@ -138,6 +138,82 @@ class AllCityProgramsController < ApplicationController
             @food_resources_second = @food_resources.second
         end
 
+      transportation = []
+      ServiceCenter.all.each do |center|
+        if center.description.match("transportation")
+          transportation.push(center)
+        end
+      end
+
+      @pb_zipcode = @user_zipcode.chomp(".0")
+        @transportation_resources = transportation
+        @transportation_resources_zip = []
+
+        transportation.each do |center|
+          if center.zip.match(@pb_zipcode)
+            @transportation_resources_zip.push(center)
+          end
+        end
+
+
+        #@transportation_resources.where(:zip => @user_zipcode)
+
+          #in this case there are 2 medical centers in the user's zip
+          if @transportation_resources_zip.count >= 2
+             @transportation_resources = @transportation_resources_zip
+          end
+
+          #in this case there is 1 medical center in the user's zip
+          if @transportation_resources_zip.count == 1
+             @transportation_resources_first = @transportation_resources_zip.first
+             @transportation_resources_second = @transportation_resources.first
+          end
+
+          #in this caser there are no medical centers in the user's zip
+          if  @transportation_resources_zip.count == 0
+              @transportation_resources_first = @transportation_resources.first
+              @transportation_resources_second = @transportation_resources.second
+          end
+      primarycare = []
+      ServiceCenter.all.each do |center|
+        if center.description.match("primary care")
+          primarycare.push(center)
+        end
+      end
+
+
+      @pb_zipcode = @user_zipcode.chomp(".0")
+        @medical_resources = primarycare
+        @medical_resources_zip = []
+
+        primarycare.each do |center|
+          if center.zip.match(@pb_zipcode)
+            @medical_resources_zip.push(center)
+          end
+        end
+
+
+        #@medical_resources.where(:zip => @user_zipcode)
+
+          #in this case there are 2 medical centers in the user's zip
+          if @medical_resources_zip.count >= 2
+             @medical_resources = @medical_resources_zip
+          end
+
+          #in this case there is 1 medical center in the user's zip
+          if @medical_resources_zip.count == 1
+             @medical_resources_first = @medical_resources_zip.first
+             @medical_resources_second = @medical_resources.first
+          end
+
+          #in this caser there are no medical centers in the user's zip
+          if  @medical_resources_zip.count == 0
+              @medical_resources_first = @medical_resources.first
+              @medical_resources_second = @medical_resources.second
+          end
+
+
+
       # this is the logic for disability
       if params[:disabled].present?
 

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby "2.1.2"
 
-gem 'figaro', '~> 1.0.0'
+# gem 'figaro', '~> 1.0.0'
 
 gem 'roo'
 gem "spreadsheet"
