@@ -2781,6 +2781,65 @@ ServiceCenter.create(:name => 'Paulo Freire Family Center - Child Care',
         :description => 'child care * early childhood education * after school programs'
     )
 
+#head start
+
+ServiceCenter.create(:name => 'Full-Day Head Start',
+        :latitude => '-87.650714',
+        :longitude => '41.8733696',
+        :street => 'Temple Head Start - 1 N. Ogden Ave. ',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60607',
+        :phone => '(312) 226-2649',
+        :organization => '700',
+        :description => 'head start * creative educational activities * lunch and snacks'
+    )
+ServiceCenter.create(:name => 'Head Start',
+        :latitude => '-87.6358772',
+        :longitude => '41.8544578',
+        :street => '2141 S Tan Court',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60616',
+        :phone => '312-791-0454',
+        :organization => '766',
+        :description => 'early childhood education * head start * preschool'
+    )
+
+ServiceCenter.create(:name => 'School Consultation',
+        :latitude => '-87.6344861',
+        :longitude => '41.878384',
+        :street => '216 W. Jackson Blvd.',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60606',
+        :phone => '855-ASK-JCFS (855-275-5237)',
+        :organization => '3942',
+        :description => 'head start * family support * early head start'
+    )
+ServiceCenter.create(:name => 'School Consultation',
+        :latitude => '-87.6344861',
+        :longitude => '41.878384',
+        :street => '216 W. Jackson Blvd.',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60606',
+        :phone => '855-ASK-JCFS (855-275-5237)',
+        :organization => '3942',
+        :description => 'head start * family support * early head start'
+    )
+ServiceCenter.create(:name => 'School Consultation',
+        :latitude => '-87.6344861',
+        :longitude => '41.878384',
+        :street => '216 W. Jackson Blvd.',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60606',
+        :phone => '855-ASK-JCFS (855-275-5237)',
+        :organization => '3942',
+        :description => 'head start * family support * early head start'
+    )
+
 #transportation
 
 ServiceCenter.create(:name => 'Non-Emergency Transportation Services Prior Approval Program',
