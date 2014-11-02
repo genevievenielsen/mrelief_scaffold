@@ -25,10 +25,11 @@
 <div class="container">
  <div class="row">
     <div class="col-md-12">
-      <h3 class="program-heading">CHICAGO PROGRAMS</h3>
+      <h3 class="program-heading" style="padding-bottom:0px">CHICAGO PROGRAMS</h3>
+        <h4 style="text-align:center">Accessible in Community Service Centers</h4>
     </div>
   </div>
-
+  <br>
   <div class="row">
   <% chicago_programs = Program.where(:location => "chicago") %>
   <% chicago_programs.each_with_index do |program| %>

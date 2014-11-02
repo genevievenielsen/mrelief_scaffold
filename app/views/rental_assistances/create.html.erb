@@ -1,8 +1,131 @@
- <%# if @eligible == "yes" %>
+ <% if @eligible == "yes" %>
+ <div class="page-header"></div>
 
- <%# elsif @eligible == "maybe" %>
+       <div class="row" style="text-align:center;">
+          <div class="col-md-8 col-md-offset-2">
+              <i class="fa fa-check-circle fa-5x"></i>
+               <h1>You may be in luck!</h1>
+               <h4> Based on your rental status, household size and income, you likely qualify for rental assistance.  Applications can be filed at any of the City’s six Community Service Centers.</h4>
+
+               <% if @medical_circumstance == "yes" %>
+               <h4>You must be able to obtain documents from your employer showing that you took time off as well as from the hospital or attending physician.</h4>
+
+               <% elsif @natural_disaster == "yes" %>
+
+               <h4>You must be able to prove this by obtaining documents from a fire marshall (standard fire department reports). For floods, please provide a letter from your landlord and photographs.
+              </h4>
+
+              <% elsif @temporary_loss == "yes"%>
+
+              <h4>You must provide last 90 days of pay stubs and a letter from employer stating (layoff, termination, etc). the return date to work. You can also provide unemployment assistance documentation.</h4>
+
+              <% elsif @domestic_violence == "yes"%>
+
+              <h4>You must be able to prove this by providing a report from the police department or a document showing an order of protection/restraining order.</h4>
+              <% end %>
+
+              <h4>The final decision will be made one-on-one by the case manager.</h4>
 
 
-  <%# elsif @eligible == "no" %>
+         <br>
+         <br>
 
-  <%# end %>
+         <div class="row">
+           <div class="text-center">
+             <p class="subhead"> For more information about Emergency Rental Assistance, visit your local Community Service Center :</p>
+           <%= link_to "Click Here", "http://www.cityofchicago.org/city/en/depts/fss/provdrs/serv/svcs/community_servicecenterlocations.html", :class => "btn btn-success btn-resolution" %>
+           <p class="subhead">or call 3-1-1.</p>
+           </div>
+
+
+
+       </div>
+     </div>
+
+ <% elsif @eligible == "maybe" %>
+
+
+   <div class="row" style="text-align:center;">
+     <div class="col-md-8 col-md-offset-2">
+       <i class="fa fa-exclamation-circle fa-5x"></i>
+         <h1>Close enough to apply!</h1>
+          <h4>According to the income guidelines of Rental Assistance, you make too much money to apply. However, in some cases the city may make an exception. Applications can be filed at any of the City’s six Community Service Centers.  </h4>
+         <br>
+
+        <div class="row">
+          <div class="text-center">
+            <p class="subhead"> For more information about Emergency Rental Assistance, visit your local Community Service Center :</p>
+          <%= link_to "Click Here", "http://www.cityofchicago.org/city/en/depts/fss/provdrs/serv/svcs/community_servicecenterlocations.html", :class => "btn btn-success btn-resolution" %>
+          <p class="subhead">or call 3-1-1.</p>
+          </div>
+      </div>
+
+ </div>
+
+
+  <% elsif @eligible == "no" %>
+  <div class="page-header"></div>
+
+        <div class="row" style="text-align:center;">
+          <div class="col-md-8 col-md-offset-2">
+              <h1>Something else in mind!</h1>
+              <h4>Based on your household size and income, you likely do not qualify for Rental Assistance.</h4>
+
+              <br>
+
+            <div class="row">
+              <p class="subhead">The financial assistance program provides essential relief services to persons in need of shelter, food, utility payments, medication and other items. Contact Emergency Fund directly at (312) 379-0301 for rent assistance.
+            </div>
+
+
+
+           <!--  <div class="row">
+              <h4>Here are some additional resources from Purple Binder:</h4>
+            </div>
+            <br>
+
+            <div class="row">
+
+            <%# if @food_resources_zip.count >= 2 %>
+              <div class="col-md-6 col-sm-6">
+                <ul class="list-group" style="text-align:left;">
+                  <li class="list-group-item" style="font-weight:bold"><%#= @food_resources_zip.first.name %>  </li>
+                  <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%#= @food_resources_zip.first.street %>  <%#= @food_resources_zip.first.city %> <%#= @food_resources_zip.first.state %>, <%#= @food_resources_zip.first.zip %> </li>
+                  <li class="list-group-item"><i class="fa fa-phone"></i>  <%#= @food_resources_zip.first.phone %> </li>
+                </ul>
+              </div>
+
+              <div class="col-md-6 col-sm-6">
+                <ul class="list-group" style="text-align:left;">
+                  <li class="list-group-item" style="font-weight:bold"><%#= @food_resources_zip.second.name %>  </li>
+                  <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%#= @food_resources_zip.second.street %>  <%#= @food_resources_zip.second.city %> <%#= @food_resources_zip.second.state %>, <%#= @food_resources_zip.second.zip %> </li>
+                  <li class="list-group-item"><i class="fa fa-phone"></i>  <%#= @food_resources_zip.second.phone %> </li>
+                </ul>
+              </div>
+              <%# end %>
+            </div>
+
+
+            <div class="row">
+            <%# if @food_resources_first.present? %>
+              <div class="col-md-6 col-sm-6">
+                <ul class="list-group" style="text-align:left;">
+                  <li class="list-group-item" style="font-weight:bold"><%#= @food_resources_first.name %>  </li>
+                  <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%#= @food_resources_first.street %>  <%#= @food_resources_first.city %> <%#= @food_resources_first.state %>, <%#= @food_resources_first.zip %> </li>
+                  <li class="list-group-item"><i class="fa fa-phone"></i>  <%#= @food_resources_first.phone %> </li>
+                </ul>
+              </div>
+
+              <div class="col-md-6 col-sm-6">
+                <ul class="list-group" style="text-align:left;">
+                  <li class="list-group-item" style="font-weight:bold"><%#= @food_resources_second.name %>  </li>
+                  <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%#= @food_resources_second.street %>  <%#= @food_resources_second.city %> <%#= @food_resources_second.state %>, <%#= @food_resources_second.zip %> </li>
+                  <li class="list-group-item"><i class="fa fa-phone"></i>  <%#= @food_resources_second.phone %> </li>
+                </ul>
+              </div>
+              <%# end %>
+            </div>
+
+            <%#= image_tag("pblogo.jpg", :class => "logo-padding") %> -->
+
+  <% end %>
