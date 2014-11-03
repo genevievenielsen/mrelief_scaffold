@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   resources :laf_centers
 
+  post('/', { :controller => 'twilio', :action => 'text'})
+
   get('/all_city_testing', { :controller => 'pages', :action => 'all_city_testing' })
 
   get('/about_us', { :controller => 'pages', :action => 'about_us' })

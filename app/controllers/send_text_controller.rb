@@ -19,3 +19,4 @@ class SendTextController < ApplicationController
     )
   end
 end
+
