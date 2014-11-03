@@ -68,4 +68,3 @@ class TwilioController < ApplicationController
       render_twiml twiml
   end
 end
-
