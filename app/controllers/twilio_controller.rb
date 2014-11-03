@@ -45,17 +45,17 @@ class TwilioController < ApplicationController
        else
          snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => snap_dependent_no })
        end
-       @eligible = false
+
        if snap_gross_income < snap_eligibility.snap_gross_income
          @eligible = true
        end
 
-      if @eligible == true
-        message = "Your income is #{session['income']}. You have #{session['dependents']} dependents. You are #{session['age']} years old. You may be in luck! You likely qualify for foodstamps. Call 311 to find the nearest family community resource center near you."
-      end
-      if @eligible == false
-        message = "Your income is #{session['income']}. You have #{session['dependents']} dependents. You are #{session['age']} years old. Text FOOD to 877-877 to find food near you."
-      end
+        if @eligible == true
+          message = "Your income is #{session['income']}. You have #{session['dependents']} dependents. You are #{session['age']} years old. You may be in luck! You likely qualify for foodstamps. Call 311 to find the nearest family community resource center near you."
+        end
+        if @eligible != true
+          message = "Your income is #{session['income']}. You have #{session['dependents']} dependents. You are #{session['age']} years old. Text FOOD to 877-877 to find food near you."
+        end
       if sms_count > 3
         message = "Still stuck #{params[:Body]} #{session['counter']}"
       end
