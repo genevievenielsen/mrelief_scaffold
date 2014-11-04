@@ -19,7 +19,7 @@
 $(document).ready(function(e) {
   $('[data-toggle=popover]').popover({
     trigger: 'click',
-    'placement': 'top'
+    'placement': 'top',
   });
    // e.preventDefault();
 
