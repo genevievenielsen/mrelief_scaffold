@@ -8,41 +8,41 @@
       <div class="col-md-8 col-md-offset-2">
 
 
-        <h3>We would love to know what you think about mRelief: </h3>
+        <h3 class="text-center">We would love to know what you think about mRelief: </h3>
         <br>
 
 
-
-      <%= form_tag(contact_index_url) do %>
+<!--
+      <%#= form_tag(contact_index_url) do %>
         <div class="form-group">
-          <%= label_tag(:contact_first_name, "First Name") %>
-          <%= text_field_tag(:contact_first_name, nil, {:class => "form-control"}) %>
+          <%#= label_tag(:contact_first_name, "First Name") %>
+          <%#= text_field_tag(:contact_first_name, nil, {:class => "form-control"}) %>
         </div>
         <div class="form-group">
-          <!-- <label for="contact_last_name">Last Name</label>
+         <label for="contact_last_name">Last Name</label>
           <input type="text" class="form-control" style="max-width:350px" id="contact_last_name"> -->
-          <%= label_tag(:contact_last_name, "Last Name") %>
-          <%= text_field_tag(:contact_last_name, nil, {:class => "form-control"}) %>
-        </div>
-          <div class="form-group">
+          <%#= label_tag(:contact_last_name, "Last Name") %>
+          <%#= text_field_tag(:contact_last_name, nil, {:class => "form-control"}) %>
+    <!--     </div>
+          <div class="form-group"> -->
             <!-- <label for="contact_email">Email</label>
             <input type="email" class="form-control" style="max-width:350px" id="contact_email"> -->
-            <%= label_tag(:contact_email, "Email") %>
-            <%= email_field_tag(:contact_email, nil, {:class => "form-control"}) %>
-          </div>
-          <div class="form-group">
-            <%= label_tag(:advertising_title, "How did you hear about us") %>
-            <%= select_tag(:advertising_options, options_for_select([['None', 1], ['Advertisements', 2], ['At an event', 3], ['Service Center', 4], ['From someone else', 5], ['Internet search', 6], ['Social Media', 7], ['Other', 8]]), {:class => "form-control"}) %>
-          </div>
-          <div class="form-group">
-            <%= label_tag(:feedback, "Your feedback") %>
-            <%= text_area_tag(:feedback, nil, {:class => "form-control", :rows => "5"}) %>
-          </div>
+            <%#= label_tag(:contact_email, "Email") %>
+            <%#= email_field_tag(:contact_email, nil, {:class => "form-control"}) %>
+          <!-- </div>
+          <div class="form-group"> -->
+            <%#= label_tag(:advertising_title, "How did you hear about us") %>
+            <%#= select_tag(:advertising_options, options_for_select([['None', 1], ['Advertisements', 2], ['At an event', 3], ['Service Center', 4], ['From someone else', 5], ['Internet search', 6], ['Social Media', 7], ['Other', 8]]), {:class => "form-control"}) %>
+          <!-- </div>
+          <div class="form-group"> -->
+            <%#= label_tag(:feedback, "Your feedback") %>
+            <%#= text_area_tag(:feedback, nil, {:class => "form-control", :rows => "5"}) %>
+         <!--  </div>
 
-          <div>
-            <%= submit_tag("Submit", :class => "btn btn-primary") %>
-          </div>
-      <% end %>
+          <div> -->
+            <%#= submit_tag("Submit", :class => "btn btn-primary") %>
+          <!-- </div> -->
+      <%# end %>
       </div>
     </div>
 

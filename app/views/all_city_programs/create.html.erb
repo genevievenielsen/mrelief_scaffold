@@ -59,7 +59,7 @@
             <p>Important Note:  If you previously opted out of Medicare part B, the Medicare cost sharing program, you may be able to get your Medicare premium paid now. Please contact or visit your LAF paralegal to re-enroll for Medicare Part B. You can see the nearest Community Service Center near you.</p>
             <div class="sectiondivider"></div>
             <h4>The LAF expert nearest you:</h4>
-            <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @user_zipcode %> | <%= @lafcenter.telephone %>  | <%= @lafcenter.spanish %> </p>
+            <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @user_zipcode %> | <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
           </li>
         <% end %>
 
@@ -83,7 +83,7 @@
 
         <div class="sectiondivider"></div>
         <h4>The LAF expert nearest you:</h4>
-        <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @user_zipcode %> | <%= @lafcenter.telephone %>  | <%= @lafcenter.spanish %> </p>
+        <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @user_zipcode %> | <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
 
       </li>
       <% end %>
@@ -95,7 +95,7 @@
 
          <div class="sectiondivider"></div>
         <h4>The LAF expert nearest you:</h4>
-        <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @user_zipcode %> | <%= @lafcenter.telephone %>  | <%= @lafcenter.spanish %> </p>
+        <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @user_zipcode %> | <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
 
       </li>
       <% end %>
@@ -117,7 +117,7 @@
       <li class="list-group-item">
         <h3 class="allcityheader">Food Stamps</h3>
 
-        <p>Direct2Food is an online resource that will help you locate the food pantries, soup kitchens, and meal programs closest to you. <br> If you need food assistance, text FOOD to 877-877 to find a meal site near you.</p>
+        <p>Direct2Food is an online resource that will help you locate the food pantries, soup kitchens, and meal programs closest to you. </p>
         <%= link_to "Click Here to find resources near you", "http://www.direct2food.org/", :class => "btn btn-success btn-resolution" %>
         <div class="sectiondivider"></div>
 

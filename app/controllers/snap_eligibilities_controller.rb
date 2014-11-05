@@ -64,6 +64,12 @@ class SnapEligibilitiesController < ApplicationController
         @zipcode = @user_zipcode << ".0"
         @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
 
+        if @lafcenter.present?
+
+        else
+          @lafcenter = LafCenter.find_by(:id => 10)
+        end
+
         #this is the logic for the community resources
         @user_zipcode = @user_zipcode.chomp(".0")
         @food_resources = ServiceCenter.where(:description => "food pantry")
