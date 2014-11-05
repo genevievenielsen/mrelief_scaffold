@@ -87,6 +87,11 @@
     @zipcode = @user_zipcode << ".0"
     @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
 
+    if @lafcenter.present?
+    else
+      @lafcenter = LafCenter.find_by(:id => 10)
+    end
+
     childcare = []
     ServiceCenter.all.each do |center|
       if center.description.match("child care")

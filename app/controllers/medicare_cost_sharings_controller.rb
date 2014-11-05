@@ -93,6 +93,11 @@ class MedicareCostSharingsController < ApplicationController
       @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
       @zipcode = @lafcenter.zipcode.chomp(".0")
 
+      if @lafcenter.present?
+      else
+        @lafcenter = LafCenter.find_by(:id => 10)
+      end
+
 
     primarycare = []
     ServiceCenter.all.each do |center|

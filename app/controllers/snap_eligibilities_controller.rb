@@ -65,7 +65,6 @@ class SnapEligibilitiesController < ApplicationController
         @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
 
         if @lafcenter.present?
-
         else
           @lafcenter = LafCenter.find_by(:id => 10)
         end
