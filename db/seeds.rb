@@ -672,7 +672,7 @@ c.ccdf_dependent_no = 20
 c.ccdf_gross_income = 6110.0
 c.save
 
-# Rental Assistance
+# Rental assistance
 
 r = RentalAssistance.new
 r.rental_dependent_no = 1
@@ -735,12 +735,12 @@ p.description = "Quality, affordable child care for low-income families"
 p.location = "illinois"
 p.save
 
-# p = Program.new
-# p.name = "Rental Assistance"
-# p.url = "/rental_assistances/new"
-# p.description = "Emergency Rental Assistance during financial hardship"
-# p.location = "chicago"
-# p.save
+p = Program.new
+p.name = "Rental Assistance"
+p.url = "/rental_assistances/new"
+p.description = "Emergency Rental Assistance during financial hardship"
+p.location = "chicago"
+p.save
 
 p = Program.new
 p.name =  "Auto Repair Assistance"
@@ -826,12 +826,12 @@ p.description = "All Chicago Programs within mRelief"
 p.location = "chicago"
 p.save
 
-p = Program.new
-p.url = "/tanifs/new"
-p.name = "TANF"
-p.description = "Cash Assistance Program"
-p.location = "chicago"
-p.save
+# p = Program.new
+# p.url = "/tanifs/new"
+# p.name = "TANF"
+# p.description = "Cash Assistance Program"
+# p.location = "chicago"
+# p.save
 
 a = AutoRepairAssistance.new
 a.auto_household_size = 1

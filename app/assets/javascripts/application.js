@@ -20,6 +20,7 @@ $(document).ready(function(e) {
   $('[data-toggle=popover]').popover({
     trigger: 'click',
     'placement': 'top',
+    'show': true
   });
    // e.preventDefault();
 
