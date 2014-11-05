@@ -7,7 +7,7 @@
         <p>Rental assistance is a homeless prevention program for those who have "suffered a financial loss related to an emergency." Eligible recipients can document this loss and prove that they can afford next month's rent. </p>
       </div>
 
-      <p>You can find more information about rental assistance <a href="http://www.cityofchicago.org/ city/en/depts/fss/provdrs/serv/svcs/how_to_find_rentalassistanceinchicago.html">here.</a></p>
+      <p>You can find more information about rental assistance by <a href="http://www.cityofchicago.org/ city/en/depts/fss/provdrs/serv/svcs/how_to_find_rentalassistanceinchicago.html">clicking here.</a></p>
     </div>
   </div>
 
@@ -36,7 +36,6 @@
 
     <br><%= radio_button_tag 'rental_status', 'a recipient of an eviction notice' %> A recipient of an eviction notice
     <%= link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "This must be a notice that is notarized and brought with you if you qualify."} %>
-
 
     <br><%= radio_button_tag 'rental_status', 'have experienced a temporary loss of income' %> Have experienced a temporary loss of income
     <%= link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "This involves losing income due to an unforeseen event (layoff, termination,or other emergencies etc.) The month in between when you lose your job and qualify for unemployment would be admissible. "} %>
@@ -88,6 +87,15 @@
     </div>
   </div>
   </div>
+
+    <%= render 'programs/zipcode_question' %>
+
+     <div class="row">
+      <div class="col-md-6">
+        <%= render "programs/calculator" %>
+      </div>
+    </div>
+
 
     <div>
       <button type="submit" class="btn btn-primary">See if I qualify</button>

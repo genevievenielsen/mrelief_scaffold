@@ -39,7 +39,7 @@
                 <li class="list-group-item" style="font-weight:bold"><%= @lafcenter.center %> </li>
                 <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @user_zipcode %> </li>
                 <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @lafcenter.telephone %> </li>
-                <li class="list-group-item">Spanish:<%= @lafcenter.spanish %> </li>
+                <li class="list-group-item">Days that Spanish is spoken:<%= @lafcenter.spanish %> </li>
               </ul>
 
             <br>
@@ -49,8 +49,8 @@
 
           </div>
       </div>
-      <div class="row img-responsive">
-        <img src="assets/LAFlogo.jpg">
+      <div class="row">
+        <%= image_tag("LAFlogo.jpg", :class => "img-responsive") %>
       </div>
 
     </div>
