@@ -74,7 +74,6 @@ class AllKidsController < ApplicationController
               @eligible = true
               @premium2_eligible = true
             end
-
         end
 
         if kids_gross_income > kids_eligibility.premium_2_gross_income

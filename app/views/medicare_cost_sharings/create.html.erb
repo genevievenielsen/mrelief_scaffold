@@ -14,7 +14,7 @@
           <div class="col-md-offset-3 col-md-6 col-sm-6 text-center" style="text-align:center;">
             <ul class="list-group" style="text-align:left;">
               <li class="list-group-item" style="font-weight:bold"><%= @lafcenter.center %> </li>
-              <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @user_zipcode %> </li>
+              <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @user_zipcode.to_i  %></li>
               <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @lafcenter.telephone %> </li>
               <li class="list-group-item">Days that Spanish is spoken - <%= @lafcenter.spanish %> </li>
             </ul>
@@ -24,7 +24,9 @@
         </div>
     </div>
     <div class="row">
+    <div class="col-md-offset-4 col-md-4">
         <%= image_tag("LAFlogo.jpg", :class => "img-responsive") %>
+      </div>
       </div>
   </div>
 
@@ -41,12 +43,21 @@
 
               <p> However, if you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.
 
+              <p>
               <%= link_to "Click Here", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution" %> to learn more about fees.
-
+              </p>
               <br>
+              <p>
               Get Covered Illinois is a resource that helps families register for insurance at in-person events.
-              <%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution" %> to find Get Covered Illinois events in your area. You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.
-
+              </p>
+              <br>
+              <p>
+              <%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution" %> to find Get Covered Illinois events in your area.
+              </p>
+              <br>
+              <p>
+              You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.
+              </p>
 
               </p>
 

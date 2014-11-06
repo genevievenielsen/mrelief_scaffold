@@ -20,6 +20,9 @@ Rails.application.routes.draw do
 
   get("/", { :controller => "pages", :action => "homepage" })
 
+  get("/twilio", { :controller => "send_text", :action => "send_text_message"})
+
+
   resources :contact, only: [:index, :create]
 
   resources :wics
