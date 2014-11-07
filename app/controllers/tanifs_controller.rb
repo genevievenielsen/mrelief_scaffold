@@ -70,8 +70,11 @@
           if params[:teen_parent] == "no"
              @eligible_tanif = "maybe"
           else
+            if params[:highschool] == "no"
+              @eligible_tanif = "no"
+            else
              @eligible_tanif = "yes"
-
+            end
           end
           end
         end

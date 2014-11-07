@@ -1,4 +1,8 @@
 <div class= "container">
+ <script>$(function ()
+      { $("[data-toggle='popover']").popover();
+      });
+   </script>
 
 <div class="row">
     <div class="page-header col-md-10 col-md-offset-1" style="border:none;">
@@ -28,7 +32,8 @@
 <div class="row">
   <div class="form-group col-md-12">
     <label for="household_size">What is your household size?</label>
-      <%= link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "The number of people in your household including yourself. This includes parents, caretaker relatives, and minor children."} %>
+
+      <button type="button" data-toggle="popover" data-content="The number of people in your household including yourself. This includes parents, caretaker relatives, and minor children." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
 
     <div class="row">
       <div class="col-md-6">
@@ -45,9 +50,8 @@
     <label for="max_income">
        How much do you anticipate to earn from employment over the next 30 days?
     </label>
-      <%= link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "This should include income you earn from your work, self employment and rental income (contributions from people who live with you.) This should NOT include child support or SSI benefits."} %>
 
-
+      <button type="button" data-toggle="popover" data-content="This should include income you earn from your work, self employment and rental income (contributions from people who live with you.) This should NOT include child support or SSI benefits." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
 
     <div class="input-group">
       <span class="input-group-addon">$</span>
@@ -103,10 +107,32 @@
     </div>
   </div>
 
+  <div class="row">
+    <div class="form-group col-md-12">
+      <label for="first" id="first">Are you pregnant with your first child?
+      </label>
+
+      <div class="clearfix"></div>
+
+      <div class="row">
+          <div class="col-md-6">
+            <div id="first"  class="pull-left">
+              <%= radio_button_tag 'first', 'yes' %> yes
+              <%= radio_button_tag 'first', 'no' %> no
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
 
 <div class="row">
   <div class="form-group col-md-12">
-    <label for="child" id="child">Are you pregnant or responsible for a child under 19 years of age?</label>
+    <label for="child" id="child">Are you responsible for a child who is under 19 years of age?
+    </label>
+
+    <button type="button" data-toggle="popover" data-content="You must be related to the child who you are caring for i.e. mother, father, or caretaker relative." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+
     <div class="clearfix"></div>
 
     <div class="row">
@@ -114,6 +140,25 @@
           <div id="child"  class="pull-left">
             <%= radio_button_tag 'child', 'yes' %> yes
             <%= radio_button_tag 'child', 'no' %> no
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group col-md-12">
+    <label for="highschool" id="highschool">If your child is 18, are they enrolled full-time in high school? </label>
+
+    <button type="button" data-toggle="popover" data-content="This does not include vocational school and GED classes" data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-6">
+          <div id="highschool"  class="pull-left">
+            <%= radio_button_tag 'highschool', 'yes' %> yes
+            <%= radio_button_tag 'highschool', 'no' %> no
           </div>
         </div>
     </div>
