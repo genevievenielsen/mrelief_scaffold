@@ -19,9 +19,14 @@
 $(document).ready(function(e) {
   $('[data-toggle=popover]').popover({
     trigger: 'click',
-    'placement': 'top'
-    // 'show': true
+    'placement': 'top',
+    'show': true
   });
+
+
+
+// $(function () { $("[data-toggle='popover']").popover(); });
+
    // e.preventDefault();
 
 

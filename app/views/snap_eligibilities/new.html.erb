@@ -1,5 +1,10 @@
 <div class= "container">
 
+  <script>$(function ()
+      { $("[data-toggle='popover']").popover();
+      });
+   </script>
+
 <div class="row">
     <div class="page-header col-md-10 col-md-offset-1" style="border:none;">
       <h2>Do I qualify for Food Stamps?</h2>
@@ -36,7 +41,8 @@
 <div class="row">
   <div class="form-group col-md-12">
     <label for="snap_dependent_no">What is the number of people living in your household including yourself?</label>
-      <%= link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "This should include the number of people who purchase and prepare food with you."} %>
+
+      <button type="button" data-toggle="popover" data-content="This should include the number of people who purchase and prepare food with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
 
     <div class="row">
       <div class="col-md-6">
@@ -53,9 +59,8 @@
     <label for="snap_gross_income">
       What is your gross monthly income?
     </label>
-      <%= link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions."} %>
 
-
+    <button type="button" data-toggle="popover" data-content="This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
 
     <div class="input-group">
       <span class="input-group-addon">$</span>

@@ -1,5 +1,10 @@
 <div class="container">
 
+  <script>$(function ()
+      { $("[data-toggle='popover']").popover();
+      });
+   </script>
+
 <div class="page-header col-md-10 col-md-offset-1" style="border:none;">
   <h1> Do I qualify for All Kids?</h1>
 
@@ -36,7 +41,9 @@
   <br>
     <div class="form-group col-sm-9">
     <label for="kids_household_size">How many children are living in your household?</label>
-     <%= link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "The number of children living in your household."} %>
+
+     <button type="button" data-toggle="popover" data-content="The number of children living in your household." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+
      <input type="text" id="kids_household_size" name="kids_household_size" placeholder="For example: 3" class="form-control" value="<%= @all_kid.kids_household_size %>"required>
   </div>
 
@@ -59,7 +66,8 @@
     <label for="kids_gross_income">
       What is your gross monthly income?
     </label>
-    <%= link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "Total monthly income from all sources."} %>
+
+    <button type="button" data-toggle="popover" data-content="Total monthly income from all sources." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
 
     <div class="input-group">
       <span class="input-group-addon">$</span>

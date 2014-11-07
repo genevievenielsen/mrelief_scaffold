@@ -1,4 +1,8 @@
 <div class= "container">
+  <script>$(function ()
+      { $("[data-toggle='popover']").popover();
+      });
+   </script>
 
 <div class="page-header col-md-10 col-md-offset-1" style="border:none;">
    <h1>Do I qualify for RTA Ride Free?</h1>
@@ -34,7 +38,9 @@
     <br> Please answer the following questions to find out:</p>
 
     <label for="rta_dependent_no">How many dependents (including yourself) are in your household?</label>
-    <%= link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "Number of people living in your household, including yourself, your spouse (if applicable), and/or resident for whom you (or you and your spouse) provided more than half of that person's total financial support last year."} %>
+
+    <button type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself, your spouse (if applicable), and/or resident for whom you (or you and your spouse) provided more than half of that person's total financial support last year." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+
     <div class="row">
        <div class="form-group col-md-6">
         <input type="text" id="rta_dependent_no" name="rta_dependent_no" placeholder="For example: 3" class="form-control" value="<%= @rta_free_ride.rta_dependent_no %>" required>
@@ -48,8 +54,8 @@
         <label for="rta_gross_income">
           What is your gross annual income?
         </label>
-          <%= link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "Your total income before tax deductions, including your spouse's income if married and living together on December 31 of last year, and that of a qualified additional resident (if applicable)."} %>
 
+          <button type="button" data-toggle="popover" data-content="Your total income before tax deductions, including your spouse's income if married and living together on December 31 of last year, and that of a qualified additional resident (if applicable)." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
 
         <div class="input-group">
           <span class="input-group-addon">$</span>

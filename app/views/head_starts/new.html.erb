@@ -1,5 +1,10 @@
 <div class= "container">
 
+  <script>$(function ()
+      { $("[data-toggle='popover']").popover();
+      });
+   </script>
+
 <div class="page-header col-md-10 col-md-offset-1" style="border:none;">
   <h1>Do I qualify for Head Start?</h1>
 
@@ -47,7 +52,8 @@
     <label for="hs_dependent_no">How many
         dependents (including yourself) are in your household?
     </label>
-    <%= link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "Number of people living in your household, including yourself."} %>
+
+    <button type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
 
     <div class="row">
     <div class="col-md-4">
@@ -63,7 +69,8 @@
     <label for="hs_gross_income">
       What is your gross annual income?
     </label>
-       <%= link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "Your income per year before tax deductions."} %>
+
+        <button type="button" data-toggle="popover" data-content="Your income per year before tax deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
 
     <div class="input-group">
       <span class="input-group-addon">$</span>
