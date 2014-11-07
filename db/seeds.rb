@@ -714,6 +714,66 @@ r.rental_dependent_no = 8
 r.rental_gross_income = 12528.13
 r.save
 
+r = RentalAssistance.new
+r.rental_dependent_no = 9
+r.rental_gross_income = 12528.13
+r.save
+
+r = RentalAssistance.new
+r.rental_dependent_no = 10
+r.rental_gross_income = 12528.13
+r.save
+
+r = RentalAssistance.new
+r.rental_dependent_no = 11
+r.rental_gross_income = 12528.13
+r.save
+
+r = RentalAssistance.new
+r.rental_dependent_no = 12
+r.rental_gross_income = 12528.13
+r.save
+
+r = RentalAssistance.new
+r.rental_dependent_no = 13
+r.rental_gross_income = 12528.13
+r.save
+
+r = RentalAssistance.new
+r.rental_dependent_no = 14
+r.rental_gross_income = 12528.13
+r.save
+
+r = RentalAssistance.new
+r.rental_dependent_no = 15
+r.rental_gross_income = 12528.13
+r.save
+
+r = RentalAssistance.new
+r.rental_dependent_no = 16
+r.rental_gross_income = 12528.13
+r.save
+
+r = RentalAssistance.new
+r.rental_dependent_no = 17
+r.rental_gross_income = 12528.13
+r.save
+
+r = RentalAssistance.new
+r.rental_dependent_no = 18
+r.rental_gross_income = 12528.13
+r.save
+
+r = RentalAssistance.new
+r.rental_dependent_no = 19
+r.rental_gross_income = 12528.13
+r.save
+
+r = RentalAssistance.new
+r.rental_dependent_no = 20
+r.rental_gross_income = 12528.13
+r.save
+
 p = Program.new
 p.name = "Food Stamps"
 p.url = "/snap_eligibilities/new"
@@ -1802,102 +1862,102 @@ a.save
 
 m = Medicaid.new
 m.medicaid_household_size = 1
-m.medicaid_gross_income = 16104.60
+m.medicaid_gross_income = 1342
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 2
-m.medicaid_gross_income = 21707.40
+m.medicaid_gross_income = 1809
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 3
-m.medicaid_gross_income = 27310.20
+m.medicaid_gross_income = 2276
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 4
-m.medicaid_gross_income = 32913.00
+m.medicaid_gross_income = 2743
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 5
-m.medicaid_gross_income = 38515.80
+m.medicaid_gross_income = 3210
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 6
-m.medicaid_gross_income = 44118.60
+m.medicaid_gross_income = 3677
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 7
-m.medicaid_gross_income = 49721.40
+m.medicaid_gross_income = 4143
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 8
-m.medicaid_gross_income = 55324.20
+m.medicaid_gross_income = 4610
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 9
-m.medicaid_gross_income = 61768.80
+m.medicaid_gross_income = 5077
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 10
-m.medicaid_gross_income = 66438.80
+m.medicaid_gross_income = 5544
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 11
-m.medicaid_gross_income = 71108.80
+m.medicaid_gross_income = 6011
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 12
-m.medicaid_gross_income = 75778.80
+m.medicaid_gross_income = 6478
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 13
-m.medicaid_gross_income = 80448.80
+m.medicaid_gross_income = 6945
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 14
-m.medicaid_gross_income = 85118.80
+m.medicaid_gross_income = 7412
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 15
-m.medicaid_gross_income = 89788.80
+m.medicaid_gross_income = 7879
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 16
-m.medicaid_gross_income = 94458.80
+m.medicaid_gross_income = 8346
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 17
-m.medicaid_gross_income = 99128.80
+m.medicaid_gross_income = 8813
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 18
-m.medicaid_gross_income = 103798.80
+m.medicaid_gross_income = 9280
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 19
-m.medicaid_gross_income = 108460.80
+m.medicaid_gross_income = 9747
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 20
-m.medicaid_gross_income = 113138.80
+m.medicaid_gross_income = 10214
 m.save
 
 m = MedicareCostSharing.new

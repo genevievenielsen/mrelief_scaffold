@@ -249,17 +249,35 @@ class AllCityProgramsController < ApplicationController
 
       #here is the logic for rental assistance
 
-      # rental_eligibility = RentalAssistance.find_by({ :rental_dependent_no => dependent_no })
+      rental_eligibility = RentalAssistance.find_by({ :rental_dependent_no => dependent_no })
+      rental_cut_off =  rental_eligibility.rental_gross_income
+      rental_cut_off_plus_200 = rental_eligibility.rental_gross_income + 200
 
-      #  p "ninety_day_gross_income = #{ninety_day_gross_income}"
-      #  p "rental_eligibility.rental_gross_income = #{rental_eligibility.rental_gross_income}"
+        if params[:lease] == "no"
+          @rental_eligible = "no"
 
-      #  if ninety_day_gross_income < rental_eligibility.rental_gross_income && params[:rental_status] != "none of the above" && params[:citizen] == 'yes'
-      #     @eligible_rental = "yes"
-      #   else
-      #     @eligible_rental = "no"
-      #  end
+        elsif params[:lease] == "yes"
+            if ninety_day_gross_income < rental_eligibility.rental_gross_income && params[:rental_status] != "none of the above"
+                @rental_eligible = "yes"
+            elsif ninety_day_gross_income < rental_cut_off_plus_200 && ninety_day_gross_income >= rental_cut_off
+              if params[:rental_status] != "none of the above"
+                @rental_eligible = "maybe"
+              end
+            else
+                @rental_eligible = "no"
 
+            end
+        end # closes the if statement about the lease agreement
+
+      if params[:rental_status] == "medical circumstance"
+        @medical_circumstance = "yes"
+      elsif params[:rental_status] == "a victim of natural disaster or fire"
+        @natural_disaster = "yes"
+      elsif params[:rental_status] == "have experienced a temporary loss of income"
+        @temporary_loss = "yes"
+      elsif params[:rental_status] == "a victim of domestic violence"
+        @domestic_violence = "yes"
+      end
 
         #here is the logic for rta ride free
        rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => dependent_no })
@@ -396,17 +414,19 @@ class AllCityProgramsController < ApplicationController
     if @eligible_medicare_cost_sharing == 'yes'
       @eligible_count = @eligible_count + 1
     end
+    if @rental_eligible== 'yes'
+      @eligible_count = @eligible_count + 1
+    end
+
 
 
     @ineligible_count = 0
     if  @eligible_snap == "no"
       @ineligible_count = @ineligible_count + 1
     end
-
     if @eligible_all_kids == "no"
       @ineligible_count = @ineligible_count + 1
     end
-
     if @eligible_rta == 'no'
       @ineligible_count = @ineligible_count + 1
     end
@@ -416,6 +436,10 @@ class AllCityProgramsController < ApplicationController
     if @eligible_medicare_cost_sharing == 'no'
       @ineligible_count = @ineligible_count + 1
     end
+    if @rental_eligible== 'no'
+      @ineligible_count = @ineligible_count + 1
+    end
+
 
 
     @indeterminate_count = 0

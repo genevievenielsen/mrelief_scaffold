@@ -1,7 +1,7 @@
 <div class="container" style="padding-bottom:150px">
 <div class="page-header">
   <h1>Do I qualify for All City Programs within mRelief?</h1>
-  <p class="subhead">Programs include Food Stamps, RTA Ride Free, All Kids, Medicare Cost Sharing and Medicaid</p>
+  <p class="subhead">Programs include Food Stamps, RTA Ride Free, All Kids, Medicare Cost Sharing, Rental Assistance and Medicaid</p>
 </div>
 
 
@@ -64,6 +64,26 @@
               <h4>The LAF expert nearest you:</h4>
             <% end %>
             <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %>| <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
+          </li>
+        <% end %>
+
+        <% if @rental_eligible == "yes" %>
+          <li class="list-group-item">
+            <h3 class="allcityheader">Rental Assistance</h3>
+
+             <% if @medical_circumstance == "yes" %>
+              <p>You must be able to obtain documents from your employer showing that you took time off as well as from the hospital or attending physician.</p>
+             <% elsif @natural_disaster == "yes" %>
+              <p>You must be able to prove this by obtaining documents from a fire marshall (standard fire department reports). For floods, please provide a letter from your landlord and photographs.
+             </p>
+            <% elsif @temporary_loss == "yes"%>
+              <p>You must provide last 90 days of pay stubs and a letter from employer stating (layoff, termination, etc) and the return date to work. You can also provide unemployment assistance documentation.</p>
+            <% elsif @domestic_violence == "yes"%>
+              <p>You must be able to prove this by providing a report from the police department or a document showing an order of protection/restraining order.</p>
+            <% end %>
+            <p>The final decision will be made one-on-one by the case manager.</p>
+            <%= link_to "Click Here for more information", "http://www.cityofchicago.org/city/en/depts/fss/provdrs/serv/svcs/community_servicecenterlocations.html", :class => "btn btn-success btn-resolution" %>
+            <p>or call 3-1-1.</p>
           </li>
         <% end %>
 
@@ -253,6 +273,17 @@
       <% end %>
       <% end %>
       </li>
+
+      <% if @rental_eligible == "no" %>
+      <li class="list-group-item">
+        <h3 class="allcityheader">Medicaid</h3>
+        <p>
+          The Chicago Housing Authority Waitlist Lottery registration is open now through November 24 for the three types of housing opportunities: Public Housing, Housing Choice Voucher (Tenant-Based Voucher or Section 8) and Property Rental Assistance (Project-Based Voucher). Online registration is free, and easy to use. The registration form will be available in several different languages.
+          <%= link_to "Click Here", "www.thechawaitlist.org", :class => "btn btn-success btn-resolution" %> or call 312.971.7700 for more information.
+        </p>
+      </li>
+      <% end %>
+
     </ul>
   </div>
 </div>

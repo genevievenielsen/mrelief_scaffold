@@ -7,18 +7,8 @@
 
 <div class="page-header" style="border:none">
   <h1>Do I qualify for All City Programs within mRelief?</h1>
-  <p class="subhead">Programs include Food Stamps, RTA Ride Free, All Kids, Medicare Cost Sharing and Medicaid</p>
+  <p class="subhead">Programs include Food Stamps, RTA Ride Free, All Kids, Medicare Cost Sharing, Rental Assistance and Medicaid</p>
 </div>
-
-
-   <!--  <%# if @snap_eligibility.errors.any? %> -->
-    <!--   <%# @snap_eligibility.errors.full_messages.each do |message| %>
-        <div class="alert alert-dismissable alert-danger">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <%#= message %>
-        </div>
-      <%# end %>
-    <%# end %> -->
 
 <div class="panel panel-default col-md-12" style="margin: 0 0 40px 0; padding-top:15px">
   <div class="panel-body">
@@ -166,22 +156,49 @@
 </div>
 <br>
 
-<!-- <div class="form-group col-sm-12">
-<p> <b>Describe your current rental status: </b></p>
-<div class="col-sm-12">
-  <div id="rental_status" class="pull-left">
-    <%#= radio_button_tag 'rental_status', 'medical circumstance' %> Someone experiencing a medical circumstance
-    <br><%#= radio_button_tag 'rental_status', 'a victim of natural disaster or fire' %> A victim of natural disaster or fire
-    <br><%#= radio_button_tag 'rental_status', 'a recipient of an eviction notice' %> A recipient of an eviction notice
-    <br><%#= radio_button_tag 'rental_status', 'have experienced a temporary loss of income' %> Have experienced a temporary loss of income
-    <%#= link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "Economic crisis or hardship that is out of your control such as an unexpected job loss. However, you must be able to prove you can afford next month's rent."} %>
-    <br><%#= radio_button_tag 'rental_status', 'a victim of domestic violence' %> A victim of domestic violence
-    <br><%#= radio_button_tag 'rental_status', 'none of the above' %> None of the above
-  </div>
-</div>
-</div>
-<br> -->
 
+  <div class="form-group col-sm-12">
+
+    <label for="lease" id="lease">Is your name currently on the lease of the apartment that you are renting?</label>
+
+      <div class="col-sm-6">
+        <div id="lease" >
+          <%= radio_button_tag 'lease', 'yes' %> yes
+          <%= radio_button_tag 'lease', 'no' %> no
+        </div>
+      </div>
+  </div>
+
+
+  <div class="form-group col-sm-12">
+
+    <label> If you are unable to pay your rent at this time, what circumstance explains why you are unable to pay rent? </label>
+
+      <div id="rental_status" class="pull-left">
+        <%= radio_button_tag 'rental_status', 'medical circumstance' %> Someone experiencing a medical circumstance
+
+         <button type="button" data-toggle="popover" data-content="An emergency procedure (for example: surgery, related to complicated birth or other conditions) that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to your spouse, child, committed partner whose name is on the lease or grandparent who lives with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+
+        <br><%= radio_button_tag 'rental_status', 'a victim of natural disaster or fire' %> A victim of natural disaster or fire
+
+         <button type="button" data-toggle="popover" data-content="A natural disaster includes instances such as a tornado or fire that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to floods for people who are renting a basement apartment who can not afford to replace those items and are seeking relocation." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+
+        <br><%= radio_button_tag 'rental_status', 'a recipient of an eviction notice' %> A recipient of an eviction notice
+
+         <button type="button" data-toggle="popover" data-content="This must be a notice that is notarized and brought with you if you qualify." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+
+        <br><%= radio_button_tag 'rental_status', 'have experienced a temporary loss of income' %> Have experienced a temporary loss of income
+
+         <button type="button" data-toggle="popover" data-content="This involves losing income due to an unforeseen event (layoff, termination,or other emergencies etc.) The month in between when you lose your job and qualify for unemployment would be admissible." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+
+        <br><%= radio_button_tag 'rental_status', 'a victim of domestic violence' %> A victim of domestic violence
+
+         <button type="button" data-toggle="popover" data-content="This involves losing income due to violence from your intimate partner. If your partner was your sole source of income, this does not apply. Typically this benefit would apply to victims with income seeking relocation assistance. " data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+
+        <br><%= radio_button_tag 'rental_status', 'none of the above' %> None of the above
+      </div>
+
+  </div>
 
 <div class="form-group col-sm-12">
 
