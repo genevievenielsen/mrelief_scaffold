@@ -1,11 +1,12 @@
 class NotificationsMailer < ActionMailer::Base
 
-  default :from => "mrelief.form@mrelief.com"
-  default :to => "mrelief.form@gmail.com"
-
-  def new_message(message)
-    @message = message
-    mail(:subject => "[mrelief.tld] #{message.subject}")
+   def send_simple_message(contact_first_name, contact_last_name, contact_email,
+        advertising_options, feedback)
+      RestClient.post "https://api:"+ ENV['mailgun_key'] +
+    "@api.mailgun.net/v2/mrelief.com/messages",
+    :from => "#{contact_email}",
+    :to => ENV['mailgun_email'],
+    :subject => "Feedback from #{contact_first_name} #{contact_last_name}",
+    :text => "How did you hear about us - #{advertising_options}.   Feedback - #{feedback}"
   end
-
 end

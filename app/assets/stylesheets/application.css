@@ -73,6 +73,12 @@ body{
   border: white;
 }
 
+.alert {
+  padding-top: 50px;
+  font-family: 'Source Sans Pro', sans-serif;
+
+}
+
 ul {
   font-family: 'Source Sans Pro', sans-serif;
 }

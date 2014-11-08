@@ -1,29 +1,31 @@
 class ContactController < ApplicationController
 
   def index
-    @message = {}
-    @password = ENV['gmail_password']
+
+
   end
 
   def create
-    hash = {
-      :contact_first_name => params[:contact_first_name],
-      :contact_last_name => params[:contact_last_name],
-      :contact_email => params[:contact_email],
-      :advertising_options => params[:advertising_options],
-      :feedback => params[:feedback],
-    }
-    @message = Feedback.new(hash)
+
+    @contact_first_name = params[:contact_first_name]
+    @contact_last_name = params[:contact_last_name]
+    @contact_email = params[:contact_email]
+    @advertising_options = params[:advertising_options]
+    @feedback = params[:feedback]
 
 
-
-    if @message.valid?
-      NotificationsMailer.new_message(@message).deliver
-      redirect_to( "/", :notice => "Message was successfully sent.")
+    if @feedback.present?
+      NotificationsMailer.send_simple_message(@contact_first_name, @contact_last_name, @contact_email,
+        @advertising_options, @feedback).deliver
+      redirect_to( "/", :notice => "Feedback was successfully sent. Thank you!")
     else
       flash.now.alert = "Please fill all fields."
       render :index
     end
+
+
   end
+
+
 
 end

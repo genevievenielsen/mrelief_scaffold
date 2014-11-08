@@ -11,7 +11,10 @@
 
   <style>
     /* Only necessary if you are using navbar-fixed-top */
-
+   /* body {
+      padding-top: 50px;
+    }
+*/
   </style>
 
   <%= stylesheet_link_tag    "application", :media => "all" %>
@@ -50,6 +53,20 @@
   </nav>
   </div>
 
+  <div class="container">
+    <% if notice.present? %>
+      <div class="alert alert-dismissable alert-success">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%= notice %>
+      </div>
+    <% end %>
+
+    <% if alert.present? %>
+      <div class="alert alert-dismissable alert-warning">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%= alert %>
+      </div>
+    <% end %>
 
     <%= yield %>
 
