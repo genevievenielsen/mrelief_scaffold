@@ -1,4 +1,8 @@
 class SnapEligibilitiesController < ApplicationController
+
+     require 'numbers_in_words'
+  require 'numbers_in_words/duck_punch' #see why later
+
   before_action :set_snap_eligibility, only: [:show, :edit, :update, :destroy]
 
   skip_before_action :authenticate_user!, :only => :index

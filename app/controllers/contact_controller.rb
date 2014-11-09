@@ -11,12 +11,13 @@ class ContactController < ApplicationController
     @contact_last_name = params[:contact_last_name]
     @contact_email = params[:contact_email]
     @advertising_options = params[:advertising_options]
+    @request = params[:request]
     @feedback = params[:feedback]
 
 
     if @feedback.present?
       NotificationsMailer.send_simple_message(@contact_first_name, @contact_last_name, @contact_email,
-        @advertising_options, @feedback).deliver
+        @advertising_options, @request, @feedback).deliver
       redirect_to( "/", :notice => "Feedback was successfully sent. Thank you!")
     else
       flash.now.alert = "Please fill all fields."

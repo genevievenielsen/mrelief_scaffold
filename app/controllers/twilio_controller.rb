@@ -1,167 +1,143 @@
-# class TwilioController < ApplicationController
+class TwilioController < ApplicationController
 
-#   def text
+  require 'numbers_in_words'
+  require 'numbers_in_words/duck_punch' #see why later
 
-#       #   sender = params[:From]
-#       #   friends = {
-#       #     "+18477672332" => "Curious George",
-#       #     "+14158157775" => "Boots",
-#       #     "+14155551234" => "Virgil"
-#       #   }
-#       #   name = friends[sender] || "Mobile Monkey"
-#       #   twiml = Twilio::TwiML::Response.new do |r|
-#       #     r.Message "Hello, #{name}. Thanks for the message."
-#       # end
-#       # puts twiml.text
+  def text
 
-#   #     session["counter"] ||= 0
+  session["counter"] ||= 0
+  if params[:Body] == "reset" || params[:Body] == "Reset"
+    session["counter"] = 0
+  end
 
-#   #     if params[:Body] == "reset"
-#   #       session["counter"] = 0
-#   #     end
-#   #        sms_count = session["counter"]
-#   #     if sms_count == 0
-#   #       message = "Welcome to mRelief! We help determine your eligibility for food stamps. How old are you? If you make a mistake, send the message 'reset'."
-#   #     end
-#   #     if sms_count == 1
-#   #       session["age"] = params[:Body]
-#   #       message = "How many dependents are in your household? Dependents are the number of people living in your household, including yourself. #{session['counter']}"
-#   #     end
-#   #     if sms_count == 2
-#   #       session["dependents"] = params[:Body]
-#   #       message = "What is your gross monthly income? Income includes social security, child support, and unemployment insurance before any deductions."
-#   #     end
-#   #     if sms_count == 3
-#   #       session["income"] = params[:Body]
-#   #       #message = "Your income is #{session['income']}. You have #{session['dependents']} dependents. You are #{session['age']} years old."
-#   #       age = session["age"].to_i
-#   #       snap_dependent_no = session["dependents"].to_i
-#   #       snap_gross_income = session["income"].to_i
+   if session["counter"] == 0
+    message = "Welcome to mRelief! We help you check your eligibility for benefits. For foodstamps, type 'food'. For RTA ride free, type 'ride.' If you make a mistake, send the message 'reset'."
+   end
 
-#   #        if age <= 59
-#   #          snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => snap_dependent_no })
-#   #        else
-#   #          snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => snap_dependent_no })
-#   #        end
+   if params[:Body] == "menu" || params[:Body] == "Menu"
+      message = "For foodstamps, type 'food'. For RTA ride free, type 'ride.' If you make a mistake, send the message 'reset'."
+   end
 
-#   #        if snap_gross_income < snap_eligibility.snap_gross_income
-#   #          @eligible = true
-#   #        end
+   if params[:Body] == "Food" || params[:Body] == "food"
+      message = "Are you enrolled in a college or institution of higher education? Enter 'yes' or 'no'"
+      session["page"] = "snap_college_question"
+      session["counter"] = 1
+   end
 
-#   #         if @eligible == true
-#   #           message = "Your income is #{session['income']}. You have #{session['dependents']} dependents. You are #{session['age']} years old. You may be in luck! You likely qualify for foodstamps. Call 311 to find the nearest family community resource center near you."
-#   #         end
-#   #         if @eligible != true
-#   #           message = "Your income is #{session['income']}. You have #{session['dependents']} dependents. You are #{session['age']} years old. Text FOOD to 877-877 to find food near you."
-#   #         end
-#   #       if sms_count > 3
-#   #         message = "Still stuck #{params[:Body]} #{session['counter']}"
-#   #       end
-#   #     end #this ends sms_count ==3
-#   #       twiml = Twilio::TwiML::Response.new do |r|
-#   #         r.Message message
-#   #       end
-#   #     session["counter"] += 1
+   #here is the food stamps logic
 
-#   #     respond_to do |format|
-#   #       format.xml {render xml: twiml.text}
-#   #     end
-#   # end
+   if session["page"] == "snap_college_question" && session["counter"] == 2
+      session["college"] = params[:Body]
+     if session["college"] == "No" || session["college"] == "NO"
+       message = "Are you a citizen of the United States? Enter 'yes' or 'no'"
+       session["page"] = "snap_citizen_question"
+     elsif session["college"] == "Yes" || session["college"] == "YES" || session["college"] == "yes"
+       session["page"] = "snap_ineligble"
+     end
+   end
 
+   if session["page"] == "snap_citizen_question" && session["counter"] == 3
+      session["citizen"] = params[:Body]
+    if session["citizen"]  == "no" || session["citizen"]  == "No" || session["citizen"]  == "NO"
+       session["page"] = "snap_eligble_maybe"
+     elsif session["citizen"]  == "yes" || session["citizen"]  == "Yes" || session["citizen"]  == "YES"
+       message = "How old are you? Enter a number"
+       session["page"] = "snap_age_question"
+     end
+   end
 
-#     session["counter"] ||= 0
-#     # session["page"] = "home"
-#    if session["counter"] == 0
-#     message = "Welcome to mRelief! We help you check your eligibility for benefits. For foodstamps type 'food'. If you make a mistake, send the message 'reset'."
-#    end
+   if session["page"] == "snap_age_question" && session["counter"] == 4
+     session["age"] = params[:Body]
 
-#    if params[:Body] == "reset" || params[:Body] == "Reset"
-#       message = "Welcome to mRelief! We help you check your eligibility for benefits. For foodstamps type 'food'. If you make a mistake, send the message 'reset'."
-#    end
+      if session["age"]  !~ /\D/
+        session["age"] = session["age"] .to_i
+      else
+        session["age"] = session["age"] .in_numbers
+      end
 
-#    if params[:Body] == "Food" || params[:Body] == "food"
-#       message = "Are you enrolled in a college or institution of higher education?"
-#       session["page"] = "snap_college_question"
-#    end
+     message = "What is the number of people living in your household including yourself? Enter a number"
+     session["page"] = "snap_household_question"
+   end
 
-#    if session["page"] == "snap_college_question"
-#      session["college"] = params[:Body]
-#      if session["college"] == "No" || session["college"] == "NO"
-#        message = "Are you a citizen of the United States?"
-#        session["page"] = "snap_citizen_question"
-#      end
-#      if session["college"] == "Yes" || session["college"] == "YES" || session["college"] == "yes"
-#        session["page"] = "snap_ineligble"
-#      end
-#    end
+   if session["page"] == "snap_household_question" && session["counter"] == 5
+     session["dependents"] = params[:Body]
 
-#    # if session["page"] == "snap_citizen_question"
-#    #   session["citizen"] = params[:Body]
-#    #   if session["citizen"] == "no" || session["citizen"] == "No" || session["citizen"] == "NO"
-#    #     session["page"] = "snap_ineligble"
-#    #   end
-#    #   if session["citizen"] == "yes" || session["citizen"] == "Yes" || session["citizen"] == "YES"
-#    #     message = "How old are you?"
-#    #     session["page"] = "snap_age_question"
-#    #   end
-#    # end
+     if session["dependents"] !~ /\D/  # returns true if all numbers
+       session["dependents"] = session["dependents"].to_i
+     else
+       session["dependents"] = session["dependents"].in_numbers
+     end
 
-#    # if session["page"] == "snap_age_question"
-#    #   session["age"] = params[:Body]
-#    #   message = "What is the number of people living in your household including yourself?"
-#    #   session["page"] = "snap_household_question"
-#    # end
+     message = "What is your zipcode?"
+     session["page"] = "snap_zipcode_question"
+   end
 
-#    # if session["page"] == "snap_household_question"
-#    #   session["dependents"] = params[:Body]
-#    #   message = "What is your gross monthly income? Income includes social security, child support, and unemployment insurance before any deductions."
-#    #   session["page"] = "snap_income_question"
-#    #  end
+   if session["page"] == "snap_zipcode_question" && session["counter"] == 6
+     session["zipcode"] = params[:Body]
+     message = "What is your gross monthly income? Income includes social security, child support, and unemployment insurance before any deductions."
+     session["page"] = "snap_income_question"
+   end
 
-#    # if session["page"] == "snap_income_question"
-#    #   session["income"] = params[:Body]
-#    #   age = session["age"].to_i
-#    #   snap_dependent_no = session["dependents"].to_i
-#    #   snap_gross_income = session["income"].to_i
+   if session["page"] == "snap_income_question" && session["counter"] == 7
+     session["income"] = params[:Body]
 
-#    #    if age <= 59
-#    #      snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => snap_dependent_no })
-#    #    else
-#    #      snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => snap_dependent_no })
-#    #    end
+     if session["income"] !~ /\D/
+       session["income"] = session["income"].to_i
+     else
+       if session["income"].include?("dollars")
+         session["income"].slice!"dollars"
+       end
+       session["income"] = session["income"].in_numbers
+     end
 
-#    #    if snap_gross_income < snap_eligibility.snap_gross_income
-#    #      session["page"] = "snap_eligible"
-#    #    else
-#    #      session["page"] = "snap_ineligble"
-#    #    end
-#    # end
+     age = session["age"].to_i
+     snap_dependent_no = session["dependents"].to_i
+     snap_gross_income = session["income"].to_i
+
+      if age <= 59
+        snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => snap_dependent_no })
+      else
+        snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => snap_dependent_no })
+      end
+
+      if snap_gross_income < snap_eligibility.snap_gross_income
+        message = "You may be in luck! You likely qualify for foodstamps. To find a Community Service Center near you go to http://abe.illinois.gov or call 311."
+      else
+        message = "Based on your household size and income, you likely do not qualify for food stamps. Go to Direct2Food at http://www.direct2food.org to locate the food pantries, soup kitchens and meal programs near you. To check other programs, type 'menu'."
+      end
+   end
+
+   if session["page"] == "snap_ineligble" && session["counter"] == 2
+     message = "Based on your household size and income, you likely do not qualify for food stamps. Go to Direct2Food at http://www.direct2food.org to locate the food pantries, soup kitchens and meal programs near you. To check other programs, type 'menu'."
+   end
+
+   if session["page"] == "snap_eligble_maybe" && session["counter"] == 3
+
+     user_zipcode = session["zipcode"]
+     @zipcode = user_zipcode << ".0"
+     @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
+
+     if @lafcenter.present?
+     else
+       @lafcenter = LafCenter.find_by(:id => 10)
+       @laf_disclaimer = "We do not have an estimation of the nearest center that is in range for you at this time. But we recommend going to the center below."
+     end
+
+     message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, type 'menu'."
+   end
 
 
+   twiml = Twilio::TwiML::Response.new do |r|
+       r.Message message
+   end
+    session["counter"] += 1
 
-#    # #  if session["page"] == "home"
-#    # #   message = "Welcome to mRelief! We help you check your eligibility for benefits. For foodstamps type 'food'. If you make a mistake, send the message 'reset'."
-#    # # end
+    respond_to do |format|
+     format.xml {render xml: twiml.text}
+   end
 
-#    # if session["page"] == "snap_eligible"
-#    #   message = "Your income is #{session['income']}. You have #{session['dependents']} dependents. You are #{session['age']} years old. You may be in luck! You likely qualify for foodstamps. Call 311 to find the nearest family community resource center near you."
-#    # end
 
-#    if session["page"] == "snap_ineligble"
-#      message = "You likely do not qualify for food stamps"
-#      session["counter"] = 0
-#    end
 
-#      twiml = Twilio::TwiML::Response.new do |r|
-#        r.Message message
-#      end
+  end
 
-#     session["counter"] += 1
-
-#    respond_to do |format|
-#      format.xml {render xml: twiml.text}
-#    end
-
-#   end
-
-# end
+end

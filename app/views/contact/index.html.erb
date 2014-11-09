@@ -8,7 +8,7 @@
       <div class="col-md-8 col-md-offset-2">
 
 
-        <h3 class="text-center">We would love to know what you think about mRelief: </h3>
+        <h3 class="text-center">We would love to hear from you!</h3>
         <br>
 
 
@@ -30,11 +30,17 @@
             <%= email_field_tag(:contact_email, nil, {:class => "form-control"}) %>
            </div>
           <div class="form-group">
-            <%= label_tag(:advertising_title, "How did you hear about us") %>
-            <%= select_tag(:advertising_options, options_for_select([['None', 'None'], ['Advertisements', 'Advertisements'], ['At an event', 'At an Event'], ['Service Center', 'Service Center'], ['From someone else', 'From Someone Else'], ['Internet search', 'Internet Search'], ['Social Media', 'Social Media'], ['Other', 'Other']]), {:class => "form-control"}) %>
+            <%= label_tag(:advertising_title, "How did you hear about us?") %>
+            <%= select_tag(:advertising_options, options_for_select([['None', 'None'], ['Advertisements', 'Advertisements'], ['At an event', 'At an Event'], ['Community Service Center', 'Community Service Center'], ['From someone else', 'From Someone Else'], ['Internet search', 'Internet Search'], ['Social Media', 'Social Media'], ['Other', 'Other']]), {:class => "form-control"}) %>
            </div>
+
+           <div class="form-group">
+            <%= label_tag(:request, "What is your request related to?") %>
+            <%= select_tag(:request, options_for_select([['Press', 'Press'], ['Grants/Investment ', 'Grants/Investment '], ['Feedback About the Site', 'Feedback About the Site'], ['A Bug or Problem you Had', 'A Bug or Problem you Had'], ['Something Else', 'Something Else']]), {:class => "form-control"}) %>
+           </div>
+
           <div class="form-group">
-            <%= label_tag(:feedback, "Your feedback") %>
+            <%= label_tag(:feedback, "Your message") %>
             <%= text_area_tag(:feedback, nil, {:class => "form-control", :rows => "5"}) %>
            </div>
 
