@@ -40,7 +40,8 @@ class TwilioController < ApplicationController
    if session["page"] == "snap_citizen_question" && session["counter"] == 3
       session["citizen"] = params[:Body]
     if session["citizen"]  == "no" || session["citizen"]  == "No" || session["citizen"]  == "NO"
-       session["page"] = "snap_eligble_maybe"
+       message = "What is your zipcode?"
+       session["page"] = "snap_eligible_maybe"
      elsif session["citizen"]  == "yes" || session["citizen"]  == "Yes" || session["citizen"]  == "YES"
        message = "How old are you? Enter a number"
        session["page"] = "snap_age_question"
@@ -108,12 +109,17 @@ class TwilioController < ApplicationController
       end
    end
 
+   # user is in school
+
    if session["page"] == "snap_ineligble" && session["counter"] == 2
      message = "Based on your household size and income, you likely do not qualify for food stamps. Go to Direct2Food at http://www.direct2food.org to locate the food pantries, soup kitchens and meal programs near you. To check other programs, type 'menu'."
    end
 
-   if session["page"] == "snap_eligble_maybe" && session["counter"] == 3
+   # user is not a US citizen
 
+   if session["page"] == "snap_eligible_maybe" && session["counter"] == 4
+    session["zipcode"] = params[:Body]
+    puts "I made it here"
      user_zipcode = session["zipcode"]
      @zipcode = user_zipcode << ".0"
      @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
@@ -121,7 +127,6 @@ class TwilioController < ApplicationController
      if @lafcenter.present?
      else
        @lafcenter = LafCenter.find_by(:id => 10)
-       @laf_disclaimer = "We do not have an estimation of the nearest center that is in range for you at this time. But we recommend going to the center below."
      end
 
      message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, type 'menu'."
