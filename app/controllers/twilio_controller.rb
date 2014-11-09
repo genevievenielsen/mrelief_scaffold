@@ -25,7 +25,13 @@ class TwilioController < ApplicationController
       session["counter"] = 1
    end
 
-   #here is the food stamps logic
+   if params[:Body] == "Ride" || params[:Body] == "ride"
+      message = "Are you 65 years old or older? Enter 'yes' or 'no'"
+      session["page"] = "rta_age_question"
+      session["counter"] = 1
+   end
+
+   # HERE IS THE FOOD STAMPS LOGIC
 
    if session["page"] == "snap_college_question" && session["counter"] == 2
       session["college"] = params[:Body]
@@ -109,13 +115,13 @@ class TwilioController < ApplicationController
       end
    end
 
-   # user is in school
+   # SNAP user is in school
 
    if session["page"] == "snap_ineligble" && session["counter"] == 2
-     message = "Based on your household size and income, you likely do not qualify for food stamps. Go to Direct2Food at http://www.direct2food.org to locate the food pantries, soup kitchens and meal programs near you. To check other programs, type 'menu'."
+     message = "You likely do not qualify for food stamps. Go to Direct2Food at http://www.direct2food.org to locate the food pantries, soup kitchens and meal programs near you. To check other programs, type 'menu'."
    end
 
-   # user is not a US citizen
+   # SNAP user is not a US citizen
 
    if session["page"] == "snap_eligible_maybe" && session["counter"] == 4
     session["zipcode"] = params[:Body]
@@ -130,6 +136,61 @@ class TwilioController < ApplicationController
      end
 
      message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, type 'menu'."
+   end
+
+
+   # HERE IS THE LOGIC FOR RTA RIDE FREE
+
+   if session["page"] == "rta_age_question" && session["counter"] == 2
+      session["age"] = params[:Body]
+     if session["age"] == "No" || session["age"] == "NO"
+       session["page"] = "rta_ineligble"
+
+     elsif session["age"] == "Yes" || session["age"] == "YES" || session["age"] == "yes"
+       message = "How many dependents including yourself are in your household? Enter a number"
+       session["page"] = "rta_dependents_question"
+     end
+   end
+
+    if session["page"] == "rta_dependents_question" && session["counter"] == 3
+      session["dependents"] = params[:Body]
+      if session["dependents"] !~ /\D/  # returns true if all numbers
+        session["dependents"] = session["dependents"].to_i
+      else
+        session["dependents"] = session["dependents"].in_numbers
+      end
+      message = "What is your gross annual income? Income includes your spouse's income if married and living together on December 31 of last year before tax deductions.  Enter a number"
+      session["page"] = "rta_income_question"
+   end
+
+   if session["page"] == "rta_income_question" && session["counter"] == 4
+     session["income"] = params[:Body]
+
+     if session["income"] !~ /\D/
+       session["income"] = session["income"].to_i
+     else
+       if session["income"].include?("dollars")
+         session["income"].slice!"dollars"
+       end
+       session["income"] = session["income"].in_numbers
+     end
+
+     rta_dependent_no = session["dependents"].to_i
+     rta_gross_income = session["income"].to_i
+
+      rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => rta_dependent_no })
+
+      if rta_gross_income < rta_eligibility.rta_gross_income
+        message = "You may be in luck! You likely qualify for RTA Ride Free. Click here to apply online https://idoaweb.aging.illinois.gov/baa/Welcome.aspx.c To check other programs, type 'menu'."
+      else
+        message = "Based on your household size and income, you likely do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
+      end
+   end
+
+   # user is below 65
+
+   if session["page"] == "rta_ineligble" && session["counter"] == 2
+    message = "Based on your age, you do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
    end
 
 
