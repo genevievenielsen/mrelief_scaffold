@@ -6,6 +6,7 @@ class TwilioController < ApplicationController
   def text
 
   session["counter"] ||= 0
+
   if params[:Body] == "reset" || params[:Body] == "Reset"
     session["counter"] = 0
   end
@@ -101,7 +102,7 @@ class TwilioController < ApplicationController
       end
 
       if snap_gross_income < snap_eligibility.snap_gross_income
-        message = "You may be in luck! You likely qualify for foodstamps. To find a Community Service Center near you go to http://abe.illinois.gov or call 311."
+        message = "You may be in luck! You likely qualify for foodstamps. To find a Community Service Center near you go to http://abe.illinois.gov or call 311. To check other programs, type 'menu'."
       else
         message = "Based on your household size and income, you likely do not qualify for food stamps. Go to Direct2Food at http://www.direct2food.org to locate the food pantries, soup kitchens and meal programs near you. To check other programs, type 'menu'."
       end
