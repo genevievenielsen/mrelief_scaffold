@@ -145,7 +145,6 @@ class TwilioController < ApplicationController
       session["age"] = params[:Body]
      if session["age"] == "No" || session["age"] == "NO"
        session["page"] = "rta_ineligble"
-
      elsif session["age"] == "Yes" || session["age"] == "YES" || session["age"] == "yes"
        message = "How many dependents including yourself are in your household? Enter a number"
        session["page"] = "rta_dependents_question"
