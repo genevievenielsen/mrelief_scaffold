@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get('/about_us', { :controller => 'pages', :action => 'about_us' })
   # get('/contact_us', { :controller => 'pages', :action => 'contact_us' })
   get('/how_mrelief_works', { :controller => 'pages', :action => 'how_mrelief_works' })
+  get('/press_release', { :controller => 'pages', :action => 'press_release' })
 
   get("/", { :controller => "pages", :action => "homepage" })
 

@@ -6,7 +6,6 @@ GIT
     starter_generators (0.9.6)
 
 GEM
-  remote: https://rubygems.org/
   specs:
     actionmailer (4.1.5)
       actionpack (= 4.1.5)

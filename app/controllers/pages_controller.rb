@@ -19,4 +19,8 @@ class PagesController < ApplicationController
 
   end
 
+  def press_release
+
+  end
+
 end
