@@ -1,3 +1,5 @@
+source 'https://rubygems.org'
+
 ruby "2.1.2"
 
 gem "rest-client"
@@ -14,9 +16,7 @@ gem 'font-awesome-rails'
 gem 'numbers_in_words'
 
 gem 'dotenv-rails', :groups => [:development, :test]
-gem 'dotenv-rails'
 gem 'twilio-ruby'
-gem 'dotenv-rails'
 gem 'sinatra'
 
 gem 'jquery-ui-rails'
