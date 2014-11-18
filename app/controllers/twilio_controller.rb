@@ -7,7 +7,7 @@ class TwilioController < ApplicationController
 
   session["counter"] ||= 0
 
-  if params[:Body] == "reset" || params[:Body] == "Reset"
+  if params[:Body].strip.downcase == "reset"
     session["counter"] = 0
   end
 
@@ -15,17 +15,17 @@ class TwilioController < ApplicationController
     message = "Welcome to mRelief! We help you check your eligibility for benefits. For foodstamps, type 'food'. For RTA ride free, type 'ride.' If you make a mistake, send the message 'reset'."
    end
 
-   if params[:Body] == "menu" || params[:Body] == "Menu"
+   if params[:Body].strip.downcase == "menu"
       message = "For foodstamps, type 'food'. For RTA ride free, type 'ride.' If you make a mistake, send the message 'reset'."
    end
 
-   if params[:Body] == "Food" || params[:Body] == "food"
+   if params[:Body].strip.downcase == "food"
       message = "Are you enrolled in a college or institution of higher education? Enter 'yes' or 'no'"
       session["page"] = "snap_college_question"
       session["counter"] = 1
    end
 
-   if params[:Body] == "Ride" || params[:Body] == "ride"
+   if params[:Body].strip.downcase == "ride"
       message = "Are you 65 years old or older? Enter 'yes' or 'no'"
       session["page"] = "rta_age_question"
       session["counter"] = 1
@@ -34,28 +34,28 @@ class TwilioController < ApplicationController
    # HERE IS THE FOOD STAMPS LOGIC
 
    if session["page"] == "snap_college_question" && session["counter"] == 2
-      session["college"] = params[:Body]
-     if session["college"] == "No" || session["college"] == "NO"
+      session["college"] = params[:Body].strip.downcase
+     if session["college"] == "no"
        message = "Are you a citizen of the United States? Enter 'yes' or 'no'"
        session["page"] = "snap_citizen_question"
-     elsif session["college"] == "Yes" || session["college"] == "YES" || session["college"] == "yes"
+     elsif session["college"] == "yes"
        session["page"] = "snap_ineligble"
      end
    end
 
    if session["page"] == "snap_citizen_question" && session["counter"] == 3
-      session["citizen"] = params[:Body]
-    if session["citizen"]  == "no" || session["citizen"]  == "No" || session["citizen"]  == "NO"
+      session["citizen"] = params[:Body].strip.downcase
+    if session["citizen"]  == "no"
        message = "What is your zipcode?"
        session["page"] = "snap_eligible_maybe"
-     elsif session["citizen"]  == "yes" || session["citizen"]  == "Yes" || session["citizen"]  == "YES"
+     elsif session["citizen"]  == "yes"
        message = "How old are you? Enter a number"
        session["page"] = "snap_age_question"
      end
    end
 
    if session["page"] == "snap_age_question" && session["counter"] == 4
-     session["age"] = params[:Body]
+     session["age"] = params[:Body].strip
 
       if session["age"]  !~ /\D/
         session["age"] = session["age"] .to_i
@@ -68,7 +68,7 @@ class TwilioController < ApplicationController
    end
 
    if session["page"] == "snap_household_question" && session["counter"] == 5
-     session["dependents"] = params[:Body]
+     session["dependents"] = params[:Body].strip
 
      if session["dependents"] !~ /\D/  # returns true if all numbers
        session["dependents"] = session["dependents"].to_i
@@ -81,13 +81,13 @@ class TwilioController < ApplicationController
    end
 
    if session["page"] == "snap_zipcode_question" && session["counter"] == 6
-     session["zipcode"] = params[:Body]
+     session["zipcode"] = params[:Body].strip
      message = "What is your gross monthly income? Income includes social security, child support, and unemployment insurance before any deductions."
      session["page"] = "snap_income_question"
    end
 
    if session["page"] == "snap_income_question" && session["counter"] == 7
-     session["income"] = params[:Body]
+     session["income"] = params[:Body].strip
 
      if session["income"] !~ /\D/
        session["income"] = session["income"].to_i
@@ -115,16 +115,16 @@ class TwilioController < ApplicationController
       end
    end
 
-   # SNAP user is in school
+   # Food stamps user is in school
 
    if session["page"] == "snap_ineligble" && session["counter"] == 2
      message = "You likely do not qualify for food stamps. Go to Direct2Food at http://www.direct2food.org to locate the food pantries, soup kitchens and meal programs near you. To check other programs, type 'menu'."
    end
 
-   # SNAP user is not a US citizen
+   # Food stamps user is not a US citizen
 
    if session["page"] == "snap_eligible_maybe" && session["counter"] == 4
-    session["zipcode"] = params[:Body]
+    session["zipcode"] = params[:Body].strip
     puts "I made it here"
      user_zipcode = session["zipcode"]
      @zipcode = user_zipcode << ".0"
@@ -142,8 +142,8 @@ class TwilioController < ApplicationController
    # HERE IS THE LOGIC FOR RTA RIDE FREE
 
    if session["page"] == "rta_age_question" && session["counter"] == 2
-      session["age"] = params[:Body]
-     if session["age"] == "No" || session["age"] == "NO"
+      session["age"] = params[:Body].strip.downcase
+     if session["age"] == "no"
        session["page"] = "rta_ineligble"
      elsif session["age"] == "Yes" || session["age"] == "YES" || session["age"] == "yes"
        message = "How many dependents including yourself are in your household? Enter a number"
@@ -152,7 +152,7 @@ class TwilioController < ApplicationController
    end
 
     if session["page"] == "rta_dependents_question" && session["counter"] == 3
-      session["dependents"] = params[:Body]
+      session["dependents"] = params[:Body].strip
       if session["dependents"] !~ /\D/  # returns true if all numbers
         session["dependents"] = session["dependents"].to_i
       else
@@ -163,7 +163,7 @@ class TwilioController < ApplicationController
    end
 
    if session["page"] == "rta_income_question" && session["counter"] == 4
-     session["income"] = params[:Body]
+     session["income"] = params[:Body].strip
 
      if session["income"] !~ /\D/
        session["income"] = session["income"].to_i
@@ -186,7 +186,7 @@ class TwilioController < ApplicationController
       end
    end
 
-   # user is below 65
+   # RTA Ride Free user is below 65
 
    if session["page"] == "rta_ineligble" && session["counter"] == 2
     message = "Based on your age, you do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
