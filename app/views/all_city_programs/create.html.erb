@@ -19,7 +19,12 @@
       <% if @eligible_snap == 'yes' %>
       <li class="list-group-item">
         <h3 class="allcityheader">Food Stamps</h3>
-        <%= link_to "Click here to find a Community Service Center near you", "http://abe.illinois.gov", :class => "btn btn-success btn-resolution" %>
+        <% if @laf_disclaimer.present?  %>
+           <h4><%= @laf_disclaimer %></h4>
+        <% else %>
+          <h4> Based on your zipcode, here is the nearest Community Service Center to access your Food Stamps: </h4>
+        <% end %>
+        <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %>| <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
         <%= link_to "Click Here to apply online before you visit", "https://abe.illinois.gov/abe/access/accessController?id=0.3971759164763745", :class => "btn btn-success btn-resolution" %>
         </li>
         <% end %>

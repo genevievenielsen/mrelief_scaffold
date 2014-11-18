@@ -177,6 +177,12 @@ class TwilioController < ApplicationController
        if session["income"].include?("dollars")
          session["income"].slice!"dollars"
        end
+       if session["income"].include?("$")
+         session["income"].slice!"$"
+       end
+       if session["income"].include?(",")
+         session["income"].slice!","
+       end
        session["income"] = session["income"].in_numbers
      end
 
