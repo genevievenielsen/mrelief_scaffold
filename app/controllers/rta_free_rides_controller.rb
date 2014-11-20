@@ -27,16 +27,30 @@ class RtaFreeRidesController < ApplicationController
       rta_gross_income = rta_gross_income.in_numbers
     end
 
+    if params[:age] !~ /\D/
+      age = params[:age].to_i
+    else
+      age = params[:age].in_numbers
+    end
+
     if  rta_gross_income.present? && rta_dependent_no.present?
          rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => rta_dependent_no })
 
        p "rta_gross_income = #{rta_gross_income}"
        p "rta_eligibility.rta_gross_income = #{rta_eligibility.rta_gross_income}"
 
-       if rta_gross_income < rta_eligibility.rta_gross_income
-         @eligible = true
-       else
-       end
+       if params[:disabled] != 'none' || age > 65
+        if rta_gross_income < rta_eligibility.rta_gross_income
+          @eligible = "yes"
+        else
+          @eligible = "no"
+        end
+      else
+        @eligible = "no"
+      end
+
+
+
      else
        redirect_to :back, :notice => "All fields are required."
      end

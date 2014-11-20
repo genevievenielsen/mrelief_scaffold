@@ -1,4 +1,4 @@
-  <% if @eligible %>
+  <% if @eligible == "yes" %>
 
   <div class="page-header"></div>
 
@@ -24,7 +24,7 @@
       </div>
 
 
-  <% else %>
+  <% else @eligible == "no" %>
 
      <div class="page-header"></div>
 

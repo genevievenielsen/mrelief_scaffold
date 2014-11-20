@@ -31,11 +31,27 @@
 
       <form action="/rta_free_rides" role="form" method="post">
 
+
+        <div class="form-group col-md-12">
+          <label for="age">How old are you?</label>
+          <input type="text" id="age" name="age" placeholder="For example: 27" class="form-control" required>
+        </div>
+
+        <div class="form-group col-md-12">
+        <label for="disabled" id="disabled">If you are disabled, describe your current status:</label>
+          <div id="disabled">
+            <%= radio_button_tag 'disabled', 'social-security' %>  I am receiving disability payments from Social Security.  <br>
+            <%= radio_button_tag 'disabled', 'railroad' %>  I am receiving disability payments from the Railroad Retirement Board.     <br>
+            <%= radio_button_tag 'disabled', 'veterans' %>  I am receiving disability payments from Veterans
+            Affairs.   <br>
+            <%= radio_button_tag 'disabled', 'none' %> I am currently not receiving any disability payments  <br>
+          </div>
+        </div>
+
+
   <!-- Label and input for rta_dependent_no -->
 
   <div class="form-group col-md-12">
-    <p class="allthatapply">If you are 65 and older or disabled, you may qualify for RTA Ride Free.
-    <br> Please answer the following questions to find out:</p>
 
     <label for="rta_dependent_no">How many dependents (including yourself) are in your household?</label>
 
