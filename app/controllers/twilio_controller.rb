@@ -77,9 +77,9 @@ class TwilioController < ApplicationController
      session["age"] = params[:Body].strip
 
       if session["age"]  !~ /\D/
-        session["age"] = session["age"] .to_i
+        session["age"] = session["age"].to_i
       else
-        session["age"] = session["age"] .in_numbers
+        session["age"] = session["age"].in_numbers
       end
 
      message = "What is the number of people living in your household including yourself? Enter a number"
@@ -268,19 +268,48 @@ class TwilioController < ApplicationController
    end
 
 
+
    # HERE IS THE LOGIC FOR RTA RIDE FREE
 
    if session["page"] == "rta_age_question" && session["counter"] == 2
       session["age"] = params[:Body].strip.downcase
-     if session["age"] == "no"
-       session["page"] = "rta_ineligble"
-     elsif session["age"] == "Yes" || securityssion["age"] == "YES" || session["age"] == "yes"
-       message = "How many dependents including yourself are in your household? Enter a number"
-       session["page"] = "rta_dependents_question"
+      if session["age"]  !~ /\D/
+        session["age"] = session["age"].to_i
+      else
+        session["age"] = session["age"].in_numbers
+      end
+      age = session["age"]
+      if age <= 65
+        message = "Are you disabled? Enter 'yes' or 'no'"
+        session["page"] = "rta_disability_question"
+      else
+         message = "How many dependents including yourself are in your household? Enter a number"
+         session["page"] = "rta_dependents_question"
+      end
+   end
+
+   if session["page"] == "rta_disability_question" & session["counter"] == 3
+    session["disabled"] = params[:Body].strip.downcase
+    if session["disabled"] == "no"
+      session["page"] = "rta_ineligble"
+    else
+      message = "Are you receiving disability payments from from Social Security, the Railroad Retirement Board or Veterans Affairs? Enter 'yes' or 'no'"
+      session["page"] = "snap_disability_payment"
+    end
+   end
+
+   if session["page"] == "snap_disability_payment" && session["counter"] == 4
+     session["disability_payment"] = params[:Body].strip.downcase
+     if session["disability_payment"] == "yes"
+      message = "How many dependents including yourself are in your household? Enter a number"
+      session["page"] = "rta_dependents_question"
+     else
+      session["page"] = "rta_ineligble"
      end
    end
 
-    if session["page"] == "rta_dependents_question" && session["counter"] == 3
+
+    if (session["page"] == "rta_dependents_question" && session["counter"] == 5) || (session["page"] == "rta_dependents_question" && session["counter"] == 3)
       session["dependents"] = params[:Body].strip
       if session["dependents"] !~ /\D/  # returns true if all numbers
         session["dependents"] = session["dependents"].to_i
@@ -291,7 +320,7 @@ class TwilioController < ApplicationController
       session["page"] = "rta_income_question"
     end
 
-   if session["page"] == "rta_income_question" && session["counter"] == 4
+   if (session["page"] == "rta_income_question" && session["counter"] == 6) || (session["page"] == "rta_income_question" && session["counter"] == 4)
      session["income"] = params[:Body].strip
 
      if session["income"] !~ /\D/
@@ -323,9 +352,9 @@ class TwilioController < ApplicationController
       end
    end
 
-   # RTA Ride Free user is below 65
+   # RTA Ride Free user is below 65 & not disabled or receiving disability payment
 
-   if session["page"] == "rta_ineligble" && session["counter"] == 2
+   if (session["page"] == "rta_ineligble" && session["counter"] == 3) || (session["page"] == "rta_ineligble" && session["counter"] == 4)
     message = "Based on your age, you do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
    end
 
