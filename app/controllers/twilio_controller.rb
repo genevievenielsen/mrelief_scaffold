@@ -127,8 +127,8 @@ class TwilioController < ApplicationController
    end
 
 
-   if session["page"] == "snap_income_question" && session["counter"] == 8 ||
-      session["page"] == "snap_income_question" && session["counter"] == 9
+   if session["page"] == "snap_income_question" && session["counter"] == 8
+
      session["income"] = params[:Body].strip
 
      if session["income"] !~ /\D/
