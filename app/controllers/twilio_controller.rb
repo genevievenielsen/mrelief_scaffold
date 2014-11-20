@@ -118,15 +118,17 @@ class TwilioController < ApplicationController
 
    if session["page"] == "snap_disability_payment" && session["counter"] == 8
      session["disability_payment"] = params[:Body].strip
+     message = "What is the gross monthly income of all people living in your household including yourself? Income includes social security, child support, and unemployment insurance before any deductions."
+     puts "I made it here"
      if session["disability_payment"] == "yes"
       @disability
      end
-     message = "What is the gross monthly income of all people living in your household including yourself? Income includes social security, child support, and unemployment insurance before any deductions."
      session["page"] = "snap_income_question"
    end
 
 
-   if session["page"] == "snap_income_question" && session["counter"] == 8 || session["page"] == "snap_income_question" && session["counter"] == 9
+   if session["page"] == "snap_income_question" && session["counter"] == 8 ||
+      session["page"] == "snap_income_question" && session["counter"] == 9
      session["income"] = params[:Body].strip
 
      if session["income"] !~ /\D/
@@ -166,7 +168,6 @@ class TwilioController < ApplicationController
       else
         @lafcenter = LafCenter.find_by(:id => 10)
       end
-
 
       if snap_gross_income < snap_eligibility.snap_gross_income
         message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, type 'menu'."
