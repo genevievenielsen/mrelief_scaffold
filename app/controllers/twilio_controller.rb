@@ -1,5 +1,24 @@
 class TwilioController < ApplicationController
 
+ # student should go to maybe page
+ # two questions for disability - are you disabled yes or no - are you receiving disability payments from SS, veterans
+ # add purple binder - one resource
+
+ # if they don't qualify under normal and are disabled but not receiving payments
+ # lower bound age on food stamps?
+
+
+# rta age and disability question for web and text
+# add laf centers to rta
+# NO zipcode for rta ride free
+# NO purple binder
+
+# add Medicaid
+# Here is the message if they don't qualify: If  your family doesn't have health coverage, you may have to pay a fee and all health costs. Call (866) 311-1119 for your coverage options.
+
+
+# add Medicare cost sharing
+
   require 'numbers_in_words'
   require 'numbers_in_words/duck_punch' #see why later
 
@@ -39,7 +58,8 @@ class TwilioController < ApplicationController
        message = "Are you a citizen of the United States? Enter 'yes' or 'no'"
        session["page"] = "snap_citizen_question"
      elsif session["college"] == "yes"
-       session["page"] = "snap_ineligble"
+       message = "What is your zipcode?"
+       session["page"] = "snap_zipcode_question"
      end
    end
 
@@ -82,11 +102,32 @@ class TwilioController < ApplicationController
 
    if session["page"] == "snap_zipcode_question" && session["counter"] == 6
      session["zipcode"] = params[:Body].strip
-     message = "What is your gross monthly income? Income includes social security, child support, and unemployment insurance before any deductions."
+     message = "Are you disabled? Enter 'yes' or 'no'"
+     session["page"] = "snap_disability_question"
+   end
+
+   if session["page"] == "snap_disability_question" && session["counter"] == 7
+      session["disability"] = params[:Body].strip.downcase
+    if session["disability"]  == "no"
+       message = "What is the gross monthly income of all people living in your household including yourself? Income includes social security, child support, and unemployment insurance before any deductions."
+       session["page"] = "snap_income_question"
+     elsif session["disability"]  == "yes"
+       message = "Are you receiving disability payments from from Social Security, the Railroad Retirement Board or Veterans Affairs? Enter 'yes' or 'no'"
+       session["page"] = "snap_disability_payment"
+     end
+   end
+
+   if session["page"] == "snap_disability_payment" && session["counter"] == 8
+     session["disability_payment"] = params[:Body].strip
+     if session["disability_payment"] == "yes"
+      @disability
+     end
+     message = "What is the gross monthly income of all people living in your household including yourself? Income includes social security, child support, and unemployment insurance before any deductions."
      session["page"] = "snap_income_question"
    end
 
-   if session["page"] == "snap_income_question" && session["counter"] == 7
+
+   if session["page"] == "snap_income_question" && session["counter"] == 8 || session["counter"] == 9
      session["income"] = params[:Body].strip
 
      if session["income"] !~ /\D/
@@ -114,6 +155,10 @@ class TwilioController < ApplicationController
         snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => snap_dependent_no })
       end
 
+      if @disability.present?
+        snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => snap_dependent_no })
+      end
+
       user_zipcode = session["zipcode"]
       @zipcode = user_zipcode << ".0"
       @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
@@ -131,9 +176,18 @@ class TwilioController < ApplicationController
    end
 
    # Food stamps user is in school
+   if session["page"] == "snap_zipcode_question" && session["counter"] == 3
+    session["zipcode"] = params[:Body].strip
+     user_zipcode = session["zipcode"]
+     @zipcode = user_zipcode << ".0"
+     @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
 
-   if session["page"] == "snap_ineligble" && session["counter"] == 2
-     message = "You likely do not qualify for food stamps. Go to Direct2Food at http://www.direct2food.org to locate the food pantries, soup kitchens and meal programs near you. To check other programs, type 'menu'."
+     if @lafcenter.present?
+     else
+       @lafcenter = LafCenter.find_by(:id => 10)
+     end
+
+     message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, type 'menu'."
    end
 
    # Food stamps user is not a US citizen
@@ -203,7 +257,7 @@ class TwilioController < ApplicationController
 
 
       if rta_gross_income < rta_eligibility.rta_gross_income
-        message = "You may be in luck! You likely qualify for RTA Ride Free. Click here to apply online https://idoaweb.aging.illinois.gov/baa/Welcome.aspx.c To check other programs, type 'menu'."
+        message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  To check other programs, type 'menu'."
       else
         message = "Based on your household size and income, you likely do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
       end

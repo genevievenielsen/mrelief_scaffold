@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :aabd_cashes
+
   resources :tanifs
 
   resources :service_centers

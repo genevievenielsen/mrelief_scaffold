@@ -1,0 +1,17 @@
+<%= form_for(@aabd_cash) do |f| %>
+  <% if @aabd_cash.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@aabd_cash.errors.count, "error") %> prohibited this aabd_cash from being saved:</h2>
+
+      <ul>
+      <% @aabd_cash.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

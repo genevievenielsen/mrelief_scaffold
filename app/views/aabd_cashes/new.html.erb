@@ -1,0 +1,159 @@
+<div class= "container">
+
+  <script>$(function ()
+      { $("[data-toggle='popover']").popover();
+      });
+   </script>
+
+<div class="row">
+    <div class="page-header col-md-10 col-md-offset-1" style="border:none;">
+      <h2>Do I qualify for Aged, Blind and Disabled (AABD) Cash Asistance?</h2>
+        <p class="subhead">If you are 65 and older and a resident of Illinois, you may qualify for SPD.</p>
+        <p>This currently includes cash assistance and not eligibility for medical assistance. </p>
+
+    </div>
+</div>
+
+    <% if @aabd_cash.errors.any? %>
+      <% @aabd_cash.errors.full_messages.each do |message| %>
+        <div class="alert alert-dismissable alert-danger">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+
+<div class="row">
+<div class="panel panel-default col-md-8 col-md-offset-2">
+  <div class="panel-body">
+    <form action="/aabd_cashes" role="form" method="post">
+
+    <label for="age">How old are you?</label>
+    <div class="row">
+     <div class="form-group col-md-6">
+         <input type="text" id="age" name="age" placeholder="For example: 27" class="form-control" required>
+     </div>
+   </div>
+
+
+<div class="row">
+  <div class="form-group col-md-12">
+    <label for="disabled" id="disabled">Describe your current disability status:</label>
+      <div id="disabled">
+        <%= radio_button_tag 'disabled', 'social-security' %>  I am receiving disability payments from Social Security.  <br>
+        <%= radio_button_tag 'disabled', 'railroad' %>  I am receiving disability payments from the Railroad Retirement Board.     <br>
+        <%= radio_button_tag 'disabled', 'veterans' %>  I am receiving disability payments from Veterans
+        Affairs.   <br>
+        <%= radio_button_tag 'disabled', 'none' %> I am currently not receiving any disability payments  <br>
+      </div>
+    </div>
+  </div>
+
+  <!-- Label and input for aabd_household_size -->
+
+<div class="row">
+  <div class="form-group col-md-12">
+    <label for="aabd_household_size">What is your household size?</label>
+
+      <button type="button" data-toggle="popover" data-content="Household is defined as anyone living in the same dwelling with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+
+    <div class="row">
+      <div class="col-md-6">
+        <input type="text" id="aabd_household_size" name="aabd_household_size" placeholder="For example: 3" class="form-control" required>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Label and input for aabd_net_income -->
+<div class="row">
+  <div class="form-group col-md-12">
+    <label for="aabd_net_income">
+     How much do you anticipate to earn in net income in the next 30 days? (After taxes have been taken out)
+    </label>
+
+    <button type="button" data-toggle="popover" data-content="This should include income you earn from your work, self employment and rental income (contributions from people who live with you.)" data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+
+    <div class="input-group">
+      <span class="input-group-addon">$</span>
+       <input type="text" id="aabd_net_income" name="aabd_net_income" placeholder="For example: 1000"class="form-control" required>
+      <span class="input-group-addon">.00</span>
+    </div>
+    </div>
+  </div>
+
+    <!-- Label and input for aabd_benefits -->
+  <div class="row">
+    <div class="form-group col-md-12">
+      <label for="aabd_benefits">
+       What is your monthly income expected from government benefits or other assistance?
+      </label>
+
+      <button type="button" data-toggle="popover" data-content="This includes social security (SSI), veterans benefits, railroad assistance etc." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+         <input type="text" id="aabd_benefits" name="aabd_benefits" placeholder="For example: 1000"class="form-control" required>
+        <span class="input-group-addon">.00</span>
+      </div>
+      </div>
+    </div>
+
+      <!-- Label and input for aabd_assets -->
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label for="aabd_assets">
+          What are your assets worth?
+        </label>
+
+        <button type="button" data-toggle="popover" data-content="Everything but your home, if you live in it, and one car." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+
+        <div class="input-group">
+          <span class="input-group-addon">$</span>
+           <input type="text" id="aabd_assets" name="aabd_assets" placeholder="For example: 1000"class="form-control" required>
+          <span class="input-group-addon">.00</span>
+        </div>
+        </div>
+      </div>
+
+
+  <div class="row">
+    <div class="form-group col-md-12">
+      <label for="citizen" id="citizen">Are you a citizen of the United States? </label>
+      <div class="clearfix"></div>
+
+      <div class="row">
+          <div class="col-md-6">
+            <div id="citizen"  class="pull-left">
+              <%= radio_button_tag 'citizen', 'yes' %> yes
+              <%= radio_button_tag 'citizen', 'no' %> no
+            </div>
+          </div>
+      </div>
+  </div>
+  </div>
+
+  <%= render 'programs/zipcode_question' %>
+
+    <div class="row">
+      <div class="col-md-6">
+        <%= render "programs/calculator" %>
+      </div>
+    </div>
+
+    <div>
+      <button type="submit" class="btn btn-primary program-btn ">See if I qualify</button>
+    </div>
+  </div>
+</form>
+</div>
+</div>
+
+
+
+
+</div>
+</div>
+</div>
+

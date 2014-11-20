@@ -1,0 +1,84 @@
+<div class="container">
+
+<% if @eligible == 'yes' %>
+<div class="page-header"></div>
+
+      <div class="row" style="text-align:center;">
+         <div class="col-md-8 col-md-offset-2">
+             <i class="fa fa-check-circle fa-5x"></i>
+              <h1>You may be in luck!</h1>
+              <h4>Based on your household size and income, you likely qualify for Aged, Blind and Disabled (AABD) Cash Asistance</h4>
+          <br>
+          <br>
+          <br>
+
+          </div>
+        <!-- <div class="row">
+          <div class="col-sm-offset-3 col-md-offset-3 col-md-6 col-sm-6 col-xs-6">
+            <p class="subhead"> To apply online before you visit:</p>
+          <%#= link_to "Click Here", "https://abe.illinois.gov/abe/access/accessController?id=0.3971759164763745", :class => "btn btn-success btn-resolution" %>
+          </div>
+
+        </div> -->
+    </div>
+
+    <% elsif @eligible == 'maybe' %>
+    <div class="page-header"></div>
+
+      <div class="row" style="text-align:center;">
+        <div class="col-md-8 col-md-offset-2">
+          <i class="fa fa-exclamation-circle fa-5x"></i>
+            <h1>Something else in mind!</h1>
+             <h4>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a Aged, Blind and Disabled (AABD) Cash Asistanceexpert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your eligibility with you. </h4>
+            <br>
+
+            <% if @laf_disclaimer.present?  %>
+              <p class="subhead"><%= @laf_disclaimer %></p>
+            <% end %>
+
+            <div class="col-md-offset-3 col-md-6 col-sm-6 text-center" style="text-align:center;">
+              <ul class="list-group" style="text-align:left;">
+                <li class="list-group-item" style="font-weight:bold"><%= @lafcenter.center %> </li>
+                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %> </li>
+                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @lafcenter.telephone %> </li>
+                <li class="list-group-item">Days that Spanish is spoken - <%= @lafcenter.spanish %> </li>
+              </ul>
+
+              <br>
+              <br>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-md-offset-4 col-md-4">
+        <%= image_tag("LAFlogo.jpg", :class => "img-responsive") %>
+        </div>
+      </div>
+
+    </div>
+
+
+      <% elsif @eligible == 'no' %>
+      <div class="page-header"></div>
+
+      <div class="row" style="text-align:center;">
+        <div class="col-md-8 col-md-offset-2">
+            <h1>Something else in mind!</h1>
+            <h4>Based on your household size and income, you likely do not qualify for Aged, Blind and Disabled (AABD) Cash Asistance.</h4>
+
+            <br>
+
+          <!-- <div class="row">
+            <p class="subhead">Direct2Food is an online resource that will help you locate the food pantries, soup kitchens, and meal programs closest to you. To find resources near you</p>
+            <%#= link_to "Click Here", "http://www.direct2food.org/", :class => "btn btn-success btn-resolution" %>
+          </div>
+ -->
+          <br>
+
+
+      </div>
+</div>
+<% end %>
+<br>
+<br>
+<br>
+<br>

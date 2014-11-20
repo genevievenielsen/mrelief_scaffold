@@ -11,7 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141019185419) do
+ActiveRecord::Schema.define(version: 20141120153013) do
+
+  create_table "aabd_cashes", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "all_city_programs", force: true do |t|
     t.datetime "created_at"
