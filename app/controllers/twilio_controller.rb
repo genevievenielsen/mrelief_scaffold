@@ -166,7 +166,7 @@ class TwilioController < ApplicationController
         message = "Based on your household size and income, you likely do not qualify for food stamps. Go to Direct2Food at http://www.direct2food.org to locate the food pantries, soup kitchens and meal programs near you. To check other programs, type 'menu'."
       end
    end
-  end
+
 
    # Food stamps user is in school
    if session["page"] == "snap_zipcode_question" && session["counter"] == 3
