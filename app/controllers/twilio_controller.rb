@@ -294,7 +294,7 @@ class TwilioController < ApplicationController
       end
    end
 
-   if session["page"] == "rta_disability_question" & session["counter"] == 3
+   if session["page"] == "rta_disability_question" && session["counter"] == 3
     session["disabled"] = params[:Body].strip.downcase
     if session["disabled"] == "no"
       session["page"] = "rta_ineligble"
