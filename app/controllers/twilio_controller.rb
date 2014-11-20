@@ -123,7 +123,7 @@ class TwilioController < ApplicationController
      if session["disability_payment"] == "yes"
       @disability
      end
-     session["page"] = "snap_income_question"
+     session["page"] = "snap_income_question_disability"
    end
 
 
@@ -156,10 +156,6 @@ class TwilioController < ApplicationController
         snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => snap_dependent_no })
       end
 
-      if @disability.present?
-        snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => snap_dependent_no })
-      end
-
       user_zipcode = session["zipcode"]
       @zipcode = user_zipcode << ".0"
       @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
@@ -176,7 +172,7 @@ class TwilioController < ApplicationController
       end
    end
 
-   if session["page"] == "snap_income_question" && session["counter"] == 9
+   if session["page"] == "snap_income_question_disability" && session["counter"] == 9
 
      session["income"] = params[:Body].strip
 
