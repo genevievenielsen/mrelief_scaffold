@@ -63,7 +63,7 @@ class AabdCashesController < ApplicationController
     # if they are receiving disability payment proceed with logic
     # if they are NOT receiving disability payment but are over 65, proceed with logic
     if params[:disabled] != 'none' || age > 65
-      if aabd_household_size = 1
+      if aabd_household_size == 1
         if aabd_net_income + aabd_benefits < 821.38
           if aabd_assets < 2000
             @eligible = 'yes'
@@ -75,7 +75,7 @@ class AabdCashesController < ApplicationController
           @eligible = "no"
         end
 
-      elsif aabd_household_size = 2
+      elsif aabd_household_size == 2
         if aabd_net_income + aabd_benefits < 724.38
           if aabd_assets < 3000
             @eligible = 'yes'
