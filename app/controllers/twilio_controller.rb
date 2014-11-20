@@ -107,7 +107,7 @@ class TwilioController < ApplicationController
 
    if session["page"] == "snap_disability_question" && session["counter"] == 7
       session["disability"] = params[:Body].strip.downcase
-    if session["disability"]  == "no"
+     if session["disability"]  == "no"
        message = "What is the gross monthly income of all people living in your household including yourself? Income includes social security, child support, and unemployment insurance before any deductions."
        session["page"] = "snap_income_question"
      elsif session["disability"]  == "yes"
@@ -119,10 +119,10 @@ class TwilioController < ApplicationController
    if session["page"] == "snap_disability_payment" && session["counter"] == 8
      session["disability_payment"] = params[:Body].strip
      message = "What is the gross monthly income of all people living in your household including yourself? Income includes social security, child support, and unemployment insurance before any deductions."
-     puts "I made it here"
-     if session["disability_payment"] == "yes"
-      @disability
-     end
+     # puts "I made it here"
+     # if session["disability_payment"] == "yes"
+     #  @disability
+     # end
      session["page"] = "snap_income_question_disability"
    end
 
@@ -195,14 +195,16 @@ class TwilioController < ApplicationController
      snap_dependent_no = session["dependents"].to_i
      snap_gross_income = session["income"].to_i
 
-      if age <= 59
-        snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => snap_dependent_no })
-      else
-        snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => snap_dependent_no })
-      end
+      # if age <= 59
+      #   snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => snap_dependent_no })
+      # else
+      #   snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => snap_dependent_no })
+      # end
 
       if @disability.present?
         snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => snap_dependent_no })
+      else
+        snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => snap_dependent_no })
       end
 
       user_zipcode = session["zipcode"]
