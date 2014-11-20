@@ -119,10 +119,9 @@ class TwilioController < ApplicationController
    if session["page"] == "snap_disability_payment" && session["counter"] == 8
      session["disability_payment"] = params[:Body].strip
      message = "What is the gross monthly income of all people living in your household including yourself? Income includes social security, child support, and unemployment insurance before any deductions."
-     # puts "I made it here"
-     # if session["disability_payment"] == "yes"
-     #  @disability
-     # end
+     if session["disability_payment"] == "yes"
+      @disability
+     end
      session["page"] = "snap_income_question_disability"
    end
 
