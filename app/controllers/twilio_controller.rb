@@ -309,7 +309,17 @@ class TwilioController < ApplicationController
    end
 
 
-    if (session["page"] == "rta_dependents_question" && session["counter"] == 5) || (session["page"] == "rta_dependents_question" && session["counter"] == 3)
+    if session["page"] == "rta_dependents_question" && session["counter"] == 5
+      session["dependents"] = params[:Body].strip
+      if session["dependents"] !~ /\D/  # returns true if all numbers
+        session["dependents"] = session["dependents"].to_i
+      else
+        session["dependents"] = session["dependents"].in_numbers
+      end
+      message = "What is your gross annual income? Income includes your spouse's income if married and living together on December 31 of last year before tax deductions.  Enter a number"
+      session["page"] = "rta_income_question"
+    end
+    if session["page"] == "rta_dependents_question" && session["counter"] == 3
       session["dependents"] = params[:Body].strip
       if session["dependents"] !~ /\D/  # returns true if all numbers
         session["dependents"] = session["dependents"].to_i
@@ -320,9 +330,8 @@ class TwilioController < ApplicationController
       session["page"] = "rta_income_question"
     end
 
-   if (session["page"] == "rta_income_question" && session["counter"] == 6) || (session["page"] == "rta_income_question" && session["counter"] == 4)
+   if session["page"] == "rta_income_question" && session["counter"] == 6
      session["income"] = params[:Body].strip
-
      if session["income"] !~ /\D/
        session["income"] = session["income"].to_i
      else
@@ -337,14 +346,34 @@ class TwilioController < ApplicationController
        end
        session["income"] = session["income"].in_numbers
      end
-
       rta_dependent_no = session["dependents"].to_i
       rta_gross_income = session["income"].to_i
-
       rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => rta_dependent_no })
-
-
-
+      if rta_gross_income < rta_eligibility.rta_gross_income
+        message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  To check other programs, type 'menu'."
+      else
+        message = "Based on your household size and income, you likely do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
+      end
+   end
+   if session["page"] == "rta_income_question" && session["counter"] == 4
+     session["income"] = params[:Body].strip
+     if session["income"] !~ /\D/
+       session["income"] = session["income"].to_i
+     else
+       if session["income"].include?("dollars")
+         session["income"].slice!"dollars"
+       end
+       if session["income"].include?("$")
+         session["income"].slice!"$"
+       end
+       if session["income"].include?(",")
+         session["income"].slice!","
+       end
+       session["income"] = session["income"].in_numbers
+     end
+      rta_dependent_no = session["dependents"].to_i
+      rta_gross_income = session["income"].to_i
+      rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => rta_dependent_no })
       if rta_gross_income < rta_eligibility.rta_gross_income
         message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  To check other programs, type 'menu'."
       else
@@ -354,9 +383,13 @@ class TwilioController < ApplicationController
 
    # RTA Ride Free user is below 65 & not disabled or receiving disability payment
 
-   if (session["page"] == "rta_ineligble" && session["counter"] == 3) || (session["page"] == "rta_ineligble" && session["counter"] == 4)
+   if session["page"] == "rta_ineligble" && session["counter"] == 3
     message = "Based on your age, you do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
    end
+   if session["page"] == "rta_ineligble" && session["counter"] == 4
+    message = "Based on your age, you do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
+   end
+
 
    # HERE IS THE LOGIC FOR MEDICAID
 
