@@ -1,6 +1,7 @@
 class TwilioController < ApplicationController
 
  # add purple binder - one resource
+ # added disability
 
  # if they don't qualify under normal and are disabled but not receiving payments
  # lower bound age on food stamps?
@@ -228,7 +229,8 @@ class TwilioController < ApplicationController
       if snap_gross_income < snap_eligibility.snap_gross_income
         message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, type 'menu'."
       else
-        message = "Based on your household size and income, you likely do not qualify for food stamps. Go to Direct2Food at http://www.direct2food.org to locate the food pantries, soup kitchens and meal programs near you. To check other programs, type 'menu'."
+        # message = "Based on your household size and income, you likely do not qualify for food stamps. Go to Direct2Food at http://www.direct2food.org to locate the food pantries, soup kitchens and meal programs near you. To check other programs, type 'menu'."
+        message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, type 'menu'."
       end
    end
 
