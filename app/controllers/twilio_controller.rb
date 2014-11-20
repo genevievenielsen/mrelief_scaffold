@@ -158,6 +158,14 @@ class TwilioController < ApplicationController
         snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => snap_dependent_no })
       end
 
+      user_zipcode = session["zipcode"]
+      @zipcode = user_zipcode << ".0"
+      @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
+
+      if @lafcenter.present?
+      else
+        @lafcenter = LafCenter.find_by(:id => 10)
+      end
 
 
       if snap_gross_income < snap_eligibility.snap_gross_income
@@ -222,7 +230,7 @@ class TwilioController < ApplicationController
       end
       message = "What is your gross annual income? Income includes your spouse's income if married and living together on December 31 of last year before tax deductions.  Enter a number"
       session["page"] = "rta_income_question"
-   end
+    end
 
    if session["page"] == "rta_income_question" && session["counter"] == 4
      session["income"] = params[:Body].strip
@@ -242,8 +250,8 @@ class TwilioController < ApplicationController
        session["income"] = session["income"].in_numbers
      end
 
-     rta_dependent_no = session["dependents"].to_i
-     rta_gross_income = session["income"].to_i
+      rta_dependent_no = session["dependents"].to_i
+      rta_gross_income = session["income"].to_i
 
       rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => rta_dependent_no })
 
