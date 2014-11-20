@@ -279,7 +279,7 @@ class TwilioController < ApplicationController
 
    if session["page"] == "rta_age_question" && session["counter"] == 2
       session["age"] = params[:Body].strip.downcase
-      if age == "no"
+      if session["age"]  == "no"
         message = "Are you disabled? Enter 'yes' or 'no'"
         session["page"] = "rta_disability_question"
       else
