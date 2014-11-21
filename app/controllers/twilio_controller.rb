@@ -469,7 +469,6 @@ class TwilioController < ApplicationController
 
     if
       session["medicare_number"] == 0
-      message =
     else
       message = "What is you gross monthly income?"
       session["page"] = "household_medicare_question"
