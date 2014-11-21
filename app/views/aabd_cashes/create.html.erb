@@ -7,20 +7,32 @@
          <div class="col-md-8 col-md-offset-2">
              <i class="fa fa-check-circle fa-5x"></i>
               <h1>You may be in luck!</h1>
-              <h4>Based on your household size and income, you likely qualify for Aged, Blind and Disabled (AABD) Cash Asistance</h4>
+              <h4>Based on your household size and income, you likely qualify for Aged, Blind and Disabled (AABD) Cash Assistance</h4>
           <br>
-          <br>
-          <br>
+
 
           </div>
           <!-- community service center -->
-        <!-- <div class="row">
-          <div class="col-sm-offset-3 col-md-offset-3 col-md-6 col-sm-6 col-xs-6">
-            <p class="subhead"> To apply online before you visit:</p>
-          <%#= link_to "Click Here", "https://abe.illinois.gov/abe/access/accessController?id=0.3971759164763745", :class => "btn btn-success btn-resolution" %>
+          <div class="row">
+          <div class="col-md-12">
+          <% if @laf_disclaimer.present?  %>
+               <p class="subhead"><%= @laf_disclaimer %></p>
+          <% else  %>
+               <p class="subhead"> Based on your zipcode, here is the nearest Community Service Center to access your AABD Cash Assistance: </p>
+          <% end %>
           </div>
+          </div>
+             <div class="col-md-offset-3 col-md-6 col-sm-6 text-center" style="text-align:center;">
+               <ul class="list-group" style="text-align:left;">
+                 <li class="list-group-item" style="font-weight:bold"><%= @lafcenter.center %> </li>
+                 <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %> </li>
+                 <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @lafcenter.telephone %> </li>
+                 <li class="list-group-item">Days that Spanish is spoken - <%= @lafcenter.spanish %> </li>
+               </ul>
 
-        </div> -->
+               <br>
+               <br>
+           </div>
     </div>
 
     <% elsif @eligible == 'maybe' %>
