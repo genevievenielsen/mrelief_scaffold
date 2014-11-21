@@ -1,13 +1,10 @@
 class TwilioController < ApplicationController
 
- # add purple binder - one resource
- # added disability
 
  # if they don't qualify under normal and are disabled but not receiving payments
  # lower bound age on food stamps?
 
 
-# rta age and disability question for web and text
 # add laf centers to rta
 # NO zipcode for rta ride free
 # NO purple binder
@@ -34,7 +31,7 @@ class TwilioController < ApplicationController
    end
 
    if params[:Body].strip.downcase == "menu"
-      message = "For foodstamps, type 'food'. For RTA ride free, type 'ride.' If you make a mistake, send the message 'reset'."
+      message = "For foodstamps, type 'food'. For RTA ride free, type 'ride.' For Medicaid, type 'medicaid.' If you make a mistake, send the message 'reset'."
    end
 
    if params[:Body].strip.downcase == "food"
@@ -81,26 +78,22 @@ class TwilioController < ApplicationController
 
    if session["page"] == "snap_age_question" && session["counter"] == 4
      session["age"] = params[:Body].strip
-
       if session["age"]  !~ /\D/
         session["age"] = session["age"].to_i
       else
         session["age"] = session["age"].in_numbers
       end
-
      message = "What is the number of people living in your household including yourself? Enter a number"
      session["page"] = "snap_household_question"
    end
 
    if session["page"] == "snap_household_question" && session["counter"] == 5
      session["dependents"] = params[:Body].strip
-
      if session["dependents"] !~ /\D/  # returns true if all numbers
        session["dependents"] = session["dependents"].to_i
      else
        session["dependents"] = session["dependents"].in_numbers
      end
-
      message = "What is your zipcode?"
      session["page"] = "snap_zipcode_question"
    end
@@ -131,11 +124,8 @@ class TwilioController < ApplicationController
      session["page"] = "snap_income_question_disability"
    end
 
-
    if session["page"] == "snap_income_question" && session["counter"] == 8
-
      session["income"] = params[:Body].strip
-
      if session["income"] !~ /\D/
        session["income"] = session["income"].to_i
      else
@@ -150,26 +140,21 @@ class TwilioController < ApplicationController
        end
        session["income"] = session["income"].in_numbers
      end
-
      age = session["age"].to_i
      snap_dependent_no = session["dependents"].to_i
      snap_gross_income = session["income"].to_i
-
       if age <= 59
         snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => snap_dependent_no })
       else
         snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => snap_dependent_no })
       end
-
       user_zipcode = session["zipcode"]
       @zipcode = user_zipcode << ".0"
       @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
-
       if @lafcenter.present?
       else
         @lafcenter = LafCenter.find_by(:id => 10)
       end
-
       @food_resources = ServiceCenter.where(:description => "food pantry")
       @food_resources_zip = @food_resources.where(:zip => user_zipcode)
       if @food_resources_zip.present?
@@ -177,19 +162,14 @@ class TwilioController < ApplicationController
       else
         @food_pantry = @food_resources.first
       end
-
       if snap_gross_income < snap_eligibility.snap_gross_income
         message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, type 'menu'."
       else
-        # message = "Based on your household size and income, you likely do not qualify for food stamps. Go to Direct2Food at http://www.direct2food.org to locate the food pantries, soup kitchens and meal programs near you. To check other programs, type 'menu'."
         message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, type 'menu'."
       end
    end
-
    if session["page"] == "snap_income_question_disability" && session["counter"] == 9
-
      session["income"] = params[:Body].strip
-
      if session["income"] !~ /\D/
        session["income"] = session["income"].to_i
      else
@@ -204,26 +184,20 @@ class TwilioController < ApplicationController
        end
        session["income"] = session["income"].in_numbers
      end
-
      snap_dependent_no = session["dependents"].to_i
      snap_gross_income = session["income"].to_i
-
-
       if @disability.present?
         snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => snap_dependent_no })
       else
         snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => snap_dependent_no })
       end
-
       user_zipcode = session["zipcode"]
       @zipcode = user_zipcode << ".0"
       @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
-
       if @lafcenter.present?
       else
         @lafcenter = LafCenter.find_by(:id => 10)
       end
-
       @food_resources = ServiceCenter.where(:description => "food pantry")
       @food_resources_zip = @food_resources.where(:zip => user_zipcode)
       if @food_resources_zip.present?
@@ -231,15 +205,12 @@ class TwilioController < ApplicationController
       else
         @food_pantry = @food_resources.first
       end
-
       if snap_gross_income < snap_eligibility.snap_gross_income
         message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, type 'menu'."
       else
-        # message = "Based on your household size and income, you likely do not qualify for food stamps. Go to Direct2Food at http://www.direct2food.org to locate the food pantries, soup kitchens and meal programs near you. To check other programs, type 'menu'."
         message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, type 'menu'."
       end
    end
-
 
    # Food stamps user is in school
    if session["page"] == "snap_zipcode_question" && session["counter"] == 3
@@ -247,29 +218,23 @@ class TwilioController < ApplicationController
      user_zipcode = session["zipcode"]
      @zipcode = user_zipcode << ".0"
      @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
-
      if @lafcenter.present?
      else
        @lafcenter = LafCenter.find_by(:id => 10)
      end
-
      message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, type 'menu'."
    end
 
    # Food stamps user is not a US citizen
-
    if session["page"] == "snap_eligible_maybe" && session["counter"] == 4
     session["zipcode"] = params[:Body].strip
-    puts "I made it here"
      user_zipcode = session["zipcode"]
      @zipcode = user_zipcode << ".0"
      @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
-
      if @lafcenter.present?
      else
        @lafcenter = LafCenter.find_by(:id => 10)
      end
-
      message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, type 'menu'."
    end
 
@@ -381,13 +346,13 @@ class TwilioController < ApplicationController
       end
    end
 
-   # RTA Ride Free user is below 65 & not disabled or receiving disability payment
 
+   # RTA Ride Free user is below 65 & not disabled or receiving disability payment
    if session["page"] == "rta_ineligble" && session["counter"] == 3
     message = "Based on your age, you do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
    end
    if session["page"] == "rta_ineligble" && session["counter"] == 4
-    message = "Based on your age, you do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
+    message = "Based on your age, you likely do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
    end
 
 
@@ -399,22 +364,72 @@ class TwilioController < ApplicationController
        message = "What is your zipcode?"
        session["page"] = "medicaid_eligible_maybe"
      elsif session["citizen"]  == "yes"
-
+      message = " How many people live in your home (including yourself)?"
+      session["page"] = "medicaid_household_size"
      end
    end
 
+   if session["page"] == "medicaid_household_size" && session["counter"] == 3
+     session["household"] = params[:Body].strip
+     if session["household"] !~ /\D/  # returns true if all numbers
+       session["household"] = session["household"].to_i
+     else
+       session["household"] = session["household"].in_numbers
+     end
+     message = "What is your monthly income? Enter a number"
+     session["page"] = "medicaid_income_question"
+   end
+
+   if session["page"] == "medicaid_income_question" && session["counter"] == 4
+     session["income"] = params[:Body].strip
+     if session["income"] !~ /\D/
+       session["income"] = session["income"].to_i
+     else
+       if session["income"].include?("dollars")
+         session["income"].slice!"dollars"
+       end
+       if session["income"].include?("$")
+         session["income"].slice!"$"
+       end
+       if session["income"].include?(",")
+         session["income"].slice!","
+       end
+       session["income"] = session["income"].in_numbers
+     end
+     medicaid_household_size = session["household"].to_i
+     medicaid_gross_income = session["income"].to_i
+
+     medicaid_eligibility = Medicaid.find_by({ :medicaid_household_size => medicaid_household_size})
+      if medicaid_gross_income < medicaid_eligibility.medicaid_gross_income
+        message = "What is your zipcode?"
+        session["page"] = "medicaid_eligible"
+      else
+        message = " If your family doesn't have health coverage, you may have to pay a fee and all health costs. Call (866) 311-1119 for your coverage options. To check other programs, type 'menu'."
+      end
+   end
+
+   if session["page"] == "medicaid_eligible" && session["counter"] == 5
+     session["zipcode"] = params[:Body].strip
+      user_zipcode = session["zipcode"]
+      @zipcode = user_zipcode << ".0"
+      @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
+      if @lafcenter.present?
+      else
+        @lafcenter = LafCenter.find_by(:id => 10)
+      end
+        message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, type 'menu'."
+   end
+
+   # medicaid user is not a US citizen
    if session["page"] == "medicaid_eligible_maybe" && session["counter"] == 3
     session["zipcode"] = params[:Body].strip
-    puts "I made it here"
      user_zipcode = session["zipcode"]
      @zipcode = user_zipcode << ".0"
      @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
-
      if @lafcenter.present?
      else
        @lafcenter = LafCenter.find_by(:id => 10)
      end
-
      message = "We cannot determine your eligibility at this time. To discuss your situation with a Medicaid expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, type 'menu'."
    end
 
