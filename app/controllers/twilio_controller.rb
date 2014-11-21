@@ -404,7 +404,7 @@ class TwilioController < ApplicationController
         message = "What is your zipcode?"
         session["page"] = "medicaid_eligible"
       else
-        message = " If your family doesn't have health coverage, you may have to pay a fee and all health costs. Call (866) 311-1119 for your coverage options. To check other programs, type 'menu'."
+        message = "you likely do not qualify for Medicaid. If your family doesn't have health coverage, you may have to pay a fee and all health costs. Call (866) 311-1119 for your coverage options. To check other programs, type 'menu'."
       end
    end
 
@@ -417,7 +417,7 @@ class TwilioController < ApplicationController
       else
         @lafcenter = LafCenter.find_by(:id => 10)
       end
-        message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, type 'menu'."
+        message = "You may be in luck! You likely qualify for Medicaid. To access your Medicaid, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, type 'menu'."
    end
 
    # medicaid user is not a US citizen
