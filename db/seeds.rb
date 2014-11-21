@@ -3002,6 +3002,63 @@ ServiceCenter.create(:name => 'Transportation Providers',
         :description => 'medical appointment transportation'
     )
 
+# aabd service centers
+ServiceCenter.create(:name => 'Senior Services',
+        :latitude => '-87.6669692',
+        :longitude => '41.8880009',
+        :street => '355 N Ashland Avenue',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60607',
+        :phone => '312-455-1000',
+        :organization => '2329',
+        :description => 'food pantry * senior services * home visits'
+    )
+ServiceCenter.create(:name => 'Mercy Family Health Center',
+        :latitude => '-87.6234384',
+        :longitude => '41.8462369',
+        :street => '2525 S Michigan Avenue',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60616',
+        :phone => '312-567-7616',
+        :organization => '2152',
+        :description => 'senior services * health care * obstetricsgynecology'
+    )
+ServiceCenter.create(:name => 'Erie Family Health Center - Various Locations',
+        :latitude => '-87.6699195',
+        :longitude => '41.8950334',
+        :street => '1701 W Superior Street',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60622',
+        :phone => '312-666-3494',
+        :organization => '4171',
+        :description => 'case management * counseling * senior services'
+    )
+ServiceCenter.create(:name => 'Housing Stability Program',
+        :latitude => '-87.6838326',
+        :longitude => '41.8879987',
+        :street => '333 N. Oakley Blvd',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60612',
+        :phone => '(773) 645-8900 extension 102',
+        :organization => '5235',
+        :description => 'mental health * disabled * homeless'
+    )
+ServiceCenter.create(:name => 'Intensive Case Advocacy and Support (ICAS)',
+        :latitude => '-87.648343',
+        :longitude => '41.921374',
+        :street => '2145 N. Halsted',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60614',
+        :phone => '312-278-4234',
+        :organization => '4543',
+        :description => 'intensive support to slefneglectful seniors in chicago * as referred to st vincent de paul center by dfsssenior services'
+    )
+
 
 
 LafCenter.create(:zipcode => '60601.0', :city => 'Chicago', :center => 'Garfield Community Service Center',

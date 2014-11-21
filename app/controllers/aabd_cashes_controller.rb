@@ -116,6 +116,47 @@ class AabdCashesController < ApplicationController
       @laf_disclaimer = "We do not have an estimation of the nearest center that is in range for you at this time. But we recommend going to the center below."
     end
 
+    aabd = []
+    ServiceCenter.all.each do |center|
+      if center.description.match("senior services")
+        unless center.description.match("child care")
+        aabd.push(center)
+        end
+      end
+      if center.description.match("disabled")
+        unless center.description.match("child care")
+        aabd.push(center)
+        end
+      end
+    end
+
+    @pb_zipcode = @user_zipcode.chomp(".0")
+      @aabd_resources = aabd
+      @aabd_resources_zip = []
+
+      aabd.each do |center|
+        if center.zip.match(@pb_zipcode)
+          @aabd_resources_zip.push(center)
+        end
+      end
+
+      #in this case there are 2 aabd centers in the user's zip
+      if @aabd_resources_zip.count >= 2
+         @aabd_resources = @aabd_resources_zip
+      end
+
+      #in this case there is 1 aabd center in the user's zip
+      if @aabd_resources_zip.count == 1
+         @aabd_resources_first = @aabd_resources_zip.first
+         @aabd_resources_second = @aabd_resources.first
+      end
+
+      #in this caser there are no aabd centers in the user's zip
+      if  @aabd_resources_zip.count == 0
+          @aabd_resources_first = @aabd_resources.first
+          @aabd_resources_second = @aabd_resources.second
+      end
+
   end
 
 

@@ -79,12 +79,58 @@
             <h4>Based on your household size and income, you likely do not qualify for Aged, Blind and Disabled (AABD) Cash Asistance.</h4>
 
             <br>
-            <!-- disability and or elderly -->
-          <!-- <div class="row">
-            <p class="subhead">Direct2Food is an online resource that will help you locate the food pantries, soup kitchens, and meal programs closest to you. To find resources near you</p>
-            <%#= link_to "Click Here", "http://www.direct2food.org/", :class => "btn btn-success btn-resolution" %>
-          </div>
- -->
+
+                <div class="row">
+                  <h4>Here are some additional resources from Purple Binder:</h4>
+                </div>
+                <br>
+
+                <div class="row">
+
+                <% if @aabd_resources_zip.count >= 2 %>
+                  <div class="col-md-6 col-sm-6">
+                    <ul class="list-group" style="text-align:left;">
+                      <li class="list-group-item" style="font-weight:bold"><%= @aabd_resources_zip.first.name %>  </li>
+                      <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @aabd_resources_zip.first.street %>  <%= @aabd_resources_zip.first.city %> <%= @aabd_resources_zip.first.state %>, <%= @aabd_resources_zip.first.zip %> </li>
+                      <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @aabd_resources_zip.first.phone %> </li>
+                    </ul>
+                  </div>
+
+                  <div class="col-md-6 col-sm-6">
+                    <ul class="list-group" style="text-align:left;">
+                      <li class="list-group-item" style="font-weight:bold"><%= @aabd_resources_zip.second.name %>  </li>
+                      <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @aabd_resources_zip.second.street %>  <%= @aabd_resources_zip.second.city %> <%= @aabd_resources_zip.second.state %>, <%= @aabd_resources_zip.second.zip %> </li>
+                      <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @aabd_resources_zip.second.phone %> </li>
+                    </ul>
+                  </div>
+                  <% end %>
+                </div>
+
+
+                <div class="row">
+                <% if @aabd_resources_first.present? %>
+                  <div class="col-md-6 col-sm-6">
+                    <ul class="list-group" style="text-align:left;">
+                      <li class="list-group-item" style="font-weight:bold"><%= @aabd_resources_first.name %>  </li>
+                      <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @aabd_resources_first.street %>  <%= @aabd_resources_first.city %> <%= @aabd_resources_first.state %>, <%= @aabd_resources_first.zip %> </li>
+                      <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @aabd_resources_first.phone %> </li>
+                    </ul>
+                  </div>
+
+                  <div class="col-md-6 col-sm-6">
+                    <ul class="list-group" style="text-align:left;">
+                      <li class="list-group-item" style="font-weight:bold"><%= @aabd_resources_second.name %>  </li>
+                      <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @aabd_resources_second.street %>  <%= @aabd_resources_second.city %> <%= @aabd_resources_second.state %>, <%= @aabd_resources_second.zip %> </li>
+                      <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @aabd_resources_second.phone %> </li>
+                    </ul>
+                  </div>
+                  <% end %>
+                </div>
+
+
+            </div>
+
+             <%= image_tag("pblogo.jpg", :class => "logo-padding") %>
           <br>
 
 
