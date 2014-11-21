@@ -448,7 +448,7 @@ class TwilioController < ApplicationController
    end
 
    # HERE IS THE MEDICARE COST SHARING LOGIC
-   if session["page"] = "medicare_household_question" & session["counter"] == 2
+   if session["page"] == "medicare_household_question" & session["counter"] == 2
     session["household"] = params[:Body].strip
     if session["household"] !~ /\D/  # returns true if all numbers
       session["household"] = session["household"].to_i
@@ -459,22 +459,152 @@ class TwilioController < ApplicationController
     session["page"] = "medicare_household_question"
    end
 
-   if session["page"] = "medicare_household_question" & session["counter"] == 3
+   if session["page"] == "medicare_household_question" & session["counter"] == 3
     session["medicare_number"] = params[:Body].strip
     if session["medicare_number"] !~ /\D/  # returns true if all numbers
       session["medicare_number"] = session["medicare_number"].to_i
     else
       session["medicare_number"] = session["medicare_number"].in_numbers
     end
-
-    if
-      session["medicare_number"] == 0
+    if session["medicare_number"] == 0
+      message = "What is your zipcode"
+      session["page"] = "medicare_ineligible"
     else
-      message = "What is you gross monthly income?"
-      session["page"] = "household_medicare_question"
+      message = "What is you gross monthly income? Enter a number"
+      session["page"] = "medicare_income_question"
     end
    end
 
+   if session["page"] == "medicare_income_question" && session["counter"] == 4
+     session["income"] = params[:Body].strip
+     if session["income"] !~ /\D/
+       session["income"] = session["income"].to_i
+     else
+       if session["income"].include?("dollars")
+         session["income"].slice!"dollars"
+       end
+       if session["income"].include?("$")
+         session["income"].slice!"$"
+       end
+       if session["income"].include?(",")
+         session["income"].slice!","
+       end
+       session["income"] = session["income"].in_numbers
+     end
+     message = "Please estimate the value of your assets.  This includes such items as: money in checking and savings accounts; stocks, bonds, savings certificates, and other securities; farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property. Please exclude the value of your home and car. Enter a number"
+     session["page"] = "medicare_assests_question"
+   end
+
+   if session["page"] == "medicare_assests_question" && session["counter"] == 5
+     session["assets"] = params[:Body].strip
+     if session["assets"] !~ /\D/
+       session["assets"] = session["assets"].to_i
+     else
+       if session["assets"].include?("dollars")
+         session["assets"].slice!"dollars"
+       end
+       if session["assets"].include?("$")
+         session["assets"].slice!"$"
+       end
+       if session["assets"].include?(",")
+         session["assets"].slice!","
+       end
+       session["assets"] = session["assets"].in_numbers
+     end
+     assets = session["assets"]
+     household_size = session["household"]
+     medicare_household_size = session["medicare_number"]
+     monthly_income = session["income"]
+
+     if medicare_household_size == 0
+      @eligible = "no"
+     elsif household_size == 1 && assets > 7160
+      @eligible = "no"
+     elsif household_size > 1 && assets > 10750
+      @eligible = "no"
+     else
+      if medicare_household_size == 1
+        monthly_income = monthly_income - 25
+      elsif medicare_household_size == 2
+        monthly_income = monthly_income - 50
+      end
+      medicare_sharing_eligibility = MedicareCostSharing.find_by({ :household_size => household_size })
+      if monthly_income < medicare_sharing_eligibility.premium_only
+        @eligible = "yes"
+        if monthly_income < medicare_sharing_eligibility.medicare_cost_sharing
+          @eligible_p_d_c = "yes"
+        elsif monthly_income >= medicare_sharing_eligibility.medicare_cost_sharing
+          @eligible_p = "yes"
+        end
+      end
+
+     if @eligible == "yes"
+      message = "What is your zipcode?"
+      session["page"] = "medicare_eligible"
+
+     elsif @eligible == "no"
+     message = "What is your zipcode?"
+     session["page"] = "medicare_ineligible"
+    end
+   end
+
+   if session["page"] = "medicare_eligible" && session["counter"] == 6
+    zipcode = session["zipcode"]
+    #refer to community resource center
+    user_zipcode = session["zipcode"]
+     @zipcode = user_zipcode << ".0"
+     @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
+     if @lafcenter.present?
+     else
+       @lafcenter = LafCenter.find_by(:id => 10)
+     end
+    message = "You may be in luck! You likely qualify for Medicare Cost Sharing. To access your Medicare Care Sharing, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, type 'menu'."
+
+   end
+
+   # no one in the household is on medicare
+   if session["page"] == "medicare_ineligible" & session["counter"] == 4
+      zipcode = session["zipcode"]
+       primarycare = []
+       ServiceCenter.all.each do |center|
+         if center.description.match("primary care")
+           primarycare.push(center)
+         end
+       end
+       primarycare.each do |center|
+         if center.zip.match(zpicode)
+           @medical_resources_zip.push(center)
+         end
+       end
+       if @medical_resources_zip.present?
+        @medical_center = @medical_resources_zip.first
+       else
+        @medical_center = primarycare.first
+       end
+       message = "You likely do not qualify for Medicare Cost Sharing. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. To check other programs, type 'menu'."
+    end
+
+    # do not be eligiblty cut offs
+    if session["page"] == "medicare_ineligible" & session["counter"] == 6
+       zipcode = session["zipcode"]
+        primarycare = []
+        ServiceCenter.all.each do |center|
+          if center.description.match("primary care")
+            primarycare.push(center)
+          end
+        end
+        primarycare.each do |center|
+          if center.zip.match(zpicode)
+            @medical_resources_zip.push(center)
+          end
+        end
+        if @medical_resources_zip.present?
+         @medical_center = @medical_resources_zip.first
+        else
+         @medical_center = primarycare.first
+        end
+        message = "You likely do not qualify for Medicare Cost Sharing. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. To check other programs, type 'menu'."
+     end
 
    twiml = Twilio::TwiML::Response.new do |r|
        r.Message message

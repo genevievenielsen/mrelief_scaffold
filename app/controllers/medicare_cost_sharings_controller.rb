@@ -73,13 +73,10 @@ class MedicareCostSharingsController < ApplicationController
 
       if monthly_income < medicare_sharing_eligibility.premium_only
         @eligible = "yes"
-
         if monthly_income < medicare_sharing_eligibility.medicare_cost_sharing
           @eligible_p_d_c = "yes"
-
         elsif monthly_income >= medicare_sharing_eligibility.medicare_cost_sharing
           @eligible_p = "yes"
-
         end
 
       end
