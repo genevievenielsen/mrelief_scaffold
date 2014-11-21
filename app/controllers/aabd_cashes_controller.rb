@@ -88,7 +88,12 @@ class AabdCashesController < ApplicationController
         end
 
       else #household size is greater than 2
-        @eligible = 'no'
+        if aabd_net_income + aabd_benefits < 724.38
+          @eligible = 'maybe'
+        else
+          @eligible = 'no'
+
+        end
       end
 
     else
