@@ -473,6 +473,7 @@ class TwilioController < ApplicationController
     else
       message = "What is you gross monthly income?"
       session["page"] = "household_medicare_question"
+    end
    end
 
 
