@@ -27,11 +27,11 @@ class TwilioController < ApplicationController
   end
 
    if session["counter"] == 0
-    message = "Welcome to mRelief! We help you check your eligibility for benefits. For foodstamps, type 'food'. For RTA ride free, type 'ride.' For Medicaid, type 'medicaid.' If you make a mistake, send the message 'reset'."
+    message = "Welcome to mRelief! We help you check your eligibility for benefits. For foodstamps, type 'food'. For RTA ride free, type 'ride.' For Medicaid, type 'medicaid.' For Medicare Cost Sharing, type 'medicare.' If you make a mistake, send the message 'reset'."
    end
 
    if params[:Body].strip.downcase == "menu"
-      message = "For foodstamps, type 'food'. For RTA ride free, type 'ride.' For Medicaid, type 'medicaid.' If you make a mistake, send the message 'reset'."
+      message = "For foodstamps, type 'food'. For RTA ride free, type 'ride.' For Medicaid, type 'medicaid.' For Medicare Cost Sharing, type 'medicare.' If you make a mistake, send the message 'reset'."
    end
 
    if params[:Body].strip.downcase == "food"
@@ -52,8 +52,13 @@ class TwilioController < ApplicationController
       session["counter"] = 1
    end
 
-   # HERE IS THE FOOD STAMPS LOGIC
+   if params[:Body].strip.downcase == "medicare"
+      message = "What is your household size? Please include yourself, your spouse, your children under 18 who live with you."
+      session["page"] = "medicare_household_question"
+      session["counter"] = 1
+   end
 
+   # HERE IS THE FOOD STAMPS LOGIC
    if session["page"] == "snap_college_question" && session["counter"] == 2
       session["college"] = params[:Body].strip.downcase
      if session["college"] == "no"
@@ -357,7 +362,6 @@ class TwilioController < ApplicationController
 
 
    # HERE IS THE LOGIC FOR MEDICAID
-
    if session["page"] == "medicaid_citizen_question" && session["counter"] == 2
      session["citizen"] = params[:Body].strip.downcase
     if session["citizen"]  == "no"
@@ -398,39 +402,77 @@ class TwilioController < ApplicationController
      end
      medicaid_household_size = session["household"].to_i
      medicaid_gross_income = session["income"].to_i
-
      medicaid_eligibility = Medicaid.find_by({ :medicaid_household_size => medicaid_household_size})
       if medicaid_gross_income < medicaid_eligibility.medicaid_gross_income
-        message = "What is your zipcode?"
-        session["page"] = "medicaid_eligible"
+        message = "You may be in luck! You likely qualify for Medicaid. Call (866) 311-1119 for your coverage options. To check other programs, type 'menu'."
       else
-        message = "You likely do not qualify for Medicaid. If your family doesn't have health coverage, you may have to pay a fee and all health costs. Call (866) 311-1119 for your coverage options. To check other programs, type 'menu'."
+        message = "What is your zipcode?"
+        session["page"] = "medicaid_ineligible"
       end
    end
 
-   if session["page"] == "medicaid_eligible" && session["counter"] == 5
+   # user is ineligible
+   if session["page"] == "medicaid_ineligible" && session["counter"] == 5
      session["zipcode"] = params[:Body].strip
-      user_zipcode = session["zipcode"]
-      @zipcode = user_zipcode << ".0"
-      @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
-      if @lafcenter.present?
-      else
-        @lafcenter = LafCenter.find_by(:id => 10)
+     zipcode = session["zipcode"]
+      primarycare = []
+      ServiceCenter.all.each do |center|
+        if center.description.match("primary care")
+          primarycare.push(center)
+        end
       end
-        message = "You may be in luck! You likely qualify for Medicaid. To access your Medicaid, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, type 'menu'."
+      primarycare.each do |center|
+        if center.zip.match(zpicode)
+          @medical_resources_zip.push(center)
+        end
+      end
+      if @medical_resources_zip.present?
+       @medical_center = @medical_resources_zip.first
+      else
+       @medical_center = primarycare.first
+      end
+      message = "You likely do not qualify for Medicaid. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. To check other programs, type 'menu'."
    end
 
    # medicaid user is not a US citizen
    if session["page"] == "medicaid_eligible_maybe" && session["counter"] == 3
     session["zipcode"] = params[:Body].strip
-     user_zipcode = session["zipcode"]
-     @zipcode = user_zipcode << ".0"
-     @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
-     if @lafcenter.present?
-     else
-       @lafcenter = LafCenter.find_by(:id => 10)
-     end
+    user_zipcode = session["zipcode"]
+    @zipcode = user_zipcode << ".0"
+    @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
+    if @lafcenter.present?
+    else
+      @lafcenter = LafCenter.find_by(:id => 10)
+    end
      message = "We cannot determine your eligibility at this time. To discuss your situation with a Medicaid expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, type 'menu'."
+   end
+
+   # HERE IS THE MEDICARE COST SHARING LOGIC
+   if session["page"] = "medicare_household_question" & session["counter"] == 2
+    session["household"] = params[:Body].strip
+    if session["household"] !~ /\D/  # returns true if all numbers
+      session["household"] = session["household"].to_i
+    else
+      session["household"] = session["household"].in_numbers
+    end
+    message = "How many people in your household receive Medicare?"
+    session["page"] = "medicare_household_question"
+   end
+
+   if session["page"] = "medicare_household_question" & session["counter"] == 3
+    session["medicare_number"] = params[:Body].strip
+    if session["medicare_number"] !~ /\D/  # returns true if all numbers
+      session["medicare_number"] = session["medicare_number"].to_i
+    else
+      session["medicare_number"] = session["medicare_number"].in_numbers
+    end
+
+    if
+      session["medicare_number"] == 0
+      message =
+    else
+      message = "What is you gross monthly income?"
+      session["page"] = "household_medicare_question"
    end
 
 
