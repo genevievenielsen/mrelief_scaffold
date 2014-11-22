@@ -88,8 +88,14 @@ class TwilioController < ApplicationController
       else
         session["age"] = session["age"].in_numbers
       end
+
+     if session["age"] >= 22
      message = "What is the number of people living in your household including yourself? Enter a number"
      session["page"] = "snap_household_question"
+    else
+      message = "What is your zipcode?"
+      session["page"] = "snap_ineligible"
+    end
    end
 
    if session["page"] == "snap_household_question" && session["counter"] == 5
@@ -215,6 +221,25 @@ class TwilioController < ApplicationController
       else
         message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, type 'menu'."
       end
+   end
+
+   # Food stamps user is younger than 22
+   if session["page"] == "snap_ineligible" && session["counter"] == 5
+      user_zipcode = session["zipcode"]
+      @zipcode = user_zipcode << ".0"
+      @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
+      if @lafcenter.present?
+      else
+        @lafcenter = LafCenter.find_by(:id => 10)
+      end
+      @food_resources = ServiceCenter.where(:description => "food pantry")
+      @food_resources_zip = @food_resources.where(:zip => user_zipcode)
+      if @food_resources_zip.present?
+        @food_pantry = @food_resources_zip.first
+      else
+        @food_pantry = @food_resources.first
+      end
+      message = "Based on your age, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, type 'menu'."
    end
 
    # Food stamps user is in school
