@@ -88,11 +88,10 @@ class TwilioController < ApplicationController
       else
         session["age"] = session["age"].in_numbers
       end
-
      if session["age"] >= 22
-     message = "What is the number of people living in your household including yourself? Enter a number"
-     session["page"] = "snap_household_question"
-    else
+      message = "What is the number of people living in your household including yourself? Enter a number"
+      session["page"] = "snap_household_question"
+     else
       message = "What is your zipcode?"
       session["page"] = "snap_ineligible"
     end

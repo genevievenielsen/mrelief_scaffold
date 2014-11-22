@@ -243,6 +243,9 @@ class AllCityProgramsController < ApplicationController
             elsif params[:citizen] == 'no'
               @eligible_snap = 'maybe'
             end
+            if age < 22
+              @eligible_snap = "no"
+            end
         end
 
 
