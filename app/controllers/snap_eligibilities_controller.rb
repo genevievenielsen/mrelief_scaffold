@@ -124,6 +124,10 @@ class SnapEligibilitiesController < ApplicationController
             end
       end
 
+      if age < 22
+        @eligible = "no"
+      end
+
   end
 
 
