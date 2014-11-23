@@ -207,6 +207,19 @@ a:hover {
   margin-top: 40px;
 }
 
+.blocktext {
+    display: block;
+    margin: 0 auto;
+    float: none !important;
+    text-align: center;
+}
+
+.team {
+  width: 150px;
+  height: auto;
+  border-radius: 150px;
+  border: 2px solid #e7e7e7;
+}
 
 .panel {
   /*width: 960px;*/
@@ -272,6 +285,14 @@ a:hover {
   padding: 0 20px 20px 20px;
 }
 
-.allcityheader{
+.allcityheader {
   color: #e74b14;
+}
+
+.col-center {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px;
+
 }
