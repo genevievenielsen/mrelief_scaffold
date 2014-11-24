@@ -589,6 +589,7 @@ class TwilioController < ApplicationController
          primarycare.push(center)
        end
      end
+     @medical_resources_zip = []
      primarycare.each do |center|
        if center.zip.match(zipcode)
          @medical_resources_zip.push(center)
