@@ -2,18 +2,11 @@ class TwilioController < ApplicationController
 
 
  # if they don't qualify under normal and are disabled but not receiving payments
- # lower bound age on food stamps?
-
 
 # add laf centers to rta
 # NO zipcode for rta ride free
 # NO purple binder
 
-# add Medicaid
-# Here is the message if they don't qualify: If  your family doesn't have health coverage, you may have to pay a fee and all health costs. Call (866) 311-1119 for your coverage options.
-
-
-# add Medicare cost sharing
 
   require 'numbers_in_words'
   require 'numbers_in_words/duck_punch' #see why later
@@ -435,7 +428,7 @@ class TwilioController < ApplicationController
       end
    end
 
-   # user is ineligible
+   # Medicaid user is ineligible
    if session["page"] == "medicaid_ineligible" && session["counter"] == 5
      session["zipcode"] = params[:Body].strip
      zipcode = session["zipcode"]
@@ -458,7 +451,7 @@ class TwilioController < ApplicationController
       message = "You likely do not qualify for Medicaid. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. To check other programs, type 'menu'."
    end
 
-   # medicaid user is not a US citizen
+   # Medicaid user is not a US citizen
    if session["page"] == "medicaid_eligible_maybe" && session["counter"] == 3
     session["zipcode"] = params[:Body].strip
     user_zipcode = session["zipcode"]
@@ -572,7 +565,6 @@ class TwilioController < ApplicationController
 
    if session["page"] == "medicare_eligible" && session["counter"] == 6
     session["zipcode"] = params[:Body].strip
-    #refer to community resource center
      user_zipcode = session["zipcode"]
      @zipcode = user_zipcode << ".0"
      @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
@@ -583,7 +575,7 @@ class TwilioController < ApplicationController
     message = "You may be in luck! You likely qualify for Medicare Cost Sharing. To access your Medicare Care Sharing, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, type 'menu'."
    end
 
-   # no one in the household is on medicare
+   # NO one in the household is on medicare
    if session["page"] == "medicare_ineligible" && session["counter"] == 4
       session["zipcode"] = params[:Body].strip
        zipcode = session["zipcode"]
@@ -605,8 +597,7 @@ class TwilioController < ApplicationController
        end
        message = "You likely do not qualify for Medicare Cost Sharing. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. To check other programs, type 'menu'."
     end
-
-    # do not be eligiblty cut offs
+    # Medicare cost sharing user does not meet eligiblty cut offs
     if session["page"] == "medicare_ineligible" && session["counter"] == 6
        session["zipcode"] = params[:Body].strip
        zipcode = session["zipcode"]
