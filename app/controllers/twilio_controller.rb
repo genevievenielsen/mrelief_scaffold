@@ -574,7 +574,7 @@ class TwilioController < ApplicationController
    end
 
    if session["page"] = "medicare_eligible" && session["counter"] == 6
-    zipcode = session["zipcode"]
+    session["zipcode"] = params[:Body].strip
     #refer to community resource center
     user_zipcode = session["zipcode"]
      @zipcode = user_zipcode << ".0"
