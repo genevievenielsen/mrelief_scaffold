@@ -573,18 +573,18 @@ class TwilioController < ApplicationController
       end
    end
 
-   if session["page"] = "medicare_eligible" && session["counter"] == 6
-    session["zipcode"] = params[:Body].strip
-    #refer to community resource center
-    user_zipcode = session["zipcode"]
-     @zipcode = user_zipcode << ".0"
-     @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
-     if @lafcenter.present?
-     else
-       @lafcenter = LafCenter.find_by(:id => 10)
-     end
-    message = "You may be in luck! You likely qualify for Medicare Cost Sharing. To access your Medicare Care Sharing, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, type 'menu'."
-   end
+   # if session["page"] = "medicare_eligible" && session["counter"] == 6
+   #  session["zipcode"] = params[:Body].strip
+   #  #refer to community resource center
+   #  user_zipcode = session["zipcode"]
+   #   @zipcode = user_zipcode << ".0"
+   #   @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
+   #   if @lafcenter.present?
+   #   else
+   #     @lafcenter = LafCenter.find_by(:id => 10)
+   #   end
+   #  message = "You may be in luck! You likely qualify for Medicare Cost Sharing. To access your Medicare Care Sharing, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, type 'menu'."
+   # end
 
    # # no one in the household is on medicare
    # if session["page"] == "medicare_ineligible" && session["counter"] == 4
