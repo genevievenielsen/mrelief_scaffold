@@ -389,38 +389,24 @@ class TwilioController < ApplicationController
       @transportation_center = transportation.first
      end
 
-     if session["counter"] == 4
-      message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
-
-     elsif session["counter"] == 5
-      message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
-
-     elsif session["counter"] == 6
-      message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
-
-     elsif session["counter"] == 7
-      message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
-
-     end
-
 
    end
 
    # RTA Ride Free user is below 65 & not disabled or receiving disability payment
-   # if session["page"] == "rta_ineligble" && session["counter"] == 4
-   #  message = "Based on your age, you do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
-   # end
 
-   # if session["page"] == "rta_ineligble" && session["counter"] == 5
-   #  message = "Based on your age, you likely do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
-   # end
-   # if session["page"] == "rta_ineligble" && session["counter"] == 6
-   #  message = "Based on your age, you likely do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
-   # end
-   # if session["page"] == "rta_ineligble" && session["counter"] == 7
-   #  message = "Based on your age, you likely do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
-   # end
+   if session["page"] == "rta_ineligble" && session["counter"] == 4
+    message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
 
+   elsif session["page"] == "rta_ineligble" && session["counter"] == 5
+    message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
+
+   elsif session["page"] == "rta_ineligble" && session["counter"] == 6
+    message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
+
+   elsif session["page"] == "rta_ineligble" && session["counter"] == 7
+    message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
+
+   end
 
    # HERE IS THE LOGIC FOR MEDICAID
    if session["page"] == "medicaid_citizen_question" && session["counter"] == 2
