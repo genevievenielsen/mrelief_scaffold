@@ -373,23 +373,13 @@ class TwilioController < ApplicationController
      else
       @transportation_center = transportation.first
      end
-     if session["counter"] == 4
-      message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
 
-     elsif session["counter"] == 5
+     if session["counter"] == 4 || session["counter"] == 5 || session["counter"] == 6 || session["counter"] == 7
       message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
-
-     elsif session["counter"] == 6
-      message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
-
-     elsif session["counter"] == 7
-      message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
-
      end
    end
 
    # RTA Ride Free user is below 65 & not disabled or receiving disability payment
-
 
 
    # HERE IS THE LOGIC FOR MEDICAID
