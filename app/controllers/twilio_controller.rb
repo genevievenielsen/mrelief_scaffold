@@ -344,6 +344,7 @@ class TwilioController < ApplicationController
          session["page"] = "rta_ineligble"
          message = "What is your zipcode?"
        end
+      end
     end
 
     if session["page"] == "rta_income_question" && session["counter"] == 6
