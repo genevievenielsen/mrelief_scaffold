@@ -483,21 +483,21 @@ class TwilioController < ApplicationController
     session["page"] = "medicare_number_question"
    end
 
-   # if session["page"] == "medicare_number_question" && session["counter"] == 3
-   #  session["medicare_number"] = params[:Body].strip
-   #  if session["medicare_number"] !~ /\D/  # returns true if all numbers
-   #    session["medicare_number"] = session["medicare_number"].to_i
-   #  else
-   #    session["medicare_number"] = session["medicare_number"].in_numbers
-   #  end
-   #  if session["medicare_number"] == 0
-   #    message = "What is your zipcode"
-   #    session["page"] = "medicare_ineligible"
-   #  else
-   #    message = "What is you gross monthly income? Enter a number"
-   #    session["page"] = "medicare_income_question"
-   #  end
-   # end
+   if session["page"] == "medicare_number_question" && session["counter"] == 3
+    session["medicare_number"] = params[:Body].strip
+    if session["medicare_number"] !~ /\D/  # returns true if all numbers
+      session["medicare_number"] = session["medicare_number"].to_i
+    else
+      session["medicare_number"] = session["medicare_number"].in_numbers
+    end
+    if session["medicare_number"] == 0
+      message = "What is your zipcode?"
+      session["page"] = "medicare_ineligible"
+    else
+      message = "What is you gross monthly income? Enter a number"
+      session["page"] = "medicare_income_question"
+    end
+   end
 
    # if session["page"] == "medicare_income_question" && session["counter"] == 4
    #   session["income"] = params[:Body].strip
