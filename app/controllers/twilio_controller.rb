@@ -277,6 +277,7 @@ class TwilioController < ApplicationController
     session["disabled"] = params[:Body].strip.downcase
     if session["disabled"] == "no"
       session["page"] = "rta_ineligble"
+      message = "What is your zipcode?"
     else
       message = "Are you receiving disability payments from from Social Security, the Railroad Retirement Board or Veterans Affairs? Enter 'yes' or 'no'"
       session["page"] = "snap_disability_payment"
@@ -290,6 +291,7 @@ class TwilioController < ApplicationController
       session["page"] = "rta_dependents_question"
      else
       session["page"] = "rta_ineligble"
+      message = "What is your zipcode?"
      end
    end
 
@@ -314,31 +316,6 @@ class TwilioController < ApplicationController
       session["page"] = "rta_income_question"
     end
 
-   if session["page"] == "rta_income_question" && session["counter"] == 6
-     session["income"] = params[:Body].strip
-     if session["income"] !~ /\D/
-       session["income"] = session["income"].to_i
-     else
-       if session["income"].include?("dollars")
-         session["income"].slice!"dollars"
-       end
-       if session["income"].include?("$")
-         session["income"].slice!"$"
-       end
-       if session["income"].include?(",")
-         session["income"].slice!","
-       end
-       session["income"] = session["income"].in_numbers
-     end
-      rta_dependent_no = session["dependents"].to_i
-      rta_gross_income = session["income"].to_i
-      rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => rta_dependent_no })
-      if rta_gross_income < rta_eligibility.rta_gross_income
-        message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  To check other programs, type 'menu'."
-      else
-        message = "Based on your household size and income, you likely do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
-      end
-   end
    if session["page"] == "rta_income_question" && session["counter"] == 4
      session["income"] = params[:Body].strip
      if session["income"] !~ /\D/
@@ -361,17 +338,88 @@ class TwilioController < ApplicationController
       if rta_gross_income < rta_eligibility.rta_gross_income
         message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  To check other programs, type 'menu'."
       else
-        message = "Based on your household size and income, you likely do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
+        session["page"] = "rta_ineligble"
+        message = "What is your zipcode?"
+      end
+   end
+   if session["page"] == "rta_income_question" && session["counter"] == 6
+     session["income"] = params[:Body].strip
+     if session["income"] !~ /\D/
+       session["income"] = session["income"].to_i
+     else
+       if session["income"].include?("dollars")
+         session["income"].slice!"dollars"
+       end
+       if session["income"].include?("$")
+         session["income"].slice!"$"
+       end
+       if session["income"].include?(",")
+         session["income"].slice!","
+       end
+       session["income"] = session["income"].in_numbers
+     end
+      rta_dependent_no = session["dependents"].to_i
+      rta_gross_income = session["income"].to_i
+      rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => rta_dependent_no })
+      if rta_gross_income < rta_eligibility.rta_gross_income
+        message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  To check other programs, type 'menu'."
+      else
+        session["page"] = "rta_ineligble"
+        message = "What is your zipcode?"
       end
    end
 
+   if session["page"] == "rta_ineligble"
+    session["zipcode"] = params[:Body].strip
+    zipcode = session["zipcode"]
+    transportation = []
+     ServiceCenter.all.each do |center|
+       if center.description.match("transportation")
+         transportation.push(center)
+       end
+     end
+     transportation.each do |center|
+       if center.zip.match(zipcode)
+         @transportation_resources_zip.push(center)
+       end
+     end
+     if @transportation_resources_zip.present?
+      @transportation_center = @transportation_resources_zip.first
+     else
+      @transportation_center = transportation.first
+     end
+
+     if session["counter"] == 4
+      message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
+
+     elsif session["counter"] == 5
+      message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
+
+     elsif session["counter"] == 6
+      message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
+
+     elsif session["counter"] == 7
+      message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
+
+     end
+
+
+   end
+
    # RTA Ride Free user is below 65 & not disabled or receiving disability payment
-   if session["page"] == "rta_ineligble" && session["counter"] == 3
-    message = "Based on your age, you do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
-   end
-   if session["page"] == "rta_ineligble" && session["counter"] == 4
-    message = "Based on your age, you likely do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
-   end
+   # if session["page"] == "rta_ineligble" && session["counter"] == 4
+   #  message = "Based on your age, you do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
+   # end
+
+   # if session["page"] == "rta_ineligble" && session["counter"] == 5
+   #  message = "Based on your age, you likely do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
+   # end
+   # if session["page"] == "rta_ineligble" && session["counter"] == 6
+   #  message = "Based on your age, you likely do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
+   # end
+   # if session["page"] == "rta_ineligble" && session["counter"] == 7
+   #  message = "Based on your age, you likely do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
+   # end
 
 
    # HERE IS THE LOGIC FOR MEDICAID
@@ -435,7 +483,7 @@ class TwilioController < ApplicationController
         end
       end
       primarycare.each do |center|
-        if center.zip.match(zpicode)
+        if center.zip.match(zipcode)
           @medical_resources_zip.push(center)
         end
       end
