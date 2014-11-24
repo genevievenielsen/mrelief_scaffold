@@ -499,25 +499,25 @@ class TwilioController < ApplicationController
     end
    end
 
-   # if session["page"] == "medicare_income_question" && session["counter"] == 4
-   #   session["income"] = params[:Body].strip
-   #   if session["income"] !~ /\D/
-   #     session["income"] = session["income"].to_i
-   #   else
-   #     if session["income"].include?("dollars")
-   #       session["income"].slice!"dollars"
-   #     end
-   #     if session["income"].include?("$")
-   #       session["income"].slice!"$"
-   #     end
-   #     if session["income"].include?(",")
-   #       session["income"].slice!","
-   #     end
-   #     session["income"] = session["income"].in_numbers
-   #   end
-   #   message = "Please estimate the value of your assets.  This includes such items as: money in checking and savings accounts; stocks, bonds, savings certificates, and other securities; farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property. Please exclude the value of your home and car. Enter a number"
-   #   session["page"] = "medicare_assests_question"
-   # end
+   if session["page"] == "medicare_income_question" && session["counter"] == 4
+     session["income"] = params[:Body].strip
+     if session["income"] !~ /\D/
+       session["income"] = session["income"].to_i
+     else
+       if session["income"].include?("dollars")
+         session["income"].slice!"dollars"
+       end
+       if session["income"].include?("$")
+         session["income"].slice!"$"
+       end
+       if session["income"].include?(",")
+         session["income"].slice!","
+       end
+       session["income"] = session["income"].in_numbers
+     end
+     message = "Please estimate the value of your assets.  This includes such items as: money in checking and savings accounts; stocks, bonds, savings certificates, and other securities; farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property. Please exclude the value of your home and car. Enter a number"
+     session["page"] = "medicare_assests_question"
+   end
 
    # if session["page"] == "medicare_assests_question" && session["counter"] == 5
    #   session["assets"] = params[:Body].strip
