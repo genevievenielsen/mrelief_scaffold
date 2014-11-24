@@ -880,6 +880,13 @@ p.location = "chicago"
 p.save
 
 p = Program.new
+p.url = "aabd_cashes/new"
+p.name = "AABD Cash Assistance"
+p.description = "Cash Assistance for the Elderly and Disabled"
+p.location = "chicago"
+p.save
+
+p = Program.new
 p.url = "/all_city_programs/new"
 p.name = "All City Programs"
 p.description = "All Chicago Programs within mRelief"

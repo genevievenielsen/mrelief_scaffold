@@ -355,6 +355,7 @@ class TwilioController < ApplicationController
          message = "What is your zipcode?"
        end
     end
+
    if session["page"] == "rta_ineligble"
     session["zipcode"] = params[:Body].strip
     zipcode = session["zipcode"]
