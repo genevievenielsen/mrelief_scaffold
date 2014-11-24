@@ -378,6 +378,7 @@ class TwilioController < ApplicationController
          transportation.push(center)
        end
      end
+     @transportation_resources_zip = []
      transportation.each do |center|
        if center.zip.match(zipcode)
          @transportation_resources_zip.push(center)
@@ -468,6 +469,7 @@ class TwilioController < ApplicationController
           primarycare.push(center)
         end
       end
+      @medical_resources_zip = []
       primarycare.each do |center|
         if center.zip.match(zipcode)
           @medical_resources_zip.push(center)
