@@ -570,7 +570,7 @@ class TwilioController < ApplicationController
      end
    end
 
-   if session["page"] = "medicare_eligible" && session["counter"] == 6
+   if session["page"] == "medicare_eligible" && session["counter"] == 6
     session["zipcode"] = params[:Body].strip
     #refer to community resource center
      user_zipcode = session["zipcode"]
@@ -583,28 +583,28 @@ class TwilioController < ApplicationController
     message = "You may be in luck! You likely qualify for Medicare Cost Sharing. To access your Medicare Care Sharing, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, type 'menu'."
    end
 
-   # # no one in the household is on medicare
-   # if session["page"] == "medicare_ineligible" && session["counter"] == 4
-   #    session["zipcode"] = params[:Body].strip
-   #     zipcode = session["zipcode"]
-   #     primarycare = []
-   #     ServiceCenter.all.each do |center|
-   #       if center.description.match("primary care")
-   #         primarycare.push(center)
-   #       end
-   #     end
-   #     primarycare.each do |center|
-   #       if center.zip.match(zipcode)
-   #         @medical_resources_zip.push(center)
-   #       end
-   #     end
-   #     if @medical_resources_zip.present?
-   #      @medical_center = @medical_resources_zip.first
-   #     else
-   #      @medical_center = primarycare.first
-   #     end
-   #     message = "You likely do not qualify for Medicare Cost Sharing. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. To check other programs, type 'menu'."
-   #  end
+   # no one in the household is on medicare
+   if session["page"] == "medicare_ineligible" && session["counter"] == 4
+      session["zipcode"] = params[:Body].strip
+       zipcode = session["zipcode"]
+       primarycare = []
+       ServiceCenter.all.each do |center|
+         if center.description.match("primary care")
+           primarycare.push(center)
+         end
+       end
+       primarycare.each do |center|
+         if center.zip.match(zipcode)
+           @medical_resources_zip.push(center)
+         end
+       end
+       if @medical_resources_zip.present?
+        @medical_center = @medical_resources_zip.first
+       else
+        @medical_center = primarycare.first
+       end
+       message = "You likely do not qualify for Medicare Cost Sharing. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. To check other programs, type 'menu'."
+    end
 
     # do not be eligiblty cut offs
     if session["page"] == "medicare_ineligible" && session["counter"] == 6
