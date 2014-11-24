@@ -472,16 +472,16 @@ class TwilioController < ApplicationController
    end
 
    # HERE IS THE MEDICARE COST SHARING LOGIC
-   # if session["page"] == "medicare_household_question" && session["counter"] == 2
-   #  session["household"] = params[:Body].strip
-   #  if session["household"] !~ /\D/  # returns true if all numbers
-   #    session["household"] = session["household"].to_i
-   #  else
-   #    session["household"] = session["household"].in_numbers
-   #  end
-   #  message = "How many people in your household receive Medicare?"
-   #  session["page"] = "medicare_number_question"
-   # end
+   if session["page"] == "medicare_household_question" && session["counter"] == 2
+    session["household"] = params[:Body].strip
+    if session["household"] !~ /\D/  # returns true if all numbers
+      session["household"] = session["household"].to_i
+    else
+      session["household"] = session["household"].in_numbers
+    end
+    message = "How many people in your household receive Medicare?"
+    session["page"] = "medicare_number_question"
+   end
 
    # if session["page"] == "medicare_number_question" && session["counter"] == 3
    #  session["medicare_number"] = params[:Body].strip
