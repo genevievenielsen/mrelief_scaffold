@@ -118,7 +118,7 @@ class TwilioController < ApplicationController
      end
    end
 
-   if session["page"] == "snap_disability_payment"
+   if session["page"] == "snap_disability_payment" && session["counter"] == 8
      session["disability_payment"] = params[:Body].strip
      message = "What is the gross monthly income of all people living in your household including yourself? Income includes social security, child support, and unemployment insurance before any deductions."
      if session["disability_payment"] == "yes"
@@ -127,7 +127,7 @@ class TwilioController < ApplicationController
      session["page"] = "snap_income_question_disability"
    end
 
-   if session["page"] == "snap_income_question"
+   if session["page"] == "snap_income_question" && session["counter"] == 8
      session["income"] = params[:Body].strip
      if session["income"] !~ /\D/
        session["income"] = session["income"].to_i
@@ -165,15 +165,55 @@ class TwilioController < ApplicationController
       else
         @food_pantry = @food_resources.first
       end
-       if session["counter"] == 8 || session["counter"] == 9
-        if snap_gross_income < snap_eligibility.snap_gross_income
-          message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, type 'menu'."
-        else
-          message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, type 'menu'."
-        end
+      if snap_gross_income < snap_eligibility.snap_gross_income
+        message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, type 'menu'."
+      else
+        message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, type 'menu'."
       end
    end
-
+   if session["page"] == "snap_income_question_disability" && session["counter"] == 9
+     session["income"] = params[:Body].strip
+     if session["income"] !~ /\D/
+       session["income"] = session["income"].to_i
+     else
+       if session["income"].include?("dollars")
+         session["income"].slice!"dollars"
+       end
+       if session["income"].include?("$")
+         session["income"].slice!"$"
+       end
+       if session["income"].include?(",")
+         session["income"].slice!","
+       end
+       session["income"] = session["income"].in_numbers
+     end
+     snap_dependent_no = session["dependents"].to_i
+     snap_gross_income = session["income"].to_i
+      if @disability.present?
+        snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => snap_dependent_no })
+      else
+        snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => snap_dependent_no })
+      end
+      user_zipcode = session["zipcode"]
+      @zipcode = user_zipcode << ".0"
+      @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
+      if @lafcenter.present?
+      else
+        @lafcenter = LafCenter.find_by(:id => 10)
+      end
+      @food_resources = ServiceCenter.where(:description => "food pantry")
+      @food_resources_zip = @food_resources.where(:zip => user_zipcode)
+      if @food_resources_zip.present?
+        @food_pantry = @food_resources_zip.first
+      else
+        @food_pantry = @food_resources.first
+      end
+      if snap_gross_income < snap_eligibility.snap_gross_income
+        message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, type 'menu'."
+      else
+        message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, type 'menu'."
+      end
+   end
 
    # Food stamps user is younger than 22
    if session["page"] == "snap_ineligible" && session["counter"] == 5
