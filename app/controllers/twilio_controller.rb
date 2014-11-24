@@ -519,59 +519,59 @@ class TwilioController < ApplicationController
      session["page"] = "medicare_assests_question"
    end
 
-   # if session["page"] == "medicare_assests_question" && session["counter"] == 5
-   #   session["assets"] = params[:Body].strip
-   #   if session["assets"] !~ /\D/
-   #     session["assets"] = session["assets"].to_i
-   #   else
-   #     if session["assets"].include?("dollars")
-   #       session["assets"].slice!"dollars"
-   #     end
-   #     if session["assets"].include?("$")
-   #       session["assets"].slice!"$"
-   #     end
-   #     if session["assets"].include?(",")
-   #       session["assets"].slice!","
-   #     end
-   #     session["assets"] = session["assets"].in_numbers
-   #   end
+   if session["page"] == "medicare_assests_question" && session["counter"] == 5
+     session["assets"] = params[:Body].strip
+     if session["assets"] !~ /\D/
+       session["assets"] = session["assets"].to_i
+     else
+       if session["assets"].include?("dollars")
+         session["assets"].slice!"dollars"
+       end
+       if session["assets"].include?("$")
+         session["assets"].slice!"$"
+       end
+       if session["assets"].include?(",")
+         session["assets"].slice!","
+       end
+       session["assets"] = session["assets"].in_numbers
+     end
 
-   #   assets = session["assets"]
-   #   household_size = session["household"]
-   #   medicare_household_size = session["medicare_number"]
-   #   monthly_income = session["income"]
+     assets = session["assets"]
+     household_size = session["household"]
+     medicare_household_size = session["medicare_number"]
+     monthly_income = session["income"]
 
-   #   if medicare_household_size == 0
-   #    @eligible = "no"
-   #   elsif household_size == 1 && assets > 7160
-   #    @eligible = "no"
-   #   elsif household_size > 1 && assets > 10750
-   #    @eligible = "no"
-   #   else
-   #    if medicare_household_size == 1
-   #      monthly_income = monthly_income - 25
-   #    elsif medicare_household_size == 2
-   #      monthly_income = monthly_income - 50
-   #    end
-   #    medicare_sharing_eligibility = MedicareCostSharing.find_by({ :household_size => household_size })
-   #    if monthly_income < medicare_sharing_eligibility.premium_only
-   #      @eligible = "yes"
-   #      if monthly_income < medicare_sharing_eligibility.medicare_cost_sharing
-   #        @eligible_p_d_c = "yes"
-   #      elsif monthly_income >= medicare_sharing_eligibility.medicare_cost_sharing
-   #        @eligible_p = "yes"
-   #      end
-   #    end
-   #    end
-   #   if @eligible == "yes"
-   #    message = "What is your zipcode?"
-   #    session["page"] = "medicare_eligible"
+     if medicare_household_size == 0
+      @eligible = "no"
+     elsif household_size == 1 && assets > 7160
+      @eligible = "no"
+     elsif household_size > 1 && assets > 10750
+      @eligible = "no"
+     else
+      if medicare_household_size == 1
+        monthly_income = monthly_income - 25
+      elsif medicare_household_size == 2
+        monthly_income = monthly_income - 50
+      end
+      medicare_sharing_eligibility = MedicareCostSharing.find_by({ :household_size => household_size })
+      if monthly_income < medicare_sharing_eligibility.premium_only
+        @eligible = "yes"
+        if monthly_income < medicare_sharing_eligibility.medicare_cost_sharing
+          @eligible_p_d_c = "yes"
+        elsif monthly_income >= medicare_sharing_eligibility.medicare_cost_sharing
+          @eligible_p = "yes"
+        end
+      end
+      end
+     if @eligible == "yes"
+      message = "What is your zipcode?"
+      session["page"] = "medicare_eligible"
 
-   #   elsif @eligible == "no"
-   #    message = "What is your zipcode?"
-   #    session["page"] = "medicare_ineligible"
-   #    end
-   # end
+     elsif @eligible == "no"
+      message = "What is your zipcode?"
+      session["page"] = "medicare_ineligible"
+      end
+   end
 
    # if session["page"] = "medicare_eligible" && session["counter"] == 6
    #  zipcode = session["zipcode"]
