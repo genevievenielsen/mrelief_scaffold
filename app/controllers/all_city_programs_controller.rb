@@ -306,6 +306,40 @@ class AllCityProgramsController < ApplicationController
         @domestic_violence = "yes"
       end
 
+      housing = []
+      ServiceCenter.all.each do |center|
+        if center.description.match("housing")
+          housing.push(center)
+        end
+      end
+
+      @pb_zipcode = @user_zipcode.chomp(".0")
+        @housing_resources = housing
+        @housing_resources_zip = []
+
+        housing.each do |center|
+          if center.zip.match(@pb_zipcode)
+            @housing_resources_zip.push(center)
+          end
+        end
+
+        #in this case there are 2 housing centers in the user's zip
+        if @housing_resources_zip.count >= 2
+           @housing_resources = @housing_resources_zip
+        end
+
+        #in this case there is 1 aabd center in the user's zip
+        if @housing_resources_zip.count == 1
+           @housing_resources_first = @housing_resources_zip.first
+           @housing_resources_second = @housing_resources.first
+        end
+
+        #in this caser there are no aabd centers in the user's zip
+        if  @housing_resources_zip.count == 0
+            @housing_resources_first = @housing_resources.first
+            @housing_resources_second = @housing_resources.second
+        end
+
         #here is the logic for rta ride free
        rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => dependent_no })
 
@@ -466,16 +500,6 @@ class AllCityProgramsController < ApplicationController
 
     if params[:citizen] == 'no'
       @aabd_eligible= 'maybe'
-    end
-
-    @user_zipcode = params[:zipcode]
-    @zipcode = @user_zipcode << ".0"
-    @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
-
-    if @lafcenter.present?
-    else
-      @lafcenter = LafCenter.find_by(:id => 10)
-      @laf_disclaimer = "We do not have an estimation of the nearest center that is in range for you at this time. But we recommend going to the center below."
     end
 
     aabd = []

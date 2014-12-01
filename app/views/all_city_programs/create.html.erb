@@ -87,10 +87,17 @@
               <p>You must be able to prove this by providing a report from the police department or a document showing an order of protection/restraining order.</p>
             <% end %>
             <p>The final decision will be made one-on-one by the case manager.</p>
-            <%= link_to "Click Here for more information", "http://www.cityofchicago.org/city/en/depts/fss/provdrs/serv/svcs/community_servicecenterlocations.html", :class => "btn btn-success btn-resolution" %>
+            <div class="sectiondivider"></div>
+            <% if @laf_disclaimer.present?  %>
+                <h5><%= @laf_disclaimer %></h5>
+            <% else %>
+              <h5>Based on your zipcode, here is the nearest Community Service Center:</h5>
+            <% end %>
+            <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %>| <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
             <p>or call 3-1-1.</p>
           </li>
         <% end %>
+
         <% if @aabd_eligible == "yes" %>
           <li class="list-group-item">
             <h3 class="allcityheader">AABD Cash Assistance</h3>
@@ -153,6 +160,11 @@
           <h3 class="allcityheader"> Rental Assistance</h3>
          <p>According to the income guidelines of Rental Assistance, you make too much money to apply. However, in some cases the city may make an exception. Applications can be filed at any of the City’s six Community Service Centers. </p>
           <div class="sectiondivider"></div>
+          <% if @laf_disclaimer.present?  %>
+              <h5><%= @laf_disclaimer %></h5>
+          <% else %>
+            <h5>Based on your zipcode, here is the nearest Community Service Center:</h5>
+          <% end %>
          <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %>| <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
         </li>
       <% end %>
@@ -316,11 +328,20 @@
 
       <% if @rental_eligible == "no" %>
       <li class="list-group-item">
-        <h3 class="allcityheader">Medicaid</h3>
-        <p>
-          The Chicago Housing Authority Waitlist Lottery registration is open now through November 24 for the three types of housing opportunities: Public Housing, Housing Choice Voucher (Tenant-Based Voucher or Section 8) and Property Rental Assistance (Project-Based Voucher). Online registration is free, and easy to use. The registration form will be available in several different languages.
-          <%= link_to "Click Here", "www.thechawaitlist.org", :class => "btn btn-success btn-resolution" %> or call 312.971.7700 for more information.
-        </p>
+        <h3 class="allcityheader">Rental Assistance</h3>
+        <h4>Some additional resources from Purple Binder:</h4>
+
+        <% if @housing_resources_zip.count >= 2 %>
+        <p><%= @housing_resources_zip.first.name %> | <%= @housing_resources_zip.first.street %>  <%= @housing_resources_zip.first.city %> <%= @housing_resources_zip.first.state %>, <%= @housing_resources_zip.first.zip %> | <%= @housing_resources_zip.first.phone %> </p>
+
+        <p><%= @housing_resources_zip.second.name %> | <%= @housing_resources_zip.second.street %>  <%= @housing_resources_zip.second.city %> <%= @housing_resources_zip.second.state %>, <%= @housing_resources_zip.second.zip %> | <%= @housing_resources_zip.second.phone %> </p>
+        <% end %>
+
+        <% if @housing_resources_first.present? %>
+        <p><%= @housing_resources_first.name %> | <%= @housing_resources_first.street %>  <%= @housing_resources_first.city %> <%= @housing_resources_first.state %>, <%= @housing_resources_first.zip %> | <%= @housing_resources_first.phone %> </p>
+
+        <p><%= @housing_resources_second.name %> | <%= @housing_resources_second.street %>  <%= @housing_resources_second.city %> <%= @housing_resources_second.state %>, <%= @housing_resources_second.zip %> | <%= @housing_resources_second.phone %> </p>
+        <% end %>
       </li>
       <% end %>
 
