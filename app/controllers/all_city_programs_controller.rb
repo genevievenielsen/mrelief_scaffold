@@ -45,6 +45,30 @@ class AllCityProgramsController < ApplicationController
       monthly_gross_income = monthly_gross_income.in_numbers
     end
 
+    net_income = params[:net_income]
+    net_income = net_income.gsub(/[^0-9\.]/, '')
+
+    if net_income !~ /\D/
+      net_income = net_income.to_i
+    else
+      if net_income.include?("dollars")
+        net_income.slice!"dollars"
+      end
+      net_income = net_income.in_numbers
+    end
+
+    monthly_benefits = params[:monthly_benefits]
+    monthly_benefits = monthly_benefits.gsub(/[^0-9\.]/, '')
+
+    if monthly_benefits !~ /\D/
+      monthly_benefits = monthly_benefits.to_i
+    else
+      if monthly_benefits.include?("dollars")
+        monthly_benefits.slice!"dollars"
+      end
+      monthly_benefits = monthly_benefits.in_numbers
+    end
+
     ninety_day_gross_income = params[:ninety_day_gross_income]
     ninety_day_gross_income = ninety_day_gross_income.gsub(/[^0-9\.]/, '')
 
@@ -399,6 +423,103 @@ class AllCityProgramsController < ApplicationController
 
     end #this ends the present if statement
 
+    # here is the logic for aabd
+    if params[:disabled] != 'none' || age > 65
+      if dependent_no  == 1
+        if net_income + monthly_benefits < 821.38
+          if assets < 2000
+            @aabd_eligible = 'yes'
+          else # exceed asset limit
+            @aabd_eligible = 'no'
+          end
+
+        else # exceed income limit
+          @aabd_eligible = "no"
+        end
+
+      elsif dependent_no  == 2
+        if net_income + monthly_benefits < 724.38
+          if assets < 3000
+            @aabd_eligible= 'yes'
+          else # exceed asset limit
+            @aabd_eligible= 'no'
+          end
+
+        else # exceed income limit
+          @aabd_eligible= "no"
+        end
+
+      else #household size is greater than 2
+        if net_income + monthly_benefits < 724.38
+          @aabd_eligible= 'maybe'
+        else
+          @aabd_eligible= 'no'
+
+        end
+      end
+
+    else
+      @aabd_eligible = 'no'
+    end
+    # if they are NOT receiving payment and are NOT over 65, not eligible
+
+
+    if params[:citizen] == 'no'
+      @aabd_eligible= 'maybe'
+    end
+
+    @user_zipcode = params[:zipcode]
+    @zipcode = @user_zipcode << ".0"
+    @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
+
+    if @lafcenter.present?
+    else
+      @lafcenter = LafCenter.find_by(:id => 10)
+      @laf_disclaimer = "We do not have an estimation of the nearest center that is in range for you at this time. But we recommend going to the center below."
+    end
+
+    aabd = []
+    ServiceCenter.all.each do |center|
+      if center.description.match("senior services")
+        unless center.description.match("child care")
+        aabd.push(center)
+        end
+      end
+      if center.description.match("disabled")
+        unless center.description.match("child care")
+        aabd.push(center)
+        end
+      end
+    end
+
+    @pb_zipcode = @user_zipcode.chomp(".0")
+      @aabd_resources = aabd
+      @aabd_resources_zip = []
+
+      aabd.each do |center|
+        if center.zip.match(@pb_zipcode)
+          @aabd_resources_zip.push(center)
+        end
+      end
+
+      #in this case there are 2 aabd centers in the user's zip
+      if @aabd_resources_zip.count >= 2
+         @aabd_resources = @aabd_resources_zip
+      end
+
+      #in this case there is 1 aabd center in the user's zip
+      if @aabd_resources_zip.count == 1
+         @aabd_resources_first = @aabd_resources_zip.first
+         @aabd_resources_second = @aabd_resources.first
+      end
+
+      #in this caser there are no aabd centers in the user's zip
+      if  @aabd_resources_zip.count == 0
+          @aabd_resources_first = @aabd_resources.first
+          @aabd_resources_second = @aabd_resources.second
+      end
+
+
     @eligible_count = 0
     if  @eligible_snap == "yes"
       @eligible_count = @eligible_count + 1
@@ -417,7 +538,10 @@ class AllCityProgramsController < ApplicationController
     if @eligible_medicare_cost_sharing == 'yes'
       @eligible_count = @eligible_count + 1
     end
-    if @rental_eligible== 'yes'
+    if @rental_eligible == 'yes'
+      @eligible_count = @eligible_count + 1
+    end
+    if @aabd_eligible == 'yes'
       @eligible_count = @eligible_count + 1
     end
 
@@ -442,6 +566,9 @@ class AllCityProgramsController < ApplicationController
     if @rental_eligible== 'no'
       @ineligible_count = @ineligible_count + 1
     end
+    if @aabd_eligible== 'no'
+      @ineligible_count = @ineligible_count + 1
+    end
 
 
 
@@ -449,9 +576,13 @@ class AllCityProgramsController < ApplicationController
     if  @eligible_snap == "maybe"
       @indeterminate_count = @indeterminate_count + 1
     end
-
-
     if @eligible_medicaid == 'maybe'
+      @indeterminate_count = @indeterminate_count + 1
+    end
+    if @rental_eligible == "maybe"
+      @indeterminate_count = @indeterminate_count + 1
+    end
+    if @aabd_eligible == 'maybe'
       @indeterminate_count = @indeterminate_count + 1
     end
 
