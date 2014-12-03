@@ -10,6 +10,10 @@ class AllCityProgramsController < ApplicationController
     @all_city_program = AllCityProgram.new
   end
 
+  def new_with_tanif
+    @all_city_program = AllCityProgram.new
+  end
+
 
   # POST /all_city_programs
   # POST /all_city_programs.json

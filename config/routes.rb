@@ -25,6 +25,10 @@ Rails.application.routes.draw do
 
   get("/twilio", { :controller => "send_text", :action => "send_text_message"})
 
+  get('/all_city_programs_with_tanif', { :controller => 'all_city_programs', :action => 'new_with_tanif' })
+  post('/all_city_programs_with_tanif', { :controller => 'all_city_programs', :action => 'create_with_tanif' })
+
+
 
   resources :contact, only: [:index, :create]
 
