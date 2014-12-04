@@ -102,6 +102,7 @@
                     if params[:citizen] == "no"
                       @eligible_tanif = "maybe"
                     else
+
                       if params[:highschool] == "no" && household_size == 2
                         @eligible_tanif = "no"
                       elsif params[:highschool] == "no" && household_size > 2
@@ -109,6 +110,7 @@
                       else
                         @eligible_tanif = "yes"
                       end
+
                     end
                   end
                  # end
