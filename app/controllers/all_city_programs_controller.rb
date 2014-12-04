@@ -1205,9 +1205,9 @@ class AllCityProgramsController < ApplicationController
                         if params[:citizen] == "no"
                           @eligible_tanif = "maybe"
                         else
-                          if params[:highschool] == "no" && household_size == 2
+                          if params[:highschool] == "no" && dependent_no == 2
                             @eligible_tanif = "no"
-                          elsif params[:highschool] == "no" && household_size > 2
+                          elsif params[:highschool] == "no" && dependent_no > 2
                             @eligible_tanif = "maybe"
                           else
                             @eligible_tanif = "yes"
