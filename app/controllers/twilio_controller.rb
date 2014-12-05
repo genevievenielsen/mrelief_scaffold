@@ -20,11 +20,11 @@ class TwilioController < ApplicationController
   end
 
    if session["counter"] == 0
-    message = "Welcome to mRelief! We help you check your eligibility for benefits. For foodstamps, type 'food'. For RTA ride free, type 'ride.' For Medicaid, type 'medicaid.' For Medicare Cost Sharing, type 'medicare.' If you make a mistake, send the message 'reset'."
+    message = "Welcome to mRelief! We help you check your eligibility for benefits. For foodstamps, text 'food'. For RTA ride free, text 'ride.' For Medicaid, text 'medicaid.' For Medicare Cost Sharing, text 'medicare.' If you make a mistake, send the message 'reset'."
    end
 
    if params[:Body].strip.downcase == "menu"
-      message = "For foodstamps, type 'food'. For RTA ride free, type 'ride.' For Medicaid, type 'medicaid.' For Medicare Cost Sharing, type 'medicare.' If you make a mistake, send the message 'reset'."
+      message = "For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.' If you make a mistake, send the message 'reset'."
    end
 
    if params[:Body].strip.downcase == "food"
@@ -47,6 +47,12 @@ class TwilioController < ApplicationController
 
    if params[:Body].strip.downcase == "medicare"
       message = "What is your household size? Please include yourself, your spouse, your children under 18 who live with you."
+      session["page"] = "medicare_household_question"
+      session["counter"] = 1
+   end
+
+   if params[:Body].strip.downcase == "med"
+      message = "For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
       session["page"] = "medicare_household_question"
       session["counter"] = 1
    end
@@ -166,9 +172,9 @@ class TwilioController < ApplicationController
         @food_pantry = @food_resources.first
       end
       if snap_gross_income < snap_eligibility.snap_gross_income
-        message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, type 'menu'."
+        message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, text 'menu'."
       else
-        message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, type 'menu'."
+        message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, text 'menu'."
       end
    end
    if session["page"] == "snap_income_question_disability" && session["counter"] == 9
@@ -209,9 +215,9 @@ class TwilioController < ApplicationController
         @food_pantry = @food_resources.first
       end
       if snap_gross_income < snap_eligibility.snap_gross_income
-        message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, type 'menu'."
+        message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, text 'menu'."
       else
-        message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, type 'menu'."
+        message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, text 'menu'."
       end
    end
 
@@ -231,7 +237,7 @@ class TwilioController < ApplicationController
       else
         @food_pantry = @food_resources.first
       end
-      message = "Based on your age, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, type 'menu'."
+      message = "Based on your age, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, text 'menu'."
    end
 
    # Food stamps user is in school
@@ -244,7 +250,7 @@ class TwilioController < ApplicationController
      else
        @lafcenter = LafCenter.find_by(:id => 10)
      end
-     message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, type 'menu'."
+     message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, text 'menu'."
    end
 
    # Food stamps user is not a US citizen
@@ -257,7 +263,7 @@ class TwilioController < ApplicationController
      else
        @lafcenter = LafCenter.find_by(:id => 10)
      end
-     message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, type 'menu'."
+     message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, text 'menu'."
    end
 
 
@@ -339,7 +345,7 @@ class TwilioController < ApplicationController
     if session["page"] == "rta_income_question" && session["counter"] == 4
      if session["counter"] == 4
        if rta_gross_income < rta_eligibility.rta_gross_income
-         message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  To check other programs, type 'menu'."
+         message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  To check other programs, text 'menu'."
        else
          session["page"] = "rta_ineligble"
          message = "What is your zipcode?"
@@ -349,7 +355,7 @@ class TwilioController < ApplicationController
 
     if session["page"] == "rta_income_question" && session["counter"] == 6
        if rta_gross_income < rta_eligibility.rta_gross_income
-         message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  To check other programs, type 'menu'."
+         message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  To check other programs, text 'menu'."
        else
          session["page"] = "rta_ineligble"
          message = "What is your zipcode?"
