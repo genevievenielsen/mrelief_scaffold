@@ -15,6 +15,11 @@ class TwilioController < ApplicationController
 
   session["counter"] ||= 0
 
+
+  if params[:Body].include?('"')
+    params[:Body] = params[:Body].tr('"', '')
+  end
+
   if params[:Body].strip.downcase == "reset"
     session["counter"] = 0
   end
@@ -22,41 +27,39 @@ class TwilioController < ApplicationController
    if session["counter"] == 0
     message = "Welcome to mRelief! We help you check your eligibility for benefits. For foodstamps, text 'food'. For RTA ride free, text 'ride.' For Medicaid, text 'medicaid.' For Medicare Cost Sharing, text 'medicare.' If you make a mistake, send the message 'reset'."
    end
-
    if params[:Body].strip.downcase == "menu"
       message = "For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.' If you make a mistake, send the message 'reset'."
    end
-
    if params[:Body].strip.downcase == "food"
       message = "Are you enrolled in a college or institution of higher education? Enter 'yes' or 'no'"
       session["page"] = "snap_college_question"
       session["counter"] = 1
    end
-
    if params[:Body].strip.downcase == "ride"
       message = "Are you 65 years old or older? Enter 'yes' or 'no'"
       session["page"] = "rta_age_question"
       session["counter"] = 1
    end
-
    if params[:Body].strip.downcase == "medicaid"
       message = "Are you a citizen of the United States? Enter 'yes' or 'no'"
       session["page"] = "medicaid_citizen_question"
       session["counter"] = 1
    end
-
    if params[:Body].strip.downcase == "medicare"
       message = "What is your household size? Please include yourself, your spouse, your children under 18 who live with you."
       session["page"] = "medicare_household_question"
       session["counter"] = 1
    end
-
    if params[:Body].strip.downcase == "med"
       message = "For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
       session["page"] = "medicare_household_question"
       session["counter"] = 1
    end
-   if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("medicaid") || params[:Body].strip.downcase.include?("ride")
+   if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("medicaid") || params[:Body].strip.downcase.include?("ride") || params[:Body].strip.downcase.include?("medicare")
+      message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'  "
+      session["counter"] = 1
+   end
+   if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("medicaid") && params[:Body].strip.downcase.include?("ride")
       message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'  "
       session["counter"] = 1
    end
@@ -464,7 +467,7 @@ class TwilioController < ApplicationController
        @medical_center = primarycare.first
       end
       message = "You likely do not qualify for Medicaid. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. To check other programs, type 'menu'."
-   end
+    end
 
    # Medicaid user is not a US citizen
    if session["page"] == "medicaid_eligible_maybe" && session["counter"] == 3
