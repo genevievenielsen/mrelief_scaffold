@@ -20,6 +20,10 @@ class TwilioController < ApplicationController
     params[:Body] = params[:Body].tr('"', '')
   end
 
+  if params[:Body].include?("'")
+    params[:Body] = params[:Body].tr("'", "")
+  end
+
   if params[:Body].strip.downcase == "reset"
     session["counter"] = 0
   end
