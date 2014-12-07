@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'set_language/english'
+
+  get 'set_language/spanish'
+
+  get 'set_language/polish'
+
   resources :aabd_cashes
 
   resources :tanifs
