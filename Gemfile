@@ -1,3 +1,5 @@
+source "https://rubygems.org"
+
 ruby "2.1.2"
 
 gem "rest-client"
@@ -66,4 +68,10 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# translation tools
+group :development do
+  #gem 'rake'
+  gem 'r18n-rails'
+  gem 'html2haml'
 
+end
