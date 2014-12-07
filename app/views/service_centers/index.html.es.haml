@@ -1,0 +1,31 @@
+%h1 Listing service_centers
+%table
+  %thead
+    %tr
+      %th Name
+      %th Latitude
+      %th Longitude
+      %th Street
+      %th City
+      %th State
+      %th Zip
+      %th Phone
+      %th Organization
+      %th{:colspan => "3"}
+  %tbody
+    - @service_centers.each do |service_center|
+      %tr
+        %td= service_center.name
+        %td= service_center.latitude
+        %td= service_center.longitude
+        %td= service_center.street
+        %td= service_center.city
+        %td= service_center.state
+        %td= service_center.zip
+        %td= service_center.phone
+        %td= service_center.organization
+        %td= link_to 'Show', service_center
+        %td= link_to 'Edit', edit_service_center_path(service_center)
+        %td= link_to 'Destroy', service_center, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Service center', new_service_center_path

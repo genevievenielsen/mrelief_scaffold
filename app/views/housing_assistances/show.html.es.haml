@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %strong Housing dependent no:
+  = @housing_assistance.housing_dependent_no
+%p
+  %strong Housing gross income:
+  = @housing_assistance.housing_gross_income
+= link_to 'Edit', edit_housing_assistance_path(@housing_assistance)
+|
+\#{link_to 'Back', housing_assistances_path}

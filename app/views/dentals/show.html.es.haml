@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %strong Dental gross income:
+  = @dental.dental_gross_income
+%p
+  %strong Dental household size:
+  = @dental.dental_household_size
+= link_to 'Edit', edit_dental_path(@dental)
+|
+\#{link_to 'Back', dentals_path}

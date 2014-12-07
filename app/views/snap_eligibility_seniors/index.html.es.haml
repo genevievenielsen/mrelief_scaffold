@@ -1,0 +1,17 @@
+%h1 Listing snap_eligibility_seniors
+%table
+  %thead
+    %tr
+      %th Snap dependent no
+      %th Snap gross income
+      %th{:colspan => "3"}
+  %tbody
+    - @snap_eligibility_seniors.each do |snap_eligibility_senior|
+      %tr
+        %td= snap_eligibility_senior.snap_dependent_no
+        %td= snap_eligibility_senior.snap_gross_income
+        %td= link_to 'Show', snap_eligibility_senior
+        %td= link_to 'Edit', edit_snap_eligibility_senior_path(snap_eligibility_senior)
+        %td= link_to 'Destroy', snap_eligibility_senior, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Snap eligibility senior', new_snap_eligibility_senior_path

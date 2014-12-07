@@ -1,0 +1,19 @@
+= form_for(@snap_eligibility_senior) do |f|
+  - if @snap_eligibility_senior.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@snap_eligibility_senior.errors.count, "error")
+        prohibited this snap_eligibility_senior from being saved:
+      %ul
+        - @snap_eligibility_senior.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.label :snap_dependent_no
+    %br/
+    = f.number_field :snap_dependent_no
+  .field
+    = f.label :snap_gross_income
+    %br/
+    = f.text_field :snap_gross_income
+  .actions
+    = f.submit

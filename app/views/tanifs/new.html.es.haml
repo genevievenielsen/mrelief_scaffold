@@ -1,0 +1,155 @@
+.container
+  :javascript
+    $(function ()
+          { $("[data-toggle='popover']").popover();
+          });
+  .row
+    .page-header.col-md-10.col-md-offset-1{:style => "border:none;"}
+      %h2 Do I qualify for TANF?
+      %p.subhead If you are a resident of Illinois and related to a child that you are caring for, or pregnant with your first child, you may qualify for the Temporary Assistance for Needy Families (TANF) program.
+      %p Note: Note: At the current moment, this form estimates eligibility for parents  and caretaker relatives who live with their biological children.
+  - if @tanif.errors.any?
+    - @tanif.errors.full_messages.each do |message|
+      .alert.alert-dismissable.alert-danger
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} &times;
+        = message
+  .row
+    .panel.panel-default.col-md-8.col-md-offset-2
+      .panel-body
+        %form{:action => "/tanifs", :method => "post", :role => "form"}
+          .row
+            .form-group.col-md-12
+              %label#child{:for => "child"}
+                Are you pregnant or caring for a child under 19 years of age?
+              .clearfix
+              .row
+                .col-md-6
+                  #child.pull-left
+                    = radio_button_tag 'child', 'yes'
+                    yes
+                    \#{radio_button_tag 'child', 'no'} no
+          .row
+            .form-group.col-md-12
+              %label#relationship{:for => "relationship"}
+                Describe your biological relationship to the child you are caring for:
+              .clearfix
+              .row
+                .col-md-6
+                  #relationship.pull-left
+                    = radio_button_tag 'relationship', 'parent'
+                    Parent
+                    \#{radio_button_tag 'relationship', 'adult_relative'} Adult relative
+          .row
+            .form-group.col-md-12
+              %label#first{:for => "first"}
+                Are you pregnant with your first child?
+              .clearfix
+              .row
+                .col-md-6
+                  #first.pull-left
+                    = radio_button_tag 'first', 'yes'
+                    yes
+                    \#{radio_button_tag 'first', 'no'} no
+          .row
+            .form-group.col-md-12
+              %label#tanif_sixty_months{:for => "tanif_sixty_months"}
+                As a parent have you been receiving TANF for 60 months or more?
+              .clearfix
+              .row
+                .col-md-6
+                  #tanif_sixty_months.pull-left
+                    = radio_button_tag 'tanif_sixty_months', 'yes'
+                    yes
+                    \#{radio_button_tag 'tanif_sixty_months', 'no'} no
+                    \#{radio_button_tag 'tanif_sixty_months', 'caretaker'}  I am a caretaker relative, this does not apply to me.
+          .row
+            .form-group.col-md-9
+              %label{:for => "children"} How many children 18 and under are you caring for?
+              .row
+                .col-md-6
+                  %input#children.form-control{:name => "children", :placeholder => "For example: 3", :required => "", :type => "text"}/
+          / Label and input for household_size
+          .row
+            .form-group.col-md-9
+              %label{:for => "household_size"} What is your household size?
+              %button{"data-content" => "The number of people in your household including yourself.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+                %i.fa.fa-info-circle
+              .row
+                .col-md-6
+                  %input#household_size.form-control{:name => "household_size", :placeholder => "For example: 3", :required => "", :type => "text"}/
+          / Label and input for gross_income
+          .row
+            .form-group.col-md-9
+              %label{:for => "gross_income"}
+                How much do you anticipate to earn in gross income in the next 30 days?
+              %button{"data-content" => "This should include income you earn from your work, self employment and rental income (contributions from people who live with you.) This should NOT include child support or SSI benefits.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+                %i.fa.fa-info-circle
+              .input-group
+                %span.input-group-addon $
+                %input#gross_income.form-control{:name => "gross_income", :placeholder => "For example: 1000", :required => "", :type => "text"}/
+                %span.input-group-addon .00
+          .row
+            .form-group.col-md-12
+              %label#anticipate_income{:for => "anticipate_income"} Do you anticipate getting any other source of income outside of your job, child support or SSI?
+              %button{"data-content" => "This includes unemployment insurance, pensions, workers compensation and any other form of income.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+                %i.fa.fa-info-circle
+              #anticipate_income
+                = radio_button_tag 'anticipate_income', 'yes'
+                yes
+                \#{radio_button_tag 'anticipate_income', 'no'} no
+          / Label and input for expect_child_support
+          .row
+            .form-group.col-md-9
+              %label{:for => "expect_child_support"}
+                How much do you expect to receive in child support in the next 30 days?
+              .input-group
+                %span.input-group-addon $
+                %input#expect_child_support.form-control{:name => "expect_child_support", :placeholder => "For example: 500", :required => "", :type => "text"}/
+                %span.input-group-addon .00
+          / Label and input for expect_ssi
+          .row
+            .form-group.col-md-9
+              %label{:for => "expect_ssi"}
+                How much do you expect to receive in SSI in the next 30 days?
+              .input-group
+                %span.input-group-addon $
+                %input#expect_ssi.form-control{:name => "expect_ssi", :placeholder => "For example: 500", :required => "", :type => "text"}/
+                %span.input-group-addon .00
+          .row
+            .form-group.col-md-12
+              %label#teen_parent{:for => "teen_parent"} Are you a teen parent?
+              .clearfix
+              .row
+                .col-md-6
+                  #teen_parent.pull-left
+                    = radio_button_tag 'teen_parent', 'yes'
+                    yes
+                    \#{radio_button_tag 'teen_parent', 'no'} no
+          .row
+            .form-group.col-md-12
+              %label#citizen{:for => "citizen"} Are you a citizen of the United States?
+              .clearfix
+              .row
+                .col-md-6
+                  #citizen.pull-left
+                    = radio_button_tag 'citizen', 'yes'
+                    yes
+                    \#{radio_button_tag 'citizen', 'no'} no
+          .row
+            .form-group.col-md-12
+              %label#highschool{:for => "highschool"} If your child is 18, are they enrolled full-time in high school?
+              %button{"data-content" => "This does not include GED classes", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+                %i.fa.fa-info-circle
+              .clearfix
+              .row
+                .col-md-6
+                  #highschool.pull-left
+                    = radio_button_tag 'highschool', 'yes'
+                    yes
+                    \#{radio_button_tag 'highschool', 'no'} no
+          = render 'programs/zipcode_question'
+          .row
+            .col-md-6
+              = render "programs/calculator"
+          %div
+            %button.btn.btn-primary.program-btn{:type => "submit"} See if I qualify

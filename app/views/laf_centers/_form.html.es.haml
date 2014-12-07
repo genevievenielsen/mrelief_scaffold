@@ -1,0 +1,39 @@
+= form_for(@laf_center) do |f|
+  - if @laf_center.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@laf_center.errors.count, "error")
+        prohibited this laf_center from being saved:
+      %ul
+        - @laf_center.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.label :zipcode
+    %br/
+    = f.text_field :zipcode
+  .field
+    = f.label :city
+    %br/
+    = f.text_field :city
+  .field
+    = f.label :center
+    %br/
+    = f.text_field :center
+  .field
+    = f.label :address
+    %br/
+    = f.text_field :address
+  .field
+    = f.label :contact
+    %br/
+    = f.text_field :contact
+  .field
+    = f.label :telephone
+    %br/
+    = f.text_field :telephone
+  .field
+    = f.label :spanish
+    %br/
+    = f.text_field :spanish
+  .actions
+    = f.submit

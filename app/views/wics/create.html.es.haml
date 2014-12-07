@@ -1,0 +1,88 @@
+- if @eligible
+  .page-header
+  .row{:style => "text-align:center;"}
+    .col-md-8.col-md-offset-2
+      %i.fa.fa-check-circle.fa-5x
+      %h1 You may be in luck!
+      %h4 Based on your household size, income, and nutrition risk, you qualify for WIC.
+      %br/
+      %br/
+      %br/
+      .row
+        .text-center
+          %p.subhead To find a resource center near you or for more information:
+          = link_to "Click Here", "www.cedaorg.net", :class => "btn btn-success btn-resolution"
+          %p.subhead or call (855)WIC-CEDA (855-942-2332).
+- else
+  .page-header
+  .row{:style => "text-align:center;"}
+    .col-md-8.col-md-offset-2
+      %h1 Something else in mind!
+      %h4 Based on your household size and income, you likely do not qualify for WIC.
+      %br/
+      .row
+        %p.subhead Firman Community Services has programs focusing on the health of families and children.
+        = link_to "Click Here to visit their website", "http://www.direct2food.org/", :class => "btn btn-success btn-resolution"
+        %p.subhead or call their office to identify the best resource at: 773- 373-3400.
+      %br/
+      %br/
+      .row
+        %h4 Here are some additional resources from Purple Binder:
+      %br/
+      .row
+        - if @child_resources_zip.count >= 2
+          .col-md-6.col-sm-6
+            %ul.list-group{:style => "text-align:left;"}
+              %li.list-group-item{:style => "font-weight:bold"}
+                = @child_resources_zip.first.name
+              %li.list-group-item
+                %i.fa.fa-map-marker
+                = @child_resources_zip.first.street
+                = @child_resources_zip.first.city
+                = @child_resources_zip.first.state
+                , #{@child_resources_zip.first.zip}
+              %li.list-group-item
+                %i.fa.fa-phone
+                = @child_resources_zip.first.phone
+          .col-md-6.col-sm-6
+            %ul.list-group{:style => "text-align:left;"}
+              %li.list-group-item{:style => "font-weight:bold"}
+                = @child_resources_zip.second.name
+              %li.list-group-item
+                %i.fa.fa-map-marker
+                = @child_resources_zip.second.street
+                = @child_resources_zip.second.city
+                = @child_resources_zip.second.state
+                , #{@child_resources_zip.second.zip}
+              %li.list-group-item
+                %i.fa.fa-phone
+                = @child_resources_zip.second.phone
+      .row
+        - if @child_resources_first.present?
+          .col-md-6.col-sm-6
+            %ul.list-group{:style => "text-align:left;"}
+              %li.list-group-item{:style => "font-weight:bold"}
+                = @child_resources_first.name
+              %li.list-group-item
+                %i.fa.fa-map-marker
+                = @child_resources_first.street
+                = @child_resources_first.city
+                = @child_resources_first.state
+                , #{@child_resources_first.zip}
+              %li.list-group-item
+                %i.fa.fa-phone
+                = @child_resources_first.phone
+          .col-md-6.col-sm-6
+            %ul.list-group{:style => "text-align:left;"}
+              %li.list-group-item{:style => "font-weight:bold"}
+                = @child_resources_second.name
+              %li.list-group-item
+                %i.fa.fa-map-marker
+                = @child_resources_second.street
+                = @child_resources_second.city
+                = @child_resources_second.state
+                , #{@child_resources_second.zip}
+              %li.list-group-item
+                %i.fa.fa-phone
+                = @child_resources_second.phone
+      = image_tag("pblogo.jpg", :class => "logo-padding")

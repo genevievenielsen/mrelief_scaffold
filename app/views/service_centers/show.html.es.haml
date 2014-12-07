@@ -1,0 +1,31 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @service_center.name
+%p
+  %strong Latitude:
+  = @service_center.latitude
+%p
+  %strong Longitude:
+  = @service_center.longitude
+%p
+  %strong Street:
+  = @service_center.street
+%p
+  %strong City:
+  = @service_center.city
+%p
+  %strong State:
+  = @service_center.state
+%p
+  %strong Zip:
+  = @service_center.zip
+%p
+  %strong Phone:
+  = @service_center.phone
+%p
+  %strong Organization:
+  = @service_center.organization
+= link_to 'Edit', edit_service_center_path(@service_center)
+|
+\#{link_to 'Back', service_centers_path}
