@@ -68,9 +68,10 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 # translation tools
-group :development do
-  #gem 'rake'
-  gem 'r18n-rails'
-  gem 'html2haml'
 
+gem 'r18n-rails'
+gem 'haml'
+
+group :development do
+  gem 'html2haml'
 end

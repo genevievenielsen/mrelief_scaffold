@@ -8,6 +8,8 @@ Bundler.require(*Rails.groups)
 
 module MreliefScaffold
   class Application < Rails::Application
+
+
     config.serve_static_assets = true
 
     # config.action_mailer.delivery_method = :smtp
@@ -35,5 +37,7 @@ module MreliefScaffold
       :password => ENV["mailgun_password"]
     }
 
+
+    config.i18n.enforce_available_locales = false
   end
 end
