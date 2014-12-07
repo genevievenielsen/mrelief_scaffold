@@ -1,0 +1,13 @@
+%h1 Listing all_city_programs
+%table
+  %thead
+    %tr
+      %th{:colspan => "3"}
+  %tbody
+    - @all_city_programs.each do |all_city_program|
+      %tr
+        %td= link_to 'Show', all_city_program
+        %td= link_to 'Edit', edit_all_city_program_path(all_city_program)
+        %td= link_to 'Destroy', all_city_program, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New All city program', new_all_city_program_path

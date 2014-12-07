@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %strong Auto household size:
+  = @auto_repair_assistance.auto_household_size
+%p
+  %strong Auto gross income:
+  = @auto_repair_assistance.auto_gross_income
+= link_to 'Edit', edit_auto_repair_assistance_path(@auto_repair_assistance)
+|
+\#{link_to 'Back', auto_repair_assistances_path}

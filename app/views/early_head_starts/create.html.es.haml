@@ -1,0 +1,88 @@
+- if @eligible
+  .page-header
+  .row{:style => "text-align:center;"}
+    .col-md-8.col-md-offset-2
+      %i.fa.fa-check-circle.fa-5x
+      %h1 You may be in luck!
+      %h4 Based on your household size and income, you likely qualify for Early Head Start.
+      %br/
+      %br/
+      %br/
+      .row
+        .text-center
+          %p.subhead The Illinois Head Start Association can help you find a Head Start program near you.
+          = link_to "Click Here to visit their website", "http://abe.illinois.gov", :class => "btn btn-success btn-resolution"
+        %p.subhead or call at 217-241-3511.
+- else
+  .page-header
+  .row{:style => "text-align:center;"}
+    .col-md-8.col-md-offset-2
+      %h1 Something else in mind!
+      %h4 Based on your household size and income, you likely do not qualify for Early Head Start.
+      %br/
+      .row
+        %p.subhead Many programs for young children have a combination of funding sources. To find early learning programs near you
+        = link_to "Click Here ", "http://chicagoearlylearning.org", :class => "btn btn-success btn-resolution"
+        %p.subhead or call the hotline at (312) 229-1690.
+      %br/
+      %br/
+      .row
+        %h4 Here are some additional resources from Purple Binder:
+      %br/
+      .row
+        - if @earlyheadstart_resources_zip.count >= 2
+          .col-md-6.col-sm-6
+            %ul.list-group{:style => "text-align:left;"}
+              %li.list-group-item{:style => "font-weight:bold"}
+                = @earlyheadstart_resources_zip.first.name
+              %li.list-group-item
+                %i.fa.fa-map-marker
+                = @earlyheadstart_resources_zip.first.street
+                = @earlyheadstart_resources_zip.first.city
+                = @earlyheadstart_resources_zip.first.state
+                , #{@earlyheadstart_resources_zip.first.zip}
+              %li.list-group-item
+                %i.fa.fa-phone
+                = @earlyheadstart_resources_zip.first.phone
+          .col-md-6.col-sm-6
+            %ul.list-group{:style => "text-align:left;"}
+              %li.list-group-item{:style => "font-weight:bold"}
+                = @earlyheadstart_resources_zip.second.name
+              %li.list-group-item
+                %i.fa.fa-map-marker
+                = @earlyheadstart_resources_zip.second.street
+                = @earlyheadstart_resources_zip.second.city
+                = @earlyheadstart_resources_zip.second.state
+                , #{@earlyheadstart_resources_zip.second.zip}
+              %li.list-group-item
+                %i.fa.fa-phone
+                = @earlyheadstart_resources_zip.second.phone
+      .row
+        - if @earlyheadstart_resources_first.present?
+          .col-md-6.col-sm-6
+            %ul.list-group{:style => "text-align:left;"}
+              %li.list-group-item{:style => "font-weight:bold"}
+                = @earlyheadstart_resources_first.name
+              %li.list-group-item
+                %i.fa.fa-map-marker
+                = @earlyheadstart_resources_first.street
+                = @earlyheadstart_resources_first.city
+                = @earlyheadstart_resources_first.state
+                , #{@earlyheadstart_resources_first.zip}
+              %li.list-group-item
+                %i.fa.fa-phone
+                = @earlyheadstart_resources_first.phone
+          .col-md-6.col-sm-6
+            %ul.list-group{:style => "text-align:left;"}
+              %li.list-group-item{:style => "font-weight:bold"}
+                = @earlyheadstart_resources_second.name
+              %li.list-group-item
+                %i.fa.fa-map-marker
+                = @earlyheadstart_resources_second.street
+                = @earlyheadstart_resources_second.city
+                = @earlyheadstart_resources_second.state
+                , #{@earlyheadstart_resources_second.zip}
+              %li.list-group-item
+                %i.fa.fa-phone
+                = @earlyheadstart_resources_second.phone
+      = image_tag("pblogo.jpg", :class => "logo-padding")

@@ -1,0 +1,45 @@
+.container
+  :javascript
+    $(function ()
+          { $("[data-toggle='popover']").popover();
+          });
+  .page-header.col-md-10.col-md-offset-1{:style => "border:none;"}
+    %h1 Do I qualify for a Child Care Voucher?
+    .subhead
+      %p Child Care Assistance Program (CCAP) provides low-income, working families with access to quality, affordable child care that allows them to continue working and contributes to the healthy, emotional and social development of the child. Also commonly referred to as a Child Care Voucher, the state of Illinos helps income eligible families pay for their child care services while they work, go to school, pursue training and other work-related activities.
+    %p
+      You can find more information about CCAP by
+      %a{:href => "http://www.dhs.state.il.us/page.aspx?item=30355"} clicking here.
+- if @child_care_voucher.errors.any?
+  - @child_care_voucher.errors.full_messages.each do |message|
+    .alert.alert-dismissable.alert-danger
+      %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} &times;
+      = message
+.row
+  .panel.panel-default.col-md-8.col-md-offset-2
+    .panel-body
+      %form{:action => "/child_care_vouchers", :method => "post", :role => "form"}
+        .form-group.col-sm-9
+          %p.allthatapply If your child is between the ages of 6 months and 12 years, you may qualify for a Child Care Voucher. Please answer the following questions to find out:
+          %label{:for => "ccdf_dependent_no"} How many dependents (including yourself) are in your household?
+          %button{"data-content" => "Total family size, including yourself and child[ren].", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+            %i.fa.fa-info-circle
+          %input#ccdf_dependent_no.form-control{:name => "ccdf_dependent_no", :placeholder => "For example: 3", :required => "", :type => "text", :value => @child_care_voucher.ccdf_dependent_no}/
+        / Label and input for rta_gross_income
+        .form-group.col-sm-9
+          %label{:for => "ccdf_gross_income"}
+            What is your gross monthly income?
+          %button{"data-content" => "Total monthly income from all sources, including work, child support, TANF, and Social Security before any deductions.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+            %i.fa.fa-info-circle
+          .input-group
+            %span.input-group-addon $
+            %input#ccdf_gross_income.form-control{:name => "ccdf_gross_income", :placeholder => "For example: 1500", :required => "", :type => "text", :value => @child_care_voucher.ccdf_gross_income}/
+            %span.input-group-addon .00
+        .form-group.col-sm-9.pull-left
+          %label{:for => "zipcode"} What is your zipcode?
+          %input#zipcode.form-control{:name => "zipcode", :placeholder => "For example: 60615", :required => "", :type => "text"}/
+        .row
+          .col-md-6
+            = render "programs/calculator"
+        %div
+          %button.btn.btn-primary.program-btn{:type => "submit"} See if I qualify

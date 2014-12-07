@@ -1,0 +1,139 @@
+.container
+  - if @eligible == 'yes'
+    .page-header
+    .row{:style => "text-align:center;"}
+      .col-md-8.col-md-offset-2
+        %i.fa.fa-check-circle.fa-5x
+        %h1 You may be in luck!
+        %h4 Based on your household size and income, you likely qualify for food stamps.
+        %br/
+        %br/
+        %br/
+        - if @laf_disclaimer.present?
+          %p.subhead= @laf_disclaimer
+        - else
+          %p.subhead Based on your zipcode, here is the nearest Community Service Center to access your Food Stamps:
+        .col-md-offset-3.col-md-6.col-sm-6.text-center{:style => "text-align:center;"}
+          %ul.list-group{:style => "text-align:left;"}
+            %li.list-group-item{:style => "font-weight:bold"}
+              = @lafcenter.center
+            %li.list-group-item
+              %i.fa.fa-map-marker
+              = @lafcenter.address
+              = @lafcenter.city
+              , #{@lafcenter.zipcode.to_i}
+            %li.list-group-item
+              %i.fa.fa-phone
+              = @lafcenter.telephone
+            %li.list-group-item
+              Days that Spanish is spoken - #{@lafcenter.spanish}
+          %br/
+          %br/
+      .row
+        .col-sm-offset-3.col-md-offset-3.col-md-6.col-sm-6.col-xs-6
+          %p.subhead To apply online before you visit:
+          = link_to "Click Here", "https://abe.illinois.gov/abe/access/accessController?id=0.3971759164763745", :class => "btn btn-success btn-resolution"
+  - elsif @eligible == 'maybe'
+    .page-header
+    .row{:style => "text-align:center;"}
+      .col-md-8.col-md-offset-2
+        %i.fa.fa-exclamation-circle.fa-5x
+        %h1 Something else in mind!
+        %h4 Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a Food Stamp expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your food stamp eligibility with you.
+        %br/
+        - if @laf_disclaimer.present?
+          %p.subhead= @laf_disclaimer
+        .col-md-offset-3.col-md-6.col-sm-6.text-center{:style => "text-align:center;"}
+          %ul.list-group{:style => "text-align:left;"}
+            %li.list-group-item{:style => "font-weight:bold"}
+              = @lafcenter.center
+            %li.list-group-item
+              %i.fa.fa-map-marker
+              = @lafcenter.address
+              = @lafcenter.city
+              , #{@lafcenter.zipcode.to_i}
+            %li.list-group-item
+              %i.fa.fa-phone
+              = @lafcenter.telephone
+            %li.list-group-item
+              Days that Spanish is spoken - #{@lafcenter.spanish}
+          %br/
+          %br/
+      .row
+        .col-md-offset-4.col-md-4
+          = image_tag("LAFlogo.jpg", :class => "img-responsive")
+  - elsif @eligible == 'no'
+    .page-header
+    .row{:style => "text-align:center;"}
+      .col-md-8.col-md-offset-2
+        %h1 Something else in mind!
+        %h4 Based on your household size and income, you likely do not qualify for food stamps.
+        %br/
+        .row
+          %p.subhead Direct2Food is an online resource that will help you locate the food pantries, soup kitchens, and meal programs closest to you. To find resources near you
+          = link_to "Click Here", "http://www.direct2food.org/", :class => "btn btn-success btn-resolution"
+        %br/
+        .row
+          %h4 Here are some additional resources from Purple Binder:
+        %br/
+        .row
+          - if @food_resources_zip.count >= 2
+            .col-md-6.col-sm-6
+              %ul.list-group{:style => "text-align:left;"}
+                %li.list-group-item{:style => "font-weight:bold"}
+                  = @food_resources_zip.first.name
+                %li.list-group-item
+                  %i.fa.fa-map-marker
+                  = @food_resources_zip.first.street
+                  = @food_resources_zip.first.city
+                  = @food_resources_zip.first.state
+                  , #{@food_resources_zip.first.zip}
+                %li.list-group-item
+                  %i.fa.fa-phone
+                  = @food_resources_zip.first.phone
+            .col-md-6.col-sm-6
+              %ul.list-group{:style => "text-align:left;"}
+                %li.list-group-item{:style => "font-weight:bold"}
+                  = @food_resources_zip.second.name
+                %li.list-group-item
+                  %i.fa.fa-map-marker
+                  = @food_resources_zip.second.street
+                  = @food_resources_zip.second.city
+                  = @food_resources_zip.second.state
+                  , #{@food_resources_zip.second.zip}
+                %li.list-group-item
+                  %i.fa.fa-phone
+                  = @food_resources_zip.second.phone
+        .row
+          - if @food_resources_first.present?
+            .col-md-6.col-sm-6
+              %ul.list-group{:style => "text-align:left;"}
+                %li.list-group-item{:style => "font-weight:bold"}
+                  = @food_resources_first.name
+                %li.list-group-item
+                  %i.fa.fa-map-marker
+                  = @food_resources_first.street
+                  = @food_resources_first.city
+                  = @food_resources_first.state
+                  , #{@food_resources_first.zip}
+                %li.list-group-item
+                  %i.fa.fa-phone
+                  = @food_resources_first.phone
+            .col-md-6.col-sm-6
+              %ul.list-group{:style => "text-align:left;"}
+                %li.list-group-item{:style => "font-weight:bold"}
+                  = @food_resources_second.name
+                %li.list-group-item
+                  %i.fa.fa-map-marker
+                  = @food_resources_second.street
+                  = @food_resources_second.city
+                  = @food_resources_second.state
+                  , #{@food_resources_second.zip}
+                %li.list-group-item
+                  %i.fa.fa-phone
+                  = @food_resources_second.phone
+        = image_tag("pblogo.jpg", :class => "logo-padding")
+%br/
+%br/
+%br/
+%br/
