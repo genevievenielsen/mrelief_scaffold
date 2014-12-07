@@ -1,5 +1,5 @@
 !!!
-%html{:lang => "en"}
+%html{:lang => "es"}
   %head
     %meta{:charset => "utf-8"}/
     %title Mrelief
@@ -43,6 +43,13 @@
               %a{:href => "/contact"} Contact Us
             %li
               %a{:href => "/press_release"} Press Release
+              %li
+                -if I18n.locale == :es %>
+                  = link_to "English", set_language_english_path
+                - elsif I18n.locale == :en %>
+                  = link_to "Spanish", set_language_spanish_path
+
+
             %li
               %a.btn-donate{:href => "https://fundly.com/mrelief-using-technology-to-improve-social-services"} Donate
     .container

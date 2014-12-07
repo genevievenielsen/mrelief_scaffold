@@ -1,13 +1,23 @@
 class SetLanguageController < ApplicationController
   def english
-    R18n.set('en')
+    I18n.locale = 'en'
   end
 
   def spanish
-    R18n.set('es')
+    I18n.locale = 'es'
   end
 
   def polish
-    R18n.set('pl')
+    I18n.locale = 'pl'
   end
+
+  # private
+
+  # def set_session_and_redirect
+  #   session[:locale] = I18n.locale
+  #   rediret_to :back
+  # rescue ActionController::RedirectBackError
+  #   redirect_to :root
+  # end
+
 end
