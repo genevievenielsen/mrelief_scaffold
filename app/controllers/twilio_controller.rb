@@ -2,18 +2,11 @@ class TwilioController < ApplicationController
 
 
  # if they don't qualify under normal and are disabled but not receiving payments
- # lower bound age on food stamps?
-
 
 # add laf centers to rta
 # NO zipcode for rta ride free
 # NO purple binder
 
-# add Medicaid
-# Here is the message if they don't qualify: If  your family doesn't have health coverage, you may have to pay a fee and all health costs. Call (866) 311-1119 for your coverage options.
-
-
-# add Medicare cost sharing
 
   require 'numbers_in_words'
   require 'numbers_in_words/duck_punch' #see why later
@@ -22,39 +15,60 @@ class TwilioController < ApplicationController
 
   session["counter"] ||= 0
 
+
+  if params[:Body].include?('"')
+    params[:Body] = params[:Body].tr('"', '')
+  end
+
+  if params[:Body].include?("'")
+    params[:Body] = params[:Body].tr("'", "")
+  end
+
   if params[:Body].strip.downcase == "reset"
     session["counter"] = 0
   end
 
    if session["counter"] == 0
-    message = "Welcome to mRelief! We help you check your eligibility for benefits. For foodstamps, type 'food'. For RTA ride free, type 'ride.' For Medicaid, type 'medicaid.' For Medicare Cost Sharing, type 'medicare.' If you make a mistake, send the message 'reset'."
+    message = "Welcome to mRelief! We help you check your eligibility for benefits. For foodstamps, text 'food'. For RTA ride free, text 'ride.' For Medicaid, text 'medicaid.' For Medicare Cost Sharing, text 'medicare.' If you make a mistake, send the message 'reset'."
    end
-
    if params[:Body].strip.downcase == "menu"
-      message = "For foodstamps, type 'food'. For RTA ride free, type 'ride.' For Medicaid, type 'medicaid.' For Medicare Cost Sharing, type 'medicare.' If you make a mistake, send the message 'reset'."
+      message = "For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.' If you make a mistake, send the message 'reset'."
    end
-
    if params[:Body].strip.downcase == "food"
       message = "Are you enrolled in a college or institution of higher education? Enter 'yes' or 'no'"
       session["page"] = "snap_college_question"
       session["counter"] = 1
    end
-
    if params[:Body].strip.downcase == "ride"
       message = "Are you 65 years old or older? Enter 'yes' or 'no'"
       session["page"] = "rta_age_question"
       session["counter"] = 1
    end
-
    if params[:Body].strip.downcase == "medicaid"
       message = "Are you a citizen of the United States? Enter 'yes' or 'no'"
       session["page"] = "medicaid_citizen_question"
       session["counter"] = 1
    end
-
    if params[:Body].strip.downcase == "medicare"
       message = "What is your household size? Please include yourself, your spouse, your children under 18 who live with you."
       session["page"] = "medicare_household_question"
+      session["counter"] = 1
+   end
+   if params[:Body].strip.downcase == "med"
+      message = "For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
+      session["page"] = "medicare_household_question"
+      session["counter"] = 1
+   end
+   if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("medicaid") || params[:Body].strip.downcase.include?("ride") || params[:Body].strip.downcase.include?("medicare")
+      message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'  "
+      session["counter"] = 1
+   end
+   if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("medicaid") && params[:Body].strip.downcase.include?("ride")
+      message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'  "
+      session["counter"] = 1
+   end
+   if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("medicaid") && params[:Body].strip.downcase.include?("ride") && params[:Body].strip.downcase.include?("medicare")
+      message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'  "
       session["counter"] = 1
    end
 
@@ -173,9 +187,9 @@ class TwilioController < ApplicationController
         @food_pantry = @food_resources.first
       end
       if snap_gross_income < snap_eligibility.snap_gross_income
-        message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, type 'menu'."
+        message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, text 'menu'."
       else
-        message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, type 'menu'."
+        message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, text 'menu'."
       end
    end
    if session["page"] == "snap_income_question_disability" && session["counter"] == 9
@@ -216,9 +230,9 @@ class TwilioController < ApplicationController
         @food_pantry = @food_resources.first
       end
       if snap_gross_income < snap_eligibility.snap_gross_income
-        message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, type 'menu'."
+        message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, text 'menu'."
       else
-        message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, type 'menu'."
+        message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, text 'menu'."
       end
    end
 
@@ -238,7 +252,7 @@ class TwilioController < ApplicationController
       else
         @food_pantry = @food_resources.first
       end
-      message = "Based on your age, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, type 'menu'."
+      message = "Based on your age, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, text 'menu'."
    end
 
    # Food stamps user is in school
@@ -251,7 +265,7 @@ class TwilioController < ApplicationController
      else
        @lafcenter = LafCenter.find_by(:id => 10)
      end
-     message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, type 'menu'."
+     message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, text 'menu'."
    end
 
    # Food stamps user is not a US citizen
@@ -264,13 +278,11 @@ class TwilioController < ApplicationController
      else
        @lafcenter = LafCenter.find_by(:id => 10)
      end
-     message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, type 'menu'."
+     message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, text 'menu'."
    end
 
 
-
    # HERE IS THE LOGIC FOR RTA RIDE FREE
-
    if session["page"] == "rta_age_question" && session["counter"] == 2
       session["age"] = params[:Body].strip.downcase
       if session["age"]  == "no"
@@ -286,6 +298,7 @@ class TwilioController < ApplicationController
     session["disabled"] = params[:Body].strip.downcase
     if session["disabled"] == "no"
       session["page"] = "rta_ineligble"
+      message = "What is your zipcode?"
     else
       message = "Are you receiving disability payments from from Social Security, the Railroad Retirement Board or Veterans Affairs? Enter 'yes' or 'no'"
       session["page"] = "snap_disability_payment"
@@ -299,9 +312,9 @@ class TwilioController < ApplicationController
       session["page"] = "rta_dependents_question"
      else
       session["page"] = "rta_ineligble"
+      message = "What is your zipcode?"
      end
    end
-
 
     if session["page"] == "rta_dependents_question" && session["counter"] == 5
       session["dependents"] = params[:Body].strip
@@ -324,64 +337,69 @@ class TwilioController < ApplicationController
       session["page"] = "rta_income_question"
     end
 
-   if session["page"] == "rta_income_question" && session["counter"] == 6
-     session["income"] = params[:Body].strip
-     if session["income"] !~ /\D/
-       session["income"] = session["income"].to_i
-     else
-       if session["income"].include?("dollars")
-         session["income"].slice!"dollars"
-       end
-       if session["income"].include?("$")
-         session["income"].slice!"$"
-       end
-       if session["income"].include?(",")
-         session["income"].slice!","
-       end
-       session["income"] = session["income"].in_numbers
-     end
-      rta_dependent_no = session["dependents"].to_i
-      rta_gross_income = session["income"].to_i
-      rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => rta_dependent_no })
-      if rta_gross_income < rta_eligibility.rta_gross_income
-        message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  To check other programs, type 'menu'."
+    if session["page"] == "rta_income_question"
+      session["income"] = params[:Body].strip
+      if session["income"] !~ /\D/
+        session["income"] = session["income"].to_i
       else
-        message = "Based on your household size and income, you likely do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
+        if session["income"].include?("dollars")
+          session["income"].slice!"dollars"
+        end
+        if session["income"].include?("$")
+          session["income"].slice!"$"
+        end
+        if session["income"].include?(",")
+          session["income"].slice!","
+        end
+        session["income"] = session["income"].in_numbers
       end
-   end
-   if session["page"] == "rta_income_question" && session["counter"] == 4
-     session["income"] = params[:Body].strip
-     if session["income"] !~ /\D/
-       session["income"] = session["income"].to_i
-     else
-       if session["income"].include?("dollars")
-         session["income"].slice!"dollars"
+       rta_dependent_no = session["dependents"].to_i
+       rta_gross_income = session["income"].to_i
+       rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => rta_dependent_no })
+    end
+    if session["page"] == "rta_income_question" && session["counter"] == 4
+     if session["counter"] == 4
+       if rta_gross_income < rta_eligibility.rta_gross_income
+         message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  To check other programs, text 'menu'."
+       else
+         session["page"] = "rta_ineligble"
+         message = "What is your zipcode?"
        end
-       if session["income"].include?("$")
-         session["income"].slice!"$"
+      end
+    end
+
+    if session["page"] == "rta_income_question" && session["counter"] == 6
+       if rta_gross_income < rta_eligibility.rta_gross_income
+         message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  To check other programs, text 'menu'."
+       else
+         session["page"] = "rta_ineligble"
+         message = "What is your zipcode?"
        end
-       if session["income"].include?(",")
-         session["income"].slice!","
+    end
+
+   if session["page"] == "rta_ineligble"
+    session["zipcode"] = params[:Body].strip
+    zipcode = session["zipcode"]
+    transportation = []
+     ServiceCenter.all.each do |center|
+       if center.description.match("transportation")
+         transportation.push(center)
        end
-       session["income"] = session["income"].in_numbers
      end
-      rta_dependent_no = session["dependents"].to_i
-      rta_gross_income = session["income"].to_i
-      rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => rta_dependent_no })
-      if rta_gross_income < rta_eligibility.rta_gross_income
-        message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  To check other programs, type 'menu'."
-      else
-        message = "Based on your household size and income, you likely do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
-      end
-   end
-
-
-   # RTA Ride Free user is below 65 & not disabled or receiving disability payment
-   if session["page"] == "rta_ineligble" && session["counter"] == 3
-    message = "Based on your age, you do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
-   end
-   if session["page"] == "rta_ineligble" && session["counter"] == 4
-    message = "Based on your age, you likely do not qualify for RTA Ride Free. Call 312-913-3110 for information about the Reduced Fare Program. To check other programs, type 'menu'."
+     @transportation_resources_zip = []
+     transportation.each do |center|
+       if center.zip.match(zipcode)
+         @transportation_resources_zip.push(center)
+       end
+     end
+     if @transportation_resources_zip.present?
+      @transportation_center = @transportation_resources_zip.first
+     else
+      @transportation_center = transportation.first
+     end
+     if session["counter"] == 4 || session["counter"] == 5 || session["counter"] == 6 || session["counter"] == 7
+      message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
+     end
    end
 
 
@@ -435,7 +453,7 @@ class TwilioController < ApplicationController
       end
    end
 
-   # user is ineligible
+   # Medicaid user is ineligible
    if session["page"] == "medicaid_ineligible" && session["counter"] == 5
      session["zipcode"] = params[:Body].strip
      zipcode = session["zipcode"]
@@ -445,8 +463,9 @@ class TwilioController < ApplicationController
           primarycare.push(center)
         end
       end
+      @medical_resources_zip = []
       primarycare.each do |center|
-        if center.zip.match(zpicode)
+        if center.zip.match(zipcode)
           @medical_resources_zip.push(center)
         end
       end
@@ -456,9 +475,9 @@ class TwilioController < ApplicationController
        @medical_center = primarycare.first
       end
       message = "You likely do not qualify for Medicaid. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. To check other programs, type 'menu'."
-   end
+    end
 
-   # medicaid user is not a US citizen
+   # Medicaid user is not a US citizen
    if session["page"] == "medicaid_eligible_maybe" && session["counter"] == 3
     session["zipcode"] = params[:Body].strip
     user_zipcode = session["zipcode"]
@@ -480,10 +499,10 @@ class TwilioController < ApplicationController
       session["household"] = session["household"].in_numbers
     end
     message = "How many people in your household receive Medicare?"
-    session["page"] = "medicare_household_question"
+    session["page"] = "medicare_number_question"
    end
 
-   if session["page"] == "medicare_household_question" && session["counter"] == 3
+   if session["page"] == "medicare_number_question" && session["counter"] == 3
     session["medicare_number"] = params[:Body].strip
     if session["medicare_number"] !~ /\D/  # returns true if all numbers
       session["medicare_number"] = session["medicare_number"].to_i
@@ -491,7 +510,7 @@ class TwilioController < ApplicationController
       session["medicare_number"] = session["medicare_number"].in_numbers
     end
     if session["medicare_number"] == 0
-      message = "What is your zipcode"
+      message = "What is your zipcode?"
       session["page"] = "medicare_ineligible"
     else
       message = "What is you gross monthly income? Enter a number"
@@ -535,12 +554,10 @@ class TwilioController < ApplicationController
        end
        session["assets"] = session["assets"].in_numbers
      end
-
      assets = session["assets"]
      household_size = session["household"]
      medicare_household_size = session["medicare_number"]
      monthly_income = session["income"]
-
      if medicare_household_size == 0
       @eligible = "no"
      elsif household_size == 1 && assets > 7160
@@ -566,17 +583,15 @@ class TwilioController < ApplicationController
      if @eligible == "yes"
       message = "What is your zipcode?"
       session["page"] = "medicare_eligible"
-
      elsif @eligible == "no"
       message = "What is your zipcode?"
       session["page"] = "medicare_ineligible"
-      end
+     end
    end
 
-   if session["page"] = "medicare_eligible" && session["counter"] == 6
-    zipcode = session["zipcode"]
-    #refer to community resource center
-    user_zipcode = session["zipcode"]
+   if session["page"] == "medicare_eligible" && session["counter"] == 6
+    session["zipcode"] = params[:Body].strip
+     user_zipcode = session["zipcode"]
      @zipcode = user_zipcode << ".0"
      @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
      if @lafcenter.present?
@@ -584,52 +599,37 @@ class TwilioController < ApplicationController
        @lafcenter = LafCenter.find_by(:id => 10)
      end
     message = "You may be in luck! You likely qualify for Medicare Cost Sharing. To access your Medicare Care Sharing, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, type 'menu'."
-
    end
 
-   # no one in the household is on medicare
-   if session["page"] == "medicare_ineligible" && session["counter"] == 4
-      zipcode = session["zipcode"]
-       primarycare = []
-       ServiceCenter.all.each do |center|
-         if center.description.match("primary care")
-           primarycare.push(center)
-         end
+   if session["page"] == "medicare_ineligible"
+    session["zipcode"] = params[:Body].strip
+     zipcode = session["zipcode"]
+     primarycare = []
+     ServiceCenter.all.each do |center|
+       if center.description.match("primary care")
+         primarycare.push(center)
        end
-       primarycare.each do |center|
-         if center.zip.match(zpicode)
-           @medical_resources_zip.push(center)
-         end
+     end
+     @medical_resources_zip = []
+     primarycare.each do |center|
+       if center.zip.match(zipcode)
+         @medical_resources_zip.push(center)
        end
-       if @medical_resources_zip.present?
-        @medical_center = @medical_resources_zip.first
-       else
-        @medical_center = primarycare.first
-       end
-       message = "You likely do not qualify for Medicare Cost Sharing. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. To check other programs, type 'menu'."
-    end
-
-    # do not be eligiblty cut offs
-    if session["page"] == "medicare_ineligible" && session["counter"] == 6
-       zipcode = session["zipcode"]
-        primarycare = []
-        ServiceCenter.all.each do |center|
-          if center.description.match("primary care")
-            primarycare.push(center)
-          end
-        end
-        primarycare.each do |center|
-          if center.zip.match(zpicode)
-            @medical_resources_zip.push(center)
-          end
-        end
-        if @medical_resources_zip.present?
-         @medical_center = @medical_resources_zip.first
-        else
-         @medical_center = primarycare.first
-        end
+     end
+     if @medical_resources_zip.present?
+      @medical_center = @medical_resources_zip.first
+     else
+      @medical_center = primarycare.first
+     end
+     if session["counter"] == 4
+       #NO one in the household is on medicare
+        message = "You likely do not qualify for Medicare Cost Sharing. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. To check other programs, type 'menu'."
+     elsif session["counter"] == 6
+      # Medicare cost sharing user does not meet eligiblty cut offs
         message = "You likely do not qualify for Medicare Cost Sharing. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. To check other programs, type 'menu'."
      end
+   end
+
 
    twiml = Twilio::TwiML::Response.new do |r|
        r.Message message

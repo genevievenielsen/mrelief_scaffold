@@ -8,7 +8,7 @@
     <div class="page-header col-md-10 col-md-offset-1" style="border:none;">
       <h2>Do I qualify for TANF?</h2>
         <p class="subhead"> If you are a resident of Illinois and related to a child that you are caring for, or pregnant with your first child, you may qualify for the Temporary Assistance for Needy Families (TANF) program.</p>
-        <p>Note: Note: At the current moment, this form estimates eligibility for parents  and caretaker relatives who live with their biological children. </p>
+        <p> Note: At the current moment, this form estimates eligibility for parents  and caretaker relatives who live with their biological children. </p>
     </div>
 </div>
 
@@ -26,14 +26,96 @@
   <div class="panel-body">
     <form action="/tanifs" role="form" method="post">
 
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label for="child" id="child">Are you pregnant or caring for a child under 19 years of age?
+        </label>
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-6">
+              <div id="child"  class="pull-left">
+                <%= radio_button_tag 'child', 'yes' %> yes
+                <%= radio_button_tag 'child', 'no' %> no
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label for="relationship" id="relationship">Describe your biological relationship to the child you are caring for:
+        </label>
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-6">
+              <div id="relationship"  class="pull-left">
+                <%= radio_button_tag 'relationship', 'parent' %> Parent
+                <%= radio_button_tag 'relationship', 'adult_relative' %> Adult relative
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label for="first" id="first">Are you pregnant with your first child?
+        </label>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-6">
+              <div id="first"  class="pull-left">
+                <%= radio_button_tag 'first', 'yes' %> yes
+                <%= radio_button_tag 'first', 'no' %> no
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label for="tanif_sixty_months" id="tanif_sixty_months">As a parent have you been receiving TANF for 60 months or more?
+        </label>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-6">
+              <div id="tanif_sixty_months"  class="pull-left">
+                <%= radio_button_tag 'tanif_sixty_months', 'yes' %> yes
+                <%= radio_button_tag 'tanif_sixty_months', 'no' %> no
+                <%= radio_button_tag 'tanif_sixty_months', 'caretaker' %>  I am a caretaker relative, this does not apply to me.
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-9">
+        <label for="children">How many children 18 and under are you caring for?</label>
+
+        <div class="row">
+          <div class="col-md-6">
+            <input type="text" id="children" name="children" placeholder="For example: 3" class="form-control"  required>
+          </div>
+        </div>
+      </div>
+    </div>
 
   <!-- Label and input for household_size -->
 
 <div class="row">
-  <div class="form-group col-md-12">
+  <div class="form-group col-md-9">
     <label for="household_size">What is your household size?</label>
 
-      <button type="button" data-toggle="popover" data-content="The number of people in your household including yourself. This includes parents, caretaker relatives, and minor children." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+      <button type="button" data-toggle="popover" data-content="The number of people in your household including yourself." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
 
     <div class="row">
       <div class="col-md-6">
@@ -44,29 +126,29 @@
 </div>
 
 
-  <!-- Label and input for max_income -->
+  <!-- Label and input for gross_income -->
 <div class="row">
   <div class="form-group col-md-9">
-    <label for="max_income">
-       How much do you anticipate to earn from employment over the next 30 days?
+    <label for="gross_income">
+       How much do you anticipate to earn in gross income in the next 30 days?
     </label>
 
       <button type="button" data-toggle="popover" data-content="This should include income you earn from your work, self employment and rental income (contributions from people who live with you.) This should NOT include child support or SSI benefits." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
 
     <div class="input-group">
       <span class="input-group-addon">$</span>
-       <input type="text" id="max_income" name="max_income" placeholder="For example: 1000"class="form-control" required>
+       <input type="text" id="gross_income" name="gross_income" placeholder="For example: 1000"class="form-control" required>
       <span class="input-group-addon">.00</span>
     </div>
     </div>
   </div>
 
-<%= render 'programs/zipcode_question' %>
-
 <div class="row">
   <div class="form-group col-md-12">
 
     <label for="anticipate_income" id="anticipate_income">Do you anticipate getting any other source of income outside of your job, child support or SSI? </label>
+
+    <button type="button" data-toggle="popover" data-content="This includes unemployment insurance, pensions, workers compensation and any other form of income." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
 
     <div id="anticipate_income">
         <%= radio_button_tag 'anticipate_income', 'yes' %> yes
@@ -109,16 +191,30 @@
 
   <div class="row">
     <div class="form-group col-md-12">
-      <label for="first" id="first">Are you pregnant with your first child?
-      </label>
-
+      <label for="teen_parent" id="teen_parent"> Are you a teen parent? </label>
       <div class="clearfix"></div>
 
       <div class="row">
           <div class="col-md-6">
-            <div id="first"  class="pull-left">
-              <%= radio_button_tag 'first', 'yes' %> yes
-              <%= radio_button_tag 'first', 'no' %> no
+            <div id="teen_parent"  class="pull-left">
+              <%= radio_button_tag 'teen_parent', 'yes' %> yes
+              <%= radio_button_tag 'teen_parent', 'no' %> no
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-12">
+      <label for="citizen" id="citizen">Are you a citizen of the United States? </label>
+      <div class="clearfix"></div>
+
+      <div class="row">
+          <div class="col-md-6">
+            <div id="citizen"  class="pull-left">
+              <%= radio_button_tag 'citizen', 'yes' %> yes
+              <%= radio_button_tag 'citizen', 'no' %> no
             </div>
           </div>
       </div>
@@ -126,31 +222,12 @@
   </div>
 
 
-<div class="row">
-  <div class="form-group col-md-12">
-    <label for="child" id="child">Are you responsible for a child who is under 19 years of age?
-    </label>
-
-    <button type="button" data-toggle="popover" data-content="You must be related to the child who you are caring for i.e. mother, father, or caretaker relative." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-
-    <div class="clearfix"></div>
-
-    <div class="row">
-        <div class="col-md-6">
-          <div id="child"  class="pull-left">
-            <%= radio_button_tag 'child', 'yes' %> yes
-            <%= radio_button_tag 'child', 'no' %> no
-          </div>
-        </div>
-    </div>
-  </div>
-</div>
 
 <div class="row">
   <div class="form-group col-md-12">
     <label for="highschool" id="highschool">If your child is 18, are they enrolled full-time in high school? </label>
 
-    <button type="button" data-toggle="popover" data-content="This does not include vocational school and GED classes" data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+    <button type="button" data-toggle="popover" data-content="This does not include GED classes" data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
 
     <div class="clearfix"></div>
 
@@ -166,38 +243,8 @@
 </div>
 
 
-<div class="row">
-  <div class="form-group col-md-12">
-    <label for="teen_parent" id="teen_parent"> Are you a teen parent? </label>
-    <div class="clearfix"></div>
 
-    <div class="row">
-        <div class="col-md-6">
-          <div id="teen_parent"  class="pull-left">
-            <%= radio_button_tag 'teen_parent', 'yes' %> yes
-            <%= radio_button_tag 'teen_parent', 'no' %> no
-          </div>
-        </div>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="form-group col-md-12">
-    <label for="citizen" id="citizen">Are you a citizen of the United States? </label>
-    <div class="clearfix"></div>
-
-    <div class="row">
-        <div class="col-md-6">
-          <div id="citizen"  class="pull-left">
-            <%= radio_button_tag 'citizen', 'yes' %> yes
-            <%= radio_button_tag 'citizen', 'no' %> no
-          </div>
-        </div>
-    </div>
-  </div>
-</div>
-
+<%= render 'programs/zipcode_question' %>
 
 
 

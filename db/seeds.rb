@@ -880,6 +880,13 @@ p.location = "chicago"
 p.save
 
 p = Program.new
+p.url = "aabd_cashes/new"
+p.name = "AABD Cash Assistance"
+p.description = "Cash Assistance for the Elderly and Disabled"
+p.location = "chicago"
+p.save
+
+p = Program.new
 p.url = "/all_city_programs/new"
 p.name = "All City Programs"
 p.description = "All Chicago Programs within mRelief"
@@ -3058,9 +3065,491 @@ ServiceCenter.create(:name => 'Intensive Case Advocacy and Support (ICAS)',
         :organization => '4543',
         :description => 'intensive support to slefneglectful seniors in chicago * as referred to st vincent de paul center by dfsssenior services'
     )
-
-
-
+#housing
+ServiceCenter.create(:name => 'Rosenthal Family Lodge Program (Safe House)',
+        :latitude => '-87.6297982',
+        :longitude => '41.8781136',
+        :street => 'confidential location',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '',
+        :phone => '800-375-8400',
+        :organization => '4003',
+        :description => 'domestic violence * emergency shelter * housing'
+    )
+ServiceCenter.create(:name => 'Housing and Residential Programs',
+        :latitude => '-87.6297982',
+        :longitude => '41.8781136',
+        :street => '',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '',
+        :phone => '773-572-5400',
+        :organization => '4562',
+        :description => 'supportive housing * life skills * independent living'
+    )
+ServiceCenter.create(:name => 'Supportive Housing Programs (SHP)',
+        :latitude => '-87.6297982',
+        :longitude => '41.8781136',
+        :street => '',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '',
+        :phone => '(773) 244-6401',
+        :organization => '5182',
+        :description => 'affordable housing * subsidized housing * homelessness'
+    )
+ServiceCenter.create(:name => 'Ridgeland Apartments and Daycare',
+        :latitude => '-87.6297982',
+        :longitude => '41.8781136',
+        :street => 'undisclosed location',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '',
+        :phone => '773-375-1918',
+        :organization => '4003',
+        :description => 'housing * day care'
+    )
+ServiceCenter.create(:name => 'Emergency Housing',
+        :latitude => '-87.6297982',
+        :longitude => '41.8781136',
+        :street => 'P.O. Box 368800',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60636',
+        :phone => '773-723-2119',
+        :organization => '4289',
+        :description => 'transitional housing * emergency shelter for domestic violence victims'
+    )
+ServiceCenter.create(:name => 'Chicago Housing Authority',
+        :latitude => '-87.6256185',
+        :longitude => '41.8770708',
+        :street => '60 E Van Buren St #12',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '',
+        :phone => '(312) 742-8500',
+        :organization => '5197',
+        :description => 'senior housing'
+    )
+ServiceCenter.create(:name => 'Housing Initiative',
+        :latitude => '-87.6422868',
+        :longitude => '41.8778324',
+        :street => '571 W Jackson',
+        :city => 'Chicago ',
+        :state => 'IL',
+        :zip => '60661',
+        :phone => '312-922-2200',
+        :organization => '4055',
+        :description => 'housing * previously incarcerated adults'
+    )
+ServiceCenter.create(:name => 'Housing Assistance',
+        :latitude => '-87.642321',
+        :longitude => '41.885302',
+        :street => '567 W. Lake Street',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60661',
+        :phone => '(312) 994-5830 ',
+        :organization => '85',
+        :description => 'rental assistance * housing services * transitional housing for veterans'
+    )
+ServiceCenter.create(:name => 'Homelessness Assistance',
+        :latitude => '-87.6446784',
+        :longitude => '41.8855362',
+        :street => '651 W. Lake Street',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60661',
+        :phone => '',
+        :organization => '4358',
+        :description => 'domestic violence * housing * homelessness'
+    )
+ServiceCenter.create(:name => 'Housing Assistance',
+        :latitude => '-87.6428743',
+        :longitude => '41.8672374',
+        :street => '614 W Roosevelt Road',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60607',
+        :phone => '312-253-7000',
+        :organization => '2857',
+        :description => 'housing referrals * public housing'
+    )
+ServiceCenter.create(:name => 'Lawson House',
+        :latitude => '-87.6293975',
+        :longitude => '41.896854',
+        :street => '30 W Chicago Avenue',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60610',
+        :phone => '312-932-1166',
+        :organization => '2482',
+        :description => 'housing * subsidized housing * sro'
+    )
+ServiceCenter.create(:name => 'Long Term Care Services ',
+        :latitude => '-87.6320817',
+        :longitude => '41.8964807',
+        :street => '115 West Chicago Avenue',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60654',
+        :phone => '312-640-2100',
+        :organization => '2857',
+        :description => 'housing search and referral services * peer support services * community support and personal assistant services'
+    )
+ServiceCenter.create(:name => 'Collins Apartments for Seniors',
+        :latitude => '-87.656284',
+        :longitude => '41.8634194',
+        :street => '1401 S Blue Island Avenue',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60608',
+        :phone => '312-243-5991 - phone currently disconnected',
+        :organization => '479',
+        :description => 'education * housing * dance'
+    )
+ServiceCenter.create(:name => 'Senior Housing',
+        :latitude => '-87.663386',
+        :longitude => '41.887183',
+        :street => '1419 W. Carroll (2nd floor)',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60607',
+        :phone => '(773) 921-3200',
+        :organization => '5198',
+        :description => 'senior housing'
+    )
+ServiceCenter.create(:name => 'Building to Building Organizing and Affordable Housing Preservation Program',
+        :latitude => '-87.6501904',
+        :longitude => '41.853245',
+        :street => '2150 South Canalport',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60608',
+        :phone => '773.292.4988 (hotline); (773) 292-4980 (administrative)',
+        :organization => '4063',
+        :description => 'housing rights education * hotline * community organizing'
+    )
+ServiceCenter.create(:name => 'Cressey House',
+        :latitude => '-87.6686356',
+        :longitude => '41.8794543',
+        :street => '1668 W Ogden Avenue',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60612',
+        :phone => '312-997-2222 X235',
+        :organization => '3883',
+        :description => 'addiction recovery supportive housing * homeless parents can live with children * single mothers with children'
+    )
+ServiceCenter.create(:name => 'Dolores’ Safe Haven',
+        :latitude => '-87.6386633',
+        :longitude => '41.9101242',
+        :street => '1532 N. Sedgwick Ave.',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60610',
+        :phone => '312.944.8810 X103',
+        :organization => '1774',
+        :description => 'case management * meals * emergency housing'
+    )
+ServiceCenter.create(:name => 'Patty Crowley Apartments',
+        :latitude => '-87.6387059',
+        :longitude => '41.9101854',
+        :street => '1530 N Sedgwick Avenue',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60610',
+        :phone => '312-944-8830',
+        :organization => '1774',
+        :description => 'case management * transitional housing * employment support'
+    )
+ServiceCenter.create(:name => 'Teresa\'s Interim Housing',
+        :latitude => '-87.6386633',
+        :longitude => '41.9101242',
+        :street => '1532 N. Sedgwick St.',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60610',
+        :phone => '312.944.8669',
+        :organization => '1774',
+        :description => 'case management * housing * financial education'
+    )
+ServiceCenter.create(:name => 'Neighborhood Housing Services Of Chicago',
+        :latitude => '-87.6689277',
+        :longitude => '41.9050655',
+        :street => '1279 N Milwaukee Avenue 5th Floor',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60622',
+        :phone => '773-329-4104',
+        :organization => '3609',
+        :description => 'affordable housing * foreclosure prevention * home buyer education'
+    )
+ServiceCenter.create(:name => 'Clayton Residential Home',
+        :latitude => '-87.637178',
+        :longitude => '41.919178',
+        :street => '2026 North Clark Street',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60614',
+        :phone => '773-549-1840',
+        :organization => '4021',
+        :description => 'individual counseling * affordable housing * medical care'
+    )
+ServiceCenter.create(:name => 'Housing Assistance',
+        :latitude => '-87.6583466',
+        :longitude => '41.911759',
+        :street => '30 W Chicago',
+        :city => '',
+        :state => '',
+        :zip => '',
+        :phone => '',
+        :organization => '2482',
+        :description => 'affordable housing * sro'
+    )
+ServiceCenter.create(:name => 'Supportive Living Program',
+        :latitude => '-87.6566344',
+        :longitude => '41.9160268',
+        :street => '1925 North Clybourn St',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60614 ',
+        :phone => '773-248-5200',
+        :organization => '3066',
+        :description => 'permanent supportive housing * hiv * support services'
+    )
+ServiceCenter.create(:name => 'The Family Support Program',
+        :latitude => '-87.6566344',
+        :longitude => '41.9160268',
+        :street => '1925 North Clybourn St',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60614',
+        :phone => '773-248-5200',
+        :organization => '3066',
+        :description => 'case management * mental health services * permanent housing'
+    )
+ServiceCenter.create(:name => 'Supportive Housing Outreach Program',
+        :latitude => '-87.6838326',
+        :longitude => '41.8879987',
+        :street => '333 N. Oakley Blvd',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60612',
+        :phone => '(773) 645-8900 extension 102',
+        :organization => '5235',
+        :description => 'substance abuse * supportive services * housing services'
+    )
+ServiceCenter.create(:name => 'The Eddie Beard Homeless Veterans\' Housing Program (Vet House)',
+        :latitude => '-87.687411',
+        :longitude => '41.8773019',
+        :street => '2425 W. Jackson Blvd ',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60612',
+        :phone => '(312) 226 2730',
+        :organization => '85',
+        :description => 'veterans housing'
+    )
+ServiceCenter.create(:name => 'Interim Housing Community',
+        :latitude => '-87.644192',
+        :longitude => '41.925848',
+        :street => '600 W Fullerton Parkway',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60614',
+        :phone => '773-549-6111',
+        :organization => '2573',
+        :description => 'case management * meals * transitional housing'
+    )
+ServiceCenter.create(:name => 'Youth Drop-In Center',
+        :latitude => '-87.6261789',
+        :longitude => '41.8289789',
+        :street => '3619 S. State',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '',
+        :phone => '866-803-8336',
+        :organization => '4549',
+        :description => 'case management * counseling * referrals to housing'
+    )
+ServiceCenter.create(:name => 'Rebecca Johnson Apartments and Admin. Office',
+        :latitude => '-87.6975402',
+        :longitude => '41.8775394',
+        :street => '2822 W Jackson Boulevard',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60612',
+        :phone => '773-722-5080',
+        :organization => '1774',
+        :description => 'case management * housing * job support'
+    )
+ServiceCenter.create(:name => 'A Safe Haven ',
+        :latitude => '-87.6953063',
+        :longitude => '41.8667489',
+        :street => '2750 W Roosevelt Road',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60608',
+        :phone => '773-435-8424',
+        :organization => '4329',
+        :description => 'permanent supportive housing * independent living * interim housing'
+    )
+ServiceCenter.create(:name => 'Adult Rehabilitation Unit',
+        :latitude => '-87.6662748',
+        :longitude => '41.9229847',
+        :street => '2258 N. Clybourn',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60614',
+        :phone => '773-477-1771',
+        :organization => '700',
+        :description => 'individual therapy * group therapy * housing'
+    )
+ServiceCenter.create(:name => 'Chronically Homeless Housing Program',
+        :latitude => '-87.622037',
+        :longitude => '41.82668',
+        :street => '3722-28 S. Indiana',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60653',
+        :phone => '888-270-3433',
+        :organization => '4488',
+        :description => 'permanent supportive housing'
+    )
+ServiceCenter.create(:name => 'Transitional Housing Program',
+        :latitude => '-87.6853341',
+        :longitude => '41.9153896',
+        :street => '1866 N Milwaukee Avenue',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60647',
+        :phone => '773-782-4734',
+        :organization => '3812',
+        :description => 'transitional housing * volunteer service * aa groups'
+    )
+ServiceCenter.create(:name => 'Residential Services Program',
+        :latitude => '-87.7059582',
+        :longitude => '41.8806185',
+        :street => '17 S Kedzie Avenue',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60612',
+        :phone => '773-722-7900',
+        :organization => '2740',
+        :description => 'transitional housing * medication monitoring * temporary housing'
+    )
+ServiceCenter.create(:name => 'SRO and Family Units - Affordable and Subsidized',
+        :latitude => '-87.6917867',
+        :longitude => '41.9104144',
+        :street => '2550 W. North Avenue  ',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60627',
+        :phone => '773.227.6332',
+        :organization => '4051',
+        :description => 'affordable housing * subsidized housing * section 8 housing'
+    )
+ServiceCenter.create(:name => 'Parkway Apartments',
+        :latitude => '-87.647236',
+        :longitude => '41.933029',
+        :street => '712 West Diversey Parkway',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60657',
+        :phone => '773-472-0025',
+        :organization => '4433',
+        :description => 'affordable housing * subsidized housing * section 8 housing'
+    )
+ServiceCenter.create(:name => 'New Hope Apartments',
+        :latitude => '-87.6321381',
+        :longitude => '41.9334702',
+        :street => '651 West Lake Street',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60661',
+        :phone => '',
+        :organization => '339',
+        :description => 'case management * transitional housing * affordable housing'
+    )
+ServiceCenter.create(:name => 'Trinity Community Housing Corp.',
+        :latitude => '-87.6185125',
+        :longitude => '41.8231475',
+        :street => '3939 S. Calumet Ave.',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60609',
+        :phone => '(773)373-8480',
+        :organization => '4322',
+        :description => 'senior housing'
+    )
+ServiceCenter.create(:name => 'Axis Teen Center',
+        :latitude => '-87.6970315',
+        :longitude => '41.9108297',
+        :street => '1636 N. California Avenue',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60647',
+        :phone => '773.384.2200',
+        :organization => '3994',
+        :description => 'transitional housing * spiritual services * residential program for women'
+    )
+ServiceCenter.create(:name => 'Bonaventure House',
+        :latitude => '-87.6501141',
+        :longitude => '41.9362067',
+        :street => '825 W Wellington Avenue',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60657',
+        :phone => '773-327-9921 x110',
+        :organization => '4017',
+        :description => 'case management * meals * affordable housing'
+    )
+ServiceCenter.create(:name => 'Interim Housing - Men\'s Services at Breakthrough Ministry Center',
+        :latitude => '-87.713827',
+        :longitude => '41.8886355',
+        :street => '402 N Saint Louis Avenue',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60624',
+        :phone => '773-346-1785',
+        :organization => '1748',
+        :description => 'case management * counseling * transitional housing'
+    )
+ServiceCenter.create(:name => 'Jazz on the Boulevard',
+        :latitude => '-87.603826',
+        :longitude => '41.820267',
+        :street => '4659 South Drexel Boulevard',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60653',
+        :phone => '773.268.4648',
+        :organization => '4433',
+        :description => 'case management * affordable housing * subsidized housing'
+    )
+ServiceCenter.create(:name => 'Marah’s Permanent Housing Program',
+        :latitude => '-87.6650319',
+        :longitude => '41.9351777',
+        :street => '1456 W. Oakdale Ave.',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60657',
+        :phone => '773.348.9011 ',
+        :organization => '1774',
+        :description => 'case management * housing * job support'
+    )
+ServiceCenter.create(:name => 'Connections for Abused Women & Their Children',
+        :latitude => '-87.7068317',
+        :longitude => '41.9013272',
+        :street => '1116 N. Kedzie Avenue',
+        :city => 'Chicago',
+        :state => 'IL',
+        :zip => '60651',
+        :phone => '(773) 278 4110',
+        :organization => '3740',
+        :description => 'housing for women who have been abused * housing for women and their children'
+    )
 LafCenter.create(:zipcode => '60601.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
         :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'None')
 LafCenter.create(:zipcode => '60602.0', :city => 'Chicago', :center => 'Garfield Community Service Center',

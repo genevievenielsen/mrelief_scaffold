@@ -22,16 +22,22 @@
       household_size = params[:household_size].in_numbers
     end
 
-    max_income = params[:max_income]
-    max_income = max_income.gsub(/[^0-9\.]/, '')
-
-    if max_income !~ /\D/
-      max_income = max_income.to_i
+    if params[:children] !~ /\D/  # returns true if all numbers
+      children = params[:children].to_i
     else
-      if max_income.include?("dollars")
-        max_income.slice!"dollars"
+      children = params[:children].in_numbers
+    end
+
+    gross_income = params[:gross_income]
+    gross_income = gross_income.gsub(/[^0-9\.]/, '')
+
+    if gross_income !~ /\D/
+      gross_income = gross_income.to_i
+    else
+      if gross_income.include?("dollars")
+        gross_income.slice!"dollars"
       end
-      max_income = max_income.in_numbers
+      gross_income = gross_income.in_numbers
     end
 
     expect_child_support = params[:expect_child_support]
@@ -46,41 +52,74 @@
       expect_child_support = expect_child_support.in_numbers
     end
 
+    expect_ssi = params[:expect_ssi]
+    expect_ssi = expect_ssi.gsub(/[^0-9\.]/, '')
 
-
-  tanif_eligibility = Tanif.find_by({ :household_size => household_size })
-
-
-  if max_income  > tanif_eligibility.max_income
-     @eligible_tanif = "no"
-  else
-    if params[:anticipate_income] == "yes"
-       @eligible_tanif = "maybe"
+    if expect_ssi !~ /\D/
+      expect_ssi = expect_ssi.to_i
     else
-      if expect_child_support  > tanif_eligibility.max_income
-         @eligible_tanif = "no"
+      if expect_ssi.include?("dollars")
+        expect_ssi.slice!"dollars"
+      end
+      expect_ssi = expect_ssi.in_numbers
+    end
+
+
+
+  if params[:child] == "no"
+      @eligible_tanif = "no"
+  else
+    if params[:relationship] == "adult_relative"
+      @eligible_tanif = "maybe"
+    else
+      if params[:first] == "yes"
+        household_size == 1
+      end
+      if params[:tanif_sixty_months] == "yes"
+        @eligible_tanif = "no"
       else
-         child_support = expect_child_support - 50
-        if child_support > tanif_eligibility.max_income
-           @eligible_tanif = "no"
-        else
-          if params[:child] == "no"
-             @eligible_tanif = "no"
-          else
-          if params[:teen_parent] == "no"
-             @eligible_tanif = "maybe"
-          else
-            if params[:highschool] == "no"
-              @eligible_tanif = "no"
-            else
-             @eligible_tanif = "yes"
-            end
-          end
-          end
+        if children < household_size - 1
+          @eligible_tanif = "maybe"
+         else
+           tanif_eligibility = Tanif.find_by({ :household_size => household_size })
+           reduced_gross_income = gross_income * 0.75
+           child_support = expect_child_support - 50
+           total_income = reduced_gross_income + child_support
+           if total_income > tanif_eligibility.max_income
+            @eligible_tanif = "no"
+           else
+              if params[:anticipate_income] == "yes"
+                @eligible_tanif = "maybe"
+              else
+                # child_support = expect_child_support - 50
+                # child_support = gross_income + child_support
+                # if child_support > tanif_eligibility.max_income
+                #   @eligible_tanif = "no"
+                #  else
+                  if params[:teen_parent] == "yes"
+                    @eligible_tanif = "maybe"
+                  else
+                    if params[:citizen] == "no"
+                      @eligible_tanif = "maybe"
+                    else
+
+                      if params[:highschool] == "no" && household_size == 2
+                        @eligible_tanif = "no"
+                      elsif params[:highschool] == "no" && household_size > 2
+                        @eligible_tanif = "maybe"
+                      else
+                        @eligible_tanif = "yes"
+                      end
+
+                    end
+                  end
+                 # end
+              end
+           end
         end
-       end
       end
     end
+  end
 
      if params[:citizen] == "no"
         @eligible_tanif = "maybe"
