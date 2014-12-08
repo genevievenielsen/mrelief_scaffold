@@ -10,8 +10,8 @@ class TwilioController < ApplicationController
   def voice
       response = Twilio::TwiML::Response.new do |r|
            r.Play 'https://dl.dropboxusercontent.com/s/vaq6et51o8ohwxz/mRelief.mp3?dl=0'
-      end
-      render_twiml response
+      end.text
+      # render_twiml response
     end
 
   require 'numbers_in_words'
@@ -62,7 +62,10 @@ class TwilioController < ApplicationController
    end
    if params[:Body].strip.downcase == "med"
       message = "For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
-      session["page"] = "medicare_household_question"
+      session["counter"] = 1
+   end
+   if params[:Body].strip.downcase == "med"
+      message = "For foodstamps, text the word 'food.'"
       session["counter"] = 1
    end
    if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("medicaid") || params[:Body].strip.downcase.include?("ride") || params[:Body].strip.downcase.include?("medicare")
