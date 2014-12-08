@@ -1,28 +1,12 @@
 require 'twilio-ruby'
 class TwilioController < ApplicationController
 
-  # def voice
-  #    twiml = Twilio::TwiML::Response.new do |response|
-  #     response.Say "Welcome to m Relief!"
-  #    end
-  #    render xml: twiml.to_xml
-  #  end
-
-
-  # def voice
-  #     response = Twilio::TwiML::Response.new do |r|
-  #          r.Play 'https://dl.dropboxusercontent.com/s/vaq6et51o8ohwxz/mRelief.mp3'
-  #     end
-  #     render text: response.text
-  #   end
-
   require 'numbers_in_words'
   require 'numbers_in_words/duck_punch' #see why later
 
   def text
 
   session["counter"] ||= 0
-
 
   if params[:Body].include?('"')
     params[:Body] = params[:Body].tr('"', '')
