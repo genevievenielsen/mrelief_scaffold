@@ -1,7 +1,7 @@
 <div class="container" style="padding-bottom:150px">
 <div class="page-header">
   <h1>Do I qualify for All City Programs within mRelief?</h1>
-  <p class="subhead">Programs include Food Stamps, RTA Ride Free, All Kids, Medicare Cost Sharing, Rental Assistance, Aged, Blind and Disabled (AABD) Cash Assistance and Medicaid</p>
+  <p class="subhead">Programs include Food Stamps, RTA Ride Free, All Kids, Medicare Cost Sharing, Rental Assistance, Medicaid, Aged, Blind and Disabled (AABD), Cash Assistance and Temporary Assistance for Needy Families </p>
 </div>
 
 
@@ -109,7 +109,13 @@
             <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %>| <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
             </li>
         <% end %>
-
+        <% if @eligible_tanif == "yes" %>
+          <li class="list-group-item">
+            <h3 class="allcityheader">AABD Cash Assistance</h3>
+            <%= link_to "to find your local Family Community Resource Center ", "https://www.dhs.state.il.us/page.aspx?module=12", :class => "btn btn-success btn-resolution" %>
+            <p>or contact the DHS Help Line at 1 800 843-6154 (voice) or 1 800 447-6404 (TTY).</p>
+          </li>
+        <% end %>
     </ul>
   </div>
   <% end %>
@@ -182,7 +188,19 @@
           <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %>| <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
         </li>
       <% end %>
-
+      <% if @eligible_tanif == "maybe" %>
+        <li class="list-group-item">
+          <h3 class="allcityheader">TANF Cash Assistance</h3>
+         <p>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a TANF expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your TANF eligibility with you.</p>
+          <div class="sectiondivider"></div>
+          <% if @laf_disclaimer.present?  %>
+              <h5><%= @laf_disclaimer %></h5>
+          <% else %>
+            <h4>The LAF expert nearest you:</h4>
+          <% end %>
+          <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %>| <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
+        </li>
+      <% end %>
     </ul>
   </div>
   <% end %>
@@ -365,11 +383,29 @@
           <% end %>
         </li>
         <% end %>
+      <% if @eligible_tanif == "no" %>
+      <li class="list-group-item">
+        <h3 class="allcityheader">TANF Cash Assistance</h3>
+
+        <h4>Some additional resources from Purple Binder:</h4>
+
+        <% if @child_resources_zip.count >= 2 %>
+        <p><%= @child_resources_zip.first.name %> | <%= @child_resources_zip.first.street %>  <%= @child_resources_zip.first.city %> <%= @child_resources_zip.first.state %>, <%= @child_resources_zip.first.zip %> | <%= @child_resources_zip.first.phone %> </p>
+
+        <p><%= @child_resources_zip.second.name %> | <%= @child_resources_zip.second.street %>  <%= @child_resources_zip.second.city %> <%= @child_resources_zip.second.state %>, <%= @child_resources_zip.second.zip %> | <%= @child_resources_zip.second.phone %> </p>
+        <% end %>
+
+        <% if @child_resources_first.present? %>
+        <p><%= @child_resources_first.name %> | <%= @child_resources_first.street %>  <%= @child_resources_first.city %> <%= @child_resources_first.state %>, <%= @child_resources_first.zip %> | <%= @child_resources_first.phone %> </p>
+
+        <p><%= @child_resources_second.name %> | <%= @child_resources_second.street %>  <%= @child_resources_second.city %> <%= @child_resources_second.state %>, <%= @child_resources_second.zip %> | <%= @child_resources_second.phone %> </p>
+
+        <% end %>
+      </li>
+      <% end %>
 
     </ul>
   </div>
 </div>
 <% end %>
-
-
 

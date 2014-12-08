@@ -7,7 +7,7 @@
 
 <div class="page-header" style="border:none">
   <h1>Do I qualify for All City Programs within mRelief?</h1>
-  <p class="subhead">Programs include Food Stamps, RTA Ride Free, All Kids, Medicare Cost Sharing, Rental Assistance, Medicaid and Aged, Blind and Disabled (AABD) Cash Assistance</p>
+  <p class="subhead">Programs include Food Stamps, RTA Ride Free, All Kids, Medicare Cost Sharing, Rental Assistance, Medicaid,  Aged, Blind and Disabled (AABD), Cash Assistance and Temporary Assistance for Needy Families</p>
 </div>
 
 <div class="panel panel-default col-md-12" style="margin: 0 0 40px 0; padding-top:15px">
@@ -34,6 +34,14 @@
       <input type="text" id="dependent_no" name="dependent_no" placeholder="For example: 3" class="form-control" required>
     </div>
   </div>
+
+
+    <div class="form-group col-sm-9">
+      <label for="children">How many children 18 and under are you caring for?</label>
+
+          <input type="text" id="children" name="children" placeholder="For example: 3" class="form-control"  required>
+
+    </div>
 
 
    <div class="form-group col-sm-9">
@@ -101,6 +109,48 @@
     </div>
 
 
+      <div class="form-group col-sm-9">
+
+        <label for="anticipate_income" id="anticipate_income">Do you or your child anticipate getting any other source of income outside of your job, child support or SSI? </label>
+
+        <button type="button" data-toggle="popover" data-content="This includes unemployment insurance, pensions, workers compensation and any other form of income." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+
+        <div id="anticipate_income">
+            <%= radio_button_tag 'anticipate_income', 'yes' %> yes
+            <%= radio_button_tag 'anticipate_income', 'no' %> no
+        </div>
+      </div>
+
+     <!-- Label and input for expect_child_support -->
+      <div class="form-group col-sm-9">
+        <label for="expect_child_support">
+          How much do you expect to receive in child support in the next 30 days?
+        </label>
+
+
+        <div class="input-group">
+          <span class="input-group-addon">$</span>
+           <input type="text" id="expect_child_support" name="expect_child_support" placeholder="For example: 500"class="form-control" required>
+          <span class="input-group-addon">.00</span>
+        </div>
+        </div>
+
+       <!-- Label and input for expect_ssi -->
+      <div class="form-group col-sm-9">
+        <label for="expect_ssi">
+          How much do you expect to receive in SSI in the next 30 days?
+        </label>
+
+
+        <div class="input-group">
+          <span class="input-group-addon">$</span>
+           <input type="text" id="expect_ssi" name="expect_ssi" placeholder="For example: 500"class="form-control" required>
+          <span class="input-group-addon">.00</span>
+        </div>
+        </div>
+
+
+
 <div class="form-group col-sm-9">
     <label for="ninety_day_gross_income">
       What is your income over the past 90 days? </label>
@@ -133,7 +183,7 @@
 </div>
 
 
-  <div class="form-group col-md-9">
+  <div class="form-group col-sm-9">
   <label for="assets">Please estimate the value of your assets. (Exclude the value of your home and car.)</label>
 
     <button type="button" data-toggle="popover" data-content="Personal property is anything owned by a person that is not land or permanently affixed to land. This includes such items as: money in checking and savings accounts;stocks, bonds, savings certificates, and other securities;farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
@@ -182,6 +232,89 @@
     </div>
 </div>
 <br>
+
+  <div class="form-group col-sm-12">
+    <label for="child" id="child">Are you pregnant or caring for a child under 19 years of age?</label>
+    <div class="clearfix"></div>
+        <div class="col-sm-6">
+          <div id="child"  class="pull-left">
+            <%= radio_button_tag 'child', 'yes' %> yes
+            <%= radio_button_tag 'child', 'no' %> no
+          </div>
+           </div>
+  </div>
+<br>
+
+  <div class="form-group col-sm-12">
+    <label for="relationship" id="relationship">Describe your biological relationship to the child you are caring for:
+    </label>
+    <div class="clearfix"></div>
+
+        <div class="col-sm-6">
+          <div id="relationship"  class="pull-left">
+            <%= radio_button_tag 'relationship', 'parent' %> Parent
+            <%= radio_button_tag 'relationship', 'adult_relative' %> Adult relative
+          </div>
+        </div>
+  </div>
+<br>
+
+  <div class="form-group col-sm-12">
+    <label for="first" id="first">Are you pregnant with your first child?
+    </label>
+    <div class="clearfix"></div>
+        <div class="col-sm-6">
+          <div id="first"  class="pull-left">
+            <%= radio_button_tag 'first', 'yes' %> yes
+            <%= radio_button_tag 'first', 'no' %> no
+          </div>
+        </div>
+  </div>
+<br>
+
+  <div class="form-group col-sm-12">
+    <label for="tanif_sixty_months" id="tanif_sixty_months">As a parent have you been receiving TANF for 60 months or more?
+    </label>
+
+    <div class="clearfix"></div>
+        <div class="col-sm-9">
+          <div id="tanif_sixty_months"  class="pull-left">
+            <%= radio_button_tag 'tanif_sixty_months', 'yes' %> yes
+            <%= radio_button_tag 'tanif_sixty_months', 'no' %> no
+            <%= radio_button_tag 'tanif_sixty_months', 'caretaker' %>  I am a caretaker relative, this does not apply to me.
+          </div>
+        </div>
+  </div>
+  <br>
+
+
+    <div class="form-group col-sm-12">
+      <label for="teen_parent" id="teen_parent"> Are you a teen parent? </label>
+      <div class="clearfix"></div>
+
+      <div class="col-sm-6">
+        <div id="teen_parent"  class="pull-left">
+          <%= radio_button_tag 'teen_parent', 'yes' %> yes
+          <%= radio_button_tag 'teen_parent', 'no' %> no
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="form-group col-md-12">
+      <label for="highschool" id="highschool">If your child is 18, are they enrolled full-time in high school? </label>
+
+      <button type="button" data-toggle="popover" data-content="This does not include GED classes" data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+
+      <div class="clearfix"></div>
+        <div class="col-md-6">
+          <div id="highschool"  class="pull-left">
+            <%= radio_button_tag 'highschool', 'yes' %> yes
+            <%= radio_button_tag 'highschool', 'no' %> no
+          </div>
+        </div>
+     </div>
 
 
   <div class="form-group col-sm-12">
@@ -260,7 +393,7 @@ Affairs.   <br>
 </div>
 
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-sm-6">
   <%= render "programs/calculator" %>
   </div>
 </div>
@@ -280,7 +413,6 @@ Affairs.   <br>
 </div>
 </div>
 </div>
-
 
 
 
