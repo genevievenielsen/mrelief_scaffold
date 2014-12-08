@@ -1,12 +1,11 @@
 class TwilioController < ApplicationController
 
-
- # if they don't qualify under normal and are disabled but not receiving payments
-
-# add laf centers to rta
-# NO zipcode for rta ride free
-# NO purple binder
-
+  def voice
+     twiml = Twilio::TwiML::Response.new do |response|
+      response.Say "Welcome to m Relief!"
+     end
+     render xml: twiml.to_xml
+   end
 
   require 'numbers_in_words'
   require 'numbers_in_words/duck_punch' #see why later
