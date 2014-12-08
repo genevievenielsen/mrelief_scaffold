@@ -6,18 +6,15 @@ class TwilioController < ApplicationController
   #    end
   #    render xml: twiml.to_xml
   #  end
-  include Webhookable
 
-  after_filter :set_header
+  # skip_before_action :verify_authenticity_token
 
-  skip_before_action :verify_authenticity_token
-
-  def voice
-      response = Twilio::TwiML::Response.new do |r|
-           r.Play 'https://dl.dropboxusercontent.com/s/vaq6et51o8ohwxz/mRelief.mp3?dl=0'
-      end
-      render text: response.text
-    end
+  # def voice
+  #     response = Twilio::TwiML::Response.new do |r|
+  #          r.Play 'https://dl.dropboxusercontent.com/s/vaq6et51o8ohwxz/mRelief.mp3?dl=0'
+  #     end
+  #     render text: response.text
+  #   end
 
   require 'numbers_in_words'
   require 'numbers_in_words/duck_punch' #see why later
