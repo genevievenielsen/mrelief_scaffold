@@ -1,3 +1,4 @@
+require 'twilio-ruby'
 class TwilioController < ApplicationController
 
   # def voice
@@ -7,11 +8,10 @@ class TwilioController < ApplicationController
   #    render xml: twiml.to_xml
   #  end
 
-  # skip_before_action :verify_authenticity_token
 
   # def voice
   #     response = Twilio::TwiML::Response.new do |r|
-  #          r.Play 'https://dl.dropboxusercontent.com/s/vaq6et51o8ohwxz/mRelief.mp3?dl=0'
+  #          r.Play 'https://dl.dropboxusercontent.com/s/vaq6et51o8ohwxz/mRelief.mp3'
   #     end
   #     render text: response.text
   #   end
@@ -650,9 +650,21 @@ class TwilioController < ApplicationController
     respond_to do |format|
      format.xml {render xml: twiml.text}
    end
-
-
-
   end
+
+  include Webhookable
+
+   after_filter :set_header
+
+   skip_before_action :verify_authenticity_token
+
+   def voice
+
+     response = Twilio::TwiML::Response.new do |r|
+        r.Play 'https://dl.dropboxusercontent.com/s/vaq6et51o8ohwxz/mRelief.mp3'
+     end
+
+     render_twiml response
+   end
 
 end
