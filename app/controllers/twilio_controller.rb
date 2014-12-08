@@ -1,11 +1,18 @@
 class TwilioController < ApplicationController
 
+  # def voice
+  #    twiml = Twilio::TwiML::Response.new do |response|
+  #     response.Say "Welcome to m Relief!"
+  #    end
+  #    render xml: twiml.to_xml
+  #  end
+
   def voice
-     twiml = Twilio::TwiML::Response.new do |response|
-      response.Say "Welcome to m Relief!"
-     end
-     render xml: twiml.to_xml
-   end
+      response = Twilio::TwiML::Response.new do |r|
+           r.Play 'http://mrelief.com/mRelief.mp3'
+      end
+      render_twiml response
+    end
 
   require 'numbers_in_words'
   require 'numbers_in_words/duck_punch' #see why later
