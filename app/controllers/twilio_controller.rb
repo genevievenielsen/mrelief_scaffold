@@ -9,7 +9,7 @@ class TwilioController < ApplicationController
 
   def voice
       response = Twilio::TwiML::Response.new do |r|
-           r.Play 'http://mrelief.com/mRelief.mp3'
+           r.Play 'https://dl.dropboxusercontent.com/s/vaq6et51o8ohwxz/mRelief.mp3?dl=0'
       end
       render_twiml response
     end
