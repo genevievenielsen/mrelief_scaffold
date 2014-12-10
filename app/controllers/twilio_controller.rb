@@ -11,18 +11,21 @@ class TwilioController < ApplicationController
   if params[:Body].include?('"')
     params[:Body] = params[:Body].tr('"', '')
   end
-
   if params[:Body].include?("'")
     params[:Body] = params[:Body].tr("'", "")
+  end
+  #check here to see if a signature is included
+  if params[:Body].strip.inlcude?(" ")
+    params[:Body] = params[:Body].split(/ /).first
   end
 
   if params[:Body].strip.downcase == "reset"
     session["counter"] = 0
   end
-
    if session["counter"] == 0
     message = "Welcome to mRelief! We help you check your eligibility for benefits. For foodstamps, text 'food'. For RTA ride free, text 'ride.' For Medicaid, text 'medicaid.' For Medicare Cost Sharing, text 'medicare.' If you make a mistake, send the message 'reset'."
    end
+
    if params[:Body].strip.downcase == "menu"
       message = "For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.' If you make a mistake, send the message 'reset'."
    end
@@ -70,6 +73,9 @@ class TwilioController < ApplicationController
    # HERE IS THE FOOD STAMPS LOGIC
    if session["page"] == "snap_college_question" && session["counter"] == 2
       session["college"] = params[:Body].strip.downcase
+      if session["college"].inlcude?(" ")
+        session["college"] = session["college"].split(/ /).first
+      end
      if session["college"] == "no"
        message = "Are you a citizen of the United States? Enter 'yes' or 'no'"
        session["page"] = "snap_citizen_question"
