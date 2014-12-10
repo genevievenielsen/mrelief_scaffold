@@ -17,7 +17,6 @@ gem 'numbers_in_words'
 
 gem 'dotenv-rails', :groups => [:development, :test]
 gem 'twilio-ruby'
-gem 'dotenv-rails'
 gem 'sinatra'
 
 gem 'jquery-ui-rails'
