@@ -15,7 +15,7 @@ class TwilioController < ApplicationController
     params[:Body] = params[:Body].tr("'", "")
   end
   #check here to see if a signature is included
-  if params[:Body].strip.inlcude?(" ")
+  if params[:Body].strip.match(" ")
     params[:Body] = params[:Body].split(/ /).first
   end
 
