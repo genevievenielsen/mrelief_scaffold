@@ -15,9 +15,9 @@ class TwilioController < ApplicationController
     params[:Body] = params[:Body].tr("'", "")
   end
   #check here to see if a signature is included
-  if params[:Body].strip.inlcude?(" ")
-    params[:Body] = params[:Body].split(/ /).first
-  end
+  # if params[:Body].strip.inlcude?(" ")
+  #   params[:Body] = params[:Body].split(/ /).first
+  # end
 
   if params[:Body].strip.downcase == "reset"
     session["counter"] = 0
