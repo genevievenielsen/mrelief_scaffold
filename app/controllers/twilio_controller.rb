@@ -73,9 +73,6 @@ class TwilioController < ApplicationController
    # HERE IS THE FOOD STAMPS LOGIC
    if session["page"] == "snap_college_question" && session["counter"] == 2
       session["college"] = params[:Body].strip.downcase
-      if session["college"].inlcude?(" ")
-        session["college"] = session["college"].split(/ /).first
-      end
      if session["college"] == "no"
        message = "Are you a citizen of the United States? Enter 'yes' or 'no'"
        session["page"] = "snap_citizen_question"
