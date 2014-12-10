@@ -16,7 +16,6 @@ gem 'font-awesome-rails'
 gem 'numbers_in_words'
 
 gem 'dotenv-rails', :groups => [:development, :test]
-gem 'dotenv-rails'
 gem 'twilio-ruby'
 gem 'dotenv-rails'
 gem 'sinatra'
