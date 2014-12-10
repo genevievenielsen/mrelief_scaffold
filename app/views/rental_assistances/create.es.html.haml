@@ -1,0 +1,143 @@
+- if @eligible == "yes"
+  .page-header
+  .row{:style => "text-align:center;"}
+    .col-md-8.col-md-offset-2
+      %i.fa.fa-check-circle.fa-5x
+      %h1 You may be in luck!
+      %h4 Based on your rental status, household size and income, you likely qualify for rental assistance.  Applications can be filed at any of the City’s six Community Service Centers.
+      - if @medical_circumstance == "yes"
+        %h4 You must be able to obtain documents from your employer showing that you took time off as well as from the hospital or attending physician.
+      - elsif @natural_disaster == "yes"
+        %h4
+          You must be able to prove this by obtaining documents from a fire marshall (standard fire department reports). For floods, please provide a letter from your landlord and photographs.
+      - elsif @temporary_loss == "yes"
+        %h4 You must provide last 90 days of pay stubs and a letter from employer stating (layoff, termination, etc) and the return date to work. You can also provide unemployment assistance documentation.
+      - elsif @domestic_violence == "yes"
+        %h4 You must be able to prove this by providing a report from the police department or a document showing an order of protection/restraining order.
+      %h4 The final decision will be made one-on-one by the case manager.
+      %br/
+      %br/
+      .row
+        .text-center
+          - if @laf_disclaimer.present?
+            %p.subhead= @laf_disclaimer
+          - else
+            %p.subhead Based on your zipcode, here is the nearest Community Service Center to complete your application:
+          .col-md-offset-3.col-md-6.col-sm-6.text-center{:style => "text-align:center;"}
+            %ul.list-group{:style => "text-align:left;"}
+              %li.list-group-item{:style => "font-weight:bold"}
+                = @lafcenter.center
+              %li.list-group-item
+                %i.fa.fa-map-marker
+                = @lafcenter.address
+                = @lafcenter.city
+                , #{@lafcenter.zipcode.to_i}
+              %li.list-group-item
+                %i.fa.fa-phone
+                = @lafcenter.telephone
+              %li.list-group-item
+                Days that Spanish is spoken - #{@lafcenter.spanish}
+            %br/
+            %br/
+      .row
+        %p.subhead or call 3-1-1.
+- elsif @eligible == "maybe"
+  %br/
+  %br/
+  .row{:style => "text-align:center;"}
+    .col-md-8.col-md-offset-2
+      %i.fa.fa-exclamation-circle.fa-5x
+      %h1 Close enough to apply!
+      %h4 According to the income guidelines of Rental Assistance, you make too much money to apply. However, in some cases the city may make an exception. Applications can be filed at any of the City’s six Community Service Centers.
+      %br/
+      .row
+        .text-center
+          - if @laf_disclaimer.present?
+            %p.subhead= @laf_disclaimer
+          - else
+            %p.subhead Based on your zipcode, here is the nearest Community Service Center to complete your application:
+          .col-md-offset-3.col-md-6.col-sm-6.text-center{:style => "text-align:center;"}
+            %ul.list-group{:style => "text-align:left;"}
+              %li.list-group-item{:style => "font-weight:bold"}
+                = @lafcenter.center
+              %li.list-group-item
+                %i.fa.fa-map-marker
+                = @lafcenter.address
+                = @lafcenter.city
+                , #{@lafcenter.zipcode.to_i}
+              %li.list-group-item
+                %i.fa.fa-phone
+                = @lafcenter.telephone
+              %li.list-group-item
+                Days that Spanish is spoken - #{@lafcenter.spanish}
+            %br/
+            %br/
+      .row
+        %p.subhead or call 3-1-1.
+- elsif @eligible == "no"
+  .page-header
+  .row{:style => "text-align:center;"}
+    .col-md-8.col-md-offset-2
+      %h1 Something else in mind!
+      %h4 Based on your household size and income, you likely do not qualify for Rental Assistance.
+      %br/
+      .row
+        %h4 Here are some additional resources from Purple Binder:
+      %br/
+      .row
+        - if @housing_resources_zip.count >= 2
+          .col-md-6.col-sm-6
+            %ul.list-group{:style => "text-align:left;"}
+              %li.list-group-item{:style => "font-weight:bold"}
+                = @housing_resources_zip.first.name
+              %li.list-group-item
+                %i.fa.fa-map-marker
+                = @housing_resources_zip.first.street
+                = @housing_resources_zip.first.city
+                = @housing_resources_zip.first.state
+                , #{@housing_resources_zip.first.zip}
+              %li.list-group-item
+                %i.fa.fa-phone
+                = @housing_resources_zip.first.phone
+          .col-md-6.col-sm-6
+            %ul.list-group{:style => "text-align:left;"}
+              %li.list-group-item{:style => "font-weight:bold"}
+                = @housing_resources_zip.second.name
+              %li.list-group-item
+                %i.fa.fa-map-marker
+                = @housing_resources_zip.second.street
+                = @housing_resources_zip.second.city
+                = @housing_resources_zip.second.state
+                , #{@housing_resources_zip.second.zip}
+              %li.list-group-item
+                %i.fa.fa-phone
+                = @housing_resources_zip.second.phone
+      .row
+        - if @housing_resources_first.present?
+          .col-md-6.col-sm-6
+            %ul.list-group{:style => "text-align:left;"}
+              %li.list-group-item{:style => "font-weight:bold"}
+                = @housing_resources_first.name
+              %li.list-group-item
+                %i.fa.fa-map-marker
+                = @housing_resources_first.street
+                = @housing_resources_first.city
+                = @housing_resources_first.state
+                , #{@housing_resources_first.zip}
+              %li.list-group-item
+                %i.fa.fa-phone
+                = @housing_resources_first.phone
+          .col-md-6.col-sm-6
+            %ul.list-group{:style => "text-align:left;"}
+              %li.list-group-item{:style => "font-weight:bold"}
+                = @housing_resources_second.name
+              %li.list-group-item
+                %i.fa.fa-map-marker
+                = @housing_resources_second.street
+                = @housing_resources_second.city
+                = @housing_resources_second.state
+                , #{@housing_resources_second.zip}
+              %li.list-group-item
+                %i.fa.fa-phone
+                = @housing_resources_second.phone
+      = image_tag("pblogo.jpg", :class => "logo-padding")

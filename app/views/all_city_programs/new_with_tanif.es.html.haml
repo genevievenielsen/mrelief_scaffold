@@ -1,0 +1,190 @@
+.container
+  :javascript
+    $(function ()
+          { $("[data-toggle='popover']").popover();
+          });
+  .page-header{:style => "border:none"}
+    %h1 Do I qualify for All City Programs within mRelief?
+    %p.subhead Programs include Food Stamps, RTA Ride Free, All Kids, Medicare Cost Sharing, Rental Assistance, Medicaid,  Aged, Blind and Disabled (AABD) Cash Assistance and Temporary Assistance for Needy Families
+  .panel.panel-default.col-md-12{:style => "margin: 0 0 40px 0; padding-top:15px"}
+    .panel-body
+      %form{:action => "/all_city_programs_with_tanif", :method => "post", :role => "form"}
+        .form-group.col-sm-9
+          %label{:for => "age"} How old are you?
+          %input#age.form-control{:name => "age", :placeholder => "For example: 27", :required => "", :type => "text"}/
+        / Label and input for snap_dependent_no
+        .form-group.col-sm-9
+          %label{:for => "dependent_no"} What is the number of people living in your household including yourself?
+          %button{"data-content" => "This should include the number of people who purchase and prepare food with you.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+            %i.fa.fa-info-circle
+          %div
+            %input#dependent_no.form-control{:name => "dependent_no", :placeholder => "For example: 3", :required => "", :type => "text"}/
+        .form-group.col-sm-9
+          %label{:for => "medicare_household_size"} How many people in your household receive Medicare?
+          %button{"data-content" => "This should include the number of people who purchase and prepare food with you.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+            %i.fa.fa-info-circle
+          %div
+            %input#medicare_household_size.form-control{:name => "medicare_household_size", :placeholder => "For example: 2", :required => "", :type => "text"}/
+        .form-group.col-sm-9.pull-left
+          %label{:for => "zipcode"} What is your zipcode?
+          %input#zipcode.form-control{:name => "zipcode", :placeholder => "For example: 60615", :required => "", :type => "text"}/
+        / Label and input for snap_gross_income
+        .form-group.col-sm-9
+          %label{:for => "monthly_gross_income"}
+            What is your gross monthly income?
+          %button{"data-content" => "This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+            %i.fa.fa-info-circle
+          .input-group
+            %span.input-group-addon $
+            %input#monthly_gross_income.form-control{:name => "monthly_gross_income", :placeholder => "For example: 1000", :required => "", :type => "text"}/
+            %span.input-group-addon .00
+        .form-group.col-sm-9
+          %label{:for => "net_income"}
+            How much do you anticipate to earn in net income in the next 30 days? (After taxes have been taken out)
+          %button{"data-content" => "This should include income you earn from your work, self employment and rental income (contributions from people who live with you.)", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+            %i.fa.fa-info-circle
+          .input-group
+            %span.input-group-addon $
+            %input#net_income.form-control{:name => "net_income", :placeholder => "For example: 1000", :required => "", :type => "text"}/
+            %span.input-group-addon .00
+        .form-group.col-sm-9
+          %label{:for => "monthly_benefits"}
+            What is your monthly income expected from government benefits or other assistance?
+          %button{"data-content" => "This includes social security (SSI), veterans benefits, railroad assistance etc.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+            %i.fa.fa-info-circle
+          .input-group
+            %span.input-group-addon $
+            %input#monthly_benefits.form-control{:name => "monthly_benefits", :placeholder => "For example: 1000", :required => "", :type => "text"}/
+            %span.input-group-addon .00
+        .form-group.col-sm-9
+          %label{:for => "ninety_day_gross_income"}
+            What is your income over the past 90 days?
+          %button{"data-content" => "Includes cash receipts from all sources including money wages and salaries before any deductions, unemployment compensation, public assistance, alimony, child support, lottery/gambling winnings, dividends and all other income.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+            %i.fa.fa-info-circle
+          .input-group
+            %span.input-group-addon $
+            %input#ninety_day_gross_income.form-control{:name => "ninety_day_gross_income", :placeholder => "For example: 4000", :required => "", :type => "text"}/
+            %span.input-group-addon .00
+        %br/
+        / Label and input for rta_gross_income
+        .form-group.col-sm-9
+          %label{:for => "annual_gross_income"}
+            What is your gross annual income?
+          %button{"data-content" => "Your total income before tax deductions, including your spouse's income if married and living together on December 31 of last year, and that of a qualified additional resident (if applicable).", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+            %i.fa.fa-info-circle
+          .input-group
+            %span.input-group-addon $
+            %input#annual_gross_income.form-control{:name => "annual_gross_income", :placeholder => "For example: 30000", :required => "", :type => "text"}/
+            %span.input-group-addon .00
+        .form-group.col-md-9
+          %label{:for => "assets"} Please estimate the value of your assets. (Exclude the value of your home and car.)
+          %button{"data-content" => "Personal property is anything owned by a person that is not land or permanently affixed to land. This includes such items as: money in checking and savings accounts;stocks, bonds, savings certificates, and other securities;farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+            %i.fa.fa-info-circle
+          %div
+            %input#assets.form-control{:name => "assets", :placeholder => "For example: 5000", :required => "", :type => "text"}/
+        %br/
+        .form-group.col-sm-9.pull-left
+          %label#education{:for => "education"} Are you enrolled in college or an institution of higher education ?
+          .col-sm-6
+            #education
+              = radio_button_tag 'education', 'yes'
+              yes
+              \#{radio_button_tag 'education', 'no'} no
+        %br/
+        .form-group.col-sm-12
+          %label#citizen.pull-left{:for => "citizen"} Are you a citizen of the United States?
+          .clearfix
+          .col-sm-6
+            #citizen.pull-left
+              = radio_button_tag 'citizen', 'yes'
+              yes
+              \#{radio_button_tag 'citizen', 'no'} no
+        %br/
+        .form-group.col-sm-12
+          %label#pregnant.pull-left{:for => "pregnant"} Are you pregnant ?
+          .clearfix
+          .col-sm-6
+            #pregnant
+              = radio_button_tag 'pregnant', 'yes'
+              yes
+              \#{radio_button_tag 'pregnant', 'no'} no
+        %br/
+        .form-group.col-sm-12
+          %label#lease.pull-left{:for => "lease"} Is your name currently on the lease of the apartment that you are renting?
+          .col-sm-6
+            #lease
+              = radio_button_tag 'lease', 'yes'
+              yes
+              \#{radio_button_tag 'lease', 'no'} no
+        .form-group.col-sm-12
+          %label#rental_status.pull-left{:for => "rental_status"} If you are unable to pay your rent at this time, what circumstance explains why you are unable to pay rent?
+          #rental_status.pull-left
+            = radio_button_tag 'rental_status', 'medical circumstance'
+            Someone experiencing a medical circumstance
+            %button{"data-content" => "An emergency procedure (for example: surgery, related to complicated birth or other conditions) that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to your spouse, child, committed partner whose name is on the lease or grandparent who lives with you.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+              %i.fa.fa-info-circle
+            %br/
+            = radio_button_tag 'rental_status', 'a victim of natural disaster or fire'
+            A victim of natural disaster or fire
+            %button{"data-content" => "A natural disaster includes instances such as a tornado or fire that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to floods for people who are renting a basement apartment who can not afford to replace those items and are seeking relocation.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+              %i.fa.fa-info-circle
+            %br/
+            = radio_button_tag 'rental_status', 'a recipient of an eviction notice'
+            A recipient of an eviction notice
+            %button{"data-content" => "This must be a notice that is notarized and brought with you if you qualify.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+              %i.fa.fa-info-circle
+            %br/
+            = radio_button_tag 'rental_status', 'have experienced a temporary loss of income'
+            Have experienced a temporary loss of income
+            %button{"data-content" => "This involves losing income due to an unforeseen event (layoff, termination,or other emergencies etc.) The month in between when you lose your job and qualify for unemployment would be admissible.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+              %i.fa.fa-info-circle
+            %br/
+            = radio_button_tag 'rental_status', 'a victim of domestic violence'
+            A victim of domestic violence
+            %button{"data-content" => "This involves losing income due to violence from your intimate partner. If your partner was your sole source of income, this does not apply. Typically this benefit would apply to victims with income seeking relocation assistance. ", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+              %i.fa.fa-info-circle
+            %br/
+            = radio_button_tag 'rental_status', 'none of the above'
+            None of the above
+        .form-group.col-sm-12
+          %label#status.pull-left{:for => "status"} If you have a child, check the box below that describes your child's health insurance status:
+          .clearfix
+          .col-sm-12
+            #status.pull-left
+              = radio_button_tag 'status', 'uninsured'
+              been uninsured for 12 months
+              %br/
+              = radio_button_tag 'status', 'job_ended'
+              lost insurance because a JOB ended
+              %br/
+              = radio_button_tag 'status', 'cobra'
+              lost insurance because the insurance was COBRA
+              %br/
+              = radio_button_tag 'status', 'none'
+              none of the above
+              %br/
+        %br/
+        .form-group.col-sm-12
+          %label#disabled.pull-left{:for => "disabled"} If you are disabled, describe your current status:
+          .clearfix
+          .col-sm-12
+            #disabled.pull-left
+              = radio_button_tag 'disabled', 'social-security'
+              I am receiving disability payments from Social Security.
+              %br/
+              = radio_button_tag 'disabled', 'railroad'
+              I am receiving disability payments from the Railroad Retirement Board.
+              %br/
+              = radio_button_tag 'disabled', 'veterans'
+              I am receiving disability payments from Veterans
+              Affairs.
+              %br/
+              = radio_button_tag 'disabled', 'none'
+              I am currently not receiving any disability payments
+              %br/
+        .row
+          .col-md-6
+            = render "programs/calculator"
+        .col-sm-12
+          %div{:style => "padding:40px 0 0 0"}
+            %button.btn.btn-primary{:type => "submit"} See if I qualify

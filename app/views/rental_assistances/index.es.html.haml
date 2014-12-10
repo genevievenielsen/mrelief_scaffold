@@ -1,0 +1,19 @@
+%h1 Listing rental_assistances
+%table
+  %thead
+    %tr
+      %th Rental dependent no
+      %th Rental gross income
+      %th Rental status
+      %th{:colspan => "3"}
+  %tbody
+    - @rental_assistances.each do |rental_assistance|
+      %tr
+        %td= rental_assistance.rental_dependent_no
+        %td= rental_assistance.rental_gross_income
+        %td= rental_assistance.rental_status
+        %td= link_to 'Show', rental_assistance
+        %td= link_to 'Edit', edit_rental_assistance_path(rental_assistance)
+        %td= link_to 'Destroy', rental_assistance, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Rental assistance', new_rental_assistance_path

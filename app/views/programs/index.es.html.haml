@@ -1,0 +1,77 @@
+.container
+  .row
+    .col-md-10.col-md-offset-1
+      %h1.page-header Programs for Chicago & Illinois
+      %p.subhead
+        Below are the benefits that mRelief currently offers for prescreening. Although these are not
+        %em all
+        the benefits the city and state offers, we are working to provide you with as much as we can.
+%div
+  %h4{:style => "text-align:center"} Click on a benefit below to begin the pre-screening process.
+%br/
+/ City of Chicago Programs
+.container
+  .row
+    .col-md-12
+      %h3.program-heading{:style => "padding-bottom:0px"} CHICAGO PROGRAMS
+      %h4{:style => "text-align:center"} Accessible in Community Service Centers
+  %br/
+  .row
+    - chicago_programs = Program.where(:location => "chicago")
+    - chicago_programs.each_with_index do |program|
+      .col-md-4
+        %a.thumbnail{:href => program.url, :style => "padding:0 20px 20px 20px"}
+          %span.caption
+        %h3= program.name
+        %p= program.description
+  /
+    <div class="row">
+    <div class="col-md-12">
+    <div class="text-center">
+    <a href="/all_city_programs/new" class="btn btn-success btn-full">Find Out If You Qualify for All City Programs</a>
+    </div>
+    </div>
+    </div>
+  %hr/
+  / Illinois Programs
+  .row
+    .col-md-12
+      %h3.program-heading STATE OF ILLINOIS PROGRAMS
+  %div
+    .row
+      - chicago_programs = Program.where(:location => "illinois")
+      - chicago_programs.each_with_index do |program|
+        .col-md-4
+          %a.thumbnail{:href => program.url}
+            %span.caption
+          %h3= program.name
+          %p= program.description
+  %br/
+  %br/
+  %br/
+  /
+    <div class="row">
+    <div class="col-md-12" style="text-align:center; padding-bottom:20px">
+    <h3>Programs Accessible in Suburban Cook County</h3>
+    </div>
+    </div>
+    <haml:silent>
+    </haml:silent>  <div class="row" style="padding: 0 0 40px 0">
+    <haml:silent>
+    </haml:silent><haml:silent>
+    </haml:silent>      <div class="row">
+    <haml:silent>
+    </haml:silent>      <div class="col-md-4">
+    <div class="thumbnail" style="min-height:230px">
+    <div class="caption" style="text-align:center; padding:0 0 20px 0">
+    <h3></haml:block><haml:silent></haml:silent><haml:block></h3>
+    <p style="padding:0 30px 0 30px"></haml:block><haml:silent></haml:silent><haml:block></p>
+    <p><a href="</haml:block><haml:silent></haml:silent><haml:block>" class="btn btn-primary" role="button">Find Out If You Qualify</a></p>
+    </div>
+    </div>
+    </div>
+    <haml:silent>
+    </haml:silent>      </div>
+    <haml:silent>
+    </haml:silent><haml:silent>
+    </haml:silent></div>

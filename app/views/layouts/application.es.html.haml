@@ -1,5 +1,5 @@
 !!!
-%html{:lang => "es"}
+%html{:lang => "en"}
   %head
     %meta{:charset => "utf-8"}/
     %title Mrelief
@@ -34,8 +34,7 @@
         #bs-example-navbar-collapse-1.collapse.navbar-collapse
           %ul.nav.navbar-nav.navbar-right
             %li
-              %a{:href => "/programs"}= t.layouts.programs | "Programs"
-
+              %a{:href => "/programs"} Programs
             %li
               %a{:href => "/how_mrelief_works"} How Mrelief Works
             %li
@@ -44,13 +43,11 @@
               %a{:href => "/contact"} Contact Us
             %li
               %a{:href => "/press_release"} Press Release
-              %li
-                - if I18n.locale == :es
-                  = link_to "English", set_language_english_path
-                - elsif I18n.locale == :en
-                  = link_to "Español", set_language_spanish_path
-
-
+            %li
+              - if I18n.locale == :es
+                = link_to "English", set_language_english_path
+              - elsif I18n.locale = :en
+                = link_to "Español", set_language_spanish_path
             %li
               %a.btn-donate{:href => "https://fundly.com/mrelief-using-technology-to-improve-social-services"} Donate
     .container

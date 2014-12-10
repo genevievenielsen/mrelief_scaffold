@@ -1,0 +1,17 @@
+%h1 Listing medicaids
+%table
+  %thead
+    %tr
+      %th Medicaid household size
+      %th Medicaid gross income
+      %th{:colspan => "3"}
+  %tbody
+    - @medicaids.each do |medicaid|
+      %tr
+        %td= medicaid.medicaid_household_size
+        %td= medicaid.medicaid_gross_income
+        %td= link_to 'Show', medicaid
+        %td= link_to 'Edit', edit_medicaid_path(medicaid)
+        %td= link_to 'Destroy', medicaid, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Medicaid', new_medicaid_path

@@ -1,0 +1,49 @@
+.container
+  :javascript
+    $(function ()
+          { $("[data-toggle='popover']").popover();
+          });
+  .page-header.col-md-10.col-md-offset-1{:style => "border:none;"}
+    %h1 Do I qualify for Early Head Start?
+    .subhead
+      %p Early Head Start provides educational and early childhood development activities for children from birth to three years old from low-income families. It includes free medical, dental, and mental health services and nutritious meals, as well as parent education and training.
+    %p
+      You can find more information on Early Head Start by
+      %a{:href => "http://chicagoearlylearning.org/faq"} clicking here
+  - if @early_head_start.errors.any?
+    - @early_head_start.errors.full_messages.each do |message|
+      .alert.alert-dismissable.alert-danger
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} &times;
+        = message
+  .row
+    .panel.panel-default.col-md-8.col-md-offset-2
+      .panel-body
+        %form{:action => "/early_head_starts", :method => "post", :role => "form"}
+          / Label and input for ehs_dependent_no
+          .form-group.col-md-12
+            %p.allthatapply If you are either pregnant or have a child who is between 0 and 2 years old, you may be eligible for Early Head Start.
+            %label{:for => "ehs_dependent_no"} How many dependents (including yourself) are in your household?
+            %button{"data-content" => "Children under the age of 19.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+              %i.fa.fa-info-circle
+            .row
+              .col-md-4
+                %input#ehs_dependent_no.form-control{:name => "ehs_dependent_no", :placeholder => "For example: 3", :required => "", :type => "text", :value => @early_head_start.ehs_dependent_no}/
+          / Label and input for ehs_gross_income
+          .form-group.col-sm-9
+            %label{:for => "ehs_gross_income"}
+              What is your gross monthly income?
+            %button{"data-content" => "Your income per year before tax deductions.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+              %i.fa.fa-info-circle
+            .input-group
+              %span.input-group-addon $
+              %input#ehs_gross_income.form-control{:name => "ehs_gross_income", :placeholder => "For example: 1,500", :required => "", :type => "text", :value => @early_head_start.ehs_gross_income}/
+              %span.input-group-addon .00
+          .row
+            .form-group.col-sm-9.pull-left
+              %label{:for => "zipcode"} What is your zipcode?
+              %input#zipcode.form-control{:name => "zipcode", :placeholder => "For example: 60615", :required => "", :type => "text"}/
+          .row
+            .col-md-6
+              = render "programs/calculator"
+          %div
+            %button.btn.btn-primary.program-btn{:type => "submit"} See if I qualify
