@@ -1,0 +1,47 @@
+= form_for(@service_center) do |f|
+  - if @service_center.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@service_center.errors.count, "error")
+        prohibited this service_center from being saved:
+      %ul
+        - @service_center.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.label :name
+    %br/
+    = f.text_field :name
+  .field
+    = f.label :latitude
+    %br/
+    = f.text_field :latitude
+  .field
+    = f.label :longitude
+    %br/
+    = f.text_field :longitude
+  .field
+    = f.label :street
+    %br/
+    = f.text_field :street
+  .field
+    = f.label :city
+    %br/
+    = f.text_field :city
+  .field
+    = f.label :state
+    %br/
+    = f.text_field :state
+  .field
+    = f.label :zip
+    %br/
+    = f.text_field :zip
+  .field
+    = f.label :phone
+    %br/
+    = f.text_field :phone
+  .field
+    = f.label :organization
+    %br/
+    = f.text_field :organization
+  .actions
+    = f.submit

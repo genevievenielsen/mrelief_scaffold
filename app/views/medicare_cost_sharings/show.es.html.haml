@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Household size:
+  = @medicare_cost_sharing.household_size
+%p
+  %strong Medicare cost sharing:
+  = @medicare_cost_sharing.medicare_cost_sharing
+%p
+  %strong Premium only:
+  = @medicare_cost_sharing.premium_only
+= link_to 'Edit', edit_medicare_cost_sharing_path(@medicare_cost_sharing)
+|
+\#{link_to 'Back', medicare_cost_sharings_path}

@@ -35,24 +35,21 @@
           %ul.nav.navbar-nav.navbar-right
             %li
               %a{:href => "/programs"}= t.layouts.programs | "Programs"
-
             %li
-              %a{:href => "/how_mrelief_works"} How Mrelief Works
+              %a{:href => "/how_mrelief_works"}= t.layouts.how_mrelief | "How Mrelief Works"
             %li
-              %a{:href => "/about_us"} About Us
+              %a{:href => "/about_us"}= t.layouts.about_us | "About Us"
             %li
-              %a{:href => "/contact"} Contact Us
+              %a{:href => "/contact"}= t.layouts.contact_us | "Contact Us"
             %li
-              %a{:href => "/press_release"} Press Release
-              %li
-                - if I18n.locale == :es
-                  = link_to "English", set_language_english_path
-                - elsif I18n.locale == :en
-                  = link_to "Español", set_language_spanish_path
-
-
+              %a{:href => "/press_release"}= t.layouts.press_release | "Press Release"
             %li
-              %a.btn-donate{:href => "https://fundly.com/mrelief-using-technology-to-improve-social-services"} Donate
+              - if I18n.locale == :es
+                = link_to "English", set_language_english_path
+              - elsif I18n.locale = :en
+                = link_to "Español", set_language_spanish_path
+            %li
+              %a.btn-donate{:href => "https://fundly.com/mrelief-using-technology-to-improve-social-services"}= t.layouts.donate | "Donate"
     .container
       - if notice.present?
         .alert.alert-dismissable.alert-success
@@ -76,7 +73,7 @@
             %a{:href => "https://plus.google.com/117049110248209318421 "}
               %i.fa.fa-google-plus-square.pull-left.fa-2x
         .col-md-10.col-sm-12.col-xs-12
-          %p#disclaimer *mRelief does not predict with 100% accuracy whether users will definitely be approved for benefits; but instead provides users with information about whether it is worth it to invest the time required for the application process. However, we are working to make our forms more inclusive everyday. If you are undocumented, a legal permanent resident, or have a very specific case, our sytem refers you to paralegals who can help. Stay tuned for more updates!
+          %p#disclaimer= t.layouts.disclaimer | "*mRelief does not predict with 100% accuracy whether users will definitely be approved for benefits; but instead provides users with information about whether it is worth it to invest the time required for the application process. However, we are working to make our forms more inclusive everyday. If you are undocumented, a legal permanent resident, or have a very specific case, our system refers you to paralegals who can help. Stay tuned for more updates!"
     = render "layouts/google_analytics"
     :javascript
       // Get all the keys from document

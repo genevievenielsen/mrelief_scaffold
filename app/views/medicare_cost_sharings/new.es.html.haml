@@ -1,0 +1,49 @@
+.container
+  :javascript
+    $(function ()
+          { $("[data-toggle='popover']").popover();
+          });
+  .page-header.col-md-10.col-md-offset-1{:style => "border:none;"}
+    %h2 Do I qualify for the Medicare Cost Sharing program?
+    .subhead
+      %p If you are receiving Medicare through the Social Security Administration, you may qualify for a Medicare cost sharing program that will pay your Medicare Part B premium and -- depending on your income -- your Medicare deductibles and co-pays.
+  - if @medicare_cost_sharing.errors.any?
+    - @medicare_cost_sharing.errors.full_messages.each do |message|
+      .alert.alert-dismissable.alert-danger
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} &times;
+        = message
+  .panel.panel-default.col-md-8.col-md-offset-2
+    .panel-body
+      %form{:action => "/medicare_cost_sharings", :method => "post", :role => "form"}
+        / Label and input for household_size
+        .form-group.col-md-12
+          %label{:for => "household_size"} What is your household size?
+          %button{"data-content" => "Please include yourself, your spouse, your children under 18 who live with you", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+            %i.fa.fa-info-circle
+          %div
+            %input#household_size.form-control{:name => "household_size", :placeholder => "For example: 3", :required => "", :type => "text"}/
+        .form-group.col-md-12
+          %label{:for => "medicare_household_size"} How many people in your household receive Medicare?
+          %div
+            %input#medicare_household_size.form-control{:name => "medicare_household_size", :placeholder => "For example: 2", :required => "", :type => "text"}/
+        / Label and input for medicare_cost_sharing
+        .form-group.col-md-12
+          %label{:for => "assets"} What is you gross monthly income?
+          %div
+            %input#monthly_income.form-control{:name => "monthly_income", :placeholder => "For example: 1000", :required => "", :type => "text"}/
+        / Label and input for premium_only
+        .form-group.col-md-12
+          %label{:for => "assets"} Please estimate the value of your assets. (Exclude the value of your home and car.)
+          %button{"data-content" => "Personal property is anything owned by a person that is not land or permanently affixed to land. This includes such items as: money in checking and savings accounts;stocks, bonds, savings certificates, and other securities;farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+            %i.fa.fa-info-circle
+          %div
+            %input#assets.form-control{:name => "assets", :placeholder => "For example: 5000", :required => "", :type => "text"}/
+        .form-group.col-sm-9.pull-left
+          %label{:for => "zipcode"} What is your zipcode?
+          %input#zipcode.form-control{:name => "zipcode", :placeholder => "For example: 60615", :required => "", :type => "text"}/
+        .row
+          .col-md-6
+            = render "programs/calculator"
+        .form-group.col-sm-12
+          %div{:style => "padding:40px 0 0 0"}
+            %button.btn.btn-primary{:type => "submit"} See if I qualify

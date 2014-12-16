@@ -1,0 +1,19 @@
+= form_for(@family_nutrition) do |f|
+  - if @family_nutrition.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@family_nutrition.errors.count, "error")
+        prohibited this family_nutrition from being saved:
+      %ul
+        - @family_nutrition.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.label :nutrition_gross_income
+    %br/
+    = f.text_field :nutrition_gross_income
+  .field
+    = f.label :nutrition_household_size
+    %br/
+    = f.number_field :nutrition_household_size
+  .actions
+    = f.submit
