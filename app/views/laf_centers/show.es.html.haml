@@ -1,0 +1,25 @@
+%p#notice= notice
+%p
+  %strong Zipcode:
+  = @laf_center.zipcode
+%p
+  %strong City:
+  = @laf_center.city
+%p
+  %strong Center:
+  = @laf_center.center
+%p
+  %strong Address:
+  = @laf_center.address
+%p
+  %strong Contact:
+  = @laf_center.contact
+%p
+  %strong Telephone:
+  = @laf_center.telephone
+%p
+  %strong Spanish:
+  = @laf_center.spanish
+= link_to 'Edit', edit_laf_center_path(@laf_center)
+|
+\#{link_to 'Back', laf_centers_path}

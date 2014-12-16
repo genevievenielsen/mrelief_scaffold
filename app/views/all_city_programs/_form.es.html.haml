@@ -1,0 +1,11 @@
+= form_for(@all_city_program) do |f|
+  - if @all_city_program.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@all_city_program.errors.count, "error")
+        prohibited this all_city_program from being saved:
+      %ul
+        - @all_city_program.errors.full_messages.each do |message|
+          %li= message
+  .actions
+    = f.submit

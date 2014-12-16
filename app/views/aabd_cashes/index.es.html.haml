@@ -1,0 +1,13 @@
+%h1 Listing aabd_cashes
+%table
+  %thead
+    %tr
+      %th{:colspan => "3"}
+  %tbody
+    - @aabd_cashes.each do |aabd_cash|
+      %tr
+        %td= link_to 'Show', aabd_cash
+        %td= link_to 'Edit', edit_aabd_cash_path(aabd_cash)
+        %td= link_to 'Destroy', aabd_cash, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Aabd cash', new_aabd_cash_path

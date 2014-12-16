@@ -1,0 +1,91 @@
+.container
+  :javascript
+    $(function ()
+          { $("[data-toggle='popover']").popover();
+          });
+  .row
+    .page-header.col-md-10.col-md-offset-1{:style => "border:none;"}
+      %h2= t.snap.do_i_qualify | "Do I qualify for Food Stamps?"
+      %p.subhead
+        = t.snap.food_stamps | "Food stamps, or Supplemental Nutrition Assistance Program (SNAP),"
+        %br/
+        = t.snap.helps_low_income | "helps low-income people and families buy the food they need for good health."
+      %p= t.snap.benefits_are | "Benefits are provided on the Illinois Link Card - an electronic card that is accepted at most grocery stores."
+      %p
+        = t.snap.you_can_find | "You can find more information about SNAP/food stamps by"
+        %a{:href => "http://www.dhs.state.il.us/page.aspx?item=30357"}= t.snap.clicking_here | "clicking here."
+  - if @snap_eligibility.errors.any?
+    - @snap_eligibility.errors.full_messages.each do |message|
+      .alert.alert-dismissable.alert-danger
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} &times;
+        = message
+  .row
+    .panel.panel-default.col-md-8.col-md-offset-2
+      .panel-body
+        %form{:action => "/snap_eligibilities", :method => "post", :role => "form"}
+          %label{:for => "age"}= t.snap.how_old | "How old are you?"
+          .row
+            .form-group.col-md-6
+              %input#age.form-control{:name => "age", :placeholder => I18n.t('placeholder.example_age', :default => "For example: 27"), :required => "", :type => "text"}/
+          / Label and input for snap_dependent_no
+          .row
+            .form-group.col-md-12
+              %label{:for => "snap_dependent_no"}= t.snap.number_of_people | "What is the number of people living in your household including yourself?"
+              %button{"data-content" => I18n.t('popover.info_hh', :default => "This should include the number of people who purchase and prepare food with you."), "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+                %i.fa.fa-info-circle
+              .row
+                .col-md-6
+                  %input#snap_dependent_no.form-control{:name => "snap_dependent_no", :placeholder => I18n.t('placeholder.example_hh', :default => "For example: 3"), :required => "", :type => "text", :value => @snap_eligibility.snap_dependent_no}/
+          / Label and input for snap_gross_income
+          .row
+            .form-group.col-md-9
+              %label{:for => "snap_gross_income"}
+                = t.snap.gross_monthly | "What is your gross monthly income?"
+              %button{"data-content" => I18n.t('popover.info_income', :default => "This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions."), "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+                %i.fa.fa-info-circle
+              .input-group
+                %span.input-group-addon $
+                %input#snap_gross_income.form-control{:name => "snap_gross_income", :placeholder => I18n.t('placeholder.example_income', :default => "For example: 1000"), :required => "", :type => "text", :value => @snap_eligibility.snap_gross_income}/
+                %span.input-group-addon .00
+          = render 'programs/zipcode_question'
+          .row
+            .form-group.col-md-12
+              %label#education{:for => "education"}= t.snap.are_you_enrolled | "Are you enrolled in college/institution of higher education?"
+              #education
+                = radio_button_tag 'education', 'yes'
+                sí
+                \#{radio_button_tag 'education', 'no'} no
+          .row
+            .form-group.col-md-12
+              %label#citizen{:for => "citizen"}= t.snap.citizen | "Are you a citizen of the United States?"
+              .clearfix
+              .row
+                .col-md-6
+                  #citizen.pull-left
+                    = radio_button_tag 'citizen', 'yes'
+                    sí
+                    \#{radio_button_tag 'citizen', 'no'} no
+          .row
+            .form-group.col-md-12
+              %label#disabled{:for => "disabled"}= t.snap.disabled | "If you are disabled, describe your current status:"
+              .row
+                .col-sm-12
+                  #disabled
+                    = radio_button_tag 'disabled', 'social-security'
+                    = t.snap.receiving_social_security | "I am receiving disability payments from Social Security."
+                    %br/
+                    = radio_button_tag 'disabled', 'railroad'
+                    = t.snap.receiving_railroad_retirement | "I am receiving disability payments from the Railroad Retirement Board."
+                    %br/
+                    = radio_button_tag 'disabled', 'veterans'
+                    = t.snap.receiving_veterans_affairs | "I am receiving disability payments from Veterans Affairs."
+
+                    %br/
+                    = radio_button_tag 'disabled', 'none'
+                    = t.snap.not_receiving | "I am currently not receiving any disability payments"
+                    %br/
+              .row
+                .col-md-6
+                  = render "programs/calculator"
+              %div
+                %button.btn.btn-primary.program-btn{:type => "submit"}= t.snap.see_if | "See if I qualify"

@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Rental dependent no:
+  = @rental_assistance.rental_dependent_no
+%p
+  %strong Rental gross income:
+  = @rental_assistance.rental_gross_income
+%p
+  %strong Rental status:
+  = @rental_assistance.rental_status
+= link_to 'Edit', edit_rental_assistance_path(@rental_assistance)
+|
+\#{link_to 'Back', rental_assistances_path}

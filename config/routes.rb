@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
 
+  get 'set_language/english'
+
+  get 'set_language/spanish'
+
+  get 'set_language/polish'
+
+  get ':controller/:action'
+  get ':locale/:controller/:action'
+
+
   resources :aabd_cashes
 
   resources :tanifs
@@ -66,6 +76,7 @@ Rails.application.routes.draw do
   resources :all_kids
 
   resources :all_city_programs
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
