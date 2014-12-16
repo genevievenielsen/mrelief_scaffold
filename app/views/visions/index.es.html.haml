@@ -1,0 +1,17 @@
+%h1 Listing visions
+%table
+  %thead
+    %tr
+      %th Vision gross income
+      %th Vision household size
+      %th{:colspan => "3"}
+  %tbody
+    - @visions.each do |vision|
+      %tr
+        %td= vision.vision_gross_income
+        %td= vision.vision_household_size
+        %td= link_to 'Show', vision
+        %td= link_to 'Edit', edit_vision_path(vision)
+        %td= link_to 'Destroy', vision, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Vision', new_vision_path

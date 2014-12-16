@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %strong Rta dependent no:
+  = @rta_free_ride.rta_dependent_no
+%p
+  %strong Rta gross income:
+  = @rta_free_ride.rta_gross_income
+= link_to 'Edit', edit_rta_free_ride_path(@rta_free_ride)
+|
+\#{link_to 'Back', rta_free_rides_path}

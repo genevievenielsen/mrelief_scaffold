@@ -1,0 +1,27 @@
+= form_for(@tanif) do |f|
+  - if @tanif.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@tanif.errors.count, "error")
+        prohibited this tanif from being saved:
+      %ul
+        - @tanif.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.label :household_size
+    %br/
+    = f.number_field :household_size
+  .field
+    = f.label :earned_income
+    %br/
+    = f.text_field :earned_income
+  .field
+    = f.label :tanif_payment
+    %br/
+    = f.number_field :tanif_payment
+  .field
+    = f.label :max_income
+    %br/
+    = f.text_field :max_income
+  .actions
+    = f.submit

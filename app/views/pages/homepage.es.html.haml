@@ -1,0 +1,21 @@
+%header
+  .container
+    .row
+      = image_tag("homepage_marquee.png", :class => "img-responsive homepage-marquee")
+    .row
+      %h1{:style => "text-align:center;"} Check your eligibility for benefits in Chicago & Illinois
+      %p.subhead Eligibility requirements can be difficult to find, we've created a process that makes it easy
+      %div{:style => "text-align:center;"}
+        = link_to("Get Started", "/programs", :class => "btn btn-primary btn-lg", :role => "button")
+    %hr{:style => "margin-top:-10px"}/
+    .row
+      %p.subhead= t.popup.check_eligibility | 'To check your eligibility via SMS, text "hello" to 1(773) 377-8946'
+%hr{:style => "margin-top:10px"}/
+.container
+  .row
+    %h2.subsection A Little More About Us
+    %p.col-md-10.col-md-offset-1{:style => "text-align:center;"} We are ruby developers and alumni of The Starter League’s Web Development program, based in Chicago. Our additional expertise include Public Policy, Economics, and Design. We are working in partnership with Mayor Rahm Emmanuel’s Innovation Delivery Team and Chicago’s Community Service Centers. We have also received tremendous support from civic tech group, Open City and their "Open Gov Hack Night", a group of developers and open data lovers dedicated to open government data in the city of Chicago. Our community resources are provided to you by Purple Binder.
+    .col-md-12{:style => "text-align:center;"}
+      = image_tag("logos.jpg", :class => "")
+    %div{:style => "text-align:center;"}
+      = link_to("Learn More About Us", "/about_us", :class => "btn btn-info")

@@ -1,0 +1,84 @@
+.container
+  :javascript
+    $(function ()
+          { $("[data-toggle='popover']").popover();
+          });
+  .page-header.col-md-10.col-md-offset-1{:style => "border:none;"}
+    %h1 Do I qualify for Rental Assistance?
+    .subhead
+      %p Rental assistance is a homeless prevention program for those who have "suffered a financial loss related to an emergency." Eligible recipients can document this loss and prove that they can afford next month's rent.
+    %p
+      You can find more information about rental assistance by
+      %a{:href => "http://www.cityofchicago.org/ city/en/depts/fss/provdrs/serv/svcs/how_to_find_rentalassistanceinchicago.html"} clicking here.
+/
+  <div class="alert alert-dismissable alert-danger">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&amp;times;</button>
+  <haml:silent>
+  </haml:silent>    </div>
+.row
+  .panel.panel-default.col-md-8.col-md-offset-2
+    .panel-body
+      %form{:action => "/rental_assistances", :method => "post", :role => "form"}
+        %label
+          %b What circumstance explains why you are unable to pay rent at this time?
+        #rental_status.relative
+          = radio_button_tag 'rental_status', 'medical circumstance'
+          Someone experiencing a medical circumstance
+          %button{"data-content" => "An emergency procedure (for example: surgery, related to complicated birth or other conditions) that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to your spouse, child, committed partner whose name is on the lease or grandparent who lives with you.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+            %i.fa.fa-info-circle
+          %br/
+          = radio_button_tag 'rental_status', 'a victim of natural disaster or fire'
+          A victim of natural disaster or fire
+          %button{"data-content" => "A natural disaster includes instances such as a tornado or fire that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to floods for people who are renting a basement apartment who can not afford to replace those items and are seeking relocation.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+            %i.fa.fa-info-circle
+          %br/
+          = radio_button_tag 'rental_status', 'a recipient of an eviction notice'
+          A recipient of an eviction notice
+          %button{"data-content" => "This must be a notice that is notarized and brought with you if you qualify.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+            %i.fa.fa-info-circle
+          %br/
+          = radio_button_tag 'rental_status', 'have experienced a temporary loss of income'
+          Have experienced a temporary loss of income
+          %button{"data-content" => "This involves losing income due to an unforeseen event (layoff, termination,or other emergencies etc.) The month in between when you lose your job and qualify for unemployment would be admissible.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+            %i.fa.fa-info-circle
+          %br/
+          = radio_button_tag 'rental_status', 'a victim of domestic violence'
+          A victim of domestic violence
+          %button{"data-content" => "This involves losing income due to violence from your intimate partner. If your partner was your sole source of income, this does not apply. Typically this benefit would apply to victims with income seeking relocation assistance. ", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+            %i.fa.fa-info-circle
+          %br/
+          = radio_button_tag 'rental_status', 'none of the above'
+          None of the above
+        %br/
+        .row
+          .form-group.col-sm-12
+            %label#lease{:for => "lease"} Is your name currently on the lease of the apartment that you are renting?
+            .col-sm-6
+              #lease
+                = radio_button_tag 'lease', 'yes'
+                yes
+                \#{radio_button_tag 'lease', 'no'} no
+        / Label and input for rental_dependent_no
+        .row
+          .form-group.col-sm-9
+            %label{:for => "rental_dependent_no"} How many dependents (including yourself) are in your household?
+            %button{"data-content" => "Number of people living in your household, including yourself.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+              %i.fa.fa-info-circle
+            %input#rental_dependent_no.form-control{:name => "rental_dependent_no", :placeholder => "For example: 3", :required => "", :type => "text", :value => @rental_assistance.rental_dependent_no}/
+        / Label and input for rental_gross_income
+        .row
+          .form-group.col-sm-9
+            %label{:for => "rental_gross_income"}
+              What is your income over the past 90 days?
+            %button{"data-content" => "Includes cash receipts from all sources including money wages and salaries before any deductions, unemployment compensation, public assistance, alimony, child support, lottery/gambling winnings, dividends and all other income.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+              %i.fa.fa-info-circle
+            .input-group
+              %span.input-group-addon $
+              %input#rental_gross_income.form-control{:name => "rental_gross_income", :placeholder => "For example: 4000", :required => "", :type => "text", :value => @rental_assistance.rental_gross_income}/
+              %span.input-group-addon .00
+        = render 'programs/zipcode_question'
+        .row
+          .col-md-6
+            = render "programs/calculator"
+        %div
+          %button.btn.btn-primary{:type => "submit"} See if I qualify

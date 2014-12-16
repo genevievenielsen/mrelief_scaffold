@@ -1,0 +1,33 @@
+.container
+  .page-header{:style => "border:none"}
+    %h1 Do I qualify for Auto Repair assistance?
+    .lead
+      %p Auto Repair Assistance, financial assistance for limited auto repair needs, is available to remove barriers to maintaining or seeking employment, education/training or health maintenance.
+    %p
+      You can find more information about Auto Repair assistance
+      %a{:href => "http://www.cedaorg.net/www2/CDS.html"} here.
+  - if @auto_repair_assistance.errors.any?
+    - @auto_repair_assistance.errors.full_messages.each do |message|
+      .alert.alert-dismissable.alert-danger
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} &times;
+        = message
+  .panel.panel-default.col-md-12{:style => "margin: 0 0 40px 0; padding-top:15px"}
+    .panel-body
+      %form{:action => "/create_auto_repair_assistance", :role => "form"}
+        .form-group.col-sm-9
+          %p
+            %b If you are a resident of Suburban Cook County and enrolled in the Community Services Block Grant program, you may be eligible for Auto-Repair Assistance.
+          %label{:for => "auto_household_size"} What is your household size?
+          = link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "Number of people living in your household, including yourself."}
+          %input#auto_household_size.form-control{:name => "auto_household_size", :placeholder => "For example: 3", :required => "", :type => "text", :value => @auto_repair_assistance.auto_household_size}/
+        / Label and input for auto_gross_income
+        .form-group.col-sm-9
+          %label{:for => "auto_gross_income"}
+            What is your household gross income over past 90 days?
+          = link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "Income of all household members 18 years and older before deductions."}
+          .input-group
+            %span.input-group-addon $
+            %input#auto_gross_income.form-control{:name => "auto_gross_income", :placeholder => "For example: 5000", :required => "", :type => "text", :value => @auto_repair_assistance.auto_gross_income}/
+            %span.input-group-addon .00
+          %div{:style => "padding:40px 0 0 0"}
+            %button.btn.btn-primary{:type => "submit"} See if I qualify
