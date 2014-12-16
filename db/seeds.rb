@@ -893,12 +893,12 @@ p.description = "All Chicago Programs within mRelief"
 p.location = "chicago"
 p.save
 
-# p = Program.new
-# p.url = "/tanifs/new"
-# p.name = "TANF"
-# p.description = "Cash Assistance Program"
-# p.location = "chicago"
-# p.save
+p = Program.new
+p.url = "/tanifs/new"
+p.name = "TANF"
+p.description = "Cash Assistance Program"
+p.location = "chicago"
+p.save
 
 a = AutoRepairAssistance.new
 a.auto_household_size = 1

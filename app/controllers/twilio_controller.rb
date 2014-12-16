@@ -1,12 +1,5 @@
+require 'twilio-ruby'
 class TwilioController < ApplicationController
-
-
- # if they don't qualify under normal and are disabled but not receiving payments
-
-# add laf centers to rta
-# NO zipcode for rta ride free
-# NO purple binder
-
 
   require 'numbers_in_words'
   require 'numbers_in_words/duck_punch' #see why later
@@ -15,22 +8,24 @@ class TwilioController < ApplicationController
 
   session["counter"] ||= 0
 
-
   if params[:Body].include?('"')
     params[:Body] = params[:Body].tr('"', '')
   end
-
   if params[:Body].include?("'")
     params[:Body] = params[:Body].tr("'", "")
+  end
+  #check here to see if a signature is included
+  if params[:Body].strip.match(" ")
+    params[:Body] = params[:Body].split(/ /).first
   end
 
   if params[:Body].strip.downcase == "reset"
     session["counter"] = 0
   end
-
    if session["counter"] == 0
     message = "Welcome to mRelief! We help you check your eligibility for benefits. For foodstamps, text 'food'. For RTA ride free, text 'ride.' For Medicaid, text 'medicaid.' For Medicare Cost Sharing, text 'medicare.' If you make a mistake, send the message 'reset'."
    end
+
    if params[:Body].strip.downcase == "menu"
       message = "For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.' If you make a mistake, send the message 'reset'."
    end
@@ -56,7 +51,10 @@ class TwilioController < ApplicationController
    end
    if params[:Body].strip.downcase == "med"
       message = "For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
-      session["page"] = "medicare_household_question"
+      session["counter"] = 1
+   end
+   if params[:Body].strip.downcase == "med"
+      message = "For foodstamps, text the word 'food.'"
       session["counter"] = 1
    end
    if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("medicaid") || params[:Body].strip.downcase.include?("ride") || params[:Body].strip.downcase.include?("medicare")
@@ -410,7 +408,7 @@ class TwilioController < ApplicationController
        message = "What is your zipcode?"
        session["page"] = "medicaid_eligible_maybe"
      elsif session["citizen"]  == "yes"
-      message = " How many people live in your home (including yourself)?"
+      message = "How many people live in your home (including yourself)?"
       session["page"] = "medicaid_household_size"
      end
    end
@@ -498,7 +496,7 @@ class TwilioController < ApplicationController
     else
       session["household"] = session["household"].in_numbers
     end
-    message = "How many people in your household receive Medicare?"
+    message = "How many people in your household receive Medicare? Please enter a number"
     session["page"] = "medicare_number_question"
    end
 
@@ -513,7 +511,7 @@ class TwilioController < ApplicationController
       message = "What is your zipcode?"
       session["page"] = "medicare_ineligible"
     else
-      message = "What is you gross monthly income? Enter a number"
+      message = "What is your gross monthly income? Enter a number"
       session["page"] = "medicare_income_question"
     end
    end
@@ -639,9 +637,21 @@ class TwilioController < ApplicationController
     respond_to do |format|
      format.xml {render xml: twiml.text}
    end
-
-
-
   end
+
+  include Webhookable
+
+   after_filter :set_header
+
+   skip_before_action :verify_authenticity_token
+
+   def voice
+
+     response = Twilio::TwiML::Response.new do |r|
+        r.Play 'https://dl.dropboxusercontent.com/s/vaq6et51o8ohwxz/mRelief.mp3'
+     end
+
+     render_twiml response
+   end
 
 end
