@@ -22,7 +22,7 @@ class TwilioController < ApplicationController
   if params[:Body].strip.downcase == "reset"
     session["counter"] = 0
   end
-  if params[:Body].strip.downcase == "hello" || params[:Body].strip.downcase == "hi"
+  if params[:Body].strip.downcase == "hello" || params[:Body].strip.downcase == "hi" || params[:Body].strip.downcase == "hola"
     session["counter"] = 0
   end
    if session["counter"] == 0
