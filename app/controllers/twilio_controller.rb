@@ -408,7 +408,7 @@ class TwilioController < ApplicationController
        message = "What is your zipcode?"
        session["page"] = "medicaid_eligible_maybe"
      elsif session["citizen"]  == "yes"
-      message = " How many people live in your home (including yourself)?"
+      message = "How many people live in your home (including yourself)?"
       session["page"] = "medicaid_household_size"
      end
    end
@@ -496,7 +496,7 @@ class TwilioController < ApplicationController
     else
       session["household"] = session["household"].in_numbers
     end
-    message = "How many people in your household receive Medicare?"
+    message = "How many people in your household receive Medicare? Please enter a number"
     session["page"] = "medicare_number_question"
    end
 
@@ -511,7 +511,7 @@ class TwilioController < ApplicationController
       message = "What is your zipcode?"
       session["page"] = "medicare_ineligible"
     else
-      message = "What is you gross monthly income? Enter a number"
+      message = "What is your gross monthly income? Enter a number"
       session["page"] = "medicare_income_question"
     end
    end

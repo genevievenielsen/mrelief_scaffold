@@ -296,10 +296,14 @@ a:hover {
   margin-top: 0px;
 }
 
-.close:hover{
+.close:hover {
   background: transparent;
 }
 
-.alert{
+.alert {
   border-radius: 0px;
+}
+
+.how-to {
+  padding: 0 60px 60px 60px;
 }
