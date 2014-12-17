@@ -151,6 +151,12 @@ es:
     based_on: Basado en el tamaño de su hogar y sus ingresos, es probable que califica para cupones de alimentos.
     something_else: Más ideas para considerar!
     based_on_hh_yes: Basado en el tamaño de su hogar y sus ingresos, es probable que si califica para cupones de alimentos.
+
+    based_on_your_zipcode:
+      Basado en su código postal, este es el Centro de Servicios Comunitarios más cercano para poder acceder a estampillas de comida.
+
+    apply_before_you_visit: >-
+      Para solicitar a través de la web, antes de su visita, por favor visite este enlace:
     based_on_the_info_probably: >-
       Basado en la información recibida, no podemos determinar su elegibilidad en este momento. Puede que tenga que hablar con un experto sobre su situación y que pueda compartir más detalles sobre si su elegibilidad es posible. Un paralegal de Fundación de Asistencia Legal (LAF, por sus siglas en inglés) podrá hablar con usted sobre su elegiblidad del programa de "Food Stamps".
     based_on_the_info_not: >-

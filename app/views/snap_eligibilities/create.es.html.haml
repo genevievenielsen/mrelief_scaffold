@@ -12,7 +12,7 @@
         - if @laf_disclaimer.present?
           %p.subhead= @laf_disclaimer
         - else
-          %p.subhead Based on your zipcode, here is the nearest Community Service Center to access your Food Stamps:
+          %p.subhead= t.snap.based_on_your_zipcode | "Based on your zipcode, here is the nearest Community Service Center to access your Food Stamps:"
         .col-md-offset-3.col-md-6.col-sm-6.text-center{:style => "text-align:center;"}
           %ul.list-group{:style => "text-align:left;"}
             %li.list-group-item{:style => "font-weight:bold"}
@@ -32,7 +32,7 @@
           %br/
       .row
         .col-sm-offset-3.col-md-offset-3.col-md-6.col-sm-6.col-xs-6
-          %p.subhead To apply online before you visit:
+          %p.subhead= t.snap.apply_before_you_visit | "To apply online before you visit:"
           = link_to I18n.t('common.click_here', :default => "Click Here"), "https://abe.illinois.gov/abe/access/accessController?id=0.3971759164763745", :class => "btn btn-success btn-resolution"
   - elsif @eligible == 'maybe'
     .page-header
