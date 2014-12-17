@@ -32,13 +32,13 @@ es:
 
   layouts:
     programs: Programas
-    how_mrelief: Como funciona mRelief
+    how_mrelief: Cómo funciona mRelief
     about_us: Quiénes somos
     contact_us: Contáctenos
     press_release: Nota de prensa
     donate: Donar
     disclaimer: >-
-      * MRelief no predice con precisión de 100% si los usuarios sin duda serán aprobados para beneficios; pero en su lugar intenta proporcionar a los usuarios información sobre si vale la pena invertir el tiempo necesario para el proceso de solicitud. No obstante, estamos trabajando para que nuestras formularios sean más accesible. Si es usted indocumentado, residente legal permanente, o tiene un caso muy específico, nuestro systema le remitirá a un asistente que le pueda ayudar. Estén atentos para más actualizaciones!
+      * mRelief no predice con precisión del 100% si los usuarios definitivamente serán aprobados para beneficios; si no que intenta proporcionar a los usuarios información para que ellos determinen si vale la pena invertir el tiempo necesario para el proceso de solicitud. No obstante, estamos trabajando para que nuestros formularios sean más accesibles. Si es usted indocumentado, residente legal permanente, o tiene un caso muy específico, nuestro sistema le referirá a un asistente que le pueda ayudar. ¡Estén atentos para más actualizaciones!
 
   pages:
 
@@ -95,12 +95,12 @@ es:
 
   programs:
     programs_for: Programas para Chicago e Illinois
-    below_are: A continuación se presentan los beneficios que mRelief ofrece actualmente para la pre-calificación.  Aunque estas no son
+    below_are: A continuación se presentan los beneficios que mRelief ofrece actualmente para la pre-calificación.  Aunque estos no son
     all: todos
-    the_benefits: los beneficios locales y estatales que se ofrecen, estamos trabajando que le proporcionarle la mayor información posible.
+    the_benefits: los beneficios locales y estatales que se ofrecen, estamos trabajando para proporcionarle la mayor información posible.
     chicago_programs: PROGRAMAS DE CHICAGO
     accessible_in: Accesible en Centros Comunitarios
-    click_on: Haz clic en un beneficio a continuación para comenzar el proceso de pre-calificación.
+    click_on: Haga clic en un beneficio a continuación para comenzar el proceso de pre-calificación.
     state_of: PROGRAMAS DEL ESTADO DE ILLINOIS
 
 
