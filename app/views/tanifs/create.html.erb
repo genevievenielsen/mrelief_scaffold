@@ -45,18 +45,7 @@
               <p class="subhead"><%= @laf_disclaimer %></p>
             <% end %>
 
-           <div class="col-md-offset-3 col-md-6 col-sm-6 text-center" style="text-align:center;">
-             <ul class="list-group" style="text-align:left;">
-               <li class="list-group-item" style="font-weight:bold"><%= @lafcenter.center %> </li>
-               <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %>  </li>
-               <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @lafcenter.telephone %> </li>
-               <li class="list-group-item">Days that Spanish is spoken - <%= @lafcenter.spanish %> </li>
-             </ul>
-
-           <br>
-             <br>
-
-         </div>
+           <%= render 'layouts/community_center' %>
      </div>
       <div class="row">
       <div class="col-md-offset-4 col-md-4">
