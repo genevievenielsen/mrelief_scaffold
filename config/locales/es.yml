@@ -73,13 +73,30 @@ es:
     see_if_sms: 4. Vea si usted califica
 
 
+
+    the_team: El Equipo
+    team_project_manager: Administradora de Proyectos
+    team_cto: Directora de Tecnología
+    team_product_designer: Diseñadora de Productos
+
+    with_our_passion: >-
+      Gracias a Pasión por Nuestra Tecnología para utilizar la bien, somos instancia de parte de la ONU Movimiento Nacional Que Busca los Servicios Sociales Mejorar. Queriamos Comenzar con el tema de las Naciones Unidas Que nuestro de la estafa Resuena Beneficiarios: Reducir el Tiempo de espera en las Agencias de Servicios Sociales. ENTONCES, El Programa usamos Ruby on Rails par Programar ONU Formulario Que ayuda al usuario una estafa Bastante precisión Que Saber y en Cuestión de Minutos, un par Requisitos llenan Recibir los Beneficios Gubernamentales. De Este Modo, las personalidades pueden Decidir si vale la pena llenar FORMULARIOS destino, Que Ser pueden Bastante Largos, los Documentos de juntar Identification Necesarios, HACER El viaje a Una oficina y su turno Esperar Para Una entrevista. Sabemos valor Que Hay en Poder Determinar califica sí si o no el párrafo Estós: beneficios, desde la privacidad del hogar de Frente a la Pantalla De Una Computadora, en Lugar de estar ¿en pÃºblico esperando, Donde sí es vulnerable.
+
+    participating_team: >-
+      Miembros del equipo que están participando:
+    sponsored_by: Auspiciado por
+
   homepage:
     check_your: Revise su elegibilidad para beneficios en Chicago e Illinois
     elegibility_requirements: Los requisitos de elegibilidad pueden ser difíciles de encontrar y hemos creado un proceso que lo hace fácil.
     get_started: Iniciar
     in_a_few: En unos pocos pasos, usted puede determinar su elegibilidad
 
+    little_more: Un Poco Más Sobre Nosotros
+    ruby_devs: >-
+      Somos programadores rubí y ex-alumnas del programa de programación web The Starter League’s Web Development, basado en Chicago. Además, tenemos conocimientos en las áreas de políticas públicas, economía y diseño. Estamos trabajando conjuntamente con el programa Equipo de Entrega de Ideas Innovadoras del Alcalde Rahm Emanuel y los Centros de Servicios Comunitarios de Chicago. También hemos recibido muchísimo apoyo por parte del grupo de tecnología cívica, Open City, y su evento semanal “Open Gov Hack Night”, un grupo de programadores y amantes de los datos, comprometidos con hacer que los datos de los servicios del gobierno en la Ciudad de Chicago sean de fuente abierta. Nuestros recursos comunitarios son cortesía de Purple Binder.
 
+    learn_more_about_us: Conozca Más Sobre Nosotros
   contact_us:
     we_would: Nos gustaría escuchar de usted!
     some_ways: Algunas maneras de ponerse en contacto con nosotros
@@ -134,6 +151,12 @@ es:
     based_on: Basado en el tamaño de su hogar y sus ingresos, es probable que califica para cupones de alimentos.
     something_else: Más ideas para considerar!
     based_on_hh_yes: Basado en el tamaño de su hogar y sus ingresos, es probable que si califica para cupones de alimentos.
+
+    based_on_your_zipcode:
+      Basado en su código postal, este es el Centro de Servicios Comunitarios más cercano para poder acceder a estampillas de comida.
+
+    apply_before_you_visit: >-
+      Para solicitar a través de la web, antes de su visita, por favor visite este enlace:
     based_on_the_info_probably: >-
       Basado en la información recibida, no podemos determinar su elegibilidad en este momento. Puede que tenga que hablar con un experto sobre su situación y que pueda compartir más detalles sobre si su elegibilidad es posible. Un paralegal de Fundación de Asistencia Legal (LAF, por sus siglas en inglés) podrá hablar con usted sobre su elegiblidad del programa de "Food Stamps".
     based_on_the_info_not: >-
