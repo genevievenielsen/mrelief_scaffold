@@ -780,14 +780,16 @@ p.name = "Food Stamps"
 p.name_es = "Cupones de Alimentos"
 p.url = "/snap_eligibilities/new"
 p.description = "Nutrition assistance to low-income people and families"
-p.description_es = "description de alimentos"
+p.description_es = "Asistencia nutricional a personas y familias de bajo ingreso"
 p.location = "chicago"
 p.save
 
 p = Program.new
 p.name = "RTA Ride Free"
+p.name_es = "RTA Ride Free (Transito Gratuito)"
 p.url = "/rta_free_rides/new"
 p.description = "Free Transit for the Aging and Disabled"
+p.description_es = "Transito gratuito para personas mayores y discapacitados (Aging and Disabled)"
 p.location = "chicago"
 p.save
 
