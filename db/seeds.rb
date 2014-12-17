@@ -780,14 +780,17 @@ p.name_en = "Food Stamps"
 p.name_es = "Cupones de Alimentos"
 p.url = "/snap_eligibilities/new"
 p.description_en = "Nutrition assistance to low-income people and families"
-p.description_es = "description de alimentos"
+p.description_es = "Asistencia nutricional a personas y familias de bajos ingresos"
 p.location = "chicago"
 p.save
 
 p = Program.new
 p.name_en = "RTA Ride Free"
+#p.name_es = "RTA Ride Free (Transito Gratuito)"
 p.url = "/rta_free_rides/new"
 p.description_en = "Free Transit for the Aging and Disabled"
+#p.description_es = "Transito gratuito para personas mayores y discapacitados (Aging and Disabled)"
+p.description_es = ""
 p.location = "chicago"
 p.save
 
@@ -795,6 +798,7 @@ p = Program.new
 p.name_en = "Child Care Voucher"
 p.url = "/child_care_vouchers/new"
 p.description_en = "Quality, affordable child care for low-income families"
+p.description_es = ""
 p.location = "illinois"
 p.save
 
@@ -802,6 +806,7 @@ p = Program.new
 p.name_en = "Rental Assistance"
 p.url = "/rental_assistances/new"
 p.description_en = "Emergency Rental Assistance during financial hardship"
+p.description_es = ""
 p.location = "chicago"
 p.save
 
@@ -809,6 +814,7 @@ p = Program.new
 p.name_en =  "Auto Repair Assistance"
 p.url = "/auto_repair_assistances/new"
 p.description_en = "Financial auto assistance to remove employment barriers"
+p.description_es = ""
 p.location = "cook county"
 p.save
 
@@ -816,6 +822,7 @@ p = Program.new
 p.name_en =  "Women, Infants and Children (WIC)"
 p.url = "/wics/new"
 p.description_en = "Nutrition education, counseling, and food for families"
+p.description_es = ""
 p.location = "illinois"
 p.save
 
@@ -823,6 +830,7 @@ p = Program.new
 p.name_en =  "Vision Assistance"
 p.url = "/visions/new"
 p.description_en = "Eye exams and glasses to remove employment barriers"
+p.description_es = ""
 p.location = "cook county"
 p.save
 
@@ -830,6 +838,7 @@ p = Program.new
 p.name_en = "Family Nutrition"
 p.url = "/family_nutritions/new"
 p.description_en = "Fresh Produce for Families"
+p.description_es = ""
 p.location = "cook county"
 p.save
 
@@ -837,6 +846,7 @@ p = Program.new
 p.name_en = "Dental Assistance"
 p.url = "/dentals/new"
 p.description_en = "Financial dental assistance to remove employment barriers"
+p.description_es = ""
 p.location = "cook county"
 p.save
 
@@ -844,6 +854,7 @@ p = Program.new
 p.name_en = "Head Start"
 p.url = "/head_starts/new"
 p.description_en = "Promote school readiness for children ages 3-5"
+p.description_es = ""
 p.location = "illinois"
 p.save
 
@@ -851,6 +862,7 @@ p = Program.new
 p.name_en = "Early Head Start"
 p.url = "/early_head_starts/new"
 p.description_en = "Promote school readiness for babies infants and toddlers"
+p.description_es = ""
 p.location = "illinois"
 p.save
 
@@ -858,6 +870,7 @@ p = Program.new
 p.name_en = "Housing Counseling and Referral Information"
 p.url = "/housing_assistances/new"
 p.description_en = "Counseling, household budgeting and financial assistance"
+p.description_es = ""
 p.location = "cook county"
 p.save
 
@@ -865,6 +878,7 @@ p = Program.new
 p.name_en = "All Kids"
 p.url = "/all_kids/new"
 p.description_en = "Healthcare for Kids"
+p.description_es = ""
 p.location = "chicago"
 p.save
 
@@ -872,6 +886,7 @@ p = Program.new
 p.url = "/medicaids/new"
 p.name_en = "Medicaid"
 p.description_en = "Healthcare for families and individuals"
+p.description_es = ""
 p.location = "chicago"
 p.save
 
@@ -879,6 +894,7 @@ p = Program.new
 p.url = "/medicare_cost_sharings/new"
 p.name_en = "Medicare Cost Sharing"
 p.description_en = "Medicare Assistance"
+p.description_es = ""
 p.location = "chicago"
 p.save
 
@@ -886,6 +902,7 @@ p = Program.new
 p.url = "aabd_cashes/new"
 p.name_en = "AABD Cash Assistance"
 p.description_en = "Cash Assistance for the Elderly and Disabled"
+p.description_es = ""
 p.location = "chicago"
 p.save
 
@@ -893,6 +910,7 @@ p = Program.new
 p.url = "/all_city_programs/new"
 p.name_en = "All City Programs"
 p.description_en = "All Chicago Programs within mRelief"
+p.description_es = ""
 p.location = "chicago"
 p.save
 
@@ -900,6 +918,7 @@ p = Program.new
 p.url = "/tanifs/new"
 p.name_en = "TANF"
 p.description_en = "Cash Assistance Program"
+p.description_es = ""
 p.location = "chicago"
 p.save
 
