@@ -16,7 +16,9 @@ es:
       Por ejemplo: 60615
   popup:
     check_eligibility: >-
-      Para comprobar su elegibilidad vía SMS textea "hola" a 1 (773) 377-8946
+      Comprobar su elegibilidad vía SMS
+    check_eligibility_text: >-
+      texto "hola" a 1 (773) 377-8946
 
   popover:
     info_hh: Esto debe incluir el numero de personas que te compran y preparan comida.
@@ -26,7 +28,7 @@ es:
     zipcode: ¿Cuál es su código postal?
 
   program_utils:
-    calculator: Deshacerse de la pluma! Aquí está una calculadora para sumar sus ingresos, si acaso usted lo necesite.
+    calculator: Tira el lapiz! Aquí está una calculadora para sumar sus ingresos, si acaso usted lo necesite.
 
   layouts:
     programs: Programas
@@ -36,62 +38,65 @@ es:
     press_release: Nota de prensa
     donate: Donar
     disclaimer: >-
-      * MRelief no predice con precisión de 100% si los usuarios sin duda serán aprobados para beneficios; pero en su lugar intenta proporcionar a los usuarios información sobre si vale la pena invertir el tiempo necesario para el proceso de solicitud. No obstante, estamos trabajando para que nuestras formas cotidianas más inclusivo. Si es usted indocumentado y residente legal permanente, o tiene un caso muy específico, nuestro systema le remite a unos asistentes de abogados que pueden ayudar. Estén atentos para más actualizaciones!
+      * MRelief no predice con precisión de 100% si los usuarios sin duda serán aprobados para beneficios; pero en su lugar intenta proporcionar a los usuarios información sobre si vale la pena invertir el tiempo necesario para el proceso de solicitud. No obstante, estamos trabajando para que nuestras formularios sean más accesible. Si es usted indocumentado, residente legal permanente, o tiene un caso muy específico, nuestro systema le remitirá a un asistente que le pueda ayudar. Estén atentos para más actualizaciones!
 
   pages:
-    see_if_3: En 3 pasos sencillos, vea si usted califica
-    currently_we: Actualmente proveemos diecisiete programas de servicios sociales para la ciudad de Chicago y el estado de Illinois. Usted puede simplificar el proceso de reunir los requisitos con un formulario que es fácil de usar y, usando mRelief, se puede acceder en línea y a través de SMS.
+
+    currently_we: >-
+      Actualmente proveemos programas de servicios sociales para la ciudad de Chicago y el estado de Illinois. Usted puede simplificar el proceso de reunir los requisitos con un formulario que es fácil de llenar. Usando mRelief, se puede acceder en línea y a través de SMS.
+      En este momento, se comprobará su elegibilidad para la ayuda a través de nuestra aplicación de mensajería de texto. Los programas incluyen cupones de comida, "Food Stamps", ayuda del transporte "RTA Free Ride", y de salud, "Medicaid" y "Medicare Cost Sharing".
     choose_your: 1. Seleccione su Programa
     horizontal_menu: >-
-      En el menú horizontal, en el lado de la derecha, seleccione "Programas". En el menú desplegable, seleccione  "Ver Todos los programas". Despues de llegar en la pagina "Programas", seleccione el programa que aplica a sus necesidades.
+      En el menú horizontal, en el lado de la derecho, seleccione "Programas". En el menú desplegable, seleccione "Ver Todos los programas". Despues de llegar en la pagina "Programas", seleccione el que aplica a sus necesidades.
     enter_your: 2. Ingrese su información
-    on_the_individual: En la página de del programa individual que ha seleccionado, habrá una declaracion de clasificación en la descripción, sequida por una serie de preguntas para que usted llene. En los pasos del formulario, proporcione su información.
+    on_the_individual: En la página del programa individual que ha seleccionado, habrá una declaracion de clasificación en la descripción, seguida por una serie de preguntas para que usted llene. En las cajas del formulario, proporcione su información.
     see_if: 3. Vea si usted califica
     after_you_have: >-
       Después de haber completado el formulario según su programa, haga clic en el botón azul, "Ver si califico", en la parte inferior izquierda.
     completed_this_process: Después de haber completado este proceso, será dirigido a recursos comunitarios o del gobierno -- basado en su resultado de calificación.
     any_questions: Si tiene alguna pregunta, por favor contactenos.
 
+    mrelief_online: >-
+      mRelief en línea:
+    mrelief_sms: >-
+      mRelief de sms:
+
+    sending_sms: >-
+      1. Enviando SMS
+
+    text_hello: Mandar un texto "hola," o su saludo preferido a 1(773) 377-8946
+    sms_choose: 2. Seleccione su Programa
+    text_the_word: >-
+      Mandar la palabra "food" para los cupones de comida.  Enviar la palabra "ride" para el programa del transporte (RTA Ride Free). Enviar la palabra "medicaid" para el programa de salud (Medicaid). Enviar la palabra "medicare" para (compartir costos de Medicare) "Medicare Cost Sharing". Debe introducir un programa a la vez.
+    completing_the_form: 3. Llenar los formularios
+    posed_questions: Mandar su respuestas a las preguntas. Si se equivoca, envíe la palabra 'reset'.
+    see_if_sms: 4. Vea si usted califica
+
+
+  homepage:
+    check_your: Revise su elegibilidad para beneficios en Chicago e Illinois
+    get_started: Iniciar
+    in_a_few: En unos pocos pasos, usted puede determinar su elegibilidad
+
 
   contact_us:
     we_would: Nos gustaría escuchar de usted!
-
-  homepage:
-    check_your: Revise su elegibilidad para beneficios en Chicago y Illinois
-    get_started: Iniciar
-
-    elegibility_requirements: Los requisitos de elegibilidad pueden ser difíciles de encontrar y hemos creado un proceso que lo hace fácil
-    find_out: Averigüé si usted califica
-    how_mrelief: Como funciona mRelief
-    in_three: respondiendo a tres preguntas o menos, determine si usted califica para los beneficios en Chicago y Illinois.
-
-    security: Seguridad
-    before_waiting: Antes de esperar en línea público por los beneficios, vea si usted es elegible desde su lugar privada o por medio de SMS y utilizando un formulario seguro.
-
-    simplicity: Simplicidad
-
-    Did you mean: Relief reduces wait times from hours to minutes with a form that checks against eligibility requirements.
-    mrelief_reduces: Los tiempos de espera podrá ser horas, pero mRelief lo reduce a minutos. Usa una forma que revisa y compara con los requisitos de elegibilidad.
-
-    empowerment: Empoderamiento
-    if_you_qualify: Si usted califica, le enseñamos su siguiente paso con la agencia o proveedor de servicio social más próximo.
-
-    resources: Recursos
-    if_you_dont: Si usted no califica, le proporcionamos los recursos de organizaciónes sin fines de lucro, locales o nacionales, y con las herramientas necesarias para ayudar.
-
-  contact_us:
     some_ways: Algunas maneras de ponerse en contacto con nosotros
 
-
-
-
+    first_name: Primer Nombre
+    last_name: Apellido
+    email: Correo electrónico
+    how_did: Como supo de nosotros?
+    request: ¿De qué tema se trata su solicitud?
+    message: Su mensaje
+    submit: Enviar
 
 
   programs:
-    programs_for: Programas para Chicago y Illinois
+    programs_for: Programas para Chicago e Illinois
     below_are: A continuación se presentan los beneficios que mRelief ofrece actualmente para la pre-calificación.  Aunque estas no son
     all: todos
-    the_benefits: los beneficios locales y estatales que se ofrecen, estamos trabajando que le proporcionan lo mas que podamos.
+    the_benefits: los beneficios locales y estatales que se ofrecen, estamos trabajando que le proporcionarle la mayor información posible.
     chicago_programs: PROGRAMAS DE CHICAGO
     accessible_in: Accesible en Centros Comunitarios
     click_on: Haz clic en un beneficio a continuación para comenzar el proceso de pre-calificación.
@@ -103,14 +108,14 @@ es:
     do_i_qualify: ¿Califico para "Food Stamps"?
     food_stamps: >-
       "Food Stamps" o Programa de Asistencia de Nutrición Suplementaria (SNAP, por sus siglas en inglés),
-    benefits_are: Los beneficios se proporcionan en la tarjeta "Illinois Link Card" - la tarjeta electrónica aceptada en la mayoría de las tiendas de comestibles.
+    benefits_are: Los beneficios se proporcionan con la tarjeta "Illinois Link Card" - aceptada en la mayoría de las tiendas de comestibles.
     you_can_find: >-
       Puede encontrar más información sobre SNAP / "Food Stamps"
     how_old: Cuántos años tienes?
     helps_low_income: ayuda a las personas de bajo ingreso y las familias a comprar los alimentos que necesita para la buena salud.
     clicking_here: al hacer clic aquí.
     number_of_people: ¿Cuál es el número de personas que viven en el hogar incluyéndote a ti mismo?
-    gross_monthly: ¿Cuál es su ingreso bruto mensual?
+    gross_monthly: ¿Cuál es sus ingresos bruto mensual?
     are_you_enrolled: ¿Está instrito en la universidad / institución de educación superior?
     citizen: ¿Es usted un ciudadano de los Estados Unidos?
     disabled: >-

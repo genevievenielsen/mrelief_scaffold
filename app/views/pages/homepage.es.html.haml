@@ -1,15 +1,19 @@
+.alert.alert-warning.alert-dismissible{:role => "alert"}
+  .container
+    %button.close{"data-dismiss" => "alert", :type => "button"}
+      %span{"aria-hidden" => "true"} &times;
+      %span.sr-only= t.popup.close | "Close"
+    %strong= t.popup.check_eligibility | "Check your eligibility via SMS:"
+    = t.popup.check_eligibility_text | 'Text "hello" to 1-773-377-8946.'
 %header
   .container
     .row
       = image_tag("homepage_marquee.png", :class => "img-responsive homepage-marquee")
     .row
-      %h1{:style => "text-align:center;"} Check your eligibility for benefits in Chicago & Illinois
-      %p.subhead Eligibility requirements can be difficult to find, we've created a process that makes it easy
+      %h1{:style => "text-align:center;"}= t.homepage.check_your | "Check your eligibility for benefits in Chicago & Illinois"
+      %p.subhead= t.homepage.elegibility_requirements | "Eligibility requirements can be difficult to find, we've created a process that makes it easy"
       %div{:style => "text-align:center;"}
-        = link_to("Get Started", "/programs", :class => "btn btn-primary btn-lg", :role => "button")
-    %hr{:style => "margin-top:-10px"}/
-    .row
-      %p.subhead= t.popup.check_eligibility | 'To check your eligibility via SMS, text "hello" to 1(773) 377-8946'
+        = link_to(I18n.t('homepage.get_started', :default => "Get Started"), "/programs", :class => "btn btn-primary btn-lg", :role => "button")
 %hr{:style => "margin-top:10px"}/
 .container
   .row

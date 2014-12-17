@@ -8,31 +8,31 @@
       %br/
       = form_tag(contact_index_url) do
         .form-group
-          = label_tag(:contact_first_name, "First Name")
+          = label_tag(:contact_first_name, I18n.t('contact_us.first_name', :default => "First Name"))
           = text_field_tag(:contact_first_name, nil, {:class => "form-control"})
         .form-group
           /
             <label for="contact_last_name">Last Name</label>
             <input type="text" class="form-control" style="max-width:350px" id="contact_last_name">
-          = label_tag(:contact_last_name, "Last Name")
+          = label_tag(:contact_last_name, I18n.t('contact_us.last_name', :default => "Last Name"))
           = text_field_tag(:contact_last_name, nil, {:class => "form-control"})
         .form-group
           /
             <label for="contact_email">Email</label>
             <input type="email" class="form-control" style="max-width:350px" id="contact_email">
-          = label_tag(:contact_email, "Email")
+          = label_tag(:contact_email, I18n.t('contact_us.email', :default => "Email"))
           = email_field_tag(:contact_email, nil, {:class => "form-control"})
         .form-group
-          = label_tag(:advertising_title, "How did you hear about us?")
+          = label_tag(:advertising_title, I18n.t('contact_us.how_did', :default => "How did you hear about us?"))
           = select_tag(:advertising_options, options_for_select([['None', 'None'], ['Advertisements', 'Advertisements'], ['At an event', 'At an Event'], ['Community Service Center', 'Community Service Center'], ['From someone else', 'From Someone Else'], ['Internet search', 'Internet Search'], ['Social Media', 'Social Media'], ['Other', 'Other']]), {:class => "form-control"})
         .form-group
-          = label_tag(:request, "What is your request related to?")
+          = label_tag(:request, I18n.t('contact_us.request', :default => "What is your request related to?"))
           = select_tag(:request, options_for_select([['Press', 'Press'], ['Grants/Investment ', 'Grants/Investment '], ['Feedback About the Site', 'Feedback About the Site'], ['A Bug or Problem you Had', 'A Bug or Problem you Had'], ['Something Else', 'Something Else']]), {:class => "form-control"})
         .form-group
-          = label_tag(:feedback, "Your message")
+          = label_tag(:feedback, I18n.t('contact_us.message', :default => "Your message"))
           = text_area_tag(:feedback, nil, {:class => "form-control", :rows => "5"})
         %div
-          = submit_tag("Submit", :class => "btn btn-primary")
+          = submit_tag(I18n.t('contact_us.submit', :default => "Submit"), :class => "btn btn-primary")
   .divider
   %br/
   %br/
