@@ -75,7 +75,7 @@
           = link_to I18n.t('common.click_here', :default => "Click Here"), "http://www.direct2food.org/", :class => "btn btn-success btn-resolution"
         %br/
         .row
-          %h4 Here are some additional resources from Purple Binder:
+          %h4= t.snap.additional_resources | "Here are some additional resources from Purple Binder:"
         %br/
         .row
           - if @food_resources_zip.count >= 2
