@@ -24,10 +24,10 @@
           = email_field_tag(:contact_email, nil, {:class => "form-control"})
         .form-group
           = label_tag(:advertising_title, I18n.t('contact_us.how_did', :default => "How did you hear about us?"))
-          = select_tag(:advertising_options, options_for_select([['None', 'None'], ['Advertisements', 'Advertisements'], ['At an event', 'At an Event'], ['Community Service Center', 'Community Service Center'], ['From someone else', 'From Someone Else'], ['Internet search', 'Internet Search'], ['Social Media', 'Social Media'], ['Other', 'Other']]), {:class => "form-control"})
+          = select_tag(:advertising_options, options_for_select([[I18n.t('contact_us.none', :default => 'None'), 'None'], [I18n.t('contact_us.ads', :default => 'Advertisements'), 'Advertisements'], [I18n.t('contact_us.events', :default => 'At an event'), 'At an Event'], [I18n.t('contact_us.community', :default => 'Community service center'), 'Community Service Center'], [I18n.t('contact_us.someone_else', :default => 'From someone else'), 'From Someone Else'], [I18n.t('contact_us.internet_search', :default => 'Internet search'), 'Internet Search'], [I18n.t('contact_us.social_media', :default => 'Social media'), 'Social Media'], [I18n.t('contact_us.other', :default => 'Other'), 'Other']]), {:class => "form-control"})
         .form-group
           = label_tag(:request, I18n.t('contact_us.request', :default => "What is your request related to?"))
-          = select_tag(:request, options_for_select([['Press', 'Press'], ['Grants/Investment ', 'Grants/Investment '], ['Feedback About the Site', 'Feedback About the Site'], ['A Bug or Problem you Had', 'A Bug or Problem you Had'], ['Something Else', 'Something Else']]), {:class => "form-control"})
+          = select_tag(:request, options_for_select([[I18n.t('contact_us.press', :default => 'Press'), 'Press'], [I18n.t('contact_us.grants', :default => 'Grants/Investment '), 'Grants/Investment '], [I18n.t('contact_us.feedback'), 'Feedback About the Site'], [I18n.t('contact_us.bug_or_problem', :default => 'A Bug or Problem you Had'), 'A Bug or Problem you Had'], [I18n.t('contact_us.something_else', :default => 'Something else'), 'Something Else']]), {:class => "form-control"})
         .form-group
           = label_tag(:feedback, I18n.t('contact_us.message', :default => "Your message"))
           = text_area_tag(:feedback, nil, {:class => "form-control", :rows => "5"})
