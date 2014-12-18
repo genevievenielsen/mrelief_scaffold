@@ -110,6 +110,21 @@ es:
     message: Su mensaje
     submit: Enviar
 
+    none: Ninguno
+    ads: Anuncios
+    events: En un evento
+    community: Centros comunitarios
+    someone_else: Oír de otra persona
+    internet_search: Búsqueda de internet
+    social_media: Medios sociales
+    other: Otro
+
+    press: Prensa
+    grants: Subsidios/Inversiones
+    feedback: Comentarios sobre el sitio-web
+    bug_or_problem: Un error o problema que tuvo
+    something_else: Algo más.
+
 
   programs:
     programs_for: Programas para Chicago e Illinois
