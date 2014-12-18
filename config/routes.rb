@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :laf_centers
 
   post('/', { :controller => 'twilio', :action => 'text'})
+  post('/twilio_spanish', { :controller => 'twilio', :action => 'text'})
   post 'twilio/voice', defaults: { format: 'xml' }
 
   get('/all_city_testing', { :controller => 'pages', :action => 'all_city_testing' })
