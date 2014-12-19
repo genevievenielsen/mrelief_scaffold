@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :all_city_program_data
+
   get 'set_language/english'
 
   get 'set_language/spanish'
