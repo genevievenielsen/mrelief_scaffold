@@ -1,4 +1,4 @@
 .row
   .form-group.col-sm-9.pull-left
-    %label{:for => "zipcode"}= t.programs.zipcode | "What is your zipcode?"
+    %label{:for => "zipcode"}= t.zipcode_question.zipcode | "What is your zipcode?"
     %input#zipcode.form-control{:name => "zipcode", :placeholder => I18n.t('placeholder.example_zip', :default => "For example: 60615"), :required => "", :type => "text"}/

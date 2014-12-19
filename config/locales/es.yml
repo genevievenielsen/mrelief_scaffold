@@ -24,11 +24,11 @@ es:
     info_hh: Esto debe incluir el numero de personas que te compran y preparan comida.
     info_income: Esto incluye el ingreso mensual de todas las personas que viven en el hogar incluyéndote a ti mismo. Esto tambien incluye ingresos de todas las fuentes, como el Seguro Social, manutención de los hijos, y el seguro de desempleo antes de cualquier deducción.
 
-  programs:
+  zipcode_question:
     zipcode: ¿Cuál es su código postal?
 
   program_utils:
-    calculator: Tira el lapiz! Aquí está una calculadora para sumar sus ingresos, si acaso usted lo necesite.
+    calculator: ¡Tire el lápiz! Utilice esta calculadora para sumar sus ingresos, si lo necesita.
 
   layouts:
     programs: Programas
@@ -43,13 +43,12 @@ es:
   pages:
 
     currently_we: >-
-      Actualmente proveemos programas de servicios sociales para la ciudad de Chicago y el estado de Illinois. Usted puede simplificar el proceso de reunir los requisitos con un formulario que es fácil de llenar. Usando mRelief, se puede acceder en línea y a través de SMS.
-      En este momento, se comprobará su elegibilidad para la ayuda a través de nuestra aplicación de mensajería de texto. Los programas incluyen cupones de comida, "Food Stamps", ayuda del transporte "RTA Free Ride", y de salud, "Medicaid" y "Medicare Cost Sharing".
+      A través de mRelief, usted puede simplificar el proceso de reunir los requisitos con un formulario que es fácil de llenar, se puede acceder en línea y a través de mensajes SMS. Por ahora, usted puede revisar si llena los requisitos para esta ayuda a través de nuestra aplicación por mensaje de texto. Los programas incluyen cupones de comida, "Food Stamps"; ayuda para transporte "RTA Free Ride", y ayuda para servicios de salud, "Medicaid" y "Medicare Cost Sharing".
     choose_your: 1. Seleccione su Programa
     horizontal_menu: >-
-      En el menú horizontal, en el lado de la derecho, seleccione "Programas". En el menú desplegable, seleccione "Ver Todos los programas". Despues de llegar en la pagina "Programas", seleccione el que aplica a sus necesidades.
+      En el menú horizontal, en el lado de la derecho, seleccione "Programas". En el menú desplegable, seleccione "Ver todos los programas". Estando en la pagina "Programas", seleccione el que se aplica a sus necesidades.
     enter_your: 2. Ingrese su información
-    on_the_individual: En la página del programa individual que ha seleccionado, habrá una declaracion de clasificación en la descripción, seguida por una serie de preguntas para que usted llene. En las cajas del formulario, proporcione su información.
+    on_the_individual: En la página del programa individual que ha seleccionado, habrá una declaración de clasificación en la descripción, seguida por una serie de preguntas para que usted debe llenar. En las cajas del formulario, proporcione su información.
     see_if: 3. Vea si usted califica
     after_you_have: >-
       Después de haber completado el formulario según su programa, haga clic en el botón azul, "Ver si califico", en la parte inferior izquierda.
@@ -91,7 +90,7 @@ es:
     check_your: Revise su elegibilidad para beneficios en Chicago e Illinois
     elegibility_requirements: Los requisitos de elegibilidad pueden ser difíciles de encontrar y hemos creado un proceso que lo hace fácil.
     get_started: Iniciar
-    in_a_few: En unos pocos pasos, usted puede determinar su elegibilidad
+    in_a_few: En unos pocos pasos, usted puede determinar si califica para beneficios
 
     little_more: Un Poco Más Sobre Nosotros
     ruby_devs: >-
@@ -99,13 +98,13 @@ es:
 
     learn_more_about_us: Conozca Más Sobre Nosotros
   contact_us:
-    we_would: Nos gustaría escuchar de usted!
+    we_would: ¡Nos gustaría escuchar de usted!
     some_ways: Algunas maneras de ponerse en contacto con nosotros
 
     first_name: Primer Nombre
     last_name: Apellido
     email: Correo electrónico
-    how_did: Como supo de nosotros?
+    how_did: ¿Como supo de nosotros?
     request: ¿De qué tema se trata su solicitud?
     message: Su mensaje
     submit: Enviar
@@ -145,13 +144,13 @@ es:
     benefits_are: Los beneficios se proporcionan con la tarjeta "Illinois Link Card" - aceptada en la mayoría de las tiendas de comestibles.
     you_can_find: >-
       Puede encontrar más información sobre SNAP / "Food Stamps"
-    how_old: Cuántos años tienes?
-    helps_low_income: ayuda a las personas de bajo ingreso y las familias a comprar los alimentos que necesita para la buena salud.
+    how_old: ¿Cuántos años tiene?
+    helps_low_income: ayuda a personas y familias de bajos ingresos a comprar los alimentos necesarios para la buena salud.
     clicking_here: al hacer clic aquí.
-    number_of_people: ¿Cuál es el número de personas que viven en el hogar incluyéndote a ti mismo?
-    gross_monthly: ¿Cuál es sus ingresos bruto mensual?
-    are_you_enrolled: ¿Está instrito en la universidad / institución de educación superior?
-    citizen: ¿Es usted un ciudadano de los Estados Unidos?
+    number_of_people: ¿Cuál es el número de personas que viven en el hogar incluyéndose a si mismo?
+    gross_monthly: ¿Cuál es su ingreso bruto mensual?
+    are_you_enrolled: ¿Está inscrito en la universidad / institución de educación superior?
+    citizen: ¿Es usted ciudadano de los Estados Unidos?
     disabled: >-
       Si usted está incapacitado, describa su situación actual:
     receiving_social_security: Estoy recibiendo pagos por incapacidad del Seguro Social.
@@ -174,7 +173,7 @@ es:
     apply_before_you_visit: >-
       Para solicitar a través de la web, antes de su visita, por favor visite este enlace:
     based_on_the_info_probably: >-
-      Basado en la información recibida, no podemos determinar su elegibilidad en este momento. Puede que tenga que hablar con un experto sobre su situación y que pueda compartir más detalles sobre si su elegibilidad es posible. Un paralegal de Fundación de Asistencia Legal (LAF, por sus siglas en inglés) podrá hablar con usted sobre su elegiblidad del programa de "Food Stamps".
+      Basado en la información recibida, no podemos determinar si califica para beneficios en este momento. Puede que tenga que hablar con un experto sobre su situación y que pueda compartir más detalles sobre su calificación para beneficios es posible. Un paralegal de Fundación de Asistencia Legal (LAF, por sus siglas en inglés) podrá hablar con usted sobre su calificación de beneficios del programa de "Food Stamps".
     based_on_the_info_not: >-
       Basado en el tamaño de su hogar y sus ingresos, es probable que no califica para cupones de alimentos.
     direct2food: >-
