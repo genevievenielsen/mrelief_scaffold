@@ -79,7 +79,7 @@ class TwilioSpanishController < ApplicationController
     if session["page"] == "snap_college_question" && session["counter"] == 2
       session["college"] = params[:Body].strip.downcase
       if session["college"] == "no"
-        message = "Es usted un cuidadano de los Estados Unidos? Ingrese 'si' o 'no'"
+        message = "Es usted cuidadano de los Estados Unidos? Ingrese 'si' o 'no'"
         session["page"] = "snap_citizen_question"
       elsif session["college"] == "yes" || session["college"] == "si" # check
         message = "¿Cuál es su código postal?"
@@ -93,7 +93,7 @@ class TwilioSpanishController < ApplicationController
         message = "¿Cuál es su código postal?"
         session["page"] = "snap_eligible_maybe"
       elsif session["citizen"]  == "yes" || session["citizen"] == "si"
-        message = "¿Cuántos años tienes? Ingrese un número"
+        message = "¿Cuántos años tiene? Ingrese un número"
         session["page"] = "snap_age_question"
       end
     end
