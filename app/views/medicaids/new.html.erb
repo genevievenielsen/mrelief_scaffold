@@ -65,23 +65,19 @@
 
       <button type="button" data-toggle="popover" data-content="Monthly income includes wages, Social Security, SSI, pensions, rental income, unemployment, worker's compensation, or other disability payments." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
 
-<div class="row">
-  <div class="col-md-8">
-    <div class="input-group">
-      <span class="input-group-addon">$</span>
-      <input type="text" id="medicaid_gross_income" name="medicaid_gross_income" placeholder="For example: 30000" class="form-control"required>
-      <span class="input-group-addon">.00</span>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="input-group">
+          <span class="input-group-addon">$</span>
+          <input type="text" id="medicaid_gross_income" name="medicaid_gross_income" placeholder="For example: 30000" class="   form-control"required>
+          <span class="input-group-addon">.00</span>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-</div>
 
 
- <div class="form-group col-sm-9 pull-left">
-    <label for="zipcode">What is your zipcode?</label>
-      <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" required>
-</div>
-
+ <%= render 'programs/zipcode_question' %>
 
 
   <div class="row">
