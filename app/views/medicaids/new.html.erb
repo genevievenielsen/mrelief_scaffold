@@ -29,9 +29,11 @@
 
 
 <div class="form-group col-md-12">
+
+    <div class="row">
     <label for="citizen" id="citizen" class="pull-left">Are you a citizen of the United States? </label>
 
-  <div class="row">
+    <div class="row">
       <div class="col-md-6">
         <div id="citizen" required>
           <%= radio_button_tag 'citizen', 'yes' %> yes
@@ -39,10 +41,12 @@
         </div>
       </div>
       </div>
-</div>
+  </div>
+  </div>
 
   <!-- Label and input for medicaid_household_size -->
 
+  <div class="row">
   <div class="form-group col-md-12">
     <label for="medicaid_household_size">What is your household size?</label>
 
@@ -54,10 +58,12 @@
       </div>
     </div>
   </div>
+  </div>
 
 
   <!-- Label and input for medicaid_gross_income -->
 
+  <div class="row">
   <div class="form-group col-md-12">
     <label for="medicaid_gross_income">
       What is your monthly income?
@@ -75,9 +81,10 @@
       </div>
     </div>
   </div>
+  </div>
 
 
- <%= render 'programs/zipcode_question' %>
+  <%= render 'programs/zipcode_question' %>
 
 
   <div class="row">
