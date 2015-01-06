@@ -15,44 +15,43 @@
   def create
     # this is the words into numbers logic
     if params[:snap_dependent_no] !~ /\D/  # returns true if all numbers
-      snap_dependent_no = params[:snap_dependent_no].to_i
+      @snap_dependent_no = params[:snap_dependent_no].to_i
     else
-      snap_dependent_no = params[:snap_dependent_no].in_numbers
+      @snap_dependent_no = params[:snap_dependent_no].in_numbers
     end
 
     if params[:age] !~ /\D/
-      age = params[:age].to_i
+      @age = params[:age].to_i
     else
-      age = params[:age].in_numbers
+      @age = params[:age].in_numbers
     end
 
-    snap_gross_income = params[:snap_gross_income]
-    snap_gross_income = snap_gross_income.gsub(/[^0-9\.]/, '')
+    @snap_gross_income = params[:snap_gross_income]
+    @snap_gross_income = @snap_gross_income.gsub(/[^0-9\.]/, '')
 
-    if snap_gross_income !~ /\D/
-      snap_gross_income = snap_gross_income.to_i
+    if @snap_gross_income !~ /\D/
+      @snap_gross_income = @snap_gross_income.to_i
     else
-      if snap_gross_income.include?("dollars")
-        snap_gross_income.slice!"dollars"
+      if @snap_gross_income.include?("dollars")
+        @snap_gross_income.slice!"dollars"
       end
-      snap_gross_income = snap_gross_income.in_numbers
+      @snap_gross_income = @snap_gross_income.in_numbers
     end
 
-    # this is the logic for everything except disability
-     age.present? && snap_gross_income.present? && snap_dependent_no.present?
+    if params[:disabled] != 'none'
+      @disabled = true
+    end
 
         if params[:education]  == 'no' && params[:citizen] == 'yes'
 
-            if age <= 59
-              snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => snap_dependent_no })
-            else
-              snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => snap_dependent_no})
+            if  @disabled == true
+               @snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => @snap_dependent_no})
+            elsif @age <= 59
+              @snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => @snap_dependent_no })
+            elsif @age > 59
+              @snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => @snap_dependent_no})
             end
-
-            p "snap_gross_income = #{snap_gross_income}"
-            p "snap_eligibility.snap_gross_income = #{snap_eligibility.snap_gross_income}"
-
-            if snap_gross_income < snap_eligibility.snap_gross_income
+            if @snap_gross_income < @snap_eligibility.snap_gross_income
               @eligible = "yes"
             else
                @eligible = "no"
@@ -62,6 +61,10 @@
           @eligible = 'maybe'
         elsif params[:citizen] == 'no'
           @eligible = 'maybe'
+        end
+
+        if @age < 22
+          @eligible = "no"
         end
 
         @user_zipcode = params[:zipcode]
@@ -96,37 +99,6 @@
               @food_resources_second = @food_resources.second
           end
 
-
-
-
-      # this is the logic for disability
-      if params[:disabled].present?
-
-        if params[:disabled] != 'none'
-          snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => snap_dependent_no})
-        else
-          snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => snap_dependent_no })
-        end
-
-            p "snap_gross_income = #{snap_gross_income}"
-            p "snap_eligibility.snap_gross_income = #{snap_eligibility.snap_gross_income}"
-
-            if snap_gross_income < snap_eligibility.snap_gross_income
-              @eligible = "yes"
-            else
-               @eligible = "no"
-            end
-
-            if params[:education]  == 'yes'
-              @eligible = 'maybe'
-            elsif params[:citizen] == 'no'
-              @eligible = 'maybe'
-            end
-      end
-
-      if age < 22
-        @eligible = "no"
-      end
 
   end
 

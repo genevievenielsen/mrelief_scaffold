@@ -7,7 +7,18 @@
          <div class="col-md-8 col-md-offset-2">
              <i class="fa fa-check-circle fa-5x"></i>
               <h1>You may be in luck!</h1>
-              <h4>Based on your household size and income, you likely qualify for food stamps.</h4>
+<!--               <h4>Based on your household size and income, you likely qualify for food stamps.</h4>
+ -->
+           <% if @disabled == true %>
+             <h4> Because you are disabled, have a household size of <%= @snap_dependent_no %> and your gross monthly income of $<%= @snap_gross_income %> is less than $<%= @snap_eligibility.snap_gross_income.to_i %>, you likely qualify for food stamps.  </h4>
+
+            <% elsif @age <= 59 %>
+              <h4> Because you are older than 22 years old, have a household size of <%= @snap_dependent_no %> and your gross monthly income of $<%= @snap_gross_income %> is less than $<%= @snap_eligibility.snap_gross_income.to_i %>, you likely qualify for food stamps.  </h4>
+
+            <% elsif @age > 59 %>
+              <h4> Because you are older than 59 years old, have a household size of <%= @snap_dependent_no %> and your gross monthly income of $<%= @snap_gross_income %> is less than $<%= @snap_eligibility.snap_gross_income.to_i %>, you likely qualify for food stamps.  </h4>
+
+            <% end %>
 
         <br>
         <br>
@@ -38,7 +49,16 @@
         <div class="col-md-8 col-md-offset-2">
           <i class="fa fa-exclamation-circle fa-5x"></i>
             <h1>Something else in mind!</h1>
-             <h4>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a Food Stamp expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your food stamp eligibility with you. </h4>
+
+            <%  if params[:education]  == 'yes' && params[:citizen] == 'no' %>
+              <h4>Because you are not a citizen and are enrolled college/institution of higher education, we cannot determine your eligibility at this time.</h4>
+            <%  elsif params[:education]  == 'yes' %>
+              <h4>Because you are enrolled college/institution of higher education, we cannot determine your eligibility at this time.</h4>
+            <% elsif params[:citizen] == 'no' %>
+              <h4>Because you are not a citizen, we cannot determine your eligibility at this time.</h4>
+            <% end %>
+
+             <h4> You may need to discuss your situation with a Food Stamp expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your food stamp eligibility with you. </h4>
             <br>
 
             <% if @laf_disclaimer.present?  %>
@@ -62,8 +82,21 @@
       <div class="row" style="text-align:center;">
         <div class="col-md-8 col-md-offset-2">
             <h1>Something else in mind!</h1>
-            <h4>Based on your household size and income, you likely do not qualify for food stamps.</h4>
+<!--             <h4>Based on your household size and income, you likely do not qualify for food stamps.</h4>
+ -->
+            <% if @age < 22 %>
+              <h4>Because you are younger than 22 years old, you likely do not qualify for foodstamps.</h4>
 
+            <% elsif @disabled == true %>
+              <h4> Because you are disabled, have a household size of <%= @snap_dependent_no %> and your gross monthly income of $<%= @snap_gross_income %> is greater than $<%= @snap_eligibility.snap_gross_income.to_i %>, you likely do not qualify for foodstamps.  </h4>
+
+             <% elsif @age <= 59 %>
+               <h4> Because you are older than 22 years old, have a household size of <%= @snap_dependent_no %> and your gross monthly income of $<%= @snap_gross_income %> is greater than $<%= @snap_eligibility.snap_gross_income.to_i %>, you likely do not qualify for foodstamps.  </h4>
+
+             <% elsif @age > 59 %>
+               <h4> Because you are older than 59 years old, have a household size of <%= @snap_dependent_no %> and your gross monthly income of $<%= @snap_gross_income %> is greater than $<%= @snap_eligibility.snap_gross_income.to_i %>, you likely do not qualify for foodstamps.  </h4>
+
+             <% end %>
             <br>
 
           <div class="row">
