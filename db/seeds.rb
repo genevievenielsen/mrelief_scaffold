@@ -3599,7 +3599,7 @@ LafCenter.create(:zipcode => '60611.0', :city => 'Chicago', :center => 'Garfield
 LafCenter.create(:zipcode => '60612.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
                  :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'Spanish speaking staff on duty daily')
 LafCenter.create(:zipcode => '60613.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave.', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave.', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60614.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave.', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60615.0', :city => 'Chicago', :center => 'King Community Service Center',
@@ -3611,7 +3611,7 @@ LafCenter.create(:zipcode => '60616.0', :city => 'Chicago', :center => 'King Com
 LafCenter.create(:zipcode => '60617.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
                  :address => '8650 S. Commercial Ave', :contact => 'Jeanette Sandoval', :telephone => '(312) 745 - 1132', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60618.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60619.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60619.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
@@ -3627,9 +3627,9 @@ LafCenter.create(:zipcode => '60623.0', :city => 'Chicago', :center => 'Garfield
 LafCenter.create(:zipcode => '60624.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
                  :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'Spanish speaking staff on duty daily')
 LafCenter.create(:zipcode => '60625.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60626.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60627.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
                  :address => '8650 S. Commercial Ave', :contact => 'Jeanette Sandoval', :telephone => '(312) 745 - 1132', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60628.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
@@ -3637,11 +3637,11 @@ LafCenter.create(:zipcode => '60628.0', :city => 'Chicago', :center => 'South Ch
 LafCenter.create(:zipcode => '60629.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60630.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60630.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60631.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60631.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60632.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
@@ -3661,7 +3661,7 @@ LafCenter.create(:zipcode => '60638.0', :city => 'Chicago', :center => 'Englewod
 LafCenter.create(:zipcode => '60639.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60640.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60641.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60642.0', :city => 'Chicago', :center => 'Trina Davila',
@@ -3671,9 +3671,9 @@ LafCenter.create(:zipcode => '60643.0', :city => 'Chicago', :center => 'South Ch
 LafCenter.create(:zipcode => '60644.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
                  :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'Spanish speaking staff on duty daily')
 LafCenter.create(:zipcode => '60645.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60646.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60647.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60648.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
@@ -3693,13 +3693,13 @@ LafCenter.create(:zipcode => '60655.0', :city => 'Chicago', :center => 'South Ch
 LafCenter.create(:zipcode => '60656.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60657.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60658.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60659.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60660.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60661.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
                  :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'Spanish speaking staff on duty daily')
 LafCenter.create(:zipcode => '60827.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
@@ -3731,7 +3731,7 @@ LafCenter.create(:zipcode => '60611.0', :city => 'Chicago', :center => 'Garfield
 LafCenter.create(:zipcode => '60612.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
                  :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'Spanish speaking staff on duty daily')
 LafCenter.create(:zipcode => '60613.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave.', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave.', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60614.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave.', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60615.0', :city => 'Chicago', :center => 'King Community Service Center',
@@ -3743,7 +3743,7 @@ LafCenter.create(:zipcode => '60616.0', :city => 'Chicago', :center => 'King Com
 LafCenter.create(:zipcode => '60617.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
                  :address => '8650 S. Commercial Ave', :contact => 'Jeanette Sandoval', :telephone => '(312) 745 - 1132', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60618.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60619.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60619.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
@@ -3759,9 +3759,9 @@ LafCenter.create(:zipcode => '60623.0', :city => 'Chicago', :center => 'Garfield
 LafCenter.create(:zipcode => '60624.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
                  :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'Spanish speaking staff on duty daily')
 LafCenter.create(:zipcode => '60625.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60626.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60627.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
                  :address => '8650 S. Commercial Ave', :contact => 'Jeanette Sandoval', :telephone => '(312) 745 - 1132', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60628.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
@@ -3769,11 +3769,11 @@ LafCenter.create(:zipcode => '60628.0', :city => 'Chicago', :center => 'South Ch
 LafCenter.create(:zipcode => '60629.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60630.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60630.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60631.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60631.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60632.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
@@ -3793,7 +3793,7 @@ LafCenter.create(:zipcode => '60638.0', :city => 'Chicago', :center => 'Englewod
 LafCenter.create(:zipcode => '60639.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60640.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60641.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60642.0', :city => 'Chicago', :center => 'Trina Davila',
@@ -3803,9 +3803,9 @@ LafCenter.create(:zipcode => '60643.0', :city => 'Chicago', :center => 'South Ch
 LafCenter.create(:zipcode => '60644.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
                  :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'Spanish speaking staff on duty daily')
 LafCenter.create(:zipcode => '60645.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60646.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60647.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60648.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
@@ -3825,13 +3825,13 @@ LafCenter.create(:zipcode => '60655.0', :city => 'Chicago', :center => 'South Ch
 LafCenter.create(:zipcode => '60656.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60657.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60658.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60659.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60660.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60661.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
                  :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'Spanish speaking staff on duty daily')
 LafCenter.create(:zipcode => '60827.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
