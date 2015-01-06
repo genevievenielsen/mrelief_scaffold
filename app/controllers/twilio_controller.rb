@@ -447,7 +447,7 @@ class TwilioController < ApplicationController
      medicaid_gross_income = session["income"].to_i
      medicaid_eligibility = Medicaid.find_by({ :medicaid_household_size => medicaid_household_size})
       if medicaid_gross_income < medicaid_eligibility.medicaid_gross_income
-        message = "You may be in luck! You likely qualify for Medicaid. Call (866) 311-1119 for your coverage options. To check other programs, type 'menu'."
+        message = "You may be in luck! You likely qualify for Medicaid. Call (866) 311-1119 for your coverage options. To further pursue your Medicaid application you can also call the county care line (312-864-8200). If you already have a doctor, be sure to confirm they transfer over. To check other programs, type 'menu'."
       else
         message = "What is your zipcode?"
         session["page"] = "medicaid_ineligible"
