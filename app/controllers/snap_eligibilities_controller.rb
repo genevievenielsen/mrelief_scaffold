@@ -63,7 +63,7 @@
           @eligible = 'maybe'
         end
 
-        if @age < 22
+        if @age < 18
           @eligible = "no"
         end
 

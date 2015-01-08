@@ -11,6 +11,10 @@
 
         <br>
         <br>
+        <% if @age <= 22 %>
+          <p class="subhead">However, make sure you accounted for your parents income, if you are still living in the same household</p>
+        <% end %>
+
         <br>
          <% if @laf_disclaimer.present?  %>
               <p class="subhead"><%= @laf_disclaimer %></p>

@@ -99,11 +99,11 @@ class TwilioController < ApplicationController
    if session["page"] == "snap_age_question" && session["counter"] == 4
      session["age"] = params[:Body].strip
       if session["age"]  !~ /\D/
-        session["age"] = session["age"].to_i
+        age = session["age"].to_i
       else
-        session["age"] = session["age"].in_numbers
+        age = session["age"].in_numbers
       end
-     if session["age"] >= 22
+     if age >= 18
       message = "What is the number of people living in your household including yourself? Enter a number"
       session["page"] = "snap_household_question"
      else
@@ -188,7 +188,11 @@ class TwilioController < ApplicationController
         @food_pantry = @food_resources.first
       end
       if snap_gross_income < snap_eligibility.snap_gross_income
-        message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, text 'menu'."
+        if age <= 22
+          message = "You may be in luck! You likely qualify for foodstamps. However make sure you accounted for your parents income, if you are still living in the same household.  To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, text 'menu'."
+        else
+          message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, text 'menu'."
+        end
       else
         message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, text 'menu'."
       end
@@ -231,13 +235,17 @@ class TwilioController < ApplicationController
         @food_pantry = @food_resources.first
       end
       if snap_gross_income < snap_eligibility.snap_gross_income
-        message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, text 'menu'."
+        if age <= 22
+          message = "You may be in luck! You likely qualify for foodstamps. However make sure you accounted for your parents income, if you are still living in the same household.  To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, text 'menu'."
+        else
+          message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, text 'menu'."
+        end
       else
         message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, text 'menu'."
       end
    end
 
-   # Food stamps user is younger than 22
+   # Food stamps user is younger than 18
    if session["page"] == "snap_ineligible" && session["counter"] == 5
       user_zipcode = session["zipcode"]
       @zipcode = user_zipcode << ".0"

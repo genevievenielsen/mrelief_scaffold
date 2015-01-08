@@ -1,4 +1,12 @@
+
+
 <div class="container">
+
+<br>
+<br>
+
+<a href="#" class="pull-right" onclick="window.print();return false;">Print</a>
+
 
 <% if @eligible == 'yes' %>
 <div class="page-header"></div>
@@ -88,7 +96,7 @@
               <h4>Because you are younger than 22 years old, you likely do not qualify for foodstamps.</h4>
 
             <% elsif @disabled == true %>
-              <h4> Because you are disabled, have a household size of <%= @snap_dependent_no %> and your gross monthly income of $<%= @snap_gross_income %> is greater than $<%= @snap_eligibility.snap_gross_income.to_i %>, you likely do not qualify for foodstamps.  </h4>
+              <h4> Because you are receiving disablitiy payments, have a household size of <%= @snap_dependent_no %> and your gross monthly income of $<%= @snap_gross_income %> is greater than $<%= @snap_eligibility.snap_gross_income.to_i %>, you likely do not qualify for foodstamps.  </h4>
 
              <% elsif @age <= 59 %>
                <h4> Because you are older than 22 years old, have a household size of <%= @snap_dependent_no %> and your gross monthly income of $<%= @snap_gross_income %> is greater than $<%= @snap_eligibility.snap_gross_income.to_i %>, you likely do not qualify for foodstamps.  </h4>

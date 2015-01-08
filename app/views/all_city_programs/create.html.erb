@@ -19,6 +19,9 @@
       <% if @eligible_snap == 'yes' %>
       <li class="list-group-item">
         <h3 class="allcityheader">Food Stamps</h3>
+        <% if @age <= 22 %>
+          <h5>However, make sure you accounted for your parents income, if you are still living in the same household</h5>
+        <% end %>
         <% if @laf_disclaimer.present?  %>
            <h5><%= @laf_disclaimer %></h5>
         <% else %>

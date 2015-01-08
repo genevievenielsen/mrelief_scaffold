@@ -30,11 +30,11 @@ class AllCityProgramsController < ApplicationController
     end
 
     if params[:age] !~ /\D/
-      age = params[:age].to_i
-      a.age = age
+      @age = params[:age].to_i
+      a.age = @age
     else
-      age = params[:age].in_numbers
-      a.age = age
+      @age = params[:age].in_numbers
+      a.age = @age
     end
 
     monthly_gross_income = params[:monthly_gross_income]
@@ -166,12 +166,12 @@ class AllCityProgramsController < ApplicationController
 
 
     #LOGIC FOR FOOD STAMPS
-     if age.present? && monthly_gross_income.present? && ninety_day_gross_income.present? &&
+     if @age.present? && monthly_gross_income.present? && ninety_day_gross_income.present? &&
       annual_gross_income.present?
 
         if params[:education]  == 'no' && params[:citizen] == 'yes'
 
-            if age <= 59
+            if @age <= 59
               snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => dependent_no })
             else
               snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => dependent_no})
@@ -247,7 +247,7 @@ class AllCityProgramsController < ApplicationController
             elsif params[:citizen] == 'no'
               @eligible_snap = 'maybe'
             end
-            if age < 22
+            if @age < 18
               @eligible_snap = "no"
             end
         end
@@ -324,7 +324,7 @@ class AllCityProgramsController < ApplicationController
         #HERE IS THE LOGIC FOR RTA RIDE FREE
        rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => dependent_no })
 
-       if age < 65
+       if @age < 65
         @eligible_rta = "no"
        else
 
@@ -498,7 +498,7 @@ class AllCityProgramsController < ApplicationController
     end #this ends the present if statement
 
     # HERE IS THE LOGIC FOR AABD
-    if params[:disabled] != 'none' || age > 65
+    if params[:disabled] != 'none' || @age > 65
       if dependent_no  == 1
         if net_income + monthly_benefits < 821.38
           if assets < 2000
