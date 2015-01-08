@@ -215,6 +215,7 @@ class TwilioController < ApplicationController
      end
      snap_dependent_no = session["dependents"].to_i
      snap_gross_income = session["income"].to_i
+     age = session["age"].to_i
       if @disability.present?
         snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => snap_dependent_no })
       else
