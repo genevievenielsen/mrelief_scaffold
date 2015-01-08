@@ -99,11 +99,11 @@ class TwilioController < ApplicationController
    if session["page"] == "snap_age_question" && session["counter"] == 4
      session["age"] = params[:Body].strip
       if session["age"]  !~ /\D/
-        age = session["age"].to_i
+        session["age"] = session["age"].to_i
       else
-        age = session["age"].in_numbers
+        session["age"]= session["age"].in_numbers
       end
-     if age >= 18
+     if session["age"] >= 18
       message = "What is the number of people living in your household including yourself? Enter a number"
       session["page"] = "snap_household_question"
      else
