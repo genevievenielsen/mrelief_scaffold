@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150113192034) do
+ActiveRecord::Schema.define(version: 20150113193924) do
 
   create_table "aabd_cashes", force: true do |t|
     t.datetime "created_at"
@@ -163,6 +163,17 @@ ActiveRecord::Schema.define(version: 20150113192034) do
   create_table "medicaids", force: true do |t|
     t.integer  "medicaid_household_size"
     t.decimal  "medicaid_gross_income"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "medicare_cost_sharing_data", force: true do |t|
+    t.string   "household_size"
+    t.string   "medicare_household_size"
+    t.string   "monthly_gross_income"
+    t.string   "assets"
+    t.string   "zipcode"
+    t.string   "medicare_cost_sharing_eligibility_status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
