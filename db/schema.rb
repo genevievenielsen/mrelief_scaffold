@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150113193924) do
+ActiveRecord::Schema.define(version: 20150113200943) do
 
   create_table "aabd_cashes", force: true do |t|
     t.datetime "created_at"
@@ -283,6 +283,26 @@ ActiveRecord::Schema.define(version: 20150113193924) do
     t.decimal  "snap_gross_income"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "tanf_data", force: true do |t|
+    t.string   "household_size"
+    t.string   "children"
+    t.string   "thirty_day_gross_income"
+    t.string   "expect_child_support"
+    t.string   "expect_ssi"
+    t.string   "pregnant_or_caring_for_child"
+    t.string   "relationship_to_child"
+    t.string   "enrolled_in_high_school"
+    t.string   "teen_parent"
+    t.string   "pregnant_with_first_child"
+    t.string   "anticipate_other_income"
+    t.string   "tanif_sixty_months"
+    t.string   "citizen"
+    t.string   "zipcode"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "tanf_eligibility_status"
   end
 
   create_table "tanifs", force: true do |t|

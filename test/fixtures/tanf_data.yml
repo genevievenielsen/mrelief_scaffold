@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  household_size: MyString
+  children: MyString
+  thirty_day_gross_income: MyString
+  expect_child_support: MyString
+  expect_ssi: MyString
+  pregnant_or_caring_for_child: MyString
+  relationship_to_child: MyString
+  enrolled_in_high_school: MyString
+  teen_parent: MyString
+  pregnant_with_first_child: MyString
+  anticipate_other_income: MyString
+  tanif_sixty_months: MyString
+  citizen: MyString
+  zipcode: MyString
+
+two:
+  household_size: MyString
+  children: MyString
+  thirty_day_gross_income: MyString
+  expect_child_support: MyString
+  expect_ssi: MyString
+  pregnant_or_caring_for_child: MyString
+  relationship_to_child: MyString
+  enrolled_in_high_school: MyString
+  teen_parent: MyString
+  pregnant_with_first_child: MyString
+  anticipate_other_income: MyString
+  tanif_sixty_months: MyString
+  citizen: MyString
+  zipcode: MyString

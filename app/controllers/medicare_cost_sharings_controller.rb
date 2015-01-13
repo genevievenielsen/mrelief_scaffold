@@ -4,14 +4,6 @@ class MedicareCostSharingsController < ApplicationController
   skip_before_action :authenticate_user!, :only => :index
   skip_before_filter :verify_authenticity_token
 
-  #household_size
-  #medicare_household_size
-  #monthly_gross_income
-  #assets
-  #zipcode
-
-  #medicare_cost_sharing_eligibility_status
-
   def new
     @medicare_cost_sharing = MedicareCostSharing.new
   end
