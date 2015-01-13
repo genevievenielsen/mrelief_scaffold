@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150113164100) do
+ActiveRecord::Schema.define(version: 20150113172559) do
 
   create_table "aabd_cashes", force: true do |t|
     t.datetime "created_at"
@@ -174,6 +174,17 @@ ActiveRecord::Schema.define(version: 20150113164100) do
     t.integer  "rental_dependent_no"
     t.decimal  "rental_gross_income"
     t.integer  "rental_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rta_free_ride_data", force: true do |t|
+    t.string   "dependent_no"
+    t.string   "gross_annual_income"
+    t.string   "age"
+    t.string   "disabled_status"
+    t.string   "zipcode"
+    t.string   "rta_eligibility_status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

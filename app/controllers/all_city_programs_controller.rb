@@ -254,7 +254,6 @@ class AllCityProgramsController < ApplicationController
 
 
       #HERE IS THE LOGIC FOR RENTAL ASSISTANCE
-
       a.name_on_lease = params[:lease]
       a.rental_status = params[:rental_status]
 
@@ -324,18 +323,14 @@ class AllCityProgramsController < ApplicationController
         #HERE IS THE LOGIC FOR RTA RIDE FREE
        rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => dependent_no })
 
-       if @age < 65
-        @eligible_rta = "no"
-       else
-
-        p "annual_gross_income = #{annual_gross_income}"
-        p "rta_eligibility.annual_gross_income = #{rta_eligibility.rta_gross_income}"
-
+       if params[:disabled] != 'none' || @age > 65
         if annual_gross_income < rta_eligibility.rta_gross_income
-          @eligible_rta = "yes"
+         @eligible_rta = "yes"
         else
           @eligible_rta = "no"
         end
+      else
+        @eligible_rta = "no"
       end
 
       transportation = []

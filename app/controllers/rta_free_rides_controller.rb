@@ -3,16 +3,19 @@ class RtaFreeRidesController < ApplicationController
   skip_before_action :authenticate_user!, :only => :index
   skip_before_filter :verify_authenticity_token
 
+
   def new
     @rta_free_ride = RtaFreeRide.new
   end
 
   def create
-
+    r = RtaFreeRideData.new
     if params[:rta_dependent_no] !~ /\D/  # returns true if all numbers
       rta_dependent_no = params[:rta_dependent_no].to_i
+      r.dependent_no = rta_dependent_no
     else
       rta_dependent_no = params[:rta_dependent_no].in_numbers
+      r.dependent_no = rta_dependent_no
     end
 
     rta_gross_income = params[:rta_gross_income]
@@ -20,40 +23,51 @@ class RtaFreeRidesController < ApplicationController
 
     if rta_gross_income !~ /\D/
       rta_gross_income = rta_gross_income.to_i
+      r.gross_annual_income = rta_gross_income
     else
       if rta_gross_income.include?("dollars")
         rta_gross_income.slice!"dollars"
       end
       rta_gross_income = rta_gross_income.in_numbers
+      r.gross_annual_income = rta_gross_income
     end
 
     if params[:age] !~ /\D/
       age = params[:age].to_i
+      r.age = age
     else
       age = params[:age].in_numbers
+      r.age = age
     end
 
-    if  rta_gross_income.present? && rta_dependent_no.present?
-         rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => rta_dependent_no })
+    if rta_gross_income.present? && rta_dependent_no.present?
+      rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => rta_dependent_no })
 
        p "rta_gross_income = #{rta_gross_income}"
        p "rta_eligibility.rta_gross_income = #{rta_eligibility.rta_gross_income}"
 
-       if params[:disabled] != 'none' || age > 65
+      if params[:disabled] != 'none' || age > 65
         if rta_gross_income < rta_eligibility.rta_gross_income
           @eligible = "yes"
+          r.rta_eligibility_status = "yes"
         else
           @eligible = "no"
+          r.rta_eligibility_status = "no"
         end
       else
         @eligible = "no"
+        r.rta_eligibility_status = "no"
       end
 
 
+    else
+      redirect_to :back, :notice => "All fields are required."
+    end
 
-     else
-       redirect_to :back, :notice => "All fields are required."
-     end
+    #DATA STORAGE
+    r.disabled_status = params[:disabled]
+    r.zipcode = params[:zipcode]
+    r.save
 
      @user_zipcode = params[:zipcode]
      @zipcode = @user_zipcode << ".0"
@@ -71,7 +85,6 @@ class RtaFreeRidesController < ApplicationController
        end
      end
 
-
      @pb_zipcode = @user_zipcode.chomp(".0")
        @transportation_resources = transportation
        @transportation_resources_zip = []
@@ -82,28 +95,24 @@ class RtaFreeRidesController < ApplicationController
          end
        end
 
+        #in this case there are 2 medical centers in the user's zip
+        if @transportation_resources_zip.count >= 2
+           @transportation_resources = @transportation_resources_zip
+        end
 
-       #@transportation_resources.where(:zip => @user_zipcode)
+        #in this case there is 1 medical center in the user's zip
+        if @transportation_resources_zip.count == 1
+           @transportation_resources_first = @transportation_resources_zip.first
+           @transportation_resources_second = @transportation_resources.first
+        end
 
-         #in this case there are 2 medical centers in the user's zip
-         if @transportation_resources_zip.count >= 2
-            @transportation_resources = @transportation_resources_zip
-         end
-
-         #in this case there is 1 medical center in the user's zip
-         if @transportation_resources_zip.count == 1
-            @transportation_resources_first = @transportation_resources_zip.first
-            @transportation_resources_second = @transportation_resources.first
-         end
-
-         #in this caser there are no medical centers in the user's zip
-         if  @transportation_resources_zip.count == 0
-             @transportation_resources_first = @transportation_resources.first
-             @transportation_resources_second = @transportation_resources.second
-         end
+        #in this caser there are no medical centers in the user's zip
+        if  @transportation_resources_zip.count == 0
+            @transportation_resources_first = @transportation_resources.first
+            @transportation_resources_second = @transportation_resources.second
+        end
 
   end
-
 
 
   private
