@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150113183005) do
+ActiveRecord::Schema.define(version: 20150113192034) do
 
   create_table "aabd_cashes", force: true do |t|
     t.datetime "created_at"
@@ -69,6 +69,21 @@ ActiveRecord::Schema.define(version: 20150113183005) do
     t.decimal  "share_gross_income"
     t.decimal  "premium_1_gross_income"
     t.decimal  "premium_2_gross_income"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "all_kids_data", force: true do |t|
+    t.string   "household_size"
+    t.string   "monthly_gross_income"
+    t.string   "pregnant"
+    t.string   "healthcare_status"
+    t.string   "zipcode"
+    t.string   "allkids_eligibility_status"
+    t.string   "assist_eligibility"
+    t.string   "share_eligibility"
+    t.string   "premium1_eligibility"
+    t.string   "premium2_eligibility"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

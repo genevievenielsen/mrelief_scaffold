@@ -3,7 +3,6 @@ class MedicaidsController < ApplicationController
   skip_before_action :authenticate_user!, :only => :index
   skip_before_filter :verify_authenticity_token
 
-
   def new
     @medicaid = Medicaid.new
   end
@@ -49,10 +48,10 @@ class MedicaidsController < ApplicationController
       end
     end
 
-    #DATA STORAGE
-    m.citizen = params[:citizen]
-    m.zipcode = params[:zipcode]
-    m.save
+   #DATA STORAGE
+   m.citizen = params[:citizen]
+   m.zipcode = params[:zipcode]
+   m.save
 
    @user_zipcode = params[:zipcode]
    @zipcode = @user_zipcode << ".0"
