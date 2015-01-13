@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150113172559) do
+ActiveRecord::Schema.define(version: 20150113180727) do
 
   create_table "aabd_cashes", force: true do |t|
     t.datetime "created_at"
@@ -168,6 +168,17 @@ ActiveRecord::Schema.define(version: 20150113172559) do
     t.string   "name_es"
     t.string   "description_en"
     t.string   "name_en"
+  end
+
+  create_table "rental_assistance_data", force: true do |t|
+    t.string   "dependent_no"
+    t.string   "ninety_day_gross_income"
+    t.string   "name_on_lease"
+    t.string   "rental_status"
+    t.string   "zipcode"
+    t.string   "rental_eligibility_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "rental_assistances", force: true do |t|

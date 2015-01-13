@@ -59,7 +59,6 @@ class RtaFreeRidesController < ApplicationController
         r.rta_eligibility_status = "no"
       end
 
-
     else
       redirect_to :back, :notice => "All fields are required."
     end
@@ -113,7 +112,6 @@ class RtaFreeRidesController < ApplicationController
         end
 
   end
-
 
   private
     # Use callbacks to share common setup or constraints between actions.

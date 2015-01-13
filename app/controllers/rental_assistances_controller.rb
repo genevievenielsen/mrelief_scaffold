@@ -6,57 +6,55 @@ class RentalAssistancesController < ApplicationController
   skip_before_action :authenticate_user!, :only => :index
   skip_before_filter :verify_authenticity_token
 
-
- def new
+  def new
     @rental_assistance = RentalAssistance.new
   end
 
+  def create
+    r = RentalAssistanceData.new
+    if params[:rental_dependent_no] !~ /\D/  # returns true if all numbers
+      rental_dependent_no = params[:rental_dependent_no].to_i
+      r.dependent_no = rental_dependent_no
+    else
+      rental_dependent_no = params[:rental_dependent_no].in_numbers
+      r.dependent_no = rental_dependent_no
+    end
 
-
-    def create
-
-      if params[:rental_dependent_no] !~ /\D/  # returns true if all numbers
-        rental_dependent_no = params[:rental_dependent_no].to_i
-      else
-        rental_dependent_no = params[:rental_dependent_no].in_numbers
+    rental_gross_income = params[:rental_gross_income]
+    rental_gross_income = rental_gross_income.gsub(/[^0-9\.]/, '').to_i
+    if rental_gross_income !~ /\D/
+      rental_gross_income = rental_gross_income.to_i
+      r.ninety_day_gross_income = rental_gross_income
+    else
+      if rental_gross_income.include?("dollars")
+        rental_gross_income.slice!"dollars"
       end
+      rental_gross_income = rental_gross_income.in_numbers
+      r.ninety_day_gross_income = rental_gross_income
+    end
 
-      rental_gross_income = params[:rental_gross_income]
-      rental_gross_income = rental_gross_income.gsub(/[^0-9\.]/, '').to_i
-
-      if rental_gross_income !~ /\D/
-        rental_gross_income = rental_gross_income.to_i
-      else
-        if rental_gross_income.include?("dollars")
-          rental_gross_income.slice!"dollars"
-        end
-        rental_gross_income = rental_gross_income.in_numbers
-      end
-
-      if  rental_gross_income.present? && rental_dependent_no.present?
-
+    if rental_gross_income.present? && rental_dependent_no.present?
       rental_eligibility = RentalAssistance.find_by({ :rental_dependent_no => rental_dependent_no })
       rental_cut_off =  rental_eligibility.rental_gross_income
       rental_cut_off_plus_200 = rental_eligibility.rental_gross_income + 200
 
+       p "rental_gross_income = #{rental_gross_income}"
+       p "rental_eligibility.rental_gross_income = #{rental_eligibility.rental_gross_income}"
 
-         p "rental_gross_income = #{rental_gross_income}"
-         p "rental_eligibility.rental_gross_income = #{rental_eligibility.rental_gross_income}"
-
-        if params[:lease] == "no"
+       if params[:lease] == "no"
+         @eligible = "no"
+         r.rental_eligibility_status = @eligible
+       elsif params[:lease] == "yes"
+        if rental_gross_income < rental_eligibility.rental_gross_income && params[:rental_status] != "none of the above"
+          @eligible = "yes"
+          r.rental_eligibility_status = @eligible
+        elsif rental_gross_income< rental_cut_off_plus_200 && rental_gross_income >= rental_cut_off && params[:rental_status] != "none of the above"
+          @eligible = "maybe"
+          r.rental_eligibility_status = @eligible
+        else
           @eligible = "no"
-
-        elsif params[:lease] == "yes"
-            if rental_gross_income < rental_eligibility.rental_gross_income && params[:rental_status] != "none of the above"
-                @eligible = "yes"
-            elsif rental_gross_income< rental_cut_off_plus_200 && rental_gross_income >= rental_cut_off
-              if params[:rental_status] != "none of the above"
-                @eligible = "maybe"
-              end
-            else
-                @eligible = "no"
-
-            end
+          r.rental_eligibility_status = @eligible
+         end
         end # closes the if statement about the lease agreement
       end #closes first if statement
       if params[:rental_status] == "medical circumstance"
@@ -68,6 +66,12 @@ class RentalAssistancesController < ApplicationController
       elsif params[:rental_status] == "a victim of domestic violence"
         @domestic_violence = "yes"
       end
+
+      # DATA STORAGE
+      r.name_on_lease = params[:lease]
+      r.rental_status = params[:rental_status]
+      r.zipcode = params[:zipcode]
+      r.save
 
       @user_zipcode = params[:zipcode]
       @zipcode = @user_zipcode << ".0"
@@ -114,9 +118,6 @@ class RentalAssistancesController < ApplicationController
         end
 
     end #closes method
-
-
-
 
 
   private

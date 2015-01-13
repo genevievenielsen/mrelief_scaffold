@@ -266,13 +266,11 @@ class AllCityProgramsController < ApplicationController
 
         elsif params[:lease] == "yes"
             if ninety_day_gross_income < rental_eligibility.rental_gross_income && params[:rental_status] != "none of the above"
-                @rental_eligible = "yes"
-            elsif ninety_day_gross_income < rental_cut_off_plus_200 && ninety_day_gross_income >= rental_cut_off
-              if params[:rental_status] != "none of the above"
-                @rental_eligible = "maybe"
-              end
+              @rental_eligible = "yes"
+            elsif ninety_day_gross_income < rental_cut_off_plus_200 && ninety_day_gross_income >= rental_cut_off && params[:rental_status] != "none of the above"
+              @rental_eligible = "maybe"
             else
-                @rental_eligible = "no"
+              @rental_eligible = "no"
             end
         end # closes the if statement about the lease agreement
 
@@ -710,7 +708,7 @@ class AllCityProgramsController < ApplicationController
 
 
     @ineligible_count = 0
-    if  @eligible_snap == "no"
+    if @eligible_snap == "no"
       @ineligible_count = @ineligible_count + 1
       a.snap_eligibility_status = "no"
     end
@@ -730,11 +728,11 @@ class AllCityProgramsController < ApplicationController
       @ineligible_count = @ineligible_count + 1
       a.medicare_cost_sharing_eligibility_status = "no"
     end
-    if @rental_eligible== "no"
+    if @rental_eligible == "no"
       @ineligible_count = @ineligible_count + 1
       a.rental_eligibility_status = "no"
     end
-    if @aabd_eligible== "no"
+    if @aabd_eligible == "no"
       @ineligible_count = @ineligible_count + 1
       a.aabd_eligibility_status = "no"
     end
