@@ -8,22 +8,28 @@
   skip_before_action :authenticate_user!, :only => :index
   skip_before_filter :verify_authenticity_token
 
+
    def new
     @snap_eligibility = SnapEligibility.new
   end
 
   def create
+    s = SnapEligibilityData.new
     # this is the words into numbers logic
     if params[:snap_dependent_no] !~ /\D/  # returns true if all numbers
       @snap_dependent_no = params[:snap_dependent_no].to_i
+      s.dependent_no = @snap_dependent_no
     else
       @snap_dependent_no = params[:snap_dependent_no].in_numbers
+      s.dependent_no = @snap_dependent_no
     end
 
     if params[:age] !~ /\D/
       @age = params[:age].to_i
+      s.age = @age
     else
       @age = params[:age].in_numbers
+      s.age = @age
     end
 
     @snap_gross_income = params[:snap_gross_income]
@@ -31,16 +37,24 @@
 
     if @snap_gross_income !~ /\D/
       @snap_gross_income = @snap_gross_income.to_i
+      s.monthly_gross_income = @snap_gross_income
     else
       if @snap_gross_income.include?("dollars")
         @snap_gross_income.slice!"dollars"
       end
       @snap_gross_income = @snap_gross_income.in_numbers
+      s.monthly_gross_income = @snap_gross_income
     end
 
     if params[:disabled] != 'none'
       @disabled = true
     end
+
+      # Data storage
+      s.enrolled_in_education = params[:education]
+      s.citizen = params[:citizen]
+      s.disabled_status = params[:disabled]
+      s.zipcode = params[:zipcode]
 
         if params[:education]  == 'no' && params[:citizen] == 'yes'
 
@@ -53,18 +67,23 @@
             end
             if @snap_gross_income < @snap_eligibility.snap_gross_income
               @eligible = "yes"
+              s.snap_eligibility_status = @eligible
             else
-               @eligible = "no"
+              @eligible = "no"
+               s.snap_eligibility_status = @eligible
             end
 
         elsif params[:education]  == 'yes'
           @eligible = 'maybe'
+          s.snap_eligibility_status = @eligible
         elsif params[:citizen] == 'no'
           @eligible = 'maybe'
+          s.snap_eligibility_status = @eligible
         end
 
         if @age < 18
           @eligible = "no"
+          s.snap_eligibility_status = @eligible
         end
 
         @user_zipcode = params[:zipcode]
@@ -99,7 +118,7 @@
               @food_resources_second = @food_resources.second
           end
 
-
+      s.save
   end
 
 

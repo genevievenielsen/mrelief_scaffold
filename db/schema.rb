@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141219144109) do
+ActiveRecord::Schema.define(version: 20150113164100) do
 
   create_table "aabd_cashes", force: true do |t|
     t.datetime "created_at"
@@ -205,6 +205,19 @@ ActiveRecord::Schema.define(version: 20141219144109) do
     t.decimal  "snap_gross_income"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "snap_eligibility_data", force: true do |t|
+    t.string   "dependent_no"
+    t.string   "age"
+    t.string   "monthly_gross_income"
+    t.string   "citizen"
+    t.string   "enrolled_in_education"
+    t.string   "disabled_status"
+    t.string   "snap_eligibility_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "zipcode"
   end
 
   create_table "snap_eligibility_seniors", force: true do |t|
