@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150113200943) do
+ActiveRecord::Schema.define(version: 20150113203221) do
+
+  create_table "aabd_cash_data", force: true do |t|
+    t.string   "household_size"
+    t.string   "age"
+    t.string   "thirty_day_net_income"
+    t.string   "government_benefits"
+    t.string   "assets"
+    t.string   "citizen"
+    t.string   "disabled_status"
+    t.string   "zipcode"
+    t.string   "aabd_eligibility_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "aabd_cashes", force: true do |t|
     t.datetime "created_at"

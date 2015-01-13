@@ -12,54 +12,61 @@ class AabdCashesController < ApplicationController
   # POST /aabd_cashes
   # POST /aabd_cashes.json
   def create
-
+    a = AabdCashData.new
     # this is the words into numbers logic
     if params[:aabd_household_size] !~ /\D/  # returns true if all numbers
       aabd_household_size = params[:aabd_household_size].to_i
+      a.household_size = aabd_household_size
     else
       aabd_household_size = params[:aabd_household_size].in_numbers
+      a.household_size = aabd_household_size
     end
 
     if params[:age] !~ /\D/
       age = params[:age].to_i
+      a.age = age
     else
       age = params[:age].in_numbers
+      a.age = age
     end
 
     aabd_net_income = params[:aabd_net_income]
     aabd_net_income = aabd_net_income.gsub(/[^0-9\.]/, '')
-
     if aabd_net_income !~ /\D/
       aabd_net_income = aabd_net_income.to_i
+      a.thirty_day_net_income = aabd_net_income
     else
       if aabd_net_income.include?("dollars")
         aabd_net_income.slice!"dollars"
       end
       aabd_net_income = aabd_net_income.in_numbers
+      a.thirty_day_net_income = aabd_net_income
     end
 
     aabd_benefits = params[:aabd_benefits]
     aabd_benefits = aabd_benefits.gsub(/[^0-9\.]/, '')
-
     if aabd_benefits !~ /\D/
       aabd_benefits = aabd_benefits.to_i
+      a.government_benefits = aabd_benefits
     else
       if aabd_benefits.include?("dollars")
         aabd_benefits.slice!"dollars"
       end
       aabd_benefits = aabd_benefits.in_numbers
+      a.government_benefits = aabd_benefits
     end
 
     aabd_assets = params[:aabd_assets]
     aabd_assets = aabd_assets.gsub(/[^0-9\.]/, '')
-
     if aabd_assets !~ /\D/
       aabd_assets = aabd_assets.to_i
+      a.assets = aabd_assets
     else
       if aabd_assets.include?("dollars")
         aabd_assets.slice!"dollars"
       end
       aabd_assets = aabd_assets.in_numbers
+      a.assets = aabd_assets
     end
 
     # if they are receiving disability payment proceed with logic
@@ -69,44 +76,55 @@ class AabdCashesController < ApplicationController
         if aabd_net_income + aabd_benefits < 821.38
           if aabd_assets < 2000
             @eligible = 'yes'
+            a.aabd_eligibility_status = @eligible
           else # exceed asset limit
             @eligible = 'no'
+            a.aabd_eligibility_status = @eligible
           end
-
         else # exceed income limit
           @eligible = "no"
+          a.aabd_eligibility_status = @eligible
         end
 
       elsif aabd_household_size == 2
         if aabd_net_income + aabd_benefits < 724.38
           if aabd_assets < 3000
             @eligible = 'yes'
+            a.aabd_eligibility_status = @eligible
           else # exceed asset limit
             @eligible = 'no'
+            a.aabd_eligibility_status = @eligible
           end
-
         else # exceed income limit
           @eligible = "no"
+          a.aabd_eligibility_status = @eligible
         end
 
       else #household size is greater than 2
         if aabd_net_income + aabd_benefits < 724.38
           @eligible = 'maybe'
+          a.aabd_eligibility_status = @eligible
         else
           @eligible = 'no'
-
+          a.aabd_eligibility_status = @eligible
         end
       end
-
     else
       @eligible = 'no'
+      a.aabd_eligibility_status = @eligible
     end
     # if they are NOT receiving payment and are NOT over 65, not eligible
 
-
     if params[:citizen] == 'no'
       @eligible = 'maybe'
+      a.aabd_eligibility_status = @eligible
     end
+
+    # DATA STORAGE
+    a.citizen = params[:citizen]
+    a.disabled_status = params[:disabled]
+    a.zipcode = params[:zipcode]
+    a.save
 
     @user_zipcode = params[:zipcode]
     @zipcode = @user_zipcode << ".0"
