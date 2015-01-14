@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150113203221) do
+ActiveRecord::Schema.define(version: 20150114213028) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20150113203221) do
     t.string   "tanf_eligibility_status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "phone_number"
   end
 
   create_table "all_city_programs", force: true do |t|

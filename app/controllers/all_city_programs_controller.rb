@@ -764,6 +764,7 @@ class AllCityProgramsController < ApplicationController
       a.tanf_eligibility_status = "maybe"
     end
 
+    a.phone_number = params[:phone_number] if params[:phone_number].present?
     a.save
   end
 
