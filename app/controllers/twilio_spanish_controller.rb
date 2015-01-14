@@ -105,7 +105,7 @@ class TwilioSpanishController < ApplicationController
       else
         session["age"] = session["age"].in_numbers
       end
-      if session["age"] >= 22
+      if session["age"] >= 18
         message = "¿Cuál es el número de personas que viven en el hogar incluyéndote a ti mismo? Ingrese un numero"
         session["page"] = "snap_household_question"
       else

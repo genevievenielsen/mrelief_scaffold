@@ -49,7 +49,7 @@
               - elsif I18n.locale = :en
                 = link_to "Español", set_language_spanish_path
             %li
-              %a.btn-donate{:href => "https://fundly.com/mrelief-using-technology-to-improve-social-services"}= t.layouts.donate | "Donate"
+              %a.btn-donate{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "https://goodcitychicago.org/donation/", :title => I18n.t("layouts.please_select", :default => "Please select &ldquo;mRelief&rdquo; on the program section")}= t.layouts.donate | "Donate"
     .container
       - if notice.present?
         .alert.alert-dismissable.alert-success
@@ -161,3 +161,7 @@
             // e.preventDefault();
           }
         }
+
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
