@@ -61,7 +61,11 @@ class TwilioController < ApplicationController
       message = "For foodstamps, text the word 'food.'"
       session["counter"] = 1
    end
-   if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("medicaid") || params[:Body].strip.downcase.include?("ride") || params[:Body].strip.downcase.include?("medicare")
+   if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("medicaid")
+      message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'  "
+      session["counter"] = 1
+   end
+   if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("ride")
       message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'  "
       session["counter"] = 1
    end
