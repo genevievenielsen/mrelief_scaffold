@@ -1,7 +1,8 @@
-
+<div class="container">
+<%= render "layouts/print_button" %>
   <% if @eligible %>
-    <div class="page-header"></div>
-
+<!--     <div class="page-header"></div>
+ -->
           <div class="row" style="text-align:center;">
              <div class="col-md-8 col-md-offset-2">
                  <i class="fa fa-check-circle fa-5x"></i>
@@ -12,7 +13,6 @@
             <br>
             <br>
 
-
             <div class="row">
               <div class="text-center">
                 <p class="subhead"> The Illinois Head Start Association can help you find a Head Start program near you.</p>
@@ -21,13 +21,12 @@
               <p class="subhead">or call at 217-241-3511.</p>
           </div>
         </div>
-
-
+      </div>
 
   <% else %>
 
-     <div class="page-header"></div>
-
+<!--      <div class="page-header"></div>
+ -->
            <div class="row" style="text-align:center;">
              <div class="col-md-8 col-md-offset-2">
                  <h1>Something else in mind!</h1>
@@ -35,21 +34,18 @@
 
                  <br>
 
-
-
-
-               <div class="row">
-                 <p class="subhead">Many programs for young children have a combination of funding sources. To find early learning programs near you </p>
-                 <%= link_to "Click Here ", "http://chicagoearlylearning.org", :class => "btn btn-success btn-resolution" %>
-                 <p class="subhead">or call the hotline at (312) 229-1690.</p>
-               </div>
+                <div class="row">
+                  <p class="subhead">Many programs for young children have a combination of funding sources. To find early learning programs near you </p>
+                  <%= link_to "Click Here ", "http://chicagoearlylearning.org", :class => "btn btn-success btn-resolution" %>
+                  <p class="subhead">or call the hotline at (312) 229-1690.</p>
+                </div>
 
                <br>
                <br>
 
                <div class="row">
-            <h4>Here are some additional resources from Purple Binder:</h4>
-          </div>
+                <h4>Here are some additional resources from Purple Binder:</h4>
+              </div>
           <br>
 
           <div class="row">
@@ -73,7 +69,6 @@
             <% end %>
           </div>
 
-
           <div class="row">
           <% if @earlyheadstart_resources_first.present? %>
             <div class="col-md-6 col-sm-6">
@@ -93,8 +88,9 @@
             </div>
             <% end %>
           </div>
-
+        </div>
 
           <%= image_tag("pblogo.jpg", :class => "logo-padding") %>
-
+        </div>
   <% end %>
+</div>

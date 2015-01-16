@@ -1,9 +1,7 @@
 <div class="container" style="padding-bottom:150px">
-
-
-
+<%= render "layouts/print_button" %>
 <% if @eligible == 'yes' %>
-  <div class="page-header"></div>
+  <!-- <div class="page-header"></div> -->
 
     <div class="row" style="text-align:center;">
       <div class="col-md-8 col-md-offset-2">
@@ -25,10 +23,9 @@
       </div>
   </div>
 
-
 <% else %>
 
-   <div class="page-header"></div>
+   <!-- <div class="page-header"></div> -->
 
       <div class="row" style="text-align:center;">
         <div class="col-md-8 col-md-offset-2">
@@ -55,7 +52,6 @@
               </p>
 
               </p>
-
 
             <br>
 
@@ -85,7 +81,6 @@
               <% end %>
             </div>
 
-
             <div class="row">
             <% if @medical_resources_first.present? %>
               <div class="col-md-6 col-sm-6">
@@ -106,11 +101,10 @@
               <% end %>
             </div>
 
-
         </div>
 
          <%= image_tag("pblogo.jpg", :class => "logo-padding") %>
-
+        </div>
 <% end %>
 
 

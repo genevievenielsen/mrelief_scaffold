@@ -1,9 +1,12 @@
+
 <div class="container" style="padding-bottom:150px">
 <div class="page-header">
+<%= render "layouts/print_button" %>
   <h1>Do I qualify for All City Programs within mRelief?</h1>
   <p class="subhead">Programs include Food Stamps, RTA Ride Free, All Kids, Medicare Cost Sharing, Rental Assistance, Medicaid, Aged, Blind and Disabled (AABD), Cash Assistance and Temporary Assistance for Needy Families </p>
 </div>
 
+<%#= render "layouts/print_button" %>
 
 <% if @eligible_count > 0 %>
 <div class="panel panel-default allcitypanel">
@@ -409,6 +412,10 @@
 
     </ul>
   </div>
-</div>
+
 <% end %>
+
+
+<%= render "layouts/print_center_button" %>
+</div>
 

@@ -1,7 +1,7 @@
 <div class="container">
-
+<%= render "layouts/print_button" %>
 <% if @eligible == 'yes' %>
-<div class="page-header"></div>
+<!-- <div class="page-header"></div> -->
 
       <div class="row" style="text-align:center;">
          <div class="col-md-8 col-md-offset-2">
@@ -24,9 +24,10 @@
 
       </div>
     </div>
+    </div>
 
     <% elsif @eligible == 'maybe' %>
-    <div class="page-header"></div>
+    <!-- <div class="page-header"></div> -->
 
       <div class="row" style="text-align:center;">
         <div class="col-md-8 col-md-offset-2">
@@ -51,7 +52,7 @@
 
 
       <% elsif @eligible == 'no' %>
-    <div class="page-header"></div>
+    <!-- <div class="page-header"></div> -->
 
       <div class="row" style="text-align:center;">
         <div class="col-md-8 col-md-offset-2">
@@ -132,7 +133,7 @@
         <% end %>
       </div>
 </div>
-
+</div>
 <br>
 <br>
 <br>

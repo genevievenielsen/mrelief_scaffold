@@ -1,17 +1,11 @@
 <div class="container">
-
+<%= render "layouts/print_button" %>
 <% if @eligible %>
-  <div class="page-header">
-      <!-- <h1>Do I qualify for All Kids?</h1> -->
-        <!-- <p class="subhead">The All Kids program offers many Illinois children comprehensive healthcare that includes doctors visits, hospital stays, prescription drugs, vision care, dental care and medical devices like eyeglasses and asthma inhalers.</p> -->
-  </div>
-
 
  <div class="row" style="text-align:center;">
     <div class="col-md-8 col-md-offset-2">
         <i class="fa fa-check-circle fa-5x"></i>
           <h1>You may be in luck!</h1>
-
 
           <% if @assist_eligible %>
             <h4>Based on your household size and income, you likely qualify for All Kids Assist.</h4>
@@ -29,24 +23,15 @@
 
           <p class="subhead">To complete your application online</p>
           <%= link_to "Click Here", "https://abe.illinois.gov/abe/access/accessController?id=0.9912272225853554", :class => "btn btn-success btn-resolution" %>
-          </div>
-          </div>
+      </div>
+    </div>
 
-      <% else %>
-
- <!--  <div class="page-header">
-          <h1>Do I qualify for All Kids?</h1>
-          <p class="page lead">The All Kids program offers many Illinois children comprehensive healthcare that includes doctors visits, hospital stays, prescription drugs, vision care, dental care and medical devices like eyeglasses and asthma inhalers.</p>
-  </div> -->
-
-      <!-- <div class="panel panel-default" style="margin: 0 0 40px 0">
-        <div class="panel-body"> -->
-<br>
-<br>
+  <% else %>
+      <br>
+      <br>
   <div class="row" style="text-align:center;">
     <div class="col-md-8 col-md-offset-2">
-        <!-- <i class="fa fa-times-circle fa-5x"></i> -->
-          <h1>Something else in mind!</h1>
+        <h1>Something else in mind!</h1>
 
             <h4>So, it looks like you possibly don't qualify for <a href="/all_kids/new"> All Kids</a>. However, our friends at
             Purple Binder found some other resources that might help. If you and your family don't have health coverage in 2014, you may have to pay a fee - and all of your health care.
@@ -54,7 +39,6 @@
 
             <br>
             <br>
-
 
         <div class="row">
           <div class="col-md-6 col-sm-6 col-xs-6">
@@ -106,7 +90,6 @@
             <% end %>
           </div>
 
-
           <div class="row">
           <% if @medical_resources_first.present? %>
             <div class="col-md-6 col-sm-6">
@@ -127,13 +110,11 @@
             <% end %>
           </div>
 
-
           <%= image_tag("pblogo.jpg", :class => "logo-padding") %>
-
-
 
         <% end %>
       </div>
+</div>
 </div>
 <br>
 <br>

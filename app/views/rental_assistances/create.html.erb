@@ -1,5 +1,7 @@
+<div class="container">
+<%= render "layouts/print_button" %>
  <% if @eligible == "yes" %>
- <div class="page-header"></div>
+ <!-- <div class="page-header"></div> -->
 
        <div class="row" style="text-align:center;">
           <div class="col-md-8 col-md-offset-2">
@@ -25,7 +27,6 @@
               <% end %>
 
               <h4>The final decision will be made one-on-one by the case manager.</h4>
-
 
          <br>
          <br>
@@ -88,7 +89,7 @@
      </div>
 
   <% elsif @eligible == "no" %>
-  <div class="page-header"></div>
+  <!-- <div class="page-header"></div> -->
 
         <div class="row" style="text-align:center;">
           <div class="col-md-8 col-md-offset-2">
@@ -148,3 +149,4 @@
             <%= image_tag("pblogo.jpg", :class => "logo-padding") %>
 
   <% end %>
+</div>

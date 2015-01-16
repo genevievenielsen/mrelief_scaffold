@@ -307,3 +307,14 @@ a:hover {
 .how-to {
   padding: 0 60px 60px 60px;
 }
+
+
+.print-button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+/*
+.print-button-right{
+  margin-right:10px;
+}
+*/

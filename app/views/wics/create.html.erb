@@ -1,7 +1,9 @@
-  <% if @eligible %>
+<div class="container">
+<%= render "layouts/print_button" %>
+<% if @eligible %>
 
-  <div class="page-header"></div>
-
+<!--   <div class="page-header"></div>
+ -->
         <div class="row" style="text-align:center;">
            <div class="col-md-8 col-md-offset-2">
                <i class="fa fa-check-circle fa-5x"></i>
@@ -20,14 +22,14 @@
             </div>
 
 
+          </div>
         </div>
       </div>
 
+<% else %>
 
-  <% else %>
-
-     <div class="page-header"></div>
-
+<!--      <div class="page-header"></div>
+ -->
            <div class="row" style="text-align:center;">
              <div class="col-md-8 col-md-offset-2">
                  <h1>Something else in mind!</h1>
@@ -95,7 +97,8 @@
 
            <%= image_tag("pblogo.jpg", :class => "logo-padding") %>
         </div>
-
+        </div>
 
 
   <% end %>
+</div>

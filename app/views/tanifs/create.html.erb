@@ -1,7 +1,7 @@
-<br>
-<br>
+<div class="container">
+<%= render "layouts/print_button" %>
 <% if @eligible_tanif == "yes" %>
-  <div class="page-header"></div>
+  <!-- <div class="page-header"></div> -->
 
         <div class="row" style="text-align:center;">
            <div class="col-md-8 col-md-offset-2">
@@ -30,9 +30,7 @@
 
 <% elsif @eligible_tanif == "maybe" %>
 
-  <div class="page-header"></div>
-
-   <div class="page-header"></div>
+  <!-- <div class="page-header"></div> -->
 
      <div class="row" style="text-align:center;">
        <div class="col-md-8 col-md-offset-2">
@@ -91,7 +89,6 @@
             <% end %>
           </div>
 
-
           <div class="row">
           <% if @child_resources_first.present? %>
             <div class="col-md-6 col-sm-6">
@@ -122,3 +119,4 @@
   <br>
 
 <% end %>
+</div>
