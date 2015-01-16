@@ -27,11 +27,11 @@ class TwilioController < ApplicationController
   end
    if session["counter"] == 0
     message = "Welcome to mRelief! We help you check your eligibility for benefits. For foodstamps, text 'food'. For RTA ride free, text 'ride.' For Medicaid, text 'medicaid.' For Medicare Cost Sharing, text 'medicare.' If you make a mistake, send the message 'reset'."
-    session["counter"] = 0
    end
 
    if params[:Body].strip.downcase == "menu"
       message = "For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.' If you make a mistake, send the message 'reset'."
+      session["counter"] = 0
    end
    if params[:Body].strip.downcase == "food"
       message = "Are you enrolled in a college or institution of higher education? Enter 'yes' or 'no'"
