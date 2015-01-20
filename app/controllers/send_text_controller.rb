@@ -12,7 +12,7 @@ class SendTextController < ApplicationController
   end
 
   def send_spanish_text_message
-    account_sid = ENV['TWILIO_SPANISH_SID']
+    account_sid = ENV['TWILIO_SID']
     auth_token = ENV['TWILIO_TOKEN']
     @client = Twilio::REST::Client.new account_sid, auth_token
 
