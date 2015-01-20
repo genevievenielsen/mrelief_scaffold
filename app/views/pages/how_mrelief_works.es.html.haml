@@ -4,7 +4,7 @@
   .row
     %p.col-md-10.blocktext= t.pages.currently_we | "Currently we provide social service programs for the city of Chicago and state of Illinois. Using mRelief, simplifies the qualifying process with an easy-to-use form that can be accessed online and through SMS. At the current moment, you can check your eligibility for relief through our text messaging application. The relief programs include food (food stamps), transportation (RTA Ride Free), and healthcare (Medicaid and Medicare Cost Sharing)."
   .row
-    .col-md-offset-3.col-md-6.how-to
+    .col-md-6.how-to
       %h2= t.pages.mrelief_online | "mRelief online:"
       %h3= t.pages.choose_your | "1. Choose Your Program"
       %p= t.pages.horizontal_menu | "From the horizontal menu, on the right-hand side, select “Programs”. From the dropdown menu, select “See All Programs”.  After landing on the Programs Page, choose the program that applies to your needs."
@@ -14,26 +14,26 @@
       .bluedivider
       %h3= t.pages.see_if | "3. See if you Qualify"
       %p= t.pages.after_you_have | "After you have completed the form for your program, click the blue “See If I Qualify” button on the lower left-hand side."
-  /   .col-md-6.how-to
-  /     %h2= t.pages.mrelief_sms | "mRelief sms:"
-  /     %h3= t.pages.sending_sms | "1. Sending SMS"
-  /     %p= t.pages.text_hello | 'Text "hello," or your preferred greeting to 1(773) 377-8946'
-  /     .bluedivider
-  /     %h3= t.pages.sms_choose | "2. Choose Your Program"
-  /     %p= t.pages.text_the_word | 'Text the word "food" for food stamps. Text the word "ride" for RTA Ride Free. Text the word "medicaid" for Medicaid. Text the word "medicare" for Medicare Cost Sharing. You must enter one program at a time.'
-  /     .bluedivider
-  /     %h3= t.pages.completing_the_form | "3. Completing the form"
-  /     %p= t.pages.posed_questions | "Text your information to the posed questions.  If you enter the wrong response, text the word 'reset.'"
-  /     .bluedivider
-  /     %h3= t.pages.see_if_sms | "4. See if you qualify"
-  / %br/
-  / .row
-  /   .col-md-8.col-md-offset-2{:style => "text-align:center;"}
-  /     %h4
-  /       = t.pages.completed_this_process | "After you have completed this process, you will be directed to community or government resources based on your qualifying outcome."
-  /       %br/
-  /       %br/
-  /       = t.pages.any_questions | "If you have any questions please contact us."
-  / %br/
-  / %br/
-  / %br/
+    .col-md-6.how-to
+      %h2= t.pages.mrelief_sms | "mRelief sms:"
+      %h3= t.pages.sending_sms | "1. Sending SMS"
+      %p= t.pages.text_hello | 'Text "hello," or your preferred greeting to 1(773) 377-8946'
+      .bluedivider
+      %h3= t.pages.sms_choose | "2. Choose Your Program"
+      %p= t.pages.text_the_word | 'Text the word "food" for food stamps. Text the word "ride" for RTA Ride Free. Text the word "medicaid" for Medicaid. Text the word "medicare" for Medicare Cost Sharing. You must enter one program at a time.'
+      .bluedivider
+      %h3= t.pages.completing_the_form | "3. Completing the form"
+      %p= t.pages.posed_questions | "Text your information to the posed questions.  If you enter the wrong response, text the word 'reset.'"
+      .bluedivider
+      %h3= t.pages.see_if_sms | "4. See if you qualify"
+  %br/
+  .row
+    .col-md-8.col-md-offset-2{:style => "text-align:center;"}
+      %h4
+        = t.pages.completed_this_process | "After you have completed this process, you will be directed to community or government resources based on your qualifying outcome."
+        %br/
+        %br/
+        = t.pages.any_questions | "If you have any questions please contact us."
+  %br/
+  %br/
+  %br/
