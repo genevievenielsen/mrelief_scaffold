@@ -1,8 +1,7 @@
 <div class="container">
 <%= render "layouts/print_button" %>
 <% if @eligible == 'yes' %>
-<!-- <div class="page-header"></div>
- -->
+
       <div class="row" style="text-align:center;">
          <div class="col-md-8 col-md-offset-2">
              <i class="fa fa-check-circle fa-5x"></i>
@@ -25,8 +24,7 @@
     </div>
 
     <% elsif @eligible == 'maybe' %>
-    <!-- <div class="page-header"></div>
- -->
+
       <div class="row" style="text-align:center;">
         <div class="col-md-8 col-md-offset-2">
           <i class="fa fa-exclamation-circle fa-5x"></i>
@@ -50,8 +48,7 @@
 
 
       <% elsif @eligible == 'no' %>
-      <!-- <div class="page-header"></div>
- -->
+
       <div class="row" style="text-align:center;">
         <div class="col-md-8 col-md-offset-2">
             <h1>Something else in mind!</h1>

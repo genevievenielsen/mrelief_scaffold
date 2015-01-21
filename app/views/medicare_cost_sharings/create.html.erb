@@ -1,7 +1,6 @@
 <div class="container" style="padding-bottom:150px">
 <%= render "layouts/print_button" %>
 <% if @eligible == 'yes' %>
-  <!-- <div class="page-header"></div> -->
 
     <div class="row" style="text-align:center;">
       <div class="col-md-8 col-md-offset-2">
@@ -25,8 +24,6 @@
 
 <% else %>
 
-   <!-- <div class="page-header"></div> -->
-
       <div class="row" style="text-align:center;">
         <div class="col-md-8 col-md-offset-2">
             <i class="fa fa-exclamation-circle fa-5x"></i>
@@ -36,7 +33,7 @@
               <p> However, if you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.
 
               <p>
-              <%= link_to "Click Here", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution" %> to learn more about fees.
+              <%= link_to "Click Here", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "_gaq.push(['_trackEvent', 'off_site', 'health_care_fees', 'medicare_cost_sharing', '1']);"  %> to learn more about fees.
               </p>
               <br>
               <p>
@@ -44,7 +41,7 @@
               </p>
               <br>
               <p>
-              <%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution" %> to find Get Covered Illinois events in your area.
+              <%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "_gaq.push(['_trackEvent', 'off_site', 'get_covered_illinois', 'medicare_cost_sharing', '1']);" %> to find Get Covered Illinois events in your area.
               </p>
               <br>
               <p>
