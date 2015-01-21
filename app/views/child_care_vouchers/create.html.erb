@@ -3,7 +3,6 @@
 <%= render "layouts/print_button" %>
   <% if @eligible %>
 
-  <!-- <div class="page-header"></div> -->
         <div class="row" style="text-align:center;">
            <div class="col-md-8 col-md-offset-2">
                <i class="fa fa-check-circle fa-5x"></i>
@@ -17,7 +16,8 @@
           <div class="row">
             <div class="text-center">
               <p class="subhead"> </p>
-                <%= link_to "Click Here to find the nearest office in your county", "http://www.dhs.state.il.us/applications/ChildCareEligCalc/eligcalc.html", :class => "btn btn-success btn-resolution" %>
+                <%= link_to "Click Here to find the nearest office in your county", "http://www.dhs.state.il.us/applications/ChildCareEligCalc/eligcalc.html", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "_gaq.push(['_trackEvent', 'off_site', 'dhs', 'child_care_voucher', '1']);" %>
+
             </div>
 
           </div>
@@ -25,7 +25,6 @@
       </div>
   <% else %>
 
-  <!-- <div class="page-header"></div> -->
 
         <div class="row" style="text-align:center;">
           <div class="col-md-8 col-md-offset-2">
