@@ -489,8 +489,8 @@ class TwilioController < ApplicationController
       @r.zipcode = zipcode
       message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
       @r.completed = true
+      @r.save
      end
-     @r.save
    end
 
 
