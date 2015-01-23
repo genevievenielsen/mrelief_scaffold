@@ -436,26 +436,30 @@ class TwilioController < ApplicationController
        rta_gross_income = session["income"].to_i
        rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => rta_dependent_no })
     end
+
     if session["page"] == "rta_income_question" && session["counter"] == 4
      @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-     @r.dependent_no = rta_dependent_no
-     @r.gross_annual_income = rta_gross_income
+     @r.dependent_no = session["dependents"].to_i
+     @r.gross_annual_income = session["income"].to_i
+     @r.save
      if session["counter"] == 4
        if rta_gross_income < rta_eligibility.rta_gross_income
          message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  To check other programs, text 'menu'."
+         @r.rta_eligibility_status = "yes"
          @r.completed = true
        else
          session["page"] = "rta_ineligble"
          message = "What is your zipcode?"
        end
+       @r.save
       end
-      @r.save
     end
 
     if session["page"] == "rta_income_question" && session["counter"] == 6
       @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
       if rta_gross_income < rta_eligibility.rta_gross_income
         message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  To check other programs, text 'menu'."
+        @r.rta_eligibility_status = "yes"
         @r.completed = true
       else
         session["page"] = "rta_ineligble"
@@ -488,6 +492,7 @@ class TwilioController < ApplicationController
       @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
       @r.zipcode = zipcode
       message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
+      @r.rta_eligibility_status = "no"
       @r.completed = true
       @r.save
      end
