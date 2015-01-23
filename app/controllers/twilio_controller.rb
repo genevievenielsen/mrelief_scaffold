@@ -611,25 +611,43 @@ class TwilioController < ApplicationController
      @m.save
    end
 
+   #MedicareCostSharingDataTwilio
+   #household_size
+   #medicare_household_size
+   #monthly_gross_income
+   #assets
+   #zipcode
+   #medicare_cost_sharing_eligibility_status
+
+   #completed
+   #phone_number
+
    # HERE IS THE MEDICARE COST SHARING LOGIC
    if session["page"] == "medicare_household_question" && session["counter"] == 2
+    @mc = MedicareCostSharingDataTwilio.new
+    @mc.phone_number = params[:From]
     session["household"] = params[:Body].strip
     if session["household"] !~ /\D/  # returns true if all numbers
       session["household"] = session["household"].to_i
     else
       session["household"] = session["household"].in_numbers
     end
+    @mc.household_size = session["household"]
     message = "How many people in your household receive Medicare? Please enter a number"
     session["page"] = "medicare_number_question"
+    @mc.completed = "false"
+    @mc.save
    end
 
    if session["page"] == "medicare_number_question" && session["counter"] == 3
     session["medicare_number"] = params[:Body].strip
+    @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
     if session["medicare_number"] !~ /\D/  # returns true if all numbers
       session["medicare_number"] = session["medicare_number"].to_i
     else
       session["medicare_number"] = session["medicare_number"].in_numbers
     end
+    @mc.medicare_household_size = session["medicare_number"]
     if session["medicare_number"] == 0
       message = "What is your zipcode?"
       session["page"] = "medicare_ineligible"
@@ -637,9 +655,11 @@ class TwilioController < ApplicationController
       message = "What is your gross monthly income? Enter a number"
       session["page"] = "medicare_income_question"
     end
+    @mc.save
    end
 
    if session["page"] == "medicare_income_question" && session["counter"] == 4
+     @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
      session["income"] = params[:Body].strip
      if session["income"] !~ /\D/
        session["income"] = session["income"].to_i
@@ -655,11 +675,14 @@ class TwilioController < ApplicationController
        end
        session["income"] = session["income"].in_numbers
      end
+     @mc.monthly_gross_income = session["income"]
      message = "Please estimate the value of your assets.  This includes such items as: money in checking and savings accounts; stocks, bonds, savings certificates, and other securities; farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property. Please exclude the value of your home and car. Enter a number"
      session["page"] = "medicare_assests_question"
+     @mc.save
    end
 
    if session["page"] == "medicare_assests_question" && session["counter"] == 5
+     @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
      session["assets"] = params[:Body].strip
      if session["assets"] !~ /\D/
        session["assets"] = session["assets"].to_i
@@ -675,6 +698,7 @@ class TwilioController < ApplicationController
        end
        session["assets"] = session["assets"].in_numbers
      end
+     @mc.assets = session["assets"]
      assets = session["assets"]
      household_size = session["household"]
      medicare_household_size = session["medicare_number"]
@@ -708,9 +732,11 @@ class TwilioController < ApplicationController
       message = "What is your zipcode?"
       session["page"] = "medicare_ineligible"
      end
+     @mc.save
    end
 
    if session["page"] == "medicare_eligible" && session["counter"] == 6
+    @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
     session["zipcode"] = params[:Body].strip
      user_zipcode = session["zipcode"]
      @zipcode = user_zipcode << ".0"
@@ -720,11 +746,16 @@ class TwilioController < ApplicationController
        @lafcenter = LafCenter.find_by(:id => 10)
      end
     message = "You may be in luck! You likely qualify for Medicare Cost Sharing. To access your Medicare Care Sharing, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, type 'menu'."
+    @mc.zipcode = user_zipcode
+    @mc.medicare_cost_sharing_eligibility_status "yes"
+    @mc.completed = "true"
+    @mc.save
    end
 
    if session["page"] == "medicare_ineligible"
     session["zipcode"] = params[:Body].strip
      zipcode = session["zipcode"]
+     @mc.zipcode = zipcode
      primarycare = []
      ServiceCenter.all.each do |center|
        if center.description.match("primary care")
@@ -743,11 +774,20 @@ class TwilioController < ApplicationController
       @medical_center = primarycare.first
      end
      if session["counter"] == 4
+       @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
        #NO one in the household is on medicare
         message = "You likely do not qualify for Medicare Cost Sharing. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. To check other programs, type 'menu'."
+        @mc.medicare_cost_sharing_eligibility_status "no"
+        @mc.completed = "true"
+        @mc.save
+        @mc.save
      elsif session["counter"] == 6
-      # Medicare cost sharing user does not meet eligiblty cut offs
+        @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
+        #Medicare cost sharing user does not meet eligiblty cut offs
         message = "You likely do not qualify for Medicare Cost Sharing. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. To check other programs, type 'menu'."
+        @mc.medicare_cost_sharing_eligibility_status "no"
+        @mc.completed = "true"
+        @mc.save
      end
    end
 
