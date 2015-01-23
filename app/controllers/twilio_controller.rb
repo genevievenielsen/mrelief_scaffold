@@ -92,14 +92,14 @@ class TwilioController < ApplicationController
 
    # HERE IS THE FOOD STAMPS LOGIC
    if session["page"] == "snap_college_question" && session["counter"] == 2
-      s = SnapEligibilityDataTwilio.new
+      @s = SnapEligibilityDataTwilio.new
       session["college"] = params[:Body].strip.downcase
      if session["college"] == "no"
-       s.enrolled_in_education = "no"
+       @s.enrolled_in_education = "no"
        message = "Are you a citizen of the United States? Enter 'yes' or 'no'"
        session["page"] = "snap_citizen_question"
      elsif session["college"] == "yes"
-       s.enrolled_in_education = "yes"
+       @s.enrolled_in_education = "yes"
        message = "What is your zipcode?"
        session["page"] = "snap_zipcode_question"
      end
@@ -108,11 +108,11 @@ class TwilioController < ApplicationController
    if session["page"] == "snap_citizen_question" && session["counter"] == 3
       session["citizen"] = params[:Body].strip.downcase
     if session["citizen"]  == "no"
-       s.citizen = "no"
+       @s.citizen = "no"
        message = "What is your zipcode?"
        session["page"] = "snap_eligible_maybe"
      elsif session["citizen"]  == "yes"
-       s.citizen = "yes"
+       @s.citizen = "yes"
        message = "How old are you? Enter a number"
        session["page"] = "snap_age_question"
      end
@@ -125,7 +125,7 @@ class TwilioController < ApplicationController
       else
         session["age"]= session["age"].in_numbers
       end
-     s.age = session["age"]
+     @s.age = session["age"]
      if session["age"] >= 18
       message = "What is the number of people living in your household including yourself? Enter a number"
       session["page"] = "snap_household_question"
@@ -142,14 +142,14 @@ class TwilioController < ApplicationController
      else
        session["dependents"] = session["dependents"].in_numbers
      end
-     s.dependent_no = session["dependents"]
+     @s.dependent_no = session["dependents"]
      message = "What is your zipcode?"
      session["page"] = "snap_zipcode_question"
    end
 
    if session["page"] == "snap_zipcode_question" && session["counter"] == 6
      session["zipcode"] = params[:Body].strip
-     s.zipcode = session["zipcode"]
+     @s.zipcode = session["zipcode"]
      message = "Are you disabled? Enter 'yes' or 'no'"
      session["page"] = "snap_disability_question"
    end
@@ -157,11 +157,11 @@ class TwilioController < ApplicationController
    if session["page"] == "snap_disability_question" && session["counter"] == 7
       session["disability"] = params[:Body].strip.downcase
      if session["disability"]  == "no"
-       s.disabled = "no"
+       @s.disabled = "no"
        message = "What is the gross monthly income of all people living in your household including yourself? Income includes social security, child support, and unemployment insurance before any deductions."
        session["page"] = "snap_income_question"
      elsif session["disability"]  == "yes"
-       s.disabled = "yes"
+       @s.disabled = "yes"
        message = "Are you receiving disability payments from from Social Security, the Railroad Retirement Board or Veterans Affairs? Enter 'yes' or 'no'"
        session["page"] = "snap_disability_payment"
      end
@@ -171,10 +171,10 @@ class TwilioController < ApplicationController
      session["disability_payment"] = params[:Body].strip
      message = "What is the gross monthly income of all people living in your household including yourself? Income includes social security, child support, and unemployment insurance before any deductions."
      if session["disability_payment"] == "yes"
-      s.disabled_receiving_payment = "yes"
+      @s.disabled_receiving_payment = "yes"
       @disability
      else
-      s.disabled_receiving_payment = "no"
+      @s.disabled_receiving_payment = "no"
      end
      session["page"] = "snap_income_question_disability"
    end
@@ -195,7 +195,7 @@ class TwilioController < ApplicationController
        end
        session["income"] = session["income"].in_numbers
      end
-     s.monthly_gross_income = session["income"]
+     @s.monthly_gross_income = session["income"]
      age = session["age"].to_i
      snap_dependent_no = session["dependents"].to_i
      snap_gross_income = session["income"].to_i
@@ -224,10 +224,10 @@ class TwilioController < ApplicationController
         else
           message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, text 'menu'."
         end
-        s.snap_eligibility_status = "yes"
+        @s.snap_eligibility_status = "yes"
       else
         message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, text 'menu'."
-        s.snap_eligibility_status = "no"
+        @s.snap_eligibility_status = "no"
       end
    end
 
@@ -247,7 +247,7 @@ class TwilioController < ApplicationController
        end
        session["income"] = session["income"].in_numbers
      end
-     s.monthly_gross_income = session["income"]
+     @s.monthly_gross_income = session["income"]
      snap_dependent_no = session["dependents"].to_i
      snap_gross_income = session["income"].to_i
      age = session["age"].to_i
@@ -276,10 +276,10 @@ class TwilioController < ApplicationController
         else
           message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, text 'menu'."
         end
-        s.snap_eligibility_status = "yes"
+        @s.snap_eligibility_status = "yes"
       else
         message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, text 'menu'."
-        s.snap_eligibility_status = "no"
+        @s.snap_eligibility_status = "no"
       end
    end
 
@@ -300,7 +300,7 @@ class TwilioController < ApplicationController
         @food_pantry = @food_resources.first
       end
       message = "Based on your age, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, text 'menu'."
-      s.snap_eligibility_status = "no"
+      @s.snap_eligibility_status = "no"
    end
 
    # Food stamps user is in school
@@ -314,7 +314,7 @@ class TwilioController < ApplicationController
        @lafcenter = LafCenter.find_by(:id => 10)
      end
      message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, text 'menu'."
-     s.snap_eligibility_status = "maybe"
+     @s.snap_eligibility_status = "maybe"
    end
 
    # Food stamps user is not a US citizen
@@ -328,7 +328,7 @@ class TwilioController < ApplicationController
        @lafcenter = LafCenter.find_by(:id => 10)
      end
      message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, text 'menu'."
-     s.snap_eligibility_status = "maybe"
+     @s.snap_eligibility_status = "maybe"
    end
 
 
