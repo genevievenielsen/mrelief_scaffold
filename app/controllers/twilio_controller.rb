@@ -340,63 +340,95 @@ class TwilioController < ApplicationController
      @s.snap_eligibility_status = "maybe"
    end
 
+   #RtaFreeRideDataTwilio
+   #over_sixty_five
+   #disabled
+   #disabled_receiving_payments
+   #dependent_no
+   #zipcode
+   #gross_annual_income
+   #rta_eligibility_status
+   #completed
+   #phone_number
+
 
    # HERE IS THE LOGIC FOR RTA RIDE FREE
    if session["page"] == "rta_age_question" && session["counter"] == 2
+      @r = RtaFreeRideDataTwilio.new
       session["age"] = params[:Body].strip.downcase
       if session["age"]  == "no"
+        @r.over_sixty_five = "no"
         message = "Are you disabled? Enter 'yes' or 'no'"
         session["page"] = "rta_disability_question"
       else
+         @r.over_sixty_five = "yes"
          message = "How many dependents including yourself are in your household? Enter a number"
          session["page"] = "rta_dependents_question"
       end
+      @r.completed = false
+      @r.save
    end
 
    if session["page"] == "rta_disability_question" && session["counter"] == 3
     session["disabled"] = params[:Body].strip.downcase
+    @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
     if session["disabled"] == "no"
+      @r.disabled = "no"
       session["page"] = "rta_ineligble"
       message = "What is your zipcode?"
     else
+      @r.disabled = "yes"
       message = "Are you receiving disability payments from from Social Security, the Railroad Retirement Board or Veterans Affairs? Enter 'yes' or 'no'"
       session["page"] = "snap_disability_payment"
     end
+    @r.save
    end
 
    if session["page"] == "snap_disability_payment" && session["counter"] == 4
      session["disability_payment"] = params[:Body].strip.downcase
+     @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
      if session["disability_payment"] == "yes"
+      @r.disabled_receiving_payments = "yes"
       message = "How many dependents including yourself are in your household? Enter a number"
       session["page"] = "rta_dependents_question"
      else
+      @r.disabled_receiving_payments = "no"
       session["page"] = "rta_ineligble"
       message = "What is your zipcode?"
      end
+     @r.save
    end
 
     if session["page"] == "rta_dependents_question" && session["counter"] == 5
       session["dependents"] = params[:Body].strip
+      @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
       if session["dependents"] !~ /\D/  # returns true if all numbers
         session["dependents"] = session["dependents"].to_i
       else
         session["dependents"] = session["dependents"].in_numbers
       end
+      @r.dependent_no = session["dependents"]
       message = "What is your gross annual income? Income includes your spouse's income if married and living together on December 31 of last year before tax deductions.  Enter a number"
       session["page"] = "rta_income_question"
+      @r.save
     end
+
     if session["page"] == "rta_dependents_question" && session["counter"] == 3
       session["dependents"] = params[:Body].strip
+      @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
       if session["dependents"] !~ /\D/  # returns true if all numbers
         session["dependents"] = session["dependents"].to_i
       else
         session["dependents"] = session["dependents"].in_numbers
       end
+      @r.dependent_no = session["dependents"]
       message = "What is your gross annual income? Income includes your spouse's income if married and living together on December 31 of last year before tax deductions.  Enter a number"
       session["page"] = "rta_income_question"
+      @r.save
     end
 
     if session["page"] == "rta_income_question"
+      @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
       session["income"] = params[:Body].strip
       if session["income"] !~ /\D/
         session["income"] = session["income"].to_i
@@ -415,30 +447,43 @@ class TwilioController < ApplicationController
        rta_dependent_no = session["dependents"].to_i
        rta_gross_income = session["income"].to_i
        rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => rta_dependent_no })
+       @r.dependent_no = rta_dependent_no
+       @r.gross_annual_income = rta_gross_income
+       @r.save
     end
     if session["page"] == "rta_income_question" && session["counter"] == 4
+     @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+     @r.dependent_no = rta_dependent_no
+     @r.gross_annual_income = rta_gross_income
      if session["counter"] == 4
        if rta_gross_income < rta_eligibility.rta_gross_income
          message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  To check other programs, text 'menu'."
+         @r.completed = true
        else
          session["page"] = "rta_ineligble"
          message = "What is your zipcode?"
        end
       end
+      @r.save
     end
 
     if session["page"] == "rta_income_question" && session["counter"] == 6
-       if rta_gross_income < rta_eligibility.rta_gross_income
-         message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  To check other programs, text 'menu'."
-       else
-         session["page"] = "rta_ineligble"
-         message = "What is your zipcode?"
-       end
+      @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+      if rta_gross_income < rta_eligibility.rta_gross_income
+        message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  To check other programs, text 'menu'."
+        @r.completed = true
+      else
+        session["page"] = "rta_ineligble"
+        message = "What is your zipcode?"
+      end
+      @r.save
     end
 
    if session["page"] == "rta_ineligble"
     session["zipcode"] = params[:Body].strip
     zipcode = session["zipcode"]
+    @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+    @r.zipcode = zipcode
     transportation = []
      ServiceCenter.all.each do |center|
        if center.description.match("transportation")
@@ -458,7 +503,9 @@ class TwilioController < ApplicationController
      end
      if session["counter"] == 4 || session["counter"] == 5 || session["counter"] == 6 || session["counter"] == 7
       message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
+      @r.completed = true
      end
+     @r.save
    end
 
 

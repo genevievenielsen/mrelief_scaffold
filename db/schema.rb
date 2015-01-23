@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150123021407) do
+ActiveRecord::Schema.define(version: 20150123164948) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -247,6 +247,20 @@ ActiveRecord::Schema.define(version: 20150123021407) do
     t.string   "disabled_status"
     t.string   "zipcode"
     t.string   "rta_eligibility_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rta_free_ride_data_twilios", force: true do |t|
+    t.string   "over_sixty_five"
+    t.string   "disabled"
+    t.string   "disabled_receiving_payments"
+    t.string   "dependent_no"
+    t.string   "zipcode"
+    t.string   "gross_annual_income"
+    t.string   "rta_eligibility_status"
+    t.boolean  "completed"
+    t.string   "phone_number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
