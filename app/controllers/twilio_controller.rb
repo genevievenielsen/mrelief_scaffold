@@ -514,6 +514,7 @@ class TwilioController < ApplicationController
       message = "How many people live in your home (including yourself)?"
       session["page"] = "medicaid_household_size"
      end
+     @m.completed = false
      @m.save
    end
 
