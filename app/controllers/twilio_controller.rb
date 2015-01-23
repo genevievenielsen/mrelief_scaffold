@@ -340,17 +340,6 @@ class TwilioController < ApplicationController
      @s.snap_eligibility_status = "maybe"
    end
 
-   #RtaFreeRideDataTwilio
-   #over_sixty_five
-   #disabled
-   #disabled_receiving_payments
-   #dependent_no
-   #zipcode
-   #gross_annual_income
-   #rta_eligibility_status
-   #completed
-   #phone_number
-
 
    # HERE IS THE LOGIC FOR RTA RIDE FREE
    if session["page"] == "rta_age_question" && session["counter"] == 2
@@ -428,7 +417,6 @@ class TwilioController < ApplicationController
     end
 
     if session["page"] == "rta_income_question"
-      @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
       session["income"] = params[:Body].strip
       if session["income"] !~ /\D/
         session["income"] = session["income"].to_i
@@ -447,9 +435,6 @@ class TwilioController < ApplicationController
        rta_dependent_no = session["dependents"].to_i
        rta_gross_income = session["income"].to_i
        rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => rta_dependent_no })
-       @r.dependent_no = rta_dependent_no
-       @r.gross_annual_income = rta_gross_income
-       @r.save
     end
     if session["page"] == "rta_income_question" && session["counter"] == 4
      @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
