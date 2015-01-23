@@ -344,19 +344,19 @@ class TwilioController < ApplicationController
    # HERE IS THE LOGIC FOR RTA RIDE FREE
    if session["page"] == "rta_age_question" && session["counter"] == 2
       @r = RtaFreeRideDataTwilio.new
-      @r.completed = false
+      @r.phone_number = params[:From]
       session["age"] = params[:Body].strip.downcase
       if session["age"]  == "no"
         @r.over_sixty_five = "no"
-         @r.save
         message = "Are you disabled? Enter 'yes' or 'no'"
         session["page"] = "rta_disability_question"
       else
          @r.over_sixty_five = "yes"
-          @r.save
          message = "How many dependents including yourself are in your household? Enter a number"
          session["page"] = "rta_dependents_question"
       end
+      @r.completed = false
+      @r.save
    end
 
    if session["page"] == "rta_disability_question" && session["counter"] == 3
