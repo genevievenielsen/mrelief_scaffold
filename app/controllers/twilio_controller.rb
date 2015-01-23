@@ -344,18 +344,19 @@ class TwilioController < ApplicationController
    # HERE IS THE LOGIC FOR RTA RIDE FREE
    if session["page"] == "rta_age_question" && session["counter"] == 2
       @r = RtaFreeRideDataTwilio.new
+      @r.completed = false
       session["age"] = params[:Body].strip.downcase
       if session["age"]  == "no"
         @r.over_sixty_five = "no"
+         @r.save
         message = "Are you disabled? Enter 'yes' or 'no'"
         session["page"] = "rta_disability_question"
       else
          @r.over_sixty_five = "yes"
+          @r.save
          message = "How many dependents including yourself are in your household? Enter a number"
          session["page"] = "rta_dependents_question"
       end
-      @r.completed = false
-      @r.save
    end
 
    if session["page"] == "rta_disability_question" && session["counter"] == 3
@@ -490,7 +491,7 @@ class TwilioController < ApplicationController
      end
      if session["counter"] == 4 || session["counter"] == 5 || session["counter"] == 6 || session["counter"] == 7
       @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-      @r.zipcode = zipcode
+      @r.zipcode = session["zipcode"]
       message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
       @r.rta_eligibility_status = "no"
       @r.completed = true
