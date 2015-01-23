@@ -4,18 +4,6 @@ class TwilioController < ApplicationController
   require 'numbers_in_words'
   require 'numbers_in_words/duck_punch' #see why later
 
-  #SnapEligibilityDataTwilio
-
-  #citizen
-  #enrolled_in_education
-  #zipcode
-  #age
-  #dependent_no
-  #disabled
-  #disabled_receiving_payment
-  #monthly_gross_income
-
-
   def text
 
   session["counter"] ||= 0
@@ -109,11 +97,11 @@ class TwilioController < ApplicationController
    if session["page"] == "snap_citizen_question" && session["counter"] == 3
       session["citizen"] = params[:Body].strip.downcase
     if session["citizen"]  == "no"
-       @s.citizen = "no"
+       # @s.citizen = "no"
        message = "What is your zipcode?"
        session["page"] = "snap_eligible_maybe"
      elsif session["citizen"]  == "yes"
-       @s.citizen = "yes"
+       # @s.citizen = "yes"
        message = "How old are you? Enter a number"
        session["page"] = "snap_age_question"
      end
