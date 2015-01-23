@@ -510,9 +510,9 @@ class TwilioController < ApplicationController
        message = "What is your zipcode?"
        session["page"] = "medicaid_eligible_maybe"
      elsif session["citizen"]  == "yes"
-      @m.citizen = "yes"
-      message = "How many people live in your home (including yourself)?"
-      session["page"] = "medicaid_household_size"
+       @m.citizen = "yes"
+       message = "How many people live in your home (including yourself)?"
+       session["page"] = "medicaid_household_size"
      end
      @m.completed = false
      @m.save
@@ -557,11 +557,11 @@ class TwilioController < ApplicationController
         message = "You may be in luck! You likely qualify for Medicaid. Call (866) 311-1119 for your coverage options. To further pursue your Medicaid application you can also call the county care line (312-864-8200). If you already have a doctor, be sure to confirm they transfer over. To check other programs, type 'menu'."
         @m.medicaid_eligibility_status = "yes"
         @m.completed = true
-        @m.save
       else
         message = "What is your zipcode?"
         session["page"] = "medicaid_ineligible"
       end
+      @m.save
    end
 
    # Medicaid user is ineligible
