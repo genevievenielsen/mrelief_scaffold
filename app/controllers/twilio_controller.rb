@@ -777,7 +777,7 @@ class TwilioController < ApplicationController
        @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
        #NO one in the household is on medicare
         message = "You likely do not qualify for Medicare Cost Sharing. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. To check other programs, type 'menu'."
-        @mc.medicare_cost_sharing_eligibility_status "no"
+        @mc.medicare_cost_sharing_eligibility_status = "no"
         @mc.completed = "true"
         @mc.save
         @mc.save
@@ -785,7 +785,7 @@ class TwilioController < ApplicationController
         @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
         #Medicare cost sharing user does not meet eligiblty cut offs
         message = "You likely do not qualify for Medicare Cost Sharing. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. To check other programs, type 'menu'."
-        @mc.medicare_cost_sharing_eligibility_status "no"
+        @mc.medicare_cost_sharing_eligibility_status = "no"
         @mc.completed = "true"
         @mc.save
      end
