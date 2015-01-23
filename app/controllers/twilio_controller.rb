@@ -467,8 +467,6 @@ class TwilioController < ApplicationController
    if session["page"] == "rta_ineligble"
     session["zipcode"] = params[:Body].strip
     zipcode = session["zipcode"]
-    @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-    @r.zipcode = zipcode
     transportation = []
      ServiceCenter.all.each do |center|
        if center.description.match("transportation")
@@ -487,6 +485,8 @@ class TwilioController < ApplicationController
       @transportation_center = transportation.first
      end
      if session["counter"] == 4 || session["counter"] == 5 || session["counter"] == 6 || session["counter"] == 7
+      @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+      @r.zipcode = zipcode
       message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
       @r.completed = true
      end
