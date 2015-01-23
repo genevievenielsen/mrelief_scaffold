@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  household_size: MyString
+  medicare_household_size: MyString
+  monthly_gross_income: MyString
+  assets: MyString
+  zipcode: MyString
+  medicare_cost_sharing_eligibility_status: MyString
+  completed: MyString
+  phone_number: MyString
+
+two:
+  household_size: MyString
+  medicare_household_size: MyString
+  monthly_gross_income: MyString
+  assets: MyString
+  zipcode: MyString
+  medicare_cost_sharing_eligibility_status: MyString
+  completed: MyString
+  phone_number: MyString
