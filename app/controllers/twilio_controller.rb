@@ -81,7 +81,7 @@ class TwilioController < ApplicationController
    # HERE IS THE FOOD STAMPS LOGIC
    if session["page"] == "snap_college_question" && session["counter"] == 2
       @s = SnapEligibilityDataTwilio.new
-      @s.phone_number = params[:From].strip
+      @s.phone_number = params[:From]
       session["college"] = params[:Body].strip.downcase
      if session["college"] == "no"
        @s.enrolled_in_education = "no"
@@ -112,7 +112,7 @@ class TwilioController < ApplicationController
 
    if session["page"] == "snap_age_question" && session["counter"] == 4
      session["age"] = params[:Body].strip
-     @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From])
+     @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip)
       if session["age"]  !~ /\D/
         session["age"] = session["age"].to_i
       else
@@ -131,14 +131,16 @@ class TwilioController < ApplicationController
 
    if session["page"] == "snap_household_question" && session["counter"] == 5
      session["dependents"] = params[:Body].strip
+     @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip)
      if session["dependents"] !~ /\D/  # returns true if all numbers
        session["dependents"] = session["dependents"].to_i
      else
        session["dependents"] = session["dependents"].in_numbers
      end
-     # @s.dependent_no = session["dependents"]
+     @s.dependent_no = session["dependents"]
      message = "What is your zipcode?"
      session["page"] = "snap_zipcode_question"
+     @s.save
    end
 
    if session["page"] == "snap_zipcode_question" && session["counter"] == 6
