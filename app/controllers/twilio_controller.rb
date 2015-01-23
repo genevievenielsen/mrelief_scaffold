@@ -611,17 +611,6 @@ class TwilioController < ApplicationController
      @m.save
    end
 
-   #MedicareCostSharingDataTwilio
-   #household_size
-   #medicare_household_size
-   #monthly_gross_income
-   #assets
-   #zipcode
-   #medicare_cost_sharing_eligibility_status
-
-   #completed
-   #phone_number
-
    # HERE IS THE MEDICARE COST SHARING LOGIC
    if session["page"] == "medicare_household_question" && session["counter"] == 2
     @mc = MedicareCostSharingDataTwilio.new
@@ -755,7 +744,6 @@ class TwilioController < ApplicationController
    if session["page"] == "medicare_ineligible"
     session["zipcode"] = params[:Body].strip
      zipcode = session["zipcode"]
-     @mc.zipcode = zipcode
      primarycare = []
      ServiceCenter.all.each do |center|
        if center.description.match("primary care")
@@ -777,6 +765,7 @@ class TwilioController < ApplicationController
        @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
        #NO one in the household is on medicare
         message = "You likely do not qualify for Medicare Cost Sharing. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. To check other programs, type 'menu'."
+        @mc.zipcode = zipcode
         @mc.medicare_cost_sharing_eligibility_status = "no"
         @mc.completed = "true"
         @mc.save
@@ -785,6 +774,7 @@ class TwilioController < ApplicationController
         @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
         #Medicare cost sharing user does not meet eligiblty cut offs
         message = "You likely do not qualify for Medicare Cost Sharing. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. To check other programs, type 'menu'."
+        @mc.zipcode = zipcode
         @mc.medicare_cost_sharing_eligibility_status = "no"
         @mc.completed = "true"
         @mc.save
