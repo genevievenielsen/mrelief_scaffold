@@ -747,7 +747,7 @@ class TwilioController < ApplicationController
      end
     message = "You may be in luck! You likely qualify for Medicare Cost Sharing. To access your Medicare Care Sharing, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, type 'menu'."
     @mc.zipcode = user_zipcode
-    @mc.medicare_cost_sharing_eligibility_status "yes"
+    @mc.medicare_cost_sharing_eligibility_status = "yes"
     @mc.completed = "true"
     @mc.save
    end
