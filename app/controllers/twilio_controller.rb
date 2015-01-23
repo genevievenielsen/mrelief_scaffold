@@ -103,6 +103,7 @@ class TwilioController < ApplicationController
        message = "What is your zipcode?"
        session["page"] = "snap_zipcode_question"
      end
+     @s.save
    end
 
    if session["page"] == "snap_citizen_question" && session["counter"] == 3
