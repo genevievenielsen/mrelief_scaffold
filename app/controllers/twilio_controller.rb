@@ -502,29 +502,38 @@ class TwilioController < ApplicationController
 
    # HERE IS THE LOGIC FOR MEDICAID
    if session["page"] == "medicaid_citizen_question" && session["counter"] == 2
+     @m = MedicaidDataTwilio.new
+     @m.phone_number = params[:From]
      session["citizen"] = params[:Body].strip.downcase
     if session["citizen"]  == "no"
+       @m.citizen = "no"
        message = "What is your zipcode?"
        session["page"] = "medicaid_eligible_maybe"
      elsif session["citizen"]  == "yes"
+      @m.citizen = "yes"
       message = "How many people live in your home (including yourself)?"
       session["page"] = "medicaid_household_size"
      end
+     @m.save
    end
 
    if session["page"] == "medicaid_household_size" && session["counter"] == 3
      session["household"] = params[:Body].strip
+     @m = MedicaidDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
      if session["household"] !~ /\D/  # returns true if all numbers
        session["household"] = session["household"].to_i
      else
        session["household"] = session["household"].in_numbers
      end
+     @m.household_size = session["household"]
      message = "What is your monthly income? Enter a number"
      session["page"] = "medicaid_income_question"
+     @m.save
    end
 
    if session["page"] == "medicaid_income_question" && session["counter"] == 4
      session["income"] = params[:Body].strip
+     @m = MedicaidDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
      if session["income"] !~ /\D/
        session["income"] = session["income"].to_i
      else
@@ -539,11 +548,15 @@ class TwilioController < ApplicationController
        end
        session["income"] = session["income"].in_numbers
      end
+     @m.monthly_gross_income = session["income"]
      medicaid_household_size = session["household"].to_i
      medicaid_gross_income = session["income"].to_i
      medicaid_eligibility = Medicaid.find_by({ :medicaid_household_size => medicaid_household_size})
       if medicaid_gross_income < medicaid_eligibility.medicaid_gross_income
         message = "You may be in luck! You likely qualify for Medicaid. Call (866) 311-1119 for your coverage options. To further pursue your Medicaid application you can also call the county care line (312-864-8200). If you already have a doctor, be sure to confirm they transfer over. To check other programs, type 'menu'."
+        @m.medicaid_eligibility_status = "yes"
+        @m.completed = true
+        @m.save
       else
         message = "What is your zipcode?"
         session["page"] = "medicaid_ineligible"
@@ -552,6 +565,7 @@ class TwilioController < ApplicationController
 
    # Medicaid user is ineligible
    if session["page"] == "medicaid_ineligible" && session["counter"] == 5
+     @m = MedicaidDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
      session["zipcode"] = params[:Body].strip
      zipcode = session["zipcode"]
       primarycare = []
@@ -572,10 +586,15 @@ class TwilioController < ApplicationController
        @medical_center = primarycare.first
       end
       message = "You likely do not qualify for Medicaid. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. To check other programs, type 'menu'."
+      @m.medicaid_eligibility_status = "no"
+      @m.zipcode = zipcode
+      @m.completed = true
+      @m.save
     end
 
    # Medicaid user is not a US citizen
    if session["page"] == "medicaid_eligible_maybe" && session["counter"] == 3
+    @m = MedicaidDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
     session["zipcode"] = params[:Body].strip
     user_zipcode = session["zipcode"]
     @zipcode = user_zipcode << ".0"
@@ -585,6 +604,10 @@ class TwilioController < ApplicationController
       @lafcenter = LafCenter.find_by(:id => 10)
     end
      message = "We cannot determine your eligibility at this time. To discuss your situation with a Medicaid expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, type 'menu'."
+     @m.medicaid_eligibility_status = "maybe"
+     @m.zipcode = user_zipcode
+     @m.completed = true
+     @m.save
    end
 
    # HERE IS THE MEDICARE COST SHARING LOGIC

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  citizen: MyString
+  household_size: MyString
+  monthly_gross_income: MyString
+  zipcode: MyString
+  medicaid_eligibility_status: MyString
+  phone_number: MyString
+  completed: MyString
+
+two:
+  citizen: MyString
+  household_size: MyString
+  monthly_gross_income: MyString
+  zipcode: MyString
+  medicaid_eligibility_status: MyString
+  phone_number: MyString
+  completed: MyString
