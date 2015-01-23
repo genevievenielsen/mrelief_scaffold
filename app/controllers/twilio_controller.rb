@@ -49,7 +49,6 @@ class TwilioController < ApplicationController
       message = "Are you enrolled in a college or institution of higher education? Enter 'yes' or 'no'"
       session["page"] = "snap_college_question"
       session["counter"] = 1
-      s = SnapEligibilityDataTwilio.new
    end
    if params[:Body].strip.downcase == "ride"
       message = "Are you 65 years old or older? Enter 'yes' or 'no'"
@@ -93,6 +92,7 @@ class TwilioController < ApplicationController
 
    # HERE IS THE FOOD STAMPS LOGIC
    if session["page"] == "snap_college_question" && session["counter"] == 2
+      s = SnapEligibilityDataTwilio.new
       session["college"] = params[:Body].strip.downcase
      if session["college"] == "no"
        s.enrolled_in_education = "no"
