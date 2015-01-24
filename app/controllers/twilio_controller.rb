@@ -92,6 +92,7 @@ class TwilioController < ApplicationController
        message = "What is your zipcode?"
        session["page"] = "snap_zipcode_question"
      end
+     @s.completed = false
      @s.save
    end
 
