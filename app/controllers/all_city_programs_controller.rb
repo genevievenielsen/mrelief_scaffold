@@ -580,7 +580,7 @@ class AllCityProgramsController < ApplicationController
       if params[:child] == "no"
           @eligible_tanif = "no"
       else
-        if params[:relationship] == "adult_relative"
+        if params[:relationship] == "adult_relative" || params[:relationship] == "not_applicable"
           @eligible_tanif = "maybe"
         else
           if params[:first] == "yes"
