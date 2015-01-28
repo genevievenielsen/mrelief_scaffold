@@ -92,7 +92,7 @@ class TwilioController < ApplicationController
        message = "What is your zipcode?"
        session["page"] = "snap_zipcode_question"
       else
-        message = "Oops! Type 'reset' and then be sure to type 'yes' or 'no' when you get to this question."
+        message = "Oops looks like there is a typo! Type 'reset' and then be sure to type 'yes' or 'no' when you answer this question."
      end
      @s.completed = false
      @s.save
@@ -109,6 +109,8 @@ class TwilioController < ApplicationController
        @s.citizen = "yes"
        message = "How old are you? Enter a number"
        session["page"] = "snap_age_question"
+     else
+        message = "Oops looks like there is a typo! Type 'reset' and then be sure to type 'yes' or 'no' when you answer this question."
      end
      @s.completed = false
      @s.save
@@ -124,7 +126,7 @@ class TwilioController < ApplicationController
       end
      @s.age = session["age"]
      if session["age"] >= 18
-      message = "What is the number of people living in your household including yourself? Enter a number"
+      message = "What is the number of people living in your household including yourself? Enter a number."
       session["page"] = "snap_household_question"
      else
       message = "What is your zipcode?"
@@ -164,13 +166,15 @@ class TwilioController < ApplicationController
       @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
      if session["disability"]  == "no"
        @s.disabled = "no"
-       message = "What is the gross monthly income of all people living in your household including yourself? Income includes social security, child support, and unemployment insurance before any deductions."
+       message = "What is the gross monthly income of all people living in your household including yourself? Income includes social security, child support, and unemployment insurance before any deductions. Enter a number. Example - 1000."
        session["page"] = "snap_income_question"
      elsif session["disability"]  == "yes"
        @s.disabled = "yes"
        message = "Are you receiving disability payments from from Social Security, the Railroad Retirement Board or Veterans Affairs? Enter 'yes' or 'no'"
        session["page"] = "snap_disability_payment"
-     end
+      else
+        message = "Oops looks like there is a typo! Type 'reset' and then be sure to type 'yes' or 'no' when you answer this question."
+      end
      @s.completed = false
      @s.save
    end
@@ -178,12 +182,14 @@ class TwilioController < ApplicationController
    if session["page"] == "snap_disability_payment" && session["counter"] == 8
      session["disability_payment"] = params[:Body].strip
      @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-     message = "What is the gross monthly income of all people living in your household including yourself? Income includes social security, child support, and unemployment insurance before any deductions."
+     message = "What is the gross monthly income of all people living in your household including yourself? Income includes social security, child support, and unemployment insurance before any deductions. Enter a number. Example - 1000."
      if session["disability_payment"] == "yes"
       @s.disabled_receiving_payment = "yes"
       @disability
      elsif session["disability_payment"] == "no"
       @s.disabled_receiving_payment = "no"
+     else
+        message = "Oops looks like there is a typo! Type 'reset' and then be sure to type 'yes' or 'no' when you answer this question."
      end
      session["page"] = "snap_income_question_disability"
      @s.completed = false
@@ -302,25 +308,25 @@ class TwilioController < ApplicationController
 
    # Food stamps user is younger than 18
    if session["page"] == "snap_ineligible" && session["counter"] == 5
-      @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-      user_zipcode = session["zipcode"]
-      @zipcode = user_zipcode << ".0"
-      @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
-      if @lafcenter.present?
-      else
-        @lafcenter = LafCenter.find_by(:id => 10)
-      end
-      @food_resources = ServiceCenter.where(:description => "food pantry")
-      @food_resources_zip = @food_resources.where(:zip => user_zipcode)
-      if @food_resources_zip.present?
-        @food_pantry = @food_resources_zip.first
-      else
-        @food_pantry = @food_resources.first
-      end
-      message = "Based on your age, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, text 'menu'."
-      @s.snap_eligibility_status = "no"
-      @s.completed = true
-      @s.save
+    @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+    user_zipcode = session["zipcode"]
+    @zipcode = user_zipcode << ".0"
+    @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
+    if @lafcenter.present?
+    else
+      @lafcenter = LafCenter.find_by(:id => 10)
+    end
+    @food_resources = ServiceCenter.where(:description => "food pantry")
+    @food_resources_zip = @food_resources.where(:zip => user_zipcode)
+    if @food_resources_zip.present?
+      @food_pantry = @food_resources_zip.first
+    else
+      @food_pantry = @food_resources.first
+    end
+    message = "Based on your age, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, text 'menu'."
+    @s.snap_eligibility_status = "no"
+    @s.completed = true
+    @s.save
    end
 
    # Food stamps user is in school
@@ -371,6 +377,8 @@ class TwilioController < ApplicationController
          @r.over_sixty_five = "yes"
          message = "How many dependents including yourself are in your household? Enter a number"
          session["page"] = "rta_dependents_question"
+      else
+        message = "Oops looks like there is a typo! Type 'reset' and then be sure to type 'yes' or 'no' when you answer this question."
       end
       @r.completed = false
       @r.save
@@ -387,6 +395,8 @@ class TwilioController < ApplicationController
       @r.disabled = "yes"
       message = "Are you receiving disability payments from from Social Security, the Railroad Retirement Board or Veterans Affairs? Enter 'yes' or 'no'"
       session["page"] = "snap_disability_payment"
+    else
+      message = "Oops looks like there is a typo! Type 'reset' and then be sure to type 'yes' or 'no' when you answer this question."
     end
     @r.save
    end
@@ -402,6 +412,8 @@ class TwilioController < ApplicationController
       @r.disabled_receiving_payments = "no"
       session["page"] = "rta_ineligble"
       message = "What is your zipcode?"
+      else
+        message = "Oops looks like there is a typo! Type 'reset' and then be sure to type 'yes' or 'no' when you answer this question."
      end
      @r.save
    end
@@ -415,7 +427,7 @@ class TwilioController < ApplicationController
         session["dependents"] = session["dependents"].in_numbers
       end
       @r.dependent_no = session["dependents"]
-      message = "What is your gross annual income? Income includes your spouse's income if married and living together on December 31 of last year before tax deductions.  Enter a number"
+      message = "What is your gross annual income? Income includes your spouse's income if married and living together on December 31 of last year before tax deductions. Enter a number. Example - 10000."
       session["page"] = "rta_income_question"
       @r.save
     end
@@ -429,7 +441,7 @@ class TwilioController < ApplicationController
         session["dependents"] = session["dependents"].in_numbers
       end
       @r.dependent_no = session["dependents"]
-      message = "What is your gross annual income? Income includes your spouse's income if married and living together on December 31 of last year before tax deductions.  Enter a number"
+      message = "What is your gross annual income? Income includes your spouse's income if married and living together on December 31 of last year before tax deductions. Enter a number.  Example - 10000."
       session["page"] = "rta_income_question"
       @r.save
     end
@@ -530,6 +542,8 @@ class TwilioController < ApplicationController
        @m.citizen = "yes"
        message = "How many people live in your home (including yourself)?"
        session["page"] = "medicaid_household_size"
+     else
+        message = "Oops looks like there is a typo! Type 'reset' and then be sure to type 'yes' or 'no' when you answer this question."
      end
      @m.completed = "false"
      @m.save
@@ -544,7 +558,7 @@ class TwilioController < ApplicationController
        session["household"] = session["household"].in_numbers
      end
      @m.household_size = session["household"]
-     message = "What is your monthly income? Enter a number"
+     message = "What is your monthly income? Enter a number. Enter a number. Example - 1000."
      session["page"] = "medicaid_income_question"
      @m.save
    end
@@ -658,7 +672,7 @@ class TwilioController < ApplicationController
       message = "What is your zipcode?"
       session["page"] = "medicare_ineligible"
     else
-      message = "What is your gross monthly income? Enter a number"
+      message = "What is your gross monthly income? Enter a number. Example - 1000."
       session["page"] = "medicare_income_question"
     end
     @mc.save
@@ -682,7 +696,7 @@ class TwilioController < ApplicationController
        session["income"] = session["income"].in_numbers
      end
      @mc.monthly_gross_income = session["income"]
-     message = "Please estimate the value of your assets.  This includes such items as: money in checking and savings accounts; stocks, bonds, savings certificates, and other securities; farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property. Please exclude the value of your home and car. Enter a number"
+     message = "Please estimate the value of your assets.  This includes such items as: money in checking and savings accounts; stocks, bonds, savings certificates, and other securities; farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property. Please exclude the value of your home and car. Enter a number. Example - 10000."
      session["page"] = "medicare_assests_question"
      @mc.save
    end
