@@ -91,6 +91,8 @@ class TwilioController < ApplicationController
        @s.enrolled_in_education = "yes"
        message = "What is your zipcode?"
        session["page"] = "snap_zipcode_question"
+      else
+        message = "Oops! Type 'reset' and then be sure to type 'yes' or 'no' when you get to this question."
      end
      @s.completed = false
      @s.save
@@ -180,7 +182,7 @@ class TwilioController < ApplicationController
      if session["disability_payment"] == "yes"
       @s.disabled_receiving_payment = "yes"
       @disability
-     else
+     elsif session["disability_payment"] == "no"
       @s.disabled_receiving_payment = "no"
      end
      session["page"] = "snap_income_question_disability"
@@ -365,7 +367,7 @@ class TwilioController < ApplicationController
         @r.over_sixty_five = "no"
         message = "Are you disabled? Enter 'yes' or 'no'"
         session["page"] = "rta_disability_question"
-      else
+      elsif session["age"]  == "yes"
          @r.over_sixty_five = "yes"
          message = "How many dependents including yourself are in your household? Enter a number"
          session["page"] = "rta_dependents_question"
@@ -381,7 +383,7 @@ class TwilioController < ApplicationController
       @r.disabled = "no"
       session["page"] = "rta_ineligble"
       message = "What is your zipcode?"
-    else
+    elsif session["disabled"] == "yes"
       @r.disabled = "yes"
       message = "Are you receiving disability payments from from Social Security, the Railroad Retirement Board or Veterans Affairs? Enter 'yes' or 'no'"
       session["page"] = "snap_disability_payment"
@@ -396,7 +398,7 @@ class TwilioController < ApplicationController
       @r.disabled_receiving_payments = "yes"
       message = "How many dependents including yourself are in your household? Enter a number"
       session["page"] = "rta_dependents_question"
-     else
+     elsif session["disability_payment"] == "no"
       @r.disabled_receiving_payments = "no"
       session["page"] = "rta_ineligble"
       message = "What is your zipcode?"
