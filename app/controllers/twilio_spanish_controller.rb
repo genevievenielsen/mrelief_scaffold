@@ -23,12 +23,12 @@ class TwilioSpanishController < ApplicationController
     if params[:Body].strip.downcase == "reset" ||  params[:Body].strip.downcase == "inicio"
       session["counter"] = 0
     end
-    if params[:Body].strip.downcase == "hello" || params[:Body].strip.downcase == "hi" || params[:Body].strip.downcase == "hola"
+    if params[:Body].strip.downcase == "hello" || params[:Body].strip.downcase == "hi" || params[:Body].strip.downcase == "hola" || params[:Body].strip.downcase == "ola"
       session["counter"] = 0
     end
 
     if session["counter"] == 0
-      message = "Bienvenido a mRelief! Le ayudamos comprobar su elegibilidad para sevicios como estampillas de comida, texto la palabra 'comida'. Si comete un error, enviar el mensaje 'reset' o 'inicio'."
+      message = "¡Bienvenido a mRelief! Le ayudamos a confirmar su elegibilidad para servicios como beneficios SNAP. Por favor, responda al texto con la palabra 'comida'. Si cometa un error, envíe texto con la palabra 'reset' o 'inicio'."
     end
 
     # if params[:Body].strip.downcase == "menu"
@@ -197,7 +197,7 @@ class TwilioSpanishController < ApplicationController
       end
       if snap_gross_income < snap_eligibility.snap_gross_income
         # message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}."
-        message = "Puede que tenga suerte! Es probable que califica para cupones de alimentos. Para acceder sus estampillas de comida, vaya a #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}."
+        message = "Puede que tenga suerte! Es probable que califica para cupones de alimentos. Para acceder sus beneficios SNAP, vaya a #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}."
       else
         # message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}."
         message = "Basado en el tamaño de su hogar y sus ingresos, es probable que no califica para cupones de alimentos. Una despensa de alimentos cerca de usted es #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}."
@@ -242,7 +242,7 @@ class TwilioSpanishController < ApplicationController
       end
       if snap_gross_income < snap_eligibility.snap_gross_income
         # message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}."
-        message = "Puede que tenga suerte! Es probable que califica para cupones de alimentos. Para acceder sus estampillas de comida, vaya a #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}."
+        message = "Puede que tenga suerte! Es probable que califica para cupones de alimentos. Para acceder sus beneficios SNAP, vaya a #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}."
       else
         # message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}."
         message = "Basado en el tamaño de su hogar y sus ingresos, es probable que no califica para cupones de alimentos. Una despensa de alimentos cerca de usted es #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}."
@@ -306,5 +306,11 @@ class TwilioSpanishController < ApplicationController
       format.xml {render xml: twiml.text}
     end
   end
+
+  include Webhookable
+
+  after_filter :set_header
+
+  skip_before_action :verify_authenticity_token
 
 end
