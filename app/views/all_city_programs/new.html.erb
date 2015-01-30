@@ -387,21 +387,10 @@
 </div>
 
 
-<div class="form-group col-sm-12">
-  <label for="king_center" id="king_center" class="pull-left">Are you completing this form at the King Community Service Center?</label>
 
-    <div class="col-sm-6">
-      <div id="king_center" >
-        <%= radio_button_tag 'king_center', 'yes' %> yes
-        <%= radio_button_tag 'king_center', 'no' %> no
-      </div>
-    </div>
-</div>
+  <%= render "layouts/location_dropdown" %>
 
-
-<div class="place_for_phone_number">
-
-</div>
+  <%= render "layouts/phone_question" %>
 
 
 

@@ -159,6 +159,7 @@ class AllCityProgramsController < ApplicationController
     end
 
     # Data storage
+      a.user_location = params[:user_location]
       a.enrolled_in_education = params[:education]
       a.citizen = params[:citizen]
       a.zipcode = params[:zipcode]
