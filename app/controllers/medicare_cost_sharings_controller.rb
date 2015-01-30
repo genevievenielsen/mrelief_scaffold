@@ -82,6 +82,7 @@ class MedicareCostSharingsController < ApplicationController
      end
 
      #DATA STORAGE
+     m.user_location = params[:user_location]
      m.zipcode = params[:zipcode]
      m.save
 

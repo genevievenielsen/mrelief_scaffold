@@ -163,15 +163,13 @@
     <label for="expect_child_support">
       How much do you expect to receive in child support in the next 30 days?
     </label>
-
-
     <div class="input-group">
       <span class="input-group-addon">$</span>
        <input type="text" id="expect_child_support" name="expect_child_support" placeholder="For example: 500"class="form-control" required>
       <span class="input-group-addon">.00</span>
     </div>
-    </div>
   </div>
+</div>
 
    <!-- Label and input for expect_ssi -->
 <div class="row">
@@ -179,21 +177,18 @@
     <label for="expect_ssi">
       How much do you expect to receive in SSI in the next 30 days?
     </label>
-
-
     <div class="input-group">
       <span class="input-group-addon">$</span>
        <input type="text" id="expect_ssi" name="expect_ssi" placeholder="For example: 500"class="form-control" required>
       <span class="input-group-addon">.00</span>
     </div>
-    </div>
   </div>
+</div>
 
   <div class="row">
     <div class="form-group col-md-12">
       <label for="teen_parent" id="teen_parent"> Are you a teen parent? </label>
       <div class="clearfix"></div>
-
       <div class="row">
           <div class="col-md-6">
             <div id="teen_parent"  class="pull-left">
@@ -209,7 +204,6 @@
     <div class="form-group col-md-12">
       <label for="citizen" id="citizen">Are you a citizen of the United States? </label>
       <div class="clearfix"></div>
-
       <div class="row">
           <div class="col-md-6">
             <div id="citizen"  class="pull-left">
@@ -220,7 +214,6 @@
       </div>
     </div>
   </div>
-
 
 
 <div class="row">
@@ -245,6 +238,10 @@
 
 
 <%= render 'programs/zipcode_question' %>
+
+<div class="row">
+   <%= render "layouts/location_dropdown" %>
+</div>
 
 
 

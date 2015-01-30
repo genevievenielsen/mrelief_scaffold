@@ -87,6 +87,7 @@ class AllKidsController < ApplicationController
     end
 
     # Data Storage
+    a.user_location = params[:user_location]
     a.pregnant = params[:pregnant]
     a.healthcare_status = params[:status]
     a.zipcode = params[:zipcode]

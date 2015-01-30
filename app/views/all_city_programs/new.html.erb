@@ -386,20 +386,14 @@
     </div>
 </div>
 
-<div class="form-group col-sm-12">
-  <label for="king_center" id="king_center" class="pull-left">Are you completing this form at the King Community Service Center?</label>
-
-    <div class="col-sm-6">
-      <div id="king_center" >
-        <%= radio_button_tag 'king_center', 'yes' %> yes
-        <%= radio_button_tag 'king_center', 'no' %> no
-      </div>
-    </div>
-</div>
+<%= render "layouts/location_dropdown" %>
 
 <div class="place_for_phone_number">
 
 </div>
+
+
+
 
 <div class="row">
   <div class="col-sm-6">
@@ -426,12 +420,29 @@
 
   $(document).ready(function() {
 
-    $("input:radio[name=king_center]").click(function() {
-      var value = $(this).val();
-      if (value == "yes") {
-        $('.place_for_phone_number').append("<%= escape_javascript(render "layouts/phone_question" ) %>");
+    var value = $("#location_dropdown:selected").val();
+
+
+    var value = $("#location_dropdown option:selected").val();
+
+    var dropdown = $("#location_dropdown option:selected");
+    var selected_value = dropdown.val();
+
+
+      if (selected_value == "king_community_service_center") {
+        $('.place_for_phone_number').append("<%= escape_javascript(render "layouts/phone_question") %>");
       }
-    });
+
+
+    // $("#location_dropdown").click(function() {
+
+    //   var location = document.getElementById("location_dropdown");
+    //   var value = location.options[location.selectedIndex].text;
+
+    //   if (value == "King Community Service Center") {
+    //     $('.place_for_phone_number').append("<%= escape_javascript(render "layouts/phone_question" ) %>");
+    //   }
+    // });
 
     $(function ()
       { $("[data-toggle='popover']").popover();

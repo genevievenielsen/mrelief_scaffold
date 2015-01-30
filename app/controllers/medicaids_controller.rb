@@ -49,6 +49,7 @@ class MedicaidsController < ApplicationController
     end
 
    #DATA STORAGE
+   m.user_location = params[:user_location]
    m.citizen = params[:citizen]
    m.zipcode = params[:zipcode]
    m.save

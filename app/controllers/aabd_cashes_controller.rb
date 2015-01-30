@@ -121,6 +121,7 @@ class AabdCashesController < ApplicationController
     end
 
     # DATA STORAGE
+    a.user_location = params[:user_location]
     a.citizen = params[:citizen]
     a.disabled_status = params[:disabled]
     a.zipcode = params[:zipcode]

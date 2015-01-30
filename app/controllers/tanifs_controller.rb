@@ -135,6 +135,7 @@
   end
 
     # DATA STORAGE
+    t.user_location = params[:user_location]
     t.pregnant_or_caring_for_child = params[:child]
     t.relationship_to_child = params[:relationship]
     t.enrolled_in_high_school = params[:highschool]

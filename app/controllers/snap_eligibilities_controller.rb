@@ -51,6 +51,7 @@
     end
 
       # Data storage
+      s.user_location = params[:user_location]
       s.enrolled_in_education = params[:education]
       s.citizen = params[:citizen]
       s.disabled_status = params[:disabled]
