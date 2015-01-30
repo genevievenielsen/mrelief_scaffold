@@ -50,6 +50,7 @@ class MedicaidsController < ApplicationController
 
    #DATA STORAGE
    m.user_location = params[:user_location]
+   m.phone_number = params[:phone_number] if params[:phone_number].present?
    m.citizen = params[:citizen]
    m.zipcode = params[:zipcode]
    m.save

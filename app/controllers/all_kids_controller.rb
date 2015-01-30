@@ -87,6 +87,7 @@ class AllKidsController < ApplicationController
     end
 
     # Data Storage
+    a.phone_number = params[:phone_number] if params[:phone_number].present?
     a.user_location = params[:user_location]
     a.pregnant = params[:pregnant]
     a.healthcare_status = params[:status]

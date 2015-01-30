@@ -136,6 +136,7 @@
 
     # DATA STORAGE
     t.user_location = params[:user_location]
+    t.phone_number = params[:phone_number] if params[:phone_number].present?
     t.pregnant_or_caring_for_child = params[:child]
     t.relationship_to_child = params[:relationship]
     t.enrolled_in_high_school = params[:highschool]

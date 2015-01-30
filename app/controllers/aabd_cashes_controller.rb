@@ -122,6 +122,7 @@ class AabdCashesController < ApplicationController
 
     # DATA STORAGE
     a.user_location = params[:user_location]
+    a.phone_number = params[:phone_number] if params[:phone_number].present?
     a.citizen = params[:citizen]
     a.disabled_status = params[:disabled]
     a.zipcode = params[:zipcode]

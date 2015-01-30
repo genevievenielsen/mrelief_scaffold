@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150128204617) do
+ActiveRecord::Schema.define(version: 20150130174416) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20150128204617) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "user_location"
+    t.string   "phone_number"
   end
 
   create_table "aabd_cashes", force: true do |t|
@@ -104,6 +105,7 @@ ActiveRecord::Schema.define(version: 20150128204617) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "user_location"
+    t.string   "phone_number"
   end
 
   create_table "auto_repair_assistances", force: true do |t|
@@ -177,6 +179,7 @@ ActiveRecord::Schema.define(version: 20150128204617) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "user_location"
+    t.string   "phone_number"
   end
 
   create_table "medicaid_data_twilios", force: true do |t|
@@ -208,6 +211,7 @@ ActiveRecord::Schema.define(version: 20150128204617) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "user_location"
+    t.string   "phone_number"
   end
 
   create_table "medicare_cost_sharing_data_twilios", force: true do |t|
@@ -261,6 +265,7 @@ ActiveRecord::Schema.define(version: 20150128204617) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "user_location"
+    t.string   "phone_number"
   end
 
   create_table "rental_assistances", force: true do |t|
@@ -281,6 +286,7 @@ ActiveRecord::Schema.define(version: 20150128204617) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "user_location"
+    t.string   "phone_number"
   end
 
   create_table "rta_free_ride_data_twilios", force: true do |t|
@@ -338,6 +344,7 @@ ActiveRecord::Schema.define(version: 20150128204617) do
     t.datetime "updated_at"
     t.string   "zipcode"
     t.string   "user_location"
+    t.string   "phone_number"
   end
 
   create_table "snap_eligibility_data_twilios", force: true do |t|
@@ -382,6 +389,7 @@ ActiveRecord::Schema.define(version: 20150128204617) do
     t.datetime "updated_at"
     t.string   "tanf_eligibility_status"
     t.string   "user_location"
+    t.string   "phone_number"
   end
 
   create_table "tanifs", force: true do |t|

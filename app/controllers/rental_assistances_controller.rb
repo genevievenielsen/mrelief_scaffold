@@ -69,6 +69,7 @@ class RentalAssistancesController < ApplicationController
 
       # DATA STORAGE
       r.user_location = params[:user_location]
+      r.phone_number = params[:phone_number] if params[:phone_number].present?
       r.name_on_lease = params[:lease]
       r.rental_status = params[:rental_status]
       r.zipcode = params[:zipcode]

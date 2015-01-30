@@ -415,41 +415,6 @@
 </div>
 </div>
 
-<script>
-
-
-  $(document).ready(function() {
-
-    var value = $("#location_dropdown:selected").val();
-
-
-    var value = $("#location_dropdown option:selected").val();
-
-    var dropdown = $("#location_dropdown option:selected");
-    var selected_value = dropdown.val();
-
-
-      if (selected_value == "king_community_service_center") {
-        $('.place_for_phone_number').append("<%= escape_javascript(render "layouts/phone_question") %>");
-      }
-
-
-    // $("#location_dropdown").click(function() {
-
-    //   var location = document.getElementById("location_dropdown");
-    //   var value = location.options[location.selectedIndex].text;
-
-    //   if (value == "King Community Service Center") {
-    //     $('.place_for_phone_number').append("<%= escape_javascript(render "layouts/phone_question" ) %>");
-    //   }
-    // });
-
-    $(function ()
-      { $("[data-toggle='popover']").popover();
-    });
-  });
-
- </script>
 
 
 

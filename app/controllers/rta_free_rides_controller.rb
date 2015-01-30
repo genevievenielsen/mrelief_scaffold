@@ -65,6 +65,7 @@ class RtaFreeRidesController < ApplicationController
 
     #DATA STORAGE
     r.user_location = params[:user_location]
+    r.phone_number = params[:phone_number] if params[:phone_number].present?
     r.disabled_status = params[:disabled]
     r.zipcode = params[:zipcode]
     r.save

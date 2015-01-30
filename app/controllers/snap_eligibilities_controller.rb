@@ -52,6 +52,7 @@
 
       # Data storage
       s.user_location = params[:user_location]
+      s.phone_number = params[:phone_number] if params[:phone_number].present?
       s.enrolled_in_education = params[:education]
       s.citizen = params[:citizen]
       s.disabled_status = params[:disabled]
