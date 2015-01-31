@@ -36,7 +36,7 @@
     <label for="child_birthdate" id="case_management" >Is the applicant child 3-years-old by Sep. 1st and not 5-years-old before Sep. 1st?</label>
 
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-9">
         <div id="child-birthdate">
          <%= radio_button_tag 'child_birthdate', 'yes' %> yes
         <%= radio_button_tag 'child_birthdate', 'no' %> no
@@ -81,11 +81,15 @@
 
 
 
- <div class="form-group col-sm-9 pull-left">
+  <div class="form-group col-sm-9 pull-left">
     <label for="zipcode">What is your zipcode?</label>
       <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" required>
-</div>
+  </div>
 
+    <%= render "layouts/location_dropdown" %>
+
+
+    <%= render "layouts/phone_question" %>
 
 
     <div class="row">

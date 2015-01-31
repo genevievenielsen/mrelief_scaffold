@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150130174416) do
+ActiveRecord::Schema.define(version: 20150131041847) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -115,6 +115,17 @@ ActiveRecord::Schema.define(version: 20150130174416) do
     t.datetime "updated_at"
   end
 
+  create_table "child_care_voucher_data", force: true do |t|
+    t.string   "dependent_no"
+    t.string   "gross_monthly_income"
+    t.string   "user_location"
+    t.string   "zipcode"
+    t.string   "phone_number"
+    t.string   "eligibility_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "child_care_vouchers", force: true do |t|
     t.integer  "ccdf_dependent_no"
     t.integer  "ccdf_eligible_children"
@@ -130,6 +141,17 @@ ActiveRecord::Schema.define(version: 20150130174416) do
     t.datetime "updated_at"
   end
 
+  create_table "early_head_start_data", force: true do |t|
+    t.string   "dependent_no"
+    t.string   "gross_monthly_income"
+    t.string   "zipcode"
+    t.string   "user_location"
+    t.string   "phone_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "eligibility_status"
+  end
+
   create_table "early_head_starts", force: true do |t|
     t.integer  "ehs_dependent_no"
     t.decimal  "ehs_gross_income"
@@ -140,6 +162,18 @@ ActiveRecord::Schema.define(version: 20150130174416) do
   create_table "family_nutritions", force: true do |t|
     t.decimal  "nutrition_gross_income"
     t.integer  "nutrition_household_size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "head_start_data", force: true do |t|
+    t.string   "dependent_no"
+    t.string   "gross_annual_income"
+    t.string   "child_birthdate"
+    t.string   "zipcode"
+    t.string   "user_location"
+    t.string   "phone_number"
+    t.string   "eligibility_status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -406,6 +440,18 @@ ActiveRecord::Schema.define(version: 20150130174416) do
     t.integer  "vision_household_size"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "wic_data", force: true do |t|
+    t.string   "household_size"
+    t.string   "gross_monthly_income"
+    t.string   "user_location"
+    t.string   "zipcode"
+    t.string   "phone_number"
+    t.string   "eligibility_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "health_status"
   end
 
   create_table "wics", force: true do |t|
