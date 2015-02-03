@@ -92,7 +92,7 @@ class TwilioController < ApplicationController
        message = "What is your zipcode?"
        session["page"] = "snap_zipcode_question"
       else
-        message = "Oops looks like there is a typo! Please type 'yes' or 'no' when you answer this question."
+        message = "Oops looks like there is a typo! Please type 'yes' or 'no' to answer this question."
         session["counter"] = 1
      end
      @s.completed = false
@@ -111,7 +111,8 @@ class TwilioController < ApplicationController
        message = "How old are you? Enter a number"
        session["page"] = "snap_age_question"
      else
-        message = "Oops looks like there is a typo! Type 'reset' and then be sure to type 'yes' or 'no' when you answer this question."
+      message = "Oops looks like there is a typo! Please type 'yes' or 'no' to answer this question."
+       session["counter"] = 2
      end
      @s.completed = false
      @s.save
@@ -174,7 +175,8 @@ class TwilioController < ApplicationController
        message = "Are you receiving disability payments from from Social Security, the Railroad Retirement Board or Veterans Affairs? Enter 'yes' or 'no'"
        session["page"] = "snap_disability_payment"
       else
-        message = "Oops looks like there is a typo! Type 'reset' and then be sure to type 'yes' or 'no' when you answer this question."
+        message = "Oops looks like there is a typo! Please type 'yes' or 'no' to answer this question."
+        session["counter"] = 6
       end
      @s.completed = false
      @s.save
@@ -190,7 +192,8 @@ class TwilioController < ApplicationController
      elsif session["disability_payment"] == "no"
       @s.disabled_receiving_payment = "no"
      else
-        message = "Oops looks like there is a typo! Type 'reset' and then be sure to type 'yes' or 'no' when you answer this question."
+      message = "Oops looks like there is a typo! Please type 'yes' or 'no' to answer this question."
+      session["counter"] = 7
      end
      session["page"] = "snap_income_question_disability"
      @s.completed = false
@@ -379,7 +382,8 @@ class TwilioController < ApplicationController
          message = "How many dependents including yourself are in your household? Enter a number"
          session["page"] = "rta_dependents_question"
       else
-        message = "Oops looks like there is a typo! Type 'reset' and then be sure to type 'yes' or 'no' when you answer this question."
+        message = "Oops looks like there is a typo! Please type 'yes' or 'no' to answer this question."
+        session["counter"] = 1
       end
       @r.completed = false
       @r.save
@@ -397,7 +401,8 @@ class TwilioController < ApplicationController
       message = "Are you receiving disability payments from from Social Security, the Railroad Retirement Board or Veterans Affairs? Enter 'yes' or 'no'"
       session["page"] = "snap_disability_payment"
     else
-      message = "Oops looks like there is a typo! Type 'reset' and then be sure to type 'yes' or 'no' when you answer this question."
+      message = "Oops looks like there is a typo! Please type 'yes' or 'no' to answer this question."
+      session["counter"] = 2
     end
     @r.save
    end
@@ -414,7 +419,8 @@ class TwilioController < ApplicationController
       session["page"] = "rta_ineligble"
       message = "What is your zipcode?"
       else
-        message = "Oops looks like there is a typo! Type 'reset' and then be sure to type 'yes' or 'no' when you answer this question."
+        message = "Oops looks like there is a typo! Please type 'yes' or 'no' to answer this question."
+        session["counter"] = 3
      end
      @r.save
    end
@@ -544,7 +550,8 @@ class TwilioController < ApplicationController
        message = "How many people live in your home (including yourself)?"
        session["page"] = "medicaid_household_size"
      else
-        message = "Oops looks like there is a typo! Type 'reset' and then be sure to type 'yes' or 'no' when you answer this question."
+      message = "Oops looks like there is a typo! Please type 'yes' or 'no' to answer this question."
+      session["counter"] = 1
      end
      @m.completed = "false"
      @m.save
