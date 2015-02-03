@@ -92,7 +92,8 @@ class TwilioController < ApplicationController
        message = "What is your zipcode?"
        session["page"] = "snap_zipcode_question"
       else
-        message = "Oops looks like there is a typo! Type 'reset' and then be sure to type 'yes' or 'no' when you answer this question."
+        message = "Oops looks like there is a typo! Please type 'yes' or 'no' when you answer this question."
+        session["counter"] = 1
      end
      @s.completed = false
      @s.save
