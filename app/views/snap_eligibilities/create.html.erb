@@ -24,17 +24,13 @@
         <div class="row">
           <div class="col-sm-offset-3 col-md-offset-3 col-md-6 col-sm-6 col-xs-6">
             <p class="subhead"> To apply online before you visit:</p>
-
-          <!-- <a href="https://abe.illinois.gov/abe/access/" onclick="_gaq.push(['_trackEvent', 'off_site', 'abe', 'food_stamps']);" class="btn btn-success btn-resolution" target="_blank">Click Here</a> -->
-
-          <a href="https://abe.illinois.gov/abe/access/" onclick="ga('send', 'event', 'button', 'food_stamps_abe', 'abe', 1);" class="btn btn-success btn-resolution" target="_blank">Click Here</a>
+            <a href="https://abe.illinois.gov/abe/access/" onclick="ga('send', 'event', 'button', 'food_stamps', 'abe', 1);" class="btn btn-success btn-resolution" target="_blank">Click Here</a>
           </div>
         </div>
     </div>
 
     <% elsif @eligible == 'maybe' %>
-<!--     <div class="page-header"></div>
- -->
+
       <div class="row" style="text-align:center;">
         <div class="col-md-8 col-md-offset-2">
           <i class="fa fa-exclamation-circle fa-5x"></i>
