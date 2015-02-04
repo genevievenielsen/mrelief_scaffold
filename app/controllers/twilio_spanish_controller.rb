@@ -105,7 +105,7 @@ class TwilioSpanishController < ApplicationController
       else
         session["age"] = session["age"].in_numbers
       end
-      if session["age"] >= 22
+      if session["age"] >= 18
         message = "¿Cuál es el número de personas que viven en el hogar incluyéndote a ti mismo? Ingrese un numero"
         session["page"] = "snap_household_question"
       else
@@ -280,7 +280,7 @@ class TwilioSpanishController < ApplicationController
         @lafcenter = LafCenter.find_by(:id => 10)
       end
       # message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}."
-      message = "no podemos determinar su elegibilidad en este momento. Para hablar con un experto sobre su situación con LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}."
+      message = "No podemos determinar su elegibilidad en este momento. Para hablar con un experto sobre su situación con LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}."
     end
 
     # Food stamps user is not a US citizen
@@ -294,7 +294,7 @@ class TwilioSpanishController < ApplicationController
         @lafcenter = LafCenter.find_by(:id => 10)
       end
       # message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}."
-      message = "no podemos determinar su elegibilidad en este momento. Para hablar con un experto sobre su situación con LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}."
+      message = "No podemos determinar su elegibilidad en este momento. Para hablar con un experto sobre su situación con LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}."
     end
 
     twiml = Twilio::TwiML::Response.new do |r|
