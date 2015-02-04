@@ -5,8 +5,8 @@ Rails.application.configure do
       :global => {'Cache-Control' => 'public, max-age=31536000'},
       :fonts  => {'Access-Control-Allow-Origin' => '*'}
     }
-    require 'rack_headers'
-    config.middleware.insert_before '::ActionDispatch::Static', '::Rack::Headers'
+    # require 'rack_headers'
+    # config.middleware.insert_before '::ActionDispatch::Static', '::Rack::Headers'
 
 
   # Code is not reloaded between requests.
