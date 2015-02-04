@@ -9,10 +9,6 @@ Bundler.require(*Rails.groups)
 module MreliefScaffold
   class Application < Rails::Application
 
-    config.action_dispatch.default_headers = {
-        'X-Frame-Options' => 'ALLOWALL'
-    }
-
     config.serve_static_assets = true
 
     config.action_mailer.delivery_method = :smtp
