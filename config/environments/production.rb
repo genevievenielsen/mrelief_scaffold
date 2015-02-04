@@ -1,6 +1,14 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.assets.header_rules = {
+      :global => {'Cache-Control' => 'public, max-age=31536000'},
+      :fonts  => {'Access-Control-Allow-Origin' => '*'}
+    }
+    require 'rack_headers'
+    config.middleware.insert_before '::ActionDispatch::Static', '::Rack::Headers'
+
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
