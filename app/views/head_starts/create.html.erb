@@ -15,7 +15,7 @@
             <div class="row">
               <div class="text-center">
                 <p class="subhead"> The Illinois Head Start Association can help you find a Head Start program near you.</p>
-              <%= link_to "Click Here to visit their website", "http://abe.illinois.gov", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "_gaq.push(['_trackEvent', 'off_site', 'abe', 'head_start', '1']);" %>
+              <%= link_to "Click Here to visit their website", "http://abe.illinois.gov", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'head_start', 'abe', 1);" %>
               </div>
               <p class="subhead">or call at 217-241-3511.</p>
           </div>
@@ -35,7 +35,7 @@
 
                <div class="row">
                  <p class="subhead">Many programs for young children have a combination of funding sources. To find early learning programs near you </p>
-                 <%= link_to "Click Here ", "http://chicagoearlylearning.org", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "_gaq.push(['_trackEvent', 'off_site', 'chicagoearlylearning', 'head_start', '1']);" %>
+                 <%= link_to "Click Here ", "http://chicagoearlylearning.org", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'head_start', 'chicagoearlylearning', 1);" %>
                  <p class="subhead">or call the hotline at (312) 229-1690.</p>
                </div>
 

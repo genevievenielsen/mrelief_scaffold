@@ -14,7 +14,7 @@
           <div class="row">
             <div class=" text-center">
               <p class="subhead"> Based on your age, household size, and income, you likely qualify for RTA Ride Free.
-              <%= link_to "Click Here to apply online before you visit", "https://idoaweb.aging.illinois.gov/baa/Welcome.aspx", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "_gaq.push(['_trackEvent', 'off_site', 'il_dept_aging', 'rta_ride_free', '1']);" %>
+              <%= link_to "Click Here to apply online before you visit", "https://idoaweb.aging.illinois.gov/baa/Welcome.aspx", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'rta_free_ride', 'il_dept_aging', 1);" %>
               </p>
               <p class="subhead">Navigate to the Benefit Access tab and click on 'Benefit Access Application.'</p>
             </div>
