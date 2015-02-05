@@ -5,9 +5,9 @@
           });
   .row
     .page-header.col-md-10.col-md-offset-1{:style => "border:none;"}
-      %h2 Do I qualify for Aged, Blind and Disabled (AABD) Cash Assistance?
-      %p.subhead If you are 65 and older and a resident of Illinois, you may qualify for Senior and Persons with Disabilities.
-      %p This currently includes cash assistance and not eligibility for medical assistance.
+      %h2= t.aabd.do_i_qualify | "Do I qualify for Aged, Blind and Disabled (AABD) Cash Assistance?"
+      %p.subhead= t.aabd.if_you_are_65 | "If you are 65 and older and a resident of Illinois, you may qualify for Senior and Persons with Disabilities."
+      %p= t.aabd.this_currently_includes | "This currently includes cash assistance and not eligibility for medical assistance."
   - if @aabd_cash.errors.any?
     - @aabd_cash.errors.full_messages.each do |message|
       .alert.alert-dismissable.alert-danger
@@ -17,82 +17,86 @@
     .panel.panel-default.col-md-8.col-md-offset-2
       .panel-body
         %form{:action => "/aabd_cashes", :method => "post", :role => "form"}
-          %label{:for => "age"} How old are you?
+          %label{:for => "age"}= t.aabd.how_old | "How old are you?"
           .row
             .form-group.col-md-6
-              %input#age.form-control{:name => "age", :placeholder => "For example: 27", :required => "", :type => "text"}/
+              %input#age.form-control{:name => "age", :placeholder => I18n.t("placeholder.example_age", :default => "For example: 27"), :required => "", :type => "text"}/
           .row
             .form-group.col-md-12
-              %label#disabled{:for => "disabled"} Describe your current disability status:
+              %label#disabled{:for => "disabled"}= t.aabd.describe_your | "Describe your current disability status:"
               #disabled
                 = radio_button_tag 'disabled', 'social-security'
-                I am receiving disability payments from Social Security.
+                = t.aabd.receiving_social_security | "I am receiving disability payments from Social Security."
                 %br/
                 = radio_button_tag 'disabled', 'railroad'
-                I am receiving disability payments from the Railroad Retirement Board.
+                = t.aabd.receiving_railroad_retirement | "I am receiving disability payments from the Railroad Retirement Board."
                 %br/
                 = radio_button_tag 'disabled', 'veterans'
-                I am receiving disability payments from Veterans
-                Affairs.
+                = t.aabd.receiving_veterans_affairs | "I am receiving disability payments from Veterans Affairs."
+
                 %br/
                 = radio_button_tag 'disabled', 'none'
-                I am currently not receiving any disability payments
+                = t.aabd.not_receiving | "I am currently not receiving any disability payments"
                 %br/
           / Label and input for aabd_household_size
           .row
             .form-group.col-md-12
-              %label{:for => "aabd_household_size"} What is your household size?
-              %button{"data-content" => "Household is defined as anyone living in the same dwelling with you.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+              %label{:for => "aabd_household_size"}= t.aabd.hh_size | "What is your household size?"
+              %button{"data-content" => I18n.t("popover.info_hh_size", :default => "Household is defined as anyone living in the same dwelling with you."), "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
                 %i.fa.fa-info-circle
               .row
                 .col-md-6
-                  %input#aabd_household_size.form-control{:name => "aabd_household_size", :placeholder => "For example: 3", :required => "", :type => "text"}/
+                  %input#aabd_household_size.form-control{:name => "aabd_household_size", :placeholder => I18n.t("placeholder.example_hh", :default => "For example: 3"), :required => "", :type => "text"}/
           / Label and input for aabd_net_income
           .row
             .form-group.col-md-12
               %label{:for => "aabd_net_income"}
-                How much do you anticipate to earn in net income in the next 30 days? (After taxes have been taken out)
+                = t.aabd.anticipate_to_earn | "How much do you anticipate to earn in net income in the next 30 days? (After taxes have been taken out)"
               %button{"data-content" => "This should include income you earn from your work, self employment and rental income (contributions from people who live with you.)", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
                 %i.fa.fa-info-circle
               .input-group
                 %span.input-group-addon $
-                %input#aabd_net_income.form-control{:name => "aabd_net_income", :placeholder => "For example: 1000", :required => "", :type => "text"}/
+                %input#aabd_net_income.form-control{:name => "aabd_net_income", :placeholder => I18n.t("placeholder.example_income", :default => "For example: 1000"), :required => "", :type => "text"}/
                 %span.input-group-addon .00
           / Label and input for aabd_benefits
           .row
             .form-group.col-md-12
               %label{:for => "aabd_benefits"}
-                What is your monthly income expected from government benefits or other assistance?
-              %button{"data-content" => "This includes social security (SSI), veterans benefits, railroad assistance etc.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+                = t.aabd.income_expected_government | "What is your monthly income expected from government benefits or other assistance?"
+              %button{"data-content" => I18n.t("popover.info_expected_government_benefits", :default => "This includes social security (SSI), veterans benefits, railroad assistance etc."), "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
                 %i.fa.fa-info-circle
               .input-group
                 %span.input-group-addon $
-                %input#aabd_benefits.form-control{:name => "aabd_benefits", :placeholder => "For example: 1000", :required => "", :type => "text"}/
+                %input#aabd_benefits.form-control{:name => "aabd_benefits", :placeholder => I18n.t("placeholder.example_income", :default => "For example: 1000"), :required => "", :type => "text"}/
                 %span.input-group-addon .00
           / Label and input for aabd_assets
           .row
             .form-group.col-md-12
               %label{:for => "aabd_assets"}
-                What are your assets worth?
-              %button{"data-content" => "Everything but your home, if you live in it, and one car.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+                = t.aabd.assets_worth | "What are your assets worth?"
+                %button{"data-content" => I18n.t("popover.info_assets", :default => "Everything but your home, if you live in it, and one car."), "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
                 %i.fa.fa-info-circle
               .input-group
                 %span.input-group-addon $
-                %input#aabd_assets.form-control{:name => "aabd_assets", :placeholder => "For example: 1000", :required => "", :type => "text"}/
+                %input#aabd_assets.form-control{:name => "aabd_assets", :placeholder => I18n.t("placeholder.example_income", :default => "For example: 1000"), :required => "", :type => "text"}/
                 %span.input-group-addon .00
           .row
             .form-group.col-md-12
-              %label#citizen{:for => "citizen"} Are you a citizen of the United States?
+              %label#citizen{:for => "citizen"}= t.aabd.citizen | "Are you a citizen of the United States?"
               .clearfix
               .row
                 .col-md-6
                   #citizen.pull-left
                     = radio_button_tag 'citizen', 'yes'
-                    yes
+                    = t.aabd.yes| "yes"
                     \#{radio_button_tag 'citizen', 'no'} no
           = render 'programs/zipcode_question'
+          .row
+            = render "layouts/location_dropdown"
+          .row
+            = render "layouts/phone_question"
           .row
             .col-md-6
               = render "programs/calculator"
           %div
-            %button.btn.btn-primary.program-btn{:type => "submit"} See if I qualify
+            %button.btn.btn-primary.program-btn{:type => "submit"}= t.aabd.see_if | "See if I qualify"
