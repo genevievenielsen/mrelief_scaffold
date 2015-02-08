@@ -52,7 +52,7 @@
             .form-group.col-md-12
               %label{:for => "aabd_net_income"}
                 = t.aabd.anticipate_to_earn | "How much do you anticipate to earn in net income in the next 30 days? (After taxes have been taken out)"
-              %button{"data-content" => "This should include income you earn from your work, self employment and rental income (contributions from people who live with you.)", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+              %button{"data-content" => I18n.t("popover.30_days_income", :default => "This should include income you earn from your work, self employment and rental income (contributions from people who live with you.)"), "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
                 %i.fa.fa-info-circle
               .input-group
                 %span.input-group-addon $
@@ -74,7 +74,7 @@
             .form-group.col-md-12
               %label{:for => "aabd_assets"}
                 = t.aabd.assets_worth | "What are your assets worth?"
-                %button{"data-content" => I18n.t("popover.info_assets", :default => "Everything but your home, if you live in it, and one car."), "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+              %button{"data-content" => I18n.t("popover.info_assets", :default => "Everything but your home, if you live in it, and one car."), "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
                 %i.fa.fa-info-circle
               .input-group
                 %span.input-group-addon $
