@@ -10,8 +10,20 @@ es:
       Por ejemplo: 27
     example_hh: >-
       Por ejemplo: 3
+    example_hh2: >-
+      Por ejemplo: 2
+
     example_income: >-
       Por ejemplo: 1000
+    example_income2: >-
+      Por ejemplo: 500
+    example_income3: >-
+      Por ejemplo: 4000
+    example_income4: >-
+      Por ejemplo: 30000
+    example_income5: >-
+      Por ejemplo: 5000
+
     example_zip: >-
       Por ejemplo: 60615
     example_phone: >-
@@ -217,3 +229,30 @@ es:
     income_expected_government: ¿Cuánto es su ingreso mensual que espera de los beneficios del gobierno u otra ayuda?
     assets_worth: ¿Cuál es el valor de sus bienes muebles?
     yes: sí
+
+  all_city:
+    do_i_qualify: ¿Califico para Todos los programas de la ciudad en mRelief?
+    how_old: ¿Cuántos años tiene?
+    programs_include: >-
+      Los programas incluyen cupones de comida, "Food Stamps"; ayuda para transporte "RTA Free Ride", ayuda para sevicios de salud, "All Kids", "Medicare Cost Sharing", "Medicare", "Medicaid", Asistencia Monetaria para los Ancianos, Ciegos y Discapacitados (AABD), "Aged, Blind and Disabled" (AABD); y Asistencia Temporal Para Familias Necesitadas (TANF)
+    number_of_people: ¿Cuál es el número de personas que viven en el hogar incluyéndose a si mismo?
+    how_many_children: ¿Cuántos niños menor de 18 años está cuidando?
+    hh_receive_medicare: ¿Cuántas personas en su hogar reciben Medicare?
+
+    child_anticipate: ¿Usted o su hijo/a espera conseguir cualquier otra fuente de ingresos fuera de su trabajo, manutención de hijos o SSI?
+
+    gross_monthly: ¿Cuál es su ingreso bruto mensual?
+    anticipate_to_earn: ¿Cuánto es lo que usted anticipa ganar en ingresos netos en los próximos 30 días? (Después de impuestos)
+    income_expected_government: ¿Cuánto es su ingreso mensual que espera de los beneficios del gobierno u otra ayuda?
+    yes: sí
+    anticipate_to_receive_child_support: ¿Cuánto es lo que usted anticipa recibir de manutención de los hijos en los próximos 30 días?
+    anticipate_to_receive_ssi: ¿Cuánto es lo que usted anticipa recibir de SSI en los próximos 30 días?
+    income_past: ¿Cuál es su ingreso en los últimos 90 días?
+    income_annual: ¿Cuál es su ingreso bruto anual?
+    someone_experiencing: Alguien experimentando una circunstancia médica
+    victim_natural: Una víctima de un desastre natural o un incendio
+    recipient_eviction: Recibió una orden de desalojo
+    temporary_loss: Han experimentado una pérdida temporal de ingresos
+    victim_domestic: Una víctima de violencia doméstica
+    none_of: Ninguno de los anteriores
+    not_receiving: Yo actualmente no estoy recibiendo pagos por discapacidad
