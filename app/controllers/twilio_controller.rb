@@ -44,7 +44,7 @@ class TwilioController < ApplicationController
       session["counter"] = 1
    end
    if params[:Body].strip.downcase == "medicaid"
-      message = "Are you a citizen of the United States? Enter 'yes' or 'no'"
+      message = "At the current moment, this form does not include Medicaid's offerings for people with disabilities. If you would like to continue, answer the following question. Are you a citizen of the United States? Enter 'yes' or 'no'"
       session["page"] = "medicaid_citizen_question"
       session["counter"] = 1
    end
@@ -55,10 +55,6 @@ class TwilioController < ApplicationController
    end
    if params[:Body].strip.downcase == "med"
       message = "For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
-      session["counter"] = 1
-   end
-   if params[:Body].strip.downcase == "med"
-      message = "For foodstamps, text the word 'food.'"
       session["counter"] = 1
    end
    if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("medicaid")
