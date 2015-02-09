@@ -63,6 +63,7 @@
         <% if @eligible_medicaid == 'yes' %>
         <li class="list-group-item">
           <h3 class="allcityheader">Medicaid</h3>
+          <p>Important Note:  </p>
 
           <%= link_to "Click Here for more information", "https://abe.illinois.gov/abe/access/jsp/access/Home.jsp", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicaid_all_city_program', 'abe', 1);" %>
 

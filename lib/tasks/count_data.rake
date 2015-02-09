@@ -20,7 +20,13 @@ task :count_data => :environment do
   medicaid_count = MedicaidData.all.count
   puts "Medicaid: #{medicaid_count}"
 
-  web_count = aabd_count + all_kids_count + child_care_voucher_count + early_head_start_count + head_start_count
+  medicare_count = MedicareCostSharingData.all.count
+  puts "Medicare: #{medicare_count}"
+
+  rental_assistance_count = RentalAssistanceData.all.count
+  puts "Rental Assistnace: #{rental_assistance_count}"
+
+  web_count = aabd_count + all_kids_count + child_care_voucher_count + early_head_start_count + head_start_count + medicare_count +  rental_assistance_count
   puts "Web Count: #{web_count}"
 
 
@@ -30,7 +36,10 @@ task :count_data => :environment do
   medicaid_count_twilio = MedicaidDataTwilio.all.count
   puts "Medicaid Twilio: #{medicaid_count_twilio}"
 
-  twilio_count = medicaid_count_twilio
+  medicare_twilio_count = MedicareCostSharingData.all.count
+  puts "medicare: #{medicare_twilio_count}"
+
+  twilio_count = medicaid_count_twilio + medicare_twilio_count
   puts "Twilio Count: #{twilio_count}"
 
   puts "####"
