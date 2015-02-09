@@ -1528,204 +1528,204 @@ h.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 1
-e.ehs_gross_income = 11670
+e.ehs_gross_income = 11770
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 2
-e.ehs_gross_income = 15730
+e.ehs_gross_income = 15930
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 3
-e.ehs_gross_income = 19790
+e.ehs_gross_income = 20090
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 4
-e.ehs_gross_income = 23850
+e.ehs_gross_income = 24250
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 5
-e.ehs_gross_income = 27910
+e.ehs_gross_income = 28410
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 6
-e.ehs_gross_income = 31970
+e.ehs_gross_income = 32570
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 7
-e.ehs_gross_income = 36030
+e.ehs_gross_income = 36730
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 8
-e.ehs_gross_income = 40090
+e.ehs_gross_income = 40890
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 9
-e.ehs_gross_income = 44150
+e.ehs_gross_income = 45050
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 10
-e.ehs_gross_income = 48210
+e.ehs_gross_income = 49210
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 11
-e.ehs_gross_income = 52270
+e.ehs_gross_income = 53370
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 12
-e.ehs_gross_income = 56330
+e.ehs_gross_income = 57530
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 13
-e.ehs_gross_income = 60390
+e.ehs_gross_income = 61690
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 14
-e.ehs_gross_income = 64450
+e.ehs_gross_income = 65850
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 15
-e.ehs_gross_income = 68510
+e.ehs_gross_income = 70010
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 16
-e.ehs_gross_income = 72570
+e.ehs_gross_income = 74170
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 17
-e.ehs_gross_income = 76630
+e.ehs_gross_income = 78330
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 18
-e.ehs_gross_income = 80690
+e.ehs_gross_income = 82490
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 19
-e.ehs_gross_income = 84750
+e.ehs_gross_income = 86650
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 20
-e.ehs_gross_income = 88810
+e.ehs_gross_income = 90810
 e.save
 
 # Head Start
 
 h = HeadStart.new
 h.hs_dependent_no = 1
-h.hs_gross_income = 11670
+h.hs_gross_income = 11770
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 2
-h.hs_gross_income = 15730
+h.hs_gross_income = 15930
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 3
-h.hs_gross_income = 19790
+h.hs_gross_income = 20090
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 4
-h.hs_gross_income = 23850
+h.hs_gross_income = 24250
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 5
-h.hs_gross_income = 27910
+h.hs_gross_income = 28410
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 6
-h.hs_gross_income = 31970
+h.hs_gross_income = 32570
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 7
-h.hs_gross_income = 36030
+h.hs_gross_income = 36730
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 8
-h.hs_gross_income = 40090
+h.hs_gross_income = 40890
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 9
-h.hs_gross_income = 44150
+h.hs_gross_income = 45050
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 10
-h.hs_gross_income = 48210
+h.hs_gross_income = 49210
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 11
-h.hs_gross_income = 52270
+h.hs_gross_income = 53370
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 12
-h.hs_gross_income = 56330
+h.hs_gross_income = 57530
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 13
-h.hs_gross_income = 60390
+h.hs_gross_income = 61690
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 14
-h.hs_gross_income = 64450
+h.hs_gross_income = 65850
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 15
-h.hs_gross_income = 68510
+h.hs_gross_income = 70010
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 16
-h.hs_gross_income = 72570
+h.hs_gross_income = 74170
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 17
-h.hs_gross_income = 76630
+h.hs_gross_income = 78330
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 18
-h.hs_gross_income = 80690
+h.hs_gross_income = 82490
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 19
-h.hs_gross_income = 84750
+h.hs_gross_income = 86650
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 20
-h.hs_gross_income = 88810
+h.hs_gross_income = 90810
 h.save
 
 a = AllKid.new
