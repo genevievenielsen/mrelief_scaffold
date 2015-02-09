@@ -1,9 +1,10 @@
 task :count_data => :environment do
 
   # Web Count
+  puts "####"
 
   all_city_count = AllCityProgramDatum.all.count
-  puts "Aabd: #{all_city_count}"
+  puts "All City Programs: #{all_city_count}"
 
   aabd_count = AabdCashData.all.count
   puts "Aabd: #{aabd_count}"
@@ -49,6 +50,7 @@ task :count_data => :environment do
 
   # Twilio Count
   puts "####"
+
   medicaid_count_twilio = MedicaidDataTwilio.all.count
   puts "Medicaid Twilio: #{medicaid_count_twilio}"
 
@@ -56,15 +58,16 @@ task :count_data => :environment do
   puts "Medicare Twilio: #{medicare_twilio_count}"
 
   rta_free_ride_twilio_count = RtaFreeRideDataTwilio.all.count
-  puts "RTA Ride Free: #{rta_free_ride_twilio_count}"
+  puts "RTA Ride Free Twilio: #{rta_free_ride_twilio_count}"
 
   snap_twilio_count = SnapEligibilityDataTwilio.all.count
-  puts "SNAP: #{snap_twilio_count}"
+  puts "SNAP Twilio: #{snap_twilio_count}"
 
   twilio_count = medicaid_count_twilio + medicare_twilio_count + rta_free_ride_twilio_count + snap_twilio_count
   puts "Twilio Count: #{twilio_count}"
 
   puts "####"
+
   total_count = web_count + twilio_count
   puts "Total Count: #{total_count}"
 end
