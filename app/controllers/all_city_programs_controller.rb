@@ -256,6 +256,7 @@ class AllCityProgramsController < ApplicationController
 
       #HERE IS THE LOGIC FOR RENTAL ASSISTANCE
       a.name_on_lease = params[:lease]
+      a.next_month_rent = params[:next_rent]
       a.rental_status = params[:rental_status]
 
       rental_eligibility = RentalAssistance.find_by({ :rental_dependent_no => dependent_no })
