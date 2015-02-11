@@ -1730,162 +1730,162 @@ h.save
 
 a = AllKid.new
 a.kids_household_size = 1
-a.assist_gross_income = 1430
-a.share_gross_income = 1527
-a.premium_1_gross_income = 2033
-a.premium_2_gross_income = 3093
+a.assist_gross_income = 1442
+a.share_gross_income = 1540
+a.premium_1_gross_income = 2050
+a.premium_2_gross_income = 3119
 a.save
 
 a = AllKid.new
 a.kids_household_size = 2
-a.assist_gross_income = 1927
-a.share_gross_income = 2058
-a.premium_1_gross_income = 2740
-a.premium_2_gross_income = 4168
+a.assist_gross_income = 1951
+a.share_gross_income = 2084
+a.premium_1_gross_income = 2774
+a.premium_2_gross_income = 4221
 a.save
 
 a = AllKid.new
 a.kids_household_size = 3
-a.assist_gross_income = 2424
-a.share_gross_income = 2589
-a.premium_1_gross_income = 3447
-a.premium_2_gross_income = 5244
+a.assist_gross_income = 2461
+a.share_gross_income = 2628
+a.premium_1_gross_income = 3499
+a.premium_2_gross_income = 5324
 a.save
 
 a = AllKid.new
 a.kids_household_size = 4
-a.assist_gross_income = 2922
-a.share_gross_income = 3120
-a.premium_1_gross_income = 4154
-a.premium_2_gross_income = 6320
+a.assist_gross_income = 2971
+a.share_gross_income = 3173
+a.premium_1_gross_income = 4224
+a.premium_2_gross_income = 6426
 a.save
 
 a = AllKid.new
 a.kids_household_size = 5
-a.assist_gross_income = 3419
-a.share_gross_income = 3652
-a.premium_1_gross_income = 4861
-a.premium_2_gross_income = 7396
+a.assist_gross_income = 3480
+a.share_gross_income = 3717
+a.premium_1_gross_income = 4948
+a.premium_2_gross_income = 7529
 a.save
 
 a = AllKid.new
 a.kids_household_size = 6
-a.assist_gross_income = 3916
-a.share_gross_income = 4183
-a.premium_1_gross_income = 5568
-a.premium_2_gross_income = 8472
+a.assist_gross_income = 3990
+a.share_gross_income = 4261
+a.premium_1_gross_income = 5673
+a.premium_2_gross_income = 8631
 a.save
 
 a = AllKid.new
 a.kids_household_size = 7
-a.assist_gross_income = 4414
-a.share_gross_income = 4714
-a.premium_1_gross_income = 6275
-a.premium_2_gross_income = 9548
+a.assist_gross_income = 4499
+a.share_gross_income = 4806
+a.premium_1_gross_income = 6397
+a.premium_2_gross_income = 9733
 a.save
 
 a = AllKid.new
 a.kids_household_size = 8
-a.assist_gross_income = 4911
-a.share_gross_income = 5245
-a.premium_1_gross_income = 6982
-a.premium_2_gross_income = 10624
+a.assist_gross_income = 5009
+a.share_gross_income = 5350
+a.premium_1_gross_income = 7122
+a.premium_2_gross_income = 10836
 a.save
 
 a = AllKid.new
 a.kids_household_size = 9
-a.assist_gross_income = 5408
-a.share_gross_income = 5776
-a.premium_1_gross_income = 7689
-a.premium_2_gross_income = 11700
+a.assist_gross_income = 5519
+a.share_gross_income = 5894
+a.premium_1_gross_income = 7847
+a.premium_2_gross_income = 11938
 a.save
 
 a = AllKid.new
 a.kids_household_size = 10
-a.assist_gross_income = 5905
-a.share_gross_income = 6307
-a.premium_1_gross_income = 8396
-a.premium_2_gross_income = 12776
+a.assist_gross_income = 6029
+a.share_gross_income = 6438
+a.premium_1_gross_income = 8572
+a.premium_2_gross_income = 13040
 a.save
 
 a = AllKid.new
 a.kids_household_size = 11
-a.assist_gross_income = 6402
-a.share_gross_income = 6838
-a.premium_1_gross_income = 9103
-a.premium_2_gross_income = 13852
+a.assist_gross_income = 6539
+a.share_gross_income = 6982
+a.premium_1_gross_income = 9297
+a.premium_2_gross_income = 14142
 a.save
 
 a = AllKid.new
 a.kids_household_size = 12
-a.assist_gross_income = 6899
-a.share_gross_income = 7369
-a.premium_1_gross_income = 9810
-a.premium_2_gross_income = 14928
+a.assist_gross_income = 7049
+a.share_gross_income = 7526
+a.premium_1_gross_income = 10022
+a.premium_2_gross_income = 15244
 a.save
 
 a = AllKid.new
 a.kids_household_size = 13
-a.assist_gross_income = 7396
-a.share_gross_income = 7900
-a.premium_1_gross_income = 10517
-a.premium_2_gross_income = 16004
+a.assist_gross_income = 7559
+a.share_gross_income = 8070
+a.premium_1_gross_income = 10747
+a.premium_2_gross_income = 16346
 a.save
 
 a = AllKid.new
 a.kids_household_size = 14
-a.assist_gross_income = 7893
-a.share_gross_income = 8431
-a.premium_1_gross_income = 11224
-a.premium_2_gross_income = 17080
+a.assist_gross_income = 8069
+a.share_gross_income = 8614
+a.premium_1_gross_income = 11472
+a.premium_2_gross_income = 17448
 a.save
 
 a = AllKid.new
 a.kids_household_size = 15
-a.assist_gross_income = 8390
-a.share_gross_income = 8962
-a.premium_1_gross_income = 11931
-a.premium_2_gross_income = 18156
+a.assist_gross_income = 8579
+a.share_gross_income = 9158
+a.premium_1_gross_income = 12197
+a.premium_2_gross_income = 18550
 a.save
 
 a = AllKid.new
 a.kids_household_size = 16
-a.assist_gross_income = 8887
-a.share_gross_income = 9493
-a.premium_1_gross_income = 12638
-a.premium_2_gross_income = 19232
+a.assist_gross_income = 9089
+a.share_gross_income = 9702
+a.premium_1_gross_income = 12922
+a.premium_2_gross_income = 19652
 a.save
 
 a = AllKid.new
 a.kids_household_size = 17
-a.assist_gross_income = 9384
-a.share_gross_income = 10024
-a.premium_1_gross_income = 13345
-a.premium_2_gross_income = 20308
+a.assist_gross_income = 9599
+a.share_gross_income = 10246
+a.premium_1_gross_income = 13647
+a.premium_2_gross_income = 20754
 a.save
 
 a = AllKid.new
 a.kids_household_size = 18
-a.assist_gross_income = 9881
-a.share_gross_income = 10555
-a.premium_1_gross_income = 14052
-a.premium_2_gross_income = 21384
+a.assist_gross_income = 10109
+a.share_gross_income = 10790
+a.premium_1_gross_income = 14372
+a.premium_2_gross_income = 21856
 a.save
 
 a = AllKid.new
 a.kids_household_size = 19
-a.assist_gross_income = 10378
-a.share_gross_income = 11086
-a.premium_1_gross_income = 14759
-a.premium_2_gross_income = 22460
+a.assist_gross_income = 10619
+a.share_gross_income = 11334
+a.premium_1_gross_income = 15097
+a.premium_2_gross_income = 22958
 a.save
 
 a = AllKid.new
 a.kids_household_size = 20
-a.assist_gross_income = 10875
-a.share_gross_income = 11617
-a.premium_1_gross_income = 15466
-a.premium_2_gross_income = 23536
+a.assist_gross_income = 11129
+a.share_gross_income = 11878
+a.premium_1_gross_income = 15822
+a.premium_2_gross_income = 24060
 a.save
 
 
