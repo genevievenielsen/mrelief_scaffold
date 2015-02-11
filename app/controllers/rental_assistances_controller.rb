@@ -41,7 +41,7 @@ class RentalAssistancesController < ApplicationController
        p "rental_gross_income = #{rental_gross_income}"
        p "rental_eligibility.rental_gross_income = #{rental_eligibility.rental_gross_income}"
 
-       if params[:lease] == "no"
+       if params[:lease] == "no" || params[:next_rent] == "no"
          @eligible = "no"
          r.rental_eligibility_status = @eligible
        elsif params[:lease] == "yes"

@@ -262,7 +262,7 @@ class AllCityProgramsController < ApplicationController
       rental_cut_off =  rental_eligibility.rental_gross_income
       rental_cut_off_plus_200 = rental_eligibility.rental_gross_income + 200
 
-        if params[:lease] == "no"
+        if params[:lease] == "no" || params[:next_rent] == "no"
           @rental_eligible = "no"
 
         elsif params[:lease] == "yes"

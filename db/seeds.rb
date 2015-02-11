@@ -677,102 +677,102 @@ c.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 1
-r.rental_gross_income = 3646.88
+r.rental_gross_income = 3678.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 2
-r.rental_gross_income = 4915.63
+r.rental_gross_income = 4978.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 3
-r.rental_gross_income = 6184.38
+r.rental_gross_income = 6278.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 4
-r.rental_gross_income = 7453.13
+r.rental_gross_income = 7578.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 5
-r.rental_gross_income = 8721.88
+r.rental_gross_income = 8878.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 6
-r.rental_gross_income = 9990.63
+r.rental_gross_income = 10178.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 7
-r.rental_gross_income = 11259.38
+r.rental_gross_income = 11478.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 8
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 12778.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 9
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 14078.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 10
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 15378.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 11
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 16678.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 12
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 17978.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 13
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 19278.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 14
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 20578.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 15
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 21878.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 16
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 23178.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 17
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 24478.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 18
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 25778.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 19
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 27078.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 20
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 28378.13
 r.save
 
 p = Program.new

@@ -15,14 +15,6 @@
     </div>
   </div>
 
-<%# if @rental_assistance.errors.any? %>
-  <%# @rental_assistance.errors.full_messages.each do |message| %>
-    <!-- <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%#= message %>
-    </div> -->
-  <%# end %>
-<%# end %>
 
 <div class="row">
   <div class="panel panel-default col-md-8 col-md-offset-2">
@@ -66,6 +58,20 @@
         <div id="lease" >
           <%= radio_button_tag 'lease', 'yes' %> yes
           <%= radio_button_tag 'lease', 'no' %> no
+        </div>
+      </div>
+  </div>
+  </div>
+
+  <div class="row">
+  <div class="form-group col-sm-12">
+
+    <label for="next_rent" id="next_rent">Can you document that you can afford next month’s rent? </label>
+
+      <div class="col-sm-6">
+        <div id="next_rent" >
+          <%= radio_button_tag 'next_rent', 'yes' %> yes
+          <%= radio_button_tag 'next_rent', 'no' %> no
         </div>
       </div>
   </div>
