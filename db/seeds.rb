@@ -1991,122 +1991,122 @@ m.save
 
 m = MedicareCostSharing.new
 m.household_size = 1
-m.medicare_cost_sharing = 973
-m.premium_only = 1312
+m.medicare_cost_sharing = 981
+m.premium_only = 1323
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 2
-m.medicare_cost_sharing = 1311
-m.premium_only = 1769
+m.medicare_cost_sharing = 1328
+m.premium_only = 1791
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 3
-m.medicare_cost_sharing = 1649
-m.premium_only = 2225
+m.medicare_cost_sharing = 1674
+m.premium_only = 2259
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 4
-m.medicare_cost_sharing = 1988
-m.premium_only = 2682
+m.medicare_cost_sharing = 2021
+m.premium_only = 2727
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 5
-m.medicare_cost_sharing = 2326
-m.premium_only = 3139
+m.medicare_cost_sharing = 2368
+m.premium_only = 3195
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 6
-m.medicare_cost_sharing = 2664
-m.premium_only = 3596
+m.medicare_cost_sharing = 2714
+m.premium_only = 3663
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 7
-m.medicare_cost_sharing = 3003
-m.premium_only = 4052
+m.medicare_cost_sharing = 3061
+m.premium_only = 4131
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 8
-m.medicare_cost_sharing = 3341
-m.premium_only = 4509
+m.medicare_cost_sharing = 3408
+m.premium_only = 4599
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 9
-m.medicare_cost_sharing = 3679
-m.premium_only = 4966
+m.medicare_cost_sharing = 3755
+m.premium_only = 5067
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 10
-m.medicare_cost_sharing = 4017
-m.premium_only = 5423
+m.medicare_cost_sharing = 4102
+m.premium_only = 5535
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 11
-m.medicare_cost_sharing = 4017
-m.premium_only = 5880
+m.medicare_cost_sharing = 4449
+m.premium_only = 6003
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 12
-m.medicare_cost_sharing = 4355
-m.premium_only = 6337
+m.medicare_cost_sharing = 4796
+m.premium_only = 6471
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 13
-m.medicare_cost_sharing = 4693
-m.premium_only = 6794
+m.medicare_cost_sharing = 5143
+m.premium_only = 6939
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 14
-m.medicare_cost_sharing = 5031
-m.premium_only = 7251
+m.medicare_cost_sharing = 5490
+m.premium_only = 7407
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 15
-m.medicare_cost_sharing = 5369
-m.premium_only = 7708
+m.medicare_cost_sharing = 5837
+m.premium_only = 7875
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 16
-m.medicare_cost_sharing = 5707
-m.premium_only = 8165
+m.medicare_cost_sharing = 6184
+m.premium_only = 8343
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 17
-m.medicare_cost_sharing = 6045
-m.premium_only = 8622
+m.medicare_cost_sharing = 6531
+m.premium_only = 8811
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 18
-m.medicare_cost_sharing = 6383
-m.premium_only = 9079
+m.medicare_cost_sharing = 6878
+m.premium_only = 9279
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 19
-m.medicare_cost_sharing = 6721
-m.premium_only = 9536
+m.medicare_cost_sharing = 7225
+m.premium_only = 9747
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 20
-m.medicare_cost_sharing = 7059
-m.premium_only = 9993
+m.medicare_cost_sharing = 7572
+m.premium_only = 10215
 m.save
 
 t = Tanif.new

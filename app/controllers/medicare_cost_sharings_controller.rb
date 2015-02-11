@@ -56,10 +56,10 @@ class MedicareCostSharingsController < ApplicationController
     if medicare_household_size == 0
       @eligible = "no"
       m.medicare_cost_sharing_eligibility_status = @eligible
-    elsif household_size == 1 && assets > 7160
+    elsif household_size == 1 && assets > 7280
       @eligible = "no"
       m.medicare_cost_sharing_eligibility_status = @eligible
-    elsif household_size > 1 && assets > 10750
+    elsif household_size > 1 && assets > 10930
       @eligible = "no"
       m.medicare_cost_sharing_eligibility_status = @eligible
     else

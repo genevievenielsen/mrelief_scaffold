@@ -729,9 +729,9 @@ class TwilioController < ApplicationController
      monthly_income = session["income"]
      if medicare_household_size == 0
       @eligible = "no"
-     elsif household_size == 1 && assets > 7160
+     elsif household_size == 1 && assets > 7280
       @eligible = "no"
-     elsif household_size > 1 && assets > 10750
+     elsif household_size > 1 && assets > 10930
       @eligible = "no"
      else
       if medicare_household_size == 1

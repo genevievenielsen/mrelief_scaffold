@@ -464,10 +464,10 @@ class AllCityProgramsController < ApplicationController
     if medicare_household_size == 0
       @eligible_medicare_cost_sharing = "no"
 
-    elsif dependent_no == 1 && assets > 7160
+    elsif dependent_no == 1 && assets > 7280
       @eligible_medicare_cost_sharing = "no"
 
-    elsif dependent_no > 1 && assets > 10750
+    elsif dependent_no > 1 && assets > 10930
       @eligible_medicare_cost_sharing = "no"
 
     else
