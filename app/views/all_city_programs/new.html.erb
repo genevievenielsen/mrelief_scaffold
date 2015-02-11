@@ -109,8 +109,8 @@
         <button type="button" data-toggle="popover" data-content="This includes unemployment insurance, pensions, workers compensation and any other form of income." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
 
         <div id="anticipate_income">
-            <%= radio_button_tag 'anticipate_income', 'yes' %> yes
-            <%= radio_button_tag 'anticipate_income', 'no' %> no
+            <%= radio_button_tag 'anticipate_income', 'yes' %> Yes
+            <%= radio_button_tag 'anticipate_income', 'no' %> No
         </div>
       </div>
 
@@ -192,8 +192,8 @@
 
     <div class="col-sm-6">
       <div id="education">
-        <%= radio_button_tag 'education', 'yes' %> yes
-        <%= radio_button_tag 'education', 'no' %> no
+        <%= radio_button_tag 'education', 'yes' %> Yes
+        <%= radio_button_tag 'education', 'no' %> No
       </div>
     </div>
 </div>
@@ -206,8 +206,8 @@
 
     <div class="col-sm-6">
       <div id="citizen"  class="pull-left">
-        <%= radio_button_tag 'citizen', 'yes' %> yes
-        <%= radio_button_tag 'citizen', 'no' %> no
+        <%= radio_button_tag 'citizen', 'yes' %> Yes
+        <%= radio_button_tag 'citizen', 'no' %> No
       </div>
     </div>
 </div>
@@ -219,8 +219,8 @@
     <div class="clearfix"></div>
     <div class="col-sm-6">
       <div id="pregnant">
-        <%= radio_button_tag 'pregnant', 'yes' %> yes
-        <%= radio_button_tag 'pregnant', 'no' %> no
+        <%= radio_button_tag 'pregnant', 'yes' %> Yes
+        <%= radio_button_tag 'pregnant', 'no' %> No
       </div>
     </div>
 </div>
@@ -231,8 +231,8 @@
     <div class="clearfix"></div>
         <div class="col-sm-6">
           <div id="child"  class="pull-left">
-            <%= radio_button_tag 'child', 'yes' %> yes
-            <%= radio_button_tag 'child', 'no' %> no
+            <%= radio_button_tag 'child', 'yes' %> Yes
+            <%= radio_button_tag 'child', 'no' %> No
           </div>
            </div>
   </div>
@@ -259,8 +259,8 @@
     <div class="clearfix"></div>
         <div class="col-sm-6">
           <div id="first"  class="pull-left">
-            <%= radio_button_tag 'first', 'yes' %> yes
-            <%= radio_button_tag 'first', 'no' %> no
+            <%= radio_button_tag 'first', 'yes' %> Yes
+            <%= radio_button_tag 'first', 'no' %> No
           </div>
         </div>
   </div>
@@ -273,8 +273,8 @@
     <div class="clearfix"></div>
         <div class="col-sm-9">
           <div id="tanif_sixty_months"  class="pull-left">
-            <%= radio_button_tag 'tanif_sixty_months', 'yes' %> yes
-            <%= radio_button_tag 'tanif_sixty_months', 'no' %> no
+            <%= radio_button_tag 'tanif_sixty_months', 'yes' %> Yes
+            <%= radio_button_tag 'tanif_sixty_months', 'no' %> No
             <%= radio_button_tag 'tanif_sixty_months', 'caretaker' %>  I am a caretaker relative, this does not apply to me.
           </div>
         </div>
@@ -288,8 +288,8 @@
 
       <div class="col-sm-6">
         <div id="teen_parent"  class="pull-left">
-          <%= radio_button_tag 'teen_parent', 'yes' %> yes
-          <%= radio_button_tag 'teen_parent', 'no' %> no
+          <%= radio_button_tag 'teen_parent', 'yes' %> Yes
+          <%= radio_button_tag 'teen_parent', 'no' %> No
         </div>
       </div>
 
@@ -304,8 +304,8 @@
       <div class="clearfix"></div>
         <div class="col-md-6">
           <div id="highschool"  class="pull-left">
-            <%= radio_button_tag 'highschool', 'yes' %> yes
-            <%= radio_button_tag 'highschool', 'no' %> no
+            <%= radio_button_tag 'highschool', 'yes' %> Yes
+            <%= radio_button_tag 'highschool', 'no' %> No
           </div>
         </div>
      </div>
@@ -317,8 +317,8 @@
 
       <div class="col-sm-6">
         <div id="lease" >
-          <%= radio_button_tag 'lease', 'yes' %> yes
-          <%= radio_button_tag 'lease', 'no' %> no
+          <%= radio_button_tag 'lease', 'yes' %> Yes
+          <%= radio_button_tag 'lease', 'no' %> No
         </div>
       </div>
   </div>
@@ -329,8 +329,8 @@
 
       <div class="col-sm-6">
         <div id="next_rent" >
-          <%= radio_button_tag 'next_rent', 'yes' %> yes
-          <%= radio_button_tag 'next_rent', 'no' %> no
+          <%= radio_button_tag 'next_rent', 'yes' %> Yes
+          <%= radio_button_tag 'next_rent', 'no' %> No
         </div>
       </div>
   </div>
@@ -384,16 +384,15 @@
 <br>
 <div class="form-group col-sm-12">
 
-    <label for="disabled" id="disabled" class="pull-left">If you are disabled, describe your current status:</label>
+<label for="disabled" id="disabled" class="pull-left">Are you receiving disability benefits?</label>
     <div class="clearfix"></div>
 
     <div class="col-sm-12">
-      <div id="disabled"  class="pull-left">
-        <%= radio_button_tag 'disabled', 'social-security' %>  I am receiving disability payments from Social Security.  <br>
-        <%= radio_button_tag 'disabled', 'railroad' %>  I am receiving disability payments from the Railroad Retirement Board.     <br>
-        <%= radio_button_tag 'disabled', 'veterans' %>  I am receiving disability payments from Veterans
-        Affairs.   <br>
-        <%= radio_button_tag 'disabled', 'none' %> I am currently not receiving any disability payments  <br>
+      <div id="disabled">
+        <%= radio_button_tag 'disabled', 'social-security' %>  Yes, from Social Security <br>
+        <%= radio_button_tag 'disabled', 'railroad' %> Yes, from the Railroad Retirement Board <br>
+        <%= radio_button_tag 'disabled', 'veterans' %>  Yes, from Veterans Affairs <br>
+        <%= radio_button_tag 'disabled', 'none' %> No <br>
       </div>
     </div>
 </div>

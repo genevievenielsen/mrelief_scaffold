@@ -78,8 +78,8 @@
     <label for="education" id="education">Are you enrolled in college/institution of higher education? </label>
 
     <div id="education">
-        <%= radio_button_tag 'education', 'yes' %> yes
-        <%= radio_button_tag 'education', 'no' %> no
+        <%= radio_button_tag 'education', 'yes' %> Yes
+        <%= radio_button_tag 'education', 'no' %> No
     </div>
   </div>
 </div>
@@ -92,48 +92,47 @@
     <div class="row">
         <div class="col-md-6">
           <div id="citizen"  class="pull-left">
-            <%= radio_button_tag 'citizen', 'yes' %> yes
-            <%= radio_button_tag 'citizen', 'no' %> no
-          </div>
+            <%= radio_button_tag 'citizen', 'yes' %> Yes
+            <%= radio_button_tag 'citizen', 'no' %> No
         </div>
     </div>
 </div>
 </div>
-<div class="row">
+
+
+
+
   <div class="form-group col-md-12">
-    <label for="disabled" id="disabled">If you are disabled, describe your current status:</label>
+    <label for="disabled" id="disabled">Are you receiving disability benefits?</label>
 
-
-<div class="row">
-    <div class="col-sm-12">
-      <div id="disabled">
-        <%= radio_button_tag 'disabled', 'social-security' %>  I am receiving disability payments from Social Security.  <br>
-        <%= radio_button_tag 'disabled', 'railroad' %>  I am receiving disability payments from the Railroad Retirement Board.     <br>
-        <%= radio_button_tag 'disabled', 'veterans' %>  I am receiving disability payments from Veterans
-Affairs.   <br>
-        <%= radio_button_tag 'disabled', 'none' %> I am currently not receiving any disability payments  <br>
-      </div>
-    </div>
-</div>
-
-<br>
-<div class="row">
-  <%= render "layouts/location_dropdown" %>
-</div>
-
-<div class="row">
-  <%= render "layouts/phone_question" %>
-</div>
-
-  <div class="row">
-    <div class="col-md-6">
-      <%= render "programs/calculator" %>
+    <div class="row">
+        <div class="col-md-9">
+          <div id="disabled" class="pull-left">
+            <%= radio_button_tag 'disabled', 'social-security' %>  Yes, from Social Security <br>
+            <%= radio_button_tag 'disabled', 'railroad' %> Yes, from the Railroad Retirement Board <br>
+            <%= radio_button_tag 'disabled', 'veterans' %>  Yes, from Veterans Affairs <br>
+            <%= radio_button_tag 'disabled', 'none' %> No <br>
+          </div>
+        </div>
     </div>
   </div>
 
-    <div>
-      <button type="submit" class="btn btn-primary program-btn ">See if I qualify</button>
+
+<br>
+
+  <%= render "layouts/location_dropdown" %>
+
+  <%= render "layouts/phone_question" %>
+
+    <div class="col-md-6">
+      <%= render "programs/calculator" %>
     </div>
+
+  <div class="row">
+  <div class="col-md-12">
+      <button type="submit" class="btn btn-primary program-btn ">See if I qualify</button>
+  </div>
+  </div>
   </div>
 </form>
 </div>
