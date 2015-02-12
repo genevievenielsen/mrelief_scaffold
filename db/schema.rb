@@ -11,11 +11,70 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141216184242) do
+ActiveRecord::Schema.define(version: 20150211000235) do
+
+  create_table "aabd_cash_data", force: true do |t|
+    t.string   "household_size"
+    t.string   "age"
+    t.string   "thirty_day_net_income"
+    t.string   "government_benefits"
+    t.string   "assets"
+    t.string   "citizen"
+    t.string   "disabled_status"
+    t.string   "zipcode"
+    t.string   "aabd_eligibility_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "user_location"
+    t.string   "phone_number"
+  end
 
   create_table "aabd_cashes", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "all_city_program_data", force: true do |t|
+    t.integer  "dependent_no"
+    t.integer  "medicare_household_size"
+    t.integer  "age"
+    t.integer  "monthly_gross_income"
+    t.integer  "thirty_day_net_income"
+    t.integer  "child_support"
+    t.integer  "ssi"
+    t.integer  "monthly_benefits"
+    t.integer  "ninety_day_gross_income"
+    t.integer  "annual_gross_income"
+    t.integer  "assets"
+    t.integer  "number_of_children"
+    t.string   "enrolled_in_education"
+    t.string   "citizen"
+    t.string   "zipcode"
+    t.string   "disabled_status"
+    t.string   "name_on_lease"
+    t.string   "rental_status"
+    t.string   "pregnant"
+    t.string   "child_health_insurance_state"
+    t.string   "pregnant_or_caring_for_child"
+    t.string   "relationship_to_child"
+    t.string   "pregnant_with_first_child"
+    t.string   "tanif_sixty_months"
+    t.string   "anticipate_other_income"
+    t.string   "teen_parent"
+    t.string   "child_in_school"
+    t.string   "snap_eligibility_status"
+    t.string   "all_kids_eligibility_status"
+    t.string   "rta_eligibility_status"
+    t.string   "medicaid_eligibility_status"
+    t.string   "medicare_cost_sharing_eligibility_status"
+    t.string   "rental_eligibility_status"
+    t.string   "aabd_eligibility_status"
+    t.string   "tanf_eligibility_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "phone_number"
+    t.string   "user_location"
+    t.string   "next_month_rent"
   end
 
   create_table "all_city_programs", force: true do |t|
@@ -33,9 +92,37 @@ ActiveRecord::Schema.define(version: 20141216184242) do
     t.datetime "updated_at"
   end
 
+  create_table "all_kids_data", force: true do |t|
+    t.string   "household_size"
+    t.string   "monthly_gross_income"
+    t.string   "pregnant"
+    t.string   "healthcare_status"
+    t.string   "zipcode"
+    t.string   "allkids_eligibility_status"
+    t.string   "assist_eligibility"
+    t.string   "share_eligibility"
+    t.string   "premium1_eligibility"
+    t.string   "premium2_eligibility"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "user_location"
+    t.string   "phone_number"
+  end
+
   create_table "auto_repair_assistances", force: true do |t|
     t.integer  "auto_household_size"
     t.decimal  "auto_gross_income"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "child_care_voucher_data", force: true do |t|
+    t.string   "dependent_no"
+    t.string   "gross_monthly_income"
+    t.string   "user_location"
+    t.string   "zipcode"
+    t.string   "phone_number"
+    t.string   "eligibility_status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -55,6 +142,17 @@ ActiveRecord::Schema.define(version: 20141216184242) do
     t.datetime "updated_at"
   end
 
+  create_table "early_head_start_data", force: true do |t|
+    t.string   "dependent_no"
+    t.string   "gross_monthly_income"
+    t.string   "zipcode"
+    t.string   "user_location"
+    t.string   "phone_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "eligibility_status"
+  end
+
   create_table "early_head_starts", force: true do |t|
     t.integer  "ehs_dependent_no"
     t.decimal  "ehs_gross_income"
@@ -65,6 +163,18 @@ ActiveRecord::Schema.define(version: 20141216184242) do
   create_table "family_nutritions", force: true do |t|
     t.decimal  "nutrition_gross_income"
     t.integer  "nutrition_household_size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "head_start_data", force: true do |t|
+    t.string   "dependent_no"
+    t.string   "gross_annual_income"
+    t.string   "child_birthdate"
+    t.string   "zipcode"
+    t.string   "user_location"
+    t.string   "phone_number"
+    t.string   "eligibility_status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -95,9 +205,59 @@ ActiveRecord::Schema.define(version: 20141216184242) do
     t.datetime "updated_at"
   end
 
+  create_table "medicaid_data", force: true do |t|
+    t.string   "household_size"
+    t.string   "monthly_gross_income"
+    t.string   "citizen"
+    t.string   "zipcode"
+    t.string   "medicaid_eligibility_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "user_location"
+    t.string   "phone_number"
+  end
+
+  create_table "medicaid_data_twilios", force: true do |t|
+    t.string   "citizen"
+    t.string   "household_size"
+    t.string   "monthly_gross_income"
+    t.string   "zipcode"
+    t.string   "medicaid_eligibility_status"
+    t.string   "phone_number"
+    t.string   "completed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "medicaids", force: true do |t|
     t.integer  "medicaid_household_size"
     t.decimal  "medicaid_gross_income"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "medicare_cost_sharing_data", force: true do |t|
+    t.string   "household_size"
+    t.string   "medicare_household_size"
+    t.string   "monthly_gross_income"
+    t.string   "assets"
+    t.string   "zipcode"
+    t.string   "medicare_cost_sharing_eligibility_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "user_location"
+    t.string   "phone_number"
+  end
+
+  create_table "medicare_cost_sharing_data_twilios", force: true do |t|
+    t.string   "household_size"
+    t.string   "medicare_household_size"
+    t.string   "monthly_gross_income"
+    t.string   "assets"
+    t.string   "zipcode"
+    t.string   "medicare_cost_sharing_eligibility_status"
+    t.string   "completed"
+    t.string   "phone_number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -130,10 +290,51 @@ ActiveRecord::Schema.define(version: 20141216184242) do
     t.string   "name_en"
   end
 
+  create_table "rental_assistance_data", force: true do |t|
+    t.string   "dependent_no"
+    t.string   "ninety_day_gross_income"
+    t.string   "name_on_lease"
+    t.string   "rental_status"
+    t.string   "zipcode"
+    t.string   "rental_eligibility_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "user_location"
+    t.string   "phone_number"
+    t.string   "next_month_rent"
+  end
+
   create_table "rental_assistances", force: true do |t|
     t.integer  "rental_dependent_no"
     t.decimal  "rental_gross_income"
     t.integer  "rental_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rta_free_ride_data", force: true do |t|
+    t.string   "dependent_no"
+    t.string   "gross_annual_income"
+    t.string   "age"
+    t.string   "disabled_status"
+    t.string   "zipcode"
+    t.string   "rta_eligibility_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "user_location"
+    t.string   "phone_number"
+  end
+
+  create_table "rta_free_ride_data_twilios", force: true do |t|
+    t.string   "over_sixty_five"
+    t.string   "disabled"
+    t.string   "disabled_receiving_payments"
+    t.string   "dependent_no"
+    t.string   "zipcode"
+    t.string   "gross_annual_income"
+    t.string   "rta_eligibility_status"
+    t.boolean  "completed"
+    t.string   "phone_number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -167,11 +368,64 @@ ActiveRecord::Schema.define(version: 20141216184242) do
     t.datetime "updated_at"
   end
 
+  create_table "snap_eligibility_data", force: true do |t|
+    t.string   "dependent_no"
+    t.string   "age"
+    t.string   "monthly_gross_income"
+    t.string   "citizen"
+    t.string   "enrolled_in_education"
+    t.string   "disabled_status"
+    t.string   "snap_eligibility_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "zipcode"
+    t.string   "user_location"
+    t.string   "phone_number"
+  end
+
+  create_table "snap_eligibility_data_twilios", force: true do |t|
+    t.string   "citizen"
+    t.string   "enrolled_in_education"
+    t.string   "zipcode"
+    t.string   "age"
+    t.string   "dependent_no"
+    t.string   "disabled"
+    t.string   "disabled_receiving_payment"
+    t.string   "monthly_gross_income"
+    t.string   "snap_eligibility_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "phone_number"
+    t.boolean  "completed"
+  end
+
   create_table "snap_eligibility_seniors", force: true do |t|
     t.integer  "snap_dependent_no"
     t.decimal  "snap_gross_income"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "tanf_data", force: true do |t|
+    t.string   "household_size"
+    t.string   "children"
+    t.string   "thirty_day_gross_income"
+    t.string   "expect_child_support"
+    t.string   "expect_ssi"
+    t.string   "pregnant_or_caring_for_child"
+    t.string   "relationship_to_child"
+    t.string   "enrolled_in_high_school"
+    t.string   "teen_parent"
+    t.string   "pregnant_with_first_child"
+    t.string   "anticipate_other_income"
+    t.string   "tanif_sixty_months"
+    t.string   "citizen"
+    t.string   "zipcode"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "tanf_eligibility_status"
+    t.string   "user_location"
+    t.string   "phone_number"
   end
 
   create_table "tanifs", force: true do |t|
@@ -188,6 +442,18 @@ ActiveRecord::Schema.define(version: 20141216184242) do
     t.integer  "vision_household_size"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "wic_data", force: true do |t|
+    t.string   "household_size"
+    t.string   "gross_monthly_income"
+    t.string   "user_location"
+    t.string   "zipcode"
+    t.string   "phone_number"
+    t.string   "eligibility_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "health_status"
   end
 
   create_table "wics", force: true do |t|

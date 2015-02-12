@@ -3,34 +3,38 @@ class AllCityProgramsController < ApplicationController
    skip_before_action :authenticate_user!, :only => :index
   skip_before_filter :verify_authenticity_token
 
-
-
   # GET /all_city_programs/new
   def new
     @all_city_program = AllCityProgram.new
   end
 
-
   # POST /all_city_programs
   # POST /all_city_programs.json
    def create
+    a = AllCityProgramDatum.new
   # this is the words into numbers logic
     if params[:dependent_no] !~ /\D/  # returns true if all numbers
       dependent_no = params[:dependent_no].to_i
+      a.dependent_no = dependent_no
     else
       dependent_no = params[:dependent_no].in_numbers
+      a.dependent_no = dependent_no
     end
 
     if params[:medicare_household_size] !~ /\D/
       medicare_household_size = params[:medicare_household_size].to_i
+      a.medicare_household_size = medicare_household_size
     else
       medicare_household_size = params[:medicare_household_size].in_numbers
+      a.medicare_household_size = medicare_household_size
     end
 
     if params[:age] !~ /\D/
-      age = params[:age].to_i
+      @age = params[:age].to_i
+      a.age = @age
     else
-      age = params[:age].in_numbers
+      @age = params[:age].in_numbers
+      a.age = @age
     end
 
     monthly_gross_income = params[:monthly_gross_income]
@@ -38,11 +42,13 @@ class AllCityProgramsController < ApplicationController
 
     if monthly_gross_income !~ /\D/
       monthly_gross_income = monthly_gross_income.to_i
+      a.monthly_gross_income = monthly_gross_income
     else
       if monthly_gross_income.include?("dollars")
         monthly_gross_income.slice!"dollars"
       end
       monthly_gross_income = monthly_gross_income.in_numbers
+      a.monthly_gross_income = monthly_gross_income
     end
 
     net_income = params[:net_income]
@@ -50,11 +56,13 @@ class AllCityProgramsController < ApplicationController
 
     if net_income !~ /\D/
       net_income = net_income.to_i
+      a.thirty_day_net_income = net_income
     else
       if net_income.include?("dollars")
         net_income.slice!"dollars"
       end
       net_income = net_income.in_numbers
+      a.thirty_day_net_income = net_income
     end
 
     expect_child_support = params[:expect_child_support]
@@ -62,11 +70,13 @@ class AllCityProgramsController < ApplicationController
 
     if expect_child_support !~ /\D/
       expect_child_support = expect_child_support.to_i
+      a.child_support = expect_child_support
     else
       if expect_child_support.include?("dollars")
         expect_child_support.slice!"dollars"
       end
       expect_child_support = expect_child_support.in_numbers
+      a.child_support = expect_child_support
     end
 
     expect_ssi = params[:expect_ssi]
@@ -74,11 +84,13 @@ class AllCityProgramsController < ApplicationController
 
     if expect_ssi !~ /\D/
       expect_ssi = expect_ssi.to_i
+      a.ssi = expect_ssi
     else
       if expect_ssi.include?("dollars")
         expect_ssi.slice!"dollars"
       end
       expect_ssi = expect_ssi.in_numbers
+      a.ssi = expect_ssi
     end
 
 
@@ -87,11 +99,13 @@ class AllCityProgramsController < ApplicationController
 
     if monthly_benefits !~ /\D/
       monthly_benefits = monthly_benefits.to_i
+      a.monthly_benefits = monthly_benefits
     else
       if monthly_benefits.include?("dollars")
         monthly_benefits.slice!"dollars"
       end
       monthly_benefits = monthly_benefits.in_numbers
+      a.montly_benefits = montly_benefits
     end
 
     ninety_day_gross_income = params[:ninety_day_gross_income]
@@ -99,11 +113,13 @@ class AllCityProgramsController < ApplicationController
 
     if ninety_day_gross_income !~ /\D/
       ninety_day_gross_income = ninety_day_gross_income.to_i
+      a.ninety_day_gross_income = ninety_day_gross_income
     else
       if ninety_day_gross_income.include?("dollars")
         ninety_day_gross_income.slice!"dollars"
       end
       ninety_day_gross_income = ninety_day_gross_income.in_numbers
+      a.ninety_day_gross_income = ninety_day_gross_income
     end
 
     annual_gross_income = params[:annual_gross_income]
@@ -111,11 +127,13 @@ class AllCityProgramsController < ApplicationController
 
     if annual_gross_income !~ /\D/
       annual_gross_income = annual_gross_income.to_i
+      a.annual_gross_income = annual_gross_income
     else
       if annual_gross_income.include?("dollars")
         annual_gross_income.slice!"dollars"
       end
       annual_gross_income = annual_gross_income.in_numbers
+      a.annual_gross_income = annual_gross_income
     end
 
     assets = params[:assets]
@@ -123,31 +141,38 @@ class AllCityProgramsController < ApplicationController
 
     if assets !~ /\D/
       assets = assets.to_i
+      a.assets = assets
     else
       if assets.include?("dollars")
         assets.slice!"dollars"
       end
       assets = assets.in_numbers
+      a.assets = assets
     end
-
 
     if params[:children] !~ /\D/  # returns true if all numbers
       children = params[:children].to_i
+      a.number_of_children = children
     else
       children = params[:children].in_numbers
+      a.number_of_children = children
     end
 
+    # Data storage
+      a.user_location = params[:user_location]
+      a.enrolled_in_education = params[:education]
+      a.citizen = params[:citizen]
+      a.zipcode = params[:zipcode]
+      a.disabled_status = params[:disabled]
 
 
-
-     if age.present? && monthly_gross_income.present? && ninety_day_gross_income.present? &&
+    #LOGIC FOR FOOD STAMPS
+     if @age.present? && monthly_gross_income.present? && ninety_day_gross_income.present? &&
       annual_gross_income.present?
-
-     # this is the logic for snap
 
         if params[:education]  == 'no' && params[:citizen] == 'yes'
 
-            if age <= 59
+            if @age <= 59
               snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => dependent_no })
             else
               snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => dependent_no})
@@ -167,7 +192,6 @@ class AllCityProgramsController < ApplicationController
         elsif params[:citizen] == 'no'
           @eligible_snap = 'maybe'
         end
-
 
       @user_zipcode = params[:zipcode]
       zipcode = @user_zipcode << ".0"
@@ -201,82 +225,6 @@ class AllCityProgramsController < ApplicationController
             @food_resources_second = @food_resources.second
         end
 
-      transportation = []
-      ServiceCenter.all.each do |center|
-        if center.description.match("transportation")
-          transportation.push(center)
-        end
-      end
-
-      @pb_zipcode = @user_zipcode.chomp(".0")
-        @transportation_resources = transportation
-        @transportation_resources_zip = []
-
-        transportation.each do |center|
-          if center.zip.match(@pb_zipcode)
-            @transportation_resources_zip.push(center)
-          end
-        end
-
-
-        #@transportation_resources.where(:zip => @user_zipcode)
-
-          #in this case there are 2 medical centers in the user's zip
-          if @transportation_resources_zip.count >= 2
-             @transportation_resources = @transportation_resources_zip
-          end
-
-          #in this case there is 1 medical center in the user's zip
-          if @transportation_resources_zip.count == 1
-             @transportation_resources_first = @transportation_resources_zip.first
-             @transportation_resources_second = @transportation_resources.first
-          end
-
-          #in this caser there are no medical centers in the user's zip
-          if  @transportation_resources_zip.count == 0
-              @transportation_resources_first = @transportation_resources.first
-              @transportation_resources_second = @transportation_resources.second
-          end
-      primarycare = []
-      ServiceCenter.all.each do |center|
-        if center.description.match("primary care")
-          primarycare.push(center)
-        end
-      end
-
-
-      @pb_zipcode = @user_zipcode.chomp(".0")
-        @medical_resources = primarycare
-        @medical_resources_zip = []
-
-        primarycare.each do |center|
-          if center.zip.match(@pb_zipcode)
-            @medical_resources_zip.push(center)
-          end
-        end
-
-
-        #@medical_resources.where(:zip => @user_zipcode)
-
-          #in this case there are 2 medical centers in the user's zip
-          if @medical_resources_zip.count >= 2
-             @medical_resources = @medical_resources_zip
-          end
-
-          #in this case there is 1 medical center in the user's zip
-          if @medical_resources_zip.count == 1
-             @medical_resources_first = @medical_resources_zip.first
-             @medical_resources_second = @medical_resources.first
-          end
-
-          #in this caser there are no medical centers in the user's zip
-          if  @medical_resources_zip.count == 0
-              @medical_resources_first = @medical_resources.first
-              @medical_resources_second = @medical_resources.second
-          end
-
-
-
       # this is the logic for disability
       if params[:disabled].present?
 
@@ -300,32 +248,31 @@ class AllCityProgramsController < ApplicationController
             elsif params[:citizen] == 'no'
               @eligible_snap = 'maybe'
             end
-            if age < 22
+            if @age < 18
               @eligible_snap = "no"
             end
         end
 
 
-
       #HERE IS THE LOGIC FOR RENTAL ASSISTANCE
+      a.name_on_lease = params[:lease]
+      a.next_month_rent = params[:next_rent]
+      a.rental_status = params[:rental_status]
 
       rental_eligibility = RentalAssistance.find_by({ :rental_dependent_no => dependent_no })
       rental_cut_off =  rental_eligibility.rental_gross_income
       rental_cut_off_plus_200 = rental_eligibility.rental_gross_income + 200
 
-        if params[:lease] == "no"
+        if params[:lease] == "no" || params[:next_rent] == "no"
           @rental_eligible = "no"
 
         elsif params[:lease] == "yes"
             if ninety_day_gross_income < rental_eligibility.rental_gross_income && params[:rental_status] != "none of the above"
-                @rental_eligible = "yes"
-            elsif ninety_day_gross_income < rental_cut_off_plus_200 && ninety_day_gross_income >= rental_cut_off
-              if params[:rental_status] != "none of the above"
-                @rental_eligible = "maybe"
-              end
+              @rental_eligible = "yes"
+            elsif ninety_day_gross_income < rental_cut_off_plus_200 && ninety_day_gross_income >= rental_cut_off && params[:rental_status] != "none of the above"
+              @rental_eligible = "maybe"
             else
-                @rental_eligible = "no"
-
+              @rental_eligible = "no"
             end
         end # closes the if statement about the lease agreement
 
@@ -373,26 +320,51 @@ class AllCityProgramsController < ApplicationController
             @housing_resources_second = @housing_resources.second
         end
 
-        #here is the logic for rta ride free
+        #HERE IS THE LOGIC FOR RTA RIDE FREE
        rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => dependent_no })
 
-       if age < 65
-        @eligible_rta = "no"
-
-       else
-
-        p "annual_gross_income = #{annual_gross_income}"
-        p "rta_eligibility.annual_gross_income = #{rta_eligibility.rta_gross_income}"
-
+       if params[:disabled] != 'none' || @age > 65
         if annual_gross_income < rta_eligibility.rta_gross_income
-          @eligible_rta = "yes"
+         @eligible_rta = "yes"
         else
           @eligible_rta = "no"
         end
+      else
+        @eligible_rta = "no"
       end
 
-      #here is the logic for medicaid
+      transportation = []
+      ServiceCenter.all.each do |center|
+        if center.description.match("transportation")
+          transportation.push(center)
+        end
+      end
+      @pb_zipcode = @user_zipcode.chomp(".0")
+        @transportation_resources = transportation
+        @transportation_resources_zip = []
 
+      transportation.each do |center|
+        if center.zip.match(@pb_zipcode)
+          @transportation_resources_zip.push(center)
+        end
+      end
+
+      #in this case there are 2 medical centers in the user's zip
+      if @transportation_resources_zip.count >= 2
+         @transportation_resources = @transportation_resources_zip
+      end
+      #in this case there is 1 medical center in the user's zip
+      if @transportation_resources_zip.count == 1
+         @transportation_resources_first = @transportation_resources_zip.first
+         @transportation_resources_second = @transportation_resources.first
+      end
+      #in this caser there are no medical centers in the user's zip
+      if  @transportation_resources_zip.count == 0
+          @transportation_resources_first = @transportation_resources.first
+          @transportation_resources_second = @transportation_resources.second
+      end
+
+      #HERE IS THE LOGIC FOR MEDICAID
       medicaid_eligibility = Medicaid.find_by({ :medicaid_household_size => dependent_no})
 
       if params[:citizen] == 'no'
@@ -403,10 +375,45 @@ class AllCityProgramsController < ApplicationController
         else
           @eligible_medicaid = 'no'
         end
-    end
+      end
+
+      primarycare = []
+      ServiceCenter.all.each do |center|
+        if center.description.match("primary care")
+          primarycare.push(center)
+        end
+      end
+
+      @pb_zipcode = @user_zipcode.chomp(".0")
+        @medical_resources = primarycare
+        @medical_resources_zip = []
+
+        primarycare.each do |center|
+          if center.zip.match(@pb_zipcode)
+            @medical_resources_zip.push(center)
+          end
+        end
+
+       #in this case there are 2 medical centers in the user's zip
+       if @medical_resources_zip.count >= 2
+          @medical_resources = @medical_resources_zip
+       end
+       #in this case there is 1 medical center in the user's zip
+       if @medical_resources_zip.count == 1
+          @medical_resources_first = @medical_resources_zip.first
+          @medical_resources_second = @medical_resources.first
+       end
+       #in this caser there are no medical centers in the user's zip
+       if  @medical_resources_zip.count == 0
+           @medical_resources_first = @medical_resources.first
+           @medical_resources_second = @medical_resources.second
+       end
 
 
       # HERE IS THE LOGIC FOR ALL KIDS
+      a.pregnant = params[:pregnant]
+      a.child_health_insurance_state = params[:status]
+
       if params[:pregnant].present?
         if params[:pregnant] == 'yes'
           dependent_no = dependent_no + 1
@@ -453,15 +460,14 @@ class AllCityProgramsController < ApplicationController
           @eligible_all_kids = "no"
         end
 
-
     #HERE IS THE LOGIC FOR MEDICARE COST SHARING
     if medicare_household_size == 0
       @eligible_medicare_cost_sharing = "no"
 
-    elsif dependent_no == 1 && assets > 7160
+    elsif dependent_no == 1 && assets > 7280
       @eligible_medicare_cost_sharing = "no"
 
-    elsif dependent_no > 1 && assets > 10750
+    elsif dependent_no > 1 && assets > 10930
       @eligible_medicare_cost_sharing = "no"
 
     else
@@ -487,7 +493,7 @@ class AllCityProgramsController < ApplicationController
     end #this ends the present if statement
 
     # HERE IS THE LOGIC FOR AABD
-    if params[:disabled] != 'none' || age > 65
+    if params[:disabled] != 'none' || @age > 65
       if dependent_no  == 1
         if net_income + monthly_benefits < 821.38
           if assets < 2000
@@ -501,12 +507,12 @@ class AllCityProgramsController < ApplicationController
       elsif dependent_no  == 2
         if net_income + monthly_benefits < 724.38
           if assets < 3000
-            @aabd_eligible= 'yes'
+            @aabd_eligible = 'yes'
           else # exceed asset limit
-            @aabd_eligible= 'no'
+            @aabd_eligible = 'no'
           end
         else # exceed income limit
-          @aabd_eligible= "no"
+          @aabd_eligible = "no"
         end
       else #household size is greater than 2
         if net_income + monthly_benefits < 724.38
@@ -565,10 +571,18 @@ class AllCityProgramsController < ApplicationController
       end
 
       # HERE IS THE LOGIC FOR TANF
+      a.pregnant_or_caring_for_child = params[:child]
+      a.relationship_to_child = params[:relationship]
+      a.pregnant_with_first_child = params[:first]
+      a.tanif_sixty_months = params[:tanif_sixty_months]
+      a.anticipate_other_income = params[:anticipate_income]
+      a.teen_parent = params[:teen_parent]
+      a.child_in_school = params[:highschool]
+
       if params[:child] == "no"
           @eligible_tanif = "no"
       else
-        if params[:relationship] == "adult_relative"
+        if params[:relationship] == "adult_relative" || params[:relationship] == "not_applicable"
           @eligible_tanif = "maybe"
         else
           if params[:first] == "yes"
@@ -663,75 +677,97 @@ class AllCityProgramsController < ApplicationController
     @eligible_count = 0
     if  @eligible_snap == "yes"
       @eligible_count = @eligible_count + 1
+      a.snap_eligibility_status = "yes"
     end
     if @eligible_all_kids == "yes"
       @eligible_count = @eligible_count + 1
+      a.all_kids_eligibility_status = "yes"
     end
     if @eligible_rta == "yes"
       @eligible_count = @eligible_count + 1
+      a.rta_eligibility_status = "yes"
     end
     if @eligible_medicaid == "yes"
       @eligible_count = @eligible_count + 1
+      a.medicaid_eligibility_status = "yes"
     end
     if @eligible_medicare_cost_sharing == "yes"
       @eligible_count = @eligible_count + 1
+      a.medicare_cost_sharing_eligibility_status = "yes"
     end
     if @rental_eligible == "yes"
       @eligible_count = @eligible_count + 1
+      a.rental_eligibility_status = "yes"
     end
     if @aabd_eligible == "yes"
       @eligible_count = @eligible_count + 1
+      a.aabd_eligibility_status = "yes"
     end
     if @eligible_tanif == "yes"
       @eligible_count = @eligible_count + 1
+      a.tanf_eligibility_status = "yes"
     end
 
 
     @ineligible_count = 0
-    if  @eligible_snap == "no"
+    if @eligible_snap == "no"
       @ineligible_count = @ineligible_count + 1
+      a.snap_eligibility_status = "no"
     end
     if @eligible_all_kids == "no"
       @ineligible_count = @ineligible_count + 1
+      a.all_kids_eligibility_status = "no"
     end
     if @eligible_rta == "no"
       @ineligible_count = @ineligible_count + 1
+      a.rta_eligibility_status = "no"
     end
     if @eligible_medicaid == "no"
       @ineligible_count = @ineligible_count + 1
+      a.medicaid_eligibility_status = "no"
     end
     if @eligible_medicare_cost_sharing == "no"
       @ineligible_count = @ineligible_count + 1
+      a.medicare_cost_sharing_eligibility_status = "no"
     end
-    if @rental_eligible== "no"
+    if @rental_eligible == "no"
       @ineligible_count = @ineligible_count + 1
+      a.rental_eligibility_status = "no"
     end
-    if @aabd_eligible== "no"
+    if @aabd_eligible == "no"
       @ineligible_count = @ineligible_count + 1
+      a.aabd_eligibility_status = "no"
     end
     if @eligible_tanif == "no"
       @ineligible_count = @ineligible_count + 1
+      a.tanf_eligibility_status = "no"
     end
 
 
     @indeterminate_count = 0
     if  @eligible_snap == "maybe"
       @indeterminate_count = @indeterminate_count + 1
+      a.snap_eligibility_status = "maybe"
     end
     if @eligible_medicaid == 'maybe'
       @indeterminate_count = @indeterminate_count + 1
+      a.medicaid_eligibility_status = "maybe"
     end
     if @rental_eligible == "maybe"
       @indeterminate_count = @indeterminate_count + 1
+      a.rental_eligibility_status = "maybe"
     end
     if @aabd_eligible == 'maybe'
       @indeterminate_count = @indeterminate_count + 1
+      a.aabd_eligibility_status = "maybe"
     end
     if @eligible_tanif == 'maybe'
       @indeterminate_count = @indeterminate_count + 1
+      a.tanf_eligibility_status = "maybe"
     end
 
-
+    a.phone_number = params[:phone_number] if params[:phone_number].present?
+    a.save
   end
 
 

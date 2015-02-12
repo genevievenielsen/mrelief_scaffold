@@ -677,102 +677,102 @@ c.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 1
-r.rental_gross_income = 3646.88
+r.rental_gross_income = 3678.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 2
-r.rental_gross_income = 4915.63
+r.rental_gross_income = 4978.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 3
-r.rental_gross_income = 6184.38
+r.rental_gross_income = 6278.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 4
-r.rental_gross_income = 7453.13
+r.rental_gross_income = 7578.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 5
-r.rental_gross_income = 8721.88
+r.rental_gross_income = 8878.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 6
-r.rental_gross_income = 9990.63
+r.rental_gross_income = 10178.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 7
-r.rental_gross_income = 11259.38
+r.rental_gross_income = 11478.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 8
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 12778.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 9
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 14078.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 10
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 15378.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 11
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 16678.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 12
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 17978.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 13
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 19278.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 14
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 20578.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 15
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 21878.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 16
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 23178.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 17
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 24478.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 18
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 25778.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 19
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 27078.13
 r.save
 
 r = RentalAssistance.new
 r.rental_dependent_no = 20
-r.rental_gross_income = 12528.13
+r.rental_gross_income = 28378.13
 r.save
 
 p = Program.new
@@ -1528,585 +1528,585 @@ h.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 1
-e.ehs_gross_income = 11670
+e.ehs_gross_income = 11770
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 2
-e.ehs_gross_income = 15730
+e.ehs_gross_income = 15930
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 3
-e.ehs_gross_income = 19790
+e.ehs_gross_income = 20090
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 4
-e.ehs_gross_income = 23850
+e.ehs_gross_income = 24250
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 5
-e.ehs_gross_income = 27910
+e.ehs_gross_income = 28410
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 6
-e.ehs_gross_income = 31970
+e.ehs_gross_income = 32570
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 7
-e.ehs_gross_income = 36030
+e.ehs_gross_income = 36730
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 8
-e.ehs_gross_income = 40090
+e.ehs_gross_income = 40890
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 9
-e.ehs_gross_income = 44150
+e.ehs_gross_income = 45050
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 10
-e.ehs_gross_income = 48210
+e.ehs_gross_income = 49210
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 11
-e.ehs_gross_income = 52270
+e.ehs_gross_income = 53370
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 12
-e.ehs_gross_income = 56330
+e.ehs_gross_income = 57530
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 13
-e.ehs_gross_income = 60390
+e.ehs_gross_income = 61690
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 14
-e.ehs_gross_income = 64450
+e.ehs_gross_income = 65850
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 15
-e.ehs_gross_income = 68510
+e.ehs_gross_income = 70010
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 16
-e.ehs_gross_income = 72570
+e.ehs_gross_income = 74170
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 17
-e.ehs_gross_income = 76630
+e.ehs_gross_income = 78330
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 18
-e.ehs_gross_income = 80690
+e.ehs_gross_income = 82490
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 19
-e.ehs_gross_income = 84750
+e.ehs_gross_income = 86650
 e.save
 
 e = EarlyHeadStart.new
 e.ehs_dependent_no = 20
-e.ehs_gross_income = 88810
+e.ehs_gross_income = 90810
 e.save
 
 # Head Start
 
 h = HeadStart.new
 h.hs_dependent_no = 1
-h.hs_gross_income = 11670
+h.hs_gross_income = 11770
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 2
-h.hs_gross_income = 15730
+h.hs_gross_income = 15930
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 3
-h.hs_gross_income = 19790
+h.hs_gross_income = 20090
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 4
-h.hs_gross_income = 23850
+h.hs_gross_income = 24250
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 5
-h.hs_gross_income = 27910
+h.hs_gross_income = 28410
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 6
-h.hs_gross_income = 31970
+h.hs_gross_income = 32570
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 7
-h.hs_gross_income = 36030
+h.hs_gross_income = 36730
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 8
-h.hs_gross_income = 40090
+h.hs_gross_income = 40890
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 9
-h.hs_gross_income = 44150
+h.hs_gross_income = 45050
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 10
-h.hs_gross_income = 48210
+h.hs_gross_income = 49210
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 11
-h.hs_gross_income = 52270
+h.hs_gross_income = 53370
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 12
-h.hs_gross_income = 56330
+h.hs_gross_income = 57530
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 13
-h.hs_gross_income = 60390
+h.hs_gross_income = 61690
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 14
-h.hs_gross_income = 64450
+h.hs_gross_income = 65850
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 15
-h.hs_gross_income = 68510
+h.hs_gross_income = 70010
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 16
-h.hs_gross_income = 72570
+h.hs_gross_income = 74170
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 17
-h.hs_gross_income = 76630
+h.hs_gross_income = 78330
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 18
-h.hs_gross_income = 80690
+h.hs_gross_income = 82490
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 19
-h.hs_gross_income = 84750
+h.hs_gross_income = 86650
 h.save
 
 h = HeadStart.new
 h.hs_dependent_no = 20
-h.hs_gross_income = 88810
+h.hs_gross_income = 90810
 h.save
 
 a = AllKid.new
 a.kids_household_size = 1
-a.assist_gross_income = 1430
-a.share_gross_income = 1527
-a.premium_1_gross_income = 2033
-a.premium_2_gross_income = 3093
+a.assist_gross_income = 1442
+a.share_gross_income = 1540
+a.premium_1_gross_income = 2050
+a.premium_2_gross_income = 3119
 a.save
 
 a = AllKid.new
 a.kids_household_size = 2
-a.assist_gross_income = 1927
-a.share_gross_income = 2058
-a.premium_1_gross_income = 2740
-a.premium_2_gross_income = 4168
+a.assist_gross_income = 1951
+a.share_gross_income = 2084
+a.premium_1_gross_income = 2774
+a.premium_2_gross_income = 4221
 a.save
 
 a = AllKid.new
 a.kids_household_size = 3
-a.assist_gross_income = 2424
-a.share_gross_income = 2589
-a.premium_1_gross_income = 3447
-a.premium_2_gross_income = 5244
+a.assist_gross_income = 2461
+a.share_gross_income = 2628
+a.premium_1_gross_income = 3499
+a.premium_2_gross_income = 5324
 a.save
 
 a = AllKid.new
 a.kids_household_size = 4
-a.assist_gross_income = 2922
-a.share_gross_income = 3120
-a.premium_1_gross_income = 4154
-a.premium_2_gross_income = 6320
+a.assist_gross_income = 2971
+a.share_gross_income = 3173
+a.premium_1_gross_income = 4224
+a.premium_2_gross_income = 6426
 a.save
 
 a = AllKid.new
 a.kids_household_size = 5
-a.assist_gross_income = 3419
-a.share_gross_income = 3652
-a.premium_1_gross_income = 4861
-a.premium_2_gross_income = 7396
+a.assist_gross_income = 3480
+a.share_gross_income = 3717
+a.premium_1_gross_income = 4948
+a.premium_2_gross_income = 7529
 a.save
 
 a = AllKid.new
 a.kids_household_size = 6
-a.assist_gross_income = 3916
-a.share_gross_income = 4183
-a.premium_1_gross_income = 5568
-a.premium_2_gross_income = 8472
+a.assist_gross_income = 3990
+a.share_gross_income = 4261
+a.premium_1_gross_income = 5673
+a.premium_2_gross_income = 8631
 a.save
 
 a = AllKid.new
 a.kids_household_size = 7
-a.assist_gross_income = 4414
-a.share_gross_income = 4714
-a.premium_1_gross_income = 6275
-a.premium_2_gross_income = 9548
+a.assist_gross_income = 4499
+a.share_gross_income = 4806
+a.premium_1_gross_income = 6397
+a.premium_2_gross_income = 9733
 a.save
 
 a = AllKid.new
 a.kids_household_size = 8
-a.assist_gross_income = 4911
-a.share_gross_income = 5245
-a.premium_1_gross_income = 6982
-a.premium_2_gross_income = 10624
+a.assist_gross_income = 5009
+a.share_gross_income = 5350
+a.premium_1_gross_income = 7122
+a.premium_2_gross_income = 10836
 a.save
 
 a = AllKid.new
 a.kids_household_size = 9
-a.assist_gross_income = 5408
-a.share_gross_income = 5776
-a.premium_1_gross_income = 7689
-a.premium_2_gross_income = 11700
+a.assist_gross_income = 5519
+a.share_gross_income = 5894
+a.premium_1_gross_income = 7847
+a.premium_2_gross_income = 11938
 a.save
 
 a = AllKid.new
 a.kids_household_size = 10
-a.assist_gross_income = 5905
-a.share_gross_income = 6307
-a.premium_1_gross_income = 8396
-a.premium_2_gross_income = 12776
+a.assist_gross_income = 6029
+a.share_gross_income = 6438
+a.premium_1_gross_income = 8572
+a.premium_2_gross_income = 13040
 a.save
 
 a = AllKid.new
 a.kids_household_size = 11
-a.assist_gross_income = 6402
-a.share_gross_income = 6838
-a.premium_1_gross_income = 9103
-a.premium_2_gross_income = 13852
+a.assist_gross_income = 6539
+a.share_gross_income = 6982
+a.premium_1_gross_income = 9297
+a.premium_2_gross_income = 14142
 a.save
 
 a = AllKid.new
 a.kids_household_size = 12
-a.assist_gross_income = 6899
-a.share_gross_income = 7369
-a.premium_1_gross_income = 9810
-a.premium_2_gross_income = 14928
+a.assist_gross_income = 7049
+a.share_gross_income = 7526
+a.premium_1_gross_income = 10022
+a.premium_2_gross_income = 15244
 a.save
 
 a = AllKid.new
 a.kids_household_size = 13
-a.assist_gross_income = 7396
-a.share_gross_income = 7900
-a.premium_1_gross_income = 10517
-a.premium_2_gross_income = 16004
+a.assist_gross_income = 7559
+a.share_gross_income = 8070
+a.premium_1_gross_income = 10747
+a.premium_2_gross_income = 16346
 a.save
 
 a = AllKid.new
 a.kids_household_size = 14
-a.assist_gross_income = 7893
-a.share_gross_income = 8431
-a.premium_1_gross_income = 11224
-a.premium_2_gross_income = 17080
+a.assist_gross_income = 8069
+a.share_gross_income = 8614
+a.premium_1_gross_income = 11472
+a.premium_2_gross_income = 17448
 a.save
 
 a = AllKid.new
 a.kids_household_size = 15
-a.assist_gross_income = 8390
-a.share_gross_income = 8962
-a.premium_1_gross_income = 11931
-a.premium_2_gross_income = 18156
+a.assist_gross_income = 8579
+a.share_gross_income = 9158
+a.premium_1_gross_income = 12197
+a.premium_2_gross_income = 18550
 a.save
 
 a = AllKid.new
 a.kids_household_size = 16
-a.assist_gross_income = 8887
-a.share_gross_income = 9493
-a.premium_1_gross_income = 12638
-a.premium_2_gross_income = 19232
+a.assist_gross_income = 9089
+a.share_gross_income = 9702
+a.premium_1_gross_income = 12922
+a.premium_2_gross_income = 19652
 a.save
 
 a = AllKid.new
 a.kids_household_size = 17
-a.assist_gross_income = 9384
-a.share_gross_income = 10024
-a.premium_1_gross_income = 13345
-a.premium_2_gross_income = 20308
+a.assist_gross_income = 9599
+a.share_gross_income = 10246
+a.premium_1_gross_income = 13647
+a.premium_2_gross_income = 20754
 a.save
 
 a = AllKid.new
 a.kids_household_size = 18
-a.assist_gross_income = 9881
-a.share_gross_income = 10555
-a.premium_1_gross_income = 14052
-a.premium_2_gross_income = 21384
+a.assist_gross_income = 10109
+a.share_gross_income = 10790
+a.premium_1_gross_income = 14372
+a.premium_2_gross_income = 21856
 a.save
 
 a = AllKid.new
 a.kids_household_size = 19
-a.assist_gross_income = 10378
-a.share_gross_income = 11086
-a.premium_1_gross_income = 14759
-a.premium_2_gross_income = 22460
+a.assist_gross_income = 10619
+a.share_gross_income = 11334
+a.premium_1_gross_income = 15097
+a.premium_2_gross_income = 22958
 a.save
 
 a = AllKid.new
 a.kids_household_size = 20
-a.assist_gross_income = 10875
-a.share_gross_income = 11617
-a.premium_1_gross_income = 15466
-a.premium_2_gross_income = 23536
+a.assist_gross_income = 11129
+a.share_gross_income = 11878
+a.premium_1_gross_income = 15822
+a.premium_2_gross_income = 24060
 a.save
 
 
 m = Medicaid.new
 m.medicaid_household_size = 1
-m.medicaid_gross_income = 1342
+m.medicaid_gross_income = 1354
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 2
-m.medicaid_gross_income = 1809
+m.medicaid_gross_income = 1832
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 3
-m.medicaid_gross_income = 2276
+m.medicaid_gross_income = 2310
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 4
-m.medicaid_gross_income = 2743
+m.medicaid_gross_income = 2789
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 5
-m.medicaid_gross_income = 3210
+m.medicaid_gross_income = 3267
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 6
-m.medicaid_gross_income = 3677
+m.medicaid_gross_income = 3746
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 7
-m.medicaid_gross_income = 4143
+m.medicaid_gross_income = 4224
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 8
-m.medicaid_gross_income = 4610
+m.medicaid_gross_income = 4702
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 9
-m.medicaid_gross_income = 5077
+m.medicaid_gross_income = 5180
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 10
-m.medicaid_gross_income = 5544
+m.medicaid_gross_income = 5658
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 11
-m.medicaid_gross_income = 6011
+m.medicaid_gross_income = 6136
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 12
-m.medicaid_gross_income = 6478
+m.medicaid_gross_income = 6614
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 13
-m.medicaid_gross_income = 6945
+m.medicaid_gross_income = 7092
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 14
-m.medicaid_gross_income = 7412
+m.medicaid_gross_income = 7570
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 15
-m.medicaid_gross_income = 7879
+m.medicaid_gross_income = 8048
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 16
-m.medicaid_gross_income = 8346
+m.medicaid_gross_income = 8526
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 17
-m.medicaid_gross_income = 8813
+m.medicaid_gross_income = 9004
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 18
-m.medicaid_gross_income = 9280
+m.medicaid_gross_income = 9482
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 19
-m.medicaid_gross_income = 9747
+m.medicaid_gross_income = 9960
 m.save
 
 m = Medicaid.new
 m.medicaid_household_size = 20
-m.medicaid_gross_income = 10214
+m.medicaid_gross_income = 10438
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 1
-m.medicare_cost_sharing = 973
-m.premium_only = 1312
+m.medicare_cost_sharing = 981
+m.premium_only = 1323
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 2
-m.medicare_cost_sharing = 1311
-m.premium_only = 1769
+m.medicare_cost_sharing = 1328
+m.premium_only = 1791
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 3
-m.medicare_cost_sharing = 1649
-m.premium_only = 2225
+m.medicare_cost_sharing = 1674
+m.premium_only = 2259
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 4
-m.medicare_cost_sharing = 1988
-m.premium_only = 2682
+m.medicare_cost_sharing = 2021
+m.premium_only = 2727
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 5
-m.medicare_cost_sharing = 2326
-m.premium_only = 3139
+m.medicare_cost_sharing = 2368
+m.premium_only = 3195
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 6
-m.medicare_cost_sharing = 2664
-m.premium_only = 3596
+m.medicare_cost_sharing = 2714
+m.premium_only = 3663
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 7
-m.medicare_cost_sharing = 3003
-m.premium_only = 4052
+m.medicare_cost_sharing = 3061
+m.premium_only = 4131
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 8
-m.medicare_cost_sharing = 3341
-m.premium_only = 4509
+m.medicare_cost_sharing = 3408
+m.premium_only = 4599
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 9
-m.medicare_cost_sharing = 3679
-m.premium_only = 4966
+m.medicare_cost_sharing = 3755
+m.premium_only = 5067
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 10
-m.medicare_cost_sharing = 4017
-m.premium_only = 5423
+m.medicare_cost_sharing = 4102
+m.premium_only = 5535
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 11
-m.medicare_cost_sharing = 4017
-m.premium_only = 5880
+m.medicare_cost_sharing = 4449
+m.premium_only = 6003
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 12
-m.medicare_cost_sharing = 4355
-m.premium_only = 6337
+m.medicare_cost_sharing = 4796
+m.premium_only = 6471
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 13
-m.medicare_cost_sharing = 4693
-m.premium_only = 6794
+m.medicare_cost_sharing = 5143
+m.premium_only = 6939
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 14
-m.medicare_cost_sharing = 5031
-m.premium_only = 7251
+m.medicare_cost_sharing = 5490
+m.premium_only = 7407
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 15
-m.medicare_cost_sharing = 5369
-m.premium_only = 7708
+m.medicare_cost_sharing = 5837
+m.premium_only = 7875
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 16
-m.medicare_cost_sharing = 5707
-m.premium_only = 8165
+m.medicare_cost_sharing = 6184
+m.premium_only = 8343
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 17
-m.medicare_cost_sharing = 6045
-m.premium_only = 8622
+m.medicare_cost_sharing = 6531
+m.premium_only = 8811
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 18
-m.medicare_cost_sharing = 6383
-m.premium_only = 9079
+m.medicare_cost_sharing = 6878
+m.premium_only = 9279
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 19
-m.medicare_cost_sharing = 6721
-m.premium_only = 9536
+m.medicare_cost_sharing = 7225
+m.premium_only = 9747
 m.save
 
 m = MedicareCostSharing.new
 m.household_size = 20
-m.medicare_cost_sharing = 7059
-m.premium_only = 9993
+m.medicare_cost_sharing = 7572
+m.premium_only = 10215
 m.save
 
 t = Tanif.new
@@ -3599,7 +3599,7 @@ LafCenter.create(:zipcode => '60611.0', :city => 'Chicago', :center => 'Garfield
 LafCenter.create(:zipcode => '60612.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
                  :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'Spanish speaking staff on duty daily')
 LafCenter.create(:zipcode => '60613.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave.', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave.', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60614.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave.', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60615.0', :city => 'Chicago', :center => 'King Community Service Center',
@@ -3611,7 +3611,7 @@ LafCenter.create(:zipcode => '60616.0', :city => 'Chicago', :center => 'King Com
 LafCenter.create(:zipcode => '60617.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
                  :address => '8650 S. Commercial Ave', :contact => 'Jeanette Sandoval', :telephone => '(312) 745 - 1132', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60618.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60619.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60619.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
@@ -3627,9 +3627,9 @@ LafCenter.create(:zipcode => '60623.0', :city => 'Chicago', :center => 'Garfield
 LafCenter.create(:zipcode => '60624.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
                  :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'Spanish speaking staff on duty daily')
 LafCenter.create(:zipcode => '60625.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60626.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60627.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
                  :address => '8650 S. Commercial Ave', :contact => 'Jeanette Sandoval', :telephone => '(312) 745 - 1132', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60628.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
@@ -3637,11 +3637,11 @@ LafCenter.create(:zipcode => '60628.0', :city => 'Chicago', :center => 'South Ch
 LafCenter.create(:zipcode => '60629.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60630.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60630.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60631.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60631.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60632.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
@@ -3661,7 +3661,7 @@ LafCenter.create(:zipcode => '60638.0', :city => 'Chicago', :center => 'Englewod
 LafCenter.create(:zipcode => '60639.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60640.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60641.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60642.0', :city => 'Chicago', :center => 'Trina Davila',
@@ -3671,9 +3671,9 @@ LafCenter.create(:zipcode => '60643.0', :city => 'Chicago', :center => 'South Ch
 LafCenter.create(:zipcode => '60644.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
                  :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'Spanish speaking staff on duty daily')
 LafCenter.create(:zipcode => '60645.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60646.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60647.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60648.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
@@ -3693,13 +3693,13 @@ LafCenter.create(:zipcode => '60655.0', :city => 'Chicago', :center => 'South Ch
 LafCenter.create(:zipcode => '60656.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60657.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60658.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60659.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60660.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60661.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
                  :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'Spanish speaking staff on duty daily')
 LafCenter.create(:zipcode => '60827.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
@@ -3731,7 +3731,7 @@ LafCenter.create(:zipcode => '60611.0', :city => 'Chicago', :center => 'Garfield
 LafCenter.create(:zipcode => '60612.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
                  :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'Spanish speaking staff on duty daily')
 LafCenter.create(:zipcode => '60613.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave.', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave.', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60614.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave.', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60615.0', :city => 'Chicago', :center => 'King Community Service Center',
@@ -3743,7 +3743,7 @@ LafCenter.create(:zipcode => '60616.0', :city => 'Chicago', :center => 'King Com
 LafCenter.create(:zipcode => '60617.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
                  :address => '8650 S. Commercial Ave', :contact => 'Jeanette Sandoval', :telephone => '(312) 745 - 1132', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60618.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60619.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60619.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
@@ -3759,9 +3759,9 @@ LafCenter.create(:zipcode => '60623.0', :city => 'Chicago', :center => 'Garfield
 LafCenter.create(:zipcode => '60624.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
                  :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'Spanish speaking staff on duty daily')
 LafCenter.create(:zipcode => '60625.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60626.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60627.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
                  :address => '8650 S. Commercial Ave', :contact => 'Jeanette Sandoval', :telephone => '(312) 745 - 1132', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60628.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
@@ -3769,11 +3769,11 @@ LafCenter.create(:zipcode => '60628.0', :city => 'Chicago', :center => 'South Ch
 LafCenter.create(:zipcode => '60629.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60630.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60630.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60631.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60631.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60632.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
@@ -3793,7 +3793,7 @@ LafCenter.create(:zipcode => '60638.0', :city => 'Chicago', :center => 'Englewod
 LafCenter.create(:zipcode => '60639.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60640.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60641.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60642.0', :city => 'Chicago', :center => 'Trina Davila',
@@ -3803,9 +3803,9 @@ LafCenter.create(:zipcode => '60643.0', :city => 'Chicago', :center => 'South Ch
 LafCenter.create(:zipcode => '60644.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
                  :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'Spanish speaking staff on duty daily')
 LafCenter.create(:zipcode => '60645.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60646.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60647.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60648.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
@@ -3825,13 +3825,13 @@ LafCenter.create(:zipcode => '60655.0', :city => 'Chicago', :center => 'South Ch
 LafCenter.create(:zipcode => '60656.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60657.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60658.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60659.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60660.0', :city => 'Chicago', :center => 'North Area Community Service Center',
-                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily')
+                 :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60661.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
                  :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'Spanish speaking staff on duty daily')
 LafCenter.create(:zipcode => '60827.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
