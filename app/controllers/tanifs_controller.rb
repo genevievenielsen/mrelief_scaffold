@@ -69,65 +69,66 @@
       t.expect_ssi = expect_ssi
     end
 
-  if params[:child] == "no"
-    @eligible_tanif = "no"
-    t.tanf_eligibility_status = @eligible_tanif
-  else
+  if params[:pregnant].present? || params[:care_for_child].present? || params[:first_child].present?
     if params[:relationship] == "adult_relative"
       @eligible_tanif = "maybe"
       t.tanf_eligibility_status = @eligible_tanif
     else
-      if params[:first] == "yes"
+      if params[:first_child] == "first_child"
         household_size == 1
       end
       if params[:tanif_sixty_months] == "yes"
-        @eligible_tanif = "no"
-        t.tanf_eligibility_status = @eligible_tanif
+         @eligible_tanif = "no"
+         t.tanf_eligibility_status = @eligible_tanif
       else
         if children < household_size - 1
           @eligible_tanif = "maybe"
           t.tanf_eligibility_status = @eligible_tanif
-         else
-           tanif_eligibility = Tanif.find_by({ :household_size => household_size })
-           reduced_gross_income = gross_income * 0.75
-           child_support = expect_child_support - 50
-           total_income = reduced_gross_income + child_support
-           if total_income > tanif_eligibility.max_income
+        else
+          tanif_eligibility = Tanif.find_by({ :household_size => household_size })
+          reduced_gross_income = gross_income * 0.75
+          child_support = expect_child_support - 50
+          total_income = reduced_gross_income + child_support
+          if total_income > tanif_eligibility.max_income
             @eligible_tanif = "no"
             t.tanf_eligibility_status = @eligible_tanif
-           else
-              if params[:anticipate_income] == "yes"
+          else
+            if params[:anticipate_income] == "yes"
+              @eligible_tanif = "maybe"
+              t.tanf_eligibility_status = @eligible_tanif
+            else
+              if params[:teen_parent] == "teen_parent"
                 @eligible_tanif = "maybe"
                 t.tanf_eligibility_status = @eligible_tanif
               else
-                  if params[:teen_parent] == "yes"
-                    @eligible_tanif = "maybe"
-                    t.tanf_eligibility_status = @eligible_tanif
-                  else
-                    if params[:citizen] == "no"
-                      @eligible_tanif = "maybe"
-                      t.tanf_eligibility_status = @eligible_tanif
-                    else
-
-                      if params[:highschool] == "no" && household_size == 2
-                        @eligible_tanif = "no"
-                        t.tanf_eligibility_status = @eligible_tanif
-                      elsif params[:highschool] == "no" && household_size > 2
-                        @eligible_tanif = "maybe"
-                        t.tanf_eligibility_status = @eligible_tanif
-                      else
-                        @eligible_tanif = "yes"
-                        t.tanf_eligibility_status = @eligible_tanif
-                      end
-
-                    end
-                 end
-               end
+                if params[:citizen] == "no"
+                  @eligible_tanif = "maybe"
+                  t.tanf_eligibility_status = @eligible_tanif
+                else
+                  if params[:highschool].present? && household_size == 2
+                     @eligible_tanif = "no"
+                     t.tanf_eligibility_status = @eligible_tanif
+                   elsif params[:highschool].present? && household_size > 2
+                     @eligible_tanif = "maybe"
+                     t.tanf_eligibility_status = @eligible_tanif
+                   else
+                     @eligible_tanif = "yes"
+                     t.tanf_eligibility_status = @eligible_tanif
+                   end
+                end
+              end
             end
-         end
-       end
-     end
-   end
+          end
+        end
+      end
+    end
+  elsif params[:no_children].present?
+    @eligible_tanif = "no"
+    t.tanf_eligibility_status = @eligible_tanif
+  else
+    @eligible_tanif = "no"
+    t.tanf_eligibility_status = @eligible_tanif
+  end
 
    if params[:citizen] == "no"
      @eligible_tanif = "maybe"
@@ -137,11 +138,11 @@
     # DATA STORAGE
     t.user_location = params[:user_location]
     t.phone_number = params[:phone_number] if params[:phone_number].present?
-    t.pregnant_or_caring_for_child = params[:child]
+    t.pregnant_or_caring_for_child = params[:care_for_child] || params[:pregant] || params[:no_children]
     t.relationship_to_child = params[:relationship]
-    t.enrolled_in_high_school = params[:highschool]
+    t.enrolled_in_high_school = params[:no_highschool]
     t.teen_parent = params[:teen_parent]
-    t.pregnant_with_first_child = params[:first]
+    t.pregnant_with_first_child = params[:first_child]
     t.anticipate_other_income = params[:anticipate_income]
     t.tanif_sixty_months = params[:tanif_sixty_months]
     t.citizen = params[:citizen]
@@ -176,25 +177,22 @@
         end
       end
 
+      #in this case there are 2 medical centers in the user's zip
+      if @child_resources_zip.count >= 2
+         @child_resources = @child_resources_zip
+      end
 
-      #@child_resources.where(:zip => @user_zipcode)
+      #in this case there is 1 medical center in the user's zip
+      if @child_resources_zip.count == 1
+         @child_resources_first = @child_resources_zip.first
+         @child_resources_second = @child_resources.first
+      end
 
-        #in this case there are 2 medical centers in the user's zip
-        if @child_resources_zip.count >= 2
-           @child_resources = @child_resources_zip
-        end
-
-        #in this case there is 1 medical center in the user's zip
-        if @child_resources_zip.count == 1
-           @child_resources_first = @child_resources_zip.first
-           @child_resources_second = @child_resources.first
-        end
-
-        #in this caser there are no medical centers in the user's zip
-        if  @child_resources_zip.count == 0
-            @child_resources_first = @child_resources.first
-            @child_resources_second = @child_resources.second
-        end
+      #in this caser there are no medical centers in the user's zip
+      if  @child_resources_zip.count == 0
+          @child_resources_first = @child_resources.first
+          @child_resources_second = @child_resources.second
+      end
 
   end
 

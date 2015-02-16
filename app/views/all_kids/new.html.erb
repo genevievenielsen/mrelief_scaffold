@@ -60,7 +60,6 @@
       </div>
   </div>
 
-
   <!-- Label and input for kids_gross_income -->
   <div class="form-group col-sm-9">
     <label for="kids_gross_income">
@@ -76,23 +75,22 @@
     </div>
   </div>
 
-  <%= render 'programs/zipcode_question' %>
-
-  <div class="row">
-    <%= render "layouts/location_dropdown" %>
+   <div class="form-group col-sm-9 pull-left">
+      <label for="zipcode">What is your zipcode?</label>
+        <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" required>
   </div>
 
-  <div class="row">
-    <%= render "layouts/phone_question" %>
+
+  <%= render "layouts/location_dropdown" %>
+
+  <%= render "layouts/phone_question" %>
+
+  <div class="col-md-6">
+    <%= render "programs/calculator" %>
   </div>
 
-    <div class="row">
-      <div class="col-md-6">
-      <%= render "programs/calculator" %>
-      </div>
-    </div>
 
-    <div>
+    <div class="col-sm-9">
       <button type="submit" class="btn btn-primary">See if I qualify</button>
     </div>
   </div>
