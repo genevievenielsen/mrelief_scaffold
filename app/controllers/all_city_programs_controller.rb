@@ -320,7 +320,7 @@ class AllCityProgramsController < ApplicationController
             @housing_resources_second = @housing_resources.second
         end
 
-        #HERE IS THE LOGIC FOR RTA RIDE FREE
+      #HERE IS THE LOGIC FOR RTA RIDE FREE
        rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => dependent_no })
 
        if params[:disabled] != 'none' || @age > 65
@@ -415,11 +415,13 @@ class AllCityProgramsController < ApplicationController
       a.child_health_insurance_state = params[:status]
 
       if params[:pregnant].present?
-        if params[:pregnant] == 'yes'
-          dependent_no = dependent_no + 1
-        end
+         dependent_no_kids = dependent_no + 1
+         dependent_no_kids = dependent_no_kids.to_i
+         kids_eligibility = AllKid.find_by({ :kids_household_size => dependent_no_kids })
+      else
+        kids_eligibility = AllKid.find_by({ :kids_household_size => dependent_no })
       end
-      kids_eligibility = AllKid.find_by({ :kids_household_size => dependent_no })
+
 
       if monthly_gross_income  < kids_eligibility.premium_1_gross_income
          @eligible_all_kids = "yes"
@@ -571,69 +573,63 @@ class AllCityProgramsController < ApplicationController
       end
 
       # HERE IS THE LOGIC FOR TANF
-      a.pregnant_or_caring_for_child = params[:child]
+      a.pregnant_or_caring_for_child = params[:care_for_child] || params[:pregnant] || params[:no_children]
       a.relationship_to_child = params[:relationship]
-      a.pregnant_with_first_child = params[:first]
+      a.pregnant_with_first_child = params[:first_child]
       a.tanif_sixty_months = params[:tanif_sixty_months]
       a.anticipate_other_income = params[:anticipate_income]
       a.teen_parent = params[:teen_parent]
-      a.child_in_school = params[:highschool]
+      a.child_in_school = params[:no_highschool]
 
-      if params[:child] == "no"
-          @eligible_tanif = "no"
-      else
-        if params[:relationship] == "adult_relative" || params[:relationship] == "not_applicable"
+      if params[:pregnant].present? || params[:care_for_child].present? || params[:first_child].present?
+        if params[:relationship] == "adult_relative"
           @eligible_tanif = "maybe"
         else
-          if params[:first] == "yes"
+          if params[:first_child] == "first_child"
             dependent_no == 1
           end
           if params[:tanif_sixty_months] == "yes"
-            @eligible_tanif = "no"
+             @eligible_tanif = "no"
           else
             if children < dependent_no - 1
               @eligible_tanif = "maybe"
-             else
-               tanif_eligibility = Tanif.find_by({ :household_size => dependent_no })
-               reduced_gross_income = net_income * 0.75
-               child_support = expect_child_support - 50
-               total_income = reduced_gross_income + child_support
-               if total_income > tanif_eligibility.max_income
+            else
+              tanif_eligibility = Tanif.find_by({ :household_size => dependent_no })
+              reduced_gross_income = net_income * 0.75
+              child_support = expect_child_support - 50
+              total_income = reduced_gross_income + child_support
+              if total_income > tanif_eligibility.max_income
                 @eligible_tanif = "no"
-               else
-                  if params[:anticipate_income] == "yes"
+              else
+                if params[:anticipate_income] == "yes"
+                  @eligible_tanif = "maybe"
+                else
+                  if params[:teen_parent] == "teen_parent"
                     @eligible_tanif = "maybe"
                   else
-                    # child_support = expect_child_support - 50
-                    # child_support = gross_income + child_support
-                    # if child_support > tanif_eligibility.max_income
-                    #   @eligible_tanif = "no"
-                    #  else
-                      if params[:teen_parent] == "yes"
-                        @eligible_tanif = "maybe"
-                      else
-                        if params[:citizen] == "no"
-                          @eligible_tanif = "maybe"
-                        else
-                          if params[:highschool] == "no" && dependent_no == 2
-                            @eligible_tanif = "no"
-                          elsif params[:highschool] == "no" && dependent_no > 2
-                            @eligible_tanif = "maybe"
-                          else
-                            @eligible_tanif = "yes"
-                          end
-                        end
-                      end
-                     # end
+                    if params[:citizen] == "no"
+                      @eligible_tanif = "maybe"
+                    else
+                       if params[:highschool] == "no_highschool" && dependent_no == 2
+                         @eligible_tanif = "no"
+                       elsif params[:highschool] == "no_highschool" && dependent_no > 2
+                         @eligible_tanif = "maybe"
+                       else
+                         @eligible_tanif = "yes"
+                       end
+                    end
                   end
-               end
+                end
+              end
             end
           end
         end
+      else
+        @eligible_tanif = "no"
       end
 
       if params[:citizen] == "no"
-          @eligible_tanif = "maybe"
+        @eligible_tanif = "maybe"
       end
 
       childcare = []
@@ -642,7 +638,6 @@ class AllCityProgramsController < ApplicationController
           childcare.push(center)
         end
       end
-
 
       @pb_zipcode = @user_zipcode.chomp(".0")
         @child_resources = childcare
@@ -653,8 +648,6 @@ class AllCityProgramsController < ApplicationController
           @child_resources_zip.push(center)
         end
       end
-
-
 
       #in this case there are 2 medical centers in the user's zip
       if @child_resources_zip.count >= 2

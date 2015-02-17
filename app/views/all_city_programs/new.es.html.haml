@@ -61,8 +61,8 @@
             %i.fa.fa-info-circle
           #anticipate_income
             = radio_button_tag 'anticipate_income', 'yes'
-            = t.all_city.yes | "yes"
-            \#{radio_button_tag 'anticipate_income', 'no'} no
+            = t.all_city.yes | "Yes"
+            \#{radio_button_tag 'anticipate_income', 'no'} No
         / Label and input for expect_child_support
         .form-group.col-sm-9
           %label{:for => "expect_child_support"}
@@ -111,8 +111,8 @@
           .col-sm-6
             #education
               = radio_button_tag 'education', 'yes'
-              = t.all_city.yes | "yes"
-              \#{radio_button_tag 'education', 'no'} no
+              = t.all_city.yes | "Yes"
+              \#{radio_button_tag 'education', 'no'} No
         %br/
         .form-group.col-sm-12
           %label#citizen.pull-left{:for => "citizen"} Are you a citizen of the United States?
@@ -120,27 +120,29 @@
           .col-sm-6
             #citizen.pull-left
               = radio_button_tag 'citizen', 'yes'
-              = t.all_city.yes | "yes"
-              \#{radio_button_tag 'citizen', 'no'} no
+              = t.all_city.yes | "Yes"
+              \#{radio_button_tag 'citizen', 'no'} No
         %br/
         .form-group.col-sm-12
-          %label#pregnant.pull-left{:for => "pregnant"} Are you pregnant ?
-          .clearfix
-          .col-sm-6
-            #pregnant
-              = radio_button_tag 'pregnant', 'yes'
-              = t.all_city.yes | "yes"
-              \#{radio_button_tag 'pregnant', 'no'} no
-        %br/
-        .form-group.col-sm-12
-          %label#child{:for => "child"} Are you pregnant or caring for a child under 19 years of age?
-          .clearfix
-          .col-sm-6
-            #child.pull-left
-              = radio_button_tag 'child', 'yes'
-              = t.all_city.yes | "yes"
-              \#{radio_button_tag 'child', 'no'} no
-        %br/
+          %p.allthatapply Select all that apply to you:
+          %input{:name => "pregnant", :type => "checkbox", :value => "pregnant"}/
+          I am pregnant
+          %br/
+          %input{:name => "first_child", :type => "checkbox", :value => "first_child"}/
+          I am pregnant with my first child
+          %br/
+          %input{:name => "teen_parent", :type => "checkbox", :value => "teen_parent"}/
+          I am a teen parent
+          %br/
+          %input{:name => "highschool", :type => "checkbox", :value => "no_highschool"}/
+          I care for a child that is 18 and not enrolled full time in high school
+          %br/
+          %input{:name => "care_for_child", :type => "checkbox", :value => "care_for_child"}/
+          I care for a child that is under 19 years of age
+          %br/
+          %input{:name => "no_children", :type => "checkbox", :value => "no_children"}/
+          I care for no children
+          %br/
         .form-group.col-sm-12
           %label#relationship{:for => "relationship"}
             Describe your biological relationship to the child you are caring for:
@@ -150,16 +152,7 @@
               = radio_button_tag 'relationship', 'parent'
               Parent
               \#{radio_button_tag 'relationship', 'adult_relative'} Adult relative
-        %br/
-        .form-group.col-sm-12
-          %label#first{:for => "first"}
-            Are you pregnant with your first child?
-          .clearfix
-          .col-sm-6
-            #first.pull-left
-              = radio_button_tag 'first', 'yes'
-              = t.all_city.yes | "yes"
-              \#{radio_button_tag 'first', 'no'} no
+              \#{radio_button_tag 'relationship', 'not_applicable'} Not applicable
         %br/
         .form-group.col-sm-12
           %label#tanif_sixty_months{:for => "tanif_sixty_months"}
@@ -168,35 +161,24 @@
           .col-sm-9
             #tanif_sixty_months.pull-left
               = radio_button_tag 'tanif_sixty_months', 'yes'
-              = t.all_city.yes | "yes"
-              \#{radio_button_tag 'tanif_sixty_months', 'no'} no
+              = t.all_city.yes | "Yes"
+              \#{radio_button_tag 'tanif_sixty_months', 'no'} No
               \#{radio_button_tag 'tanif_sixty_months', 'caretaker'}  I am a caretaker relative, this does not apply to me.
         %br/
-        .form-group.col-sm-12
-          %label#teen_parent{:for => "teen_parent"} Are you a teen parent?
-          .clearfix
-          .col-sm-6
-            #teen_parent.pull-left
-              = radio_button_tag 'teen_parent', 'yes'
-              = t.all_city.yes | "yes"
-              \#{radio_button_tag 'teen_parent', 'no'} no
-        .form-group.col-md-12
-          %label#highschool{:for => "highschool"} If your child is 18, are they enrolled full-time in high school?
-          %button{"data-content" => "This does not include GED classes", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
-            %i.fa.fa-info-circle
-          .clearfix
-          .col-md-6
-            #highschool.pull-left
-              = radio_button_tag 'highschool', 'yes'
-              = t.all_city.yes | "yes"
-              \#{radio_button_tag 'highschool', 'no'} no
         .form-group.col-sm-12
           %label#lease.pull-left{:for => "lease"} Is your name currently on the lease of the apartment that you are renting?
           .col-sm-6
             #lease
               = radio_button_tag 'lease', 'yes'
-              = t.all_city.yes | "yes"
-              \#{radio_button_tag 'lease', 'no'} no
+              = t.all_city.yes | "Yes"
+              \#{radio_button_tag 'lease', 'no'} No
+        .form-group.col-sm-12
+          %label#next_rent.pull-left{:for => "next_rent"} Can you document that you can afford next month’s rent?
+          .col-sm-6
+            #next_rent
+              = radio_button_tag 'next_rent', 'yes'
+              = t.all_city.yes | "Yes"
+              \#{radio_button_tag 'next_rent', 'no'} No
         .form-group.col-sm-12
           %label#rental_status.pull-left{:for => "rental_status"} If you are unable to pay your rent at this time, what circumstance explains why you are unable to pay rent?
           #rental_status.pull-left
@@ -222,7 +204,7 @@
             %br/
             = radio_button_tag 'rental_status', 'a victim of domestic violence'
             = t.all_city.victim_domestic | "A victim of domestic violence"
-            %button{"data-content" => "This involves losing income due to violence from your intimate partner. If your partner was your sole source of income, this does not apply. Typically this benefit would apply to victims with income seeking relocation assistance. ", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+            %button{"data-content" => "This involves losing income due to violence from your intimate partner.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
               %i.fa.fa-info-circle
             %br/
             = radio_button_tag 'rental_status', 'none of the above'
@@ -246,23 +228,24 @@
               %br/
         %br/
         .form-group.col-sm-12
-          %label#disabled.pull-left{:for => "disabled"} If you are disabled, describe your current status:
+          %label#disabled.pull-left{:for => "disabled"} Are you receiving disability benefits?
           .clearfix
           .col-sm-12
-            #disabled.pull-left
+            #disabled
               = radio_button_tag 'disabled', 'social-security'
-              I am receiving disability payments from Social Security.
+              Yes, from Social Security
               %br/
               = radio_button_tag 'disabled', 'railroad'
-              I am receiving disability payments from the Railroad Retirement Board.
+              Yes, from the Railroad Retirement Board
               %br/
               = radio_button_tag 'disabled', 'veterans'
-              I am receiving disability payments from Veterans
-              Affairs.
+              Yes, from Veterans Affairs
               %br/
               = radio_button_tag 'disabled', 'none'
-              = t.all_city.not_receiving | "I am currently not receiving any disability payments."
+              No
               %br/
+        = render "layouts/location_dropdown"
+        = render "layouts/phone_question"
         .row
           .col-sm-6
             = render "programs/calculator"
