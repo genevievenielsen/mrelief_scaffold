@@ -66,8 +66,9 @@
   <div class="row">
     <div class="form-group col-md-12">
       <label for="education" id="education">Are you enrolled in college/institution of higher education? </label>
+      <br>
         <% [ 'yes', 'no'].each do |education| %>
-          <br><%= radio_button_tag 'education', education, @s.enrolled_in_education == education %>
+          <%= radio_button_tag 'education', education, @s.enrolled_in_education == education %>
           <%= education.humanize %>
         <% end %>
     </div>
@@ -76,8 +77,9 @@
   <div class="row">
     <div class="form-group col-md-12">
       <label for="citizen" id="citizen">Are you a citizen of the United States? </label>
+      <br>
         <% [ 'yes', 'no'].each do |citizen| %>
-          <br><%= radio_button_tag 'citizen', citizen, @s.citizen == citizen %>
+          <%= radio_button_tag 'citizen', citizen, @s.citizen == citizen %>
           <%= citizen.humanize %>
         <% end %>
     </div>
