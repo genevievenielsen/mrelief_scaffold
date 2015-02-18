@@ -12,21 +12,10 @@
   </div>
 </div>
 
-
-<% if @medicaid.errors.any? %>
-  <% @medicaid.errors.full_messages.each do |message| %>
-    <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= message %>
-    </div>
-  <% end %>
-<% end %>
-
 <div class="row">
 <div class="panel panel-default col-md-8 col-md-offset-2">
 <div class="panel-body">
 <form action="/medicaids" class="form-horizontal" method="post">
-
 
 <div class="form-group col-md-12">
 
@@ -45,7 +34,6 @@
   </div>
 
   <!-- Label and input for medicaid_household_size -->
-
   <div class="row">
   <div class="form-group col-md-12">
     <label for="medicaid_household_size">What is your household size?</label>
@@ -53,16 +41,14 @@
       <button type="button" data-toggle="popover" data-content="Household size: How many people live in your home (including yourself)?" data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
 
     <div class="row">
-      <div class="col-md-6">
-      <input type="text" id="medicaid_household_size" name="medicaid_household_size" placeholder="For example: 3" class="form-control" required>
+      <div class="col-md-9">
+      <input type="text" id="medicaid_household_size" name="medicaid_household_size" placeholder="For example: 3" class="form-control" value="<%= @m.household_size %>" required>
       </div>
     </div>
   </div>
   </div>
 
-
   <!-- Label and input for medicaid_gross_income -->
-
   <div class="row">
   <div class="form-group col-md-12">
     <label for="medicaid_gross_income">
@@ -72,10 +58,10 @@
       <button type="button" data-toggle="popover" data-content="Monthly income includes wages, Social Security, SSI, pensions, rental income, unemployment, worker's compensation, or other disability payments." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
 
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-9">
         <div class="input-group">
           <span class="input-group-addon">$</span>
-          <input type="text" id="medicaid_gross_income" name="medicaid_gross_income" placeholder="For example: 30000" class="   form-control"required>
+          <input type="text" id="medicaid_gross_income" name="medicaid_gross_income" placeholder="For example: 30000" class="   form-control" value="<%= @m.monthly_gross_income %>" required>
           <span class="input-group-addon">.00</span>
         </div>
       </div>
@@ -84,14 +70,28 @@
   </div>
 
 
-  <%= render 'programs/zipcode_question' %>
+   <div class="row">
+    <div class="form-group col-sm-9 pull-left">
+      <label for="zipcode">What is your zipcode?</label>
+        <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" value="<%= @m.zipcode.chop.chop if @m.zipcode.present? %>"required>
+    </div>
+   </div>
 
   <div class="row">
-    <%= render "layouts/location_dropdown" %>
+    <div class="form-group col-sm-9">
+    <label for="location" id="location_dropdown">Where are you completing this form? </label>
+    <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], ['Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Other', 'other']], @m.user_location), :class => "form-control", :prompt => "Select a location") %>
+    </div>
   </div>
 
   <div class="row">
-    <%= render "layouts/phone_question" %>
+  <div class="form-group col-sm-9">
+    <label for="phone_number">What is your cell phone number?</label>
+      <button type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+    <div>
+      <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control" value="<%= @m.phone_number %>">
+    </div>
+  </div>
   </div>
 
   <div class="row">
@@ -103,7 +103,6 @@
 <div>
     <button type="submit" class="btn btn-primary program-btn">See if I qualify</button>
 </div>
-
 
 </form>
 

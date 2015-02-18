@@ -5,55 +5,47 @@ class MedicaidsController < ApplicationController
 
   def new
     @medicaid = Medicaid.new
+    @m = MedicaidData.new
   end
 
   def create
-    m = MedicaidData.new
+    @m = MedicaidData.new
     if params[:medicaid_household_size] !~ /\D/  # returns true if all numbers
       medicaid_household_size = params[:medicaid_household_size].to_i
-      m.household_size = medicaid_household_size
+      @m.household_size = medicaid_household_size
     else
       medicaid_household_size = params[:medicaid_household_size].in_numbers
-      m.household_size = medicaid_household_size
+      @m.household_size = medicaid_household_size
     end
 
     medicaid_gross_income = params[:medicaid_gross_income]
     medicaid_gross_income = medicaid_gross_income.gsub(/[^0-9\.]/, '')
     if medicaid_gross_income !~ /\D/
       medicaid_gross_income = medicaid_gross_income.to_i
-      m.monthly_gross_income = medicaid_gross_income
+      @m.monthly_gross_income = medicaid_gross_income
     else
       if medicaid_gross_income.include?("dollars")
         medicaid_gross_income.slice!"dollars"
       end
       medicaid_gross_income = medicaid_gross_income.in_numbers
-      m.monthly_gross_income = medicaid_gross_income
+      @m.monthly_gross_income = medicaid_gross_income
     end
 
     medicaid_eligibility = Medicaid.find_by({ :medicaid_household_size => medicaid_household_size})
 
-    p "medicaid_gross_income = #{medicaid_gross_income}"
-    p "medicaid_eligibility.medicaid_gross_income = #{medicaid_eligibility.medicaid_gross_income}"
-
     if params[:citizen] == 'no'
       @eligible = 'maybe'
-      m.medicaid_eligibility_status = @eligible
+      @m.medicaid_eligibility_status = @eligible
     elsif params[:citizen] == 'yes'
       if medicaid_gross_income < medicaid_eligibility.medicaid_gross_income
         @eligible = 'yes'
-        m.medicaid_eligibility_status = @eligible
+        @m.medicaid_eligibility_status = @eligible
       else
         @eligible = 'no'
-        m.medicaid_eligibility_status = @eligible
+        @m.medicaid_eligibility_status = @eligible
       end
     end
 
-   #DATA STORAGE
-   m.user_location = params[:user_location]
-   m.phone_number = params[:phone_number] if params[:phone_number].present?
-   m.citizen = params[:citizen]
-   m.zipcode = params[:zipcode]
-   m.save
 
    @user_zipcode = params[:zipcode]
    @zipcode = @user_zipcode << ".0"
@@ -99,8 +91,19 @@ class MedicaidsController < ApplicationController
           @medical_resources_second = @medical_resources.second
       end
 
-  end
+    #DATA STORAGE
+    @m.user_location = params[:user_location]
+    @m.phone_number = params[:phone_number] if params[:phone_number].present?
+    @m.citizen = params[:citizen]
+    @m.zipcode = params[:zipcode]
+    @m.save
 
+    if params[:citizen].present?
+    else
+       flash.now[:alert] = 'Looks like you forgot to answer the citizenship question! Please answer all questions below.'
+      render "new"
+    end
+  end
 
 
   private

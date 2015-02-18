@@ -2,6 +2,9 @@ source "https://rubygems.org"
 
 ruby "2.1.2"
 
+gem 'geocoder'
+gem 'underscore-rails'
+
 gem "rack-cors", group: :development
 
 gem "rest-client"
