@@ -9,27 +9,28 @@
   skip_before_filter :verify_authenticity_token
 
 
-   def new
+  def new
     @snap_eligibility = SnapEligibility.new
+    @s = SnapEligibilityData.new
   end
 
   def create
-    s = SnapEligibilityData.new
+    @s = SnapEligibilityData.new
     # this is the words into numbers logic
     if params[:snap_dependent_no] !~ /\D/  # returns true if all numbers
       @snap_dependent_no = params[:snap_dependent_no].to_i
-      s.dependent_no = @snap_dependent_no
+      @s.dependent_no = @snap_dependent_no
     else
       @snap_dependent_no = params[:snap_dependent_no].in_numbers
-      s.dependent_no = @snap_dependent_no
+      @s.dependent_no = @snap_dependent_no
     end
 
     if params[:age] !~ /\D/
       @age = params[:age].to_i
-      s.age = @age
+      @s.age = @age
     else
       @age = params[:age].in_numbers
-      s.age = @age
+      @s.age = @age
     end
 
     @snap_gross_income = params[:snap_gross_income]
@@ -37,26 +38,26 @@
 
     if @snap_gross_income !~ /\D/
       @snap_gross_income = @snap_gross_income.to_i
-      s.monthly_gross_income = @snap_gross_income
+      @s.monthly_gross_income = @snap_gross_income
     else
       if @snap_gross_income.include?("dollars")
         @snap_gross_income.slice!"dollars"
       end
       @snap_gross_income = @snap_gross_income.in_numbers
-      s.monthly_gross_income = @snap_gross_income
+      @s.monthly_gross_income = @snap_gross_income
     end
 
-    if params[:disabled] != 'none'
+    if params[:disabled] != 'No'
       @disabled = true
     end
 
       # Data storage
-      s.user_location = params[:user_location]
-      s.phone_number = params[:phone_number] if params[:phone_number].present?
-      s.enrolled_in_education = params[:education]
-      s.citizen = params[:citizen]
-      s.disabled_status = params[:disabled]
-      s.zipcode = params[:zipcode]
+      @s.user_location = params[:user_location]
+      @s.phone_number = params[:phone_number] if params[:phone_number].present?
+      @s.enrolled_in_education = params[:education]
+      @s.citizen = params[:citizen]
+      @s.disabled_status = params[:disabled]
+      @s.zipcode = params[:zipcode]
 
         if params[:education]  == 'no' && params[:citizen] == 'yes'
 
@@ -69,23 +70,23 @@
             end
             if @snap_gross_income < @snap_eligibility.snap_gross_income
               @eligible = "yes"
-              s.snap_eligibility_status = @eligible
+              @s.snap_eligibility_status = @eligible
             else
               @eligible = "no"
-               s.snap_eligibility_status = @eligible
+               @s.snap_eligibility_status = @eligible
             end
 
         elsif params[:education]  == 'yes'
           @eligible = 'maybe'
-          s.snap_eligibility_status = @eligible
+          @s.snap_eligibility_status = @eligible
         elsif params[:citizen] == 'no'
           @eligible = 'maybe'
-          s.snap_eligibility_status = @eligible
+          @s.snap_eligibility_status = @eligible
         end
 
         if @age < 18
           @eligible = "no"
-          s.snap_eligibility_status = @eligible
+          @s.snap_eligibility_status = @eligible
         end
 
         @user_zipcode = params[:zipcode]
@@ -119,8 +120,13 @@
               @food_resources_first = @food_resources.first
               @food_resources_second = @food_resources.second
           end
+      @s.save
 
-      s.save
+      if params[:citizen].present? && params[:disabled].present? && params[:education].present?
+      else
+         flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
+        render "new"
+      end
   end
 
 

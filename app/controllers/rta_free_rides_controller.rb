@@ -6,16 +6,17 @@ class RtaFreeRidesController < ApplicationController
 
   def new
     @rta_free_ride = RtaFreeRide.new
+    @r = RtaFreeRideData.new
   end
 
   def create
-    r = RtaFreeRideData.new
+    @r = RtaFreeRideData.new
     if params[:rta_dependent_no] !~ /\D/  # returns true if all numbers
       rta_dependent_no = params[:rta_dependent_no].to_i
-      r.dependent_no = rta_dependent_no
+      @r.dependent_no = rta_dependent_no
     else
       rta_dependent_no = params[:rta_dependent_no].in_numbers
-      r.dependent_no = rta_dependent_no
+      @r.dependent_no = rta_dependent_no
     end
 
     rta_gross_income = params[:rta_gross_income]
@@ -23,21 +24,21 @@ class RtaFreeRidesController < ApplicationController
 
     if rta_gross_income !~ /\D/
       rta_gross_income = rta_gross_income.to_i
-      r.gross_annual_income = rta_gross_income
+      @r.gross_annual_income = rta_gross_income
     else
       if rta_gross_income.include?("dollars")
         rta_gross_income.slice!"dollars"
       end
       rta_gross_income = rta_gross_income.in_numbers
-      r.gross_annual_income = rta_gross_income
+      @r.gross_annual_income = rta_gross_income
     end
 
     if params[:age] !~ /\D/
       age = params[:age].to_i
-      r.age = age
+      @r.age = age
     else
       age = params[:age].in_numbers
-      r.age = age
+      @r.age = age
     end
 
     if rta_gross_income.present? && rta_dependent_no.present?
@@ -49,14 +50,14 @@ class RtaFreeRidesController < ApplicationController
       if params[:disabled] != 'none' || age > 65
         if rta_gross_income < rta_eligibility.rta_gross_income
           @eligible = "yes"
-          r.rta_eligibility_status = "yes"
+          @r.rta_eligibility_status = "yes"
         else
           @eligible = "no"
-          r.rta_eligibility_status = "no"
+          @r.rta_eligibility_status = "no"
         end
       else
         @eligible = "no"
-        r.rta_eligibility_status = "no"
+        @r.rta_eligibility_status = "no"
       end
 
     else
@@ -64,11 +65,11 @@ class RtaFreeRidesController < ApplicationController
     end
 
     #DATA STORAGE
-    r.user_location = params[:user_location]
-    r.phone_number = params[:phone_number] if params[:phone_number].present?
-    r.disabled_status = params[:disabled]
-    r.zipcode = params[:zipcode]
-    r.save
+    @r.user_location = params[:user_location]
+    @r.phone_number = params[:phone_number] if params[:phone_number].present?
+    @r.disabled_status = params[:disabled]
+    @r.zipcode = params[:zipcode]
+    @r.save
 
      @user_zipcode = params[:zipcode]
      @zipcode = @user_zipcode << ".0"
@@ -112,6 +113,12 @@ class RtaFreeRidesController < ApplicationController
             @transportation_resources_first = @transportation_resources.first
             @transportation_resources_second = @transportation_resources.second
         end
+
+      if params[:disabled].present?
+      else
+        flash.now[:alert] = 'Looks like you forgot to answer the question about disability benefits! Please answer all questions below.'
+        render "new"
+      end
 
   end
 

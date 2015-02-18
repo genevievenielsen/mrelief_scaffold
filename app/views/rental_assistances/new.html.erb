@@ -22,7 +22,7 @@
     <form action="/rental_assistances" role="form" method="post">
 
 
-<label> <b>What circumstance explains why you are unable to pay rent at this time? </b></label>
+  <label> <b>What circumstance explains why you are unable to pay rent at this time? </b></label>
 
   <div class="relative" id="rental_status">
     <%= radio_button_tag 'rental_status', 'medical circumstance' %> Someone experiencing a medical circumstance
@@ -50,41 +50,33 @@
   <br>
 
   <div class="row">
-  <div class="form-group col-sm-12">
-
+    <div class="form-group col-md-12">
     <label for="lease" id="lease" >Is your name currently on the lease of the apartment that you are renting?</label>
-
-      <div class="col-sm-6">
-        <div id="lease" >
-          <%= radio_button_tag 'lease', 'yes' %> yes
-          <%= radio_button_tag 'lease', 'no' %> no
-        </div>
-      </div>
-  </div>
+      <br>
+        <% [ 'yes', 'no' ].each do |lease| %>
+          <%= radio_button_tag 'lease', lease, @r.name_on_lease == lease %>
+          <%= lease.humanize %>
+        <% end %>
+    </div>
   </div>
 
   <div class="row">
-  <div class="form-group col-sm-12">
-
+    <div class="form-group col-md-12">
     <label for="next_rent" id="next_rent">Can you document that you can afford next month’s rent? </label>
-
-      <div class="col-sm-6">
-        <div id="next_rent" >
-          <%= radio_button_tag 'next_rent', 'yes' %> yes
-          <%= radio_button_tag 'next_rent', 'no' %> no
-        </div>
-      </div>
-  </div>
+    <br>
+        <% [ 'yes', 'no' ].each do |next_rent| %>
+          <%= radio_button_tag 'next_rent', next_rent, @r.next_month_rent == next_rent %>
+          <%= next_rent.humanize %>
+        <% end %>
+    </div>
   </div>
 
   <!-- Label and input for rental_dependent_no -->
   <div class="row">
     <div class="form-group col-sm-9">
-    <label for="rental_dependent_no">How many dependents (including yourself) are in your household?</label>
+    <label for="rental_dependent_no">How many dependents (including yourself) are in your household? <button type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button></label>
 
-     <button type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-
-      <input type="text" id="rental_dependent_no" name="rental_dependent_no" placeholder="For example: 3" class="form-control" value="<%= @rental_assistance.rental_dependent_no %>" required>
+      <input type="text" id="rental_dependent_no" name="rental_dependent_no" placeholder="For example: 3" class="form-control" value="<%= @r.dependent_no %>" required>
     </div>
   </div>
 
@@ -100,21 +92,35 @@
 
     <div class="input-group">
       <span class="input-group-addon">$</span>
-        <input type="text" id="rental_gross_income" name="rental_gross_income" placeholder="For example: 4000" class="form-control" value="<%= @rental_assistance.rental_gross_income %>" required>
+        <input type="text" id="rental_gross_income" name="rental_gross_income" placeholder="For example: 4000" class="form-control" value="<%= @r.ninety_day_gross_income %>" required>
       <span class="input-group-addon">.00</span>
     </div>
   </div>
   </div>
 
-  <%= render 'programs/zipcode_question' %>
-
   <div class="row">
-    <%= render "layouts/location_dropdown" %>
+   <div class="form-group col-sm-9 pull-left">
+     <label for="zipcode">What is your zipcode?</label>
+       <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" value="<%= @r.zipcode.chop.chop if @r.zipcode.present? %>"required>
+   </div>
   </div>
 
-  <div class="row">
-    <%= render "layouts/phone_question" %>
-  </div>
+ <div class="row">
+   <div class="form-group col-sm-9">
+   <label for="location" id="location_dropdown">Where are you completing this form? </label>
+   <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], ['Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Other', 'other']], @r.user_location), :class => "form-control", :prompt => "Select a location") %>
+   </div>
+ </div>
+
+ <div class="row">
+ <div class="form-group col-sm-9">
+   <label for="phone_number">What is your cell phone number?</label>
+     <button type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+   <div>
+     <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control" value="<%= @r.phone_number %>">
+   </div>
+ </div>
+ </div>
 
   <div class="row">
     <div class="col-md-6">

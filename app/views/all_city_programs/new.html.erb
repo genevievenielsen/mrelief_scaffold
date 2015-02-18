@@ -14,63 +14,49 @@
 
   <div class="form-group col-sm-9">
     <label for="age">How old are you?</label>
-      <input type="text" id="age" name="age" placeholder="For example: 27" class="form-control" required>
+      <input type="text" id="age" name="age" placeholder="For example: 27" class="form-control" value="<%= @a.age %>" required>
   </div>
 
 
   <!-- Label and input for snap_dependent_no -->
-
   <div class="form-group col-sm-9">
     <label for="dependent_no">What is the number of people living in your household including yourself?</label>
-
       <button type="button" data-toggle="popover" data-content="This should include the number of people who purchase and prepare food with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-
-
     <div>
-      <input type="text" id="dependent_no" name="dependent_no" placeholder="For example: 3" class="form-control" required>
+      <input type="text" id="dependent_no" name="dependent_no" placeholder="For example: 3" class="form-control" value="<%= @a.dependent_no %>" required>
     </div>
   </div>
 
-
     <div class="form-group col-sm-9">
       <label for="children">How many children 18 and under are you caring for?</label>
-
-          <input type="text" id="children" name="children" placeholder="For example: 3" class="form-control"  required>
-
+          <input type="text" id="children" name="children" placeholder="For example: 3" class="form-control"  value="<%= @a.number_of_children %>" required>
     </div>
 
 
    <div class="form-group col-sm-9">
     <label for="medicare_household_size">How many people in your household receive Medicare?</label>
-
-
       <button type="button" data-toggle="popover" data-content="This should include the number of people who purchase and prepare food with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-
     <div>
-      <input type="text" id="medicare_household_size" name="medicare_household_size" placeholder="For example: 2" class="form-control"  required>
+      <input type="text" id="medicare_household_size" name="medicare_household_size" placeholder="For example: 2" class="form-control"  value="<%= @a.medicare_household_size %>" required>
     </div>
   </div>
 
-   <div class="form-group col-sm-9 pull-left">
-      <label for="zipcode">What is your zipcode?</label>
-        <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" required>
+
+  <div class="form-group col-sm-9 pull-left">
+    <label for="zipcode">What is your zipcode?</label>
+        <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" value="<%= @a.zipcode.chop.chop if @a.zipcode.present? %>"required>
   </div>
 
 
   <!-- Label and input for snap_gross_income -->
-
   <div class="form-group col-sm-9">
     <label for="monthly_gross_income">
       What is your gross monthly income?
     </label>
-
-
-      <button type="button" data-toggle="popover" data-content="This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-
-
+    <button type="button" data-toggle="popover" data-content="This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
     <div class="input-group">
   <span class="input-group-addon">$</span>
-  <input type="text" id="monthly_gross_income" name="monthly_gross_income" placeholder="For example: 1000"class="form-control" required>
+  <input type="text" id="monthly_gross_income" name="monthly_gross_income" placeholder="For example: 1000"class="form-control" value="<%= @a.monthly_gross_income %>" required>
   <span class="input-group-addon">.00</span>
   </div>
 </div>
@@ -83,7 +69,7 @@
     <button type="button" data-toggle="popover" data-content="This should include income you earn from your work, self employment and rental income (contributions from people who live with you.)" data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
     <div class="input-group">
       <span class="input-group-addon">$</span>
-       <input type="text" id="net_income" name="net_income" placeholder="For example: 1000"class="form-control" required>
+       <input type="text" id="net_income" name="net_income" placeholder="For example: 1000"class="form-control" value="<%= @a.thirty_day_net_income %>" required>
       <span class="input-group-addon">.00</span>
     </div>
   </div>
@@ -96,23 +82,22 @@
       <button type="button" data-toggle="popover" data-content="This includes social security (SSI), veterans benefits, railroad assistance etc." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
       <div class="input-group">
         <span class="input-group-addon">$</span>
-         <input type="text" id="monthly_benefits" name="monthly_benefits" placeholder="For example: 1000"class="form-control" required>
+         <input type="text" id="monthly_benefits" name="monthly_benefits" placeholder="For example: 1000"class="form-control" value="<%= @a.monthly_benefits %>" required>
         <span class="input-group-addon">.00</span>
       </div>
     </div>
 
-
-      <div class="form-group col-sm-9">
-
-        <label for="anticipate_income" id="anticipate_income">Do you or your child anticipate getting any other source of income outside of your job, child support or SSI? </label>
-
-        <button type="button" data-toggle="popover" data-content="This includes unemployment insurance, pensions, workers compensation and any other form of income." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-
-        <div id="anticipate_income">
-            <%= radio_button_tag 'anticipate_income', 'yes' %> Yes
-            <%= radio_button_tag 'anticipate_income', 'no' %> No
-        </div>
+      <div class="form-group col-md-9">
+      <label for="anticipate_income" id="anticipate_income">Do you or your child anticipate getting any other source of income outside of your job, child support or SSI?
+      <button type="button" data-toggle="popover" data-content="This includes unemployment insurance, pensions, workers compensation and any other form of income." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+      </label>
+        <br>
+          <% [ 'yes', 'no'].each do |anticipate_income| %>
+            <%= radio_button_tag 'anticipate_income', anticipate_income, @a.anticipate_other_income == anticipate_income %>
+            <%= anticipate_income.humanize %>
+          <% end %>
       </div>
+
 
      <!-- Label and input for expect_child_support -->
       <div class="form-group col-sm-9">
@@ -121,7 +106,7 @@
         </label>
         <div class="input-group">
           <span class="input-group-addon">$</span>
-           <input type="text" id="expect_child_support" name="expect_child_support" placeholder="For example: 500"class="form-control" required>
+           <input type="text" id="expect_child_support" name="expect_child_support" placeholder="For example: 500" value="<%= @a.child_support %>" class="form-control" required>
           <span class="input-group-addon">.00</span>
         </div>
       </div>
@@ -133,80 +118,68 @@
         </label>
         <div class="input-group">
           <span class="input-group-addon">$</span>
-           <input type="text" id="expect_ssi" name="expect_ssi" placeholder="For example: 500"class="form-control" required>
+           <input type="text" id="expect_ssi" name="expect_ssi" placeholder="For example: 500" class="form-control" value="<%= @a.ssi %>" required>
           <span class="input-group-addon">.00</span>
         </div>
       </div>
 
 
 
-<div class="form-group col-sm-9">
+  <div class="form-group col-sm-9">
     <label for="ninety_day_gross_income">
       What is your income over the past 90 days? </label>
-
       <button type="button" data-toggle="popover" data-content="Includes cash receipts from all sources including money wages and salaries before any deductions, unemployment compensation, public assistance, alimony, child support, lottery/gambling winnings, dividends and all other income." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-
     <div class="input-group">
       <span class="input-group-addon">$</span>
-        <input type="text" id="ninety_day_gross_income" name="ninety_day_gross_income" placeholder="For example: 4000" class="form-control" required>
+        <input type="text" id="ninety_day_gross_income" name="ninety_day_gross_income" placeholder="For example: 4000" class="form-control" value="<%= @a.ninety_day_gross_income %>" required>
       <span class="input-group-addon">.00</span>
     </div>
   </div>
-
-<br>
+  <br>
 
 <!-- Label and input for rta_gross_income -->
   <div class="form-group col-sm-9">
-    <label for="annual_gross_income">
-      What is your gross annual income?
-    </label>
-
+      <label for="annual_gross_income">
+        What is your gross annual income?
+      </label>
       <button type="button" data-toggle="popover" data-content="Your total income before tax deductions, including your spouse's income if married and living together on December 31 of last year, and that of a qualified additional resident (if applicable)." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-
-
     <div class="input-group">
-  <span class="input-group-addon">$</span>
-  <input type="text" id="annual_gross_income" name="annual_gross_income" placeholder="For example: 30000" class="form-control" required>
-  <span class="input-group-addon">.00</span>
-</div>
+      <span class="input-group-addon">$</span>
+      <input type="text" id="annual_gross_income" name="annual_gross_income" placeholder="For example: 30000" class="form-control" value="<%= @a.annual_gross_income %>" required>
+      <span class="input-group-addon">.00</span>
+  </div>
 </div>
 
 
   <div class="form-group col-sm-9">
-  <label for="assets">Please estimate the value of your assets. (Exclude the value of your home and car.)</label>
-
-    <button type="button" data-toggle="popover" data-content="Personal property is anything owned by a person that is not land or permanently affixed to land. This includes such items as: money in checking and savings accounts;stocks, bonds, savings certificates, and other securities;farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-
+    <label for="assets">Please estimate the value of your assets. (Exclude the value of your home and car.)</label>
+      <button type="button" data-toggle="popover" data-content="Personal property is anything owned by a person that is not land or permanently affixed to land. This includes such items as: money in checking and savings accounts;stocks, bonds, savings certificates, and other securities;farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
   <div>
-    <input type="text" id="assets" name="assets" placeholder="For example: 5000" class="form-control" required>
+    <input type="text" id="assets" name="assets" placeholder="For example: 5000" class="form-control" value="<%= @a.assets %>" required>
   </div>
 </div>
 <br>
-<div class="form-group col-sm-9 pull-left">
 
-    <label for="education" id="education" >Are you enrolled in college or an institution of higher education ? </label>
 
-    <div class="col-sm-6">
-      <div id="education">
-        <%= radio_button_tag 'education', 'yes' %> Yes
-        <%= radio_button_tag 'education', 'no' %> No
-      </div>
-    </div>
-</div>
+  <div class="form-group col-md-12">
+    <label for="education" id="education">Are you enrolled in college/institution of higher education? </label>
+    <br>
+      <% [ 'yes', 'no'].each do |education| %>
+        <%= radio_button_tag 'education', education, @a.enrolled_in_education == education %>
+        <%= education.humanize %>
+      <% end %>
+  </div>
+
 <br>
 
-<div class="form-group col-sm-12">
-
-    <label for="citizen" id="citizen" class="pull-left">Are you a citizen of the United States? </label>
-    <div class="clearfix"></div>
-
-    <div class="col-sm-6">
-      <div id="citizen"  class="pull-left">
-        <%= radio_button_tag 'citizen', 'yes' %> Yes
-        <%= radio_button_tag 'citizen', 'no' %> No
-      </div>
+<div class="form-group col-md-9">
+      <label for="citizen" id="citizen">Are you a citizen of the United States? </label>
+      <br>
+        <% [ 'yes', 'no'].each do |citizen| %>
+          <%= radio_button_tag 'citizen', citizen, @a.citizen == citizen %>
+          <%= citizen.humanize %>
+        <% end %>
     </div>
-</div>
 <br>
 
 <div class="form-group col-sm-12">
@@ -222,55 +195,43 @@
 
 </div>
 
-  <div class="form-group col-sm-12">
-    <label for="relationship" id="relationship">Describe your biological relationship to the child you are caring for:
-    </label>
-    <div class="clearfix"></div>
-      <div class="col-sm-6">
-        <div id="relationship"  class="pull-left">
-          <%= radio_button_tag 'relationship', 'parent' %> Parent
-          <%= radio_button_tag 'relationship', 'adult_relative' %> Adult relative
-          <%= radio_button_tag 'relationship', 'not_applicable' %> Not applicable
-        </div>
-      </div>
-  </div>
-<br>
-
-  <div class="form-group col-sm-12">
-    <label for="tanif_sixty_months" id="tanif_sixty_months">As a parent have you been receiving TANF for 60 months or more?
-    </label>
-    <div class="clearfix"></div>
-        <div class="col-sm-9">
-          <div id="tanif_sixty_months"  class="pull-left">
-            <%= radio_button_tag 'tanif_sixty_months', 'yes' %> Yes
-            <%= radio_button_tag 'tanif_sixty_months', 'no' %> No
-            <%= radio_button_tag 'tanif_sixty_months', 'caretaker' %>  I am a caretaker relative, this does not apply to me.
-          </div>
-        </div>
+  <div class="form-group col-md-12">
+    <label for="relationship" id="relationship">Describe your biological relationship to the child you are caring for:</label>
+      <br>
+      <% [ 'parent', 'adult relative'].each do |relationship| %>
+        <%= radio_button_tag 'relationship', relationship, @a.relationship_to_child == relationship %>
+        <%= relationship.humanize %>
+      <% end %>
   </div>
   <br>
 
+  <div class="form-group col-md-12">
+  <label for="tanif_sixty_months" id="tanif_sixty_months">As a parent have you been receiving TANF for 60 months or more?</label>
+    <br>
+      <% [ 'yes', 'no', 'I am a caretaker relative, this does not apply to me.'].each do |tanif_sixty_months| %>
+        <%= radio_button_tag 'tanif_sixty_months', tanif_sixty_months, @a.tanif_sixty_months == tanif_sixty_months %>
+        <%= tanif_sixty_months.humanize %>
+      <% end %>
+  </div>
+  <br>
 
-  <div class="form-group col-sm-12">
-    <label for="lease" id="lease" class="pull-left">Is your name currently on the lease of the apartment that you are renting?</label>
-      <div class="col-sm-6">
-        <div id="lease" >
-          <%= radio_button_tag 'lease', 'yes' %> Yes
-          <%= radio_button_tag 'lease', 'no' %> No
-        </div>
-      </div>
+  <div class="form-group col-md-12">
+  <label for="lease" id="lease" >Is your name currently on the lease of the apartment that you are renting?</label>
+    <br>
+      <% [ 'yes', 'no' ].each do |lease| %>
+        <%= radio_button_tag 'lease', lease, @a.name_on_lease == lease %>
+        <%= lease.humanize %>
+      <% end %>
   </div>
 
-  <div class="form-group col-sm-12">
-    <label for="next_rent" id="next_rent" class="pull-left">Can you document that you can afford next month’s rent? </label>
-      <div class="col-sm-6">
-        <div id="next_rent" >
-          <%= radio_button_tag 'next_rent', 'yes' %> Yes
-          <%= radio_button_tag 'next_rent', 'no' %> No
-        </div>
-      </div>
+  <div class="form-group col-md-12">
+  <label for="next_rent" id="next_rent">Can you document that you can afford next month’s rent? </label>
+    <br>
+      <% [ 'yes', 'no' ].each do |next_rent| %>
+        <%= radio_button_tag 'next_rent', next_rent, @a.next_month_rent == next_rent %>
+        <%= next_rent.humanize %>
+      <% end %>
   </div>
-
 
   <div class="form-group col-sm-12">
     <label for="rental_status" id="rental_status" class="pull-left"> If you are unable to pay your rent at this time, what circumstance explains why you are unable to pay rent? </label>
@@ -300,39 +261,40 @@
 
   </div>
 
-<div class="form-group col-sm-12">
-    <label for="status" id="status" class="pull-left">If you have a child, check the box below that describes your child's health insurance status:</label>
-    <div class="clearfix"></div>
-    <div class="col-sm-12">
-      <div id="status"  class="pull-left">
-        <%= radio_button_tag 'status', 'uninsured' %>  been uninsured for 12 months  <br>
-        <%= radio_button_tag 'status', 'job_ended' %>  lost insurance because a JOB ended  <br>
-        <%= radio_button_tag 'status', 'cobra' %>  lost insurance because the insurance was COBRA  <br>
-        <%= radio_button_tag 'status', 'none' %> none of the above <br>
+  <div class="form-group col-sm-12">
+      <label for="status" id="status" class="pull-left">If you have a child, check the box below that describes your child's health insurance status:</label>
+      <div class="clearfix"></div>
+      <div class="col-sm-12">
+        <div id="status"  class="pull-left">
+          <%= radio_button_tag 'status', 'uninsured' %>  been uninsured for 12 months  <br>
+          <%= radio_button_tag 'status', 'job_ended' %>  lost insurance because a JOB ended  <br>
+          <%= radio_button_tag 'status', 'cobra' %>  lost insurance because the insurance was COBRA  <br>
+          <%= radio_button_tag 'status', 'none' %> none of the above <br>
+        </div>
       </div>
+  </div>
+  <br>
+
+    <div class="form-group col-md-12">
+        <label for="disabled" id="disabled">Are you receiving disability benefits?</label>
+        <% [ 'Yes, from Social Security', 'Yes, from the Railroad Retirement Board ', 'Yes, from Veterans Affairs', 'No' ].each do |disabled| %>
+        <br><%= radio_button_tag 'disabled', disabled, @a.disabled_status == disabled %>
+        <%= disabled.humanize %>
+      <% end %>
     </div>
-</div>
 
-<br>
-<div class="form-group col-sm-12">
-  <label for="disabled" id="disabled" class="pull-left">Are you receiving disability benefits?</label>
-    <div class="clearfix"></div>
-    <div class="col-sm-12">
-      <div id="disabled">
-        <%= radio_button_tag 'disabled', 'social-security' %>  Yes, from Social Security <br>
-        <%= radio_button_tag 'disabled', 'railroad' %> Yes, from the Railroad Retirement Board <br>
-        <%= radio_button_tag 'disabled', 'veterans' %>  Yes, from Veterans Affairs <br>
-        <%= radio_button_tag 'disabled', 'none' %> No <br>
-      </div>
+    <div class="form-group col-sm-9">
+    <label for="location" id="location_dropdown">Where are you completing this form? </label>
+    <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], ['Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Other', 'other']], @a.user_location), :class => "form-control", :prompt => "Select a location") %>
     </div>
-</div>
 
-
-  <%= render "layouts/location_dropdown" %>
-
-  <%= render "layouts/phone_question" %>
-
-
+    <div class="form-group col-sm-9">
+    <label for="phone_number">What is your cell phone number?</label>
+      <button type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+    <div>
+      <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control" value="<%= @a.phone_number %>">
+    </div>
+    </div>
 
 
 <div class="row">

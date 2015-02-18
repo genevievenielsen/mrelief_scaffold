@@ -6,16 +6,17 @@ class WicsController < ApplicationController
   # GET /wics/new
   def new
     @wic = Wic.new
+    @w = WicData.new
   end
 
   def create
-    w = WicData.new
+    @w = WicData.new
     if params[:wic_household_size] !~ /\D/  # returns true if all numbers
       wic_household_size = params[:wic_household_size].to_i
-      w.household_size = wic_household_size
+      @w.household_size = wic_household_size
     else
       wic_household_size = params[:wic_household_size].in_numbers
-      w.household_size = wic_household_size
+      @w.household_size = wic_household_size
     end
 
     wic_gross_income = params[:wic_gross_income]
@@ -23,18 +24,18 @@ class WicsController < ApplicationController
 
     if wic_gross_income !~ /\D/
       wic_gross_income = wic_gross_income.to_i
-      w.gross_monthly_income = wic_gross_income
+      @w.gross_monthly_income = wic_gross_income
     else
       if wic_gross_income.include?("dollars")
         wic_gross_income.slice!"dollars"
       end
       wic_gross_income = wic_gross_income.in_numbers
-      w.gross_monthly_income = wic_gross_income
+      @w.gross_monthly_income = wic_gross_income
     end
 
 
     wic_status = params[:wic_status]
-    w.health_status = params[:wic_status]
+    @w.health_status = params[:wic_status]
 
     if  wic_gross_income.present? && wic_household_size.present?
 
@@ -43,9 +44,9 @@ class WicsController < ApplicationController
       if wic_gross_income < wic_eligibility.wic_gross_income
         if wic_status != 'none of the above'
           @eligible = true
-          w.eligibility_status = "yes"
+          @w.eligibility_status = "yes"
         else
-          w.eligibility_status = "no"
+          @w.eligibility_status = "no"
         end
       end
 
@@ -95,10 +96,16 @@ class WicsController < ApplicationController
         @child_resources_second = @child_resources.second
     end
 
-    w.user_location = params[:user_location]
-    w.phone_number = params[:phone_number] if params[:phone_number].present?
-    w.zipcode = params[:zipcode]
-    w.save
+    @w.user_location = params[:user_location]
+    @w.phone_number = params[:phone_number] if params[:phone_number].present?
+    @w.zipcode = params[:zipcode]
+    @w.save
+
+    if params[:wic_status].present?
+    else
+       flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
+      render "new"
+    end
 
   end
 

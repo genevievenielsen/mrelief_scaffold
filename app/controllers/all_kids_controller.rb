@@ -7,32 +7,33 @@ class AllKidsController < ApplicationController
   # GET /all_kids/new
   def new
     @all_kid = AllKid.new
+    @a = AllKidsData.new
   end
 
   # POST /all_kids
   # POST /all_kids.json
   def create
-    a = AllKidsData.new
+    @a = AllKidsData.new
     # if the params hash contains a letter
     if params[:kids_household_size] !~ /\D/  # returns true if all numbers
       kids_household_size = params[:kids_household_size].to_i
-      a.household_size = kids_household_size
+      @a.household_size = kids_household_size
     else
       kids_household_size = params[:kids_household_size].in_numbers
-      a.household_size = kids_household_size
+      @a.household_size = kids_household_size
     end
 
     kids_gross_income = params[:kids_gross_income]
     kids_gross_income = kids_gross_income.gsub(/[^0-9\.]/, '').to_i
     if kids_gross_income !~ /\D/
       kids_gross_income = kids_gross_income.to_i
-      a.monthly_gross_income = kids_gross_income
+      @a.monthly_gross_income = kids_gross_income
     else
       if kids_gross_income.include?("dollars")
         kids_gross_income.slice!"dollars"
       end
       kids_gross_income = kids_gross_income.in_numbers
-      a.monthly_gross_income = kids_gross_income
+      @a.monthly_gross_income = kids_gross_income
     end
 
     if params[:pregnant] == 'yes'
@@ -45,20 +46,20 @@ class AllKidsController < ApplicationController
 
        if kids_gross_income < kids_eligibility.premium_1_gross_income
          @eligible = true
-         a.allkids_eligibility_status = "yes"
+         @a.allkids_eligibility_status = "yes"
        end
 
        if @eligible ==  true
         # now find out which version they are eligible for
         if kids_gross_income <= kids_eligibility.assist_gross_income
           @assist_eligible = true
-          a.assist_eligibility = "yes"
+          @a.assist_eligibility = "yes"
         elsif kids_gross_income <= kids_eligibility.share_gross_income && kids_gross_income > kids_eligibility.assist_gross_income
           @share_eligible = true
-          a.share_eligibility = "yes"
+          @a.share_eligibility = "yes"
         elsif kids_gross_income <= kids_eligibility.premium_1_gross_income && kids_gross_income > kids_eligibility.share_gross_income
           @premium1_eligible = true
-          a.premium1_eligibility = "yes"
+          @a.premium1_eligibility = "yes"
         end
        end
 
@@ -66,33 +67,33 @@ class AllKidsController < ApplicationController
         if kids_gross_income <= kids_eligibility.premium_2_gross_income && kids_gross_income > kids_eligibility.premium_1_gross_income
           if params["status"] == 'none'
              @eligible = false
-             a.allkids_eligibility_status = "no"
+             @a.allkids_eligibility_status = "no"
           else
             @eligible = true
             @premium2_eligible = true
-            a.allkids_eligibility_status = "yes"
-            a.premium2_eligibility = "yes"
+            @a.allkids_eligibility_status = "yes"
+            @a.premium2_eligibility = "yes"
           end
         end
 
         if kids_gross_income > kids_eligibility.premium_2_gross_income
           @eligible = false
-          a.allkids_eligibility_status = "no"
+          @a.allkids_eligibility_status = "no"
         end
 
         if kids_household_size == 1
           @eligible = false
-          a.allkids_eligibility_status = "no"
+          @a.allkids_eligibility_status = "no"
         end
     end
 
     # Data Storage
-    a.phone_number = params[:phone_number] if params[:phone_number].present?
-    a.user_location = params[:user_location]
-    a.pregnant = params[:pregnant]
-    a.healthcare_status = params[:status]
-    a.zipcode = params[:zipcode]
-    a.save
+    @a.phone_number = params[:phone_number] if params[:phone_number].present?
+    @a.user_location = params[:user_location]
+    @a.pregnant = params[:pregnant]
+    @a.healthcare_status = params[:status]
+    @a.zipcode = params[:zipcode]
+    @a.save
 
     @user_zipcode = params[:zipcode]
     @zipcode = @user_zipcode << ".0"
@@ -140,6 +141,11 @@ class AllKidsController < ApplicationController
              @medical_resources_first = @medical_resources.first
              @medical_resources_second = @medical_resources.second
          end
+      if params[:pregnant].present? && params[:status].present?
+      else
+         flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
+        render "new"
+      end
 
 
   end

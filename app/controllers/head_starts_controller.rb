@@ -20,17 +20,18 @@ class HeadStartsController < ApplicationController
 
   def new
     @head_start = HeadStart.new
+    @h = HeadStartData.new
   end
 
   def create
-    h = HeadStartData.new
+    @h = HeadStartData.new
      # if the params hash contains a letter
     if params[:hs_dependent_no] !~ /\D/  # returns true if all numbers
       hs_dependent_no = params[:hs_dependent_no].to_i
-      h.dependent_no = hs_dependent_no
+      @h.dependent_no = hs_dependent_no
     else
       hs_dependent_no = params[:hs_dependent_no].in_numbers
-      h.dependent_no = hs_dependent_no
+      @h.dependent_no = hs_dependent_no
     end
 
     hs_gross_income = params[:hs_gross_income]
@@ -38,31 +39,28 @@ class HeadStartsController < ApplicationController
 
     if hs_gross_income !~ /\D/
       hs_gross_income = hs_gross_income.to_i
-      h.gross_annual_income = hs_gross_income
+      @h.gross_annual_income = hs_gross_income
     else
       if hs_gross_income.include?("dollars")
         hs_gross_income.slice!"dollars"
       end
       hs_gross_income = hs_gross_income.in_numbers
-      h.gross_annual_income = hs_gross_income
+      @h.gross_annual_income = hs_gross_income
     end
 
     if  hs_gross_income.present? && hs_dependent_no.present?
 
        hs_eligibility = HeadStart.find_by({ :hs_dependent_no => hs_dependent_no })
 
-       p "hs_gross_income = #{hs_gross_income}"
-       p "hs_eligibility.hs_gross_income = #{hs_eligibility.hs_gross_income}"
-
        if hs_gross_income < hs_eligibility.hs_gross_income
          if params[:child_birthdate]  == "yes"
             @eligible = true
-            h.eligibility_status = "yes"
+            @h.eligibility_status = "yes"
           else
-            h.eligibility_status = "no"
+            @h.eligibility_status = "no"
           end
        else
-        h.eligibility_status = "no"
+        @h.eligibility_status = "no"
       end
     end #closes if statement
 
@@ -109,11 +107,17 @@ class HeadStartsController < ApplicationController
           @headstart_resources_second = @headstart_resources.second
       end
 
-    h.user_location = params[:user_location]
-    h.phone_number = params[:phone_number] if params[:phone_number].present?
-    h.child_birthdate = params[:child_birthdate]
-    h.zipcode = params[:zipcode]
-    h.save
+    @h.user_location = params[:user_location]
+    @h.phone_number = params[:phone_number] if params[:phone_number].present?
+    @h.child_birthdate = params[:child_birthdate]
+    @h.zipcode = params[:zipcode]
+    @h.save
+
+    if params[:child_birthdate].present?
+    else
+       flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
+      render "new"
+    end
 
   end #closes end
 

@@ -12,15 +12,6 @@
     </div>
 </div>
 
-    <% if @tanif.errors.any? %>
-      <% @tanif.errors.full_messages.each do |message| %>
-        <div class="alert alert-dismissable alert-danger">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <%= message %>
-        </div>
-      <% end %>
-    <% end %>
-
 <div class="row">
 <div class="panel panel-default col-md-8 col-md-offset-2">
   <div class="panel-body">
@@ -28,17 +19,12 @@
 
     <div class="row">
       <div class="form-group col-md-12">
-        <label for="relationship" id="relationship">Describe your biological relationship to the child you are caring for:
-        </label>
-        <div class="clearfix"></div>
-        <div class="row">
-            <div class="col-md-6">
-              <div id="relationship"  class="pull-left">
-                <%= radio_button_tag 'relationship', 'parent' %> Parent
-                <%= radio_button_tag 'relationship', 'adult_relative' %> Adult relative
-              </div>
-            </div>
-        </div>
+        <label for="relationship" id="relationship">Describe your biological relationship to the child you are caring for:</label>
+          <br>
+          <% [ 'parent', 'adult relative'].each do |relationship| %>
+            <%= radio_button_tag 'relationship', relationship, @t.relationship_to_child == relationship %>
+            <%= relationship.humanize %>
+          <% end %>
       </div>
     </div>
 
@@ -56,27 +42,24 @@
 
     <div class="row">
       <div class="form-group col-md-12">
-        <label for="tanif_sixty_months" id="tanif_sixty_months">As a parent have you been receiving TANF for 60 months or more?
-        </label>
-        <div class="clearfix"></div>
-        <div class="row">
-            <div class="col-md-12">
-              <div id="tanif_sixty_months"  class="pull-left">
-                <%= radio_button_tag 'tanif_sixty_months', 'yes' %> yes
-                <%= radio_button_tag 'tanif_sixty_months', 'no' %> no
-                <%= radio_button_tag 'tanif_sixty_months', 'caretaker' %>  I am a caretaker relative, this does not apply to me.
-              </div>
-            </div>
-        </div>
-        </div>
-     </div>
+
+    <div class="row">
+      <div class="form-group col-md-12">
+      <label for="tanif_sixty_months" id="tanif_sixty_months">As a parent have you been receiving TANF for 60 months or more?</label>
+        <br>
+          <% [ 'yes', 'no', 'I am a caretaker relative, this does not apply to me.'].each do |tanif_sixty_months| %>
+            <%= radio_button_tag 'tanif_sixty_months', tanif_sixty_months, @t.tanif_sixty_months == tanif_sixty_months %>
+            <%= tanif_sixty_months.humanize %>
+          <% end %>
+      </div>
+    </div>
 
     <div class="row">
       <div class="form-group col-md-9">
         <label for="children">How many children 18 and under are you caring for?</label>
         <div class="row">
           <div class="col-md-12">
-            <input type="text" id="children" name="children" placeholder="For example: 3" class="form-control"  required>
+            <input type="text" id="children" name="children" placeholder="For example: 3" class="form-control"  value="<%= @t.children %>" required>
           </div>
         </div>
       </div>
@@ -90,7 +73,7 @@
         <button type="button" data-toggle="popover" data-content="The number of people in your household including  yourself." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
       <div class="row">
         <div class="col-md-12">
-          <input type="text" id="household_size" name="household_size" placeholder="For example: 3" class="form-control"  required>
+          <input type="text" id="household_size" name="household_size" placeholder="For example: 3" class="form-control"  value="<%= @t.household_size %>" required>
         </div>
       </div>
     </div>
@@ -101,26 +84,30 @@
   <div class="form-group col-md-9">
     <label for="gross_income">
        How much do you anticipate to earn in gross income in the next 30 days?
+       <button type="button" data-toggle="popover" data-content="This should include income you or your child earn from your work, self employment and rental income (contributions from people who live with you.) This should NOT include child support or SSI benefits." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
     </label>
-      <button type="button" data-toggle="popover" data-content="This should include income you or your child earn from your work, self employment and rental income (contributions from people who live with you.) This should NOT include child support or SSI benefits." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
     <div class="input-group">
       <span class="input-group-addon">$</span>
-       <input type="text" id="gross_income" name="gross_income" placeholder="For example: 1000"class="form-control" required>
+       <input type="text" id="gross_income" name="gross_income" placeholder="For example: 1000"class="form-control" value="<%= @t.thirty_day_gross_income %>" required>
       <span class="input-group-addon">.00</span>
     </div>
     </div>
   </div>
 
+
 <div class="row">
   <div class="form-group col-md-12">
-    <label for="anticipate_income" id="anticipate_income">Do you or your child anticipate getting any other source of income outside of your job, child support or SSI? </label>
-    <button type="button" data-toggle="popover" data-content="This includes unemployment insurance, pensions, workers compensation and any other form of income." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-    <div id="anticipate_income">
-        <%= radio_button_tag 'anticipate_income', 'yes' %> yes
-        <%= radio_button_tag 'anticipate_income', 'no' %> no
-    </div>
+  <label for="anticipate_income" id="anticipate_income">Do you or your child anticipate getting any other source of income outside of your job, child support or SSI?
+  <button type="button" data-toggle="popover" data-content="This includes unemployment insurance, pensions, workers compensation and any other form of income." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+  </label>
+    <br>
+      <% [ 'yes', 'no'].each do |anticipate_income| %>
+        <%= radio_button_tag 'anticipate_income', anticipate_income, @t.anticipate_other_income == anticipate_income %>
+        <%= anticipate_income.humanize %>
+      <% end %>
   </div>
 </div>
+
 
  <!-- Label and input for expect_child_support -->
 <div class="row">
@@ -130,49 +117,59 @@
     </label>
     <div class="input-group">
       <span class="input-group-addon">$</span>
-       <input type="text" id="expect_child_support" name="expect_child_support" placeholder="For example: 500"class="form-control" required>
+       <input type="text" id="expect_child_support" name="expect_child_support" placeholder="For example: 500" class="form-control" value="<%= @t.expect_child_support %>" required>
       <span class="input-group-addon">.00</span>
     </div>
   </div>
 </div>
 
    <!-- Label and input for expect_ssi -->
-<div class="row">
-  <div class="form-group col-md-9">
-    <label for="expect_ssi">
-      How much do you expect to receive in SSI in the next 30 days?
-    </label>
-    <div class="input-group">
-      <span class="input-group-addon">$</span>
-       <input type="text" id="expect_ssi" name="expect_ssi" placeholder="For example: 500"class="form-control" required>
-      <span class="input-group-addon">.00</span>
-    </div>
-  </div>
-</div>
-
   <div class="row">
-    <div class="form-group col-md-12">
-      <label for="citizen" id="citizen">Are you a citizen of the United States? </label>
-      <div class="clearfix"></div>
-      <div class="row">
-          <div class="col-md-6">
-            <div id="citizen"  class="pull-left">
-              <%= radio_button_tag 'citizen', 'yes' %> yes
-              <%= radio_button_tag 'citizen', 'no' %> no
-            </div>
-          </div>
+    <div class="form-group col-md-9">
+      <label for="expect_ssi">
+        How much do you expect to receive in SSI in the next 30 days?
+      </label>
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+         <input type="text" id="expect_ssi" name="expect_ssi" placeholder="For example: 500"class="form-control" value="<%= @t.expect_ssi %>" required>
+        <span class="input-group-addon">.00</span>
       </div>
     </div>
   </div>
 
-  <%= render 'programs/zipcode_question' %>
+  <div class="row">
+    <div class="form-group col-md-12">
+      <label for="citizen" id="citizen">Are you a citizen of the United States? </label>
+        <br>
+        <% [ 'yes', 'no'].each do |citizen| %>
+          <%= radio_button_tag 'citizen', citizen, @t.citizen == citizen %>
+          <%= citizen.humanize %>
+        <% end %>
+    </div>
+  </div>
+
+   <div class="row">
+    <div class="form-group col-sm-9 pull-left">
+      <label for="zipcode">What is your zipcode?</label>
+        <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" value="<%= @t.zipcode.chop.chop if @t.zipcode.present? %>"required>
+    </div>
+   </div>
 
   <div class="row">
-     <%= render "layouts/location_dropdown" %>
+    <div class="form-group col-sm-9">
+    <label for="location" id="location_dropdown">Where are you completing this form? </label>
+    <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], ['Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Other', 'other']], @t.user_location), :class => "form-control", :prompt => "Select a location") %>
+    </div>
   </div>
 
   <div class="row">
-    <%= render "layouts/phone_question" %>
+  <div class="form-group col-sm-9">
+    <label for="phone_number">What is your cell phone number?</label>
+      <button type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+    <div>
+      <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control" value="<%= @t.phone_number %>">
+    </div>
+  </div>
   </div>
 
   <div class="row">

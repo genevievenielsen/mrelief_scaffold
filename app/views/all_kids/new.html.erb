@@ -12,17 +12,6 @@
 
 </div>
 
-
-<% if @all_kid.errors.any? %>
-  <% @all_kid.errors.full_messages.each do |message| %>
-    <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= message %>
-    </div>
-  <% end %>
-<% end %>
-
-
 <div class="row">
   <div class="panel panel-default col-md-8 col-md-offset-2">
   <div class="panel-body">
@@ -30,34 +19,26 @@
   <!-- Label and input for kids_household_size -->
 
     <p class="allthatapply">Please answer the following questions (check all that apply):</p>
-
     <p class="allthatapply">Has your child:</p>
-
     <input type="checkbox" name="status" value="uninsured">  been uninsured for 12 months<br>
     <input type="checkbox" name="status" value="job_ended"> lost insurance because a JOB ended<br>
     <input type="checkbox" name="status" value="cobra"> lost insurance because the insurance was COBRA<br>
     <input type="checkbox" name="status" value="none"> none of the above<br>
+    <br>
 
-  <br>
-    <div class="form-group col-sm-9">
+  <div class="form-group col-sm-9">
     <label for="kids_household_size">How many children are living in your household?</label>
-
      <button type="button" data-toggle="popover" data-content="The number of children living in your household." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-
-     <input type="text" id="kids_household_size" name="kids_household_size" placeholder="For example: 3" class="form-control" value="<%= @all_kid.kids_household_size %>"required>
+     <input type="text" id="kids_household_size" name="kids_household_size" placeholder="For example: 3" class="form-control" value="<%= @a.household_size %>"required>
   </div>
 
-
-     <div class="form-group col-sm-12">
-
-      <label for="pregnant" id="pregnant" class="pull-left">Are you pregnant ? </label>
-      <div class="clearfix"></div>
-      <div class="col-sm-6">
-        <div id="pregnant">
-          <%= radio_button_tag 'pregnant', 'yes' %> yes
-          <%= radio_button_tag 'pregnant', 'no' %> no
-        </div>
-      </div>
+  <div class="form-group col-md-12">
+    <label for="pregnant" id="pregnant" >Are you pregnant ? </label>
+    <br>
+      <% [ 'yes', 'no'].each do |pregnant| %>
+        <%= radio_button_tag 'pregnant', pregnant, @a.pregnant == pregnant %>
+        <%= pregnant.humanize %>
+      <% end %>
   </div>
 
   <!-- Label and input for kids_gross_income -->
@@ -65,25 +46,33 @@
     <label for="kids_gross_income">
       What is your gross monthly income?
     </label>
-
     <button type="button" data-toggle="popover" data-content="Total monthly income from all sources." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-
     <div class="input-group">
       <span class="input-group-addon">$</span>
-        <input type="text" id="kids_gross_income" name="kids_gross_income" placeholder="For example: 1000" class="form-control"  required>
+        <input type="text" id="kids_gross_income" name="kids_gross_income" placeholder="For example: 1000" class="form-control"  value="<%= @a.monthly_gross_income %>" required>
       <span class="input-group-addon">.00</span>
     </div>
   </div>
 
-   <div class="form-group col-sm-9 pull-left">
-      <label for="zipcode">What is your zipcode?</label>
-        <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" required>
+  <div class="form-group col-sm-9 pull-left">
+    <label for="zipcode">What is your zipcode?</label>
+      <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" value="<%= @a.zipcode.chop.chop if @a.zipcode.present? %>"required>
   </div>
 
 
-  <%= render "layouts/location_dropdown" %>
+  <div class="form-group col-sm-9">
+    <label for="location" id="location_dropdown">Where are you completing this form? </label>
+    <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], ['Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Other', 'other']], @a.user_location), :class => "form-control", :prompt => "Select a location") %>
+  </div>
 
-  <%= render "layouts/phone_question" %>
+  <div class="form-group col-sm-9">
+    <label for="phone_number">What is your cell phone number?</label>
+      <button type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+    <div>
+      <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control" value="<%= @a.phone_number %>">
+    </div>
+  </div>
+
 
   <div class="col-md-6">
     <%= render "programs/calculator" %>

@@ -16,15 +16,6 @@
 </div>
  </div>
 
-<% if @rta_free_ride.errors.any? %>
-  <% @rta_free_ride.errors.full_messages.each do |message| %>
-    <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= message %>
-    </div>
-  <% end %>
-<% end %>
-
 <div class="row">
   <div class="panel panel-default col-md-8 col-md-offset-2">
     <div class="panel-body">
@@ -32,11 +23,14 @@
       <form action="/rta_free_rides" role="form" method="post">
 
 
+  <div class="row">
     <div class="form-group col-sm-9">
       <label for="age">How old are you?</label>
-      <input type="text" id="age" name="age" placeholder="For example: 27" class="form-control" required>
+      <input type="text" id="age" name="age" placeholder="For example: 27" class="form-control" value="<%= @r.age %>" required>
     </div>
+  </div>
 
+  <div class="row">
     <div class="form-group col-sm-9">
       <label for="disabled" id="disabled">Are you receiving disability benefits?</label>
         <div id="disabled">
@@ -46,22 +40,22 @@
           <%= radio_button_tag 'disabled', 'none' %> No <br>
         </div>
     </div>
-
+  </div>
 
   <!-- Label and input for rta_dependent_no -->
 
+  <div class="row">
   <div class="form-group col-sm-9">
-
     <label for="rta_dependent_no">How many dependents (including yourself) are in your household?</label>
-
     <button type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself, your spouse (if applicable), and/or resident for whom you (or you and your spouse) provided more than half of that person's total financial support last year." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
 
     <div class="row">
-       <div class="form-group col-md-6">
-        <input type="text" id="rta_dependent_no" name="rta_dependent_no" placeholder="For example: 3" class="form-control" value="<%= @rta_free_ride.rta_dependent_no %>" required>
+       <div class="form-group col-md-12">
+        <input type="text" id="rta_dependent_no" name="rta_dependent_no" placeholder="For example: 3" class="form-control" value="<%= @r.dependent_no %>" required>
       </div>
     </div>
-
+  </div>
+  </div>
 
   <!-- Label and input for rta_gross_income -->
     <div class="row">
@@ -74,20 +68,34 @@
 
         <div class="input-group">
           <span class="input-group-addon">$</span>
-          <input type="text" id="rta_gross_income" name="rta_gross_income" placeholder="For example: 30000" class="form-control" value= "<%= @rta_free_ride.rta_gross_income %>" required>
+          <input type="text" id="rta_gross_income" name="rta_gross_income" placeholder="For example: 30000" class="form-control" value= "<%= @r.gross_annual_income %>" required>
           <span class="input-group-addon">.00</span>
         </div>
       </div>
     </div>
 
-    <%= render 'programs/zipcode_question' %>
+     <div class="row">
+      <div class="form-group col-sm-9 pull-left">
+        <label for="zipcode">What is your zipcode?</label>
+          <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" value="<%= @r.zipcode.chop.chop if @r.zipcode.present? %>"required>
+      </div>
+     </div>
 
     <div class="row">
-      <%= render "layouts/location_dropdown" %>
+      <div class="form-group col-sm-9">
+      <label for="location" id="location_dropdown">Where are you completing this form? </label>
+      <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], ['Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Other', 'other']], @r.user_location), :class => "form-control", :prompt => "Select a location") %>
+      </div>
     </div>
 
     <div class="row">
-      <%= render "layouts/phone_question" %>
+    <div class="form-group col-sm-9">
+      <label for="phone_number">What is your cell phone number?</label>
+        <button type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+      <div>
+        <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control" value="<%= @r.phone_number %>">
+      </div>
+    </div>
     </div>
 
     <div class="row">
@@ -97,7 +105,7 @@
     </div>
 
   <div>
-      <button type="submit" class="btn btn-primary program-btn">See if I qualify</button>
+    <button type="submit" class="btn btn-primary program-btn">See if I qualify</button>
   </div>
 
   </div>
