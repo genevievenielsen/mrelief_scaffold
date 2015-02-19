@@ -17,21 +17,19 @@
 <div class="panel-body">
 <form action="/medicaids" class="form-horizontal" method="post">
 
+<div class="row">
 <div class="form-group col-md-12">
-
-    <div class="row">
-    <label for="citizen" id="citizen" class="pull-left">Are you a citizen of the United States? </label>
-
+    <label for="citizen" id="citizen" >Are you a citizen of the United States? </label><br>
     <div class="row">
       <div class="col-md-6">
-        <div id="citizen" required>
+        <div id="citizen">
           <%= radio_button_tag 'citizen', 'yes' %> yes
           <%= radio_button_tag 'citizen', 'no' %> no
         </div>
       </div>
       </div>
   </div>
-  </div>
+</div>
 
   <!-- Label and input for medicaid_household_size -->
   <div class="row">

@@ -28,7 +28,7 @@
 
    <div class="row">
      <div class="form-group col-md-9">
-           <label for="disabled" id="disabled">Are you receiving disability benefits?</label>
+      <label for="disabled" id="disabled">Are you receiving disability benefits?</label>
        <% [ 'Yes, from Social Security', 'Yes, from the Railroad Retirement Board ', 'Yes, from Veterans Affairs', 'No' ].each do |disabled| %>
          <br><%= radio_button_tag 'disabled', disabled, @a.disabled_status == disabled %>
          <%= disabled.humanize %>
@@ -58,10 +58,8 @@
   <div class="form-group col-md-9">
     <label for="aabd_net_income">
      How much do you anticipate to earn in net income in the next 30 days? (After taxes have been taken out)
+       <button type="button" data-toggle="popover" data-content="This should include income you earn from your work, self employment and rental income (contributions from people who live with you.)" data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
     </label>
-
-    <button type="button" data-toggle="popover" data-content="This should include income you earn from your work, self employment and rental income (contributions from people who live with you.)" data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-
     <div class="input-group">
       <span class="input-group-addon">$</span>
        <input type="text" id="aabd_net_income" name="aabd_net_income" placeholder="For example: 1000"class="form-control" value="<%= @a.thirty_day_net_income %>" required>
@@ -75,10 +73,8 @@
     <div class="form-group col-md-9">
       <label for="aabd_benefits">
        What is your monthly income expected from government benefits or other assistance?
+         <button type="button" data-toggle="popover" data-content="This includes social security (SSI), veterans benefits, railroad assistance etc." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
       </label>
-
-      <button type="button" data-toggle="popover" data-content="This includes social security (SSI), veterans benefits, railroad assistance etc." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-
       <div class="input-group">
         <span class="input-group-addon">$</span>
          <input type="text" id="aabd_benefits" name="aabd_benefits" placeholder="For example: 1000"class="form-control" value="<%= @a.government_benefits %>" required>
@@ -92,10 +88,8 @@
       <div class="form-group col-md-9">
         <label for="aabd_assets">
           What are your assets worth?
+           <button type="button" data-toggle="popover" data-content="Everything but your home, if you live in it, and one car." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
         </label>
-
-        <button type="button" data-toggle="popover" data-content="Everything but your home, if you live in it, and one car." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-
         <div class="input-group">
           <span class="input-group-addon">$</span>
            <input type="text" id="aabd_assets" name="aabd_assets" placeholder="For example: 1000"class="form-control" value="<%= @a.assets %>" required>
@@ -108,8 +102,9 @@
   <div class="row">
     <div class="form-group col-md-9">
       <label for="citizen" id="citizen">Are you a citizen of the United States? </label>
+      <br>
         <% [ 'yes', 'no'].each do |citizen| %>
-          <br><%= radio_button_tag 'citizen', citizen, @a.citizen == citizen %>
+          <%= radio_button_tag 'citizen', citizen, @a.citizen == citizen %>
           <%= citizen.humanize %>
         <% end %>
     </div>
