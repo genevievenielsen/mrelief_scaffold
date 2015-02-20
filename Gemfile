@@ -16,7 +16,7 @@ gem 'roo'
 gem "spreadsheet"
 gem 'rails_12factor', group: :production
 
-gem 'font-awesome-rails'
+# gem 'font-awesome-rails'
 
 gem 'numbers_in_words'
 
