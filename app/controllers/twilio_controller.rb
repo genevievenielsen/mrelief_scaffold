@@ -179,7 +179,7 @@ class TwilioController < ApplicationController
    end
 
    if session["page"] == "snap_disability_payment" && session["counter"] == 8
-     session["disability_payment"] = params[:Body].strip
+     session["disability_payment"] = params[:Body].strip.downcase
      @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
      message = "What is the gross monthly income of all people living in your household including yourself? Income includes social security, child support, and unemployment insurance before any deductions. Enter a number. Example - 1000."
      if session["disability_payment"] == "yes"
