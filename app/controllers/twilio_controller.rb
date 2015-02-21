@@ -44,7 +44,7 @@ class TwilioController < ApplicationController
       session["counter"] = 1
    end
    if params[:Body].strip.downcase == "medicaid"
-      message = "At the current moment, this form does not include Medicaid's offerings for people with disabilities. If you would like to continue, answer the following question. Are you a citizen of the United States? Enter 'yes' or 'no'"
+      message = "At the current moment, this form does not include Medicaid's offerings for people with disabilities. If you would like to continue, answer the following question. Are you a citizen of the United States or a legal permanent resident who has lived in the US for at least 5 years? Enter 'yes' or 'no'."
       session["page"] = "medicaid_citizen_question"
       session["counter"] = 1
    end
@@ -81,7 +81,7 @@ class TwilioController < ApplicationController
       session["college"] = params[:Body].strip.downcase
      if session["college"] == "no"
        @s.enrolled_in_education = "no"
-       message = "Are you a citizen of the United States? Enter 'yes' or 'no'"
+       message = "Are you a citizen of the United States or a legal permanent resident who has lived in the US for at least five years? Enter 'yes' or 'no'."
        session["page"] = "snap_citizen_question"
      elsif session["college"] == "yes"
        @s.enrolled_in_education = "yes"

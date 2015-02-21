@@ -98,7 +98,7 @@ $(document).ready(function() {
 
   <div class="row">
     <div class="form-group col-md-12">
-      <label for="citizen" id="citizen">Are you a citizen of the United States? </label>
+      <label for="citizen" id="citizen">Are you a citizen of the United States or a legal permanent resident who has lived in the US for at least 5 years? </label>
       <br>
         <% [ 'yes', 'no'].each do |citizen| %>
           <%= radio_button_tag 'citizen', citizen, @s.citizen == citizen %>
