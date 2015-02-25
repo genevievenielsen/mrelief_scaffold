@@ -3588,7 +3588,7 @@ LafCenter.create(:zipcode => '60607.0', :city => 'Chicago', :center => 'Garfield
                  :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'Spanish speaking staff on duty daily')
 LafCenter.create(:zipcode => '60608.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
                  :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'Spanish speaking staff on duty daily')
-LafCenter.create(:zipcode => '60609.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60609.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60609.0', :city => 'Chicago', :center => 'King Community Service Center',
                  :address => '4314 S. Cottage Grove', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 747 - 2272', :spanish => 'All Days')
@@ -3604,7 +3604,7 @@ LafCenter.create(:zipcode => '60614.0', :city => 'Chicago', :center => 'Trina Da
                  :address => '4357 W. Armitage Ave.', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60615.0', :city => 'Chicago', :center => 'King Community Service Center',
                  :address => '4314 S. Cottage Grove', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 747 - 2273', :spanish => 'All Days')
-LafCenter.create(:zipcode => '60616.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60616.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60616.0', :city => 'Chicago', :center => 'King Community Service Center',
                  :address => '4314 S. Cottage Grove', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 747 - 2274', :spanish => 'All Days')
@@ -3612,13 +3612,13 @@ LafCenter.create(:zipcode => '60617.0', :city => 'Chicago', :center => 'South Ch
                  :address => '8650 S. Commercial Ave', :contact => 'Jeanette Sandoval', :telephone => '(312) 745 - 1132', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60618.0', :city => 'Chicago', :center => 'North Area Community Service Center',
                  :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
-LafCenter.create(:zipcode => '60619.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60619.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60619.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
                  :address => '8650 S. Commercial Ave', :contact => 'Jeanette Sandoval', :telephone => '(312) 745 - 1132', :spanish => 'All Days')
-LafCenter.create(:zipcode => '60620.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60620.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
-LafCenter.create(:zipcode => '60621.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60621.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60622.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
                  :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'Spanish speaking staff on duty daily')
@@ -3634,7 +3634,7 @@ LafCenter.create(:zipcode => '60627.0', :city => 'Chicago', :center => 'South Ch
                  :address => '8650 S. Commercial Ave', :contact => 'Jeanette Sandoval', :telephone => '(312) 745 - 1132', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60628.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
                  :address => '8650 S. Commercial Ave', :contact => 'Jeanette Sandoval', :telephone => '(312) 745 - 1132', :spanish => 'All Days')
-LafCenter.create(:zipcode => '60629.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60629.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60630.0', :city => 'Chicago', :center => 'North Area Community Service Center',
                  :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
@@ -3644,19 +3644,19 @@ LafCenter.create(:zipcode => '60631.0', :city => 'Chicago', :center => 'North Ar
                  :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60631.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
-LafCenter.create(:zipcode => '60632.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60632.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60633.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
                  :address => '8650 S. Commercial Ave', :contact => 'Jeanette Sandoval', :telephone => '(312) 745 - 1132', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60634.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
-LafCenter.create(:zipcode => '60635.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60635.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
-LafCenter.create(:zipcode => '60636.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60636.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
-LafCenter.create(:zipcode => '60637.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60637.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
-LafCenter.create(:zipcode => '60638.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60638.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60639.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
@@ -3682,7 +3682,7 @@ LafCenter.create(:zipcode => '60649.0', :city => 'Chicago', :center => 'South Ch
                  :address => '8650 S. Commercial Ave', :contact => 'Jeanette Sandoval', :telephone => '(312) 745 - 1132', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60650.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
-LafCenter.create(:zipcode => '60652.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60652.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60653.0', :city => 'Chicago', :center => 'King Community Service Center',
                  :address => '4314 S. Cottage Grove', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 747 - 2275', :spanish => 'All Days')
@@ -3720,7 +3720,7 @@ LafCenter.create(:zipcode => '60607.0', :city => 'Chicago', :center => 'Garfield
                  :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'Spanish speaking staff on duty daily')
 LafCenter.create(:zipcode => '60608.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
                  :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'Spanish speaking staff on duty daily')
-LafCenter.create(:zipcode => '60609.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60609.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60609.0', :city => 'Chicago', :center => 'King Community Service Center',
                  :address => '4314 S. Cottage Grove', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 747 - 2272', :spanish => 'All Days')
@@ -3736,7 +3736,7 @@ LafCenter.create(:zipcode => '60614.0', :city => 'Chicago', :center => 'Trina Da
                  :address => '4357 W. Armitage Ave.', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60615.0', :city => 'Chicago', :center => 'King Community Service Center',
                  :address => '4314 S. Cottage Grove', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 747 - 2273', :spanish => 'All Days')
-LafCenter.create(:zipcode => '60616.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60616.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60616.0', :city => 'Chicago', :center => 'King Community Service Center',
                  :address => '4314 S. Cottage Grove', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 747 - 2274', :spanish => 'All Days')
@@ -3744,13 +3744,13 @@ LafCenter.create(:zipcode => '60617.0', :city => 'Chicago', :center => 'South Ch
                  :address => '8650 S. Commercial Ave', :contact => 'Jeanette Sandoval', :telephone => '(312) 745 - 1132', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60618.0', :city => 'Chicago', :center => 'North Area Community Service Center',
                  :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
-LafCenter.create(:zipcode => '60619.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60619.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60619.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
                  :address => '8650 S. Commercial Ave', :contact => 'Jeanette Sandoval', :telephone => '(312) 745 - 1132', :spanish => 'All Days')
-LafCenter.create(:zipcode => '60620.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60620.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
-LafCenter.create(:zipcode => '60621.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60621.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60622.0', :city => 'Chicago', :center => 'Garfield Community Service Center',
                  :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'Spanish speaking staff on duty daily')
@@ -3766,7 +3766,7 @@ LafCenter.create(:zipcode => '60627.0', :city => 'Chicago', :center => 'South Ch
                  :address => '8650 S. Commercial Ave', :contact => 'Jeanette Sandoval', :telephone => '(312) 745 - 1132', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60628.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
                  :address => '8650 S. Commercial Ave', :contact => 'Jeanette Sandoval', :telephone => '(312) 745 - 1132', :spanish => 'All Days')
-LafCenter.create(:zipcode => '60629.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60629.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60630.0', :city => 'Chicago', :center => 'North Area Community Service Center',
                  :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
@@ -3776,19 +3776,19 @@ LafCenter.create(:zipcode => '60631.0', :city => 'Chicago', :center => 'North Ar
                  :address => '845 W. Wilson Ave', :contact => 'Angelica Serna', :telephone => '(312) 744 - 0829', :spanish => 'Spanish speaking staff on duty daily. Also, Hindi and Korean speaking staff are on duty daily.')
 LafCenter.create(:zipcode => '60631.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
-LafCenter.create(:zipcode => '60632.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60632.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60633.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
                  :address => '8650 S. Commercial Ave', :contact => 'Jeanette Sandoval', :telephone => '(312) 745 - 1132', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60634.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
-LafCenter.create(:zipcode => '60635.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60635.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
-LafCenter.create(:zipcode => '60636.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60636.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
-LafCenter.create(:zipcode => '60637.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60637.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
-LafCenter.create(:zipcode => '60638.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60638.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60639.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
@@ -3814,7 +3814,7 @@ LafCenter.create(:zipcode => '60649.0', :city => 'Chicago', :center => 'South Ch
                  :address => '8650 S. Commercial Ave', :contact => 'Jeanette Sandoval', :telephone => '(312) 745 - 1132', :spanish => 'All Days')
 LafCenter.create(:zipcode => '60650.0', :city => 'Chicago', :center => 'Trina Davila',
                  :address => '4357 W. Armitage Ave', :contact => 'Angelica Serna or Lisa Hilleren', :telephone => '(312) 744 - 4629', :spanish => 'All Days')
-LafCenter.create(:zipcode => '60652.0', :city => 'Chicago', :center => 'Englewod Community Service Center',
+LafCenter.create(:zipcode => '60652.0', :city => 'Chicago', :center => 'Englewood Community Service Center',
                  :address => '1140 W. 79th St', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 745 - 2453', :spanish => 'Thursday and Friday')
 LafCenter.create(:zipcode => '60653.0', :city => 'Chicago', :center => 'King Community Service Center',
                  :address => '4314 S. Cottage Grove', :contact => 'Gabriel Corral or Lisa Hilleren', :telephone => '(312) 747 - 2275', :spanish => 'All Days')
