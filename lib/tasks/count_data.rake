@@ -42,8 +42,7 @@ task :count_data => :environment do
   wic_count = WicData.all.count
   puts "WIC: #{wic_count}"
 
-  web_count = all_city_count + aabd_count + all_kids_count + child_care_voucher_count + early_head_start_count + head_start_count + medicare_count +  rental_assistance_count
-  + rta_free_ride_count + snap_count + tanf_count + wic_count
+  web_count = all_city_count + aabd_count + all_kids_count + child_care_voucher_count + early_head_start_count + head_start_count + medicaid_count + medicare_count +  rental_assistance_count + rta_free_ride_count + snap_count + tanf_count + wic_count
   puts "Web Count: #{web_count}"
 
 
