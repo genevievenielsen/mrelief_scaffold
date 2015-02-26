@@ -196,7 +196,7 @@ class TwilioController < ApplicationController
      @s.save
    end
 
-   if (session["page"] == "snap_income_question" && session["counter"] == 8) || (session["page"] == "snap_income_question_disability" && session["counter"] == 9)
+   if session["page"] == "snap_income_question" && session["counter"] == 8
      session["income"] = params[:Body].strip
      @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
      if session["income"] !~ /\D/
@@ -813,7 +813,7 @@ class TwilioController < ApplicationController
      end
    end
 
-    if (session["page"] == "snap_feedback_response" && session["counter"] == 4) || (session["page"] == "snap_feedback_response" && session["counter"] == 5) || (session["page"] == "snap_feedback_response" && session["counter"] == 6)
+    if session["page"] == "snap_feedback_response" && session["counter"] == 4
        @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
        message = "Thank you so much for your feedback! To check other programs, text 'menu'."
        @s.feedback = params[:Body]
@@ -821,6 +821,21 @@ class TwilioController < ApplicationController
        @s.save
     end
 
+     if session["page"] == "snap_feedback_response" && session["counter"] == 5
+       @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+       message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+       @s.feedback = params[:Body]
+       @s.completed = true
+       @s.save
+    end
+
+    if session["page"] == "snap_feedback_response" && session["counter"] == 6
+       @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+       message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+       @s.feedback = params[:Body]
+       @s.completed = true
+       @s.save
+    end
 
    twiml = Twilio::TwiML::Response.new do |r|
        r.Message message
