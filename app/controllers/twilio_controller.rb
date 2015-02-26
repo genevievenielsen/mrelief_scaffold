@@ -249,7 +249,7 @@ class TwilioController < ApplicationController
       end
       @s.completed = true
       @s.save
-      session["page"] == "feedback_question"
+      session["page"] = "feedback_question"
    end
 
    if session["page"] == "snap_income_question_disability" && session["counter"] == 9
@@ -305,7 +305,7 @@ class TwilioController < ApplicationController
       end
       @s.completed = true
       @s.save
-      session["page"] == "feedback_question"
+      session["page"] = "feedback_question"
    end
 
    # Food stamps user is younger than 18
@@ -346,7 +346,7 @@ class TwilioController < ApplicationController
      @s.snap_eligibility_status = "maybe"
      @s.completed = true
      @s.save
-     session["page"] == "feedback_question"
+     session["page"] = "feedback_question"
    end
 
    # Food stamps user is not a US citizen
