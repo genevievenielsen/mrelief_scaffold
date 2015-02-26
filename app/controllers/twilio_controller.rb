@@ -570,26 +570,26 @@ class TwilioController < ApplicationController
 
    # RTA FEEDBACK QUESTIONS
   if session["page"] == "rta_feedback_1" && session["counter"] == 5
-    @s = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+    @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
      message = "Thank you so much for your feedback! \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
-     @s.feedback = params[:Body]
-     @s.completed = true
-     @s.save
+     @r.feedback = params[:Body]
+     @r.completed = true
+     @r.save
 
   elsif session["page"] == "rta_feedback_2" && session["counter"] == 7
-    @s = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+    @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
      message = "Thank you so much for your feedback! \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
-     @s.feedback = params[:Body]
-     @s.completed = true
-     @s.save
+     @r.feedback = params[:Body]
+     @r.completed = true
+     @r.save
 
   elsif session["page"] == "rta_feedback_ineligible"
    if session["counter"] == 5 || session["counter"] == 6 || session["counter"] == 7 || session["counter"] == 8
-     @s = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+     @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
      message = "Thank you so much for your feedback! \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
-     @s.feedback = params[:Body]
-     @s.completed = true
-     @s.save
+     @r.feedback = params[:Body]
+     @r.completed = true
+     @r.save
    end
   end
 
@@ -651,9 +651,9 @@ class TwilioController < ApplicationController
      medicaid_gross_income = session["income"].to_i
      medicaid_eligibility = Medicaid.find_by({ :medicaid_household_size => medicaid_household_size})
       if medicaid_gross_income < medicaid_eligibility.medicaid_gross_income
-        message = "You may be in luck! You likely qualify for Medicaid. Call (866) 311-1119 for your coverage options. To further pursue your Medicaid application you can also call the county care line (312-864-8200). If you already have a doctor, be sure to confirm they transfer over. To check other programs, type 'menu'."
+        message = "You may be in luck! You likely qualify for Medicaid. Call (866) 311-1119 for your coverage options. To further pursue your Medicaid application you can also call the county care line (312-864-8200). If you already have a doctor, be sure to confirm they transfer over. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
         @m.medicaid_eligibility_status = "yes"
-        @m.completed = "true"
+        session["page"] = "medicaid_feedback_1"
       else
         message = "What is your zipcode?"
         session["page"] = "medicaid_ineligible"
@@ -683,10 +683,10 @@ class TwilioController < ApplicationController
       else
        @medical_center = primarycare.first
       end
-      message = "You likely do not qualify for Medicaid. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. To check other programs, type 'menu'."
+      message = "You likely do not qualify for Medicaid. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
       @m.medicaid_eligibility_status = "no"
       @m.zipcode = zipcode
-      @m.completed = "true"
+      session["page"] = "medicaid_feedback_2"
       @m.save
     end
 
@@ -701,22 +701,33 @@ class TwilioController < ApplicationController
     else
       @lafcenter = LafCenter.find_by(:id => 10)
     end
-     message = "We cannot determine your eligibility at this time. To discuss your situation with a Medicaid expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, type 'menu'."
+     message = "We cannot determine your eligibility at this time. To discuss your situation with a Medicaid expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
      @m.medicaid_eligibility_status = "maybe"
      @m.zipcode = user_zipcode
-     @m.completed = "true"
+     session["page"] = "medicaid_feedback_3"
      @m.save
    end
 
-   if session["page"] == "rta_feedback"
-   if session["counter"] == 5 || session["counter"] == 6 || session["counter"] == 7 || session["counter"] == 8
-     @s = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+   # MEDICAID FEEDBACK QUESTIONS
+   if session["page"] == "medicaid_feedback_1" && session["counter"] == 5
+    @m = MedicaidDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+    message = "Thank you so much for your feedback! \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+    @m.feedback = params[:Body]
+    @m.completed = "true"
+    @m.save
+   elsif session["page"] == "medicaid_feedback_2" && session["counter"] == 6
+    @m = MedicaidDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+    message = "Thank you so much for your feedback! \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+    @m.feedback = params[:Body]
+    @m.completed = "true"
+    @m.save
+   elsif session["page"] == "medicaid_feedback_3" && session["counter"] == 4
+     @m = MedicaidDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
      message = "Thank you so much for your feedback! \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
-     @s.feedback = params[:Body]
-     @s.completed = "true"
-     @s.save
+     @m.feedback = params[:Body]
+     @m.completed = "true"
+     @m.save
    end
-  end
 
    # HERE IS THE MEDICARE COST SHARING LOGIC
    if session["page"] == "medicare_household_question" && session["counter"] == 2
@@ -841,10 +852,10 @@ class TwilioController < ApplicationController
      else
        @lafcenter = LafCenter.find_by(:id => 10)
      end
-    message = "You may be in luck! You likely qualify for Medicare Cost Sharing. To access your Medicare Care Sharing, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, type 'menu'."
+    message = "You may be in luck! You likely qualify for Medicare Cost Sharing. To access your Medicare Care Sharing, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
     @mc.zipcode = user_zipcode
     @mc.medicare_cost_sharing_eligibility_status = "yes"
-    @mc.completed = "true"
+    session["page"] = "mcs_feedback_1"
     @mc.save
    end
 
@@ -871,67 +882,41 @@ class TwilioController < ApplicationController
      if session["counter"] == 4
        @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
        #NO one in the household is on medicare
-        message = "You likely do not qualify for Medicare Cost Sharing. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. To check other programs, type 'menu'."
+        message = "You likely do not qualify for Medicare Cost Sharing. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
         @mc.zipcode = zipcode
         @mc.medicare_cost_sharing_eligibility_status = "no"
-        @mc.completed = "true"
+        session["page"] = "mcs_feedback_2"
         @mc.save
      elsif session["counter"] == 6
         @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
         #Medicare cost sharing user does not meet eligiblty cut offs
-        message = "You likely do not qualify for Medicare Cost Sharing. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. To check other programs, type 'menu'."
+        message = "You likely do not qualify for Medicare Cost Sharing. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
         @mc.zipcode = zipcode
         @mc.medicare_cost_sharing_eligibility_status = "no"
-        @mc.completed = "true"
+        session["page"] = "mcs_feedback_3"
         @mc.save
      end
    end
 
-
-
-    # if session["page"] == "snap_feedback_response" && session["counter"] == 4
-    #    @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-    #    message = "Thank you so much for your feedback! To check other programs, text 'menu'."
-    #    @s.feedback = params[:Body]
-    #    @s.completed = true
-    #    @s.save
-    # end
-
-    #  if session["page"] == "snap_feedback_response_non_citizen" && session["counter"] == 5
-    #    @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-    #    message = "Thank you so much for your feedback! To check other programs, text 'menu'."
-    #    @s.feedback = params[:Body]
-    #    @s.completed = true
-    #    @s.save
-    # end
-
-    # if session["page"] == "snap_feedback_response_under_18" && session["counter"] == 6
-    #    @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-    #    message = "Thank you so much for your feedback! To check other programs, text 'menu'."
-    #    @s.feedback = params[:Body]
-    #    @s.completed = true
-    #    @s.save
-    # end
-
-    # if session["page"] == "snap_feedback_response_non_disability" && session["counter"] == 9
-    #    @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-    #    message = "Thank you so much for your feedback! To check other programs, text 'menu'."
-    #    @s.feedback = params[:Body]
-    #    @s.completed = true
-    #    @s.save
-    # end
-
-    # if session["page"] == "snap_feedback_response_disability" && session["counter"] == 10
-    #    @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-    #    message = "Thank you so much for your feedback! To check other programs, text 'menu'."
-    #    @s.feedback = params[:Body]
-    #    @s.completed = true
-    #    @s.save
-    # end
-
-
-
-
+   if session["page"] == "mcs_feedback_1" && session["counter"] == 7
+     @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+     message = "Thank you so much for your feedback! \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+     @mc.feedback = params[:Body]
+     @mc.completed = "true"
+     @mc.save
+   elsif session["page"] == "mcs_feedback_2" && session["counter"] == 5
+     @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+     message = "Thank you so much for your feedback! \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+     @mc.feedback = params[:Body]
+     @mc.completed = "true"
+     @mc.save
+   elsif session["page"] == "mcs_feedback_3" && session["counter"] == 7
+     @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+     message = "Thank you so much for your feedback! \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+     @mc.feedback = params[:Body]
+     @mc.completed = "true"
+     @mc.save
+   end
 
    twiml = Twilio::TwiML::Response.new do |r|
        r.Message message
