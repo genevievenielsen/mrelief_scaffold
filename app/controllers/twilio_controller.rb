@@ -248,7 +248,7 @@ class TwilioController < ApplicationController
         @s.snap_eligibility_status = "no"
       end
       @s.save
-      session["page"] = "snap_feedback"
+      session["page"] = "snap_feedback_1"
    end
 
    if session["page"] == "snap_income_question_disability" && session["counter"] == 9
@@ -303,7 +303,7 @@ class TwilioController < ApplicationController
         @s.snap_eligibility_status = "no"
       end
       @s.save
-      session["page"] = "snap_feedback"
+      session["page"] = "snap_feedback_2"
    end
 
    # Food stamps user is in school
@@ -321,7 +321,7 @@ class TwilioController < ApplicationController
      message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
      @s.snap_eligibility_status = "maybe"
      @s.save
-     session["page"] = "snap_feedback"
+     session["page"] = "snap_feedback_3"
    end
 
    # Food stamps user is not a US citizen
@@ -338,7 +338,7 @@ class TwilioController < ApplicationController
      message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
      @s.snap_eligibility_status = "maybe"
      @s.save
-     session["page"] = "snap_feedback"
+     session["page"] = "snap_feedback_4"
    end
 
     # Food stamps user is younger than 18
@@ -361,20 +361,44 @@ class TwilioController < ApplicationController
     message = "Based on your age, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
     @s.snap_eligibility_status = "no"
     @s.save
-    session["page"] = "snap_feedback"
+    session["page"] = "snap_feedback_5"
    end
 
    # HERE IS THE FEEDBACK LOGIC FOR FOODSTAMPS
-   if session["page"] == "snap_feedback"
-    puts "I made it here"
-    if session["counter"] == 4 || session["counter"] == 5 || session["counter"] == 6 || session["counter"] == 9 || session["counter"] == 10
-      puts "I made it here"
+   if session["page"] == "snap_feedback_1" && session["counter"] == 9
       @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
       message = "Thank you so much for your feedback! To check other programs, text 'menu'."
       @s.feedback = params[:Body]
       @s.completed = true
       @s.save
-    end
+
+   elsif session["page"] == "snap_feedback_2" && session["counter"] == 10
+      @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+      message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+      @s.feedback = params[:Body]
+      @s.completed = true
+      @s.save
+
+   elsif session["page"] == "snap_feedback_3" && session["counter"] == 4
+      @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+      message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+      @s.feedback = params[:Body]
+      @s.completed = true
+      @s.save
+
+   elsif session["page"] == "snap_feedback_4" && session["counter"] == 5
+      @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+      message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+      @s.feedback = params[:Body]
+      @s.completed = true
+      @s.save
+
+   elsif session["page"] == "snap_feedback_5" && session["counter"] == 6
+      @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+      message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+      @s.feedback = params[:Body]
+      @s.completed = true
+      @s.save
    end
 
 
@@ -668,6 +692,16 @@ class TwilioController < ApplicationController
      @m.completed = "true"
      @m.save
    end
+
+   if session["page"] == "rta_feedback"
+   if session["counter"] == 5 || session["counter"] == 6 || session["counter"] == 7 || session["counter"] == 8
+     @s = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+     message = "Thank you so much for your feedback! \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+     @s.feedback = params[:Body]
+     @s.completed = "true"
+     @s.save
+   end
+  end
 
    # HERE IS THE MEDICARE COST SHARING LOGIC
    if session["page"] == "medicare_household_question" && session["counter"] == 2
