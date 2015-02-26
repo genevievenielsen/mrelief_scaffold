@@ -345,7 +345,6 @@ class TwilioController < ApplicationController
      @s.completed = true
      @s.save
      session["page"] = "feedback_response"
-     @count = session["counter"]
    end
 
    # Food stamps user is not a US citizen
@@ -817,12 +816,11 @@ class TwilioController < ApplicationController
      end
    end
 
-   if @count.present?
-    if session["page"] == "feedback_response" && session["counter"] == (@count.to_i + 1)
+    if session["page"] == "feedback_response" && session["counter"] == 4
        feedback = params[:Body]
        message = "Thank you so much for your feedback! To check other programs, text 'menu'."
     end
-   end
+
 
 
    twiml = Twilio::TwiML::Response.new do |r|
