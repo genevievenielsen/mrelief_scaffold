@@ -249,7 +249,6 @@ class TwilioController < ApplicationController
       end
       @s.completed = true
       @s.save
-      session["page"] = "feedback_question"
    end
 
    if session["page"] == "snap_income_question_disability" && session["counter"] == 9
@@ -305,7 +304,6 @@ class TwilioController < ApplicationController
       end
       @s.completed = true
       @s.save
-      session["page"] = "feedback_question"
    end
 
    # Food stamps user is younger than 18
@@ -819,16 +817,17 @@ class TwilioController < ApplicationController
      end
    end
 
-   if session["page"] == "feedback_question" && session["counter"] == (@count + 1)
-     message = "How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
-     session["page"] = "feedback_response"
-   end
+   if @count.present?
+    if session["page"] == "feedback_question" && session["counter"] == (@count + 1)
+      message = "How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+      session["page"] = "feedback_response"
+    end
 
-   if session["page"] == "feedback_response" && session["counter"] == (@count + 2)
-    feedback = params[:Body]
-    message = "Thank you so much for your feedback! To check other programs, text 'menu'."
-   end
-
+    if session["page"] == "feedback_response" && session["counter"] == (@count + 2)
+     feedback = params[:Body]
+     message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+    end
+  end
 
 
 
