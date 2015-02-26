@@ -340,11 +340,12 @@ class TwilioController < ApplicationController
      else
        @lafcenter = LafCenter.find_by(:id => 10)
      end
-     message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, text 'menu'."
+     message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?."
      @s.snap_eligibility_status = "maybe"
      @s.completed = true
      @s.save
-     send_feedback
+     session["page"] = "feedback_response"
+     @count = session["counter"]
    end
 
    # Food stamps user is not a US citizen
@@ -816,6 +817,13 @@ class TwilioController < ApplicationController
      end
    end
 
+   if @count.present?
+    if session["page"] == "feedback_response" && session["counter"] == (@count.to_i + 1)
+       feedback = params[:Body]
+       message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+    end
+   end
+
 
    twiml = Twilio::TwiML::Response.new do |r|
        r.Message message
@@ -827,21 +835,19 @@ class TwilioController < ApplicationController
    end
   end
 
-  def send_feedback
-      session["counter"] = 0
-      message = "How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
-      session["page"] = "feedback_response"
-
-      if session["page"] == "feedback_response" && session["counter"] == 1
-       feedback = params[:Body]
-       message = "Thank you so much for your feedback! To check other programs, text 'menu'."
-      end
-
-      twiml = Twilio::TwiML::Response.new do |r|
-         r.Message message
-      end
-    session["counter"] += 1
-  end
+  # def send_feedback
+  #   session["counter"] = 0
+  #   message = "How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+  #   session["page"] = "feedback_response"
+  #   if session["page"] == "feedback_response" && session["counter"] == 1
+  #    feedback = params[:Body]
+  #    message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+  #   end
+  #   twiml = Twilio::TwiML::Response.new do |r|
+  #      r.Message message
+  #   end
+  #   session["counter"] += 1
+  # end
 
   include Webhookable
 
