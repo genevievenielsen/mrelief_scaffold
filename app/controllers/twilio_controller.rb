@@ -517,7 +517,7 @@ class TwilioController < ApplicationController
        if rta_gross_income < rta_eligibility.rta_gross_income
          message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
          @r.rta_eligibility_status = "yes"
-         session["page"] = "rta_feedback"
+         session["page"] = "rta_feedback_1"
        else
          session["page"] = "rta_ineligble"
          message = "What is your zipcode?"
@@ -531,7 +531,7 @@ class TwilioController < ApplicationController
       if rta_gross_income < rta_eligibility.rta_gross_income
         message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
         @r.rta_eligibility_status = "yes"
-        session["page"] = "rta_feedback"
+        session["page"] = "rta_feedback_2"
       else
         session["page"] = "rta_ineligble"
         message = "What is your zipcode?"
@@ -564,11 +564,26 @@ class TwilioController < ApplicationController
       @r.zipcode = session["zipcode"]
       message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
       @r.rta_eligibility_status = "no"
-      session["page"] = "rta_feedback"
+      session["page"] = "rta_feedback_ineligible"
      end
    end
 
-  if session["page"] == "rta_feedback"
+   # RTA FEEDBACK QUESTIONS
+  if session["page"] == "rta_feedback_1" && session["counter"] == 5
+    @s = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+     message = "Thank you so much for your feedback! \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+     @s.feedback = params[:Body]
+     @s.completed = true
+     @s.save
+
+  elsif session["page"] == "rta_feedback_2" && session["counter"] == 7
+    @s = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+     message = "Thank you so much for your feedback! \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+     @s.feedback = params[:Body]
+     @s.completed = true
+     @s.save
+
+  elsif session["page"] == "rta_feedback_ineligible"
    if session["counter"] == 5 || session["counter"] == 6 || session["counter"] == 7 || session["counter"] == 8
      @s = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
      message = "Thank you so much for your feedback! \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
