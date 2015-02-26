@@ -478,7 +478,7 @@ class TwilioController < ApplicationController
      @r.save
      if session["counter"] == 4
        if rta_gross_income < rta_eligibility.rta_gross_income
-         message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  To check other programs, text 'menu'."
+         message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
          @r.rta_eligibility_status = "yes"
          session["page"] = "rta_feedback"
        else
@@ -492,7 +492,7 @@ class TwilioController < ApplicationController
     if session["page"] == "rta_income_question" && session["counter"] == 6
       @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
       if rta_gross_income < rta_eligibility.rta_gross_income
-        message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  To check other programs, text 'menu'."
+        message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
         @r.rta_eligibility_status = "yes"
         session["page"] = "rta_feedback"
       else
@@ -525,7 +525,7 @@ class TwilioController < ApplicationController
      if session["counter"] == 4 || session["counter"] == 5 || session["counter"] == 6 || session["counter"] == 7
       @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
       @r.zipcode = session["zipcode"]
-      message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
+      message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
       @r.rta_eligibility_status = "no"
       session["page"] = "rta_feedback"
      end
