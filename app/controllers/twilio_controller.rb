@@ -247,8 +247,7 @@ class TwilioController < ApplicationController
         message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
         @s.snap_eligibility_status = "no"
       end
-      @s.completed = true
-      @s.save
+      session["page"] = "snap_feedback_response_non_disability"
    end
 
    if session["page"] == "snap_income_question_disability" && session["counter"] == 9
@@ -302,8 +301,8 @@ class TwilioController < ApplicationController
         message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
         @s.snap_eligibility_status = "no"
       end
-      @s.completed = true
-      @s.save
+      session["page"] = "snap_feedback_response_disability"
+
    end
 
    # Food stamps user is in school
@@ -837,7 +836,7 @@ class TwilioController < ApplicationController
        @s.save
     end
 
-    if session["page"] == "snap_feedback_response" && session["counter"] == 9
+    if session["page"] == "snap_feedback_response_non_disability" && session["counter"] == 9
        @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
        message = "Thank you so much for your feedback! To check other programs, text 'menu'."
        @s.feedback = params[:Body]
@@ -845,7 +844,7 @@ class TwilioController < ApplicationController
        @s.save
     end
 
-    if session["page"] == "snap_feedback_response" && session["counter"] == 10
+    if session["page"] == "snap_feedback_response_disability" && session["counter"] == 10
        @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
        message = "Thank you so much for your feedback! To check other programs, text 'menu'."
        @s.feedback = params[:Body]
