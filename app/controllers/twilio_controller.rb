@@ -346,6 +346,7 @@ class TwilioController < ApplicationController
      @s.snap_eligibility_status = "maybe"
      @s.completed = true
      @s.save
+     @count = session["counter"]
      session["page"] = "feedback_question"
    end
 
@@ -818,13 +819,12 @@ class TwilioController < ApplicationController
      end
    end
 
-   if session["page"] == "feedback_question"
+   if session["page"] == "feedback_question" && session["counter"] == (@count + 1)
      message = "How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
-     @count = session["counter"]
      session["page"] = "feedback_response"
    end
 
-   if session["page"] == "feedback_response" && session["counter"] == (@count + 1)
+   if session["page"] == "feedback_response" && session["counter"] == (@count + 2)
     feedback = params[:Body]
     message = "Thank you so much for your feedback! To check other programs, text 'menu'."
    end
