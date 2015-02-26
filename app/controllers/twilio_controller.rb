@@ -238,17 +238,17 @@ class TwilioController < ApplicationController
       end
       if snap_gross_income < snap_eligibility.snap_gross_income
         if age <= 22
-          message = "You may be in luck! You likely qualify for foodstamps. However make sure you accounted for your parents income, if you are still living in the same household.  To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, text 'menu'."
+          message = "You may be in luck! You likely qualify for foodstamps. However make sure you accounted for your parents income, if you are still living in the same household.  To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
         else
-          message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, text 'menu'."
+          message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
         end
         @s.snap_eligibility_status = "yes"
       else
-        message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, text 'menu'."
+        message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
         @s.snap_eligibility_status = "no"
       end
-      @s.completed = true
       @s.save
+      session["page"] = "snap_feedback"
    end
 
    if session["page"] == "snap_income_question_disability" && session["counter"] == 9
@@ -293,20 +293,55 @@ class TwilioController < ApplicationController
       end
       if snap_gross_income < snap_eligibility.snap_gross_income
         if age <= 22
-          message = "You may be in luck! You likely qualify for foodstamps. However make sure you accounted for your parents income, if you are still living in the same household.  To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, text 'menu'."
+          message = "You may be in luck! You likely qualify for foodstamps. However make sure you accounted for your parents income, if you are still living in the same household.  To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
         else
-          message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  To check other programs, text 'menu'."
+          message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
         end
         @s.snap_eligibility_status = "yes"
       else
-        message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, text 'menu'."
+        message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
         @s.snap_eligibility_status = "no"
       end
-      @s.completed = true
       @s.save
+      session["page"] = "snap_feedback"
    end
 
-   # Food stamps user is younger than 18
+   # Food stamps user is in school
+   if session["page"] == "snap_zipcode_question" && session["counter"] == 3
+    session["zipcode"] = params[:Body].strip
+    @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+     user_zipcode = session["zipcode"]
+     @s.zipcode = user_zipcode
+     @zipcode = user_zipcode << ".0"
+     @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
+     if @lafcenter.present?
+     else
+       @lafcenter = LafCenter.find_by(:id => 10)
+     end
+     message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+     @s.snap_eligibility_status = "maybe"
+     @s.save
+     session["page"] = "snap_feedback"
+   end
+
+   # Food stamps user is not a US citizen
+   if session["page"] == "snap_eligible_maybe" && session["counter"] == 4
+    session["zipcode"] = params[:Body].strip
+    @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+     user_zipcode = session["zipcode"]
+     @zipcode = user_zipcode << ".0"
+     @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
+     if @lafcenter.present?
+     else
+       @lafcenter = LafCenter.find_by(:id => 10)
+     end
+     message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+     @s.snap_eligibility_status = "maybe"
+     @s.save
+     session["page"] = "snap_feedback"
+   end
+
+    # Food stamps user is younger than 18
    if session["page"] == "snap_ineligible" && session["counter"] == 5
     @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
     user_zipcode = session["zipcode"]
@@ -323,44 +358,10 @@ class TwilioController < ApplicationController
     else
       @food_pantry = @food_resources.first
     end
-    message = "Based on your age, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, text 'menu'."
+    message = "Based on your age, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
     @s.snap_eligibility_status = "no"
-    @s.completed = true
     @s.save
-   end
-
-   # Food stamps user is in school
-   if session["page"] == "snap_zipcode_question" && session["counter"] == 3
-    session["zipcode"] = params[:Body].strip
-    @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-     user_zipcode = session["zipcode"]
-     @zipcode = user_zipcode << ".0"
-     @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
-     if @lafcenter.present?
-     else
-       @lafcenter = LafCenter.find_by(:id => 10)
-     end
-     message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, text 'menu'."
-     @s.snap_eligibility_status = "maybe"
-     @s.completed = true
-     @s.save
-   end
-
-   # Food stamps user is not a US citizen
-   if session["page"] == "snap_eligible_maybe" && session["counter"] == 4
-    session["zipcode"] = params[:Body].strip
-    @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-     user_zipcode = session["zipcode"]
-     @zipcode = user_zipcode << ".0"
-     @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
-     if @lafcenter.present?
-     else
-       @lafcenter = LafCenter.find_by(:id => 10)
-     end
-     message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. To check other programs, text 'menu'."
-     @s.snap_eligibility_status = "maybe"
-     @s.completed = true
-     @s.save
+    session["page"] = "snap_feedback"
    end
 
 
@@ -395,7 +396,7 @@ class TwilioController < ApplicationController
     elsif session["disabled"] == "yes"
       @r.disabled = "yes"
       message = "Are you receiving disability payments from from Social Security, the Railroad Retirement Board or Veterans Affairs? Enter 'yes' or 'no'"
-      session["page"] = "snap_disability_payment"
+      session["page"] = "rta_disability_payment"
     else
       message = "Oops looks like there is a typo! Please type 'yes' or 'no' to answer this question."
       session["counter"] = 2
@@ -403,7 +404,7 @@ class TwilioController < ApplicationController
     @r.save
    end
 
-   if session["page"] == "snap_disability_payment" && session["counter"] == 4
+   if session["page"] == "rta_disability_payment" && session["counter"] == 4
      session["disability_payment"] = params[:Body].strip.downcase
      @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
      if session["disability_payment"] == "yes"
@@ -479,7 +480,7 @@ class TwilioController < ApplicationController
        if rta_gross_income < rta_eligibility.rta_gross_income
          message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  To check other programs, text 'menu'."
          @r.rta_eligibility_status = "yes"
-         @r.completed = true
+         session["page"] = "rta_feedback"
        else
          session["page"] = "rta_ineligble"
          message = "What is your zipcode?"
@@ -493,7 +494,7 @@ class TwilioController < ApplicationController
       if rta_gross_income < rta_eligibility.rta_gross_income
         message = "You may be in luck! You likely qualify for RTA Ride Free. Call 1-800-252-8966(toll free) for help with your application.  To check other programs, text 'menu'."
         @r.rta_eligibility_status = "yes"
-        @r.completed = true
+        session["page"] = "rta_feedback"
       else
         session["page"] = "rta_ineligble"
         message = "What is your zipcode?"
@@ -526,8 +527,7 @@ class TwilioController < ApplicationController
       @r.zipcode = session["zipcode"]
       message = "You likely do not qualify for RTA Ride Free. A transportation resource near you is #{@transportation_center.name} - #{@transportation_center.street} #{@transportation_center.city} #{@transportation_center.state}, #{@transportation_center.zip} #{@transportation_center.phone}. To check other programs, type 'menu'."
       @r.rta_eligibility_status = "no"
-      @r.completed = true
-      @r.save
+      session["page"] = "rta_feedback"
      end
    end
 
@@ -815,6 +815,68 @@ class TwilioController < ApplicationController
      end
    end
 
+   # HERE IS THE FEEDBACK LOGIC FOR FOODSTAMPS
+   if session["page"] == "snap_feedback_response"
+    if session["counter"] == 4 || session["counter"] == 5 || session["counter"] == 6 || session["counter"] == 9 || session["counter"] == 10
+      @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+      message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+      @s.feedback = params[:Body]
+      @s.completed = true
+      @s.save
+    end
+   end
+
+    # if session["page"] == "snap_feedback_response" && session["counter"] == 4
+    #    @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+    #    message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+    #    @s.feedback = params[:Body]
+    #    @s.completed = true
+    #    @s.save
+    # end
+
+    #  if session["page"] == "snap_feedback_response_non_citizen" && session["counter"] == 5
+    #    @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+    #    message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+    #    @s.feedback = params[:Body]
+    #    @s.completed = true
+    #    @s.save
+    # end
+
+    # if session["page"] == "snap_feedback_response_under_18" && session["counter"] == 6
+    #    @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+    #    message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+    #    @s.feedback = params[:Body]
+    #    @s.completed = true
+    #    @s.save
+    # end
+
+    # if session["page"] == "snap_feedback_response_non_disability" && session["counter"] == 9
+    #    @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+    #    message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+    #    @s.feedback = params[:Body]
+    #    @s.completed = true
+    #    @s.save
+    # end
+
+    # if session["page"] == "snap_feedback_response_disability" && session["counter"] == 10
+    #    @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+    #    message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+    #    @s.feedback = params[:Body]
+    #    @s.completed = true
+    #    @s.save
+    # end
+
+    if session["page"] == "rta_feedback"
+     if session["counter"] == 5 || session["counter"] == 6 || session["counter"] == 7 || session["counter"] == 8
+       @s = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+       message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+       @s.feedback = params[:Body]
+       @s.completed = true
+       @s.save
+     end
+    end
+
+
 
    twiml = Twilio::TwiML::Response.new do |r|
        r.Message message
@@ -825,6 +887,7 @@ class TwilioController < ApplicationController
      format.xml {render xml: twiml.text}
    end
   end
+
 
   include Webhookable
 
