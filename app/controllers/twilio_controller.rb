@@ -827,23 +827,7 @@ class TwilioController < ApplicationController
    end
   end
 
-  def send_feedback
-      session["counter"] = 0
-      message = "How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
-      session["page"] = "feedback_response"
 
-
-      if session["page"] == "feedback_response" && session["counter"] == 1
-       feedback = params[:Body]
-       message = "Thank you so much for your feedback! To check other programs, text 'menu'."
-      end
-    end
-
-    twiml = Twilio::TwiML::Response.new do |r|
-       r.Message message
-    end
-    session["counter"] += 1
-  end
 
   include Webhookable
 
