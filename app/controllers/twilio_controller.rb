@@ -58,19 +58,19 @@ class TwilioController < ApplicationController
       session["counter"] = 1
    end
    if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("medicaid")
-      message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'  "
+      message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
       session["counter"] = 1
    end
    if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("ride")
-      message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'  "
+      message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
       session["counter"] = 1
    end
    if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("medicaid") && params[:Body].strip.downcase.include?("ride")
-      message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'  "
+      message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
       session["counter"] = 1
    end
    if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("medicaid") && params[:Body].strip.downcase.include?("ride") && params[:Body].strip.downcase.include?("medicare")
-      message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'  "
+      message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
       session["counter"] = 1
    end
 
@@ -571,14 +571,14 @@ class TwilioController < ApplicationController
    # RTA FEEDBACK QUESTIONS
   if session["page"] == "rta_feedback_1" && session["counter"] == 5
     @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-     message = "Thank you so much for your feedback! \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+     message = "Thank you so much for your feedback! To check other programs, text 'menu'."
      @r.feedback = params[:Body]
      @r.completed = true
      @r.save
 
   elsif session["page"] == "rta_feedback_2" && session["counter"] == 7
     @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-     message = "Thank you so much for your feedback! \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+     message = "Thank you so much for your feedback! To check other programs, text 'menu'."
      @r.feedback = params[:Body]
      @r.completed = true
      @r.save
@@ -586,7 +586,7 @@ class TwilioController < ApplicationController
   elsif session["page"] == "rta_feedback_ineligible"
    if session["counter"] == 5 || session["counter"] == 6 || session["counter"] == 7 || session["counter"] == 8
      @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-     message = "Thank you so much for your feedback! \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+     message = "Thank you so much for your feedback! To check other programs, text 'menu'."
      @r.feedback = params[:Body]
      @r.completed = true
      @r.save
@@ -711,19 +711,19 @@ class TwilioController < ApplicationController
    # MEDICAID FEEDBACK QUESTIONS
    if session["page"] == "medicaid_feedback_1" && session["counter"] == 5
     @m = MedicaidDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-    message = "Thank you so much for your feedback! \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+    message = "Thank you so much for your feedback! To check other programs, text 'menu'."
     @m.feedback = params[:Body]
     @m.completed = "true"
     @m.save
    elsif session["page"] == "medicaid_feedback_2" && session["counter"] == 6
     @m = MedicaidDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-    message = "Thank you so much for your feedback! \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+    message = "Thank you so much for your feedback! To check other programs, text 'menu'."
     @m.feedback = params[:Body]
     @m.completed = "true"
     @m.save
    elsif session["page"] == "medicaid_feedback_3" && session["counter"] == 4
      @m = MedicaidDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-     message = "Thank you so much for your feedback! \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+     message = "Thank you so much for your feedback! To check other programs, text 'menu'."
      @m.feedback = params[:Body]
      @m.completed = "true"
      @m.save
@@ -900,19 +900,19 @@ class TwilioController < ApplicationController
 
    if session["page"] == "mcs_feedback_1" && session["counter"] == 7
      @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-     message = "Thank you so much for your feedback! \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+     message = "Thank you so much for your feedback! \n To check other programs, text 'menu'."
      @mc.feedback = params[:Body]
      @mc.completed = "true"
      @mc.save
    elsif session["page"] == "mcs_feedback_2" && session["counter"] == 5
      @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-     message = "Thank you so much for your feedback! \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+     message = "Thank you so much for your feedback! \n To check other programs, text 'menu'."
      @mc.feedback = params[:Body]
      @mc.completed = "true"
      @mc.save
    elsif session["page"] == "mcs_feedback_3" && session["counter"] == 7
      @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-     message = "Thank you so much for your feedback! \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+     message = "Thank you so much for your feedback! \n To check other programs, text 'menu'."
      @mc.feedback = params[:Body]
      @mc.completed = "true"
      @mc.save
