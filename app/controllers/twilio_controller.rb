@@ -364,6 +364,19 @@ class TwilioController < ApplicationController
     session["page"] = "snap_feedback"
    end
 
+   # HERE IS THE FEEDBACK LOGIC FOR FOODSTAMPS
+   if session["page"] == "snap_feedback"
+    puts "I made it here"
+    if session["counter"] == 4 || session["counter"] == 5 || session["counter"] == 6 || session["counter"] == 9 || session["counter"] == 10
+      puts "I made it here"
+      @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+      message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+      @s.feedback = params[:Body]
+      @s.completed = true
+      @s.save
+    end
+   end
+
 
    # HERE IS THE LOGIC FOR RTA RIDE FREE
    if session["page"] == "rta_age_question" && session["counter"] == 2
@@ -530,6 +543,16 @@ class TwilioController < ApplicationController
       session["page"] = "rta_feedback"
      end
    end
+
+  if session["page"] == "rta_feedback"
+   if session["counter"] == 5 || session["counter"] == 6 || session["counter"] == 7 || session["counter"] == 8
+     @s = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+     message = "Thank you so much for your feedback! \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+     @s.feedback = params[:Body]
+     @s.completed = true
+     @s.save
+   end
+  end
 
 
    # HERE IS THE LOGIC FOR MEDICAID
@@ -815,26 +838,49 @@ class TwilioController < ApplicationController
      end
    end
 
-   # HERE IS THE FEEDBACK LOGIC FOR FOODSTAMPS
-   if session["page"] == "snap_feedback"
-    if session["counter"] == 4 || session["counter"] == 5 || session["counter"] == 6 || session["counter"] == 9 || session["counter"] == 10
-      @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-      message = "Thank you so much for your feedback! To check other programs, text 'menu'."
-      @s.feedback = params[:Body]
-      @s.completed = true
-      @s.save
-    end
-   end
 
-    if session["page"] == "rta_feedback"
-     if session["counter"] == 5 || session["counter"] == 6 || session["counter"] == 7 || session["counter"] == 8
-       @s = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-       message = "Thank you so much for your feedback! To check other programs, text 'menu'."
-       @s.feedback = params[:Body]
-       @s.completed = true
-       @s.save
-     end
-    end
+
+    # if session["page"] == "snap_feedback_response" && session["counter"] == 4
+    #    @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+    #    message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+    #    @s.feedback = params[:Body]
+    #    @s.completed = true
+    #    @s.save
+    # end
+
+    #  if session["page"] == "snap_feedback_response_non_citizen" && session["counter"] == 5
+    #    @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+    #    message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+    #    @s.feedback = params[:Body]
+    #    @s.completed = true
+    #    @s.save
+    # end
+
+    # if session["page"] == "snap_feedback_response_under_18" && session["counter"] == 6
+    #    @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+    #    message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+    #    @s.feedback = params[:Body]
+    #    @s.completed = true
+    #    @s.save
+    # end
+
+    # if session["page"] == "snap_feedback_response_non_disability" && session["counter"] == 9
+    #    @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+    #    message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+    #    @s.feedback = params[:Body]
+    #    @s.completed = true
+    #    @s.save
+    # end
+
+    # if session["page"] == "snap_feedback_response_disability" && session["counter"] == 10
+    #    @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+    #    message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+    #    @s.feedback = params[:Body]
+    #    @s.completed = true
+    #    @s.save
+    # end
+
+
 
 
 
