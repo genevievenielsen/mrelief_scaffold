@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211000235) do
+ActiveRecord::Schema.define(version: 20150226171922) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -227,6 +227,7 @@ ActiveRecord::Schema.define(version: 20150211000235) do
     t.string   "completed"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "feedback"
   end
 
   create_table "medicaids", force: true do |t|
@@ -260,6 +261,7 @@ ActiveRecord::Schema.define(version: 20150211000235) do
     t.string   "phone_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "feedback"
   end
 
   create_table "medicare_cost_sharings", force: true do |t|
@@ -337,6 +339,7 @@ ActiveRecord::Schema.define(version: 20150211000235) do
     t.string   "phone_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "feedback"
   end
 
   create_table "rta_free_rides", force: true do |t|
@@ -397,6 +400,7 @@ ActiveRecord::Schema.define(version: 20150211000235) do
     t.datetime "updated_at"
     t.string   "phone_number"
     t.boolean  "completed"
+    t.string   "feedback"
   end
 
   create_table "snap_eligibility_seniors", force: true do |t|
