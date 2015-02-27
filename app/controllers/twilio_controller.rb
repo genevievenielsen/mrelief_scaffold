@@ -363,6 +363,7 @@ class TwilioController < ApplicationController
    end
 
    # students do not meet requirements
+   #student not enrolled part-time or more
     if session["page"] == "snap_zipcode_question_not_half_time" && session["counter"] == 4
         session["zipcode"] = params[:Body].strip
         @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
@@ -379,6 +380,7 @@ class TwilioController < ApplicationController
         @s.snap_eligibility_status = "no"
         @s.save
         session["page"] = "snap_feedback_3"
+    #student not working 20 hours a week
     elsif session["page"] == "snap_zipcode_question_not_working" && session["counter"] == 5
       session["zipcode"] = params[:Body].strip
       @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)

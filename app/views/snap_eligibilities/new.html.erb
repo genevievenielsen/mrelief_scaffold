@@ -1,23 +1,5 @@
 <div class= "container">
 
-<script>
-$(document).ready(function() {
-  $(function (){
-    $("[data-toggle='popover']").popover();
-  });
-
-  $('body').on('click', function (e) {
-      $('[data-toggle="popover"]').each(function () {
-          //the 'is' for buttons that trigger popups
-          //the 'has' for icons within a button that triggers a popup
-          if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-              $(this).popover('hide');
-          }
-      });
-  });
-
-});
-</script>
 
 
   <div class="row">
@@ -88,6 +70,7 @@ $(document).ready(function() {
   <div class="row">
     <div class="form-group col-md-12">
       <label for="education" id="education">Are you enrolled in college/institution of higher education? </label>
+      <button type="button" data-toggle="popover" data-content="Eligibile schools include: a business, technical, trade, or vocational school that normally requires a high school diploma or the equivalent for enrollment in the course of study; or regular courses, including internet, mail, self-study, or correspondence courses, at an accredited college or university that offers degree programs." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
       <br>
         <% [ 'yes', 'no'].each do |education| %>
           <%= radio_button_tag 'education', education, @s.enrolled_in_education == education %>
@@ -95,6 +78,10 @@ $(document).ready(function() {
         <% end %>
     </div>
   </div>
+
+<div class="place_for_student_questions">
+
+</div>
 
   <div class="row">
     <div class="form-group col-md-12">
@@ -106,7 +93,6 @@ $(document).ready(function() {
         <% end %>
     </div>
   </div>
-
 
   <div class="row">
     <div class="form-group col-md-12">
@@ -155,5 +141,42 @@ $(document).ready(function() {
 
 </div>
 </div>
+
+<script>
+$(document).ready(function() {
+  $(function (){
+    $("[data-toggle='popover']").popover();
+  });
+
+  $('body').on('click', function (e) {
+      $('[data-toggle="popover"]').each(function () {
+          //the 'is' for buttons that trigger popups
+          //the 'has' for icons within a button that triggers a popup
+          if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+              $(this).popover('hide');
+          }
+      });
+  });
+
+  $("input:radio[name=education]").click(function() {
+  var value = $(this).val();
+    if (value == "yes") {
+      $('.place_for_student_questions').empty().append("<%= escape_javascript(render "snap_eligibilities/student_questions", :work_status => @s.work_status, :student_status => @s.student_status ) %>");
+    }
+    <%= puts @s.work_status  %>
+    <%= puts @s.student_status  %>
+    if (value == "no") {
+      $('.student_questions').remove();
+    }
+  });
+
+  if($('input:radio[name=education][value="yes"]').prop('checked')){
+      $('.place_for_student_questions').append("<%= escape_javascript(render "snap_eligibilities/student_questions", :work_status => @s.work_status, :student_status => @s.student_status ) %>");
+      <%= puts @s  %>
+  }
+
+
+});
+</script>
 
 
