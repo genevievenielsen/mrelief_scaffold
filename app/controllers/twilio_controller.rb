@@ -34,7 +34,7 @@ class TwilioController < ApplicationController
       session["counter"] = 0
    end
    if params[:Body].strip.downcase == "food"
-      message = "Are you currently enrolled in a college, technical, or vocational school? Enter 'yes' or 'no'"
+      message = "Are you currently enrolled in a college, technical, or vacational school that requires a high school diploma or the equivalent? Enter 'yes' or 'no'"
       session["page"] = "snap_college_question"
       session["counter"] = 1
    end
@@ -85,7 +85,7 @@ class TwilioController < ApplicationController
        session["page"] = "snap_citizen_question"
      elsif session["college"] == "yes"
        @s.enrolled_in_education = "yes"
-        message = "Are you enrolled in a college, technical or vocational school half-time or more?"
+        message = "Are you currently enrolled halftime or more? Enter 'yes' or 'no'."
         session["page"] = "snap_college_question2"
       else
         message = "Oops looks like there is a typo! Please type 'yes' or 'no' to answer this question."
@@ -326,8 +326,10 @@ class TwilioController < ApplicationController
    if session["page"] == "snap_college_question2" && session["counter"] == 3
     session["half-time"] = params[:Body].strip.downcase
     @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+    @s.enrolled_halftime_or_more = session["half-time"]
+    # add data storage for enrolled half-time or more
     if session["half-time"] == "yes"
-      message = "Are you currently working an average of 20 hours a week OR are in a work study program? Enter 'yes' or 'no'."
+      message = "Do you work an average of 20 hours a week OR are in a work study program? Enter 'yes' or 'no'."
       session["page"] = "work_question"
     elsif session["half-time"] == "no"
       #zipcode question because they are ineligible
@@ -343,6 +345,8 @@ class TwilioController < ApplicationController
    if session["page"] == "work_question" && session["counter"] == 4
     session["work_question"] = params[:Body].strip.downcase
     @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+    @s.work_or_workstudy = session["work_question"]
+    # add data storage for work or work study study
     if session["work_question"] == "yes"
       #ask the remaining questions to determine food stamps eligibility
       message = "Are you a citizen of the United States or a legal permanent resident who has lived in the US for at least five years? Enter 'yes' or 'no'."
@@ -358,7 +362,7 @@ class TwilioController < ApplicationController
      @s.save
    end
 
-#Rose - is this correct or should I tell them they are ineligible
+   # students do not meet requirements
     if session["page"] == "snap_zipcode_question_not_half_time" && session["counter"] == 4
         session["zipcode"] = params[:Body].strip
         @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
@@ -372,10 +376,9 @@ class TwilioController < ApplicationController
           @food_pantry = @food_resources.first
         end
         message = "Based on your current student status, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
-        @s.snap_eligibility_status = "maybe"
+        @s.snap_eligibility_status = "no"
         @s.save
         session["page"] = "snap_feedback_3"
-
     elsif session["page"] == "snap_zipcode_question_not_working" && session["counter"] == 5
       session["zipcode"] = params[:Body].strip
       @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
@@ -389,11 +392,10 @@ class TwilioController < ApplicationController
         @food_pantry = @food_resources.first
       end
         message = "Based on your current student status, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
-      @s.snap_eligibility_status = "maybe"
+      @s.snap_eligibility_status = "no"
       @s.save
       session["page"] = "snap_feedback_3.5"
    end
-
 
 
    # Food stamps user is not a US citizen
@@ -495,9 +497,6 @@ class TwilioController < ApplicationController
       @s.completed = true
       @s.save
    end
-
-
-
 
 
 
