@@ -319,7 +319,7 @@ class TwilioController < ApplicationController
       session["page"] = "work_question"
     elsif session["half-time"] == "no"
       message = "What is your zipcode?"
-      session["page"] = "snap_zipcode_question"
+      session["page"] = "snap_zipcode_question_not_half_time"
     else
       message = "Oops looks like there is a typo! Please type 'yes' or 'no' to answer this question."
       session["counter"] = 2
@@ -336,7 +336,7 @@ class TwilioController < ApplicationController
     elsif session["work_question"] == "no"
       #zipcode question because they are ineligible
       message = "What is your zipcode?"
-      session["page"] = "snap_zipcode_question"
+      session["page"] = "snap_zipcode_question_not_working"
     else
       message = "Oops looks like there is a typo! Please type 'yes' or 'no' to answer this question."
       session["counter"] = 3
@@ -344,7 +344,7 @@ class TwilioController < ApplicationController
      @s.save
    end
 
-    if session["page"] == "snap_zipcode_question" && session["counter"] == 4
+    if session["page"] == "snap_zipcode_question_not_half_time" && session["counter"] == 4
         session["zipcode"] = params[:Body].strip
          @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
          user_zipcode = session["zipcode"]
@@ -359,7 +359,7 @@ class TwilioController < ApplicationController
          @s.snap_eligibility_status = "maybe"
          @s.save
          session["page"] = "snap_feedback_3"
-    elsif session["page"] == "snap_zipcode_question" && session["counter"] == 5
+    elsif session["page"] == "snap_zipcode_question_not_working" && session["counter"] == 5
         @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
         user_zipcode = session["zipcode"]
         @s.zipcode = user_zipcode
