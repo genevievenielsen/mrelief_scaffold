@@ -344,8 +344,7 @@ class TwilioController < ApplicationController
      @s.save
    end
 
-    if session["page"] == "snap_zipcode_question"
-      if session["counter"] == 4 || session["counter"] == 5
+    if session["page"] == "snap_zipcode_question" && session["counter"] == 4
         session["zipcode"] = params[:Body].strip
          @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
          user_zipcode = session["zipcode"]
@@ -360,7 +359,20 @@ class TwilioController < ApplicationController
          @s.snap_eligibility_status = "maybe"
          @s.save
          session["page"] = "snap_feedback_3"
-     end
+    elsif session["page"] == "snap_zipcode_question" && session["counter"] == 5
+        @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+        user_zipcode = session["zipcode"]
+        @s.zipcode = user_zipcode
+        @zipcode = user_zipcode << ".0"
+        @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
+        if @lafcenter.present?
+        else
+          @lafcenter = LafCenter.find_by(:id => 10)
+        end
+        message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+        @s.snap_eligibility_status = "maybe"
+        @s.save
+        session["page"] = "snap_feedback_3"
    end
 
 
@@ -405,6 +417,9 @@ class TwilioController < ApplicationController
     session["page"] = "snap_feedback_5"
    end
 
+
+
+
    # HERE IS THE FEEDBACK LOGIC FOR FOODSTAMPS
    if session["page"] == "snap_feedback_1" && session["counter"] == 9
       @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
@@ -420,7 +435,7 @@ class TwilioController < ApplicationController
       @s.completed = true
       @s.save
 
-   elsif session["page"] == "snap_feedback_3" && session["counter"] == 5
+   elsif session["page"] == "snap_feedback_2" && session["counter"] == 5
       @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
       message = "Thank you so much for your feedback! To check other programs, text 'menu'."
       @s.feedback = params[:Body]
@@ -428,6 +443,13 @@ class TwilioController < ApplicationController
       @s.save
 
     elsif session["page"] == "snap_feedback_3" && session["counter"] == 5
+      @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+      message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+      @s.feedback = params[:Body]
+      @s.completed = true
+      @s.save
+
+    elsif session["page"] == "snap_feedback_3" && session["counter"] == 6
       @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
       message = "Thank you so much for your feedback! To check other programs, text 'menu'."
       @s.feedback = params[:Body]
