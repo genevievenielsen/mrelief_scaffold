@@ -198,8 +198,7 @@ class TwilioController < ApplicationController
      @s.save
    end
 
-   if session["page"] == "snap_income_question"
-    if session["counter"] == 8 || session["counter"] == 9
+   if session["page"] == "snap_income_question" && session["counter"] == 8
      session["income"] = params[:Body].strip
      @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
      if session["income"] !~ /\D/
@@ -252,63 +251,62 @@ class TwilioController < ApplicationController
       end
       @s.save
       session["page"] = "snap_feedback_1"
-    end
    end
 
-   # if session["page"] == "snap_income_question_disability" && session["counter"] == 9
-   #   session["income"] = params[:Body].strip
-   #   @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-   #   if session["income"] !~ /\D/
-   #     session["income"] = session["income"].to_i
-   #   else
-   #     if session["income"].include?("dollars")
-   #       session["income"].slice!"dollars"
-   #     end
-   #     if session["income"].include?("$")
-   #       session["income"].slice!"$"
-   #     end
-   #     if session["income"].include?(",")
-   #       session["income"].slice!","
-   #     end
-   #     session["income"] = session["income"].in_numbers
-   #   end
-   #   @s.monthly_gross_income = session["income"]
-   #   snap_dependent_no = session["dependents"].to_i
-   #   snap_gross_income = session["income"].to_i
-   #   age = session["age"].to_i
-   #    if @disability.present?
-   #      snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => snap_dependent_no })
-   #    else
-   #      snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => snap_dependent_no })
-   #    end
-   #    user_zipcode = session["zipcode"]
-   #    @zipcode = user_zipcode << ".0"
-   #    @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
-   #    if @lafcenter.present?
-   #    else
-   #      @lafcenter = LafCenter.find_by(:id => 10)
-   #    end
-   #    @food_resources = ServiceCenter.where(:description => "food pantry")
-   #    @food_resources_zip = @food_resources.where(:zip => user_zipcode)
-   #    if @food_resources_zip.present?
-   #      @food_pantry = @food_resources_zip.first
-   #    else
-   #      @food_pantry = @food_resources.first
-   #    end
-   #    if snap_gross_income < snap_eligibility.snap_gross_income
-   #      if age <= 22
-   #        message = "You may be in luck! You likely qualify for foodstamps. However make sure you accounted for your parents income, if you are still living in the same household.  To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
-   #      else
-   #        message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
-   #      end
-   #      @s.snap_eligibility_status = "yes"
-   #    else
-   #      message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
-   #      @s.snap_eligibility_status = "no"
-   #    end
-   #    @s.save
-   #    session["page"] = "snap_feedback_2"
-   # end
+   if session["page"] == "snap_income_question_disability" && session["counter"] == 9
+     session["income"] = params[:Body].strip
+     @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+     if session["income"] !~ /\D/
+       session["income"] = session["income"].to_i
+     else
+       if session["income"].include?("dollars")
+         session["income"].slice!"dollars"
+       end
+       if session["income"].include?("$")
+         session["income"].slice!"$"
+       end
+       if session["income"].include?(",")
+         session["income"].slice!","
+       end
+       session["income"] = session["income"].in_numbers
+     end
+     @s.monthly_gross_income = session["income"]
+     snap_dependent_no = session["dependents"].to_i
+     snap_gross_income = session["income"].to_i
+     age = session["age"].to_i
+      if @disability.present?
+        snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => snap_dependent_no })
+      else
+        snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => snap_dependent_no })
+      end
+      user_zipcode = session["zipcode"]
+      @zipcode = user_zipcode << ".0"
+      @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
+      if @lafcenter.present?
+      else
+        @lafcenter = LafCenter.find_by(:id => 10)
+      end
+      @food_resources = ServiceCenter.where(:description => "food pantry")
+      @food_resources_zip = @food_resources.where(:zip => user_zipcode)
+      if @food_resources_zip.present?
+        @food_pantry = @food_resources_zip.first
+      else
+        @food_pantry = @food_resources.first
+      end
+      if snap_gross_income < snap_eligibility.snap_gross_income
+        if age <= 22
+          message = "You may be in luck! You likely qualify for foodstamps. However make sure you accounted for your parents income, if you are still living in the same household.  To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+        else
+          message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+        end
+        @s.snap_eligibility_status = "yes"
+      else
+        message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+        @s.snap_eligibility_status = "no"
+      end
+      @s.save
+      session["page"] = "snap_feedback_2"
+   end
 
    # Food stamps user is in school
    if session["page"] == "snap_college_question2" && session["counter"] == 3
@@ -345,6 +343,7 @@ class TwilioController < ApplicationController
      @s.save
    end
 
+#Rose - is this correct
     if session["page"] == "snap_zipcode_question_not_half_time" && session["counter"] == 4
         session["zipcode"] = params[:Body].strip
         @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
@@ -430,7 +429,7 @@ class TwilioController < ApplicationController
       @s.completed = true
       @s.save
 
-   elsif session["page"] == "snap_feedback_1" && session["counter"] == 10
+   elsif session["page"] == "snap_feedback_2" && session["counter"] == 10
       @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
       message = "Thank you so much for your feedback! To check other programs, text 'menu'."
       @s.feedback = params[:Body]
