@@ -318,6 +318,7 @@ class TwilioController < ApplicationController
       message = "Are you currently working an average of 20 hours a week OR are in a work study program? Enter 'yes' or 'no'."
       session["page"] = "work_question"
     elsif session["half-time"] == "no"
+      #zipcode question because they are ineligible
       message = "What is your zipcode?"
       session["page"] = "snap_zipcode_question_not_half_time"
     else
@@ -360,6 +361,7 @@ class TwilioController < ApplicationController
          @s.save
          session["page"] = "snap_feedback_3"
     elsif session["page"] == "snap_zipcode_question_not_working" && session["counter"] == 5
+      session["zipcode"] = params[:Body].strip
         @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
         user_zipcode = session["zipcode"]
         @s.zipcode = user_zipcode
