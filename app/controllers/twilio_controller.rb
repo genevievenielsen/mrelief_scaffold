@@ -97,23 +97,25 @@ class TwilioController < ApplicationController
 
 
 
-   if session["page"] == "snap_citizen_question" && session["counter"] == 3
+   if session["page"] == "snap_citizen_question"
+      if session["counter"] == 3 || session["counter"] == 5
       session["citizen"] = params[:Body].strip.downcase
       @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
-    if session["citizen"]  == "no"
-       @s.citizen = "no"
-       message = "What is your zipcode?"
-       session["page"] = "snap_eligible_maybe"
-     elsif session["citizen"]  == "yes"
-       @s.citizen = "yes"
-       message = "How old are you? Enter a number"
-       session["page"] = "snap_age_question"
-     else
-      message = "Oops looks like there is a typo! Please type 'yes' or 'no' to answer this question."
-       session["counter"] = 2
-     end
-     @s.completed = false
-     @s.save
+      if session["citizen"]  == "no"
+         @s.citizen = "no"
+         message = "What is your zipcode?"
+         session["page"] = "snap_eligible_maybe"
+       elsif session["citizen"]  == "yes"
+         @s.citizen = "yes"
+         message = "How old are you? Enter a number"
+         session["page"] = "snap_age_question"
+       else
+        message = "Oops looks like there is a typo! Please type 'yes' or 'no' to answer this question."
+         session["counter"] = 2
+       end
+       @s.completed = false
+       @s.save
+    end
    end
 
    if session["page"] == "snap_age_question" && session["counter"] == 4
@@ -330,8 +332,9 @@ class TwilioController < ApplicationController
     session["work_question"] = params[:Body].strip.downcase
     @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
     if session["work_question"] == "yes"
-      #ask the remaining questions
-
+      #ask the remaining questions to determine food stamps eligibility
+      message = "Are you a citizen of the United States or a legal permanent resident who has lived in the US for at least five years? Enter 'yes' or 'no'."
+      session["page"] = "snap_citizen_question"
     elsif session["work_question"] == "no"
       #zipcode question because they are ineligible
       message = "What is your zipcode?"
@@ -343,7 +346,7 @@ class TwilioController < ApplicationController
      @s.save
    end
 
-#Rose - is this correct
+#Rose - is this correct or should I tell them they are ineligible
     if session["page"] == "snap_zipcode_question_not_half_time" && session["counter"] == 4
         session["zipcode"] = params[:Body].strip
         @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
