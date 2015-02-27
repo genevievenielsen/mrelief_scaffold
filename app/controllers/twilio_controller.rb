@@ -95,8 +95,6 @@ class TwilioController < ApplicationController
      @s.save
    end
 
-
-
    if session["page"] == "snap_citizen_question"
       if session["counter"] == 3 || session["counter"] == 5
       session["citizen"] = params[:Body].strip.downcase
@@ -111,14 +109,15 @@ class TwilioController < ApplicationController
          session["page"] = "snap_age_question"
        else
         message = "Oops looks like there is a typo! Please type 'yes' or 'no' to answer this question."
-         session["counter"] = 2
+        session["counter"] = session["counter"] - 1
        end
        @s.completed = false
        @s.save
     end
    end
 
-   if session["page"] == "snap_age_question" && session["counter"] == 4
+   if session["page"] == "snap_age_question"
+    if session["counter"] == 4 || session["counter"] == 6
      session["age"] = params[:Body].strip
      @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
       if session["age"]  !~ /\D/
@@ -136,34 +135,40 @@ class TwilioController < ApplicationController
     end
     @s.completed = false
     @s.save
+    end
    end
 
-   if session["page"] == "snap_household_question" && session["counter"] == 5
-     session["dependents"] = params[:Body].strip
-     @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-     if session["dependents"] !~ /\D/  # returns true if all numbers
-       session["dependents"] = session["dependents"].to_i
-     else
-       session["dependents"] = session["dependents"].in_numbers
-     end
-     @s.dependent_no = session["dependents"]
-     message = "What is your zipcode?"
-     session["page"] = "snap_zipcode_question"
-     @s.completed = false
-     @s.save
+   if session["page"] == "snap_household_question"
+     if session["counter"] == 5 || session["counter"] == 7
+      session["dependents"] = params[:Body].strip
+      @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+      if session["dependents"] !~ /\D/  # returns true if all numbers
+        session["dependents"] = session["dependents"].to_i
+      else
+        session["dependents"] = session["dependents"].in_numbers
+      end
+      @s.dependent_no = session["dependents"]
+      message = "What is your zipcode?"
+      session["page"] = "snap_zipcode_question"
+      @s.completed = false
+      @s.save
+    end
    end
 
-   if session["page"] == "snap_zipcode_question" && session["counter"] == 6
-     session["zipcode"] = params[:Body].strip
-     @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-     @s.zipcode = session["zipcode"]
-     message = "Are you disabled? Enter 'yes' or 'no'"
-     session["page"] = "snap_disability_question"
-     @s.completed = false
-     @s.save
+   if session["page"] == "snap_zipcode_question"
+     if session["counter"] == 6 || session["counter"] == 8
+      session["zipcode"] = params[:Body].strip
+      @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+      @s.zipcode = session["zipcode"]
+      message = "Are you disabled? Enter 'yes' or 'no'"
+      session["page"] = "snap_disability_question"
+      @s.completed = false
+      @s.save
+    end
    end
 
-   if session["page"] == "snap_disability_question" && session["counter"] == 7
+   if session["page"] == "snap_disability_question"
+    if session["counter"] == 7 || session["counter"] == 9
       session["disability"] = params[:Body].strip.downcase
       @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
      if session["disability"]  == "no"
@@ -176,31 +181,35 @@ class TwilioController < ApplicationController
        session["page"] = "snap_disability_payment"
       else
         message = "Oops looks like there is a typo! Please type 'yes' or 'no' to answer this question."
-        session["counter"] = 6
+        session["counter"] = session["counter"] - 1
       end
      @s.completed = false
      @s.save
-   end
-
-   if session["page"] == "snap_disability_payment" && session["counter"] == 8
-     session["disability_payment"] = params[:Body].strip.downcase
-     @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-     message = "What is the gross monthly income of all people living in your household including yourself? Income includes social security, child support, and unemployment insurance before any deductions. Enter a number. Example - 1000."
-     if session["disability_payment"] == "yes"
-      @s.disabled_receiving_payment = "yes"
-      @disability
-     elsif session["disability_payment"] == "no"
-      @s.disabled_receiving_payment = "no"
-     else
-      message = "Oops looks like there is a typo! Please type 'yes' or 'no' to answer this question."
-      session["counter"] = 7
      end
-     session["page"] = "snap_income_question_disability"
-     @s.completed = false
-     @s.save
    end
 
-   if session["page"] == "snap_income_question" && session["counter"] == 8
+   if session["page"] == "snap_disability_payment"
+     if session["counter"] == 8 || session["counter"] == 10
+      session["disability_payment"] = params[:Body].strip.downcase
+      @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+      message = "What is the gross monthly income of all people living in your household including yourself? Income includes social security, child support, and unemployment insurance before any deductions. Enter a number. Example - 1000."
+      if session["disability_payment"] == "yes"
+       @s.disabled_receiving_payment = "yes"
+       @disability
+      elsif session["disability_payment"] == "no"
+       @s.disabled_receiving_payment = "no"
+      else
+       message = "Oops looks like there is a typo! Please type 'yes' or 'no' to answer this question."
+       session["counter"] = session["counter"] - 1
+      end
+      session["page"] = "snap_income_question_disability"
+      @s.completed = false
+      @s.save
+    end
+   end
+
+   if session["page"] == "snap_income_question"
+     if session["counter"] == 8 || session["counter"] == 10
      session["income"] = params[:Body].strip
      @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
      if session["income"] !~ /\D/
@@ -253,9 +262,11 @@ class TwilioController < ApplicationController
       end
       @s.save
       session["page"] = "snap_feedback_1"
+     end
    end
 
-   if session["page"] == "snap_income_question_disability" && session["counter"] == 9
+   if session["page"] == "snap_income_question_disability"
+     if session["counter"] == 9 || session["counter"] == 11
      session["income"] = params[:Body].strip
      @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
      if session["income"] !~ /\D/
@@ -308,9 +319,10 @@ class TwilioController < ApplicationController
       end
       @s.save
       session["page"] = "snap_feedback_2"
+    end
    end
 
-   # Food stamps user is in school
+   # FOOD STAMPS USER IS IN SCHOOL
    if session["page"] == "snap_college_question2" && session["counter"] == 3
     session["half-time"] = params[:Body].strip.downcase
     @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
@@ -352,28 +364,31 @@ class TwilioController < ApplicationController
         @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
         user_zipcode = session["zipcode"]
         @s.zipcode = user_zipcode
-        @zipcode = user_zipcode << ".0"
-        @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
-        if @lafcenter.present?
+        @food_resources = ServiceCenter.where(:description => "food pantry")
+        @food_resources_zip = @food_resources.where(:zip => user_zipcode)
+        if @food_resources_zip.present?
+          @food_pantry = @food_resources_zip.first
         else
-          @lafcenter = LafCenter.find_by(:id => 10)
+          @food_pantry = @food_resources.first
         end
-        message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+        message = "Based on your current student status, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
         @s.snap_eligibility_status = "maybe"
         @s.save
         session["page"] = "snap_feedback_3"
+
     elsif session["page"] == "snap_zipcode_question_not_working" && session["counter"] == 5
       session["zipcode"] = params[:Body].strip
       @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
       user_zipcode = session["zipcode"]
       @s.zipcode = user_zipcode
-      @zipcode = user_zipcode << ".0"
-      @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
-      if @lafcenter.present?
+      @food_resources = ServiceCenter.where(:description => "food pantry")
+      @food_resources_zip = @food_resources.where(:zip => user_zipcode)
+      if @food_resources_zip.present?
+        @food_pantry = @food_resources_zip.first
       else
-        @lafcenter = LafCenter.find_by(:id => 10)
+        @food_pantry = @food_resources.first
       end
-      message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+        message = "Based on your current student status, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
       @s.snap_eligibility_status = "maybe"
       @s.save
       session["page"] = "snap_feedback_3.5"
@@ -382,7 +397,8 @@ class TwilioController < ApplicationController
 
 
    # Food stamps user is not a US citizen
-   if session["page"] == "snap_eligible_maybe" && session["counter"] == 4
+   if session["page"] == "snap_eligible_maybe"
+    if session["counter"] == 4 || session["counter"] == 6
     session["zipcode"] = params[:Body].strip
     @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
      user_zipcode = session["zipcode"]
@@ -396,6 +412,7 @@ class TwilioController < ApplicationController
      @s.snap_eligibility_status = "maybe"
      @s.save
      session["page"] = "snap_feedback_4"
+    end
    end
 
     # Food stamps user is younger than 18
@@ -425,19 +442,23 @@ class TwilioController < ApplicationController
 
 
    # HERE IS THE FEEDBACK LOGIC FOR FOODSTAMPS
-   if session["page"] == "snap_feedback_1" && session["counter"] == 9
-      @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-      message = "Thank you so much for your feedback! To check other programs, text 'menu'."
-      @s.feedback = params[:Body]
-      @s.completed = true
-      @s.save
+   if session["page"] == "snap_feedback_1"
+      if session["counter"] == 9 || session["counter"] == 11
+        @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+        message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+        @s.feedback = params[:Body]
+        @s.completed = true
+        @s.save
+      end
 
-   elsif session["page"] == "snap_feedback_2" && session["counter"] == 10
-      @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-      message = "Thank you so much for your feedback! To check other programs, text 'menu'."
-      @s.feedback = params[:Body]
-      @s.completed = true
-      @s.save
+   elsif session["page"] == "snap_feedback_2"
+      if session["counter"] == 10 || session["counter"] == 12
+        @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+        message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+        @s.feedback = params[:Body]
+        @s.completed = true
+        @s.save
+     end
 
    elsif session["page"] == "snap_feedback_2" && session["counter"] == 5
       @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
