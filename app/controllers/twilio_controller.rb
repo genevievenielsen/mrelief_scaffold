@@ -411,6 +411,7 @@ class TwilioController < ApplicationController
        @lafcenter = LafCenter.find_by(:id => 10)
      end
      message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+     @s.zipcode = user_zipcode
      @s.snap_eligibility_status = "maybe"
      @s.save
      session["page"] = "snap_feedback_4"
@@ -427,12 +428,13 @@ class TwilioController < ApplicationController
        @lafcenter = LafCenter.find_by(:id => 10)
      end
      message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+     @s.zipcode = user_zipcode
      @s.snap_eligibility_status = "maybe"
      @s.save
      session["page"] = "snap_feedback_4.5"
    end
 
-    # Food stamps user is younger than 18
+   # Food stamps user is younger than 18
    if session["page"] == "snap_ineligible" && session["counter"] == 5
     @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
     user_zipcode = session["zipcode"]
@@ -450,6 +452,7 @@ class TwilioController < ApplicationController
       @food_pantry = @food_resources.first
     end
     message = "Based on your age, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+    @s.zipcode = user_zipcode
     @s.snap_eligibility_status = "no"
     @s.save
     session["page"] = "snap_feedback_5"
