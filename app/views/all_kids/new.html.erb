@@ -1,10 +1,5 @@
 <div class="container">
 
-  <script>$(function ()
-      { $("[data-toggle='popover']").popover();
-      });
-   </script>
-
 <div class="page-header col-md-10 col-md-offset-1" style="border:none;">
   <h1> Do I qualify for All Kids?</h1>
 
@@ -29,7 +24,9 @@
   <div class="form-group col-sm-9">
     <label for="kids_household_size">How many children are living in your household?</label>
      <button type="button" data-toggle="popover" data-content="The number of children living in your household." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-     <input type="text" id="kids_household_size" name="kids_household_size" placeholder="For example: 3" class="form-control" value="<%= @a.household_size %>"required>
+      <p type="button" data-toggle="popover" data-content="The number of children living in your household." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+      <input type="text" id="kids_household_size" name="kids_household_size" placeholder="For example: 3" class="form-control" value="<%= @a.household_size %>"required>
+      </p>
   </div>
 
   <div class="form-group col-md-12">
@@ -49,7 +46,9 @@
     <button type="button" data-toggle="popover" data-content="Total monthly income from all sources." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
     <div class="input-group">
       <span class="input-group-addon">$</span>
-        <input type="text" id="kids_gross_income" name="kids_gross_income" placeholder="For example: 1000" class="form-control"  value="<%= @a.monthly_gross_income %>" required>
+         <p type="button" data-toggle="popover" data-content="Total monthly income from all sources." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+          <input type="text" id="kids_gross_income" name="kids_gross_income" placeholder="For example: 1000" class="form-control"  value="<%= @a.monthly_gross_income %>" required>
+         </p>
       <span class="input-group-addon">.00</span>
     </div>
   </div>
@@ -69,7 +68,9 @@
     <label for="phone_number">What is your cell phone number?</label>
       <button type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
     <div>
-      <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control" value="<%= @a.phone_number %>">
+       <p type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+          <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control" value="<%= @a.phone_number %>">
+      </p>
     </div>
   </div>
 
@@ -88,3 +89,19 @@
 </div>
 </div>
 </div>
+
+  <script>
+    $(function ()
+      { $("[data-toggle='popover']").popover();
+    });
+
+    $('body').on('click', function (e) {
+        $('[data-toggle="popover"]').each(function () {
+            //the 'is' for buttons that trigger popups
+            //the 'has' for icons within a button that triggers a popup
+            if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                $(this).popover('hide');
+            }
+        });
+    });
+   </script>
