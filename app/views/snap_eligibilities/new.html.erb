@@ -163,8 +163,6 @@ $(document).ready(function() {
     if (value == "yes") {
       $('.place_for_student_questions').empty().append("<%= escape_javascript(render "snap_eligibilities/student_questions", :work_status => @s.work_status, :student_status => @s.student_status ) %>");
     }
-    <%= puts @s.work_status  %>
-    <%= puts @s.student_status  %>
     if (value == "no") {
       $('.student_questions').remove();
     }
