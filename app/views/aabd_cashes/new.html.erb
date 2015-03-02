@@ -1,10 +1,5 @@
 <div class= "container">
 
-  <script>$(function ()
-      { $("[data-toggle='popover']").popover();
-      });
-   </script>
-
   <div class="row">
     <div class="page-header col-md-10 col-md-offset-1" style="border:none;">
       <h2>Do I qualify for Aged, Blind and Disabled (AABD) Cash Assistance?</h2>
@@ -46,7 +41,9 @@
 
     <div class="row">
       <div class="col-md-9">
-        <input type="text" id="aabd_household_size" name="aabd_household_size" placeholder="For example: 3" class="form-control" value="<%= @a.household_size %>" required>
+        <p type="button" data-toggle="popover" data-content="Household is defined as anyone living in the same dwelling with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+          <input type="text" id="aabd_household_size" name="aabd_household_size" placeholder="For example: 3" class="form-control" value="<%= @a.household_size %>" required>
+        </p>
       </div>
     </div>
   </div>
@@ -62,7 +59,9 @@
     </label>
     <div class="input-group">
       <span class="input-group-addon">$</span>
-       <input type="text" id="aabd_net_income" name="aabd_net_income" placeholder="For example: 1000"class="form-control" value="<%= @a.thirty_day_net_income %>" required>
+        <p type="button" data-toggle="popover" data-content="This should include income you earn from your work, self employment and rental income (contributions from people who live with you.)" data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+        <input type="text" id="aabd_net_income" name="aabd_net_income" placeholder="For example: 1000"class="form-control" value="<%= @a.thirty_day_net_income %>" required>
+        </p>
       <span class="input-group-addon">.00</span>
     </div>
     </div>
@@ -77,7 +76,9 @@
       </label>
       <div class="input-group">
         <span class="input-group-addon">$</span>
-         <input type="text" id="aabd_benefits" name="aabd_benefits" placeholder="For example: 1000"class="form-control" value="<%= @a.government_benefits %>" required>
+          <p type="button" data-toggle="popover" data-content="This includes social security (SSI), veterans benefits, railroad assistance etc." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+          <input type="text" id="aabd_benefits" name="aabd_benefits" placeholder="For example: 1000"class="form-control" value="<%= @a.government_benefits %>" required>
+          </p>
         <span class="input-group-addon">.00</span>
       </div>
       </div>
@@ -92,7 +93,9 @@
         </label>
         <div class="input-group">
           <span class="input-group-addon">$</span>
-           <input type="text" id="aabd_assets" name="aabd_assets" placeholder="For example: 1000"class="form-control" value="<%= @a.assets %>" required>
+            <p type="button" data-toggle="popover" data-content="Everything but your home, if you live in it, and one car." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+              <input type="text" id="aabd_assets" name="aabd_assets" placeholder="For example: 1000"class="form-control" value="<%= @a.assets %>" required>
+            </p>
           <span class="input-group-addon">.00</span>
         </div>
         </div>
@@ -128,9 +131,11 @@
  <div class="form-group col-sm-9">
    <label for="phone_number">What is your cell phone number?</label>
      <button type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-   <div>
-     <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control" value="<%= @a.phone_number %>">
-   </div>
+
+      <p type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+        <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control" value="<%= @a.phone_number %>">
+      </p>
+
  </div>
  </div>
 
@@ -149,9 +154,23 @@
 </div>
 
 
+</div>
+</div>
+</div>
 
+<script>
+  $(function ()
+    { $("[data-toggle='popover']").popover();
+  });
 
-</div>
-</div>
-</div>
+   $('body').on('click', function (e) {
+      $('[data-toggle="popover"]').each(function () {
+          //the 'is' for buttons that trigger popups
+          //the 'has' for icons within a button that triggers a popup
+          if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+              $(this).popover('hide');
+          }
+      });
+  });
+ </script>
 
