@@ -1,10 +1,5 @@
 <div class= "container">
 
- <script>$(function ()
-      { $("[data-toggle='popover']").popover();
-      });
-   </script>
-
 <div class="page-header" style="border:none">
   <h1>Do I qualify for All City Programs within mRelief?</h1>
   <p class="subhead">Programs include Food Stamps, RTA Ride Free, All Kids, Medicare Cost Sharing, Rental Assistance, Medicaid,  Aged, Blind and Disabled (AABD), Cash Assistance and Temporary Assistance for Needy Families</p>
@@ -27,7 +22,9 @@
     <label for="dependent_no">What is the number of people living in your household including yourself?</label>
       <button type="button" data-toggle="popover" data-content="This should include the number of people who purchase and prepare food with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
     <div>
-      <input type="text" id="dependent_no" name="dependent_no" placeholder="For example: 3" class="form-control" value="<%= @a.dependent_no %>" required>
+      <p type="button" data-toggle="popover" data-content="This should include the number of people who purchase and prepare food with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+        <input type="text" id="dependent_no" name="dependent_no" placeholder="For example: 3" class="form-control" value="<%= @a.dependent_no %>" required>
+      </p>
     </div>
   </div>
 
@@ -41,7 +38,9 @@
     <label for="medicare_household_size">How many people in your household receive Medicare?</label>
       <button type="button" data-toggle="popover" data-content="This should include the number of people who purchase and prepare food with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
     <div>
-      <input type="text" id="medicare_household_size" name="medicare_household_size" placeholder="For example: 2" class="form-control"  value="<%= @a.medicare_household_size %>" required>
+      <p type="button" data-toggle="popover" data-content="This should include the number of people who purchase and prepare food with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+        <input type="text" id="medicare_household_size" name="medicare_household_size" placeholder="For example: 2" class="form-control"  value="<%= @a.medicare_household_size %>" required>
+      </p>
     </div>
   </div>
 
@@ -59,9 +58,11 @@
     </label>
     <button type="button" data-toggle="popover" data-content="This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
     <div class="input-group">
-  <span class="input-group-addon">$</span>
-  <input type="text" id="monthly_gross_income" name="monthly_gross_income" placeholder="For example: 1000"class="form-control" value="<%= @a.monthly_gross_income %>" required>
-  <span class="input-group-addon">.00</span>
+      <span class="input-group-addon">$</span>
+      <p type="button" data-toggle="popover" data-content="This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+       <input type="text" id="monthly_gross_income" name="monthly_gross_income" placeholder="For example: 1000"class="form-control" value="<%= @a.monthly_gross_income %>" required>
+       </p>
+    <span class="input-group-addon">.00</span>
   </div>
 </div>
 
@@ -73,7 +74,9 @@
     <button type="button" data-toggle="popover" data-content="This should include income you earn from your work, self employment and rental income (contributions from people who live with you.)" data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
     <div class="input-group">
       <span class="input-group-addon">$</span>
-       <input type="text" id="net_income" name="net_income" placeholder="For example: 1000"class="form-control" value="<%= @a.thirty_day_net_income %>" required>
+       <p type="button" data-toggle="popover" data-content="This should include income you earn from your work, self employment and rental income (contributions from people who live with you.)" data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+        <input type="text" id="net_income" name="net_income" placeholder="For example: 1000"class="form-control" value="<%= @a.thirty_day_net_income %>" required>
+       </p>
       <span class="input-group-addon">.00</span>
     </div>
   </div>
@@ -86,7 +89,9 @@
       <button type="button" data-toggle="popover" data-content="This includes social security (SSI), veterans benefits, railroad assistance etc." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
       <div class="input-group">
         <span class="input-group-addon">$</span>
-         <input type="text" id="monthly_benefits" name="monthly_benefits" placeholder="For example: 1000"class="form-control" value="<%= @a.monthly_benefits %>" required>
+          <p type="button" data-toggle="popover" data-content="This includes social security (SSI), veterans benefits, railroad assistance etc." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+            <input type="text" id="monthly_benefits" name="monthly_benefits" placeholder="For example: 1000"class="form-control" value="<%= @a.monthly_benefits %>" required>
+          </p>
         <span class="input-group-addon">.00</span>
       </div>
     </div>
@@ -135,7 +140,9 @@
       <button type="button" data-toggle="popover" data-content="Includes cash receipts from all sources including money wages and salaries before any deductions, unemployment compensation, public assistance, alimony, child support, lottery/gambling winnings, dividends and all other income." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
     <div class="input-group">
       <span class="input-group-addon">$</span>
-        <input type="text" id="ninety_day_gross_income" name="ninety_day_gross_income" placeholder="For example: 4000" class="form-control" value="<%= @a.ninety_day_gross_income %>" required>
+        <p type="button" data-toggle="popover" data-content="Includes cash receipts from all sources including money wages and salaries before any deductions, unemployment compensation, public assistance, alimony, child support, lottery/gambling winnings, dividends and all other income." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+          <input type="text" id="ninety_day_gross_income" name="ninety_day_gross_income" placeholder="For example: 4000" class="form-control" value="<%= @a.ninety_day_gross_income %>" required>
+        </p>
       <span class="input-group-addon">.00</span>
     </div>
   </div>
@@ -149,7 +156,9 @@
       <button type="button" data-toggle="popover" data-content="Your total income before tax deductions, including your spouse's income if married and living together on December 31 of last year, and that of a qualified additional resident (if applicable)." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
     <div class="input-group">
       <span class="input-group-addon">$</span>
-      <input type="text" id="annual_gross_income" name="annual_gross_income" placeholder="For example: 30000" class="form-control" value="<%= @a.annual_gross_income %>" required>
+        <p type="button" data-toggle="popover" data-content="Your total income before tax deductions, including your spouse's income if married and living together on December 31 of last year, and that of a qualified additional resident (if applicable)." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+          <input type="text" id="annual_gross_income" name="annual_gross_income" placeholder="For example: 30000" class="form-control" value="<%= @a.annual_gross_income %>" required>
+        </p>
       <span class="input-group-addon">.00</span>
   </div>
 </div>
@@ -158,9 +167,10 @@
   <div class="form-group col-sm-9">
     <label for="assets">Please estimate the value of your assets. (Exclude the value of your home and car.)</label>
       <button type="button" data-toggle="popover" data-content="Personal property is anything owned by a person that is not land or permanently affixed to land. This includes such items as: money in checking and savings accounts;stocks, bonds, savings certificates, and other securities;farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-  <div>
-    <input type="text" id="assets" name="assets" placeholder="For example: 5000" class="form-control" value="<%= @a.assets %>" required>
-  </div>
+
+      <p type="button" data-toggle="popover" data-content="Personal property is anything owned by a person that is not land or permanently affixed to land. This includes such items as: money in checking and savings accounts;stocks, bonds, savings certificates, and other securities;farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+        <input type="text" id="assets" name="assets" placeholder="For example: 5000" class="form-control" value="<%= @a.assets %>" required>
+      </p>
 </div>
 <br>
 
@@ -295,9 +305,9 @@
     <div class="form-group col-sm-9">
     <label for="phone_number">What is your cell phone number?</label>
       <button type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-    <div>
-      <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control" value="<%= @a.phone_number %>">
-    </div>
+      <p type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+        <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control" value="<%= @a.phone_number %>">
+      </p>
     </div>
 
 
@@ -321,7 +331,19 @@
 </div>
 </div>
 
-
-
+<script>
+   $(function ()
+     { $("[data-toggle='popover']").popover();
+   });
+    $('body').on('click', function (e) {
+       $('[data-toggle="popover"]').each(function () {
+           //the 'is' for buttons that trigger popups
+           //the 'has' for icons within a button that triggers a popup
+           if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+               $(this).popover('hide');
+           }
+       });
+   });
+  </script>
 
 
