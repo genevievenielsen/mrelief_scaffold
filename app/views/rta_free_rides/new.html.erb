@@ -1,7 +1,19 @@
 <div class= "container">
-  <script>$(function ()
-      { $("[data-toggle='popover']").popover();
+  <script>
+    $(function (){
+        $("[data-toggle='popover']").popover();
       });
+
+    $('body').on('click', function (e) {
+        $('[data-toggle="popover"]').each(function () {
+            //the 'is' for buttons that trigger popups
+            //the 'has' for icons within a button that triggers a popup
+            if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                $(this).popover('hide');
+            }
+        });
+    });
+
    </script>
 
 <div class="page-header col-md-10 col-md-offset-1" style="border:none;">
@@ -46,12 +58,15 @@
 
   <div class="row">
   <div class="form-group col-sm-9">
-    <label for="rta_dependent_no">How many dependents (including yourself) are in your household?</label>
+    <label for="rta_dependent_no">How many dependents (including yourself) are in your household?
     <button type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself, your spouse (if applicable), and/or resident for whom you (or you and your spouse) provided more than half of that person's total financial support last year." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+    </label>
 
     <div class="row">
        <div class="form-group col-md-12">
+       <p type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself, your spouse (if applicable), and/or resident for whom you (or you and your spouse) provided more than half of that person's total financial support last year." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
         <input type="text" id="rta_dependent_no" name="rta_dependent_no" placeholder="For example: 3" class="form-control" value="<%= @r.dependent_no %>" required>
+        </p>
       </div>
     </div>
   </div>
@@ -63,12 +78,13 @@
         <label for="rta_gross_income">
           What is your gross annual income?
         </label>
-
           <button type="button" data-toggle="popover" data-content="Your total income before tax deductions, including your spouse's income if married and living together on December 31 of last year, and that of a qualified additional resident (if applicable)." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
 
         <div class="input-group">
           <span class="input-group-addon">$</span>
-          <input type="text" id="rta_gross_income" name="rta_gross_income" placeholder="For example: 30000" class="form-control" value= "<%= @r.gross_annual_income %>" required>
+          <p type="button" data-toggle="popover" data-content="Your total income before tax deductions, including your spouse's income if married and living together on December 31 of last year, and that of a qualified additional resident (if applicable)." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+            <input type="text" id="rta_gross_income" name="rta_gross_income" placeholder="For example: 30000" class="form-control" value= "<%= @r.gross_annual_income %>" required>
+          </p>
           <span class="input-group-addon">.00</span>
         </div>
       </div>

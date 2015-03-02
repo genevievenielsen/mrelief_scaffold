@@ -365,36 +365,38 @@ class TwilioController < ApplicationController
    # students do not meet requirements
    #student not enrolled part-time or more
     if session["page"] == "snap_zipcode_question_not_half_time" && session["counter"] == 4
-        session["zipcode"] = params[:Body].strip
-        @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-        user_zipcode = session["zipcode"]
-        @s.zipcode = user_zipcode
-        @food_resources = ServiceCenter.where(:description => "food pantry")
-        @food_resources_zip = @food_resources.where(:zip => user_zipcode)
-        if @food_resources_zip.present?
-          @food_pantry = @food_resources_zip.first
-        else
-          @food_pantry = @food_resources.first
-        end
-        message = "Based on your current student status, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
-        @s.snap_eligibility_status = "no"
-        @s.save
-        session["page"] = "snap_feedback_3"
+      session["zipcode"] = params[:Body].strip
+      @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+      user_zipcode = session["zipcode"]
+      @s.zipcode = user_zipcode
+      @food_resources = ServiceCenter.where(:description => "food pantry")
+      @food_resources_zip = @food_resources.where(:zip => user_zipcode)
+      if @food_resources_zip.present?
+        @food_pantry = @food_resources_zip.first
+      else
+        @food_pantry = @food_resources.first
+      end
+      message = "Based on your current student status, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+      @s.snap_eligibility_status = "no"
+      @s.save
+      session["page"] = "snap_feedback_3"
     #student not working 20 hours a week
     elsif session["page"] == "snap_zipcode_question_not_working" && session["counter"] == 5
       session["zipcode"] = params[:Body].strip
       @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-      u@zipcode = user_zipcode << ".0"
-     @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
-     if @lafcenter.present?
-     else
-       @lafcenter = LafCenter.find_by(:id => 10)
-     end
-     message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
-     @s.snap_eligibility_status = "maybe"
-     @s.save
+      user_zipcode = session["zipcode"]
+      @s.zipcode = user_zipcode
+      @zipcode = user_zipcode << ".0"
+      @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
+      if @lafcenter.present?
+      else
+        @lafcenter = LafCenter.find_by(:id => 10)
+      end
+      message = "We cannot determine your eligibility at this time. To discuss your situation with a Food Stamp expert, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+      @s.snap_eligibility_status = "maybe"
+      @s.save
       session["page"] = "snap_feedback_3.5"
-   end
+    end
 
 
    # Food stamps user is not a US citizen
