@@ -1,10 +1,5 @@
 <div class= "container">
 
-  <script>$(function ()
-      { $("[data-toggle='popover']").popover();
-      });
-   </script>
-
  <div class="page-header col-md-10 col-md-offset-1" style="border:none;">
   <h2>Do I qualify for the Medicare Cost Sharing program?</h2>
   <div class="subhead"> <p>If you are receiving Medicare through the Social Security Administration, you may qualify for a Medicare cost sharing program that will pay your Medicare Part B premium and -- depending on your income -- your Medicare deductibles and co-pays. </p>
@@ -31,21 +26,14 @@
 
    <div class="form-group col-md-12">
     <label for="household_size">What is your household size? </label>
-
-
       <button type="button" data-toggle="popover" data-content="Please include yourself, your spouse, your children under 18 who live with you" data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-
-    <div>
-      <input type="text" id="household_size" name="household_size" placeholder="For example: 3" class="form-control" required>
-    </div>
-    </div>
-
-
+      <p type="button" data-toggle="popover" data-content="Please include yourself, your spouse, your children under 18 who live with you" data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+       <input type="text" id="household_size" name="household_size" placeholder="For example: 3" class="form-control" required>
+      </p>
+  </div>
 
    <div class="form-group col-md-12">
     <label for="medicare_household_size">How many people in your household receive Medicare?</label>
-      <%#= link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "This should include the number of people who purchase and prepare food with you."} %>
-
     <div>
       <input type="text" id="medicare_household_size" name="medicare_household_size" placeholder="For example: 2" class="form-control"  required>
     </div>
@@ -54,8 +42,6 @@
   <!-- Label and input for medicare_cost_sharing -->
   <div class="form-group col-md-12">
     <label for="assets">What is you gross monthly income?</label>
-      <%#= link_to "<i class=\"fa fa-info-circle\"></i>".html_safe, "#", data: {toggle: "popover", placement: "top", content: "This should include the number of people who purchase and prepare food with you."} %>
-
     <div>
       <input type="text" id="monthly_income" name="monthly_income" placeholder="For example: 1000" class="form-control" required>
     </div>
@@ -63,13 +49,13 @@
 
   <!-- Label and input for premium_only -->
     <div class="form-group col-md-12">
-    <label for="assets">Please estimate the value of your assets. (Exclude the value of your home and car.)</label>
-
+    <label for="assets">Please estimate the value of your assets. (Exclude the value of your home and car.)
       <button type="button" data-toggle="popover" data-content="Personal property is anything owned by a person that is not land or permanently affixed to land. This includes such items as: money in checking and savings accounts;stocks, bonds, savings certificates, and other securities;farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-
-    <div>
+    </label>
+    <p type="button" data-toggle="popover" data-content="Personal property is anything owned by a person that is not land or permanently affixed to land. This includes such items as: money in checking and savings accounts;stocks, bonds, savings certificates, and other securities;farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
       <input type="text" id="assets" name="assets" placeholder="For example: 5000" class="form-control" required>
-    </div>
+    </p>
+
   </div>
 
    <div class="form-group col-sm-9 pull-left">
@@ -100,4 +86,19 @@
 </div>
 
 </div>
+
+<script>
+    $(function ()
+      { $("[data-toggle='popover']").popover();
+    });
+     $('body').on('click', function (e) {
+        $('[data-toggle="popover"]').each(function () {
+            //the 'is' for buttons that trigger popups
+            //the 'has' for icons within a button that triggers a popup
+            if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                $(this).popover('hide');
+            }
+        });
+    });
+   </script>
 
