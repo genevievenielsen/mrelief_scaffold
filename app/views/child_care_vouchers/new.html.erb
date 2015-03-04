@@ -24,6 +24,7 @@
   <div class="panel-body">
     <form action="/child_care_vouchers" role="form" method="post">
 
+    <div class="row">
     <div class="form-group col-sm-9">
       <p class="allthatapply">If your child is between the ages of 6 months and 12 years, you may qualify for a Child Care Voucher. Please answer the following questions to find out:</p>
     <label for="ccdf_dependent_no">How many dependents (including yourself) are in your household?</label>
@@ -34,12 +35,13 @@
         <input type="text" id="ccdf_dependent_no" name="ccdf_dependent_no" placeholder="For example: 3" class="form-control" value="<%= @child_care_voucher.ccdf_dependent_no %>" required>
       </p>
   </div>
+  </div>
 
 
   <!-- Label and input for rta_gross_income -->
+  <div class="row">
   <div class="form-group col-sm-9">
-    <label for="ccdf_gross_income">
-      What is your gross monthly income?</label>
+    <label for="ccdf_gross_income">What is your gross monthly income?</label>
 
       <button type="button" data-toggle="popover" data-content="Total monthly income from all sources, including work, child support, TANF, and Social Security before any deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
 
@@ -50,19 +52,24 @@
           </p>
         <span class="input-group-addon">.00</span>
       </div>
-  </div>
+    </div>
+    </div>
 
-
-  <div class="form-group col-sm-9 pull-left">
+  <div class="row">
+  <div class="form-group col-xs-12 col-sm-9 pull-left">
     <label for="zipcode">What is your zipcode?</label>
       <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" required>
   </div>
+  </div>
 
 
-  <%= render "layouts/location_dropdown" %>
+  <div class="row">
+    <%= render "layouts/location_dropdown" %>
+  </div>
 
-  <%= render "layouts/phone_question" %>
-
+  <div class="row">
+    <%= render "layouts/phone_question" %>
+  </div>
 
      <div class="row">
        <div class="col-md-6">
