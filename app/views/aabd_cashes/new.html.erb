@@ -9,7 +9,7 @@
   </div>
 
 <div class="row">
-<div class="panel panel-default col-md-8 col-md-offset-2">
+<div class="panel panel-default col-md-8 col-sm-7 pull-left">
   <div class="panel-body">
     <form action="/aabd_cashes" role="form" method="post">
 
@@ -139,26 +139,47 @@
  </div>
  </div>
 
-    <div class="row">
-      <div class="col-md-6">
-        <%= render "programs/calculator" %>
-      </div>
-    </div>
-
     <div>
       <button type="submit" class="btn btn-primary program-btn ">See if I qualify</button>
     </div>
   </div>
 </form>
-</div>
-</div>
-
 
 </div>
+
+  <div class="col-md-3 sm-3 xs-12 pull-left">
+    <div class="calculator_box">
+      <%= render "programs/calculator" %>
+    </div>
+  </div>
+
 </div>
 </div>
 
 <script>
+$(document).ready(function() {
+
+  //this is the map scroll down thing
+  $(window).scroll(function() {
+    if($(this).scrollTop() > 310 && $(this).width() > 750) {
+      $('.calculator_box').addClass('sticky_calculator');
+    } else {
+      $('.calculator_box').removeClass('sticky_calculator');
+    }
+  });
+
+  $(window).scroll(function() {
+    if($(this).scrollTop() < 310) {
+      $('.calculator_box').removeClass('sticky_calculator');
+    }
+  });
+
+  $(window).scroll(function() {
+    if($(this).width() < 750) {
+      $('.calculator').removeClass('sticky_calculator');
+    }
+  });
+
   $(function ()
     { $("[data-toggle='popover']").popover();
   });
@@ -172,5 +193,6 @@
           }
       });
   });
- </script>
+});
+</script>
 

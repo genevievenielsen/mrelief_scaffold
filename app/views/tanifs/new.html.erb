@@ -9,7 +9,7 @@
 </div>
 
 <div class="row">
-<div class="panel panel-default col-md-8 col-md-offset-2">
+<div class="panel panel-default col-md-8 col-sm-7 pull-left">
   <div class="panel-body">
     <form action="/tanifs" role="form" method="post">
 
@@ -35,9 +35,6 @@
         <input type="checkbox" name="no_children" value="no_children"> I care for no children <br>
       </div>
     </div>
-
-    <div class="row">
-      <div class="form-group col-md-12">
 
     <div class="row">
       <div class="form-group col-md-12">
@@ -174,11 +171,6 @@
   </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-6">
-      <%= render "programs/calculator" %>
-    </div>
-  </div>
 
   <div>
     <button type="submit" class="btn btn-primary program-btn ">See if I qualify</button>
@@ -186,16 +178,42 @@
 </div>
 </form>
 </div>
+  <div class="col-md-3 sm-3 xs-12 pull-left">
+    <div class="calculator_box">
+      <%= render "programs/calculator" %>
+    </div>
+  </div>
+
 </div>
 
-
-
-
 </div>
 </div>
-</div>
+
 
 <script>
+$(document).ready(function() {
+
+  //this is the map scroll down thing
+  $(window).scroll(function() {
+    if($(this).scrollTop() > 310 && $(this).width() > 750) {
+      $('.calculator_box').addClass('sticky_calculator');
+    } else {
+      $('.calculator_box').removeClass('sticky_calculator');
+    }
+  });
+
+  $(window).scroll(function() {
+    if($(this).scrollTop() < 310) {
+      $('.calculator_box').removeClass('sticky_calculator');
+    }
+  });
+
+  $(window).scroll(function() {
+    if($(this).width() < 750) {
+      $('.calculator').removeClass('sticky_calculator');
+    }
+  });
+
    $(function ()
      { $("[data-toggle='popover']").popover();
    });
@@ -208,4 +226,5 @@
            }
        });
    });
-  </script>
+});
+</script>
