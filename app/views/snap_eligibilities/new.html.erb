@@ -132,7 +132,9 @@
 
 </div>
 <div class="col-md-3 sm-3 xs-12 pull-left">
+  <div class="calculator_box">
     <%= render "programs/calculator" %>
+  </div>
 </div>
 
 </div>
@@ -145,15 +147,15 @@ $(document).ready(function() {
   //this is the map scroll down thing
   $(window).scroll(function() {
     if($(this).scrollTop() > 310 && $(this).width() > 750) {
-      $('.calculator').addClass('sticky_calculator');
+      $('.calculator_box').addClass('sticky_calculator');
     } else {
-      $('.calculator').removeClass('sticky_calculator');
+      $('.calculator_box').removeClass('sticky_calculator');
     }
   });
 
   $(window).scroll(function() {
     if($(this).scrollTop() < 310) {
-      $('.calculator').removeClass('sticky_calculator');
+      $('.calculator_box').removeClass('sticky_calculator');
     }
   });
 
