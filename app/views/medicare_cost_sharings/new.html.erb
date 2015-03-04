@@ -3,10 +3,8 @@
  <div class="page-header col-md-10 col-md-offset-1" style="border:none;">
   <h2>Do I qualify for the Medicare Cost Sharing program?</h2>
   <div class="subhead"> <p>If you are receiving Medicare through the Social Security Administration, you may qualify for a Medicare cost sharing program that will pay your Medicare Part B premium and -- depending on your income -- your Medicare deductibles and co-pays. </p>
-
-
-</div>
-</div>
+  </div>
+  </div>
 
 <% if @medicare_cost_sharing.errors.any? %>
   <% @medicare_cost_sharing.errors.full_messages.each do |message| %>
@@ -17,37 +15,38 @@
   <% end %>
 <% end %>
 
-
-
-<div class="panel panel-default col-md-8 col-md-offset-2">
+<div class="panel panel-default col-md-8 col-sm-6 pull-left">
   <div class="panel-body">
     <form action="/medicare_cost_sharings" role="form" method="post">
   <!-- Label and input for household_size -->
 
+  <div class="row">
    <div class="form-group col-md-12">
     <label for="household_size">What is your household size? </label>
       <button type="button" data-toggle="popover" data-content="Please include yourself, your spouse, your children under 18 who live with you" data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
       <p type="button" data-toggle="popover" data-content="Please include yourself, your spouse, your children under 18 who live with you" data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
        <input type="text" id="household_size" name="household_size" placeholder="For example: 3" class="form-control" required>
       </p>
+    </div>
   </div>
 
+  <div class="row">
    <div class="form-group col-md-12">
     <label for="medicare_household_size">How many people in your household receive Medicare?</label>
-    <div>
       <input type="text" id="medicare_household_size" name="medicare_household_size" placeholder="For example: 2" class="form-control"  required>
-    </div>
+  </div>
   </div>
 
   <!-- Label and input for medicare_cost_sharing -->
+  <div class="row">
   <div class="form-group col-md-12">
     <label for="assets">What is you gross monthly income?</label>
-    <div>
       <input type="text" id="monthly_income" name="monthly_income" placeholder="For example: 1000" class="form-control" required>
-    </div>
+  </div>
   </div>
 
   <!-- Label and input for premium_only -->
+  <div class="row">
     <div class="form-group col-md-12">
     <label for="assets">Please estimate the value of your assets. (Exclude the value of your home and car.)
       <button type="button" data-toggle="popover" data-content="Personal property is anything owned by a person that is not land or permanently affixed to land. This includes such items as: money in checking and savings accounts;stocks, bonds, savings certificates, and other securities;farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
@@ -55,24 +54,34 @@
     <p type="button" data-toggle="popover" data-content="Personal property is anything owned by a person that is not land or permanently affixed to land. This includes such items as: money in checking and savings accounts;stocks, bonds, savings certificates, and other securities;farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
       <input type="text" id="assets" name="assets" placeholder="For example: 5000" class="form-control" required>
     </p>
-
+  </div>
   </div>
 
-   <div class="form-group col-sm-9 pull-left">
+  <div class="row">
+   <div class="form-group col-md-12 ">
       <label for="zipcode">What is your zipcode?</label>
-        <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" required>
+        <input type="text" id="zipc ode" name="zipcode" placeholder="For example: 60615" class="form-control" required>
+  </div>
   </div>
 
+  <div class="row">
+    <div class="form-group col-md-12 ">
+    <label for="location" id="location_dropdown">Where are you completing this form? </label>
+    <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], ['Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Other', 'other']]), :class => "form-control", :prompt => "Select a location") %>
+    </div>
+  </div>
 
-    <%= render "layouts/location_dropdown" %>
-
-    <%= render "layouts/phone_question" %>
-
-   <div class="row">
-      <div class="col-md-6">
-        <%= render "programs/calculator" %>
+  <div class="row">
+    <div class="form-group col-md-12 ">
+      <label for="phone_number">What is your cell phone number?</label>
+        <button type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+      <div>
+        <p type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+          <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control" >
+        </p>
       </div>
     </div>
+  </div>
 
 
   <div class="form-group col-sm-12">
@@ -80,14 +89,47 @@
       <button type="submit" class="btn btn-primary">See if I qualify</button>
     </div>
   </div>
-  </div>
+
+
 </form>
 </div>
-</div>
 
 </div>
 
-  <script>
+  <div class="col-md-3 sm-3 xs-12 pull-left">
+     <div class="calculator_box">
+       <%= render "programs/calculator" %>
+     </div>
+   </div>
+
+</div>
+</div>
+
+
+<script>
+  $(document).ready(function() {
+
+    //this is the map scroll down thing
+    $(window).scroll(function() {
+      if($(this).scrollTop() > 310 && $(this).width() > 750) {
+        $('.calculator_box').addClass('sticky_calculator');
+      } else {
+        $('.calculator_box').removeClass('sticky_calculator');
+      }
+    });
+
+    $(window).scroll(function() {
+      if($(this).scrollTop() < 310) {
+        $('.calculator_box').removeClass('sticky_calculator');
+      }
+    });
+
+    $(window).scroll(function() {
+      if($(this).width() < 750) {
+        $('.calculator').removeClass('sticky_calculator');
+      }
+    });
+
     $(function ()
       { $("[data-toggle='popover']").popover();
     });
@@ -100,5 +142,6 @@
             }
         });
     });
-   </script>
+  });
+  </script>
 

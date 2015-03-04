@@ -8,12 +8,11 @@
       </div>
 
       <p>You can find more information about rental assistance by <a href="http://www.cityofchicago.org/ city/en/depts/fss/provdrs/serv/svcs/how_to_find_rentalassistanceinchicago.html">clicking here.</a></p>
-    </div>
   </div>
 
 
 <div class="row">
-  <div class="panel panel-default col-md-8 col-md-offset-2">
+  <div class="panel panel-default col-md-8 col-sm-7 pull-left">
   <div class="panel-body">
     <form action="/rental_assistances" role="form" method="post">
 
@@ -110,7 +109,7 @@
   </div>
 
   <div class="row">
-   <div class="form-group col-sm-9 pull-left">
+   <div class="form-group col-sm-9">
      <label for="zipcode">What is your zipcode?</label>
        <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" value="<%= @r.zipcode.chop.chop if @r.zipcode.present? %>"required>
    </div>
@@ -135,24 +134,48 @@
  </div>
  </div>
 
-  <div class="row">
-    <div class="col-md-6">
+ <div class="row">
+    <div>
+      <button type="submit" class="btn btn-primary">See if I qualify</button>
+    </div>
+</div>
+</form>
+</div>
+
+</div>
+
+  <div class="col-md-3 sm-3 xs-12 pull-left">
+    <div class="calculator_box">
       <%= render "programs/calculator" %>
     </div>
   </div>
 
-
-    <div>
-      <button type="submit" class="btn btn-primary">See if I qualify</button>
-    </div>
-  </div>
-
-
-</form>
 </div>
 </div>
-
 <script>
+$(document).ready(function() {
+
+  //this is the map scroll down thing
+  $(window).scroll(function() {
+    if($(this).scrollTop() > 310 && $(this).width() > 750) {
+      $('.calculator_box').addClass('sticky_calculator');
+    } else {
+      $('.calculator_box').removeClass('sticky_calculator');
+    }
+  });
+
+  $(window).scroll(function() {
+    if($(this).scrollTop() < 310) {
+      $('.calculator_box').removeClass('sticky_calculator');
+    }
+  });
+
+  $(window).scroll(function() {
+    if($(this).width() < 750) {
+      $('.calculator').removeClass('sticky_calculator');
+    }
+  });
+
   $(function ()
     { $("[data-toggle='popover']").popover();
   });
@@ -167,4 +190,5 @@
       });
   });
 
- </script>
+});
+</script>
