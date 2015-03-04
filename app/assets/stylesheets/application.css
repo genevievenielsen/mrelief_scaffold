@@ -317,3 +317,12 @@ a:hover {
   margin-right:10px;
 }
 */
+
+.calculator {
+  border-radius: 4px;
+}
+
+.sticky_calculator {
+  position: fixed !important;
+  top: 55px;
+}
