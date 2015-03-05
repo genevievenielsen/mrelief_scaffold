@@ -3,14 +3,14 @@
 <div class="page-header col-md-10 col-md-offset-1" style="border:none;">
   <h1> Do I qualify for WIC?</h1>
 
-<div class="subhead"> <p>The Women, Infants and Children (WIC) Program, funded by the United States Department of Agriculture, is a supplemental nutrition program focused on eating healthy for moms and kids. WIC can provide nutrition education, nutrition counseling, breastfeeding support, nutritious foods and referrals to other services as needed.</p>
+  <div class="subhead"> <p>The Women, Infants and Children (WIC) Program, funded by the United States Department of Agriculture, is a supplemental nutrition program focused on eating healthy for moms and kids. WIC can provide nutrition education, nutrition counseling, breastfeeding support, nutritious foods and referrals to other services as needed.</p>
   </div>
 
   <p>You can find more information about WIC by <a href="http://www.cedaorg.net/www2/HNS.html"> clicking here.</a></p>
 </div>
 
 <div class="row">
-  <div class="panel panel-default col-md-8 col-md-offset-2">
+  <div class="panel panel-default col-md-8 col-sm-7 pull-left">
   <div class="panel-body">
   <p class="allthatapply">If you are pregnant, breastfeeding, have had a baby in the past six months, or have a child or infant younger than five years old, you may be able to qualify for WIC benefits.</p>
 
@@ -58,7 +58,7 @@
   </div>
 
    <div class="row">
-    <div class="form-group col-sm-9 pull-left">
+    <div class="form-group col-sm-9">
       <label for="zipcode">What is your zipcode?</label>
         <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" value="<%= @w.zipcode.chop.chop if @w.zipcode.present? %>"required>
     </div>
@@ -83,22 +83,45 @@
   </div>
   </div>
 
-    <div class="row">
-      <div class="col-md-6">
-        <%= render "programs/calculator" %>
-      </div>
-    </div>
 
-  <div>
+  <div class="col-sm-9">
       <button type="submit" class="btn btn-primary program-btn">See if I qualify</button>
-  </div>
   </div>
 
 </form>
 </div>
 </div>
+  <div class="col-md-3 sm-3 xs-12 pull-left">
+    <div class="calculator_box">
+      <%= render "programs/calculator" %>
+    </div>
+  </div>
+</div>
+</div>
 
 <script>
+$(document).ready(function() {
+
+  //this is the map scroll down thing
+  $(window).scroll(function() {
+    if($(this).scrollTop() > 310 && $(this).width() > 750) {
+      $('.calculator_box').addClass('sticky_calculator');
+    } else {
+      $('.calculator_box').removeClass('sticky_calculator');
+    }
+  });
+
+  $(window).scroll(function() {
+    if($(this).scrollTop() < 310) {
+      $('.calculator_box').removeClass('sticky_calculator');
+    }
+  });
+
+  $(window).scroll(function() {
+    if($(this).width() < 750) {
+      $('.calculator').removeClass('sticky_calculator');
+    }
+  });
     $(function ()
       { $("[data-toggle='popover']").popover();
     });
@@ -111,5 +134,6 @@
             }
         });
     });
-   </script>
+});
+</script>
 

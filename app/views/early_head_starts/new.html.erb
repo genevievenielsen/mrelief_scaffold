@@ -22,23 +22,21 @@
 
 
 <div class="row">
-  <div class="panel panel-default col-md-8 col-md-offset-2">
+  <div class="panel panel-default col-md-8 col-sm-7 pull-left">
   <div class="panel-body">
     <form action="/early_head_starts" role="form" method="post">
 
   <!-- Label and input for ehs_dependent_no -->
-    <div class="form-group col-md-12">
+    <div class="form-group col-sm-9">
     <p class="allthatapply">If you are either pregnant or have a child who is between 0 and 2 years old, you may be eligible for Early Head Start.</p>
     <label for="ehs_dependent_no">How many dependents (including yourself) are in your household?</label>
 
     <button type="button" data-toggle="popover" data-content="Children under the age of 19." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-    <div class="row">
-    <div class="col-md-4">
+
     <p type="button" data-toggle="popover" data-content="Children under the age of 19." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
       <input type="text" id="ehs_dependent_no" name="ehs_dependent_no" placeholder="For example: 3" class="form-control" value="<%= @early_head_start.ehs_dependent_no %>" required>
     </p>
-  </div>
-  </div>
+
   </div>
 
 
@@ -59,23 +57,15 @@
     </div>
     </div>
 
-  <div class="form-group col-sm-9 pull-left">
+  <div class="form-group col-sm-9 ">
     <label for="zipcode">What is your zipcode?</label>
       <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" required>
   </div>
 
     <%= render "layouts/location_dropdown" %>
-
     <%= render "layouts/phone_question" %>
 
-
-    <div class="row">
-      <div class="col-md-6">
-        <%= render "programs/calculator" %>
-      </div>
-    </div>
-
-  <div>
+  <div class="col-sm-9">
       <button type="submit" class="btn btn-primary program-btn">See if I qualify</button>
   </div>
   </div>
@@ -83,10 +73,37 @@
 
 </form>
 </div>
+  <div class="col-md-3 sm-3 xs-12 pull-left">
+    <div class="calculator_box">
+      <%= render "programs/calculator" %>
+    </div>
+  </div>
 </div>
 </div>
 
 <script>
+$(document).ready(function() {
+
+  //this is the map scroll down thing
+  $(window).scroll(function() {
+    if($(this).scrollTop() > 310 && $(this).width() > 750) {
+      $('.calculator_box').addClass('sticky_calculator');
+    } else {
+      $('.calculator_box').removeClass('sticky_calculator');
+    }
+  });
+
+  $(window).scroll(function() {
+    if($(this).scrollTop() < 310) {
+      $('.calculator_box').removeClass('sticky_calculator');
+    }
+  });
+
+  $(window).scroll(function() {
+    if($(this).width() < 750) {
+      $('.calculator').removeClass('sticky_calculator');
+    }
+  });
   $(function ()
     { $("[data-toggle='popover']").popover();
   });
@@ -99,4 +116,5 @@
           }
       });
   });
- </script>
+});
+</script>
