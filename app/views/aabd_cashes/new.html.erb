@@ -123,7 +123,7 @@
  <div class="row">
    <div class="form-group col-sm-9">
    <label for="location" id="location_dropdown">Where are you completing this form? </label>
-   <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], ['Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Other', 'other']], @a.user_location), :class => "form-control", :prompt => "Select a location") %>
+   <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], ['Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['CTA Bus', 'cta_bus'], ['Other', 'other']], @a.user_location), :class => "form-control", :prompt => "Select a location") %>
    </div>
  </div>
 

@@ -77,6 +77,7 @@ class TwilioController < ApplicationController
    if params[:Body].strip.downcase == "cash"
       message = "Thanks for texting mRelief! Currently, we only help check eligibility for cash assistance at www.mrelief.com Please visit us online."
    end
+
    if params[:Body].strip.downcase == "rent"
       message = "Thanks for texting mRelief! Currently, we only help check eligibility for rent assistance at www.mrelief.com Please visit us online."
    end
