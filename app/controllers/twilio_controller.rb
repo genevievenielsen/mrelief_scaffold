@@ -75,10 +75,10 @@ class TwilioController < ApplicationController
    end
 
    if params[:Body].strip.downcase == "cash"
-      message = "Hello! Thanks so much for texting mRelief! At the current moment, we only help you check your eligibility for cash assistance online at www.mrelief.com Please visit our website on your next step."
+      message = "Thanks for texting mRelief! Currently, we only help check eligibility for cash assistance at www.mrelief.com Please visit us online."
    end
    if params[:Body].strip.downcase == "rent"
-      message = "Hello! Thanks so much for texting mRelief! At the current moment, we only help you check your eligibility for rental assistance online at www.mrelief.com Please visit our website on your next step."
+      message = "Thanks for texting mRelief! Currently, we only help check eligibility for rent assistance at www.mrelief.com Please visit us online."
    end
 
    # HERE IS THE FOOD STAMPS LOGIC
