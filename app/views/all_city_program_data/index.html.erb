@@ -1,0 +1,91 @@
+<h1>Listing all_city_program_data</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Dependent no</th>
+      <th>Medicare household size</th>
+      <th>Age</th>
+      <th>Monthly gross income</th>
+      <th>Child support</th>
+      <th>Ssi</th>
+      <th>Monthly benefits</th>
+      <th>Ninety day gross income</th>
+      <th>Annual gross income</th>
+      <th>Assets</th>
+      <th>Number of children</th>
+      <th>Enrolled in education</th>
+      <th>Citizen</th>
+      <th>Zipcode</th>
+      <th>Disabled status</th>
+      <th>Name on lease</th>
+      <th>Rental status</th>
+      <th>Pregnant</th>
+      <th>Child health insurance state</th>
+      <th>Pregnant or caring for child</th>
+      <th>Relationship to child</th>
+      <th>Pregnant with first child</th>
+      <th>Tanif sixty months</th>
+      <th>Anticipate other income</th>
+      <th>Teen parent</th>
+      <th>Child in school</th>
+      <th>Snap eligibility status</th>
+      <th>All kids eligibility status</th>
+      <th>Rta eligibility status</th>
+      <th>Medicaid eligibility status</th>
+      <th>Medicare cost sharing eligibility status</th>
+      <th>Rental eligibility status</th>
+      <th>Aabd eligibility status</th>
+      <th>Tanf eligibility status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @all_city_program_data.each do |all_city_program_datum| %>
+      <tr>
+        <td><%= all_city_program_datum.dependent_no %></td>
+        <td><%= all_city_program_datum.medicare_household_size %></td>
+        <td><%= all_city_program_datum.age %></td>
+        <td><%= all_city_program_datum.monthly_gross_income %></td>
+        <td><%= all_city_program_datum.child_support %></td>
+        <td><%= all_city_program_datum.ssi %></td>
+        <td><%= all_city_program_datum.monthly_benefits %></td>
+        <td><%= all_city_program_datum.ninety_day_gross_income %></td>
+        <td><%= all_city_program_datum.annual_gross_income %></td>
+        <td><%= all_city_program_datum.assets %></td>
+        <td><%= all_city_program_datum.number_of_children %></td>
+        <td><%= all_city_program_datum.enrolled_in_education %></td>
+        <td><%= all_city_program_datum.citizen %></td>
+        <td><%= all_city_program_datum.zipcode %></td>
+        <td><%= all_city_program_datum.disabled_status %></td>
+        <td><%= all_city_program_datum.name_on_lease %></td>
+        <td><%= all_city_program_datum.rental_status %></td>
+        <td><%= all_city_program_datum.pregnant %></td>
+        <td><%= all_city_program_datum.child_health_insurance_state %></td>
+        <td><%= all_city_program_datum.pregnant_or_caring_for_child %></td>
+        <td><%= all_city_program_datum.relationship_to_child %></td>
+        <td><%= all_city_program_datum.pregnant_with_first_child %></td>
+        <td><%= all_city_program_datum.tanif_sixty_months %></td>
+        <td><%= all_city_program_datum.anticipate_other_income %></td>
+        <td><%= all_city_program_datum.teen_parent %></td>
+        <td><%= all_city_program_datum.child_in_school %></td>
+        <td><%= all_city_program_datum.snap_eligibility_status %></td>
+        <td><%= all_city_program_datum.all_kids_eligibility_status %></td>
+        <td><%= all_city_program_datum.rta_eligibility_status %></td>
+        <td><%= all_city_program_datum.medicaid_eligibility_status %></td>
+        <td><%= all_city_program_datum.medicare_cost_sharing_eligibility_status %></td>
+        <td><%= all_city_program_datum.rental_eligibility_status %></td>
+        <td><%= all_city_program_datum.aabd_eligibility_status %></td>
+        <td><%= all_city_program_datum.tanf_eligibility_status %></td>
+        <td><%= link_to 'Show', all_city_program_datum %></td>
+        <td><%= link_to 'Edit', edit_all_city_program_datum_path(all_city_program_datum) %></td>
+        <td><%= link_to 'Destroy', all_city_program_datum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New All city program datum', new_all_city_program_datum_path %>

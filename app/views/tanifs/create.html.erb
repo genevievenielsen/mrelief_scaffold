@@ -1,38 +1,32 @@
-<br>
-<br>
+<div class="container">
+<%= render "layouts/print_button" %>
 <% if @eligible_tanif == "yes" %>
-  <div class="page-header"></div>
 
-        <div class="row" style="text-align:center;">
-           <div class="col-md-8 col-md-offset-2">
-               <i class="fa fa-check-circle fa-5x"></i>
-                <h1>You may be in luck!</h1>
-                <h4>Based on your household size, income, and ages of your children, you may qualify for TANF. </h4>
 
+     <div class="row" style="text-align:center;">
+      <div class="col-md-8 col-md-offset-2">
+          <i class="fa fa-check-circle fa-5x"></i>
+           <h1>You may be in luck!</h1>
+           <h4>Based on your household size, income, and ages of your children, you may qualify for TANF. </h4>
           <br>
           <br>
           <br>
-
           <div class="row">
             <div class="text-center">
               <p class="subhead">  Use the DHS Office Locator to find your local Family Community Resource Center :</p>
-            <%= link_to "Click Here", "https://www.dhs.state.il.us/page.aspx?module=12", :class => "btn btn-success btn-resolution" %>
+            <%= link_to "Click Here", "https://www.dhs.state.il.us/page.aspx?module=12", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'tanf', 'dhs_office_locator', 1);" %>
             </div>
             <br>
-            </div>
+          </div>
         </div>
       </div>
       <div class="row">
-      <div class="text-center">
-      <p class="subhead">or contact the DHS Help Line at 1 800 843-6154 (voice) or 1 800 447-6404 (TTY).</p>
-      </div>
+        <div class="text-center">
+          <p class="subhead">or contact the DHS Help Line at 1 800 843-6154 (voice) or 1 800 447-6404 (TTY).</p>
+        </div>
       </div>
 
 <% elsif @eligible_tanif == "maybe" %>
-
-  <div class="page-header"></div>
-
-   <div class="page-header"></div>
 
      <div class="row" style="text-align:center;">
        <div class="col-md-8 col-md-offset-2">
@@ -91,7 +85,6 @@
             <% end %>
           </div>
 
-
           <div class="row">
           <% if @child_resources_first.present? %>
             <div class="col-md-6 col-sm-6">
@@ -122,3 +115,4 @@
   <br>
 
 <% end %>
+</div>

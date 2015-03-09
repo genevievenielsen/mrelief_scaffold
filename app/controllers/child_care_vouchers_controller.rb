@@ -3,26 +3,22 @@ class ChildCareVouchersController < ApplicationController
   skip_before_action :authenticate_user!, :only => :index
   skip_before_filter :verify_authenticity_token
 
-
   # GET /child_care_vouchers/new
  def new
     @child_care_voucher = ChildCareVoucher.new
   end
 
   def create
-
+    c = ChildCareVoucherData.new
     # if the params hash contains a letter
     if params[:ccdf_dependent_no] !~ /\D/  # returns true if all numbers
       ccdf_dependent_no = params[:ccdf_dependent_no].to_i
+      c.dependent_no = ccdf_dependent_no
     else
       ccdf_dependent_no = params[:ccdf_dependent_no].in_numbers
+      c.dependent_no = ccdf_dependent_no
     end
 
-    if params[:ccdf_eligible_children] !~ /\D/
-      ccdf_eligible_children = params[:ccdf_eligible_children].to_i
-    else
-      ccdf_eligible_children = params[:ccdf_eligible_children].in_numbers
-    end
 
     ccdf_gross_income = params[:ccdf_gross_income]
     ccdf_gross_income = ccdf_gross_income.gsub(/[^0-9\.]/, '')
@@ -30,11 +26,13 @@ class ChildCareVouchersController < ApplicationController
 
     if ccdf_gross_income !~ /\D/
       ccdf_gross_income = ccdf_gross_income.to_i
+      c.gross_monthly_income = ccdf_gross_income
     else
       if ccdf_gross_income.include?("dollars")
         ccdf_gross_income.slice!"dollars"
       end
       ccdf_gross_income = ccdf_gross_income.in_numbers
+      c.gross_monthly_income = ccdf_gross_income
     end
 
     if ccdf_gross_income.present? && ccdf_dependent_no.present?
@@ -47,9 +45,10 @@ class ChildCareVouchersController < ApplicationController
 
        if ccdf_gross_income < ccdf_eligibility.ccdf_gross_income
          @eligible = true
+         c.eligibility_status = "yes"
        else
-
-        end
+          c.eligibility_status = "no"
+       end
      else
        redirect_to :back, :notice => "All fields are required."
      end
@@ -84,24 +83,27 @@ class ChildCareVouchersController < ApplicationController
 
        #@child_resources.where(:zip => @user_zipcode)
 
-         #in this case there are 2 medical centers in the user's zip
-         if @child_resources_zip.count >= 2
-            @child_resources = @child_resources_zip
-         end
+       #in this case there are 2 medical centers in the user's zip
+       if @child_resources_zip.count >= 2
+          @child_resources = @child_resources_zip
+       end
+       #in this case there is 1 medical center in the user's zip
+       if @child_resources_zip.count == 1
+          @child_resources_first = @child_resources_zip.first
+          @child_resources_second = @child_resources.first
+       end
+       #in this caser there are no medical centers in the user's zip
+       if  @child_resources_zip.count == 0
+           @child_resources_first = @child_resources.first
+           @child_resources_second = @child_resources.second
+       end
 
-         #in this case there is 1 medical center in the user's zip
-         if @child_resources_zip.count == 1
-            @child_resources_first = @child_resources_zip.first
-            @child_resources_second = @child_resources.first
-         end
-
-         #in this caser there are no medical centers in the user's zip
-         if  @child_resources_zip.count == 0
-             @child_resources_first = @child_resources.first
-             @child_resources_second = @child_resources.second
-         end
-
-    end
+  # DATA STORAGE
+    c.user_location = params[:user_location]
+    c.phone_number = params[:phone_number] if params[:phone_number].present?
+    c.zipcode = params[:zipcode]
+    c.save
+end
 
 
 

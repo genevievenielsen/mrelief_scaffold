@@ -2,6 +2,9 @@ source "https://rubygems.org"
 
 ruby "2.1.2"
 
+gem 'geocoder'
+gem 'underscore-rails'
+
 gem "rack-cors", group: :development
 
 gem "rest-client"
@@ -13,7 +16,7 @@ gem 'roo'
 gem "spreadsheet"
 gem 'rails_12factor', group: :production
 
-gem 'font-awesome-rails'
+# gem 'font-awesome-rails'
 
 gem 'numbers_in_words'
 

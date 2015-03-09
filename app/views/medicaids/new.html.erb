@@ -1,103 +1,150 @@
 <div class= "container">
 
-  <script>$(function ()
-      { $("[data-toggle='popover']").popover();
-      });
-   </script>
-
 <div class="page-header col-md-10 col-md-offset-1" style="border:none;">
   <h1>Do I qualify for Medicaid?</h1>
   <div class="subhead">
-    <p> If you are an adult (19 and over) and a resident in the state of Illinois, you may qualify for Medicaid.</p>
+    <p> If you are an adult (19 and over) and a resident in the state of Illinois, you may qualify for Medicaid. At the current moment, this form does not include Medicaid's offerings for people with disabilities. However, we are working to make this form more inclusive. Check back soon for more updates.</p>
   </div>
 </div>
 
-
-<% if @medicaid.errors.any? %>
-  <% @medicaid.errors.full_messages.each do |message| %>
-    <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= message %>
-    </div>
-  <% end %>
-<% end %>
-
 <div class="row">
-<div class="panel panel-default col-md-8 col-md-offset-2">
+<div class="panel panel-default col-md-8 col-sm-7 pull-left">
 <div class="panel-body">
 <form action="/medicaids" class="form-horizontal" method="post">
 
-
+<div class="row">
 <div class="form-group col-md-12">
-    <label for="citizen" id="citizen" class="pull-left">Are you a citizen of the United States? </label>
-
-  <div class="row">
+    <label for="citizen" id="citizen">Are you a citizen of the United States or a legal permanent resident who has lived in the US for at least 5 years? </label> <br>
+    <div class="row">
       <div class="col-md-6">
-        <div id="citizen" required>
+        <div id="citizen">
           <%= radio_button_tag 'citizen', 'yes' %> yes
           <%= radio_button_tag 'citizen', 'no' %> no
         </div>
       </div>
       </div>
+  </div>
 </div>
 
   <!-- Label and input for medicaid_household_size -->
-
+  <div class="row">
   <div class="form-group col-md-12">
     <label for="medicaid_household_size">What is your household size?</label>
+     <button type="button" data-toggle="popover" data-content="Household size: How many people live in your home (including yourself)?" data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
 
-      <button type="button" data-toggle="popover" data-content="Household size: How many people live in your home (including yourself)?" data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+     <div class="row">
+       <div class="col-md-9">
+       <p type="button" data-toggle="popover" data-content="Household size: How many people live in your home (including yourself)?" data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
 
-    <div class="row">
-      <div class="col-md-6">
-      <input type="text" id="medicaid_household_size" name="medicaid_household_size" placeholder="For example: 3" class="form-control" required>
-      </div>
-    </div>
-  </div>
-
+        <input type="text" id="medicaid_household_size" name="medicaid_household_size" placeholder="For example: 3" class="form-control"  value="<%= @m.household_size %>" required>
+       </p>
+       </div>
+     </div>
+   </div>
+   </div>
 
   <!-- Label and input for medicaid_gross_income -->
-
+  <div class="row">
   <div class="form-group col-md-12">
     <label for="medicaid_gross_income">
       What is your monthly income?
     </label>
-
       <button type="button" data-toggle="popover" data-content="Monthly income includes wages, Social Security, SSI, pensions, rental income, unemployment, worker's compensation, or other disability payments." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-
-<div class="row">
-  <div class="col-md-8">
-    <div class="input-group">
-      <span class="input-group-addon">$</span>
-      <input type="text" id="medicaid_gross_income" name="medicaid_gross_income" placeholder="For example: 30000" class="form-control"required>
-      <span class="input-group-addon">.00</span>
+      <div class="row">
+        <div class="col-md-9">
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
+            <p type="button" data-toggle="popover" data-content="Monthly income includes wages, Social Security, SSI, pensions, rental income, unemployment, worker's compensation, or other disability payments." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+              <input type="text" id="medicaid_gross_income" name="medicaid_gross_income" placeholder="For example: 30000" class="   form-control" value="<%= @m.monthly_gross_income %>" required>
+            </p>
+            <span class="input-group-addon">.00</span>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-</div>
+    </div>
 
 
- <div class="form-group col-sm-9 pull-left">
-    <label for="zipcode">What is your zipcode?</label>
-      <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" required>
-</div>
-
-
+   <div class="row">
+    <div class="form-group col-sm-9 pull-left">
+      <label for="zipcode">What is your zipcode?</label>
+        <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" value="<%= @m.zipcode.chop.chop if @m.zipcode.present? %>"required>
+    </div>
+   </div>
 
   <div class="row">
-    <div class="col-md-6">
-      <%= render "programs/calculator" %>
+    <div class="form-group col-sm-9">
+    <label for="location" id="location_dropdown">Where are you completing this form? </label>
+    <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], ['Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Other', 'other']], @m.user_location), :class => "form-control", :prompt => "Select a location") %>
     </div>
   </div>
+
+  <div class="row">
+  <div class="form-group col-sm-9">
+    <label for="phone_number">What is your cell phone number?</label>
+      <button type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+    <div>
+      <p type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+      <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control" value="<%= @m.phone_number %>">
+      </p>
+    </div>
+  </div>
+  </div>
+
+
 
 <div>
     <button type="submit" class="btn btn-primary program-btn">See if I qualify</button>
 </div>
-
-
 </form>
+</div>
+
+</div>
+  <div class="col-md-3 sm-3 xs-12 pull-left">
+     <div class="calculator_box">
+       <%= render "programs/calculator" %>
+     </div>
+   </div>
 
 </div>
 </div>
-</div>
+
+<script>
+  $(document).ready(function() {
+
+    //this is the map scroll down thing
+    $(window).scroll(function() {
+      if($(this).scrollTop() > 310 && $(this).width() > 750) {
+        $('.calculator_box').addClass('sticky_calculator');
+      } else {
+        $('.calculator_box').removeClass('sticky_calculator');
+      }
+    });
+
+    $(window).scroll(function() {
+      if($(this).scrollTop() < 310) {
+        $('.calculator_box').removeClass('sticky_calculator');
+      }
+    });
+
+    $(window).scroll(function() {
+      if($(this).width() < 750) {
+        $('.calculator').removeClass('sticky_calculator');
+      }
+    });
+
+    $(function ()
+      { $("[data-toggle='popover']").popover();
+     });
+     $('body').on('click', function (e) {
+        $('[data-toggle="popover"]').each(function () {
+            //the 'is' for buttons that trigger popups
+            //the 'has' for icons within a button that triggers a popup
+            if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                $(this).popover('hide');
+            }
+        });
+    });
+  });
+  </script>
 

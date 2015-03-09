@@ -7,17 +7,31 @@ class HeadStartsController < ApplicationController
   require 'numbers_in_words'
   require 'numbers_in_words/duck_punch' #see why later
 
+  #dependent_no
+  #gross_annual_income
+  #child_birthdate
+
+  #zipcode
+  #user_location
+  #phone_number
+  #eligibility_status
+
+
 
   def new
     @head_start = HeadStart.new
+    @h = HeadStartData.new
   end
 
   def create
+    @h = HeadStartData.new
      # if the params hash contains a letter
     if params[:hs_dependent_no] !~ /\D/  # returns true if all numbers
       hs_dependent_no = params[:hs_dependent_no].to_i
+      @h.dependent_no = hs_dependent_no
     else
       hs_dependent_no = params[:hs_dependent_no].in_numbers
+      @h.dependent_no = hs_dependent_no
     end
 
     hs_gross_income = params[:hs_gross_income]
@@ -25,28 +39,28 @@ class HeadStartsController < ApplicationController
 
     if hs_gross_income !~ /\D/
       hs_gross_income = hs_gross_income.to_i
+      @h.gross_annual_income = hs_gross_income
     else
       if hs_gross_income.include?("dollars")
         hs_gross_income.slice!"dollars"
       end
       hs_gross_income = hs_gross_income.in_numbers
+      @h.gross_annual_income = hs_gross_income
     end
-
 
     if  hs_gross_income.present? && hs_dependent_no.present?
 
-    hs_eligibility = HeadStart.find_by({ :hs_dependent_no => hs_dependent_no })
-
-
-       p "hs_gross_income = #{hs_gross_income}"
-       p "hs_eligibility.hs_gross_income = #{hs_eligibility.hs_gross_income}"
+       hs_eligibility = HeadStart.find_by({ :hs_dependent_no => hs_dependent_no })
 
        if hs_gross_income < hs_eligibility.hs_gross_income
          if params[:child_birthdate]  == "yes"
             @eligible = true
+            @h.eligibility_status = "yes"
+          else
+            @h.eligibility_status = "no"
           end
        else
-
+        @h.eligibility_status = "no"
       end
     end #closes if statement
 
@@ -66,7 +80,6 @@ class HeadStartsController < ApplicationController
        end
      end
 
-
      @pb_zipcode = @user_zipcode.chomp(".0")
        @headstart_resources = headstart
        @headstart_resources_zip = []
@@ -77,25 +90,34 @@ class HeadStartsController < ApplicationController
          end
        end
 
+      #in this case there are 2 medical centers in the user's zip
+      if @headstart_resources_zip.count >= 2
+         @headstart_resources = @headstart_resources_zip
+      end
 
-       #@headstart_resources.where(:zip => @user_zipcode)
+      #in this case there is 1 medical center in the user's zip
+      if @headstart_resources_zip.count == 1
+         @headstart_resources_first = @headstart_resources_zip.first
+         @headstart_resources_second = @headstart_resources.first
+      end
 
-         #in this case there are 2 medical centers in the user's zip
-         if @headstart_resources_zip.count >= 2
-            @headstart_resources = @headstart_resources_zip
-         end
+      #in this caser there are no medical centers in the user's zip
+      if  @headstart_resources_zip.count == 0
+          @headstart_resources_first = @headstart_resources.first
+          @headstart_resources_second = @headstart_resources.second
+      end
 
-         #in this case there is 1 medical center in the user's zip
-         if @headstart_resources_zip.count == 1
-            @headstart_resources_first = @headstart_resources_zip.first
-            @headstart_resources_second = @headstart_resources.first
-         end
+    @h.user_location = params[:user_location]
+    @h.phone_number = params[:phone_number] if params[:phone_number].present?
+    @h.child_birthdate = params[:child_birthdate]
+    @h.zipcode = params[:zipcode]
+    @h.save
 
-         #in this caser there are no medical centers in the user's zip
-         if  @headstart_resources_zip.count == 0
-             @headstart_resources_first = @headstart_resources.first
-             @headstart_resources_second = @headstart_resources.second
-         end
+    if params[:child_birthdate].present?
+    else
+       flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
+      render "new"
+    end
 
   end #closes end
 

@@ -2,10 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Mrelief</title>
+  <title>mRelief</title>
 
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css">
+
   <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="assets/sitestyles.css">
 
@@ -56,12 +60,12 @@
             <%= link_to "Español", set_language_spanish_path %>
           <% end %>
         </li>
-        <li><a href="https://fundly.com/mrelief-using-technology-to-improve-social-services" class="btn-donate">Donate</a></li>
+        <li><a href="https://www.goodcitychicago.org/donate/" class="btn-donate" data-toggle="tooltip" data-placement="bottom" title="Please select &ldquo;mRelief&rdquo; on the program section">Donate</a></li>
       </ul>
   </nav>
   </div>
 
-<!--   <div class="container">
+  <div class="container">
     <% if notice.present? %>
       <div class="alert alert-dismissable alert-success">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -69,12 +73,13 @@
       </div>
     <% end %>
 
+
     <% if alert.present? %>
       <div class="alert alert-dismissable alert-warning">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <%= alert %>
       </div>
-    <% end %> -->
+    <% end %>
 
     <%= yield %>
 
@@ -190,6 +195,10 @@
             // e.preventDefault();
           }
         }
+
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
 
   </script>
 </body>

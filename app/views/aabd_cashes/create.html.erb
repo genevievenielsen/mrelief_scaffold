@@ -1,7 +1,6 @@
 <div class="container">
-
+<%= render "layouts/print_button" %>
 <% if @eligible == 'yes' %>
-<div class="page-header"></div>
 
       <div class="row" style="text-align:center;">
          <div class="col-md-8 col-md-offset-2">
@@ -9,7 +8,6 @@
               <h1>You may be in luck!</h1>
               <h4>Based on your household size and income, you likely qualify for Aged, Blind and Disabled (AABD) Cash Assistance</h4>
           <br>
-
 
           </div>
           <!-- community service center -->
@@ -26,7 +24,6 @@
     </div>
 
     <% elsif @eligible == 'maybe' %>
-    <div class="page-header"></div>
 
       <div class="row" style="text-align:center;">
         <div class="col-md-8 col-md-offset-2">
@@ -51,7 +48,6 @@
 
 
       <% elsif @eligible == 'no' %>
-      <div class="page-header"></div>
 
       <div class="row" style="text-align:center;">
         <div class="col-md-8 col-md-offset-2">
@@ -86,7 +82,6 @@
                   <% end %>
                 </div>
 
-
                 <div class="row">
                 <% if @aabd_resources_first.present? %>
                   <div class="col-md-6 col-sm-6">
@@ -107,12 +102,10 @@
                   <% end %>
                 </div>
 
-
             </div>
 
              <%= image_tag("pblogo.jpg", :class => "logo-padding") %>
           <br>
-
 
       </div>
 </div>

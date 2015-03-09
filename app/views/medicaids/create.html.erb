@@ -1,7 +1,7 @@
 <div class="container">
-
+<%= render "layouts/print_button" %>
 <% if @eligible == 'yes' %>
-<div class="page-header"></div>
+
 
       <div class="row" style="text-align:center;">
          <div class="col-md-8 col-md-offset-2">
@@ -16,15 +16,20 @@
         <div class="row">
 
           <div class=" text-center">
-            <p class="subhead"> To apply online before your visit:</p>
-          <%= link_to "Click Here", "https://abe.illinois.gov/abe/access/accessController?id=0.9152558493190114 ", :class => "btn btn-success btn-resolution" %>
+            <p class="subhead">You can call 1 (866) 311-1119 for your coverage options.</p>
+            <p class="subhead"> To apply online:</p>
+
+          <%= link_to "Click Here", "https://abe.illinois.gov/abe/access/jsp/access/Home.jsp", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicaid', 'abe', 1);" %>
+
+          <p class="subhead">To further pursue your Medicaid application you can also call the county care line (312-864-8200). If you already have a doctor, be sure to confirm they transfer over.</p>
           </div>
 
       </div>
     </div>
+    </div>
 
     <% elsif @eligible == 'maybe' %>
-    <div class="page-header"></div>
+
 
       <div class="row" style="text-align:center;">
         <div class="col-md-8 col-md-offset-2">
@@ -49,7 +54,7 @@
 
 
       <% elsif @eligible == 'no' %>
-    <div class="page-header"></div>
+
 
       <div class="row" style="text-align:center;">
         <div class="col-md-8 col-md-offset-2">
@@ -59,7 +64,7 @@
             <p> However, if you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.
 
             <p>
-            <%= link_to "Click Here", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution" %> to learn more about fees.
+            <%= link_to "Click Here", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'medicaid', 'health_care_fees', 1);" %> to learn more about fees.
             </p>
             <br>
             <p>
@@ -67,7 +72,7 @@
             </p>
             <br>
             <p>
-            <%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution" %> to find Get Covered Illinois events in your area.
+            <%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicaid', 'get_covered_illinois', 1);" %> to find Get Covered Illinois events in your area.
             </p>
             <br>
             <p>
@@ -126,11 +131,16 @@
           </div>
 
            <%= image_tag("pblogo.jpg", :class => "logo-padding") %>
+        </div>
+    </div>
+  <% else %>
+  <div class="row">
+    <p class="subhead">Looks like you forgot to answer one of the questions. Please go back and make sure you answered all questions!</p>
+  </div>
 
-        <% end %>
-      </div>
+<% end %>
+
 </div>
-
 <br>
 <br>
 <br>

@@ -1,11 +1,11 @@
-  <% if @eligible == "yes" %>
+<div class="container">
+<%= render "layouts/print_button" %>
+<% if @eligible == "yes" %>
 
-  <div class="page-header"></div>
-
-        <div class="row" style="text-align:center;">
-           <div class="col-md-8 col-md-offset-2">
-               <i class="fa fa-check-circle fa-5x"></i>
-                <h1>You may be in luck!</h1>
+   <div class="row" style="text-align:center;">
+      <div class="col-md-8 col-md-offset-2">
+          <i class="fa fa-check-circle fa-5x"></i>
+           <h1>You may be in luck!</h1>
 
           <br>
           <br>
@@ -14,7 +14,7 @@
           <div class="row">
             <div class=" text-center">
               <p class="subhead"> Based on your age, household size, and income, you likely qualify for RTA Ride Free.
-              <%= link_to "Click Here to apply online before you visit", "https://idoaweb.aging.illinois.gov/baa/Welcome.aspx", :class => "btn btn-success btn-resolution" %>
+              <%= link_to "Click Here to apply online before you visit", "https://idoaweb.aging.illinois.gov/baa/Welcome.aspx", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'rta_free_ride', 'il_dept_aging', 1);" %>
               </p>
               <p class="subhead">Navigate to the Benefit Access tab and click on 'Benefit Access Application.'</p>
             </div>
@@ -25,8 +25,6 @@
 
 
   <% else @eligible == "no" %>
-
-     <div class="page-header"></div>
 
            <div class="row" style="text-align:center;">
              <div class="col-md-8 col-md-offset-2">
@@ -88,6 +86,5 @@
            <%= image_tag("pblogo.jpg", :class => "logo-padding") %>
         </div>
 
-
-
   <% end %>
+  </div>

@@ -27,13 +27,13 @@ es:
     example_zip: >-
       Por ejemplo: 60615
     example_phone: >-
-      Por ejemplo: 3121110011
+      Por ejemplo: 3125555555
 
   popup:
     check_eligibility: >-
       Comprobar su elegibilidad vía SMS
     check_eligibility_text: >-
-      texto "hola" a 1 (773) 377-8946
+      texto "hola" a 1 (773) 366-8485
 
   popover:
     info_hh: Esto debe incluir el numero de personas que te compran y preparan comida.
@@ -61,6 +61,8 @@ es:
     contact_us: Contáctenos
     press_release: Nota de prensa
     donate: Donar
+    please_select: >-
+      Por favor, seleccione "mRelief" en la sección de del programa
     disclaimer: >-
       * mRelief no predice con precisión del 100% si los usuarios definitivamente serán aprobados para beneficios; si no que intenta proporcionar a los usuarios información para que ellos determinen si vale la pena invertir el tiempo necesario para el proceso de solicitud. No obstante, estamos trabajando para que nuestros formularios sean más accesibles. Si es usted indocumentado, residente legal permanente, o tiene un caso muy específico, nuestro sistema le referirá a un asistente que le pueda ayudar. ¡Estén atentos para más actualizaciones!
     where_are_you: ¿De dónde estás llenando este formulario?

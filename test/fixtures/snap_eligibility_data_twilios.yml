@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  citizen: MyString
+  enrolled_in_education: MyString
+  zipcode: MyString
+  age: MyString
+  dependent_no: MyString
+  disabled: MyString
+  disabled_receiving_payment: MyString
+  monthly_gross_income: MyString
+
+two:
+  citizen: MyString
+  enrolled_in_education: MyString
+  zipcode: MyString
+  age: MyString
+  dependent_no: MyString
+  disabled: MyString
+  disabled_receiving_payment: MyString
+  monthly_gross_income: MyString

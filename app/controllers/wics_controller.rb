@@ -3,37 +3,39 @@ class WicsController < ApplicationController
   skip_before_action :authenticate_user!, :only => :index
   skip_before_filter :verify_authenticity_token
 
-
-
   # GET /wics/new
   def new
     @wic = Wic.new
+    @w = WicData.new
   end
 
   def create
-
+    @w = WicData.new
     if params[:wic_household_size] !~ /\D/  # returns true if all numbers
       wic_household_size = params[:wic_household_size].to_i
+      @w.household_size = wic_household_size
     else
       wic_household_size = params[:wic_household_size].in_numbers
+      @w.household_size = wic_household_size
     end
-
 
     wic_gross_income = params[:wic_gross_income]
     wic_gross_income = wic_gross_income.gsub(/[^0-9\.]/, '')
 
-
     if wic_gross_income !~ /\D/
       wic_gross_income = wic_gross_income.to_i
+      @w.gross_monthly_income = wic_gross_income
     else
       if wic_gross_income.include?("dollars")
         wic_gross_income.slice!"dollars"
       end
       wic_gross_income = wic_gross_income.in_numbers
+      @w.gross_monthly_income = wic_gross_income
     end
 
 
     wic_status = params[:wic_status]
+    @w.health_status = params[:wic_status]
 
     if  wic_gross_income.present? && wic_household_size.present?
 
@@ -42,6 +44,9 @@ class WicsController < ApplicationController
       if wic_gross_income < wic_eligibility.wic_gross_income
         if wic_status != 'none of the above'
           @eligible = true
+          @w.eligibility_status = "yes"
+        else
+          @w.eligibility_status = "no"
         end
       end
 
@@ -66,7 +71,7 @@ class WicsController < ApplicationController
   end
 
 
-  @pb_zipcode = @user_zipcode.chomp(".0")
+    @pb_zipcode = @user_zipcode.chomp(".0")
     @child_resources = childcare
     @child_resources_zip = []
 
@@ -76,26 +81,31 @@ class WicsController < ApplicationController
       end
     end
 
+    #in this case there are 2 medical centers in the user's zip
+    if @child_resources_zip.count >= 2
+       @child_resources = @child_resources_zip
+    end
+    #in this case there is 1 medical center in the user's zip
+    if @child_resources_zip.count == 1
+       @child_resources_first = @child_resources_zip.first
+       @child_resources_second = @child_resources.first
+    end
+    #in this caser there are no medical centers in the user's zip
+    if  @child_resources_zip.count == 0
+        @child_resources_first = @child_resources.first
+        @child_resources_second = @child_resources.second
+    end
 
-    #@child_resources.where(:zip => @user_zipcode)
+    @w.user_location = params[:user_location]
+    @w.phone_number = params[:phone_number] if params[:phone_number].present?
+    @w.zipcode = params[:zipcode]
+    @w.save
 
-      #in this case there are 2 medical centers in the user's zip
-      if @child_resources_zip.count >= 2
-         @child_resources = @child_resources_zip
-      end
-
-      #in this case there is 1 medical center in the user's zip
-      if @child_resources_zip.count == 1
-         @child_resources_first = @child_resources_zip.first
-         @child_resources_second = @child_resources.first
-      end
-
-      #in this caser there are no medical centers in the user's zip
-      if  @child_resources_zip.count == 0
-          @child_resources_first = @child_resources.first
-          @child_resources_second = @child_resources.second
-      end
-
+    if params[:wic_status].present?
+    else
+       flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
+      render "new"
+    end
 
   end
 

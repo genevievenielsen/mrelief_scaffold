@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  household_size: MyString
+  monthly_gross_income: MyString
+  pregnant: MyString
+  healthcare_status: MyString
+  zipcode: MyString
+  allkids_eligibility_status: MyString
+  assist_eligibility: MyString
+  share_eligibility: MyString
+  premium1_eligibility: MyString
+  premium2_eligibility: MyString
+
+two:
+  household_size: MyString
+  monthly_gross_income: MyString
+  pregnant: MyString
+  healthcare_status: MyString
+  zipcode: MyString
+  allkids_eligibility_status: MyString
+  assist_eligibility: MyString
+  share_eligibility: MyString
+  premium1_eligibility: MyString
+  premium2_eligibility: MyString

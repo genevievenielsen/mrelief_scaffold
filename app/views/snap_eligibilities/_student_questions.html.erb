@@ -1,0 +1,25 @@
+<div class="student_questions">
+<% @student_questions %>
+  <div class="row">
+    <div class="form-group col-md-12">
+          <label for="student" id="student">Describe your current student status:</label>
+           <button type="button" data-toggle="popover" data-content="Enrollment status (part time/full time) may vary by school. Students should check their status as described by their particular school." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+      <% [ 'I am not a student', 'I am currently enrolled half time or more', 'I am currently enrolled LESS than half time' ].each do |student| %>
+        <br><%= radio_button_tag 'student', student, student_status == student %>
+        <%= student.humanize %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-12">
+      <label for="work" id="work"> Are you currently working an average of 20 hours a week OR are in a work study program? </label>
+       <button type="button" data-toggle="popover" data-content="If self-employed, students must be working an average of 20 hours per week and earn at least $7.25, OR approved to participate in a state or federal workstudy program for the school term and expecting to work in a state or federal workstudy program during that time." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+      <br>
+        <% [ 'yes', 'no'].each do |work| %>
+          <%= radio_button_tag 'work', work, work_status == work %>
+          <%= work.humanize %>
+        <% end %>
+    </div>
+  </div>
+</div>

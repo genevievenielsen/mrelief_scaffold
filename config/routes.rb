@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :all_city_program_data
+
   get 'set_language/english'
 
   get 'set_language/spanish'
@@ -22,8 +24,12 @@ Rails.application.routes.draw do
 
   resources :laf_centers
 
+  get("/twilio", { :controller => "send_text", :action => "send_text_message"})
   post('/', { :controller => 'twilio', :action => 'text'})
-  post('/twilio_spanish', { :controller => 'twilio', :action => 'text'})
+
+  get("/twilio_spanish", { :controller => "send_text", :action => "send_spanish_text_message"})
+  post('/twilio_spanish', { :controller => 'twilio_spanish', :action => 'text'})
+
   post 'twilio/voice', defaults: { format: 'xml' }
 
   get('/all_city_testing', { :controller => 'pages', :action => 'all_city_testing' })
@@ -35,11 +41,8 @@ Rails.application.routes.draw do
 
   get("/", { :controller => "pages", :action => "homepage" })
 
-  get("/twilio", { :controller => "send_text", :action => "send_text_message"})
-
   get('/all_city_programs_with_tanif', { :controller => 'all_city_programs', :action => 'new_with_tanif' })
   post('/all_city_programs_with_tanif', { :controller => 'all_city_programs', :action => 'create_with_tanif' })
-
 
 
   resources :contact, only: [:index, :create]

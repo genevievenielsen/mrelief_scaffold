@@ -1,9 +1,6 @@
 <div class= "container">
 
-  <script>$(function ()
-      { $("[data-toggle='popover']").popover();
-      });
-   </script>
+
 
 <div class="page-header" style="border:none">
   <h1>Do I qualify for All City Programs within mRelief?</h1>
@@ -353,7 +350,7 @@
 
         <br><%= radio_button_tag 'rental_status', 'a victim of domestic violence' %> A victim of domestic violence
 
-         <button type="button" data-toggle="popover" data-content="This involves losing income due to violence from your intimate partner. If your partner was your sole source of income, this does not apply. Typically this benefit would apply to victims with income seeking relocation assistance. " data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+         <button type="button" data-toggle="popover" data-content="This involves losing income due to violence from your intimate partner." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
 
         <br><%= radio_button_tag 'rental_status', 'none of the above' %> None of the above
       </div>
@@ -392,6 +389,8 @@ Affairs.   <br>
     </div>
 </div>
 
+
+
 <div class="row">
   <div class="col-sm-6">
   <%= render "programs/calculator" %>
@@ -408,9 +407,15 @@ Affairs.   <br>
 </form>
 
 
+</div>
+</div>
+</div>
+
+  <script>
+  $(function ()
+    { $("[data-toggle='popover']").popover();
+  });
 
 
-</div>
-</div>
-</div>
+   </script>
 

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dependent_no: MyString
+  ninety_day_gross_income: MyString
+  name_on_lease: MyString
+  rental_status: MyString
+  zipcode: MyString
+  rental_eligibility_status: MyString
+
+two:
+  dependent_no: MyString
+  ninety_day_gross_income: MyString
+  name_on_lease: MyString
+  rental_status: MyString
+  zipcode: MyString
+  rental_eligibility_status: MyString
