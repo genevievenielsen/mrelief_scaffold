@@ -1,60 +1,18 @@
-
-
-<div class="container">
-
-<br>
-<br>
-
-<a href="#" class="pull-right" onclick="window.print();return false;">Print</a>
-
-
+ <div class="container">
+<%= render "layouts/print_button" %>
 <% if @eligible == 'yes' %>
-<div class="page-header"></div>
-
-      <div class="row">
-         <div class="col-md-8 col-md-offset-2">
-          <div class="text-center">
+      <div class="row" style="text-align:center;">
+        <div class="col-md-8 col-md-offset-2">
              <i class="fa fa-check-circle fa-5x"></i>
               <h1>You may be in luck!</h1>
-          </div>
-<!--               <h4>Based on your household size and income, you likely qualify for food stamps.</h4>
- -->
-           <% if @disabled == true %>
-              <h4 class="text-center">Because you are: </h4>
-                <ul style="list-style-type: none;">
-                  <li><i class="fa fa-check-square-o"></i>Older than 18 years old</li>
-                  <li><i class="fa fa-check-square-o"></i>Have a gross monthly income that is less than $<%= number_with_delimiter(@snap_eligibility.snap_gross_income.to_i, :delimiter => ',') %> for a household size of <%= @snap_dependent_no %> and for someone who is disabled</li>
-                  <li><i class="fa fa-check-square-o"></i>Are a US citizen</li>
-                  <li><i class="fa fa-check-square-o"></i>Are not enrolled in college or an institution of higher learning</li><br>
-                </ul>
-             <!-- <h4> Because you are disabled, have a household size of <%#= @snap_dependent_no %> and your gross monthly income of $<%#= @snap_gross_income %> is less than $<%#= @snap_eligibility.snap_gross_income.to_i %>, you likely qualify for food stamps.  </h4>
- -->
-            <% elsif @age <= 59 %>
-            <h4 class="text-center">Because you are: </h4>
-              <ul style="list-style-type: none;">
-                <li><i class="fa fa-check-square-o"></i>Older than 18 years old</li>
-                <li><i class="fa fa-check-square-o"></i>Have a gross monthly income that is less than $<%= number_with_delimiter(@snap_eligibility.snap_gross_income.to_i, :delimiter => ',') %> for a household size of <%= @snap_dependent_no %> and for someone who is not receiving disability payments</li>
-                <li><i class="fa fa-check-square-o"></i>Are a US citizen</li>
-                <li><i class="fa fa-check-square-o"></i>Are not enrolled in college or an institution of higher learning</li><br>
-              </ul>
-            <!--   <h4> Because you are older than 18 years old, have a household size of <%#= @snap_dependent_no %> and your gross monthly income of $<%#= @snap_gross_income %> is less than $<%#= @snap_eligibility.snap_gross_income.to_i %>, you likely qualify for food stamps.  </h4> -->
-
-            <% elsif @age > 59 %>
-              <h4 class="text-center">Because you are: </h4>
-                <ul style="list-style-type: none;">
-                  <li><i class="fa fa-check-square-o"></i>Older than 18 years old</li>
-                  <li><i class="fa fa-check-square-o"></i>Have a gross monthly income that is less than $<%= number_with_delimiter(@snap_eligibility.snap_gross_income.to_i, :delimiter => ',') %> for a household size of <%= @snap_dependent_no %> and for someone who is over 59 years old</li>
-                  <li><i class="fa fa-check-square-o"></i>Are a US citizen</li>
-                  <li><i class="fa fa-check-square-o"></i>Are not enrolled in college or an institution of higher learning</li><br>
-                </ul>
-            <!--   <h4> Because you are older than 59 years old, have a household size of <%#= @snap_dependent_no %> and your gross monthly income of $<%#= @snap_gross_income %> is less than $<%#= @snap_eligibility.snap_gross_income.to_i %>, you likely qualify for food stamps.  </h4> -->
-
-            <% end %>
-
+              <h4>Currently your reported income $<%= @s.monthly_gross_income %> for your household size of <%= @s.dependent_no  %> is LOWER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> of the Illinois Department of Human Services (DHS) Manual. Once you apply, you should hear within 30 business days about your in-person interview with DHS.</h4>
         <br>
         <br>
+        <% if @age <= 22 %>
+          <p class="subhead">However, make sure you accounted for your parents income, if you are still living in the same household</p>
+        <% end %>
+
         <br>
-        <div class="text-center">
          <% if @laf_disclaimer.present?  %>
               <p class="subhead"><%= @laf_disclaimer %></p>
          <% else  %>
@@ -63,36 +21,21 @@
 
          <%= render 'layouts/community_center' %>
       </div>
-
-
         <div class="row">
           <div class="col-sm-offset-3 col-md-offset-3 col-md-6 col-sm-6 col-xs-6">
             <p class="subhead"> To apply online before you visit:</p>
-          <%= link_to "Click Here", "https://abe.illinois.gov/abe/access/accessController?id=0.3971759164763745", :class => "btn btn-success btn-resolution center-block" %>
+            <a href="https://abe.illinois.gov/abe/access/" onclick="ga('send', 'event', 'button', 'food_stamps', 'abe', 1);" class="btn btn-success btn-resolution" target="_blank">Click Here</a>
           </div>
-
-      </div>
-    </div>
+        </div>
     </div>
 
     <% elsif @eligible == 'maybe' %>
-    <div class="page-header"></div>
 
       <div class="row" style="text-align:center;">
         <div class="col-md-8 col-md-offset-2">
           <i class="fa fa-exclamation-circle fa-5x"></i>
             <h1>Something else in mind!</h1>
-
-            <%  if params[:education]  == 'yes' && params[:citizen] == 'no' %>
-              <h4>Because you are not a citizen and are enrolled college/institution of higher education, we cannot determine your eligibility at this time.</h4>
-
-            <%  elsif params[:education]  == 'yes' %>
-              <h4>Because you are enrolled college/institution of higher education, we cannot determine your eligibility at this time.</h4>
-            <% elsif params[:citizen] == 'no' %>
-              <h4>Because you are not a citizen, we cannot determine your eligibility at this time.</h4>
-            <% end %>
-
-             <h4> You may need to discuss your situation with a Food Stamp expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your food stamp eligibility with you. </h4>
+             <h4>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a Food Stamp expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your food stamp eligibility with you. </h4>
             <br>
 
             <% if @laf_disclaimer.present?  %>
@@ -110,43 +53,18 @@
     </div>
 
 
-      <% elsif @eligible == 'no' %>
-<div class="page-header"></div>
+    <% elsif @eligible == 'no' %>
 
-      <div class="row">
+      <div class="row" style="text-align:center;">
         <div class="col-md-8 col-md-offset-2">
-        <div class="text-center">
             <h1>Something else in mind!</h1>
-        </div>
-<!--             <h4>Based on your household size and income, you likely do not qualify for food stamps.</h4>
- -->
-            <% if @age < 18 %>
-              <h4>Because you are younger than 22 years old, you likely do not qualify for foodstamps.</h4>
+            <h4>Based on your household size and income, you likely do not qualify for food stamps.</h4>
 
-            <% elsif @disabled == true %>
-
-           <!--    <h4> Because you are receiving disablitiy payments, have a household size of <%#= @snap_dependent_no %> and your gross monthly income of $<%#= @snap_gross_income %> is greater than $<%#= @snap_eligibility.snap_gross_income.to_i %>, you likely do not qualify for foodstamps.  </h4> -->
-              <h4 class="text-center">Because you are: </h4>
-                <ul style="list-style-type: none;">
-                  <li><i class="fa fa-check-square-o"></i>Older than 18 years old</li>
-                  <li><i class="fa fa-times"></i></i>Have a gross monthly income that is greater than $<%= number_with_delimiter(@snap_eligibility.snap_gross_income.to_i, :delimiter => ',') %> for a household size of <%= @snap_dependent_no %> and for someone who is disabled</li>
-                  <li><i class="fa fa-check-square-o"></i>Are a US citizen</li>
-                  <li><i class="fa fa-check-square-o"></i>Are not enrolled in college or an institution of higher learning</li><br>
-                </ul>
-
-             <% elsif @age <= 59 %>
-               <h4> Because you are older than 22 years old, have a household size of <%= @snap_dependent_no %> and your gross monthly income of $<%= @snap_gross_income %> is greater than $<%= @snap_eligibility.snap_gross_income.to_i %>, you likely do not qualify for foodstamps.  </h4>
-
-             <% elsif @age > 59 %>
-               <h4> Because you are older than 59 years old, have a household size of <%= @snap_dependent_no %> and your gross monthly income of $<%= @snap_gross_income %> is greater than $<%= @snap_eligibility.snap_gross_income.to_i %>, you likely do not qualify for foodstamps.  </h4>
-
-             <% end %>
             <br>
 
-          <div class="text-center">
           <div class="row">
             <p class="subhead">Direct2Food is an online resource that will help you locate the food pantries, soup kitchens, and meal programs closest to you. To find resources near you</p>
-            <%= link_to "Click Here", "http://www.direct2food.org/", :class => "btn btn-success btn-resolution" %>
+            <a href="http://www.direct2food.org/" onclick="ga('send', 'event', 'button', 'food_stamps', 'direct2food', 1);" class="btn btn-success btn-resolution" target="_blank">Click Here</a>
           </div>
 
           <br>
@@ -177,7 +95,6 @@
             <% end %>
           </div>
 
-
           <div class="row">
           <% if @food_resources_first.present? %>
             <div class="col-md-6 col-sm-6">
@@ -199,10 +116,11 @@
           </div>
 
           <%= image_tag("pblogo.jpg", :class => "logo-padding") %>
-          </div>
 
         <% end %>
       </div>
+</div>
+
 </div>
 
 <br>

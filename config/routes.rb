@@ -44,6 +44,10 @@ Rails.application.routes.draw do
   get('/all_city_programs_with_tanif', { :controller => 'all_city_programs', :action => 'new_with_tanif' })
   post('/all_city_programs_with_tanif', { :controller => 'all_city_programs', :action => 'create_with_tanif' })
 
+  get('/snap_eligibities/new2', { :controller => 'snap_eligibilities', :action => 'new2' })
+  post('/snap_eligibilities/create2', { :controller => 'snap_eligibilities', :action => 'create2' })
+
+
 
   resources :contact, only: [:index, :create]
 
