@@ -13,7 +13,6 @@
   *= require_tree .
 
   *= require jquery-ui
- *= require font-awesome
  *= require_self
  */
 
@@ -306,4 +305,24 @@ a:hover {
 
 .how-to {
   padding: 0 60px 60px 60px;
+}
+
+
+.print-button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+/*
+.print-button-right{
+  margin-right:10px;
+}
+*/
+
+.calculator {
+  border-radius: 4px;
+}
+
+.sticky_calculator {
+  position: fixed !important;
+  top: 55px;
 }
