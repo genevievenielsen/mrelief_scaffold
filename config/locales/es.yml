@@ -10,10 +10,25 @@ es:
       Por ejemplo: 27
     example_hh: >-
       Por ejemplo: 3
+    example_hh2: >-
+      Por ejemplo: 2
+
     example_income: >-
       Por ejemplo: 1000
+    example_income2: >-
+      Por ejemplo: 500
+    example_income3: >-
+      Por ejemplo: 4000
+    example_income4: >-
+      Por ejemplo: 30000
+    example_income5: >-
+      Por ejemplo: 5000
+
     example_zip: >-
       Por ejemplo: 60615
+    example_phone: >-
+      Por ejemplo: 3125555555
+
   popup:
     check_eligibility: >-
       Comprobar su elegibilidad vía SMS
@@ -22,7 +37,16 @@ es:
 
   popover:
     info_hh: Esto debe incluir el numero de personas que te compran y preparan comida.
+    info_hh_size: Hogar se define como cualquier persona en la misma vivienda con usted.
     info_income: Esto incluye el ingreso mensual de todas las personas que viven en el hogar incluyéndote a ti mismo. Esto tambien incluye ingresos de todas las fuentes, como el Seguro Social, manutención de los hijos, y el seguro de desempleo antes de cualquier deducción.
+    info_assets: Todo menos su casa, si usted vive allí, y un auto.
+    info_expected_government_benefits: >-
+      Esto incluye la seguridad social (SSI), beneficios de veteranos, asistencia de "Railroad Retirement Board" (Consejo de Retiro Ferroviario), etc.
+    30_days_income: "Esto debe incluir los ingresos que obtiene de su trabajo, el autoempleo y los ingresos por alquiler (contribuciones de las personas que viven con usted.)"
+    phone_number: "Vamos a utilizar este número para enviarle notificaciónes durante el proceso del aplicación."
+
+  prompt:
+    select_location: Seleccione un lugar
 
   zipcode_question:
     zipcode: ¿Cuál es su código postal?
@@ -41,6 +65,8 @@ es:
       Por favor, seleccione "mRelief" en la sección de del programa
     disclaimer: >-
       * mRelief no predice con precisión del 100% si los usuarios definitivamente serán aprobados para beneficios; si no que intenta proporcionar a los usuarios información para que ellos determinen si vale la pena invertir el tiempo necesario para el proceso de solicitud. No obstante, estamos trabajando para que nuestros formularios sean más accesibles. Si es usted indocumentado, residente legal permanente, o tiene un caso muy específico, nuestro sistema le referirá a un asistente que le pueda ayudar. ¡Estén atentos para más actualizaciones!
+    where_are_you: ¿De dónde estás llenando este formulario?
+    phone_question: ¿Cuál es su número de teléfono celular?
 
   pages:
 
@@ -139,6 +165,8 @@ es:
 
 
 
+
+
   snap:
     do_i_qualify: ¿Califico para "Food Stamps"?
     food_stamps: >-
@@ -157,7 +185,7 @@ es:
       Si usted está incapacitado, describa su situación actual:
     receiving_social_security: Estoy recibiendo pagos por incapacidad del Seguro Social.
     receiving_railroad_retirement: >-
-      Estoy recibiendo pagos por incapacidad de "Railroad Retirement Board", (Consejo de Retiro Ferroviario).
+      Estoy recibiendo pagos por incapacidad de "Railroad Retirement Board" (Consejo de Retiro Ferroviario).
     receiving_veterans_affairs: >-
       Estoy recibiendo pagos por incapacidad de "Veterans Affairs", (Asuntos de Veteranos).
     not_receiving: Yo actualmente no estoy recibiendo pagos por discapacidad
@@ -182,3 +210,51 @@ es:
       "Direct2Food" es un recurso en línea que le ayudará a localizar las despensas de alimentos, comedores comunitarios y otros programas de comida más cercanos a usted. Para encontrar recursos de su area:
     additional_resources: >-
       A continuación algunos recursos adicionales, cortesía de Purple Binder:
+
+
+  aabd:
+    do_i_qualify: ¿Califico para Asistencia Monetaria para los Ancianos, Ciegos y Discapacitados (AABD)?
+    if_you_are_65: Si usted tiene 65 años o más y es usted un residente de Illinois, puede calificar para ayuda para las personas mayores y con discapacidad.
+    this_currently_includes: Esto incluye ayuda monetaria y no significa elegibilidad para recibir asistencia médica.
+    how_old: ¿Cuántos años tiene?
+    describe_your: "Describa su situación de discapacidad actual:"
+    hh_size: ¿Cuántas personas viven su hogar?
+    citizen: ¿Es usted ciudadano de los Estados Unidos?
+    see_if: Ver si califico
+    receiving_social_security: Estoy recibiendo pagos por incapacidad del Seguro Social.
+    receiving_railroad_retirement: >-
+      Estoy recibiendo pagos por incapacidad de "Railroad Retirement Board" (Consejo de Retiro Ferroviario).
+    receiving_veterans_affairs: >-
+      Estoy recibiendo pagos por incapacidad de "Veterans Affairs", (Asuntos de Veteranos).
+    not_receiving: Yo actualmente no estoy recibiendo pagos por discapacidad
+    anticipate_to_earn: ¿Cuánto es lo que usted anticipa ganar en ingresos netos en los próximos 30 días? (Después de impuestos)
+    income_expected_government: ¿Cuánto es su ingreso mensual que espera de los beneficios del gobierno u otra ayuda?
+    assets_worth: ¿Cuál es el valor de sus bienes muebles?
+    yes: sí
+
+  all_city:
+    do_i_qualify: ¿Califico para Todos los programas de la ciudad en mRelief?
+    how_old: ¿Cuántos años tiene?
+    programs_include: >-
+      Los programas incluyen cupones de comida, "Food Stamps"; ayuda para transporte "RTA Free Ride", ayuda para sevicios de salud, "All Kids", "Medicare Cost Sharing", "Medicare", "Medicaid", Asistencia Monetaria para los Ancianos, Ciegos y Discapacitados (AABD), "Aged, Blind and Disabled" (AABD); y Asistencia Temporal Para Familias Necesitadas (TANF)
+    number_of_people: ¿Cuál es el número de personas que viven en el hogar incluyéndose a si mismo?
+    how_many_children: ¿Cuántos niños menor de 18 años está cuidando?
+    hh_receive_medicare: ¿Cuántas personas en su hogar reciben Medicare?
+
+    child_anticipate: ¿Usted o su hijo/a espera conseguir cualquier otra fuente de ingresos fuera de su trabajo, manutención de hijos o SSI?
+
+    gross_monthly: ¿Cuál es su ingreso bruto mensual?
+    anticipate_to_earn: ¿Cuánto es lo que usted anticipa ganar en ingresos netos en los próximos 30 días? (Después de impuestos)
+    income_expected_government: ¿Cuánto es su ingreso mensual que espera de los beneficios del gobierno u otra ayuda?
+    yes: sí
+    anticipate_to_receive_child_support: ¿Cuánto es lo que usted anticipa recibir de manutención de los hijos en los próximos 30 días?
+    anticipate_to_receive_ssi: ¿Cuánto es lo que usted anticipa recibir de SSI en los próximos 30 días?
+    income_past: ¿Cuál es su ingreso en los últimos 90 días?
+    income_annual: ¿Cuál es su ingreso bruto anual?
+    someone_experiencing: Alguien experimentando una circunstancia médica
+    victim_natural: Una víctima de un desastre natural o un incendio
+    recipient_eviction: Recibió una orden de desalojo
+    temporary_loss: Han experimentado una pérdida temporal de ingresos
+    victim_domestic: Una víctima de violencia doméstica
+    none_of: Ninguno de los anteriores
+    not_receiving: Yo actualmente no estoy recibiendo pagos por discapacidad

@@ -1,0 +1,3 @@
+.form-group.col-sm-9
+  %label#location_dropdown{:for => "location"}= t.layouts.where_are_you | "Where are you completing this form?"
+  = select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], ['Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Other', 'other']]), :class => "form-control", :prompt => I18n.t("prompt.select_location", :default => "Select a location"))

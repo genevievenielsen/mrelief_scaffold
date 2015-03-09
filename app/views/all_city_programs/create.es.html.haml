@@ -1,7 +1,8 @@
 .container{:style => "padding-bottom:150px"}
   .page-header
+    = render "layouts/print_button"
     %h1 Do I qualify for All City Programs within mRelief?
-    %p.subhead Programs include Food Stamps, RTA Ride Free, All Kids, Medicare Cost Sharing, Rental Assistance, Aged, Blind and Disabled (AABD) Cash Assistance and Medicaid
+    %p.subhead Programs include Food Stamps, RTA Ride Free, All Kids, Medicare Cost Sharing, Rental Assistance, Medicaid, Aged, Blind and Disabled (AABD), Cash Assistance and Temporary Assistance for Needy Families
   - if @eligible_count > 0
     .panel.panel-default.allcitypanel
       .allcityheading
@@ -13,6 +14,8 @@
         - if @eligible_snap == 'yes'
           %li.list-group-item
             %h3.allcityheader Food Stamps
+            - if @age <= 22
+              %h5 However, make sure you accounted for your parents income, if you are still living in the same household
             - if @laf_disclaimer.present?
               %h5= @laf_disclaimer
             - else
@@ -20,15 +23,15 @@
             %p
               = @lafcenter.center
               | #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i}| #{@lafcenter.telephone}  | Days that Spanish is spoken - #{@lafcenter.spanish}
-            = link_to "Click Here to apply online before you visit", "https://abe.illinois.gov/abe/access/accessController?id=0.3971759164763745", :class => "btn btn-success btn-resolution"
+            = link_to "Click Here to apply online before you visit", "https://abe.illinois.gov/abe/access/", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'food_stamps_all_city_program', 'abe', 1);"
         - if @eligible_rta == 'yes'
           %li.list-group-item
             %h3.allcityheader RTA Free
-            = link_to "Click here to apply online", "https://idoaweb.aging.illinois.gov/baa/Welcome.aspx", :class => "btn btn-success btn-resolution"
+            = link_to "Click Here to apply online", "https://idoaweb.aging.illinois.gov/baa/Welcome.aspx", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'rta_ride_free_all_city_program', 'il_dept_aging', 1);"
         - if @eligible_all_kids == 'yes'
           %li.list-group-item
             %h3.allcityheader All Kids
-            = link_to "Click Here to complete your application online", "https://abe.illinois.gov/abe/access/accessController?id=0.9912272225853554", :class => "btn btn-success btn-resolution"
+            = link_to "Click Here to complete your application online", "https://abe.illinois.gov/abe/access/jsp/access/Home.jsp", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'all_kids_all_city_program', 'abe', 1);"
             - if @assist_eligible == 'yes'
               %p Based on your household size and income, you likely qualify for All Kids Assist.
             - elsif @share_eligible == 'yes'
@@ -40,7 +43,8 @@
         - if @eligible_medicaid == 'yes'
           %li.list-group-item
             %h3.allcityheader Medicaid
-            = link_to "Click Here for more information", "https://abe.illinois.gov/abe/access/accessController?id=0.9152558493190114 ", :class => "btn btn-success btn-resolution"
+            %p Important Note:  At the current moment, this form does not include Medicaid's offerings for people with disabilities. However, we are working to make this form more inclusive.
+            = link_to "Click Here for more information", "https://abe.illinois.gov/abe/access/jsp/access/Home.jsp", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicaid_all_city_program', 'abe', 1);"
         - if @eligible_medicare_cost_sharing == "yes"
           %li.list-group-item
             %h3.allcityheader Medicare Cost Sharing
@@ -85,6 +89,11 @@
             %p
               = @lafcenter.center
               | #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i}| #{@lafcenter.telephone}  | Days that Spanish is spoken - #{@lafcenter.spanish}
+        - if @eligible_tanif == "yes"
+          %li.list-group-item
+            %h3.allcityheader TANF Cash Assistance
+            = link_to "to find your local Family Community Resource Center ", "https://www.dhs.state.il.us/page.aspx?module=12", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'tanf_all_city_program', 'dhs_office_locator', 1);"
+            %p or contact the DHS Help Line at 1 800 843-6154 (voice) or 1 800 447-6404 (TTY).
   - if @indeterminate_count > 0
     .panel.panel-default.allcitypanel
       .allcityheading
@@ -141,6 +150,18 @@
             %p
               = @lafcenter.center
               | #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i}| #{@lafcenter.telephone}  | Days that Spanish is spoken - #{@lafcenter.spanish}
+        - if @eligible_tanif == "maybe"
+          %li.list-group-item
+            %h3.allcityheader TANF Cash Assistance
+            %p Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a TANF expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your TANF eligibility with you.
+            .sectiondivider
+            - if @laf_disclaimer.present?
+              %h5= @laf_disclaimer
+            - else
+              %h4 The LAF expert nearest you:
+            %p
+              = @lafcenter.center
+              | #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i}| #{@lafcenter.telephone}  | Days that Spanish is spoken - #{@lafcenter.spanish}
   - if @ineligible_count > 0
     .panel.panel-default.allcitypanel
       .allcityheading
@@ -153,7 +174,7 @@
           %li.list-group-item
             %h3.allcityheader Food Stamps
             %p Direct2Food is an online resource that will help you locate the food pantries, soup kitchens, and meal programs closest to you.
-            = link_to "Click Here to find resources near you", "http://www.direct2food.org/", :class => "btn btn-success btn-resolution"
+            = link_to "Click Here to find resources near you", "http://www.direct2food.org/", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'food_stamps_all_city_program', 'direct2food', 1);"
             .sectiondivider
             %h4 Some additional resources from Purple Binder:
             - if @food_resources_zip.count >= 2
@@ -195,8 +216,8 @@
           %li.list-group-item
             %h3.allcityheader All Kids
             %p If you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.
-            = link_to "Click Here to learn more about fees", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution"
-            = link_to "Click Here to find Get Covered Illinois events in your area", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution"
+            = link_to "Click Here to learn more about fees", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'all_kids_all_city_program', 'health_care_fees', 1);"
+            = link_to "Click Here to find Get Covered Illinois events in your area", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'all_kids_all_city_program', 'get_covered_illinois', 1);"
             %p You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.
             .sectiondivider
             %h4 Some additional resources from Purple Binder:
@@ -218,9 +239,9 @@
           %li.list-group-item
             %h3.allcityheader Medicaid
             %p If you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.
-            = link_to "Click Here to learn more about fees", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution"
+            = link_to "Click Here to learn more about fees", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicaid_all_city_program', 'health_care_fees', 1);"
             %p Get Covered Illinois is a resource that helps families register for insurance at in-person events.
-            = link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution"
+            = link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'all_kids_all_city_program', 'get_covered_illinois', 1);"
             to find Get Covered Illinois events in your area. You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.
             .sectiondivider
             %h4 Some additional resources from Purple Binder:
@@ -242,9 +263,9 @@
           %li.list-group-item
             %h3.allcityheader Medicare Cost Sharing
             %p However, if you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.
-            = link_to "Click Here to learn more about fees", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution"
+            = link_to "Click Here to learn more about fees", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'medicare_cost_sharing_all_city_program', 'health_care_fees', 1);"
             %p Get Covered Illinois is a resource that helps families register for insurance at in-person events.
-            = link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution"
+            = link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicare_cost_sharing_all_city_program', 'get_covered_illinois', 1);"
             to find Get Covered Illinois events in your area. You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.
             .sectiondivider
             %h4 Some additional resources from Purple Binder:
@@ -298,3 +319,22 @@
               %p
                 = @aabd_resources_second.name
                 | #{@aabd_resources_second.street}  #{@aabd_resources_second.city} #{@aabd_resources_second.state}, #{@aabd_resources_second.zip} | #{@aabd_resources_second.phone}
+        - if @eligible_tanif == "no"
+          %li.list-group-item
+            %h3.allcityheader TANF Cash Assistance
+            %h4 Some additional resources from Purple Binder:
+            - if @child_resources_zip.count >= 2
+              %p
+                = @child_resources_zip.first.name
+                | #{@child_resources_zip.first.street}  #{@child_resources_zip.first.city} #{@child_resources_zip.first.state}, #{@child_resources_zip.first.zip} | #{@child_resources_zip.first.phone}
+              %p
+                = @child_resources_zip.second.name
+                | #{@child_resources_zip.second.street}  #{@child_resources_zip.second.city} #{@child_resources_zip.second.state}, #{@child_resources_zip.second.zip} | #{@child_resources_zip.second.phone}
+            - if @child_resources_first.present?
+              %p
+                = @child_resources_first.name
+                | #{@child_resources_first.street}  #{@child_resources_first.city} #{@child_resources_first.state}, #{@child_resources_first.zip} | #{@child_resources_first.phone}
+              %p
+                = @child_resources_second.name
+                | #{@child_resources_second.street}  #{@child_resources_second.city} #{@child_resources_second.state}, #{@child_resources_second.zip} | #{@child_resources_second.phone}
+  = render "layouts/print_center_button"

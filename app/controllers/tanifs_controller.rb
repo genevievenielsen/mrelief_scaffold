@@ -1,4 +1,4 @@
-    class TanifsController < ApplicationController
+class TanifsController < ApplicationController
   before_action :set_tanif, only: [:show, :edit, :update, :destroy]
 
   skip_before_action :authenticate_user!, :only => :index
@@ -70,71 +70,71 @@
       @t.expect_ssi = expect_ssi
     end
 
-  if params[:pregnant].present? || params[:care_for_child].present? || params[:first_child].present?
-    if params[:relationship] == "adult relative"
-      @eligible_tanif = "maybe"
-      @t.tanf_eligibility_status = @eligible_tanif
-    else
-      if params[:first_child] == "first_child"
-        household_size == 1
-      end
-      if params[:tanif_sixty_months] == "yes"
-         @eligible_tanif = "no"
-         @t.tanf_eligibility_status = @eligible_tanif
+    if params[:pregnant].present? || params[:care_for_child].present? || params[:first_child].present?
+      if params[:relationship] == "adult relative"
+        @eligible_tanif = "maybe"
+        @t.tanf_eligibility_status = @eligible_tanif
       else
-        if children < household_size - 1
-          @eligible_tanif = "maybe"
+        if params[:first_child] == "first_child"
+          household_size == 1
+        end
+        if params[:tanif_sixty_months] == "yes"
+          @eligible_tanif = "no"
           @t.tanf_eligibility_status = @eligible_tanif
         else
-          tanif_eligibility = Tanif.find_by({ :household_size => household_size })
-          reduced_gross_income = gross_income * 0.75
-          child_support = expect_child_support - 50
-          total_income = reduced_gross_income + child_support
-          if total_income > tanif_eligibility.max_income
-            @eligible_tanif = "no"
+          if children < household_size - 1
+            @eligible_tanif = "maybe"
             @t.tanf_eligibility_status = @eligible_tanif
           else
-            if params[:anticipate_income] == "yes"
-              @eligible_tanif = "maybe"
+            tanif_eligibility = Tanif.find_by({ :household_size => household_size })
+            reduced_gross_income = gross_income * 0.75
+            child_support = expect_child_support - 50
+            total_income = reduced_gross_income + child_support
+            if total_income > tanif_eligibility.max_income
+              @eligible_tanif = "no"
               @t.tanf_eligibility_status = @eligible_tanif
             else
-              if params[:teen_parent] == "teen_parent"
+              if params[:anticipate_income] == "yes"
                 @eligible_tanif = "maybe"
                 @t.tanf_eligibility_status = @eligible_tanif
               else
-                if params[:citizen] == "no"
+                if params[:teen_parent] == "teen_parent"
                   @eligible_tanif = "maybe"
                   @t.tanf_eligibility_status = @eligible_tanif
                 else
-                  if params[:highschool].present? && household_size == 2
-                     @eligible_tanif = "no"
-                     @t.tanf_eligibility_status = @eligible_tanif
-                   elsif params[:highschool].present? && household_size > 2
-                     @eligible_tanif = "maybe"
-                     @t.tanf_eligibility_status = @eligible_tanif
-                   else
-                     @eligible_tanif = "yes"
-                     @t.tanf_eligibility_status = @eligible_tanif
-                   end
+                  if params[:citizen] == "no"
+                    @eligible_tanif = "maybe"
+                    @t.tanf_eligibility_status = @eligible_tanif
+                  else
+                    if params[:highschool].present? && household_size == 2
+                      @eligible_tanif = "no"
+                      @t.tanf_eligibility_status = @eligible_tanif
+                    elsif params[:highschool].present? && household_size > 2
+                      @eligible_tanif = "maybe"
+                      @t.tanf_eligibility_status = @eligible_tanif
+                    else
+                      @eligible_tanif = "yes"
+                      @t.tanf_eligibility_status = @eligible_tanif
+                    end
+                  end
                 end
               end
             end
           end
         end
       end
+    elsif params[:no_children].present?
+      @eligible_tanif = "no"
+      @t.tanf_eligibility_status = @eligible_tanif
+    else
+      @eligible_tanif = "no"
+      @t.tanf_eligibility_status = @eligible_tanif
     end
-  elsif params[:no_children].present?
-    @eligible_tanif = "no"
-    @t.tanf_eligibility_status = @eligible_tanif
-  else
-    @eligible_tanif = "no"
-    @t.tanf_eligibility_status = @eligible_tanif
-  end
 
-   if params[:citizen] == "no"
-     @eligible_tanif = "maybe"
-     @t.tanf_eligibility_status = @eligible_tanif
-  end
+    if params[:citizen] == "no"
+      @eligible_tanif = "maybe"
+      @t.tanf_eligibility_status = @eligible_tanif
+    end
 
     # DATA STORAGE
     @t.user_location = params[:user_location]
@@ -169,35 +169,35 @@
 
 
     @pb_zipcode = @user_zipcode.chomp(".0")
-      @child_resources = childcare
-      @child_resources_zip = []
+    @child_resources = childcare
+    @child_resources_zip = []
 
-      childcare.each do |center|
-        if center.zip.match(@pb_zipcode)
-          @child_resources_zip.push(center)
-        end
+    childcare.each do |center|
+      if center.zip.match(@pb_zipcode)
+        @child_resources_zip.push(center)
       end
+    end
 
-      #in this case there are 2 medical centers in the user's zip
-      if @child_resources_zip.count >= 2
-         @child_resources = @child_resources_zip
-      end
+    #in this case there are 2 medical centers in the user's zip
+    if @child_resources_zip.count >= 2
+      @child_resources = @child_resources_zip
+    end
 
-      #in this case there is 1 medical center in the user's zip
-      if @child_resources_zip.count == 1
-         @child_resources_first = @child_resources_zip.first
-         @child_resources_second = @child_resources.first
-      end
+    #in this case there is 1 medical center in the user's zip
+    if @child_resources_zip.count == 1
+      @child_resources_first = @child_resources_zip.first
+      @child_resources_second = @child_resources.first
+    end
 
-      #in this caser there are no medical centers in the user's zip
-      if  @child_resources_zip.count == 0
-          @child_resources_first = @child_resources.first
-          @child_resources_second = @child_resources.second
-      end
+    #in this caser there are no medical centers in the user's zip
+    if  @child_resources_zip.count == 0
+      @child_resources_first = @child_resources.first
+      @child_resources_second = @child_resources.second
+    end
 
     if params[:relationship].present? && params[:tanif_sixty_months].present? && params[:anticipate_income].present? && params[:citizen].present?
     else
-       flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
+      flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
       render "new"
     end
 
@@ -215,13 +215,13 @@
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_tanif
-      @tanif = Tanif.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_tanif
+    @tanif = Tanif.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def tanif_params
-      params.require(:tanif).permit(:household_size, :earned_income, :tanif_payment, :max_income)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def tanif_params
+    params.require(:tanif).permit(:household_size, :earned_income, :tanif_payment, :max_income)
+  end
 end

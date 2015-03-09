@@ -1,95 +1,118 @@
 .container
-  :javascript
-    $(function ()
-          { $("[data-toggle='popover']").popover();
-          });
   .page-header{:style => "border:none"}
-    %h1 Do I qualify for All City Programs within mRelief?
-    %p.subhead Programs include Food Stamps, RTA Ride Free, All Kids, Medicare Cost Sharing, Rental Assistance, Medicaid and Aged, Blind and Disabled (AABD) Cash Assistance
+    %h1= t.all_city.do_i_qualify | "Do I qualify for All City Programs within mRelief?"
+    %p.subhead= t.all_city.programs_include | "Programs include Food Stamps, RTA Ride Free, All Kids, Medicare Cost Sharing, Rental Assistance, Medicaid,  Aged, Blind and Disabled (AABD), Cash Assistance and Temporary Assistance for Needy Families"
   .panel.panel-default.col-md-12{:style => "margin: 0 0 40px 0; padding-top:15px"}
     .panel-body
       %form{:action => "/all_city_programs", :method => "post", :role => "form"}
         .form-group.col-sm-9
-          %label{:for => "age"} How old are you?
-          %input#age.form-control{:name => "age", :placeholder => "For example: 27", :required => "", :type => "text"}/
+          %label{:for => "age"}= t.all_city.how_old | "How old are you?"
+          %input#age.form-control{:name => "age", :placeholder => I18n.t("placeholder.example_age", :default => "For example: 27"), :required => "", :type => "text"}/
         / Label and input for snap_dependent_no
         .form-group.col-sm-9
-          %label{:for => "dependent_no"} What is the number of people living in your household including yourself?
+          %label{:for => "dependent_no"}= t.all_city.number_of_people | "What is the number of people living in your household including yourself?"
           %button{"data-content" => "This should include the number of people who purchase and prepare food with you.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
             %i.fa.fa-info-circle
           %div
-            %input#dependent_no.form-control{:name => "dependent_no", :placeholder => "For example: 3", :required => "", :type => "text"}/
+            %input#dependent_no.form-control{:name => "dependent_no", :placeholder => I18n.t("placeholder.example_hh", :default => "For example: 3"), :required => "", :type => "text"}/
         .form-group.col-sm-9
-          %label{:for => "medicare_household_size"} How many people in your household receive Medicare?
+          %label{:for => "children"}= t.all_city.how_many_children | "How many children 18 and under are you caring for?"
+          %input#children.form-control{:name => "children", :placeholder => I18n.t("placeholder.example_hh", :default => "For example: 3"), :required => "", :type => "text"}/
+        .form-group.col-sm-9
+          %label{:for => "medicare_household_size"}= t.all_city.hh_receive_medicare | "How many people in your household receive Medicare?"
           %button{"data-content" => "This should include the number of people who purchase and prepare food with you.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
             %i.fa.fa-info-circle
           %div
-            %input#medicare_household_size.form-control{:name => "medicare_household_size", :placeholder => "For example: 2", :required => "", :type => "text"}/
+            %input#medicare_household_size.form-control{:name => "medicare_household_size", :placeholder => I18n.t("placeholder.example_hh2", :default => "For example: 2"), :required => "", :type => "text"}/
         .form-group.col-sm-9.pull-left
-          %label{:for => "zipcode"} What is your zipcode?
-          %input#zipcode.form-control{:name => "zipcode", :placeholder => "For example: 60615", :required => "", :type => "text"}/
+          %label{:for => "zipcode"}= t.zipcode_question.zipcode | "What is your zipcode?"
+          %input#zipcode.form-control{:name => "zipcode", :placeholder => I18n.t("placeholder.example_zip", :default => "For example: 60615"), :required => "", :type => "text"}/
         / Label and input for snap_gross_income
         .form-group.col-sm-9
           %label{:for => "monthly_gross_income"}
-            What is your gross monthly income?
+            = t.all_city.gross_monthly | "What is your gross monthly income?"
           %button{"data-content" => "This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
             %i.fa.fa-info-circle
           .input-group
             %span.input-group-addon $
-            %input#monthly_gross_income.form-control{:name => "monthly_gross_income", :placeholder => "For example: 1000", :required => "", :type => "text"}/
+            %input#monthly_gross_income.form-control{:name => "monthly_gross_income", :placeholder => I18n.t("placeholder.example_income", :default => "For example: 1000"), :required => "", :type => "text"}/
             %span.input-group-addon .00
         .form-group.col-sm-9
           %label{:for => "net_income"}
-            How much do you anticipate to earn in net income in the next 30 days? (After taxes have been taken out)
+            = t.all_city.anticipate_to_earn | "How much do you anticipate to earn in net income in the next 30 days? (After taxes have been taken out)"
           %button{"data-content" => "This should include income you earn from your work, self employment and rental income (contributions from people who live with you.)", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
             %i.fa.fa-info-circle
           .input-group
             %span.input-group-addon $
-            %input#net_income.form-control{:name => "net_income", :placeholder => "For example: 1000", :required => "", :type => "text"}/
+            %input#net_income.form-control{:name => "net_income", :placeholder => I18n.t("placeholder.example_income", :default => "For example: 1000"), :required => "", :type => "text"}/
             %span.input-group-addon .00
         .form-group.col-sm-9
           %label{:for => "monthly_benefits"}
-            What is your monthly income expected from government benefits or other assistance?
+            = t.all_city.income_expected_government | "What is your monthly income expected from government benefits or other assistance?"
           %button{"data-content" => "This includes social security (SSI), veterans benefits, railroad assistance etc.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
             %i.fa.fa-info-circle
           .input-group
             %span.input-group-addon $
-            %input#monthly_benefits.form-control{:name => "monthly_benefits", :placeholder => "For example: 1000", :required => "", :type => "text"}/
+            %input#monthly_benefits.form-control{:name => "monthly_benefits", :placeholder => I18n.t("placeholder.example_income", :default => "For example: 1000"), :required => "", :type => "text"}/
+            %span.input-group-addon .00
+        .form-group.col-sm-9
+          %label#anticipate_income{:for => "anticipate_income"}= t.all_city.child_anticipate | "Do you or your child anticipate getting any other source of income outside of your job, child support or SSI?"
+          %button{"data-content" => "This includes unemployment insurance, pensions, workers compensation and any other form of income.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+            %i.fa.fa-info-circle
+          #anticipate_income
+            = radio_button_tag 'anticipate_income', 'yes'
+            = t.all_city.yes | "Yes"
+            \#{radio_button_tag 'anticipate_income', 'no'} No
+        / Label and input for expect_child_support
+        .form-group.col-sm-9
+          %label{:for => "expect_child_support"}
+            = t.all_city.anticipate_to_receive_child_support | "How much do you expect to receive in child support in the next 30 days?"
+          .input-group
+            %span.input-group-addon $
+            %input#expect_child_support.form-control{:name => "expect_child_support", :placeholder => I18n.t("placeholder.example_income2", :default => "For example: 500"), :required => "", :type => "text"}/
+            %span.input-group-addon .00
+        / Label and input for expect_ssi
+        .form-group.col-sm-9
+          %label{:for => "expect_ssi"}
+            = t.all_city.anticipate_to_recieve_ssi | "How much do you expect to receive in SSI in the next 30 days?"
+          .input-group
+            %span.input-group-addon $
+            %input#expect_ssi.form-control{:name => "expect_ssi", :placeholder => I18n.t("placeholder.example_income2", :default => "For example: 500"), :required => "", :type => "text"}/
             %span.input-group-addon .00
         .form-group.col-sm-9
           %label{:for => "ninety_day_gross_income"}
-            What is your income over the past 90 days?
+            = t.all_city.income_past | "What is your income over the past 90 days?"
           %button{"data-content" => "Includes cash receipts from all sources including money wages and salaries before any deductions, unemployment compensation, public assistance, alimony, child support, lottery/gambling winnings, dividends and all other income.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
             %i.fa.fa-info-circle
           .input-group
             %span.input-group-addon $
-            %input#ninety_day_gross_income.form-control{:name => "ninety_day_gross_income", :placeholder => "For example: 4000", :required => "", :type => "text"}/
+            %input#ninety_day_gross_income.form-control{:name => "ninety_day_gross_income", :placeholder => I18n.t("placeholder.example_income3", :default => "For example: 4000"), :required => "", :type => "text"}/
             %span.input-group-addon .00
         %br/
         / Label and input for rta_gross_income
         .form-group.col-sm-9
           %label{:for => "annual_gross_income"}
-            What is your gross annual income?
+            = t.all_city.income_annual | "What is your gross annual income?"
           %button{"data-content" => "Your total income before tax deductions, including your spouse's income if married and living together on December 31 of last year, and that of a qualified additional resident (if applicable).", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
             %i.fa.fa-info-circle
           .input-group
             %span.input-group-addon $
-            %input#annual_gross_income.form-control{:name => "annual_gross_income", :placeholder => "For example: 30000", :required => "", :type => "text"}/
+            %input#annual_gross_income.form-control{:name => "annual_gross_income", :placeholder => I18n.t("placeholder.example_income4", :default => "For example: 30000"), :required => "", :type => "text"}/
             %span.input-group-addon .00
-        .form-group.col-md-9
+        .form-group.col-sm-9
           %label{:for => "assets"} Please estimate the value of your assets. (Exclude the value of your home and car.)
           %button{"data-content" => "Personal property is anything owned by a person that is not land or permanently affixed to land. This includes such items as: money in checking and savings accounts;stocks, bonds, savings certificates, and other securities;farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
             %i.fa.fa-info-circle
           %div
-            %input#assets.form-control{:name => "assets", :placeholder => "For example: 5000", :required => "", :type => "text"}/
+            %input#assets.form-control{:name => "assets", :placeholder => I18n.t("placeholer.example_income5", :default => "For example: 5000"), :required => "", :type => "text"}/
         %br/
         .form-group.col-sm-9.pull-left
           %label#education{:for => "education"} Are you enrolled in college or an institution of higher education ?
           .col-sm-6
             #education
               = radio_button_tag 'education', 'yes'
-              yes
-              \#{radio_button_tag 'education', 'no'} no
+              = t.all_city.yes | "Yes"
+              \#{radio_button_tag 'education', 'no'} No
         %br/
         .form-group.col-sm-12
           %label#citizen.pull-left{:for => "citizen"} Are you a citizen of the United States?
@@ -97,55 +120,95 @@
           .col-sm-6
             #citizen.pull-left
               = radio_button_tag 'citizen', 'yes'
-              yes
-              \#{radio_button_tag 'citizen', 'no'} no
+              = t.all_city.yes | "Yes"
+              \#{radio_button_tag 'citizen', 'no'} No
         %br/
         .form-group.col-sm-12
-          %label#pregnant.pull-left{:for => "pregnant"} Are you pregnant ?
+          %p.allthatapply Select all that apply to you:
+          %input{:name => "pregnant", :type => "checkbox", :value => "pregnant"}/
+          I am pregnant
+          %br/
+          %input{:name => "first_child", :type => "checkbox", :value => "first_child"}/
+          I am pregnant with my first child
+          %br/
+          %input{:name => "teen_parent", :type => "checkbox", :value => "teen_parent"}/
+          I am a teen parent
+          %br/
+          %input{:name => "highschool", :type => "checkbox", :value => "no_highschool"}/
+          I care for a child that is 18 and not enrolled full time in high school
+          %br/
+          %input{:name => "care_for_child", :type => "checkbox", :value => "care_for_child"}/
+          I care for a child that is under 19 years of age
+          %br/
+          %input{:name => "no_children", :type => "checkbox", :value => "no_children"}/
+          I care for no children
+          %br/
+        .form-group.col-sm-12
+          %label#relationship{:for => "relationship"}
+            Describe your biological relationship to the child you are caring for:
           .clearfix
           .col-sm-6
-            #pregnant
-              = radio_button_tag 'pregnant', 'yes'
-              yes
-              \#{radio_button_tag 'pregnant', 'no'} no
+            #relationship.pull-left
+              = radio_button_tag 'relationship', 'parent'
+              Parent
+              \#{radio_button_tag 'relationship', 'adult_relative'} Adult relative
+              \#{radio_button_tag 'relationship', 'not_applicable'} Not applicable
+        %br/
+        .form-group.col-sm-12
+          %label#tanif_sixty_months{:for => "tanif_sixty_months"}
+            As a parent have you been receiving TANF for 60 months or more?
+          .clearfix
+          .col-sm-9
+            #tanif_sixty_months.pull-left
+              = radio_button_tag 'tanif_sixty_months', 'yes'
+              = t.all_city.yes | "Yes"
+              \#{radio_button_tag 'tanif_sixty_months', 'no'} No
+              \#{radio_button_tag 'tanif_sixty_months', 'caretaker'}  I am a caretaker relative, this does not apply to me.
         %br/
         .form-group.col-sm-12
           %label#lease.pull-left{:for => "lease"} Is your name currently on the lease of the apartment that you are renting?
           .col-sm-6
             #lease
               = radio_button_tag 'lease', 'yes'
-              yes
-              \#{radio_button_tag 'lease', 'no'} no
+              = t.all_city.yes | "Yes"
+              \#{radio_button_tag 'lease', 'no'} No
+        .form-group.col-sm-12
+          %label#next_rent.pull-left{:for => "next_rent"} Can you document that you can afford next month’s rent?
+          .col-sm-6
+            #next_rent
+              = radio_button_tag 'next_rent', 'yes'
+              = t.all_city.yes | "Yes"
+              \#{radio_button_tag 'next_rent', 'no'} No
         .form-group.col-sm-12
           %label#rental_status.pull-left{:for => "rental_status"} If you are unable to pay your rent at this time, what circumstance explains why you are unable to pay rent?
           #rental_status.pull-left
             = radio_button_tag 'rental_status', 'medical circumstance'
-            Someone experiencing a medical circumstance
+            = t.all_city.someone_experiencing | "Someone experiencing a medical circumstance"
             %button{"data-content" => "An emergency procedure (for example: surgery, related to complicated birth or other conditions) that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to your spouse, child, committed partner whose name is on the lease or grandparent who lives with you.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
               %i.fa.fa-info-circle
             %br/
             = radio_button_tag 'rental_status', 'a victim of natural disaster or fire'
-            A victim of natural disaster or fire
+            = t.all_city.victim_natural | "A victim of natural disaster or fire"
             %button{"data-content" => "A natural disaster includes instances such as a tornado or fire that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to floods for people who are renting a basement apartment who can not afford to replace those items and are seeking relocation.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
               %i.fa.fa-info-circle
             %br/
             = radio_button_tag 'rental_status', 'a recipient of an eviction notice'
-            A recipient of an eviction notice
+            = t.all_city.recipient_eviction | "A recipient of an eviction notice"
             %button{"data-content" => "This must be a notice that is notarized and brought with you if you qualify.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
               %i.fa.fa-info-circle
             %br/
             = radio_button_tag 'rental_status', 'have experienced a temporary loss of income'
-            Have experienced a temporary loss of income
+            = t.all_city.temporary_loss | "Have experienced a temporary loss of income"
             %button{"data-content" => "This involves losing income due to an unforeseen event (layoff, termination,or other emergencies etc.) The month in between when you lose your job and qualify for unemployment would be admissible.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
               %i.fa.fa-info-circle
             %br/
             = radio_button_tag 'rental_status', 'a victim of domestic violence'
-            A victim of domestic violence
-            %button{"data-content" => "This involves losing income due to violence from your intimate partner. If your partner was your sole source of income, this does not apply. Typically this benefit would apply to victims with income seeking relocation assistance. ", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+            = t.all_city.victim_domestic | "A victim of domestic violence"
+            %button{"data-content" => "This involves losing income due to violence from your intimate partner.", "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
               %i.fa.fa-info-circle
             %br/
             = radio_button_tag 'rental_status', 'none of the above'
-            None of the above
+            = t.all_city.none_of | "None of the above"
         .form-group.col-sm-12
           %label#status.pull-left{:for => "status"} If you have a child, check the box below that describes your child's health insurance status:
           .clearfix
@@ -165,25 +228,26 @@
               %br/
         %br/
         .form-group.col-sm-12
-          %label#disabled.pull-left{:for => "disabled"} If you are disabled, describe your current status:
+          %label#disabled.pull-left{:for => "disabled"} Are you receiving disability benefits?
           .clearfix
           .col-sm-12
-            #disabled.pull-left
+            #disabled
               = radio_button_tag 'disabled', 'social-security'
-              I am receiving disability payments from Social Security.
+              Yes, from Social Security
               %br/
               = radio_button_tag 'disabled', 'railroad'
-              I am receiving disability payments from the Railroad Retirement Board.
+              Yes, from the Railroad Retirement Board
               %br/
               = radio_button_tag 'disabled', 'veterans'
-              I am receiving disability payments from Veterans
-              Affairs.
+              Yes, from Veterans Affairs
               %br/
               = radio_button_tag 'disabled', 'none'
-              I am currently not receiving any disability payments
+              No
               %br/
+        = render "layouts/location_dropdown"
+        = render "layouts/phone_question"
         .row
-          .col-md-6
+          .col-sm-6
             = render "programs/calculator"
         .col-sm-12
           %div{:style => "padding:40px 0 0 0"}
