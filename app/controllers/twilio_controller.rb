@@ -74,6 +74,13 @@ class TwilioController < ApplicationController
       session["counter"] = 1
    end
 
+   if params[:Body].strip.downcase == "cash"
+      message = "Hello! Thanks so much for texting mRelief! At the current moment, we only help you check your eligibility for cash assistance online at www.mrelief.com Please visit our website on your next step."
+   end
+   if params[:Body].strip.downcase == "rent"
+      message = "Hello! Thanks so much for texting mRelief! At the current moment, we only help you check your eligibility for rental assistance online at www.mrelief.com Please visit our website on your next step."
+   end
+
    # HERE IS THE FOOD STAMPS LOGIC
    if session["page"] == "snap_college_question" && session["counter"] == 2
       @s = SnapEligibilityDataTwilio.new
