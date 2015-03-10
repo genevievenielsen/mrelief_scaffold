@@ -212,6 +212,7 @@
       @s.zipcode = params[:zipcode]
       @s.student_status = params[:student]
       @s.work_status = params[:work]
+      s.amount_in_account = params[:amount_in_account]
 
         if params[:education]  == 'no' && params[:citizen] == 'yes'
            if  @disabled == true
@@ -268,6 +269,10 @@
         if @age.to_i < 18
           @eligible = "no"
           @s.snap_eligibility_status = @eligible
+        end
+
+        if @snap_gross_income < 150 && params[:amount_in_account] == "yes"
+          @expedited = true
         end
 
         @user_zipcode = params[:zipcode]
