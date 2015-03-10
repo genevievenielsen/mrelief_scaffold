@@ -84,8 +84,8 @@
 
         # user is a student and citizen
         elsif params[:education]  == 'yes' && params[:citizen] == 'yes'
-          if params[:student_status] == 'I am currently enrolled half time or more'
-            if params[:work_status] == 'yes'
+          if params[:student] == 'I am currently enrolled half time or more'
+            if params[:work] == 'yes'
               if  @disabled == true
                  @snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => @snap_dependent_no})
               elsif @age <= 59
@@ -231,8 +231,9 @@
 
         # user is a student and citizen
         elsif params[:education]  == 'yes' && params[:citizen] == 'yes'
-          if params[:student_status] == 'I am currently enrolled half time or more'
-            if params[:work_status] == 'yes'
+          if params[:student] == 'I am currently enrolled half time or more'
+             puts "I made it to yes"
+            if params[:work] == 'yes'
               if  @disabled == true
                  @snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => @snap_dependent_no})
               elsif @age <= 59
@@ -241,9 +242,12 @@
                 @snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => @snap_dependent_no})
               end
               if @snap_gross_income < @snap_eligibility.snap_gross_income
+
                 @eligible = "yes"
+                @eligible_student = "yes"
               else
                 @eligible = "no"
+                 @eligible_student = "no"
                end
             # user is not working at least 20 hours
             else
@@ -252,6 +256,7 @@
           # user is not enrolled at least part time
           else
             @eligible = "no"
+            @eligible_student = "no"
           end
           @s.snap_eligibility_status = @eligible
 
@@ -260,7 +265,7 @@
           @s.snap_eligibility_status = @eligible
         end
 
-        if @age < 18
+        if @age.to_i < 18
           @eligible = "no"
           @s.snap_eligibility_status = @eligible
         end
