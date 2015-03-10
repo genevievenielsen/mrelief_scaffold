@@ -212,7 +212,7 @@
       @s.zipcode = params[:zipcode]
       @s.student_status = params[:student]
       @s.work_status = params[:work]
-      s.amount_in_account = params[:amount_in_account]
+      @s.amount_in_account = params[:amount_in_account]
 
         if params[:education]  == 'no' && params[:citizen] == 'yes'
            if  @disabled == true
