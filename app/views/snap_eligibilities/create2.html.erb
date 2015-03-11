@@ -1,5 +1,7 @@
  <div class="container">
 <%= render "layouts/print_button" %>
+
+<!-- USER IS ELIGIBLE FOR FOODSTAMPS -->
 <% if @eligible == 'yes' %>
       <div class="row" style="text-align:center;">
         <div class="col-md-8 col-md-offset-2">
@@ -47,8 +49,6 @@
           <td></td>
         </tr>
       <% end %>
-
-
       </table>
 
 
@@ -62,7 +62,6 @@
             </div>
 
         <% elsif @disabled != true && @s.age.to_i <= 59 %>
-
           <div id="income_explanation" class="panel-collapse collapse" role="tabpanel" >
               <div class="panel-body">
                  <p>Currently your reported income $<%= @s.monthly_gross_income %> for your household size of <%= @s.dependent_no  %> is LOWER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> of the Illinois Department of Human Services (DHS) Manual. Once you apply, you should hear within 30 business days about your in-person interview with DHS.</p>
@@ -82,35 +81,28 @@
                  <p> Currently your reported income $<%= @s.monthly_gross_income %> combined with your reported age of <%= @s.age %> is LOWER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> and <a href="http://www.dhs.state.il.us/page.aspx?item=13632">PM-05-06-01</a> of the Illinois Department of Human Services (DHS) Manual. Once you apply, you should hear within 30 business days about your in-person interview with DHS.</p>
               </div>
             </div>
-
         <% end %>
 
         <!-- CITIZEN EXPLANATION -->
         <% if @s.citizen == "yes" %>
-
             <div id="citizenship_explanation" class="panel-collapse collapse" role="tabpanel" >
                 <div class="panel-body">
                    <p>  Currently your citizenship status is reported as a citizen or legal permanent resident for at least 5 years wherein citizenship is allowable under <a href="https://www.dhs.state.il.us/page.aspx?item=13100">PM 03-01-02-a</a> and legal permanent residency for at least 5 years is allowable under <a href="https://www.dhs.state.il.us/page.aspx?item=13183">PM 03-01-02-g</a> of the Illinois Department of Human Services (DHS) Manual.
                   </p>
                 </div>
             </div>
-
         <% end %>
 
 
         <!-- EDUCATION EXPLANATION -->
         <% if @eligible_student == "yes" %>
-
             <div id="education_explanation" class="panel-collapse collapse" role="tabpanel" >
                 <div class="panel-body">
                    <p>  Currently your student status is reported as (half-time or more) at  a business, technical, trade, or vocational school that normally requires a high school diploma or the equivalent for enrollment in the course of study; or regular courses, including internet, mail, self-study, or correspondence courses, at an accredited college or university that offers degree programs which is consistent with an institution satisfying the policy requirements defining a student of higher education under <a href="https://www.dhs.state.il.us/page.aspx?item=13273">PM 03-04-03-a </a>and you reported the following condition(s) of (insert condition) which also satisfies policy <a href="https://www.dhs.state.il.us/page.aspx?item=13275">PM 03-04-03-b</a> of the Illinois Department of Human Services (DHS) Manual. Once you apply, you should hear within 30 business days about your in-person interview with DHS.
                   </p>
                 </div>
             </div>
-
         <% end %>
-
-
 
         <br>
         <br>
@@ -135,6 +127,7 @@
         </div>
     </div>
 
+<!-- USER MAYBE ELIGIBLE FOR FOODSTAMPS -->
     <% elsif @eligible == 'maybe' %>
 
       <div class="row" style="text-align:center;">
@@ -159,15 +152,48 @@
     </div>
 
 
+<!-- USER IS NOT ELIGIBLE FOR FOODSTAMPS -->
     <% elsif @eligible == 'no' %>
+
 
       <div class="row" style="text-align:center;">
         <div class="col-md-8 col-md-offset-2">
             <h1>Something else in mind!</h1>
-            <h4>Based on your household size and income, you likely do not qualify for food stamps.</h4>
+            <h4>You likely do not qualify for food stamps.</h4>
 
-            <br>
 
+            <table class="table table-striped">
+              <% if @s.age >= 18  %>
+              <tr>
+                <td><i class="fa fa-times"></i></td>
+                <td><p>Your gross monthly income</p></td>
+                <td> <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#income_explanation" aria-expanded="false" aria-controls="income_explanation">Read More </a></td>
+              </tr>
+              <% else %>
+                <tr>
+                  <td><i class="fa fa-times"></i></td>
+                  <td><p>Your age</p></td>
+                  <td> <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#age_explanation" aria-expanded="false" aria-controls="age_explanation">Read More </a></td>
+                </tr>
+              <% end %>
+            </table>
+
+
+
+              <div id="income_explanation" class="panel-collapse collapse" role="tabpanel" >
+                <div class="panel-body">
+                  <p>Currently your reported income  $<%= @s.monthly_gross_income %> for your household size of <%= @s.dependent_no  %> is HIGHER the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to  <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> of the Illinois Department of Human Services Policy Manual and you do not qualify for SNAP (food stamps) benefits. However, below are some local resources that can help. </p>
+                </div>
+              </div>
+
+              <div id="age_explanation" class="panel-collapse collapse" role="tabpanel" >
+                <div class="panel-body">
+                  <p>Currently your reported age of <%= @s.age %> is below 18 and you are too young to qualify for SNAP (food stamp) benefits. We recommend exploring these options with other members of your household.  However, below are some local resources that can help. </p>
+                </div>
+              </div>
+
+
+          <br>
           <div class="row">
             <p class="subhead">Direct2Food is an online resource that will help you locate the food pantries, soup kitchens, and meal programs closest to you. To find resources near you</p>
             <a href="http://www.direct2food.org/" onclick="ga('send', 'event', 'button', 'food_stamps', 'direct2food', 1);" class="btn btn-success btn-resolution" target="_blank">Click Here</a>
