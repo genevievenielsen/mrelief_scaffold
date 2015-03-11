@@ -134,8 +134,30 @@
         <div class="col-md-8 col-md-offset-2">
           <i class="fa fa-exclamation-circle fa-5x"></i>
             <h1>Something else in mind!</h1>
+
              <h4>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a Food Stamp expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your food stamp eligibility with you. </h4>
             <br>
+
+            <% if @hundred_dollar_range == true %>
+            <h4>The following information you reported impacted your eligibility status. Read More.</h4>
+            <table class="table table-striped">
+              <tr>
+                <td><i class="fa fa-check-circle "></i></td>
+                <td><p>Your gross monthly income</p></td>
+                <td> <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#income_explanation" aria-expanded="false" aria-controls="income_explanation">Read More </a></td>
+              </tr>
+            </table>
+
+            <div id="income_explanation" class="panel-collapse collapse" role="tabpanel" >
+              <div class="panel-body">
+
+                <p>Currently your reported income $<%= @s.monthly_gross_income %> for your household size of <%= @s.dependent_no  %> is HIGHER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %>  according to<a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> of the Illinois Department of Human Services Policy Manual. But since the amount is within $100, we recommend calling a Legal Assistance Foundation eligibility expert located community service centers. (Source nearest community resource center)</p>
+              </div>
+            </div>
+
+            <!-- this ends the $100 range -->
+          <% end %>
+
 
             <% if @laf_disclaimer.present?  %>
               <p class="subhead"><%= @laf_disclaimer %></p>
@@ -159,7 +181,8 @@
       <div class="row" style="text-align:center;">
         <div class="col-md-8 col-md-offset-2">
             <h1>Something else in mind!</h1>
-            <h4>You likely do not qualify for food stamps.</h4>
+            <h3>You likely do not qualify for food stamps. The following information you reported impacted your eligibility status. Read More.</h3>
+
 
 
             <table class="table table-striped">
@@ -177,7 +200,6 @@
                 </tr>
               <% end %>
             </table>
-
 
 
               <div id="income_explanation" class="panel-collapse collapse" role="tabpanel" >

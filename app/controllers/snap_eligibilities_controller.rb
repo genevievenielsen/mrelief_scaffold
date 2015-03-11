@@ -225,6 +225,10 @@
            if @snap_gross_income < @snap_eligibility.snap_gross_income
              @eligible = "yes"
              @s.snap_eligibility_status = @eligible
+
+           elsif @snap_gross_income < @snap_eligibility.snap_gross_income + 100
+            @eligible = "maybe"
+            @hundred_dollar_range = true
            else
              @eligible = "no"
               @s.snap_eligibility_status = @eligible
