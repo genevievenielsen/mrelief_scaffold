@@ -248,7 +248,6 @@
                 @snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => @snap_dependent_no})
               end
               if @snap_gross_income < @snap_eligibility.snap_gross_income
-
                 @eligible = "yes"
                 @eligible_student = "yes"
               else
@@ -257,7 +256,9 @@
                end
             # user is not working at least 20 hours
             else
+              puts "I made it to maybe"
               @eligible = "maybe"
+              @eligible_student = "maybe"
             end
           # user is not enrolled at least part time
           else
@@ -313,21 +314,20 @@
               @food_resources_first = @food_resources.first
               @food_resources_second = @food_resources.second
           end
-      @s.save
 
-      if params[:citizen].present? && params[:disabled].present? && params[:education].present?
+
+      if params[:citizen].present? && params[:disabled].present? && params[:education] == "no"
+        puts "I made to save"
+        @s.save
+      elsif params[:citizen].present? && params[:disabled].present? && params[:education] == "yes" && params[:student].present? && params[:work].present?
+        puts "I made to save"
+        @s.save
       else
          flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
         render "new"
       end
 
-      if params[:education] == "yes"
-        if params[:student].present? && params[:work].present?
-        else
-          flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
-          render "new"
-        end
-      end
+
   end
 
 
