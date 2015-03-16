@@ -327,6 +327,18 @@
         render "new"
       end
 
+    def print
+      @snap_data = SnapEligibilityData.find(params[:id])
+
+      if @snap_data.disabled_status != "No"
+         @snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => @snap_dependent_no})
+      elsif @snap_data.age <= 59
+        @snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => @snap_dependent_no })
+      elsif @snap_data.age > 59
+        @snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => @snap_dependent_no})
+      end
+    end
+
 
   end
 

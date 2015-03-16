@@ -1,5 +1,13 @@
- <div class="container">
-<%= render "layouts/print_button" %>
+<div class="container">
+<%#= render "layouts/print_button" %>
+<div class="row">
+  <div class="col-md-12">
+
+    <%= link_to "Print this Page".html_safe, "/snap_eligibilities/print/#{@s.id}", :class => "btn btn-primary btn-lg print-button-right" -%>
+
+
+  </div>
+</div>
 
 <!-- USER IS ELIGIBLE FOR FOODSTAMPS -->
 <% if @eligible == 'yes' %>
