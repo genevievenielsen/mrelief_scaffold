@@ -214,7 +214,8 @@
       @s.work_status = params[:work]
       @s.amount_in_account = params[:amount_in_account]
 
-        if params[:education]  == 'no' && params[:citizen] == 'yes'
+        # user is not a student
+        if params[:education]  == 'no'
            if  @disabled == true
               @snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => @snap_dependent_no})
            elsif @age <= 59
@@ -264,8 +265,10 @@
             @eligible_student = "no"
           end
           @s.snap_eligibility_status = @eligible
+        end
 
-        elsif params[:citizen] == 'no'
+        #user is not a citizen
+        if params[:citizen] == 'no'
           @eligible = 'maybe'
           @s.snap_eligibility_status = @eligible
         end
