@@ -74,11 +74,11 @@ class TwilioController < ApplicationController
       session["counter"] = 1
    end
 
-   if params[:Body].strip.downcase == "cash"
+   if params[:Body].strip.downcase == "cash" || params[:Body].strip.downcase == "cash assistance"
       message = "Thanks for texting mRelief! Currently, we only help check eligibility for cash assistance at www.mrelief.com Please visit us online."
    end
 
-   if params[:Body].strip.downcase == "rent"
+   if params[:Body].strip.downcase == "rent" || params[:Body].strip.downcase == "rental assistance"
       message = "Thanks for texting mRelief! Currently, we only help check eligibility for rent assistance at www.mrelief.com Please visit us online."
    end
 

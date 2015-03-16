@@ -84,8 +84,8 @@
 
         # user is a student and citizen
         elsif params[:education]  == 'yes' && params[:citizen] == 'yes'
-          if params[:student_status] == 'I am currently enrolled half time or more'
-            if params[:work_status] == 'yes'
+          if params[:student] == 'I am currently enrolled half time or more'
+            if params[:work] == 'yes'
               if  @disabled == true
                  @snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => @snap_dependent_no})
               elsif @age <= 59
@@ -212,8 +212,10 @@
       @s.zipcode = params[:zipcode]
       @s.student_status = params[:student]
       @s.work_status = params[:work]
+      @s.amount_in_account = params[:amount_in_account]
 
-        if params[:education]  == 'no' && params[:citizen] == 'yes'
+        # user is not a student
+        if params[:education]  == 'no'
            if  @disabled == true
               @snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => @snap_dependent_no})
            elsif @age <= 59
@@ -224,6 +226,10 @@
            if @snap_gross_income < @snap_eligibility.snap_gross_income
              @eligible = "yes"
              @s.snap_eligibility_status = @eligible
+
+           elsif @snap_gross_income < @snap_eligibility.snap_gross_income + 100
+            @eligible = "maybe"
+            @hundred_dollar_range = true
            else
              @eligible = "no"
               @s.snap_eligibility_status = @eligible
@@ -231,8 +237,9 @@
 
         # user is a student and citizen
         elsif params[:education]  == 'yes' && params[:citizen] == 'yes'
-          if params[:student_status] == 'I am currently enrolled half time or more'
-            if params[:work_status] == 'yes'
+          if params[:student] == 'I am currently enrolled half time or more'
+             puts "I made it to yes"
+            if params[:work] == 'yes'
               if  @disabled == true
                  @snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => @snap_dependent_no})
               elsif @age <= 59
@@ -242,27 +249,38 @@
               end
               if @snap_gross_income < @snap_eligibility.snap_gross_income
                 @eligible = "yes"
+                @eligible_student = "yes"
               else
                 @eligible = "no"
+                 @eligible_student = "no"
                end
             # user is not working at least 20 hours
             else
+              puts "I made it to maybe"
               @eligible = "maybe"
+              @eligible_student = "maybe"
             end
           # user is not enrolled at least part time
           else
             @eligible = "no"
+            @eligible_student = "no"
           end
           @s.snap_eligibility_status = @eligible
+        end
 
-        elsif params[:citizen] == 'no'
+        #user is not a citizen
+        if params[:citizen] == 'no'
           @eligible = 'maybe'
           @s.snap_eligibility_status = @eligible
         end
 
-        if @age < 18
+        if @age.to_i < 18
           @eligible = "no"
           @s.snap_eligibility_status = @eligible
+        end
+
+        if @snap_gross_income < 150 && params[:amount_in_account] == "yes"
+          @expedited = true
         end
 
         @user_zipcode = params[:zipcode]
@@ -296,21 +314,32 @@
               @food_resources_first = @food_resources.first
               @food_resources_second = @food_resources.second
           end
-      @s.save
 
-      if params[:citizen].present? && params[:disabled].present? && params[:education].present?
+
+      if params[:citizen].present? && params[:disabled].present? && params[:education] == "no"
+        puts "I made to save"
+        @s.save
+      elsif params[:citizen].present? && params[:disabled].present? && params[:education] == "yes" && params[:student].present? && params[:work].present?
+        puts "I made to save"
+        @s.save
       else
          flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
         render "new"
       end
 
-      if params[:education] == "yes"
-        if params[:student].present? && params[:work].present?
-        else
-          flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
-          render "new"
-        end
+    def print
+      @snap_data = SnapEligibilityData.find(params[:id])
+
+      if @snap_data.disabled_status != "No"
+         @snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => @snap_dependent_no})
+      elsif @snap_data.age <= 59
+        @snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => @snap_dependent_no })
+      elsif @snap_data.age > 59
+        @snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => @snap_dependent_no})
       end
+    end
+
+
   end
 
 
