@@ -226,10 +226,23 @@
            if @snap_gross_income < @snap_eligibility.snap_gross_income
              @eligible = "yes"
              @s.snap_eligibility_status = @eligible
-
-           elsif @snap_gross_income < @snap_eligibility.snap_gross_income + 100
+             #200 for seniors and elderly
+             #20 for everyone else
+           elsif @age > 59 && @snap_gross_income < @snap_eligibility.snap_gross_income + 200
+            @income_range = 200
             @eligible = "maybe"
             @hundred_dollar_range = true
+
+           elsif @disabled == true && @snap_gross_income < @snap_eligibility.snap_gross_income + 200
+            @income_range = 200
+            @eligible = "maybe"
+            @hundred_dollar_range = true
+
+           elsif @snap_gross_income < @snap_eligibility.snap_gross_income + 20
+            @income_range = 20
+            @eligible = "maybe"
+            @hundred_dollar_range = true
+
            else
              @eligible = "no"
               @s.snap_eligibility_status = @eligible

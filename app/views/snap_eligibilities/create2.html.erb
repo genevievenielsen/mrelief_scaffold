@@ -254,7 +254,7 @@
                       <h4 class="modal-title">Your Income</h4>
                     </div>
                     <div class="modal-body">
-                       <p>Currently your reported income $<%= @s.monthly_gross_income %> for your household size of <%= @s.dependent_no  %> is HIGHER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %>  according to<a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> of the Illinois Department of Human Services Policy Manual. But since the amount is within $100, we recommend calling a Legal Assistance Foundation eligibility expert located community service centers. (Source nearest community resource center)</p>
+                       <p>Currently your reported income $<%= @s.monthly_gross_income %> for your household size of <%= @s.dependent_no  %> is HIGHER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %>  according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> of the Illinois Department of Human Services Policy Manual. But since the amount is within $<%= @income_range %>, we recommend calling a Legal Assistance Foundation eligibility expert located community service centers.</p>
                     </div>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   </div>
