@@ -4,33 +4,107 @@
     <strong>Check your eligibility via SMS:</strong> Text "hello" to 1-773-377-8946.
   </div>
 </div>
-<header>
+
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="text-center">
+    Enter your information below to check your eligibility for public assistance
+    </h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="panel panel-default col-md-offset-2 col-md-8">
+    <div class="panel-body">
+      <form action="/snap_eligibilities/create2" role="form" method="post">
+
+
+      <!-- age question -->
+      <label for="age">How old are you?</label>
+      <div class="row">
+        <div class="form-group col-md-9">
+          <input type="text" id="age" name="age" placeholder="For example: 27" class="form-control" required>
+        </div>
+      </div>
+
+      <!-- income question -->
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label for="dependent_no">What is the number of people living in your household including    yourself?</label>
+            <button type="button" data-toggle="popover" data-content="This should include the number of people who purchase and prepare food with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+          <div class="row">
+            <div class="col-md-9">
+              <p type="button" data-toggle="popover" data-content="This should include the number of people who purchase and prepare food with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+                <input type="text" id="dependent_no" name="dependent_no" placeholder="For example: 3" class="form-control" required>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- gross income question-->
+      <div class="row">
+        <div class="form-group col-md-9">
+          <label for="gross_income">
+            What is your gross monthly income?
+          </label>
+          <button type="button" data-toggle="popover" data-content="This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as   Social Security, child support, and unemployment insurance before any deductions." data-placement="top    " style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
+               <p type="button" data-toggle="popover" data-content="This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+                <input type="text" id="gross_income" name="gross_income" placeholder="For example: 1000"class="form-control" required>
+              </p>
+            <span class="input-group-addon">.00</span>
+          </div>
+          </div>
+        </div>
+
+        <!-- disability question -->
+        <div class="row">
+          <div class="form-group col-md-12">
+                <label for="disabled" id="disabled">Are you receiving disability benefits?</label>
+            <% [ 'Yes, from Social Security', 'Yes, from the Railroad Retirement Board ', 'Yes, from Veterans Affairs', 'No' ].each do |disabled| %>
+              <br><%= radio_button_tag 'disabled', disabled  %>
+              <%= disabled.humanize %>
+            <% end %>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <header>
 <div class="container">
   <div class="row">
-    <%= image_tag("homepage_marquee.png", :class => "img-responsive homepage-marquee") %>
+    <%#= image_tag("homepage_marquee.png", :class => "img-responsive homepage-marquee") %>
   </div>
   <div class="row">
     <h1 style="text-align:center;">Check your eligibility for benefits in Chicago & Illinois</h1>
     <p class="subhead">Eligibility requirements can be difficult to find, we've created a process that makes it easy</p>
     <div style="text-align:center;">
-    <%= link_to("Get Started", "/programs", :class => "btn btn-primary btn-lg", :role => "button") %>
+    <%#= link_to("Get Started", "/programs", :class => "btn btn-primary btn-lg", :role => "button") %>
     </div>
   </div>
-</header>
+</header> -->
 
-<hr style="margin-top:10px">
+
+<!-- <hr style="margin-top:10px">
 
 <div class="container">
   <div class="row">
     <h2 class="subsection">A Little More About Us</h2>
     <p class="col-md-10 col-md-offset-1" style="text-align:center;">We are ruby developers and alumni of The Starter League’s Web Development program, based in Chicago. Our additional expertise include Public Policy, Economics, and Design. We are working in partnership with Mayor Rahm Emanuel’s Innovation Delivery Team and Chicago’s Community Service Centers. We have also received tremendous support from civic tech group, Open City and their "Open Gov Hack Night", a group of developers and open data lovers dedicated to open government data in the city of Chicago. Our community resources are provided to you by Purple Binder.</p>
       <div class="col-md-12" style="text-align:center;">
-        <%= image_tag("logos.jpg", :class => "") %>
+        <%#= image_tag("logos.jpg", :class => "") %>
       </div>
       <div style="text-align:center;">
-          <%= link_to("Learn More About Us", "/about_us", :class => "btn btn-info") %>
+          <%#= link_to("Learn More About Us", "/about_us", :class => "btn btn-info") %>
       </div>
   </div>
   </div>
-</div>
+</div> -->
 
