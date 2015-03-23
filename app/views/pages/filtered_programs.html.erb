@@ -1,0 +1,29 @@
+
+<div class="container">
+  <div class ="row">
+    <div class="col-md-10 col-md-offset-1">
+      <h1 class="page-header">Programs for Chicago & Illinois</h1>
+    </div>
+  </div>
+</div>
+
+
+<div>
+  <h4 style="text-align:center">Click on a benefit below to continue the pre-screening process.</h4>
+</div>
+
+
+<br>
+
+<div class="row">
+  <% @programs.each_with_index do |program| %>
+    <div class="col-md-4" >
+      <a href="<%= program.url %>" class="thumbnail" style="padding:0 20px 20px 20px">
+        <span class="caption">
+          <h3><%= program.name %></h3>
+          <p><%= program.description %></p>
+        </span>
+      </a>
+    </div>
+  <% end %>
+</div>

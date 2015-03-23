@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   get('/press_release', { :controller => 'pages', :action => 'press_release' })
 
   get("/", { :controller => "pages", :action => "homepage" })
+  post("/filtered_programs", { :controller => "pages", :action => "filtered_programs" })
 
   get('/all_city_programs_with_tanif', { :controller => 'all_city_programs', :action => 'new_with_tanif' })
   post('/all_city_programs_with_tanif', { :controller => 'all_city_programs', :action => 'create_with_tanif' })

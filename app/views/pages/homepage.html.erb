@@ -16,7 +16,7 @@
 <div class="row">
   <div class="panel panel-default col-md-offset-2 col-md-8">
     <div class="panel-body">
-      <form action="/snap_eligibilities/create2" role="form" method="post">
+      <form action="/filtered_programs" role="form" method="post">
 
 
       <!-- age question -->
@@ -67,6 +67,12 @@
               <br><%= radio_button_tag 'disabled', disabled  %>
               <%= disabled.humanize %>
             <% end %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-primary program-btn ">See if I qualify</button>
           </div>
         </div>
 
