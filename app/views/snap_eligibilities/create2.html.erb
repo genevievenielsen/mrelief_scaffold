@@ -61,7 +61,7 @@
                     <h4 class="modal-title">Your Income Status</h4>
                   </div>
                   <div class="modal-body">
-                    <p>Currently your reported income $<%= @s.monthly_gross_income %> is lower than $150 and therefore you may qualify for emergency or expedited SNAP (food stamp) benefits according to policy <a href="http://www.dhs.state.il.us/page.aspx?item=13005">PM-02-08-0</a> 1 of the Illinois Department of Human Services (DHS) manual. Once you apply, you should hear within 5 business days about your in-person interview with DHS.</p>
+                    <p>Currently your reported income of $<%= @s.monthly_gross_income %> is lower than $150 and therefore you may qualify for emergency or expedited SNAP (food stamp) benefits according to policy <a href="http://www.dhs.state.il.us/page.aspx?item=13005">PM-02-08-01</a>  of the Illinois Department of Human Services (DHS) manual. Once you apply, you should hear within 5 business days about your in-person interview with DHS.</p>
                   </div>
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
@@ -78,7 +78,7 @@
                     <h4 class="modal-title">Your Income Status</h4>
                   </div>
                   <div class="modal-body">
-                     <p>Currently your reported income $<%= @s.monthly_gross_income %> for your household size of <%= @s.dependent_no  %> is LOWER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> of the Illinois Department of Human Services (DHS) Manual. Once you apply, you should hear within 30 business days about your in-person interview with DHS.</p>
+                     <p>Currently your reported income of $<%= @s.monthly_gross_income %> for your household size of <%= @s.dependent_no  %> is LOWER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> of the Illinois Department of Human Services (DHS) Manual. Once you apply, you should hear within 30 business days about your in-person interview with DHS.</p>
                   </div>
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
@@ -95,7 +95,7 @@
                     <h4 class="modal-title">Your Income Status</h4>
                   </div>
                   <div class="modal-body">
-                    <p> Currently your reported income $<%= @s.monthly_gross_income %> combined with your receipt of disability benefits is LOWER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412"> policy 124 </a> and <a href="http://www.dhs.state.il.us/page.aspx?item=13632"> PM-05-06-01</a> of the Illinois Department of Human Services (DHS) Manual. Once you apply, you should hear within 30 business days about your in-person interview with DHS.</p>
+                    <p> Currently your reported income of $<%= @s.monthly_gross_income %> combined with your receipt of disability benefits is LOWER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412"> policy 124 </a> and <a href="http://www.dhs.state.il.us/page.aspx?item=13632"> PM-05-06-01</a> of the Illinois Department of Human Services (DHS) Manual. Once you apply, you should hear within 30 business days about your in-person interview with DHS.</p>
                   </div>
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
@@ -112,7 +112,7 @@
                     <h4 class="modal-title">Your Income Status</h4>
                   </div>
                   <div class="modal-body">
-                     <p> Currently your reported income $<%= @s.monthly_gross_income %> combined with your reported age of <%= @s.age %> is LOWER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> and <a href="http://www.dhs.state.il.us/page.aspx?item=13632"> PM-05-06-01</a> of the Illinois Department of Human Services (DHS) Manual. Once you apply, you should hear within 30 business days about your in-person interview with DHS.</p>
+                     <p> Currently your reported income of $<%= @s.monthly_gross_income %> combined with your reported age of <%= @s.age %> is LOWER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> and <a href="http://www.dhs.state.il.us/page.aspx?item=13632"> PM-05-06-01</a> of the Illinois Department of Human Services (DHS) Manual. Once you apply, you should hear within 30 business days about your in-person interview with DHS.</p>
                   </div>
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
@@ -150,7 +150,7 @@
                       <h4 class="modal-title">Your Education Status</h4>
                     </div>
                     <div class="modal-body">
-                       <p>  Currently your student status is reported as (half-time or more) at  a business, technical, trade, or vocational school that normally requires a high school diploma or the equivalent for enrollment in the course of study; or regular courses, including internet, mail, self-study, or correspondence courses, at an accredited college or university that offers degree programs which is consistent with an institution satisfying the policy requirements defining a student of higher education under <a href="https://www.dhs.state.il.us/page.aspx?item=13273">P M 03-04-03-a </a> and you reported the following condition(s) of (insert condition) which also satisfies policy <a href="https://www.dhs.state.il.us/page.aspx?item=13275"> PM 03-04-03-b</a> of the Illinois Department of Human Services (DHS) Manual. Once you apply, you should hear within 30 business days about your in-person interview with DHS.
+                       <p>  Currently your student status is reported as (half-time or more) at  a business, technical, trade, or vocational school that normally requires a high school diploma or the equivalent for enrollment in the course of study; or regular courses, including internet, mail, self-study, or correspondence courses, at an accredited college or university that offers degree programs which is consistent with an institution satisfying the policy requirements defining a student of higher education under <a href="https://www.dhs.state.il.us/page.aspx?item=13273">P M 03-04-03-a </a> and you reported conditions that satisfy policy <a href="https://www.dhs.state.il.us/page.aspx?item=13275"> PM 03-04-03-b</a> of the Illinois Department of Human Services (DHS) Manual. Once you apply, you should hear within 30 business days about your in-person interview with DHS.
                       </p>
                     </div>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -162,7 +162,7 @@
         <br>
         <br>
         <% if @age <= 22 %>
-          <p class="subhead">However, make sure you accounted for your parents income, if you are still living in the same household</p>
+          <p class="subhead">However, make sure you accounted for your parents income, if you are still living in the same household.</p>
         <% end %>
 
         <br>
@@ -244,7 +244,7 @@
                       <h4 class="modal-title">Your Income</h4>
                     </div>
                     <div class="modal-body">
-                       <p>Currently your reported income $<%= @s.monthly_gross_income %> for your household size of <%= @s.dependent_no  %> is HIGHER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %>  according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> of the Illinois Department of Human Services Policy Manual. But since the amount is within $<%= @income_range %>, we recommend calling a Legal Assistance Foundation eligibility expert located community service centers.</p>
+                       <p>Currently your reported income of $<%= @s.monthly_gross_income %> for your household size of <%= @s.dependent_no  %> is HIGHER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %>  according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> of the Illinois Department of Human Services Policy Manual. But since the amount is within $<%= @income_range %>, we recommend calling a Legal Assistance Foundation eligibility expert located community service centers.</p>
                     </div>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   </div>
@@ -378,7 +378,7 @@
                         <h4 class="modal-title">Your Income</h4>
                       </div>
                       <div class="modal-body">
-                         <p>Currently your reported income  $<%= @s.monthly_gross_income %> for your household size of <%= @s.dependent_no  %> is HIGHER the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to  <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> of the Illinois Department of Human Services Policy Manual and you do not qualify for SNAP (food stamps) benefits. However, below are some local resources that can help. </p>
+                         <p>Currently your reported income of $<%= @s.monthly_gross_income %> for your household size of <%= @s.dependent_no  %> is HIGHER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to  <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> of the Illinois Department of Human Services Policy Manual and you do not qualify for SNAP (food stamps) benefits. However, below are some local resources that can help. </p>
                       </div>
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
