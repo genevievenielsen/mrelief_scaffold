@@ -65,7 +65,7 @@
   <div class="row">
     <div class="form-group col-md-12" id="education_question">
       <label for="education" id="education">Are you enrolled in college/institution of higher education? </label>
-      <button id="education_explanation" type="button" data-toggle="popover" data-content="Eligibile schools include: a business, technical, trade, or vocational school that normally requires a high school diploma or the equivalent for enrollment in the course of study; or regular courses, including internet, mail, self-study, or correspondence courses, at an accredited college or university that offers degree programs." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+      <button id="education_explanation" type="button" data-toggle="popover" data-content="Eligible schools include: a business, technical, trade, or vocational school that normally requires a high school diploma or the equivalent for enrollment in the course of study; or regular courses, including internet, mail, self-study, or correspondence courses, at an accredited college or university that offers degree programs." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
       <br>
         <% [ 'yes', 'no'].each do |education| %>
           <%= radio_button_tag 'education', education, @s.enrolled_in_education == education %>
