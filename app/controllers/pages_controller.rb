@@ -8,7 +8,7 @@ class PagesController < ApplicationController
     # CHICAGO PROGRAMS
     @programs = []
 
-    # food stamps logic, based on household size, age, disability status and gross monthly income
+    # Food Stamps logic, based on household size, age, disability status and gross monthly income
     if  params[:disabled] != "No"
        @snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => params[:dependent_no].to_i})
     elsif params[:age].to_i <= 59
@@ -22,28 +22,29 @@ class PagesController < ApplicationController
       @programs.push(@snap)
     end
 
-    # rta ride free logic, based on age and disability status
+    # RTA Ride Free logic, based on age and disability status
     if params[:age].to_i > 64 || params[:disabled] != "No"
       @rta_ride_free = Program.find_by(:name_en => "RTA Ride Free")
       @programs.push(@rta_ride_free)
     end
 
-    # all kids - householdsize and gross monthly income - slighlty more complicated because we ask how many children
-
-
-    # medicaid - householdsize and gross monthly income
+    # Medicaid logic, based on household size and gross monthly income
     @medicaid_eligibility = Medicaid.find_by({ :medicaid_household_size => params[:dependent_no].to_i})
     if params[:gross_income].to_i < @medicaid_eligibility.medicaid_gross_income
       @medicaid = Program.find_by(:name_en => "Medicaid")
       @programs.push(@medicaid)
     end
 
-    # medicare cost sharing - householdsize and gross monthly income
+    # Medicare Cost Sharing logic, based on household size and gross monthly income
     @medicare_sharing_eligibility = MedicareCostSharing.find_by({ :household_size => params[:dependent_no].to_i })
     if params[:gross_income].to_i < @medicare_sharing_eligibility.premium_only
       @medicare_cost_sharing = Program.find_by(:name_en => "Medicare Cost Sharing")
       @programs.push(@medicare_cost_sharing)
     end
+
+    # all kids - householdsize and gross monthly income - slighlty more complicated because we ask how many children
+      # if householdsize is greater than 1 and falls below income cut offs
+
 
 
     # programs that we can't screen for with global questions - rental assistance (90 day gross income),
