@@ -42,25 +42,48 @@ class PagesController < ApplicationController
       @programs.push(@medicare_cost_sharing)
     end
 
-    # all kids - householdsize and gross monthly income - slighlty more complicated because we ask how many children
-      # if householdsize is greater than 1 and falls below income cut offs
-
-
+    # all kids - householdsize and gross monthly income
+    if params[:dependent_no].to_i > 1
+      number_of_kids = params[:dependent_no].to_i - 1
+      @kids_eligibility = AllKid.find_by({ :kids_household_size => number_of_kids })
+      if params[:gross_income].to_i < @kids_eligibility.premium_1_gross_income
+        @all_kids = Program.find_by(:name_en => "All Kids")
+        @programs.push(@all_kids)
+      end
+    end
 
     # programs that we can't screen for with global questions - rental assistance (90 day gross income),
     #aabd cash assistance, tanf cash assistance
 
 
     # ILLINOIS PROGRAMS
-
+    @illinois_programs = []
     # child care vouchers - householdsize and gross monthly income
+    @ccdf_eligibility = ChildCareVoucher.find_by({ :ccdf_dependent_no => params[:dependent_no].to_i})
+    if params[:gross_income].to_i < @ccdf_eligibility.ccdf_gross_income
+      @child_care = Program.find_by(:name_en => "Child Care Voucher")
+      @illinois_programs.push(@child_care)
+    end
 
     # wic - household size and gross monthly income
+    @wic_eligibility = Wic.find_by({ :wic_household_size => params[:dependent_no].to_i })
+    if params[:gross_income].to_i < @wic_eligibility.wic_gross_income
+      @wic = Program.find_by(:name_en => "Women, Infants and Children (WIC)")
+      @illinois_programs.push(@wic)
+    end
 
     # early head start - household size and gross monthly income
+    @ehs_eligibility = EarlyHeadStart.find_by({ :ehs_dependent_no => params[:dependent_no].to_i })
+    if params[:gross_income].to_i< @ehs_eligibility.ehs_gross_income
+      @ehs = Program.find_by(:name_en => "Early Head Start")
+      @illinois_programs.push(@ehs)
+    end
 
     # head start - household size
-
+    if params[:dependent_no].to_i > 1
+      @head_start = Program.find_by(:name_en => "Head Start")
+      @illinois_programs.push(@head_start)
+    end
 
   end
 

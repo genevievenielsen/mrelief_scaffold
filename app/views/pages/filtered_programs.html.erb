@@ -15,15 +15,59 @@
 
 <br>
 
-<div class="row">
-  <% @programs.each_with_index do |program| %>
-    <div class="col-md-4" >
-      <a href="<%= program.url %>" class="thumbnail" style="padding:0 20px 20px 20px">
-        <span class="caption">
-          <h3><%= program.name %></h3>
-          <p><%= program.description %></p>
-        </span>
-      </a>
+<!-- City of Chicago Programs  -->
+<div class="container">
+ <div class="row">
+    <div class="col-md-12">
+      <h3 class="program-heading" style="padding-bottom:0px">CHICAGO PROGRAMS</h3>
+        <h4 style="text-align:center">Accessible in Community Service Centers</h4>
     </div>
+  </div>
+  <br>
+  <div class="row">
+
+
+  <% @programs.each_with_index do |program| %>
+
+      <div class="col-md-4" >
+        <a href="<%= program.url %>" class="thumbnail" style="padding:0 20px 20px 20px">
+          <span class="caption">
+            <h3><%= program.name %></h3>
+            <p><%= program.description %></p>
+          </span>
+        </a>
+      </div>
   <% end %>
+  </div>
+
+<hr>
+
+
+<!-- Illinois Programs  -->
+ <div class="row">
+    <div class="col-md-12">
+      <h3 class="program-heading">STATE OF ILLINOIS PROGRAMS</h3>
+    </div>
+  </div>
+<div>
+  <div class="row">
+  <% @illinois_programs.each_with_index do |program| %>
+
+      <div class="col-md-4">
+        <a href="<%= program.url %>" class="thumbnail">
+          <span class="caption">
+            <h3><%= program.name %></h3>
+            <p><%= program.description %></p>
+          </span>
+        </a>
+      </div>
+  <% end %>
+
+</div>
+</div>
+
+
+<br>
+<br>
+<br>
 </div>
