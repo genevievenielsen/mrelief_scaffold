@@ -31,7 +31,8 @@
                 %i.fa.fa-info-circle
               .row
                 .col-md-9
-                  %input#snap_dependent_no.form-control{:name => "snap_dependent_no", :placeholder => I18n.t('placeholder.example_hh', :default => "For example: 3"), :required => "", :type => "text", :value => @snap_eligibility.snap_dependent_no}/
+                  %p{"data-content" => I18n.t('popover.info_hh', :default => "This should include the number of people who purchase and prepare food with you."), "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+                    %input#snap_dependent_no.form-control{:name => "snap_dependent_no", :placeholder => I18n.t('placeholder.example_hh', :default => "For example: 3"), :required => "", :type => "text", :value => @snap_eligibility.snap_dependent_no}/
           / Label and input for snap_gross_income
           .row
             .form-group.col-md-9
@@ -41,7 +42,8 @@
                 %i.fa.fa-info-circle
               .input-group
                 %span.input-group-addon $
-                %input#snap_gross_income.form-control{:name => "snap_gross_income", :placeholder => I18n.t('placeholder.example_income', :default => "For example: 1000"), :required => "", :type => "text", :value => @snap_eligibility.snap_gross_income}/
+                %p{"data-content" => I18n.t('popover.info_income', :default => "This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions."), "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+                  %input#snap_gross_income.form-control{:name => "snap_gross_income", :placeholder => I18n.t('placeholder.example_income', :default => "For example: 1000"), :required => "", :type => "text", :value => @snap_eligibility.snap_gross_income}/
                 %span.input-group-addon .00
           = render 'programs/zipcode_question'
           .row
