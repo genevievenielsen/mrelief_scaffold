@@ -21,25 +21,28 @@
 
   def create
     @s = SnapEligibilityData.new
+
+    dependent_no = params[:snap_dependent_no].strip
     # this is the words into numbers logic
-    if params[:snap_dependent_no] !~ /\D/  # returns true if all numbers
-      @snap_dependent_no = params[:snap_dependent_no].to_i
+    if dependent_no !~ /\D/  # returns true if all numbers
+      @snap_dependent_no = dependent_no.to_i
       @s.dependent_no = @snap_dependent_no
     else
-      @snap_dependent_no = params[:snap_dependent_no].in_numbers
+      @snap_dependent_no = dependent_no.strip.in_numbers
       @s.dependent_no = @snap_dependent_no
     end
 
-    if params[:age] !~ /\D/
-      @age = params[:age].to_i
+    age = params[:age].strip
+    if age !~ /\D/
+      @age = age.to_i
       @s.age = @age
     else
-      @age = params[:age].in_numbers
+      @age = age.in_numbers
       @s.age = @age
     end
 
-    @snap_gross_income = params[:snap_gross_income]
-    @snap_gross_income = @snap_gross_income.gsub(/[^0-9\.]/, '')
+    @snap_gross_income = params[:snap_gross_income].strip
+    # @snap_gross_income = @snap_gross_income.gsub(/[^0-9\.]/, '')
 
     if @snap_gross_income !~ /\D/
       @snap_gross_income = @snap_gross_income.to_i
@@ -118,7 +121,7 @@
           @s.snap_eligibility_status = @eligible
         end
 
-        @user_zipcode = params[:zipcode]
+        @user_zipcode = params[:zipcode].strip
         @zipcode = @user_zipcode << ".0"
         @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
 
