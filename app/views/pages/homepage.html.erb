@@ -70,6 +70,22 @@
           </div>
         </div>
 
+        <!-- benefits question -->
+        <div class="row">
+          <div class="form-group col-md-12">
+                <label for="benefits" id="benefits">Are you currently receiving public benefits?</label>
+            <% [ 'yes', 'no' ].each do |benefits| %>
+              <br><%= radio_button_tag 'benefits', benefits  %>
+              <%= benefits.humanize %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="place_for_benefits_checkboxes">
+
+
+        </div>
+
         <div class="row">
           <div class="col-md-12">
             <button type="submit" class="btn btn-primary program-btn ">See if I qualify</button>
@@ -81,36 +97,18 @@
   </div>
 </div>
 
+<script type="text/javascript">
+  //student JavaScript
+  $("input:radio[name=benefits]").click(function() {
+  var value = $(this).val();
+    if (value == "yes") {
+      $('.place_for_benefits_checkboxes').empty().append("<%= escape_javascript(render "pages/benefits_checkboxes") %>");
+    }
+    if (value == "no") {
+      $('.benefits_checkboxes').remove();
+    }
+  });
 
+</script>
 
-<!-- <header>
-<div class="container">
-  <div class="row">
-    <%#= image_tag("homepage_marquee.png", :class => "img-responsive homepage-marquee") %>
-  </div>
-  <div class="row">
-    <h1 style="text-align:center;">Check your eligibility for benefits in Chicago & Illinois</h1>
-    <p class="subhead">Eligibility requirements can be difficult to find, we've created a process that makes it easy</p>
-    <div style="text-align:center;">
-    <%#= link_to("Get Started", "/programs", :class => "btn btn-primary btn-lg", :role => "button") %>
-    </div>
-  </div>
-</header> -->
-
-
-<!-- <hr style="margin-top:10px">
-
-<div class="container">
-  <div class="row">
-    <h2 class="subsection">A Little More About Us</h2>
-    <p class="col-md-10 col-md-offset-1" style="text-align:center;">We are ruby developers and alumni of The Starter League’s Web Development program, based in Chicago. Our additional expertise include Public Policy, Economics, and Design. We are working in partnership with Mayor Rahm Emanuel’s Innovation Delivery Team and Chicago’s Community Service Centers. We have also received tremendous support from civic tech group, Open City and their "Open Gov Hack Night", a group of developers and open data lovers dedicated to open government data in the city of Chicago. Our community resources are provided to you by Purple Binder.</p>
-      <div class="col-md-12" style="text-align:center;">
-        <%#= image_tag("logos.jpg", :class => "") %>
-      </div>
-      <div style="text-align:center;">
-          <%#= link_to("Learn More About Us", "/about_us", :class => "btn btn-info") %>
-      </div>
-  </div>
-  </div>
-</div> -->
 
