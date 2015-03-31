@@ -1,0 +1,35 @@
+.row
+  .col-md-12
+    %h4
+      %a.btn.btn-primary.btn-lg.print-button-right{:href => "#", :onclick => "onPrint();"}
+        %i.fa.fa-print
+        Print
+/ function that puts the text below
+:javascript
+  var onPrint = function(){
+
+    //incase the user is printing for the second time
+    $('.income_explanation_row').remove();
+    $('.citizenship_explanation_row').remove();
+    $('.education_explanation_row').remove();
+
+    // add ids
+    $("<tr class=\"income_explanation_row\"><td></td><td id='print_income'></td><td></td></tr>").insertAfter('#income_row');
+    $("<tr class=\"citizenship_explanation_row\"><td></td><td id='print_citizenship'></td><td></td></tr>").insertAfter('#citizenship_row');
+    $("<tr class=\"education_explanation_row\"><td></td><td id='print_education'></td><td></td></tr>").insertAfter('#education_row');
+
+    //get the explanations
+    income_explanation = $("#income_explanation p")
+    citizenship_explanation = $("#citizenship_explanation p")
+    education_explanation = $("#education_explanation p")
+
+    // insert relevant explanations into the row
+    $(income_explanation[0]).clone().appendTo('#print_income');
+    $(citizenship_explanation[0]).clone().appendTo('#print_citizenship');
+    $(education_explanation[0]).clone().appendTo('#print_education');
+
+
+    window.print();
+    return false;
+
+  };

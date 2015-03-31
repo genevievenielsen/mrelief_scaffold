@@ -46,6 +46,8 @@ Rails.application.routes.draw do
 
   get('/snap_eligibities/new2', { :controller => 'snap_eligibilities', :action => 'new2' })
   post('/snap_eligibilities/create2', { :controller => 'snap_eligibilities', :action => 'create2' })
+
+
   get('/snap_eligibilities/print/:id', :controller => 'snap_eligibilities', :action => 'print')
 
 

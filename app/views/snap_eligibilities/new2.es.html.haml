@@ -10,19 +10,14 @@
       %p
         = t.snap.you_can_find | "You can find more information about SNAP/food stamps by"
         %a{:href => "http://www.dhs.state.il.us/page.aspx?item=30357"}= t.snap.clicking_here | "clicking here."
-  - if @snap_eligibility.errors.any?
-    - @snap_eligibility.errors.full_messages.each do |message|
-      .alert.alert-dismissable.alert-danger
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} &times;
-        = message
   .row
     .panel.panel-default.col-md-8.col-sm-7.pull-left
       .panel-body
-        %form{:action => "/snap_eligibilities", :method => "post", :role => "form"}
+        %form{:action => "/snap_eligibilities/create2", :method => "post", :role => "form"}
           %label{:for => "age"}= t.snap.how_old | "How old are you?"
           .row
-            .form-group.col-md-6
-              %input#age.form-control{:name => "age", :placeholder => I18n.t('placeholder.example_age', :default => "For example: 27"), :required => "", :type => "text"}/
+            .form-group.col-md-9
+              %input#age.form-control{:name => "age", :placeholder => I18n.t('placeholder.example_age', :default => "For example: 27"), :required => "", :type => "text", :value => @s.age}/
           / Label and input for snap_dependent_no
           .row
             .form-group.col-md-12
@@ -32,7 +27,7 @@
               .row
                 .col-md-9
                   %p{"data-content" => I18n.t('popover.info_hh', :default => "This should include the number of people who purchase and prepare food with you."), "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
-                    %input#snap_dependent_no.form-control{:name => "snap_dependent_no", :placeholder => I18n.t('placeholder.example_hh', :default => "For example: 3"), :required => "", :type => "text", :value => @snap_eligibility.snap_dependent_no}/
+                    %input#snap_dependent_no.form-control{:name => "snap_dependent_no", :placeholder => I18n.t('placeholder.example_hh', :default => "For example: 3"), :required => "", :type => "text", :value => @s.dependent_no }/
           / Label and input for snap_gross_income
           .row
             .form-group.col-md-9
@@ -43,29 +38,42 @@
               .input-group
                 %span.input-group-addon $
                 %p{"data-content" => I18n.t('popover.info_income', :default => "This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions."), "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
-                  %input#snap_gross_income.form-control{:name => "snap_gross_income", :placeholder => I18n.t('placeholder.example_income', :default => "For example: 1000"), :required => "", :type => "text", :value => @snap_eligibility.snap_gross_income}/
+                  %input#snap_gross_income.form-control{:name => "snap_gross_income", :placeholder => I18n.t('placeholder.example_income', :default => "For example: 1000"), :required => "", :type => "text", :value => @s.monthly_gross_income}/
                 %span.input-group-addon .00
           = render 'programs/zipcode_question'
           .row
-            .form-group.col-md-12
+            #education_question.form-group.col-md-12
               %label#education{:for => "education"}= t.snap.are_you_enrolled | "Are you enrolled in college/institution of higher education?"
+              %button{"data-content" => I18n.t('popover.info_education', :default => "Eligibile schools include: a business, technical, trade, or vocational school that normally requires a high school diploma or the equivalent for enrollment in the course of study; or regular courses, including internet, mail, self-study, or correspondence courses, at an accredited college or university that offers degree programs."), "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button", :id => "education_explanation"}
+                %i.fa.fa-info-circle
               #education
                 = radio_button_tag 'education', 'yes'
-                sí
-                \#{radio_button_tag 'education', 'no'} no
+                Sí
+                \#{radio_button_tag 'education', 'no'} No
+
+          .place_for_student_questions
           .row
             .form-group.col-md-12
-              %label#citizen{:for => "citizen"}= t.snap.citizen | "Are you a citizen of the United States?"
+              %label#citizen{:for => "citizen"}= t.snap.citizen | "Are you a citizen of the United States or a legal permanent resident who has lived in the US for at least 5 years? "
               .clearfix
               .row
                 .col-md-6
                   #citizen.pull-left
                     = radio_button_tag 'citizen', 'yes'
-                    sí
-                    \#{radio_button_tag 'citizen', 'no'} no
+                    Sí
+                    \#{radio_button_tag 'citizen', 'no'} No
+
           .row
             .form-group.col-md-12
-              %label#disabled{:for => "disabled"}= t.snap.disabled | "If you are disabled, describe your current status:"
+              %label#amount_in_account{:for => "amount_in_account"} Do you have $100 or less in cash or in a checking or savings account?
+              %br/
+              - [ 'yes', 'no'].each do |amount_in_account|
+                = radio_button_tag 'amount_in_account', amount_in_account, @s.amount_in_account == amount_in_account
+                = amount_in_account.humanize
+
+          .row
+            .form-group.col-md-12
+              %label#disabled{:for => "disabled"}= t.snap.disabled | "Are you receiving disability benefits?"
               .row
                 .col-sm-12
                   #disabled
@@ -82,6 +90,15 @@
                     = radio_button_tag 'disabled', 'none'
                     = t.snap.not_receiving | "I am currently not receiving any disability payments"
                     %br/
+          .row
+            .form-group.col-sm-12.col-md-9
+              %label#location_dropdown{:for => "location"}= t.snap.location | "Where are you completing this form?"
+              = select_tag(:user_location, options_for_select([['Centro de Servicio Comunitario King', 'king_community_service_center'], ['Biblioteca Harold Washington', 'harold_washington_library'], ['Otra biblioteca', 'other_library'], ['Centro para Familias Trabajadoras', 'center_for_working_families'], ['Autobus del CTA', 'cta_bus'], ['Otro lugar', 'other']], @s.user_location), :class => "form-control", :prompt => "Select a location")
+
+          .row
+            .form-group.col-sm-12.col-md-9
+              %label#education{:for => "education"}= t.snap.cellphone_question | "What is your cell phone number?"
+              %input#phone_number.form-control{:name => "phone_number", :placeholder => "Por ejemplo: 3125555555", :required => "", :type => "text", :value => @s.phone_number}/
               %div
                 %button.btn.btn-primary.program-btn{:type => "submit"}= t.snap.see_if | "See if I qualify"
 
@@ -92,6 +109,7 @@
 
 :javascript
     $(document).ready(function() {
+
       //this is the map scroll down thing
       $(window).scroll(function() {
         if($(this).scrollTop() > 310 && $(this).width() > 750) {
@@ -100,20 +118,50 @@
           $('.calculator_box').removeClass('sticky_calculator');
         }
       });
+
       $(window).scroll(function() {
         if($(this).scrollTop() < 310) {
           $('.calculator_box').removeClass('sticky_calculator');
         }
       });
+
       $(window).scroll(function() {
         if($(this).width() < 750) {
           $('.calculator').removeClass('sticky_calculator');
         }
       });
+
+
+      //education hover mechanism
+         $( "#education_question" ).hover(
+           function() {
+               $( this ).append( $( "<p class=\"hover_explanation\">Los centros de estudio que califican para este programa son: una escuela de negocios, técnica, comercial o vocacional que por lo regular requiere un diploma de bachiller (preparatoria) o su equivalente para poder inscribirse en dicho programa; o bien materias regulares, incluyendo cursos por internet, estudio independiente o cursos por correspondencia en un centro de estudios superiores o universidad, previamente acreditada y que ofrece programas que culminen en un título.</p>" ) );
+             },
+           function() {
+             $( this ).find( "p:last" ).remove();
+           }
+         );
+
+      //student JavaScript
+      $("input:radio[name=education]").click(function() {
+      var value = $(this).val();
+        if (value == "yes") {
+          $('.place_for_student_questions').empty().append("#{escape_javascript(render "snap_eligibilities/student_questions", :work_status => @s.work_status, :student_status => @s.student_status )}");
+        }
+        if (value == "no") {
+          $('.student_questions').remove();
+        }
+      });
+      if($('input:radio[name=education][value="yes"]').prop('checked')){
+          $('.place_for_student_questions').empty().append("#{escape_javascript(render "snap_eligibilities/student_questions", :work_status => @s.work_status, :student_status => @s.student_status )}");
+      }
+
+
       //popover code
       $(function (){
         $("[data-toggle='popover']").popover();
       });
+
       $('body').on('click', function (e) {
           $('[data-toggle="popover"]').each(function () {
               //the 'is' for buttons that trigger popups
@@ -124,5 +172,4 @@
           });
       });
     });
-
 

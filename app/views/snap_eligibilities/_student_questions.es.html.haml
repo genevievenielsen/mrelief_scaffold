@@ -1,0 +1,51 @@
+.student_questions
+  .row
+    #student_status_question.form-group.col-md-12
+      %label#student{:for => "student"}= t.snap.student_status |  "Describe your current student status:"
+      %button{"data-content" => I18n.t('popover.info_student_status', :default => "Enrollment status (part time/full time) may vary by school. Students should check their status as described by their particular school."), "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+        %i.fa.fa-info-circle
+      %br/
+      = radio_button_tag 'I am not a student', 'I am not a student'
+      No soy estudiante
+      %br/
+      \#{radio_button_tag 'I am currently enrolled half time or more', 'I am currently enrolled half time or more'} Actualmente estoy inscrito como estudiante de medio tiempo o tiempo completo
+      %br/
+      \#{radio_button_tag 'I am currently enrolled LESS than half time', 'I am currently enrolled LESS than half time'} Actualmente estoy inscrito como estudiante de menos de medio tiempo
+
+  .row
+    #student_work_question.form-group.col-md-12
+      %label#work{:for => "work"}= t.snap.currently_working | "Are you currently working an average of 20 hours a week OR are in a work study program?"
+      %button{"data-content" => I18n.t('popover.info_currently_working', :default => "If self-employed, students must be working an average of 20 hours per week and earn at least $7.25, OR approved to participate in a state or federal workstudy program for the school term and expecting to work in a state or federal workstudy program during that time."), "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
+        %i.fa.fa-info-circle
+      %br/
+      = radio_button_tag 'work', 'yes'
+      Sí
+      \#{radio_button_tag 'work', 'no'} No
+
+
+  :javascript
+    $(document).ready(function() {
+
+      $( "#student_status_question" ).hover(
+        function() {
+            $( this ).append( $( "<p class=\"hover_explanation\">El estatus de inscripción (medio tiempo/tiempo completo) puede variar de un centro educativo a otro. Cada estudiante debe verificar su estatus, tal como lo describe su centro de estudios.</p>" ) );
+          },
+        function() {
+          $( this ).find( "p:last" ).remove();
+        }
+      );
+
+
+      $( "#student_work_question" ).hover(
+        function() {
+            $( this ).append( $( "<p class=\"hover_explanation\"> Si trabaja independientemente, un estudiante debe trabajar un promedio de 20 horas por semana y tener un ingreso de al menos $7.25 por hora, o tener aprobación para participar en un programa estatal o federal de trabajo por estudio (work study), y con la expectativa que trabajará en un programa estatal o federal de trabajo por estudio durante ese tiempo.</p>" ) );
+          },
+        function() {
+          $( this ).find( "p:last" ).remove();
+        }
+      );
+
+
+
+
+    });
