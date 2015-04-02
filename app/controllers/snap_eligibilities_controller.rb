@@ -345,7 +345,7 @@
         @s.save
       else
          flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
-        render "new"
+        render "new2"
       end
 
     def print
