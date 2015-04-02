@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310185130) do
+ActiveRecord::Schema.define(version: 20150401162619) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -442,6 +442,15 @@ ActiveRecord::Schema.define(version: 20150310185130) do
     t.decimal  "earned_income"
     t.integer  "tanif_payment"
     t.decimal  "max_income"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.integer  "age"
+    t.integer  "household_size"
+    t.decimal  "gross_income"
+    t.string   "disability_benefits"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

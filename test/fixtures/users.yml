@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  age: 1
+  household_size: 1
+  gross_income: 9.99
+  disability_benefits: MyString
+
+two:
+  age: 1
+  household_size: 1
+  gross_income: 9.99
+  disability_benefits: MyString

@@ -5,6 +5,14 @@ class PagesController < ApplicationController
   end
 
   def filtered_programs
+    #Data Storage
+    @user = User.new
+    @user.age = params[:age].to_i
+    @user.household_size = params[:dependent_no].to_i
+    @user.gross_income = params[:gross_income].to_i
+    @user.disability_benefits = params[:disabled]
+    @user.save
+
     # CHICAGO PROGRAMS
     @programs = []
 
