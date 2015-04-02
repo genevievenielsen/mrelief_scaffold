@@ -5,12 +5,12 @@
       %button{"data-content" => I18n.t('popover.info_student_status', :default => "Enrollment status (part time/full time) may vary by school. Students should check their status as described by their particular school."), "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
         %i.fa.fa-info-circle
       %br/
-      = radio_button_tag 'I am not a student', 'I am not a student'
+      = radio_button_tag 'student', 'I am not a student'
       No soy estudiante
       %br/
-      \#{radio_button_tag 'I am currently enrolled half time or more', 'I am currently enrolled half time or more'} Actualmente estoy inscrito como estudiante de medio tiempo o tiempo completo
+      \#{radio_button_tag 'student', 'I am currently enrolled half time or more'} Actualmente estoy inscrito como estudiante de medio tiempo o tiempo completo
       %br/
-      \#{radio_button_tag 'I am currently enrolled LESS than half time', 'I am currently enrolled LESS than half time'} Actualmente estoy inscrito como estudiante de menos de medio tiempo
+      \#{radio_button_tag 'student', 'I am currently enrolled LESS than half time'} Actualmente estoy inscrito como estudiante de menos de medio tiempo
 
   .row
     #student_work_question.form-group.col-md-12
