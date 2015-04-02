@@ -1,15 +1,11 @@
 .container
   .row
     .col-md-10.col-md-offset-1
-      %br/
-      %br/
       %h1.page-header= t.programs.programs_for | "Programs for Chicago & Illinois"
       %p.subhead
         = t.programs.below_are | "Below are the benefits that mRelief currently offers for prescreening. Although these are not"
-
         %em= t.programs.all | "all"
         = t.programs.the_benefits | "the benefits the city and state offers, we are working to provide you with as much as we can."
-
 %div
   %h4{:style => "text-align:center"}= t.programs.click_on | "Click on a benefit below to begin the pre-screening process."
 %br/
@@ -17,14 +13,14 @@
 .container
   .row
     .col-md-12
-      %h3.program-heading{:style => "padding-bottom:0px"}= t.programs.chicago_programs | "CHICAGO PROGRAMS"
+      %h3.program-heading{:style => "padding-bottom:0px"}= t.programs.city_of | "CHICAGO PROGRAMS"
       %h4{:style => "text-align:center"}= t.programs.accessible_in | "Accessible in Community Service Centers"
   %br/
   .row
     - chicago_programs = Program.where(:location => "chicago")
-    - chicago_programs.where(:name_es => "Cupones de Alimentos").each_with_index do |program|
-      .text-center
-        %a.thumbnail{:href => program.url, :style => "padding:0 20px 20px 20px; width:350px; margin:auto"}
+    - chicago_programs.each_with_index do |program|
+      .col-md-4
+        %a.thumbnail{:href => program.url, :style => "padding:0 20px 20px 20px"}
           %span.caption
             %h3= program.name
             %p= program.description
@@ -36,23 +32,23 @@
     </div>
     </div>
     </div>
-  / %hr/
-  / / Illinois Programs
-  / .row
-  /   .col-md-12
-  /     %h3.program-heading= t.programs.state_of | "STATE OF ILLINOIS PROGRAMS"
-  / %div
-  /   .row
-  /     - chicago_programs = Program.where(:location => "illinois")
-  /     - chicago_programs.each_with_index do |program|
-  /       .col-md-4
-  /         %a.thumbnail{:href => program.url}
-  /           %span.caption
-  /             %h3= program.name
-  /             %p= program.description
-  / %br/
-  / %br/
-  / %br/
+  %hr/
+  / Illinois Programs
+  .row
+    .col-md-12
+      %h3.program-heading= t.programs.state_of | "STATE OF ILLINOIS PROGRAMS"
+  %div
+    .row
+      - chicago_programs = Program.where(:location => "illinois")
+      - chicago_programs.each_with_index do |program|
+        .col-md-4
+          %a.thumbnail{:href => program.url}
+            %span.caption
+              %h3= program.name
+              %p= program.description
+  %br/
+  %br/
+  %br/
   /
     <div class="row">
     <div class="col-md-12" style="text-align:center; padding-bottom:20px">

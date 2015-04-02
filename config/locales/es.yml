@@ -28,7 +28,6 @@ es:
       Por ejemplo: 60615
     example_phone: >-
       Por ejemplo: 3125555555
-
   popup:
     check_eligibility: >-
       Comprobar su elegibilidad vía SMS
@@ -39,6 +38,7 @@ es:
     info_hh: Esto debe incluir el numero de personas que te compran y preparan comida.
     info_hh_size: Hogar se define como cualquier persona en la misma vivienda con usted.
     info_income: Esto incluye el ingreso mensual de todas las personas que viven en el hogar incluyéndote a ti mismo. Esto tambien incluye ingresos de todas las fuentes, como el Seguro Social, manutención de los hijos, y el seguro de desempleo antes de cualquier deducción.
+
     info_assets: Todo menos su casa, si usted vive allí, y un auto.
     info_expected_government_benefits: >-
       Esto incluye la seguridad social (SSI), beneficios de veteranos, asistencia de "Railroad Retirement Board" (Consejo de Retiro Ferroviario), etc.
@@ -48,6 +48,12 @@ es:
   prompt:
     select_location: Seleccione un lugar
 
+    info_education: >-
+     Los centros de estudio que califican para este programa son: una escuela de negocios, técnica, comercial o vocacional que por lo regular requiere un diploma de bachiller (preparatoria) o su equivalente para poder inscribirse en dicho programa; o bien materias regulares, incluyendo cursos por internet, estudio independiente o cursos por correspondencia en un centro de estudios superiores o universidad, previamente acreditada y que ofrece programas que culminen en un título.
+    info_student_status: >-
+     El estatus de inscripción (medio tiempo/tiempo completo) puede variar de un centro educativo a otro. Cada estudiante debe verificar su estatus, tal como lo describe su centro de estudios.
+    info_currently_working: >-
+      Si trabaja independientemente, un estudiante debe trabajar un promedio de 20 horas por semana y tener un ingreso de al menos $7.25 por hora, o tener aprobación para participar en un programa estatal o federal de trabajo por estudio (work study), y con la expectativa que trabajará en un programa estatal o federal de trabajo por estudio durante ese tiempo.
   zipcode_question:
     zipcode: ¿Cuál es su código postal?
 
@@ -158,10 +164,14 @@ es:
     below_are: A continuación se presentan los beneficios que mRelief ofrece actualmente para la pre-calificación.  Aunque estos no son
     all: todos
     the_benefits: los beneficios locales y estatales que se ofrecen, estamos trabajando para proporcionarle la mayor información posible.
-    chicago_programs: PROGRAMAS DE CHICAGO
+
     accessible_in: Accesible en Centros Comunitarios
     click_on: Haga clic en un beneficio a continuación para comenzar el proceso de pre-calificación.
     state_of: PROGRAMAS DEL ESTADO DE ILLINOIS
+    city_of: PROGRAMAS DE CHICAGO
+
+    error_explanation: no permitió el guardar de estos datos
+
 
 
 
@@ -180,32 +190,53 @@ es:
     number_of_people: ¿Cuál es el número de personas que viven en el hogar incluyéndose a si mismo?
     gross_monthly: ¿Cuál es su ingreso bruto mensual?
     are_you_enrolled: ¿Está inscrito en la universidad / institución de educación superior?
-    citizen: ¿Es usted ciudadano de los Estados Unidos?
+    currently_working: Actualmente, ¿está trabajando un promedio de 20 horas por semana? o ¿está en un programa de trabajo por estudio (work study)?
+    student_status: >-
+      Describa su estatus de estudiante:
+    citizen: ¿Es usted ciudadano/a de Estados Unidos o residente permanente legal que ha vivido en Estados Unidos por al menos 5 años?
     disabled: >-
-      Si usted está incapacitado, describa su situación actual:
-    receiving_social_security: Estoy recibiendo pagos por incapacidad del Seguro Social.
+      ¿Recibe beneficios por discapacidad?
+    receiving_social_security: Sí, del Seguro Social
     receiving_railroad_retirement: >-
-      Estoy recibiendo pagos por incapacidad de "Railroad Retirement Board" (Consejo de Retiro Ferroviario).
+      Sí, de la Junta de Jubilación de Empleados Ferroviarios
+
     receiving_veterans_affairs: >-
-      Estoy recibiendo pagos por incapacidad de "Veterans Affairs", (Asuntos de Veteranos).
-    not_receiving: Yo actualmente no estoy recibiendo pagos por discapacidad
+      Sí, del Departamento de Asuntos Veteranos
+    not_receiving: >-
+      No
+    location: ¿En dónde está llenando este formulario?
+    cellphone_question: ¿Cuál es su número de celular?
     see_if: Ver si califico
 
+    your_income: Su ingreso mensual bruto
+    your_income_and_age: Su ingreso mensual bruto y su edad
+    your_citizenship: Su estatus migratorio
+    your_education: Su estatus de estudiante
+    your_age: Su edad
+    n_a: No se aplica
+
+    read_more: Continúe leyendo para mayor información
+    close: Cerrar
 
     in_luck: Puede que tenga suerte!
     based_on: Basado en el tamaño de su hogar y sus ingresos, es probable que califica para cupones de alimentos.
     something_else: Más ideas para considerar!
-    based_on_hh_yes: Basado en el tamaño de su hogar y sus ingresos, es probable que si califica para cupones de alimentos.
+    based_on_hh_yes: Su estatus para acceder a cupones de alimentos depende de la información que usted nos proporcionó. Continúe leyendo para mayor información.
+
+    accounted_for_parents: >-
+      Sin embargo, asegúrese de haber incluído el ingreso de sus padres, si es que aún viven en el mismo hogar.
 
     based_on_your_zipcode:
       Basado en su código postal, este es el Centro de Servicios Comunitarios más cercano para poder acceder a estampillas de comida.
 
+    following_information: >-
+      Su estatus para acceder a cupones de alimentos depende de la información que usted nos proporcionó. Continúe leyendo para mayor información.
     apply_before_you_visit: >-
       Para solicitar a través de la web, antes de su visita, por favor visite este enlace:
     based_on_the_info_probably: >-
-      Basado en la información recibida, no podemos determinar si califica para beneficios en este momento. Puede que tenga que hablar con un experto sobre su situación y que pueda compartir más detalles sobre su calificación para beneficios es posible. Un paralegal de Fundación de Asistencia Legal (LAF, por sus siglas en inglés) podrá hablar con usted sobre su calificación de beneficios del programa de "Food Stamps".
+      Basado en la información que hemos recibido, en este momento no podemos determinar si usted califica para este beneficio. Es posible que usted tenga que hablar sobre su situación con un experto en Cupones de Alimentos que puede darle más información sobre su caso. Un representante de la Fundación de Asistencia Legal (LAF, por sus siglas en inglés), puede reunirse con usted y hablar sobre su caso.
     based_on_the_info_not: >-
-      Basado en el tamaño de su hogar y sus ingresos, es probable que no califica para cupones de alimentos.
+      Basado en el tamaño de su hogar y sus ingresos, es probable que no califica para cupones de alimentos. Su estatus para acceder a cupones de alimentos depende de la información que usted nos proporcionó. Continúe leyendo para mayor información.
     direct2food: >-
       "Direct2Food" es un recurso en línea que le ayudará a localizar las despensas de alimentos, comedores comunitarios y otros programas de comida más cercanos a usted. Para encontrar recursos de su area:
     additional_resources: >-
