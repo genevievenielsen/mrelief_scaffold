@@ -65,7 +65,7 @@
 
           .row
             .form-group.col-md-12
-              %label#amount_in_account{:for => "amount_in_account"} Do you have $100 or less in cash or in a checking or savings account?
+              %label#amount_in_account{:for => "amount_in_account"}= t.snap.checking_or_saving | "Do you have $100 or less in cash or in a checking or savings account?"
               %br/
               - [ 'yes', 'no'].each do |amount_in_account|
                 = radio_button_tag 'amount_in_account', amount_in_account, @s.amount_in_account == amount_in_account
@@ -93,7 +93,7 @@
           .row
             .form-group.col-sm-12.col-md-9
               %label#location_dropdown{:for => "location"}= t.snap.location | "Where are you completing this form?"
-              = select_tag(:user_location, options_for_select([['Centro de Servicio Comunitario King', 'king_community_service_center'], ['Biblioteca Harold Washington', 'harold_washington_library'], ['Otra biblioteca', 'other_library'], ['Centro para Familias Trabajadoras', 'center_for_working_families'], ['Autobus del CTA', 'cta_bus'], ['Otro lugar', 'other']], @s.user_location), :class => "form-control", :prompt => "Select a location")
+              = select_tag(:user_location, options_for_select([['Centro de Servicio Comunitario King', 'king_community_service_center'], ['Biblioteca Harold Washington', 'harold_washington_library'], ['Otra biblioteca', 'other_library'], ['Centro para Familias Trabajadoras', 'center_for_working_families'], ['Autobus del CTA', 'cta_bus'], ['Otro lugar', 'other']], @s.user_location), :class => "form-control", :prompt => "Escoja un lugar")
 
           .row
             .form-group.col-sm-12.col-md-9

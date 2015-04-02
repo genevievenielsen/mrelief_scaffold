@@ -311,6 +311,7 @@
         else
           @lafcenter = LafCenter.find_by(:id => 10)
           @laf_disclaimer = "We do not have an estimation of the nearest center that is in range for you at this time. But we recommend going to the center below."
+          @laf_disclaimer_spanish =  "En este momento no tenemos información sobre el centro que le queda más cerca, pero le recomendamos que vaya al siguiente centro: "
         end
 
         #this is the logic for the community resources

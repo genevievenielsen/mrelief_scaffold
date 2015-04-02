@@ -163,6 +163,7 @@ es:
     student_status: >-
       Describa su estatus de estudiante:
     citizen: ¿Es usted ciudadano/a de Estados Unidos o residente permanente legal que ha vivido en Estados Unidos por al menos 5 años?
+    checking_or_saving: ¿Tiene $100 o menos, ya sea en efectivo o en el banco en una cuenta de cheques o cuenta de ahorros?
     disabled: >-
       ¿Recibe beneficios por discapacidad?
     receiving_social_security: Sí, del Seguro Social

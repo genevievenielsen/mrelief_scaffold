@@ -148,8 +148,8 @@
         - if @age <= 22
           %p.subhead= t.snap.accounted_for_parents | "However, make sure you accounted for your parents income, if you are still living in the same household."
         %br/
-        - if @laf_disclaimer.present?
-          / %p.subhead= @laf_disclaimer
+        - if @laf_disclaimer_spanish.present?
+          %p.subhead= @laf_disclaimer_spanish
         - else
           %p.subhead= t.snap.based_on_your_zipcode | "Based on your zipcode, here is the nearest Community Service Center to access your Food Stamps:"
         .col-md-offset-3.col-md-6.col-sm-6.text-center{:style => "text-align:center;"}
@@ -165,7 +165,7 @@
               %i.fa.fa-phone
               = @lafcenter.telephone
             %li.list-group-item
-              Days that Spanish is spoken - #{@lafcenter.spanish}
+              Días en que hay alguien que habla español - #{@lafcenter.spanish}
 
           %br/
           %br/
@@ -283,8 +283,8 @@
                     %a{:href => "https://www.dhs.state.il.us/page.aspx?item=13275"} la ley PM 03-04-03-b
                     del manual del Departamento de Servicios Humanos de Illinois (DHS, por sus siglas en inglés), usted aún podría calificar por Cupones de Alimentos basado en sus estatus como padre/madre de un menor, alguien que cuida de una persona con discapacidades u otros requisitos de trabajo. Nosotros le recomendamos comunicarse con un experto en la Fundación de Asistencia Legal para ver si usted califica a través de otras cláusulas.
                 %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}= t.snap.close | "Close"
-        - if @laf_disclaimer.present?
-          / %p.subhead= @laf_disclaimer
+        - if @laf_disclaimer_spanish.present?
+          %p.subhead= @laf_disclaimer
         .col-md-offset-3.col-md-6.col-sm-6.text-center{:style => "text-align:center;"}
           %ul.list-group{:style => "text-align:left;"}
             %li.list-group-item{:style => "font-weight:bold"}
@@ -298,7 +298,7 @@
               %i.fa.fa-phone
               = @lafcenter.telephone
             %li.list-group-item
-              Days that Spanish is spoken - #{@lafcenter.spanish}
+              Días en que hay alguien que habla español - #{@lafcenter.spanish}
           %br/
           %br/
       .row
