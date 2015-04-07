@@ -373,7 +373,7 @@
                   %h4.modal-title= t.snap.your_age | "Your Age"
                 .modal-body
                   %p
-                    La edad que usted reportó de #{@s.age} está por debajo de los 18 años y usted es demasiado joven para calificar para beneficios SNAP (Cupones de Alimentos). Nosotros le recomendamos explorar estas opciones con otros miembros de su familia. Sin embargo, estos son algunos recursos locales que le pueden ayudar.
+                    Usted reportó una edad de #{@s.age} años, la cual está por debajo de los 18 años.  Los menores de edad, por lo general, deben solicitar servicios bajo una aplicación familiar (y este servicio no está disponible para hogares conformados solamente por un menor de edad). Sin embargo, a continuación le damos información de recursos locales que le pueden ayudar.
                 %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}= t.snap.close | "Close"
         / CITIZEN EXPLANATION
         - if @s.citizen == "yes"
