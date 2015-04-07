@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150401162619) do
+ActiveRecord::Schema.define(version: 20150407164317) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -453,6 +453,7 @@ ActiveRecord::Schema.define(version: 20150401162619) do
     t.string   "disability_benefits"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "benefits"
   end
 
   create_table "visions", force: true do |t|
