@@ -12,6 +12,7 @@
   def new
     @snap_eligibility = SnapEligibility.new
     @s = SnapEligibilityData.new
+    @current_user = current_user
   end
 
   def new2

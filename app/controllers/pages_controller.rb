@@ -13,6 +13,8 @@ class PagesController < ApplicationController
     @user.disability_benefits = params[:disabled]
     @user.save
 
+    session[:user_id] = @user.id
+
     # CHICAGO PROGRAMS
     @programs = []
 
