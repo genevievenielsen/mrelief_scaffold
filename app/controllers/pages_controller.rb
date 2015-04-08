@@ -11,8 +11,6 @@ class PagesController < ApplicationController
 
   def filtered_programs
 
-
-
     # Clean data
     dependent_no = params[:dependent_no].strip
     if dependent_no !~ /\D/  # returns true if all numbers
@@ -50,10 +48,9 @@ class PagesController < ApplicationController
     if params[:benefits].present? && params[:disabled].present? && params[:dependent_no].present? && params[:age].present? && params[:gross_income].present?
     else
       redirect_to :back, :notice => 'Looks like you forgot to answer a question! Please answer all questions below.'
-
     end
 
-    #User data Storage
+    #Data Storage
     if current_user.present?
       @user = @current_user
     else
@@ -64,6 +61,14 @@ class PagesController < ApplicationController
     @user.gross_income = @gross_income
     @user.disability_benefits = params[:disabled]
     @user.benefits = params[:benefits]
+    @user.food_stamps = params[:food_stamps]
+    @user.rta_ride_free = params[:rta_ride_free]
+    @user.medicaid = params[:medicaid]
+    @user.medicare_cost_sharing = params[:medicare_cost_sharing]
+    @user.all_kids = params[:all_kids]
+    @user.child_care_vouchers = params[:child_care_vouchers]
+    @user.early_head_start = params[:early_head_start]
+    @user.head_start = params[:head_start]
     @user.save
 
     #session hash

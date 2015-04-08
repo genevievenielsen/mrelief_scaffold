@@ -18,19 +18,13 @@
     <div class="panel-body">
       <form action="/filtered_programs" role="form" method="post">
 
-
       <!-- age question -->
-      <label for="age">How old are you?</label>
-      <div class="row">
-        <div class="form-group col-md-9">
-          <input type="text" id="age" name="age" placeholder="For example: 27" class="form-control" value="<%= @current_user.try(:age) %>" required>
-        </div>
-      </div>
+      <%= render "programs/age_question" %>
 
       <!-- income question -->
       <div class="row">
         <div class="form-group col-md-12">
-          <label for="dependent_no">What is the number of people living in your household including    yourself?</label>
+          <label for="dependent_no">What is the number of people living in your household including yourself?</label>
             <button type="button" data-toggle="popover" data-content="This should include the number of people who purchase and prepare food with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
           <div class="row">
             <div class="col-md-9">
@@ -52,7 +46,7 @@
           <div class="input-group">
             <span class="input-group-addon">$</span>
                <p type="button" data-toggle="popover" data-content="This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-                <input type="text" id="gross_income" name="gross_income" placeholder="For example: 1000"class="form-control" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 2) %>" required>
+                <input type="text" id="gross_income" name="gross_income" placeholder="For example: 1000"class="form-control" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %>" required>
               </p>
             <span class="input-group-addon">.00</span>
           </div>
@@ -60,15 +54,7 @@
         </div>
 
         <!-- disability question -->
-        <div class="row">
-          <div class="form-group col-md-12">
-                <label for="disabled" id="disabled">Are you receiving disability benefits?</label>
-            <% [ 'Yes, from Social Security', 'Yes, from the Railroad Retirement Board ', 'Yes, from Veterans Affairs', 'No' ].each do |disabled| %>
-              <br><%= radio_button_tag 'disabled', disabled, @current_user.try(:disability_benefits) == disabled  %>
-              <%= disabled.humanize %>
-            <% end %>
-          </div>
-        </div>
+        <%= render "programs/disability_question" %>
 
         <!-- benefits question -->
         <div class="row">
@@ -82,8 +68,6 @@
         </div>
 
         <div class="place_for_benefits_checkboxes">
-
-
         </div>
 
         <div class="row">
@@ -102,6 +86,7 @@
   $(function (){
     $("[data-toggle='popover']").popover();
   });
+
   $('body').on('click', function (e) {
       $('[data-toggle="popover"]').each(function () {
           //the 'is' for buttons that trigger popups
@@ -125,7 +110,18 @@
 
   //benefits JavaScript on page load
   $(document).ready(function() {
+
     if($('input:radio[name=benefits][value="yes"]').prop('checked')){
+      //Check if the current URL contains '#'
+       if(document.URL.indexOf("#")==-1){
+           // Set the URL to whatever it was plus "#".
+           url = document.URL+"#";
+           location = "#";
+
+           //Reload the page
+           location.reload(true);
+       }
+
       $('.place_for_benefits_checkboxes').empty().append("<%= escape_javascript(render "pages/benefits_checkboxes") %>");
      };
   });
