@@ -1,0 +1,45 @@
+
+<div class="col-md-offset-3 col-md-6 col-sm-6 text-center" style="text-align:center;">
+    <ul class="list-group" style="text-align:left;">
+
+       <% if @medical_circumstance == "yes" %>
+       <li class="list-group-item">Documentation of Emergency - Medical Circumstance<br>
+       You must be able to obtain documents from your employer showing that you took time off as well as from the hospital or attending physician.
+       </li>
+
+       <% elsif @natural_disaster == "yes" %>
+       <li class="list-group-item">Documentation of Emergency - Natural Disaster <br>
+       You must be able to prove this by obtaining documents from a fire marshall (standard fire department reports). For floods, please provide a letter from your landlord and photographs.
+       </li>
+
+       <% elsif @eviction == "yes" %>
+       <li class="list-group-item">Documentation of Emergency - Eviction Notice
+       </li>
+
+      <% elsif @temporary_loss == "yes"%>
+      <li class="list-group-item">Documentation of Emergency - Temporary Loss of Income<br>
+      You must provide last 90 days of pay stubs and a letter from employer stating (layoff, termination, etc) and the return date to work. You can also provide unemployment assistance documentation.
+      </li>
+
+      <% elsif @domestic_violence == "yes" %>
+      <li class="list-group-item">Documentation of Emergency - Domestic Violence<br>
+      You must be able to prove this by providing a report from the police department or a document showing an order of protection/restraining order.
+      </li>
+
+      <% end %>
+
+      <li class="list-group-item">Notarized 5 day notice</li>
+      <li class="list-group-item">90 days of income documetation</li>
+      <li class="list-group-item">State I.D. / Driver's Lincense (everyone 18 and older)</li>
+      <li class="list-group-item">Social Security Card (all household members)</li>
+      <li class="list-group-item">Current Lease</li>
+      <li class="list-group-item">3 rent receipts</li>
+      <li class="list-group-item">Property Owner / Management Company Agreement</li>
+      <li class="list-group-item">Property tax bill</li>
+      <li class="list-group-item">W9</li>
+      <li class="list-group-item">Property manager affidavit (if applicable)</li>
+      <li class="list-group-item">Payment plan (if applicable) </li>
+    </ul>
+    <br>
+    <br>
+</div>

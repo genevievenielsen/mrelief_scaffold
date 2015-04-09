@@ -62,6 +62,8 @@ class RentalAssistancesController < ApplicationController
         @medical_circumstance = "yes"
       elsif params[:rental_status] == "a victim of natural disaster or fire"
         @natural_disaster = "yes"
+      elsif params[:rental_status] == "a recipient of an eviction notice"
+        @eviction = "yes"
       elsif params[:rental_status] == "have experienced a temporary loss of income"
         @temporary_loss = "yes"
       elsif params[:rental_status] == "a victim of domestic violence"
