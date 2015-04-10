@@ -14,6 +14,18 @@
     <%= check_box_tag "rta_ride_free", "checked" %> RTA Ride Free<br>
   <% end %>
 
+  <% if @current_user.try(:rental_assistance) == "checked" %>
+    <%= check_box_tag "rental_assistance", "checked", :checked => true %> Rental Assistance<br>
+  <% else %>
+    <%= check_box_tag "rental_assistance", "checked" %> Rental Assistance<br>
+  <% end %>
+
+  <% if @current_user.try(:all_kids) == "checked" %>
+    <%= check_box_tag "all_kids", "checked", :checked => true %> All Kids<br>
+  <% else %>
+    <%= check_box_tag "all_kids", "checked" %> All Kids<br>
+  <% end %>
+
   <% if @current_user.try(:medicaid) == "checked" %>
     <%= check_box_tag "medicaid", "checked", :checked => true %> Medicaid <br>
   <% else %>
@@ -26,10 +38,16 @@
     <%= check_box_tag "medicare_cost_sharing", "checked" %> Medicare Cost Sharing<br>
   <% end %>
 
-  <% if @current_user.try(:all_kids) == "checked" %>
-    <%= check_box_tag "all_kids", "checked", :checked => true %> All Kids<br>
+  <% if @current_user.try(:aabd) == "checked" %>
+    <%= check_box_tag "aabd", "checked", :checked => true %> AABD Cash Assistance<br>
   <% else %>
-    <%= check_box_tag "all_kids", "checked" %> All Kids<br>
+    <%= check_box_tag "aabd", "checked" %> AABD Cash Assistance<br>
+  <% end %>
+
+  <% if @current_user.try(:tanf) == "checked" %>
+    <%= check_box_tag "tanf", "checked", :checked => true %> TANF Cash Assistance<br>
+  <% else %>
+    <%= check_box_tag "tanf", "checked" %> TANF Cash Assistance<br>
   <% end %>
 
   <% if @current_user.try(:child_care_vouchers) == "checked" %>

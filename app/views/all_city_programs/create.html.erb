@@ -6,16 +6,13 @@
   <p class="subhead">Programs include Food Stamps, RTA Ride Free, All Kids, Medicare Cost Sharing, Rental Assistance, Medicaid, Aged, Blind and Disabled (AABD), Cash Assistance and Temporary Assistance for Needy Families </p>
 </div>
 
-<%#= render "layouts/print_button" %>
 
 <% if @eligible_count > 0 %>
-<div class="panel panel-default allcitypanel">
-  <div class="allcityheading">
+  <div class="panel panel-default allcitypanel">
+    <div class="allcityheading">
       <h2>You may qualify ( <%= pluralize(@eligible_count, 'program') %>)</h2>
-
-
       <p class="subhead" style="text-align:left;">Below are the programs you may qualify for:</p>
-  </div>
+    </div>
 
     <ul class="list-group">
     <!-- Food Stamps -->

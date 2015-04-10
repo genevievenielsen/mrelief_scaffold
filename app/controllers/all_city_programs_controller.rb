@@ -7,6 +7,7 @@ class AllCityProgramsController < ApplicationController
   def new
     @all_city_program = AllCityProgram.new
     @a = AllCityProgramDatum.new
+    @current_user = current_user
   end
 
   # POST /all_city_programs
@@ -257,66 +258,70 @@ class AllCityProgramsController < ApplicationController
       @a.next_month_rent = params[:next_rent]
       @a.rental_status = params[:rental_status]
 
-      rental_eligibility = RentalAssistance.find_by({ :rental_dependent_no => dependent_no })
-      rental_cut_off =  rental_eligibility.rental_gross_income
-      rental_cut_off_plus_200 = rental_eligibility.rental_gross_income + 200
+      if current_user.rental_assistance == "checked"
+        @rental_eligible = "already receiving"
+      else
+          rental_eligibility = RentalAssistance.find_by({ :rental_dependent_no => dependent_no })
+          rental_cut_off =  rental_eligibility.rental_gross_income
+          rental_cut_off_plus_200 = rental_eligibility.rental_gross_income + 200
 
-        if params[:lease] == "no" || params[:next_rent] == "no"
-          @rental_eligible = "no"
-
-        elsif params[:lease] == "yes"
-            if ninety_day_gross_income < rental_eligibility.rental_gross_income && params[:rental_status] != "none of the above"
-              @rental_eligible = "yes"
-            elsif ninety_day_gross_income < rental_cut_off_plus_200 && ninety_day_gross_income >= rental_cut_off && params[:rental_status] != "none of the above"
-              @rental_eligible = "maybe"
-            else
+            if params[:lease] == "no" || params[:next_rent] == "no"
               @rental_eligible = "no"
-            end
-        end # closes the if statement about the lease agreement
 
-      if params[:rental_status] == "medical circumstance"
-        @medical_circumstance = "yes"
-      elsif params[:rental_status] == "a victim of natural disaster or fire"
-        @natural_disaster = "yes"
-      elsif params[:rental_status] == "have experienced a temporary loss of income"
-        @temporary_loss = "yes"
-      elsif params[:rental_status] == "a victim of domestic violence"
-        @domestic_violence = "yes"
-      end
+            elsif params[:lease] == "yes"
+                if ninety_day_gross_income < rental_eligibility.rental_gross_income && params[:rental_status] != "none of the above"
+                  @rental_eligible = "yes"
+                elsif ninety_day_gross_income < rental_cut_off_plus_200 && ninety_day_gross_income >= rental_cut_off && params[:rental_status] != "none of the above"
+                  @rental_eligible = "maybe"
+                else
+                  @rental_eligible = "no"
+                end
+            end # closes the if statement about the lease agreement
 
-      housing = []
-      ServiceCenter.all.each do |center|
-        if center.description.match("housing")
-          housing.push(center)
-        end
-      end
-
-      @pb_zipcode = @user_zipcode.chomp(".0")
-        @housing_resources = housing
-        @housing_resources_zip = []
-
-        housing.each do |center|
-          if center.zip.match(@pb_zipcode)
-            @housing_resources_zip.push(center)
+          if params[:rental_status] == "medical circumstance"
+            @medical_circumstance = "yes"
+          elsif params[:rental_status] == "a victim of natural disaster or fire"
+            @natural_disaster = "yes"
+          elsif params[:rental_status] == "have experienced a temporary loss of income"
+            @temporary_loss = "yes"
+          elsif params[:rental_status] == "a victim of domestic violence"
+            @domestic_violence = "yes"
           end
-        end
+      end
 
-        #in this case there are 2 housing centers in the user's zip
-        if @housing_resources_zip.count >= 2
-           @housing_resources = @housing_resources_zip
-        end
+          housing = []
+          ServiceCenter.all.each do |center|
+            if center.description.match("housing")
+              housing.push(center)
+            end
+          end
 
-        #in this case there is 1 aabd center in the user's zip
-        if @housing_resources_zip.count == 1
-           @housing_resources_first = @housing_resources_zip.first
-           @housing_resources_second = @housing_resources.first
-        end
+          @pb_zipcode = @user_zipcode.chomp(".0")
+            @housing_resources = housing
+            @housing_resources_zip = []
 
-        #in this caser there are no aabd centers in the user's zip
-        if  @housing_resources_zip.count == 0
-            @housing_resources_first = @housing_resources.first
-            @housing_resources_second = @housing_resources.second
-        end
+            housing.each do |center|
+              if center.zip.match(@pb_zipcode)
+                @housing_resources_zip.push(center)
+              end
+            end
+
+            #in this case there are 2 housing centers in the user's zip
+            if @housing_resources_zip.count >= 2
+               @housing_resources = @housing_resources_zip
+            end
+
+            #in this case there is 1 aabd center in the user's zip
+            if @housing_resources_zip.count == 1
+               @housing_resources_first = @housing_resources_zip.first
+               @housing_resources_second = @housing_resources.first
+            end
+
+            #in this caser there are no aabd centers in the user's zip
+            if  @housing_resources_zip.count == 0
+                @housing_resources_first = @housing_resources.first
+                @housing_resources_second = @housing_resources.second
+            end
 
       #HERE IS THE LOGIC FOR RTA RIDE FREE
        rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => dependent_no })

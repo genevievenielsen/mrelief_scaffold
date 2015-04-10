@@ -63,12 +63,15 @@ class PagesController < ApplicationController
     @user.benefits = params[:benefits]
     @user.food_stamps = params[:food_stamps]
     @user.rta_ride_free = params[:rta_ride_free]
+    @user.rental_assistance = params[:rental_assistance]
     @user.medicaid = params[:medicaid]
     @user.medicare_cost_sharing = params[:medicare_cost_sharing]
     @user.all_kids = params[:all_kids]
     @user.child_care_vouchers = params[:child_care_vouchers]
     @user.early_head_start = params[:early_head_start]
     @user.head_start = params[:head_start]
+    @user.aabd = params[:aabd]
+    @user.tanf = params[:tanf]
     @user.save
 
     #session hash
@@ -138,6 +141,29 @@ class PagesController < ApplicationController
 
     # programs that we can't screen for with global questions - rental assistance (90 day gross income),
     #aabd cash assistance, tanf cash assistance
+    if params[:rental_assistance].present?
+    else
+      @rental_assistance = Program.find_by(:name_en => "Rental Assistance")
+      @programs.push(@rental_assistance)
+    end
+
+    if params[:aabd].present?
+    else
+      @aabd = Program.find_by(:name_en => "AABD Cash Assistance")
+      @programs.push(@aabd)
+    end
+
+    if params[:tanf].present?
+    else
+      @tanf = Program.find_by(:name_en => "TANF")
+      @programs.push(@tanf)
+    end
+
+
+    @all_city = Program.find_by(:name_en => "All City Programs")
+    @programs.push(@all_city)
+
+
 
 
     # ILLINOIS PROGRAMS

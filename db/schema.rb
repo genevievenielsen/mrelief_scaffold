@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150408195924) do
+ActiveRecord::Schema.define(version: 20150410144330) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -463,6 +463,9 @@ ActiveRecord::Schema.define(version: 20150408195924) do
     t.string   "wic"
     t.string   "early_head_start"
     t.string   "head_start"
+    t.string   "rental_assistance"
+    t.string   "aabd"
+    t.string   "tanf"
   end
 
   create_table "visions", force: true do |t|
