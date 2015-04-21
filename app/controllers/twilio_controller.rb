@@ -57,29 +57,38 @@ class TwilioController < ApplicationController
       message = "For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
       session["counter"] = 1
    end
-   if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("medicaid")
-      message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
-      session["counter"] = 1
-   end
-   if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("ride")
-      message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
-      session["counter"] = 1
-   end
-   if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("medicaid") && params[:Body].strip.downcase.include?("ride")
-      message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
-      session["counter"] = 1
-   end
-   if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("medicaid") && params[:Body].strip.downcase.include?("ride") && params[:Body].strip.downcase.include?("medicare")
-      message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
-      session["counter"] = 1
-   end
+   # if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("medicaid")
+   #    message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
+   #    session["counter"] = 1
+   # end
+   # if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("ride")
+   #    message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
+   #    session["counter"] = 1
+   # end
+   # if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("medicaid") && params[:Body].strip.downcase.include?("ride")
+   #    message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
+   #    session["counter"] = 1
+   # end
+   # if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("medicaid") && params[:Body].strip.downcase.include?("ride") && params[:Body].strip.downcase.include?("medicare")
+   #    message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
+   #    session["counter"] = 1
+   # end
 
    if params[:Body].strip.downcase == "cash" || params[:Body].strip.downcase == "cash assistance"
       message = "Thanks for texting mRelief! Currently, we only help check eligibility for cash assistance at www.mrelief.com Please visit us online."
+      session["counter"] = 1
    end
 
    if params[:Body].strip.downcase == "rent" || params[:Body].strip.downcase == "rental assistance"
       message = "Thanks for texting mRelief! Currently, we only help check eligibility for rent assistance at www.mrelief.com Please visit us online."
+      session["counter"] = 1
+   end
+
+   if session["counter"] == 1
+      if params[:Body].strip.downcase == "food" || params[:Body].strip.downcase == "ride" || params[:Body].strip.downcase == "medicaid" || params[:Body].strip.downcase == "medicare"|| params[:Body].strip.downcase == "med" || params[:Body].strip.downcase == "cash" || params[:Body].strip.downcase == "cash assistance" || params[:Body].strip.downcase == "rent" || params[:Body].strip.downcase == "rental assistance"
+      else
+        message = "Oops looks like there is a typo! For foodstamps, text 'food'. For RTA ride free, text 'ride.' For Medicaid, text 'medicaid.' For Medicare Cost Sharing, text 'medicare.' "
+      end
    end
 
    # HERE IS THE FOOD STAMPS LOGIC
