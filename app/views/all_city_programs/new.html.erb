@@ -12,7 +12,7 @@
 
 
 
-  <% if @current_user.food_stamps != "checked" && @current_user.rta_ride_free != "checked" && @current_user.aabd != "checked" %>
+  <% if @current_user.food_stamps != "checked" || @current_user.rta_ride_free != "checked" || @current_user.aabd != "checked" %>
     <div class="form-group col-sm-9">
       <label for="age">How old are you?</label>
         <input type="text" id="age" name="age" placeholder="For example: 27" class="form-control" value="<%= @current_user.age %>"   required>
@@ -21,7 +21,7 @@
 
 
   <!-- Label and input for snap_dependent_no -->
-  <% if @current_user.food_stamps != "checked" && @current_user.rta_ride_free != "checked" && @current_user.rental_assistance != "checked" && @current_user.medicaid != "checked" && @current_user.medicare_cost_sharing != "checked" && @current_user.aabd != "checked" && @current_user.tanf != "checked" %>
+  <% if @current_user.food_stamps != "checked" || @current_user.rta_ride_free != "checked" || @current_user.rental_assistance != "checked" || @current_user.medicaid != "checked" || @current_user.medicare_cost_sharing != "checked" || @current_user.aabd != "checked" || @current_user.tanf != "checked" %>
     <div class="form-group col-sm-9">
       <label for="dependent_no">What is the number of people living in your household including yourself?</label>
         <button type="button" data-toggle="popover" data-content="This should include the number of people who purchase  and prepare food with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i  class="fa fa-info-circle"></i></button>
@@ -33,7 +33,7 @@
     </div>
   <% end %>
 
-  <% if @current_user.all_kids != "checked" && @current_user.tanf != "checked" %>
+  <% if @current_user.all_kids != "checked" || @current_user.tanf != "checked" %>
     <div class="form-group col-sm-9">
       <label for="children">How many children 18 and under are you caring for?</label>
           <input type="text" id="children" name="children" placeholder="For example: 3" class="form-control"  value="<%= @a.number_of_children %>" required>
@@ -60,7 +60,7 @@
 
 
   <!-- Label and input for snap_gross_income -->
-  <% if @current_user.food_stamps != "checked" && @current_user.all_kids != "checked"  && @current_user.medicaid != "checked" && @current_user.medicare_cost_sharing != "checked" %>
+  <% if @current_user.food_stamps != "checked" || @current_user.all_kids != "checked"  || @current_user.medicaid != "checked" || @current_user.medicare_cost_sharing != "checked" %>
       <div class="form-group col-sm-9">
         <label for="monthly_gross_income">
           What is your gross monthly income?
@@ -77,7 +77,7 @@
    <% end %>
 
 
-  <% if @current_user.aabd != "checked" && @current_user.tanf != "checked" %>
+  <% if @current_user.aabd != "checked" || @current_user.tanf != "checked" %>
     <div class="form-group col-sm-9">
       <label for="net_income">
        How much do you anticipate to earn in net income in the next 30 days? (After taxes have been taken out)
@@ -179,7 +179,7 @@
     </div>
   <% end %>
 
-  <% if @current_user.medicare_cost_sharing != "checked" && @current_user.aabd != "checked"%>
+  <% if @current_user.medicare_cost_sharing != "checked" || @current_user.aabd != "checked"%>
     <div class="form-group col-sm-9">
     <label for="assets">Please estimate the value of your assets. (Exclude the value of your home and car.)</label>
       <button type="button" data-toggle="popover" data-content="Personal property is anything owned by a person that is not land or permanently affixed to land. This includes such items as: money in checking and savings accounts;stocks, bonds, savings certificates, and other securities;farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
@@ -202,7 +202,7 @@
     <br>
   <% end %>
 
-  <% if @current_user.food_stamps != "checked" && @current_user.medicaid != "checked" && @current_user.aabd != "checked" && @current_user.tanf != "checked" %>
+  <% if @current_user.food_stamps != "checked" || @current_user.medicaid != "checked" || @current_user.aabd != "checked" || @current_user.tanf != "checked" %>
     <div class="form-group col-md-9">
       <label for="citizen" id="citizen">Are you a citizen of the United States? </label>
       <br>
@@ -214,7 +214,7 @@
     <br>
   <% end %>
 
-  <% if @current_user.all_kids != "checked" && @current_user.tanf != "checked" %>
+  <% if @current_user.all_kids != "checked" || @current_user.tanf != "checked" %>
     <div class="form-group col-sm-12">
       <p class="allthatapply">Select all that apply to you:</p>
       <input type="checkbox" name="pregnant" value="pregnant"> I am pregnant<br>
@@ -312,7 +312,7 @@
     <br>
   <% end %>
 
-  <% if @current_user.food_stamps != "checked" && @current_user.rta_ride_free != "checked" && @current_user.aabd != "checked" %>
+  <% if @current_user.food_stamps != "checked" || @current_user.rta_ride_free != "checked" || @current_user.aabd != "checked" %>
     <div class="form-group col-md-12">
         <label for="disabled" id="disabled">Are you receiving disability benefits?</label>
         <% [ 'Yes, from Social Security', 'Yes, from the Railroad Retirement Board ', 'Yes, from Veterans Affairs', 'No' ].each do |disabled| %>

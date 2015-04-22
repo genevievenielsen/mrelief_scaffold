@@ -14,150 +14,167 @@ class AllCityProgramsController < ApplicationController
   # POST /all_city_programs.json
    def create
     @a = AllCityProgramDatum.new
-  # this is the words into numbers logic
-    if params[:dependent_no] !~ /\D/  # returns true if all numbers
-      dependent_no = params[:dependent_no].to_i
-      @a.dependent_no = dependent_no
-    else
-      dependent_no = params[:dependent_no].in_numbers
-      @a.dependent_no = dependent_no
-    end
+    @current_user = current_user
 
-    if params[:medicare_household_size] !~ /\D/
-      medicare_household_size = params[:medicare_household_size].to_i
-      @a.medicare_household_size = medicare_household_size
-    else
-      medicare_household_size = params[:medicare_household_size].in_numbers
-      @a.medicare_household_size = medicare_household_size
-    end
-
-    if params[:age] !~ /\D/
-      @age = params[:age].to_i
-      @a.age = @age
-    else
-      @age = params[:age].in_numbers
-      @a.age = @age
-    end
-
-    monthly_gross_income = params[:monthly_gross_income]
-    monthly_gross_income = monthly_gross_income.gsub(/[^0-9\.]/, '')
-
-    if monthly_gross_income !~ /\D/
-      monthly_gross_income = monthly_gross_income.to_i
-      @a.monthly_gross_income = monthly_gross_income
-    else
-      if monthly_gross_income.include?("dollars")
-        monthly_gross_income.slice!"dollars"
+    if params[:dependent_no].present?
+      # this is the words into numbers logic
+      if params[:dependent_no] !~ /\D/  # returns true if all numbers
+        dependent_no = params[:dependent_no].to_i
+        @a.dependent_no = dependent_no
+      else
+        dependent_no = params[:dependent_no].in_numbers
+        @a.dependent_no = dependent_no
       end
-      monthly_gross_income = monthly_gross_income.in_numbers
-      @a.monthly_gross_income = monthly_gross_income
     end
 
-    net_income = params[:net_income]
-    net_income = net_income.gsub(/[^0-9\.]/, '')
-
-    if net_income !~ /\D/
-      net_income = net_income.to_i
-      @a.thirty_day_net_income = net_income
-    else
-      if net_income.include?("dollars")
-        net_income.slice!"dollars"
+    if params[:medicaid_household_size].present?
+      if params[:medicare_household_size] !~ /\D/
+        medicare_household_size = params[:medicare_household_size].to_i
+        @a.medicare_household_size = medicare_household_size
+      else
+        medicare_household_size = params[:medicare_household_size].in_numbers
+        @a.medicare_household_size = medicare_household_size
       end
-      net_income = net_income.in_numbers
-      @a.thirty_day_net_income = net_income
     end
 
-    expect_child_support = params[:expect_child_support]
-    expect_child_support = expect_child_support.gsub(/[^0-9\.]/, '')
-
-    if expect_child_support !~ /\D/
-      expect_child_support = expect_child_support.to_i
-      @a.child_support = expect_child_support
-    else
-      if expect_child_support.include?("dollars")
-        expect_child_support.slice!"dollars"
+    if params[:age].present?
+      if params[:age] !~ /\D/
+        @age = params[:age].to_i
+        @a.age = @age
+      else
+        @age = params[:age].in_numbers
+        @a.age = @age
       end
-      expect_child_support = expect_child_support.in_numbers
-      @a.child_support = expect_child_support
     end
 
-    expect_ssi = params[:expect_ssi]
-    expect_ssi = expect_ssi.gsub(/[^0-9\.]/, '')
-
-    if expect_ssi !~ /\D/
-      expect_ssi = expect_ssi.to_i
-      @a.ssi = expect_ssi
-    else
-      if expect_ssi.include?("dollars")
-        expect_ssi.slice!"dollars"
+    if params[:monthly_gross_income].present?
+      monthly_gross_income = params[:monthly_gross_income]
+      monthly_gross_income = monthly_gross_income.gsub(/[^0-9\.]/, '')
+      if monthly_gross_income !~ /\D/
+        monthly_gross_income = monthly_gross_income.to_i
+        @a.monthly_gross_income = monthly_gross_income
+      else
+        if monthly_gross_income.include?("dollars")
+          monthly_gross_income.slice!"dollars"
+        end
+        monthly_gross_income = monthly_gross_income.in_numbers
+        @a.monthly_gross_income = monthly_gross_income
       end
-      expect_ssi = expect_ssi.in_numbers
-      @a.ssi = expect_ssi
     end
 
-
-    monthly_benefits = params[:monthly_benefits]
-    monthly_benefits = monthly_benefits.gsub(/[^0-9\.]/, '')
-
-    if monthly_benefits !~ /\D/
-      monthly_benefits = monthly_benefits.to_i
-      @a.monthly_benefits = monthly_benefits
-    else
-      if monthly_benefits.include?("dollars")
-        monthly_benefits.slice!"dollars"
+    if params[:net_income].present?
+      net_income = params[:net_income]
+      net_income = net_income.gsub(/[^0-9\.]/, '')
+      if net_income !~ /\D/
+        net_income = net_income.to_i
+        @a.thirty_day_net_income = net_income
+      else
+        if net_income.include?("dollars")
+          net_income.slice!"dollars"
+        end
+        net_income = net_income.in_numbers
+        @a.thirty_day_net_income = net_income
       end
-      monthly_benefits = monthly_benefits.in_numbers
-      @a.monthly_benefits = montly_benefits
     end
 
-    ninety_day_gross_income = params[:ninety_day_gross_income]
-    ninety_day_gross_income = ninety_day_gross_income.gsub(/[^0-9\.]/, '')
-
-    if ninety_day_gross_income !~ /\D/
-      ninety_day_gross_income = ninety_day_gross_income.to_i
-      @a.ninety_day_gross_income = ninety_day_gross_income
-    else
-      if ninety_day_gross_income.include?("dollars")
-        ninety_day_gross_income.slice!"dollars"
+    if params[:expect_child_support].present?
+      expect_child_support = params[:expect_child_support]
+      expect_child_support = expect_child_support.gsub(/[^0-9\.]/, '')
+      if expect_child_support !~ /\D/
+        expect_child_support = expect_child_support.to_i
+        @a.child_support = expect_child_support
+      else
+        if expect_child_support.include?("dollars")
+          expect_child_support.slice!"dollars"
+        end
+        expect_child_support = expect_child_support.in_numbers
+        @a.child_support = expect_child_support
       end
-      ninety_day_gross_income = ninety_day_gross_income.in_numbers
-      @a.ninety_day_gross_income = ninety_day_gross_income
     end
 
-    annual_gross_income = params[:annual_gross_income]
-    annual_gross_income = annual_gross_income.gsub(/[^0-9\.]/, '')
-
-    if annual_gross_income !~ /\D/
-      annual_gross_income = annual_gross_income.to_i
-      @a.annual_gross_income = annual_gross_income
-    else
-      if annual_gross_income.include?("dollars")
-        annual_gross_income.slice!"dollars"
+    if params[:expect_ssi].present?
+      expect_ssi = params[:expect_ssi]
+      expect_ssi = expect_ssi.gsub(/[^0-9\.]/, '')
+      if expect_ssi !~ /\D/
+        expect_ssi = expect_ssi.to_i
+        @a.ssi = expect_ssi
+      else
+        if expect_ssi.include?("dollars")
+          expect_ssi.slice!"dollars"
+        end
+        expect_ssi = expect_ssi.in_numbers
+        @a.ssi = expect_ssi
       end
-      annual_gross_income = annual_gross_income.in_numbers
-      @a.annual_gross_income = annual_gross_income
     end
 
-    assets = params[:assets]
-    assets = assets.gsub(/[^0-9\.]/, '')
-
-    if assets !~ /\D/
-      assets = assets.to_i
-      @a.assets = assets
-    else
-      if assets.include?("dollars")
-        assets.slice!"dollars"
+    if params[:monthly_benefits].present?
+      monthly_benefits = params[:monthly_benefits]
+      monthly_benefits = monthly_benefits.gsub(/[^0-9\.]/, '')
+      if monthly_benefits !~ /\D/
+        monthly_benefits = monthly_benefits.to_i
+        @a.monthly_benefits = monthly_benefits
+      else
+        if monthly_benefits.include?("dollars")
+          monthly_benefits.slice!"dollars"
+        end
+        monthly_benefits = monthly_benefits.in_numbers
+        @a.monthly_benefits = montly_benefits
       end
-      assets = assets.in_numbers
-      @a.assets = assets
     end
 
-    if params[:children] !~ /\D/  # returns true if all numbers
-      children = params[:children].to_i
-      @a.number_of_children = children
-    else
-      children = params[:children].in_numbers
-      @a.number_of_children = children
+    if params[:ninety_day_gross_income].present?
+      ninety_day_gross_income = params[:ninety_day_gross_income]
+      ninety_day_gross_income = ninety_day_gross_income.gsub(/[^0-9\.]/, '')
+      if ninety_day_gross_income !~ /\D/
+        ninety_day_gross_income = ninety_day_gross_income.to_i
+        @a.ninety_day_gross_income = ninety_day_gross_income
+      else
+        if ninety_day_gross_income.include?("dollars")
+          ninety_day_gross_income.slice!"dollars"
+        end
+        ninety_day_gross_income = ninety_day_gross_income.in_numbers
+        @a.ninety_day_gross_income = ninety_day_gross_income
+      end
+    end
+
+    if params[:annual_gross_income].present?
+      annual_gross_income = params[:annual_gross_income]
+      annual_gross_income = annual_gross_income.gsub(/[^0-9\.]/, '')
+      if annual_gross_income !~ /\D/
+        annual_gross_income = annual_gross_income.to_i
+        @a.annual_gross_income = annual_gross_income
+      else
+        if annual_gross_income.include?("dollars")
+          annual_gross_income.slice!"dollars"
+        end
+        annual_gross_income = annual_gross_income.in_numbers
+        @a.annual_gross_income = annual_gross_income
+      end
+    end
+
+    if params[:assets].present?
+      assets = params[:assets]
+      assets = assets.gsub(/[^0-9\.]/, '')
+      if assets !~ /\D/
+        assets = assets.to_i
+        @a.assets = assets
+      else
+        if assets.include?("dollars")
+          assets.slice!"dollars"
+        end
+        assets = assets.in_numbers
+        @a.assets = assets
+      end
+    end
+
+    if params[:children].present?
+      if params[:children] !~ /\D/  # returns true if all numbers
+        children = params[:children].to_i
+        @a.number_of_children = children
+      else
+        children = params[:children].in_numbers
+        @a.number_of_children = children
+      end
     end
 
     # Data storage
@@ -169,8 +186,8 @@ class AllCityProgramsController < ApplicationController
 
 
     #LOGIC FOR FOOD STAMPS
-     if @age.present? && monthly_gross_income.present? && ninety_day_gross_income.present? &&
-      annual_gross_income.present?
+     # if @age.present? && monthly_gross_income.present? && ninety_day_gross_income.present? &&
+     #  annual_gross_income.present?
 
         if params[:education]  == 'no' && params[:citizen] == 'yes'
 
@@ -495,7 +512,7 @@ class AllCityProgramsController < ApplicationController
         end
       end
      end
-    end #this ends the present if statement
+    # end #this ends the present if statement
 
     # HERE IS THE LOGIC FOR AABD
     if params[:disabled] != 'No' || @age > 65
@@ -784,3 +801,4 @@ class AllCityProgramsController < ApplicationController
       params[:all_city_program]
     end
 end
+
