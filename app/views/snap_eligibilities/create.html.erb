@@ -13,7 +13,7 @@
       <table class="table table-striped">
       <tr id="income_row">
         <td><i class="fa fa-check-circle "></i></td>
-        <% if @s.age.to_i <= 59 %>
+        <% if @d.age.to_i <= 59 %>
           <td><p>Your gross monthly income</p></td>
         <% else %>
           <td><p>Your gross monthly income and age</p></td>
@@ -21,7 +21,7 @@
           <td><a href="#" data-toggle="modal" data-target="#income_explanation">Read More </a></td>
       </tr>
 
-      <% if @s.citizen == "yes" %>
+      <% if @d.citizen == "yes" %>
         <tr id="citizenship_row">
           <td><i class="fa fa-check-circle "></i></td>
           <td><p>Your citizenship status</p></td>
@@ -61,7 +61,7 @@
                     <h4 class="modal-title">Your Income Status</h4>
                   </div>
                   <div class="modal-body">
-                    <p>Currently your reported income of $<%= @s.monthly_gross_income %> is lower than $150 and therefore you may qualify for emergency or expedited SNAP (food stamp) benefits according to policy <a href="http://www.dhs.state.il.us/page.aspx?item=13005">PM-02-08-01</a>  of the Illinois Department of Human Services (DHS) manual. Once you apply, you should hear within 5 business days about your in-person interview with DHS.</p>
+                    <p>Currently your reported income of $<%= @d.monthly_gross_income %> is lower than $150 and therefore you may qualify for emergency or expedited SNAP (food stamp) benefits according to policy <a href="http://www.dhs.state.il.us/page.aspx?item=13005">PM-02-08-01</a>  of the Illinois Department of Human Services (DHS) manual. Once you apply, you should hear within 5 business days about your in-person interview with DHS.</p>
                   </div>
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
@@ -69,7 +69,7 @@
            </div>
 
 
-        <% elsif @disabled != true && @s.age.to_i <= 59 %>
+        <% elsif @disabled != true && @d.age.to_i <= 59 %>
           <div class="modal fade" id="income_explanation" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -78,7 +78,7 @@
                     <h4 class="modal-title">Your Income Status</h4>
                   </div>
                   <div class="modal-body">
-                     <p>Currently your reported income of $<%= @s.monthly_gross_income %> for your household size of <%= @s.dependent_no  %> is LOWER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> of the Illinois Department of Human Services (DHS) Manual. Once you apply, you should hear within 30 business days about your in-person interview with DHS.</p>
+                     <p>Currently your reported income of $<%= @d.monthly_gross_income %> for your household size of <%= @d.dependent_no  %> is LOWER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> of the Illinois Department of Human Services (DHS) Manual. Once you apply, you should hear within 30 business days about your in-person interview with DHS.</p>
                   </div>
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
@@ -95,7 +95,7 @@
                     <h4 class="modal-title">Your Income Status</h4>
                   </div>
                   <div class="modal-body">
-                    <p> Currently your reported income of $<%= @s.monthly_gross_income %> combined with your receipt of disability benefits is LOWER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412"> policy 124 </a> and <a href="http://www.dhs.state.il.us/page.aspx?item=13632"> PM-05-06-01</a> of the Illinois Department of Human Services (DHS) Manual. Once you apply, you should hear within 30 business days about your in-person interview with DHS.</p>
+                    <p> Currently your reported income of $<%= @d.monthly_gross_income %> combined with your receipt of disability benefits is LOWER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412"> policy 124 </a> and <a href="http://www.dhs.state.il.us/page.aspx?item=13632"> PM-05-06-01</a> of the Illinois Department of Human Services (DHS) Manual. Once you apply, you should hear within 30 business days about your in-person interview with DHS.</p>
                   </div>
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
@@ -103,7 +103,7 @@
            </div>
 
 
-        <% elsif @s.age.to_i > 59  %>
+        <% elsif @d.age.to_i > 59  %>
           <div class="modal fade" id="income_explanation" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -112,7 +112,7 @@
                     <h4 class="modal-title">Your Income Status</h4>
                   </div>
                   <div class="modal-body">
-                     <p> Currently your reported income of $<%= @s.monthly_gross_income %> combined with your reported age of <%= @s.age %> is LOWER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> and <a href="http://www.dhs.state.il.us/page.aspx?item=13632"> PM-05-06-01</a> of the Illinois Department of Human Services (DHS) Manual. Once you apply, you should hear within 30 business days about your in-person interview with DHS.</p>
+                     <p> Currently your reported income of $<%= @d.monthly_gross_income %> combined with your reported age of <%= @d.age %> is LOWER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> and <a href="http://www.dhs.state.il.us/page.aspx?item=13632"> PM-05-06-01</a> of the Illinois Department of Human Services (DHS) Manual. Once you apply, you should hear within 30 business days about your in-person interview with DHS.</p>
                   </div>
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
@@ -122,7 +122,7 @@
         <% end %>
 
         <!-- CITIZEN EXPLANATION -->
-        <% if @s.citizen == "yes" %>
+        <% if @d.citizen == "yes" %>
             <div class="modal fade" id="citizenship_explanation" tabindex="-1" role="dialog" aria-hidden="true">
               <div class="modal-dialog">
                   <div class="modal-content">
@@ -204,13 +204,13 @@
                 <td><a href="#" data-toggle="modal" data-target="#income_explanation">Read More </a></td>
               </tr>
               <% end %>
-            <% if @s.citizen == "yes" %>
+            <% if @d.citizen == "yes" %>
               <tr id="citizenship_row">
                 <td><i class="fa fa-check-circle "></i></td>
                 <td><p>Your citizenship status</p></td>
                 <td><a href="#" data-toggle="modal" data-target="#citizenship_explanation">Read More </a></td>
               </tr>
-            <% elsif @s.citizen == "no" %>
+            <% elsif @d.citizen == "no" %>
               <tr id="citizenship_row">
                 <td><i class="fa fa-question-circle"></i></td>
                 <td><p>Your citizenship status</p></td>
@@ -244,7 +244,7 @@
                       <h4 class="modal-title">Your Income</h4>
                     </div>
                     <div class="modal-body">
-                       <p>Currently your reported income of $<%= @s.monthly_gross_income %> for your household size of <%= @s.dependent_no  %> is HIGHER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %>  according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> of the Illinois Department of Human Services Policy Manual. But since the amount is within $<%= @income_range %>, we recommend calling a Legal Assistance Foundation eligibility expert located community service centers.</p>
+                       <p>Currently your reported income of $<%= @d.monthly_gross_income %> for your household size of <%= @d.dependent_no  %> is HIGHER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %>  according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> of the Illinois Department of Human Services Policy Manual. But since the amount is within $<%= @income_range %>, we recommend calling a Legal Assistance Foundation eligibility expert located community service centers.</p>
                     </div>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   </div>
@@ -253,7 +253,7 @@
              <% end %>
 
              <!-- CITIZEN EXPLANATION -->
-             <% if @s.citizen == "yes" %>
+             <% if @d.citizen == "yes" %>
                  <div class="modal fade" id="citizenship_explanation" tabindex="-1" role="dialog" aria-hidden="true">
                    <div class="modal-dialog">
                        <div class="modal-content">
@@ -269,7 +269,7 @@
                        </div>
                      </div>
                   </div>
-             <% elsif @s.citizen == "no"   %>
+             <% elsif @d.citizen == "no"   %>
                 <div class="modal fade" id="citizenship_explanation" tabindex="-1" role="dialog" aria-hidden="true">
                   <div class="modal-dialog">
                       <div class="modal-content">
@@ -331,7 +331,7 @@
 
 
             <table class="table table-striped">
-              <% if @s.age >= 18  %>
+              <% if @d.age >= 18  %>
               <tr id="income_row">
                 <td><i class="fa fa-times"></i></td>
                 <td><p>Your gross monthly income</p></td>
@@ -345,7 +345,7 @@
                 </tr>
               <% end %>
 
-              <% if @s.citizen == "yes" %>
+              <% if @d.citizen == "yes" %>
                 <tr id="citizenship_row">
                   <td><i class="fa fa-check-circle "></i></td>
                   <td><p>Your citizenship status</p></td>
@@ -359,7 +359,7 @@
                 </tr>
               <% end %>
 
-              <% if @s.enrolled_in_education == "no" %>
+              <% if @d.enrolled_in_education == "no" %>
                 <tr id="education_row">
                   <td><p>N/A</p></td>
                   <td><p>Your education status</p></td>
@@ -369,7 +369,7 @@
             </table>
 
           <!-- INCOME EXPLANATION -->
-           <% if @s.age >= 18  %>
+           <% if @d.age >= 18  %>
               <div class="modal fade" id="income_explanation" tabindex="-1" role="dialog" aria-labelledby="income_explanationLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -378,7 +378,7 @@
                         <h4 class="modal-title">Your Income</h4>
                       </div>
                       <div class="modal-body">
-                         <p>Currently your reported income of $<%= @s.monthly_gross_income %> for your household size of <%= @s.dependent_no  %> is HIGHER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to  <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> of the Illinois Department of Human Services Policy Manual and you do not qualify for SNAP (food stamps) benefits. However, below are some local resources that can help. </p>
+                         <p>Currently your reported income of $<%= @d.monthly_gross_income %> for your household size of <%= @d.dependent_no  %> is HIGHER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to  <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> of the Illinois Department of Human Services Policy Manual and you do not qualify for SNAP (food stamps) benefits. However, below are some local resources that can help. </p>
                       </div>
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
@@ -394,7 +394,7 @@
                         <h4 class="modal-title">Your Age</h4>
                       </div>
                       <div class="modal-body">
-                        <p>Currently your reported age of <%= @s.age %> is below 18. Children generally must apply as part of their larger household (and this service is not available to single minor households). However, below are some local resources that can help.</p>
+                        <p>Currently your reported age of <%= @d.age %> is below 18. Children generally must apply as part of their larger household (and this service is not available to single minor households). However, below are some local resources that can help.</p>
                       </div>
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
@@ -403,7 +403,7 @@
               <% end %>
 
             <!-- CITIZEN EXPLANATION -->
-            <% if @s.citizen == "yes" %>
+            <% if @d.citizen == "yes" %>
                 <div class="modal fade" id="citizenship_explanation" tabindex="-1" role="dialog" aria-hidden="true">
                   <div class="modal-dialog">
                       <div class="modal-content">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310185130) do
+ActiveRecord::Schema.define(version: 20150427212101) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -75,6 +75,8 @@ ActiveRecord::Schema.define(version: 20150310185130) do
     t.string   "phone_number"
     t.string   "user_location"
     t.string   "next_month_rent"
+    t.string   "work_status"
+    t.string   "student_status"
   end
 
   create_table "all_city_programs", force: true do |t|
@@ -444,6 +446,28 @@ ActiveRecord::Schema.define(version: 20150310185130) do
     t.decimal  "max_income"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.integer  "age"
+    t.integer  "household_size"
+    t.decimal  "gross_income"
+    t.string   "disability_benefits"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "benefits"
+    t.string   "food_stamps"
+    t.string   "rta_ride_free"
+    t.string   "medicaid"
+    t.string   "medicare_cost_sharing"
+    t.string   "all_kids"
+    t.string   "child_care_vouchers"
+    t.string   "wic"
+    t.string   "early_head_start"
+    t.string   "head_start"
+    t.string   "rental_assistance"
+    t.string   "aabd"
+    t.string   "tanf"
   end
 
   create_table "visions", force: true do |t|
