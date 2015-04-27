@@ -169,25 +169,24 @@
         <input type="text" id="assets" name="assets" placeholder="For example: 5000" class="form-control" value="<%= @d.assets %>" required>
       </p>
 </div>
-<br>
 
-   <div class="row">
-    <div class="form-group col-md-12" id="education_question">
-      <label for="education" id="education">Are you enrolled in college/institution of higher education? </label>
+
+    <div class="form-group col-sm-9" id="education_question">
+      <label for="education" id="education">Are you enrolled in college/institution of higher education?
       <button id="education_explanation" type="button" data-toggle="popover" data-content="Eligible schools include: a business, technical, trade, or vocational school that normally requires a high school diploma or the equivalent for enrollment in the course of study; or regular courses, including internet, mail, self-study, or correspondence courses, at an accredited college or university that offers degree programs." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+      </label>
       <br>
         <% [ 'yes', 'no'].each do |education| %>
           <%= radio_button_tag 'education', education, @d.enrolled_in_education == education %>
           <%= education.humanize %>
         <% end %>
     </div>
-  </div>
+
 
   <div class="place_for_student_questions">
 
   </div>
 
-<br>
 
 
 <div class="form-group col-md-9">
