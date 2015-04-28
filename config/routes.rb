@@ -41,9 +41,6 @@ Rails.application.routes.draw do
 
   get("/", { :controller => "pages", :action => "homepage" })
 
-  get('/all_city_programs_with_tanif', { :controller => 'all_city_programs', :action => 'new_with_tanif' })
-  post('/all_city_programs_with_tanif', { :controller => 'all_city_programs', :action => 'create_with_tanif' })
-
   get('/snap_eligibilities/print/:id', :controller => 'snap_eligibilities', :action => 'print')
 
 
