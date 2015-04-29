@@ -7,16 +7,6 @@ class HeadStartsController < ApplicationController
   require 'numbers_in_words'
   require 'numbers_in_words/duck_punch' #see why later
 
-  #dependent_no
-  #gross_annual_income
-  #child_birthdate
-
-  #zipcode
-  #user_location
-  #phone_number
-  #eligibility_status
-
-
 
   def new
     @head_start = HeadStart.new

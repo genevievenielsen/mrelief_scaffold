@@ -3,7 +3,11 @@ class PagesController < ApplicationController
   require 'numbers_in_words/duck_punch' #see why later
 
    skip_before_filter :verify_authenticity_token
+
   def homepage
+  end
+
+  def filter
     if current_user.present?
       @current_user = current_user
     end
@@ -79,8 +83,11 @@ class PagesController < ApplicationController
 
     # CHICAGO PROGRAMS
     @programs = []
+    @community_resources = []
 
     if params[:food_stamps].present?
+      # User is already receiving food stamps
+      @community_resources.push("food")
     else
       # Food Stamps logic, based on household size, age, disability status and gross monthly income
       if  params[:disabled] != "No"
@@ -94,39 +101,51 @@ class PagesController < ApplicationController
       if params[:gross_income].to_i < @snap_eligibility.snap_gross_income
         @snap = Program.find_by(:name_en => "Food Stamps")
         @programs.push(@snap)
+      else
+        @community_resources.push("food")
       end
     end
 
     if params[:rta_ride_free].present?
+      @community_resources.push("transportation")
     else
       # RTA Ride Free logic, based on age and disability status
       if @age > 64 || params[:disabled] != "No"
         @rta_ride_free = Program.find_by(:name_en => "RTA Ride Free")
         @programs.push(@rta_ride_free)
+      else
+        @community_resources.push("transportation")
       end
     end
 
     if params[:medicaid].present?
+      @community_resources.push("health")
     else
       # Medicaid logic, based on household size and gross monthly income
       @medicaid_eligibility = Medicaid.find_by({ :medicaid_household_size => @dependent_no})
       if params[:gross_income].to_i < @medicaid_eligibility.medicaid_gross_income
         @medicaid = Program.find_by(:name_en => "Medicaid")
         @programs.push(@medicaid)
+      else
+        @community_resources.push("health")
       end
     end
 
     if params[:medicare_cost_sharing].present?
+      @community_resources.push("health")
     else
       # Medicare Cost Sharing logic, based on household size and gross monthly income
       @medicare_sharing_eligibility = MedicareCostSharing.find_by({ :household_size => @dependent_no})
       if params[:gross_income].to_i < @medicare_sharing_eligibility.premium_only
         @medicare_cost_sharing = Program.find_by(:name_en => "Medicare Cost Sharing")
         @programs.push(@medicare_cost_sharing)
+      else
+        @community_resources.push("health")
       end
     end
 
     if params[:all_kids].present?
+      @community_resources.push("health")
     else
       # all kids - householdsize and gross monthly income
       if @dependent_no > 1
@@ -135,6 +154,8 @@ class PagesController < ApplicationController
         if params[:gross_income].to_i < @kids_eligibility.premium_1_gross_income
           @all_kids = Program.find_by(:name_en => "All Kids")
           @programs.push(@all_kids)
+        else
+          @community_resources.push("health")
         end
       end
     end
@@ -142,18 +163,21 @@ class PagesController < ApplicationController
     # programs that we can't screen for with global questions - rental assistance (90 day gross income),
     #aabd cash assistance, tanf cash assistance
     if params[:rental_assistance].present?
+      @community_resources.push("housing")
     else
       @rental_assistance = Program.find_by(:name_en => "Rental Assistance")
       @programs.push(@rental_assistance)
     end
 
     if params[:aabd].present?
+      @community_resources.push("elderly")
     else
       @aabd = Program.find_by(:name_en => "AABD Cash Assistance")
       @programs.push(@aabd)
     end
 
     if params[:tanf].present?
+      @community_resources.push("child care")
     else
       @tanf = Program.find_by(:name_en => "TANF")
       @programs.push(@tanf)
@@ -164,49 +188,316 @@ class PagesController < ApplicationController
     @programs.push(@all_city)
 
 
-
-
     # ILLINOIS PROGRAMS
     @illinois_programs = []
 
     if params[:child_care_vouchers].present?
+      @community_resources.push("child care")
     else
       # child care vouchers - householdsize and gross monthly income
       @ccdf_eligibility = ChildCareVoucher.find_by({ :ccdf_dependent_no => @dependent_no})
       if params[:gross_income].to_i < @ccdf_eligibility.ccdf_gross_income
         @child_care = Program.find_by(:name_en => "Child Care Voucher")
         @illinois_programs.push(@child_care)
+      else
+        @community_resources.push("child care")
       end
     end
 
     if params[:wic].present?
+      @community_resources.push("child care")
     else
       # wic - household size and gross monthly income
       @wic_eligibility = Wic.find_by({ :wic_household_size => @dependent_no})
       if params[:gross_income].to_i < @wic_eligibility.wic_gross_income
         @wic = Program.find_by(:name_en => "Women, Infants and Children (WIC)")
         @illinois_programs.push(@wic)
+      else
+        @community_resources.push("child care")
       end
     end
 
     if params[:early_head_start].present?
+      @community_resources.push("early head start")
     else
       # early head start - household size and gross monthly income
       @ehs_eligibility = EarlyHeadStart.find_by({ :ehs_dependent_no => @dependent_no})
       if params[:gross_income].to_i< @ehs_eligibility.ehs_gross_income
         @ehs = Program.find_by(:name_en => "Early Head Start")
         @illinois_programs.push(@ehs)
+      else
+        @community_resources.push("early head start")
       end
     end
 
     if params[:head_start].present?
+      @community_resources.push("head start")
     else
       # head start - household size
       if @dependent_no > 1
         @head_start = Program.find_by(:name_en => "Head Start")
         @illinois_programs.push(@head_start)
+      else
+        @community_resources.push("head start")
       end
     end
+
+  end
+
+  def community_resources
+
+    @community_resources = params[:resources]
+
+    @user_zipcode = "60615"
+
+    # FOOD RESOURCES
+    @food_resources = ServiceCenter.where(:description => "food pantry")
+    @food_resources_zip = @food_resources.where(:zip => @user_zipcode)
+
+      #in this case there are 2 food pantries in the user's zip
+      if @food_resources_zip.count >= 2
+         @food_resources = @food_resources_zip
+      end
+      #in this case there is 1 food pantry in the user's zip
+      if @food_resources_zip.count == 1
+         @food_resources_first = @food_resources_zip.first
+         @food_resources_second = @food_resources.first
+      end
+      #in this caser there are no food pantries in the user's zip
+      if  @food_resources_zip.count == 0
+          @food_resources_first = @food_resources.first
+          @food_resources_second = @food_resources.second
+      end
+
+    #TRANSPORATION RESOURCES
+    transportation = []
+    ServiceCenter.all.each do |center|
+      if center.description.match("transportation")
+        transportation.push(center)
+      end
+    end
+
+    @transportation_resources = transportation
+    @transportation_resources_zip = []
+    transportation.each do |center|
+      if center.zip.match(@user_zipcode)
+        @transportation_resources_zip.push(center)
+      end
+    end
+
+       #in this case there are 2 medical centers in the user's zip
+       if @transportation_resources_zip.count >= 2
+          @transportation_resources = @transportation_resources_zip
+       end
+       #in this case there is 1 medical center in the user's zip
+       if @transportation_resources_zip.count == 1
+          @transportation_resources_first = @transportation_resources_zip.first
+          @transportation_resources_second = @transportation_resources.first
+       end
+       #in this caser there are no medical centers in the user's zip
+       if  @transportation_resources_zip.count == 0
+           @transportation_resources_first = @transportation_resources.first
+           @transportation_resources_second = @transportation_resources.second
+       end
+
+    #HEALTH RESOURCES
+    primarycare = []
+    ServiceCenter.all.each do |center|
+      if center.description.match("primary care")
+        primarycare.push(center)
+      end
+    end
+
+      @medical_resources = primarycare
+      @medical_resources_zip = []
+
+      primarycare.each do |center|
+        if center.zip.match(@user_zipcode)
+          @medical_resources_zip.push(center)
+        end
+      end
+
+      #in this case there are 2 medical centers in the user's zip
+      if @medical_resources_zip.count >= 2
+         @medical_resources = @medical_resources_zip
+      end
+      #in this case there is 1 medical center in the user's zip
+      if @medical_resources_zip.count == 1
+         @medical_resources_first = @medical_resources_zip.first
+         @medical_resources_second = @medical_resources.first
+      end
+      #in this caser there are no medical centers in the user's zip
+      if  @medical_resources_zip.count == 0
+          @medical_resources_first = @medical_resources.first
+          @medical_resources_second = @medical_resources.second
+      end
+
+    #HOUSING RESOURCES
+    housing = []
+    ServiceCenter.all.each do |center|
+      if center.description.match("housing")
+        housing.push(center)
+      end
+    end
+
+      @housing_resources = housing
+      @housing_resources_zip = []
+
+      housing.each do |center|
+        if center.zip.match(@user_zipcode)
+          @housing_resources_zip.push(center)
+        end
+      end
+
+      #in this case there are 2 housing centers in the user's zip
+      if @housing_resources_zip.count >= 2
+         @housing_resources = @housing_resources_zip
+      end
+      #in this case there is 1 aabd center in the user's zip
+      if @housing_resources_zip.count == 1
+         @housing_resources_first = @housing_resources_zip.first
+         @housing_resources_second = @housing_resources.first
+      end
+      #in this caser there are no aabd centers in the user's zip
+      if  @housing_resources_zip.count == 0
+          @housing_resources_first = @housing_resources.first
+          @housing_resources_second = @housing_resources.second
+      end
+
+  aabd = []
+  ServiceCenter.all.each do |center|
+    if center.description.match("senior services")
+      unless center.description.match("child care")
+      aabd.push(center)
+      end
+    end
+    if center.description.match("disabled")
+      unless center.description.match("child care")
+      aabd.push(center)
+      end
+    end
+  end
+
+    @aabd_resources = aabd
+    @aabd_resources_zip = []
+
+    aabd.each do |center|
+      if center.zip.match(@user_zipcode)
+        @aabd_resources_zip.push(center)
+      end
+    end
+
+    #in this case there are 2 aabd centers in the user's zip
+    if @aabd_resources_zip.count >= 2
+       @aabd_resources = @aabd_resources_zip
+    end
+    #in this case there is 1 aabd center in the user's zip
+    if @aabd_resources_zip.count == 1
+       @aabd_resources_first = @aabd_resources_zip.first
+       @aabd_resources_second = @aabd_resources.first
+    end
+    #in this caser there are no aabd centers in the user's zip
+    if  @aabd_resources_zip.count == 0
+        @aabd_resources_first = @aabd_resources.first
+        @aabd_resources_second = @aabd_resources.second
+    end
+
+  #CHILD CARE RESOURCES
+  childcare = []
+  ServiceCenter.all.each do |center|
+    if center.description.match("child care")
+      childcare.push(center)
+    end
+  end
+
+    @child_resources = childcare
+    @child_resources_zip = []
+
+    childcare.each do |center|
+      if center.zip.match(@user_zipcode)
+        @child_resources_zip.push(center)
+      end
+    end
+
+    #in this case there are 2 medical centers in the user's zip
+    if @child_resources_zip.count >= 2
+       @child_resources = @child_resources_zip
+    end
+    #in this case there is 1 medical center in the user's zip
+    if @child_resources_zip.count == 1
+       @child_resources_first = @child_resources_zip.first
+       @child_resources_second = @child_resources.first
+    end
+    #in this caser there are no medical centers in the user's zip
+    if  @child_resources_zip.count == 0
+        @child_resources_first = @child_resources.first
+        @child_resources_second = @child_resources.second
+    end
+
+  #HEAD START RESOURCES
+  headstart = []
+  ServiceCenter.all.each do |center|
+    if center.description.match("head start")
+      headstart.push(center)
+    end
+  end
+
+    @headstart_resources = headstart
+    @headstart_resources_zip = []
+
+    headstart.each do |center|
+      if center.zip.match(@user_zipcode)
+        @headstart_resources_zip.push(center)
+      end
+    end
+
+   #in this case there are 2 medical centers in the user's zip
+   if @headstart_resources_zip.count >= 2
+      @headstart_resources = @headstart_resources_zip
+   end
+   #in this case there is 1 medical center in the user's zip
+   if @headstart_resources_zip.count == 1
+      @headstart_resources_first = @headstart_resources_zip.first
+      @headstart_resources_second = @headstart_resources.first
+   end
+   #in this caser there are no medical centers in the user's zip
+   if  @headstart_resources_zip.count == 0
+       @headstart_resources_first = @headstart_resources.first
+       @headstart_resources_second = @headstart_resources.second
+   end
+
+  #EARLY HEAD START
+  earlyheadstart = []
+  ServiceCenter.all.each do |center|
+    if center.description.match("early head start")
+      earlyheadstart.push(center)
+    end
+  end
+
+    @earlyheadstart_resources = earlyheadstart
+    @earlyheadstart_resources_zip = []
+
+    earlyheadstart.each do |center|
+      if center.zip.match(@user_zipcode)
+        @earlyheadstart_resources_zip.push(center)
+      end
+    end
+
+    #in this case there are 2 medical centers in the user's zip
+    if @earlyheadstart_resources_zip.count >= 2
+       @earlyheadstart_resources = @earlyheadstart_resources_zip
+    end
+    #in this case there is 1 medical center in the user's zip
+    if @earlyheadstart_resources_zip.count == 1
+       @earlyheadstart_resources_first = @earlyheadstart_resources_zip.first
+       @earlyheadstart_resources_second = @earlyheadstart_resources.first
+    end
+    #in this caser there are no medical centers in the user's zip
+    if  @earlyheadstart_resources_zip.count == 0
+        @earlyheadstart_resources_first = @earlyheadstart_resources.first
+        @earlyheadstart_resources_second = @earlyheadstart_resources.second
+    end
+
 
   end
 

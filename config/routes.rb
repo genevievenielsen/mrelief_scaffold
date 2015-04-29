@@ -39,11 +39,12 @@ Rails.application.routes.draw do
   get('/how_mrelief_works', { :controller => 'pages', :action => 'how_mrelief_works' })
   get('/press_release', { :controller => 'pages', :action => 'press_release' })
 
-  get("/", { :controller => "pages", :action => "homepage" })
-  post("/filtered_programs", { :controller => "pages", :action => "filtered_programs" })
 
-  get('/all_city_programs_with_tanif', { :controller => 'all_city_programs', :action => 'new_with_tanif' })
-  post('/all_city_programs_with_tanif', { :controller => 'all_city_programs', :action => 'create_with_tanif' })
+  get("/", { :controller => "pages", :action => "homepage" })
+  get("/filter", { :controller => "pages", :action => "filter" })
+  post("/filtered_programs", { :controller => "pages", :action => "filtered_programs" })
+  post("/community_resources", { :controller => "pages", :action => "community_resources" })
+
 
   get('/snap_eligibities/new2', { :controller => 'snap_eligibilities', :action => 'new2' })
   post('/snap_eligibilities/create2', { :controller => 'snap_eligibilities', :action => 'create2' })
