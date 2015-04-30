@@ -1,0 +1,14 @@
+<p> Call 312-913-3110 for information about the Reduced Fare Program.</p>
+<div class="sectiondivider"></div>
+
+<h4>Some additional resources from Purple Binder:</h4>
+
+<% if @transportation_resources_zip.count >= 2 %>
+  <p><%= @transportation_resources_zip.first.name %> | <%= @transportation_resources_zip.first.street %>  <%= @transportation_resources_zip.first.city %> <%= @transportation_resources_zip.first.state %>, <%= @transportation_resources_zip.first.zip %> | <%= @transportation_resources_zip.first.phone %> </p>
+  <p><%= @transportation_resources_zip.second.name %> | <%= @transportation_resources_zip.second.street %>  <%= @transportation_resources_zip.second.city %> <%= @transportation_resources_zip.second.state %>, <%= @transportation_resources_zip.second.zip %> | <%= @transportation_resources_zip.second.phone %> </p>
+<% end %>
+
+<% if @transportation_resources_first.present? %>
+  <p><%= @transportation_resources_first.name %> | <%= @transportation_resources_first.street %>  <%= @transportation_resources_first.city %> <%= @transportation_resources_first.state %>, <%= @transportation_resources_first.zip %> | <%= @transportation_resources_first.phone %> </p>
+  <p><%= @transportation_resources_second.name %> | <%= @transportation_resources_second.street %>  <%= @transportation_resources_second.city %> <%= @transportation_resources_second.state %>, <%= @transportation_resources_second.zip %> | <%= @transportation_resources_second.phone %> </p>
+<% end %>

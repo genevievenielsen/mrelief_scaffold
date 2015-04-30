@@ -1,0 +1,20 @@
+<p>If you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.</p>
+
+<%= link_to "Click Here to learn more about fees", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'all_kids_all_city_program', 'health_care_fees', 1);" %>
+
+<%= link_to "Click Here to find Get Covered Illinois events in your area", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'all_kids_all_city_program', 'get_covered_illinois', 1);" %>
+
+<p>You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.</p>
+<div class="sectiondivider"></div>
+
+<h4>Some additional resources from Purple Binder:</h4>
+
+<% if @medical_resources_zip.count >= 2 %>
+  <p><%= @medical_resources_zip.first.name %> | <%= @medical_resources_zip.first.street %>  <%= @medical_resources_zip.first.city %> <%= @medical_resources_zip.first.state %>, <%= @medical_resources_zip.first.zip %> | <%= @medical_resources_zip.first.phone %> </p>
+  <p><%= @medical_resources_zip.second.name %> | <%= @medical_resources_zip.second.street %>  <%= @medical_resources_zip.second.city %> <%= @medical_resources_zip.second.state %>, <%= @medical_resources_zip.second.zip %> | <%= @medical_resources_zip.second.phone %> </p>
+<% end %>
+
+<% if @medical_resources_first.present? %>
+  <p><%= @medical_resources_first.name %> | <%= @medical_resources_first.street %>  <%= @medical_resources_first.city %> <%= @medical_resources_first.state %>, <%= @medical_resources_first.zip %> | <%= @medical_resources_first.phone %> </p>
+  <p><%= @medical_resources_second.name %> | <%= @medical_resources_second.street %>  <%= @medical_resources_second.city %> <%= @medical_resources_second.state %>, <%= @medical_resources_second.zip %> | <%= @medical_resources_second.phone %> </p>
+<% end %>

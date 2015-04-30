@@ -1,0 +1,12 @@
+<h4>Some additional resources from Purple Binder:</h4>
+
+<% if @aabd_resources_zip.count >= 2 %>
+<p><%= @aabd_resources_zip.first.name %> | <%= @aabd_resources_zip.first.street %>  <%= @aabd_resources_zip.first.city %> <%= @aabd_resources_zip.first.state %>, <%= @aabd_resources_zip.first.zip %> | <%= @aabd_resources_zip.first.phone %> </p>
+<p><%= @aabd_resources_zip.second.name %> | <%= @aabd_resources_zip.second.street %>  <%= @aabd_resources_zip.second.city %> <%= @aabd_resources_zip.second.state %>, <%= @aabd_resources_zip.second.zip %> | <%= @aabd_resources_zip.second.phone %> </p>
+<% end %>
+
+<% if @aabd_resources_first.present? %>
+<p><%= @aabd_resources_first.name %> | <%= @aabd_resources_first.street %>  <%= @aabd_resources_first.city %> <%= @aabd_resources_first.state %>, <%= @aabd_resources_first.zip %> | <%= @aabd_resources_first.phone %> </p>
+<p><%= @aabd_resources_second.name %> | <%= @aabd_resources_second.street %>  <%= @aabd_resources_second.city %> <%= @aabd_resources_second.state %>, <%= @aabd_resources_second.zip %> | <%= @aabd_resources_second.phone %> </p>
+
+<% end %>

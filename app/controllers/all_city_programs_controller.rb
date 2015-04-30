@@ -187,8 +187,6 @@ class AllCityProgramsController < ApplicationController
 
 
     #LOGIC FOR FOOD STAMPS
-     # if @age.present? && monthly_gross_income.present? && ninety_day_gross_income.present? &&
-     #  annual_gross_income.present?
      if current_user.food_stamps == "checked"
        @eligible_snap = "already receiving"
      else
@@ -790,6 +788,40 @@ class AllCityProgramsController < ApplicationController
     if @eligible_tanif == 'maybe'
       @indeterminate_count = @indeterminate_count + 1
       @a.tanf_eligibility_status = "maybe"
+    end
+
+    @already_receiving_count = 0
+    if @eligible_snap == "already receiving"
+      @already_receiving_count = @already_receiving_count + 1
+      @a.snap_eligibility_status = "already receiving"
+    end
+    if @eligible_all_kids == "already receiving"
+      @already_receiving_count = @already_receiving_count + 1
+      @a.all_kids_eligibility_status = "already receiving"
+    end
+    if @eligible_rta == "already receiving"
+      @already_receiving_count = @already_receiving_count + 1
+      @a.rta_eligibility_status = "already receiving"
+    end
+    if @eligible_medicaid == "already receiving"
+      @already_receiving_count = @already_receiving_count + 1
+      @a.medicaid_eligibility_status = "already receiving"
+    end
+    if @eligible_medicare_cost_sharing == "already receiving"
+      @already_receiving_count = @already_receiving_count + 1
+      @a.medicare_cost_sharing_eligibility_status = "already receiving"
+    end
+    if @rental_eligible == "already receiving"
+      @already_receiving_count = @already_receiving_count + 1
+      @a.rental_eligibility_status = "already receiving"
+    end
+    if @aabd_eligible == "already receiving"
+      @already_receiving_count = @already_receiving_count + 1
+      @a.aabd_eligibility_status = "already receiving"
+    end
+    if @eligible_tanif == "already receiving"
+      @already_receiving_count = @already_receiving_count + 1
+      @a.tanf_eligibility_status = "already receiving"
     end
 
     @a.phone_number = params[:phone_number] if params[:phone_number].present?

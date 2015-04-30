@@ -97,33 +97,33 @@
       });
   });
 
-  //benefits JavaScript onclick
-  $("input:radio[name=benefits]").click(function() {
-  var value = $(this).val();
-    if (value == "yes") {
-      $('.place_for_benefits_checkboxes').empty().append("<%= escape_javascript(render "pages/benefits_checkboxes") %>");
-    }
-    if (value == "no") {
-      $('.benefits_checkboxes').remove();
-    }
-  });
+    //benefits JavaScript onclick
+    $("input:radio[name=benefits]").click(function() {
+    var value = $(this).val();
+      if (value == "yes") {
+        $('.place_for_benefits_checkboxes').empty().append("<%= escape_javascript(render "pages/benefits_checkboxes") %>");
+      }
+      if (value == "no") {
+        $('.benefits_checkboxes').remove();
+      }
+    });
 
-  //benefits JavaScript on page load
-  $(document).ready(function() {
+  // //benefits JavaScript on page load
+  // $(document).ready(function() {
 
-    if($('input:radio[name=benefits][value="yes"]').prop('checked')){
-      //Check if the current URL contains '#'
-       if(document.URL.indexOf("#")==-1){
-           // Set the URL to whatever it was plus "#".
-           url = document.URL+"#";
-           location = "#";
+  //   if($('input:radio[name=benefits][value="yes"]').prop('checked')){
+  //     //Check if the current URL contains '#'
+  //      if(document.URL.indexOf("#")==-1){
+  //          // Set the URL to whatever it was plus "#".
+  //          url = document.URL+"#";
+  //          location = "#";
 
-           //Reload the page
-           location.reload(true);
-       }
+  //          //Reload the page
+  //          location.reload(true);
+  //      }
 
-      $('.place_for_benefits_checkboxes').empty().append("<%= escape_javascript(render "pages/benefits_checkboxes") %>");
-     };
-  });
+  //     $('.place_for_benefits_checkboxes').empty().append("<%= escape_javascript(render "pages/benefits_checkboxes") %>");
+  //    };
+  // });
 
 </script>

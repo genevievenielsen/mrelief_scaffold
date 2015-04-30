@@ -1,0 +1,7 @@
+<div class="sectiondivider"></div>
+<% if @laf_disclaimer.present?  %>
+    <h5><%= @laf_disclaimer %></h5>
+<% else %>
+  <h4>The LAF expert nearest you:</h4>
+<% end %>
+<p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %>| <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
