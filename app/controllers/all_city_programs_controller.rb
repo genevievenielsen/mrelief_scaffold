@@ -7,7 +7,12 @@ class AllCityProgramsController < ApplicationController
   def new
     @all_city_program = AllCityProgram.new
     @a = AllCityProgramDatum.new
-    @current_user = current_user
+
+    if current_user.present?
+      @current_user = current_user
+    else
+      @current_user = User.new
+    end
   end
 
   # POST /all_city_programs

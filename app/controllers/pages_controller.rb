@@ -14,7 +14,6 @@ class PagesController < ApplicationController
   end
 
   def filtered_programs
-
     # Clean data
     dependent_no = params[:dependent_no].strip
     if dependent_no !~ /\D/  # returns true if all numbers
@@ -245,10 +244,8 @@ class PagesController < ApplicationController
   end
 
   def community_resources
-
     @community_resources = params[:resources]
-
-    @user_zipcode = "60615"
+    @user_zipcode = params[:zipcode]
 
     # FOOD RESOURCES
     @food_resources = ServiceCenter.where(:description => "food pantry")
@@ -284,7 +281,6 @@ class PagesController < ApplicationController
         @transportation_resources_zip.push(center)
       end
     end
-
        #in this case there are 2 medical centers in the user's zip
        if @transportation_resources_zip.count >= 2
           @transportation_resources = @transportation_resources_zip
@@ -307,16 +303,13 @@ class PagesController < ApplicationController
         primarycare.push(center)
       end
     end
-
       @medical_resources = primarycare
       @medical_resources_zip = []
-
       primarycare.each do |center|
         if center.zip.match(@user_zipcode)
           @medical_resources_zip.push(center)
         end
       end
-
       #in this case there are 2 medical centers in the user's zip
       if @medical_resources_zip.count >= 2
          @medical_resources = @medical_resources_zip
@@ -339,16 +332,13 @@ class PagesController < ApplicationController
         housing.push(center)
       end
     end
-
       @housing_resources = housing
       @housing_resources_zip = []
-
       housing.each do |center|
         if center.zip.match(@user_zipcode)
           @housing_resources_zip.push(center)
         end
       end
-
       #in this case there are 2 housing centers in the user's zip
       if @housing_resources_zip.count >= 2
          @housing_resources = @housing_resources_zip
@@ -377,16 +367,13 @@ class PagesController < ApplicationController
       end
     end
   end
-
     @aabd_resources = aabd
     @aabd_resources_zip = []
-
     aabd.each do |center|
       if center.zip.match(@user_zipcode)
         @aabd_resources_zip.push(center)
       end
     end
-
     #in this case there are 2 aabd centers in the user's zip
     if @aabd_resources_zip.count >= 2
        @aabd_resources = @aabd_resources_zip
@@ -497,8 +484,6 @@ class PagesController < ApplicationController
         @earlyheadstart_resources_first = @earlyheadstart_resources.first
         @earlyheadstart_resources_second = @earlyheadstart_resources.second
     end
-
-
   end
 
   def about_us
