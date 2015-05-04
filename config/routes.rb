@@ -42,7 +42,7 @@ Rails.application.routes.draw do
 
   get("/", { :controller => "pages", :action => "homepage" })
   get("/filter", { :controller => "pages", :action => "filter" })
-  post("/filtered_programs", { :controller => "pages", :action => "filtered_programs" })
+  get("/filtered_programs", { :controller => "pages", :action => "filtered_programs" })
   post("/community_resources", { :controller => "pages", :action => "community_resources" })
 
 
