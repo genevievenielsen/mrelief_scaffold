@@ -19,7 +19,11 @@ class AllCityProgramsController < ApplicationController
   # POST /all_city_programs.json
    def create
     @a = AllCityProgramDatum.new
-    @current_user = current_user
+    if current_user.present?
+      @current_user = current_user
+    else
+      @current_user = User.new
+    end
 
     if params[:dependent_no].present?
       # this is the words into numbers logic
@@ -192,7 +196,7 @@ class AllCityProgramsController < ApplicationController
 
 
     #LOGIC FOR FOOD STAMPS
-     if current_user.food_stamps == "checked"
+     if @current_user.food_stamps == "checked"
        @eligible_snap = "already receiving"
      else
         if params[:education]  == 'no' && params[:citizen] == 'yes'
@@ -277,7 +281,7 @@ class AllCityProgramsController < ApplicationController
       @a.next_month_rent = params[:next_rent]
       @a.rental_status = params[:rental_status]
 
-      if current_user.rental_assistance == "checked"
+      if @current_user.rental_assistance == "checked"
         @rental_eligible = "already receiving"
       else
           rental_eligibility = RentalAssistance.find_by({ :rental_dependent_no => dependent_no })
@@ -341,7 +345,7 @@ class AllCityProgramsController < ApplicationController
             end
 
       #HERE IS THE LOGIC FOR RTA RIDE FREE
-      if current_user.rta_ride_free == "checked"
+      if @current_user.rta_ride_free == "checked"
         @eligible_rta = "already receiving"
       else
         rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => dependent_no })
@@ -388,7 +392,7 @@ class AllCityProgramsController < ApplicationController
       end
 
       #HERE IS THE LOGIC FOR MEDICAID
-      if current_user.medicaid == "checked"
+      if @current_user.medicaid == "checked"
         @eligible_medicaid = "already receiving"
       else
         medicaid_eligibility = Medicaid.find_by({ :medicaid_household_size => dependent_no})
@@ -440,7 +444,7 @@ class AllCityProgramsController < ApplicationController
       @a.pregnant = params[:pregnant]
       @a.child_health_insurance_state = params[:status]
 
-      if current_user.all_kids == "checked"
+      if @current_user.all_kids == "checked"
         @eligible_all_kids = "already receiving"
       else
         if params[:pregnant].present?
@@ -490,7 +494,7 @@ class AllCityProgramsController < ApplicationController
     end
 
     #HERE IS THE LOGIC FOR MEDICARE COST SHARING
-    if current_user.medicare_cost_sharing == "checked"
+    if @current_user.medicare_cost_sharing == "checked"
       @eligible_medicare_cost_sharing = "already receiving"
     else
       if medicare_household_size == 0
@@ -526,7 +530,7 @@ class AllCityProgramsController < ApplicationController
     # end #this ends the present if statement
 
     # HERE IS THE LOGIC FOR AABD
-    if current_user.aabd == "checked"
+    if @current_user.aabd == "checked"
       @aabd_eligible = "already receiving"
     else
       if params[:disabled] != 'No' || @age > 65
@@ -614,7 +618,7 @@ class AllCityProgramsController < ApplicationController
       @a.teen_parent = params[:teen_parent]
       @a.child_in_school = params[:no_highschool]
 
-      if current_user.tanf == "checked"
+      if @current_user.tanf == "checked"
         @eligible_tanif  = "already receiving"
       else
         if params[:pregnant].present? || params[:care_for_child].present? || params[:first_child].present?
