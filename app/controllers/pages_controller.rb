@@ -55,30 +55,30 @@ class PagesController < ApplicationController
 
     #Data Storage
     if current_user.present?
-      @user = @current_user
+      @current_user = current_user
     else
-      @user = User.new
+      @current_user = User.new
     end
-    @user.age = @age
-    @user.household_size = @dependent_no
-    @user.gross_income = @gross_income
-    @user.disability_benefits = params[:disabled]
-    @user.benefits = params[:benefits]
-    @user.food_stamps = params[:food_stamps]
-    @user.rta_ride_free = params[:rta_ride_free]
-    @user.rental_assistance = params[:rental_assistance]
-    @user.medicaid = params[:medicaid]
-    @user.medicare_cost_sharing = params[:medicare_cost_sharing]
-    @user.all_kids = params[:all_kids]
-    @user.child_care_vouchers = params[:child_care_vouchers]
-    @user.early_head_start = params[:early_head_start]
-    @user.head_start = params[:head_start]
-    @user.aabd = params[:aabd]
-    @user.tanf = params[:tanf]
-    @user.save
+    @current_user.age = @age
+    @current_user.household_size = @dependent_no
+    @current_user.gross_income = @gross_income
+    @current_user.disability_benefits = params[:disabled]
+    @current_user.benefits = params[:benefits]
+    @current_user.food_stamps = params[:food_stamps]
+    @current_user.rta_ride_free = params[:rta_ride_free]
+    @current_user.rental_assistance = params[:rental_assistance]
+    @current_user.medicaid = params[:medicaid]
+    @current_user.medicare_cost_sharing = params[:medicare_cost_sharing]
+    @current_user.all_kids = params[:all_kids]
+    @current_user.child_care_vouchers = params[:child_care_vouchers]
+    @current_user.early_head_start = params[:early_head_start]
+    @current_user.head_start = params[:head_start]
+    @current_user.aabd = params[:aabd]
+    @current_user.tanf = params[:tanf]
+    @current_user.save
 
     #session hash
-    session[:user_id] = @user.id
+    session[:user_id] = @current_user.id
 
     # CHICAGO PROGRAMS
     @programs = []
@@ -244,7 +244,8 @@ class PagesController < ApplicationController
   end
 
   def community_resources
-    @community_resources = params[:resources]
+    @resources = params[:resources]
+    @community_resources = @resources.uniq
     @user_zipcode = params[:zipcode]
 
     # FOOD RESOURCES

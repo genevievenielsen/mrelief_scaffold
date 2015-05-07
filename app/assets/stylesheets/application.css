@@ -312,11 +312,6 @@ a:hover {
   margin-top: 5px;
   margin-bottom: 5px;
 }
-/*
-.print-button-right{
-  margin-right:10px;
-}
-*/
 
 .calculator {
   border-radius: 4px;
@@ -354,4 +349,8 @@ a:hover {
 
 .missing_global_question {
   z-index: 100;
+}
+
+.inline_text {
+  display: inline;
 }

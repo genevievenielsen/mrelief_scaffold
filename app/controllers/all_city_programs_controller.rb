@@ -9,20 +9,22 @@ class AllCityProgramsController < ApplicationController
     @a = AllCityProgramDatum.new
 
     if current_user.present?
-      @current_user = current_user
+      @current_user = @current_user
     else
       @current_user = User.new
     end
 
-    @current_user.food_stamps = params[:food_stamps]
-    @current_user.rta_ride_free = params[:rta_ride_free]
-    @current_user.rental_assistance = params[:rental_assistance]
-    @current_user.medicaid = params[:medicaid]
-    @current_user.medicare_cost_sharing = params[:medicare_cost_sharing]
-    @current_user.all_kids = params[:all_kids]
-    @current_user.aabd = params[:aabd]
-    @current_user.tanf = params[:tanf]
-    @current_user.save
+    if params[:filtered_programs] == "false"
+      @current_user.food_stamps = params[:food_stamps]
+      @current_user.rta_ride_free = params[:rta_ride_free]
+      @current_user.rental_assistance = params[:rental_assistance]
+      @current_user.medicaid = params[:medicaid]
+      @current_user.medicare_cost_sharing = params[:medicare_cost_sharing]
+      @current_user.all_kids = params[:all_kids]
+      @current_user.aabd = params[:aabd]
+      @current_user.tanf = params[:tanf]
+      @current_user.save
+    end
   end
 
   # POST /all_city_programs
