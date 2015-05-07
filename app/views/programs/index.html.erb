@@ -35,14 +35,26 @@
   <% chicago_programs = Program.where(:location => "chicago") %>
   <% chicago_programs.each_with_index do |program| %>
 
+    <% if program.name_en == "All City Programs" %>
       <div class="col-md-4" >
-        <a href="<%= program.url %>" class="thumbnail" style="padding:0 20px 20px 20px">
+        <a href="#" class="thumbnail" style="padding:0 20px 20px 20px" data-toggle="modal" data-target="#receiving_benefits">
           <span class="caption">
             <h3><%= program.name %></h3>
             <p><%= program.description %></p>
           </span>
         </a>
       </div>
+
+    <% else %>
+        <div class="col-md-4" >
+          <a href="<%= program.url %>" class="thumbnail" style="padding:0 20px 20px 20px">
+            <span class="caption">
+              <h3><%= program.name %></h3>
+              <p><%= program.description %></p>
+            </span>
+          </a>
+        </div>
+    <% end %>
   <% end %>
   </div>
 
@@ -79,32 +91,89 @@
 <br>
 </div>
 
+<!-- All City Programs Modal -->
+<div class="modal fade" id="receiving_benefits" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
+       <div class="modal-header">
+           <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+       </div>
 
-  <!--  <div class="row">
-    <div class="col-md-12" style="text-align:center; padding-bottom:20px">
-      <h3>Programs Accessible in Suburban Cook County</h3>
-    </div>
-  </div>
-  <%# cook_county_programs = Program.where(:location => "cook county") %>
-  <div class="row" style="padding: 0 0 40px 0">
-  <%# cook_county_programs.each_with_index do |program, i| %>
-    <%# if i % 3 == 0  %>
-      <div class="row">
-    <%# end %>
-      <div class="col-md-4">
-        <div class="thumbnail" style="min-height:230px">
-          <div class="caption" style="text-align:center; padding:0 0 20px 0">
-            <h3><%#= program.name %></h3>
-            <p style="padding:0 30px 0 30px"><%#= program.description %></p>
-            <p><a href="<%#= program.url %>" class="btn btn-primary" role="button">Find Out If You Qualify</a></p>
+        <div class="modal-body">
+        <div class="container">
+          <div class="col-md-9">
+             <%= form_tag new_all_city_program_url, method: :get do %>
+
+                <div class="benefits_checkboxes">
+
+                  <p class="allthatapply">Check all of the benefits that you are currenty receiving:</p>
+
+                  <p>
+                  <% if @current_user.try(:food_stamps) == "checked" %>
+                    <%= check_box_tag "food_stamps", "checked", :checked => true %> Food Stamps<br>
+                  <% else %>
+                    <%= check_box_tag "food_stamps", "checked" %> Food Stamps<br>
+                  <% end %>
+
+                  <% if @current_user.try(:rta_ride_free) == "checked" %>
+                    <%= check_box_tag "rta_ride_free", "checked", :checked => true %> RTA Ride Free<br>
+                  <% else %>
+                    <%= check_box_tag "rta_ride_free", "checked" %> RTA Ride Free<br>
+                  <% end %>
+
+                  <% if @current_user.try(:rental_assistance) == "checked" %>
+                    <%= check_box_tag "rental_assistance", "checked", :checked => true %> Rental Assistance<br>
+                  <% else %>
+                    <%= check_box_tag "rental_assistance", "checked" %> Rental Assistance<br>
+                  <% end %>
+
+                  <% if @current_user.try(:all_kids) == "checked" %>
+                    <%= check_box_tag "all_kids", "checked", :checked => true %> All Kids<br>
+                  <% else %>
+                    <%= check_box_tag "all_kids", "checked" %> All Kids<br>
+                  <% end %>
+
+                  <% if @current_user.try(:medicaid) == "checked" %>
+                    <%= check_box_tag "medicaid", "checked", :checked => true %> Medicaid <br>
+                  <% else %>
+                    <%= check_box_tag "medicaid", "checked" %> Medicaid <br>
+                  <% end %>
+
+                  <% if @current_user.try(:medicare_cost_sharing) == "checked" %>
+                    <%= check_box_tag "medicare_cost_sharing", "checked", :checked => true %> Medicare Cost Sharing<br>
+                  <% else %>
+                    <%= check_box_tag "medicare_cost_sharing", "checked" %> Medicare Cost Sharing<br>
+                  <% end %>
+
+                  <% if @current_user.try(:aabd) == "checked" %>
+                    <%= check_box_tag "aabd", "checked", :checked => true %> AABD Cash Assistance<br>
+                  <% else %>
+                    <%= check_box_tag "aabd", "checked" %> AABD Cash Assistance<br>
+                  <% end %>
+
+                  <% if @current_user.try(:tanf) == "checked" %>
+                    <%= check_box_tag "tanf", "checked", :checked => true %> TANF Cash Assistance<br>
+                  <% else %>
+                    <%= check_box_tag "tanf", "checked" %> TANF Cash Assistance<br>
+                  <% end %>
+
+                  <%= check_box_tag "none", "checked" %> None of the above<br>
+                  </p>
+                </div>
+
+               <div class="form-group col-md-9">
+                 <%= submit_tag "Enter", name: nil, :class => "btn btn-primary btn-sm col-sm-4", :style=>"display:block-inline;" %>
+               </div>
+
+              <% end %>
+
           </div>
         </div>
       </div>
-    <%# if (i + 1) % 3 == 0 %>
-      </div>
-    <%# end %>
-  <%# end %>
-</div> -->
+
+    </div>
+  </div>
+</div>
 
 
