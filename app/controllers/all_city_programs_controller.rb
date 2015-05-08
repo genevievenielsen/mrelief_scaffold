@@ -7,374 +7,369 @@ class AllCityProgramsController < ApplicationController
   def new
     @all_city_program = AllCityProgram.new
     @d = AllCityProgramDatum.new
+
+    if current_user.present?
+      @current_user = @current_user
+    else
+      @current_user = User.new
+    end
+
+    if params[:filtered_programs] == "false"
+      @current_user.food_stamps = params[:food_stamps]
+      @current_user.rta_ride_free = params[:rta_ride_free]
+      @current_user.rental_assistance = params[:rental_assistance]
+      @current_user.medicaid = params[:medicaid]
+      @current_user.medicare_cost_sharing = params[:medicare_cost_sharing]
+      @current_user.all_kids = params[:all_kids]
+      @current_user.aabd = params[:aabd]
+      @current_user.tanf = params[:tanf]
+      @current_user.save
+    end
   end
 
   # POST /all_city_programs
   # POST /all_city_programs.json
    def create
-    @d = AllCityProgramDatum.new
-  # this is the words into numbers logic
-    if params[:dependent_no] !~ /\D/  # returns true if all numbers
-      dependent_no = params[:dependent_no].to_i
-      @d.dependent_no = dependent_no
+    @a = AllCityProgramDatum.new
+    if current_user.present?
+      @current_user = current_user
     else
-      dependent_no = params[:dependent_no].in_numbers
-      @d.dependent_no = dependent_no
+      @current_user = User.new
     end
 
-    if params[:medicare_household_size] !~ /\D/
-      medicare_household_size = params[:medicare_household_size].to_i
-      @d.medicare_household_size = medicare_household_size
-    else
-      medicare_household_size = params[:medicare_household_size].in_numbers
-      @d.medicare_household_size = medicare_household_size
-    end
-
-    if params[:age] !~ /\D/
-      @age = params[:age].to_i
-      @d.age = @age
-    else
-      @age = params[:age].in_numbers
-      @d.age = @age
-    end
-
-    monthly_gross_income = params[:monthly_gross_income]
-    monthly_gross_income = monthly_gross_income.gsub(/[^0-9\.]/, '')
-
-    if monthly_gross_income !~ /\D/
-      monthly_gross_income = monthly_gross_income.to_i
-      @d.monthly_gross_income = monthly_gross_income
-    else
-      if monthly_gross_income.include?("dollars")
-        monthly_gross_income.slice!"dollars"
+    if params[:dependent_no].present?
+      # this is the words into numbers logic
+      if params[:dependent_no] !~ /\D/  # returns true if all numbers
+        dependent_no = params[:dependent_no].to_i
+        @a.dependent_no = dependent_no
+      else
+        dependent_no = params[:dependent_no].in_numbers
+        @a.dependent_no = dependent_no
       end
-      monthly_gross_income = monthly_gross_income.in_numbers
-      @d.monthly_gross_income = monthly_gross_income
     end
 
-    net_income = params[:net_income]
-    net_income = net_income.gsub(/[^0-9\.]/, '')
-
-    if net_income !~ /\D/
-      net_income = net_income.to_i
-      @d.thirty_day_net_income = net_income
-    else
-      if net_income.include?("dollars")
-        net_income.slice!"dollars"
+    if params[:medicaid_household_size].present?
+      if params[:medicare_household_size] !~ /\D/
+        medicare_household_size = params[:medicare_household_size].to_i
+        @a.medicare_household_size = medicare_household_size
+      else
+        medicare_household_size = params[:medicare_household_size].in_numbers
+        @a.medicare_household_size = medicare_household_size
       end
-      net_income = net_income.in_numbers
-      @d.thirty_day_net_income = net_income
     end
 
-    expect_child_support = params[:expect_child_support]
-    expect_child_support = expect_child_support.gsub(/[^0-9\.]/, '')
-
-    if expect_child_support !~ /\D/
-      expect_child_support = expect_child_support.to_i
-      @d.child_support = expect_child_support
-    else
-      if expect_child_support.include?("dollars")
-        expect_child_support.slice!"dollars"
+    if params[:age].present?
+      if params[:age] !~ /\D/
+        @age = params[:age].to_i
+        @a.age = @age
+      else
+        @age = params[:age].in_numbers
+        @a.age = @age
       end
-      expect_child_support = expect_child_support.in_numbers
-      @d.child_support = expect_child_support
     end
 
-    expect_ssi = params[:expect_ssi]
-    expect_ssi = expect_ssi.gsub(/[^0-9\.]/, '')
-
-    if expect_ssi !~ /\D/
-      expect_ssi = expect_ssi.to_i
-      @d.ssi = expect_ssi
-    else
-      if expect_ssi.include?("dollars")
-        expect_ssi.slice!"dollars"
+    if params[:monthly_gross_income].present?
+      monthly_gross_income = params[:monthly_gross_income]
+      monthly_gross_income = monthly_gross_income.gsub(/[^0-9\.]/, '')
+      if monthly_gross_income !~ /\D/
+        monthly_gross_income = monthly_gross_income.to_i
+        @a.monthly_gross_income = monthly_gross_income
+      else
+        if monthly_gross_income.include?("dollars")
+          monthly_gross_income.slice!"dollars"
+        end
+        monthly_gross_income = monthly_gross_income.in_numbers
+        @a.monthly_gross_income = monthly_gross_income
       end
-      expect_ssi = expect_ssi.in_numbers
-      @d.ssi = expect_ssi
     end
 
-
-    monthly_benefits = params[:monthly_benefits]
-    monthly_benefits = monthly_benefits.gsub(/[^0-9\.]/, '')
-
-    if monthly_benefits !~ /\D/
-      monthly_benefits = monthly_benefits.to_i
-      @d.monthly_benefits = monthly_benefits
-    else
-      if monthly_benefits.include?("dollars")
-        monthly_benefits.slice!"dollars"
+    if params[:net_income].present?
+      net_income = params[:net_income]
+      net_income = net_income.gsub(/[^0-9\.]/, '')
+      if net_income !~ /\D/
+        net_income = net_income.to_i
+        @a.thirty_day_net_income = net_income
+      else
+        if net_income.include?("dollars")
+          net_income.slice!"dollars"
+        end
+        net_income = net_income.in_numbers
+        @a.thirty_day_net_income = net_income
       end
-      monthly_benefits = monthly_benefits.in_numbers
-      @d.monthly_benefits = montly_benefits
     end
 
-    ninety_day_gross_income = params[:ninety_day_gross_income]
-    ninety_day_gross_income = ninety_day_gross_income.gsub(/[^0-9\.]/, '')
-
-    if ninety_day_gross_income !~ /\D/
-      ninety_day_gross_income = ninety_day_gross_income.to_i
-      @d.ninety_day_gross_income = ninety_day_gross_income
-    else
-      if ninety_day_gross_income.include?("dollars")
-        ninety_day_gross_income.slice!"dollars"
+    if params[:expect_child_support].present?
+      expect_child_support = params[:expect_child_support]
+      expect_child_support = expect_child_support.gsub(/[^0-9\.]/, '')
+      if expect_child_support !~ /\D/
+        expect_child_support = expect_child_support.to_i
+        @a.child_support = expect_child_support
+      else
+        if expect_child_support.include?("dollars")
+          expect_child_support.slice!"dollars"
+        end
+        expect_child_support = expect_child_support.in_numbers
+        @a.child_support = expect_child_support
       end
-      ninety_day_gross_income = ninety_day_gross_income.in_numbers
-      @d.ninety_day_gross_income = ninety_day_gross_income
     end
 
-    annual_gross_income = params[:annual_gross_income]
-    annual_gross_income = annual_gross_income.gsub(/[^0-9\.]/, '')
-
-    if annual_gross_income !~ /\D/
-      annual_gross_income = annual_gross_income.to_i
-      @d.annual_gross_income = annual_gross_income
-    else
-      if annual_gross_income.include?("dollars")
-        annual_gross_income.slice!"dollars"
+    if params[:expect_ssi].present?
+      expect_ssi = params[:expect_ssi]
+      expect_ssi = expect_ssi.gsub(/[^0-9\.]/, '')
+      if expect_ssi !~ /\D/
+        expect_ssi = expect_ssi.to_i
+        @a.ssi = expect_ssi
+      else
+        if expect_ssi.include?("dollars")
+          expect_ssi.slice!"dollars"
+        end
+        expect_ssi = expect_ssi.in_numbers
+        @a.ssi = expect_ssi
       end
-      annual_gross_income = annual_gross_income.in_numbers
-      @d.annual_gross_income = annual_gross_income
     end
 
-    assets = params[:assets]
-    assets = assets.gsub(/[^0-9\.]/, '')
-
-    if assets !~ /\D/
-      assets = assets.to_i
-      @d.assets = assets
-    else
-      if assets.include?("dollars")
-        assets.slice!"dollars"
+    if params[:monthly_benefits].present?
+      monthly_benefits = params[:monthly_benefits]
+      monthly_benefits = monthly_benefits.gsub(/[^0-9\.]/, '')
+      if monthly_benefits !~ /\D/
+        monthly_benefits = monthly_benefits.to_i
+        @a.monthly_benefits = monthly_benefits
+      else
+        if monthly_benefits.include?("dollars")
+          monthly_benefits.slice!"dollars"
+        end
+        monthly_benefits = monthly_benefits.in_numbers
+        @a.monthly_benefits = montly_benefits
       end
-      assets = assets.in_numbers
-      @d.assets = assets
     end
 
-    if params[:children] !~ /\D/  # returns true if all numbers
-      children = params[:children].to_i
-      @d.number_of_children = children
-    else
-      children = params[:children].in_numbers
-      @d.number_of_children = children
+    if params[:ninety_day_gross_income].present?
+      ninety_day_gross_income = params[:ninety_day_gross_income]
+      ninety_day_gross_income = ninety_day_gross_income.gsub(/[^0-9\.]/, '')
+      if ninety_day_gross_income !~ /\D/
+        ninety_day_gross_income = ninety_day_gross_income.to_i
+        @a.ninety_day_gross_income = ninety_day_gross_income
+      else
+        if ninety_day_gross_income.include?("dollars")
+          ninety_day_gross_income.slice!"dollars"
+        end
+        ninety_day_gross_income = ninety_day_gross_income.in_numbers
+        @a.ninety_day_gross_income = ninety_day_gross_income
+      end
+    end
+
+    if params[:annual_gross_income].present?
+      annual_gross_income = params[:annual_gross_income]
+      annual_gross_income = annual_gross_income.gsub(/[^0-9\.]/, '')
+      if annual_gross_income !~ /\D/
+        annual_gross_income = annual_gross_income.to_i
+        @a.annual_gross_income = annual_gross_income
+      else
+        if annual_gross_income.include?("dollars")
+          annual_gross_income.slice!"dollars"
+        end
+        annual_gross_income = annual_gross_income.in_numbers
+        @a.annual_gross_income = annual_gross_income
+      end
+    end
+
+    if params[:assets].present?
+      assets = params[:assets]
+      assets = assets.gsub(/[^0-9\.]/, '')
+      if assets !~ /\D/
+        assets = assets.to_i
+        @a.assets = assets
+      else
+        if assets.include?("dollars")
+          assets.slice!"dollars"
+        end
+        assets = assets.in_numbers
+        @a.assets = assets
+      end
+    end
+
+    if params[:children].present?
+      if params[:children] !~ /\D/  # returns true if all numbers
+        children = params[:children].to_i
+        @a.number_of_children = children
+      else
+        children = params[:children].in_numbers
+        @a.number_of_children = children
+      end
     end
 
     # Data storage
-      @d.user_location = params[:user_location]
-      @d.enrolled_in_education = params[:education]
-      @d.citizen = params[:citizen]
-      @d.zipcode = params[:zipcode]
-      @d.disabled_status = params[:disabled]
-      @d.student_status = params[:student]
-      @d.work_status = params[:work]
+      @a.user_location = params[:user_location]
+      @a.enrolled_in_education = params[:education]
+      @a.citizen = params[:citizen]
+      @a.zipcode = params[:zipcode]
+      @a.disabled_status = params[:disabled]
+      @user_zipcode = params[:zipcode]
 
-      if params[:disabled] != 'No'
-        @disabled = true
-      end
 
     #LOGIC FOR FOOD STAMPS
-     if @age.present? && monthly_gross_income.present? && ninety_day_gross_income.present? &&
-      annual_gross_income.present?
+     if @current_user.food_stamps == "checked"
+       @eligible_snap = "already receiving"
+     else
+        if params[:education]  == 'no' && params[:citizen] == 'yes'
 
-        # if params[:education]  == 'no' && params[:citizen] == 'yes'
-
-        #     if @age <= 59
-        #       snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => dependent_no })
-        #     else
-        #       snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => dependent_no})
-        #     end
-
-        #     if monthly_gross_income < snap_eligibility.snap_gross_income
-        #       @eligible_snap = "yes"
-        #     else
-        #        @eligible_snap = "no"
-        #     end
-
-        # elsif params[:education]  == 'yes'
-        #   @eligible_snap = 'maybe'
-        # elsif params[:citizen] == 'no'
-        #   @eligible_snap = 'maybe'
-        # end
-
-      # user is not a student
-      if params[:education]  == 'no'
-         if @disabled == true
-           snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => dependent_no })
-         elsif @age <= 59
-          snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => dependent_no })
-         elsif @age > 59
-          snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => dependent_no })
-         end
-         if monthly_gross_income < snap_eligibility.snap_gross_income
-           @eligible_snap = "yes"
-           #200 for seniors and elderly
-           #20 for everyone else
-         elsif @age > 59 && monthly_gross_income < snap_eligibility.snap_gross_income + 200
-          @income_range = 200
-          @eligible_snap = "maybe"
-          # @hundred_dollar_range = true
-
-         elsif @disabled == true && monthly_gross_income < snap_eligibility.snap_gross_income + 200
-          @income_range = 200
-          @eligible_snap = "maybe"
-          # @hundred_dollar_range = true
-
-         elsif monthly_gross_income < snap_eligibility.snap_gross_income + 20
-          @income_range = 20
-          @eligible_snap = "maybe"
-          # @hundred_dollar_range = true
-
-         else
-           @eligible_snap = "no"
-         end
-
-      # user is a student and citizen
-      elsif params[:education]  == 'yes' && params[:citizen] == 'yes'
-        if params[:student] == 'I am currently enrolled half time or more'
-          if params[:work] == 'yes'
-            if  @disabled == true
+            if @age <= 59
+              snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => dependent_no })
+            else
               snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => dependent_no})
-            elsif @age <= 59
-             snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => dependent_no })
-            elsif @age > 59
-             snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => dependent_no})
             end
+
             if monthly_gross_income < snap_eligibility.snap_gross_income
               @eligible_snap = "yes"
-              # @eligible_student = "yes"
             else
-              @eligible_snap = "no"
-               # @eligible_student = "no"
-             end
-          # user is not working at least 20 hours
-          else
-            @eligible_snap = "maybe"
-            # @eligible_student = "maybe"
-          end
-        # user is not enrolled at least part time
-        else
-          @eligible_snap = "no"
-          # @eligible_student = "no"
+               @eligible_snap = "no"
+            end
+
+        elsif params[:education]  == 'yes'
+          @eligible_snap = 'maybe'
+        elsif params[:citizen] == 'no'
+          @eligible_snap = 'maybe'
         end
+
+      # this is the logic for disability
+      if params[:disabled].present?
+        if params[:disabled] != 'No'
+          snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => dependent_no})
+        else
+          snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => dependent_no })
+        end
+            p "monthly_gross_income = #{monthly_gross_income}"
+            p "snap_eligibility.snap_gross_income = #{snap_eligibility.snap_gross_income}"
+
+            if monthly_gross_income < snap_eligibility.snap_gross_income
+              @eligible_snap = "yes"
+            else
+               @eligible_snap = "no"
+            end
+            if params[:education]  == 'yes'
+              @eligible_snap = 'maybe'
+            elsif params[:citizen] == 'no'
+              @eligible_snap = 'maybe'
+            end
+            if @age < 18
+              @eligible_snap = "no"
+            end
+        end
+
       end
 
-      #user is not a citizen
-      if params[:citizen] == 'no'
-        @eligible_snap = 'maybe'
-      end
+        zipcode = @user_zipcode << ".0"
+        @lafcenter = LafCenter.find_by(:zipcode => zipcode)
 
-      if @age.to_i < 18
-        @eligible_snap = "no"
-      end
+        if @lafcenter.present?
+        else
+          @lafcenter = LafCenter.find_by(:id => 10)
+          @laf_disclaimer = "We do not have an estimation of the nearest center that is in range for you at this time. But we recommend going to the center below."
+        end
 
-      @user_zipcode = params[:zipcode]
-      zipcode = @user_zipcode << ".0"
-      @lafcenter = LafCenter.find_by(:zipcode => zipcode)
+        #this is the logic for the community resources
+        @user_zipcode = @user_zipcode.chomp(".0")
+        @food_resources = ServiceCenter.where(:description => "food pantry")
+        @food_resources_zip = @food_resources.where(:zip => @user_zipcode)
 
-      if @lafcenter.present?
-      else
-        @lafcenter = LafCenter.find_by(:id => 10)
-        @laf_disclaimer = "We do not have an estimation of the nearest center that is in range for you at this time. But we recommend going to the center below."
-      end
-
-      #this is the logic for the community resources
-      @user_zipcode = @user_zipcode.chomp(".0")
-      @food_resources = ServiceCenter.where(:description => "food pantry")
-      @food_resources_zip = @food_resources.where(:zip => @user_zipcode)
-
-      #in this case there are 2 food pantries in the user's zip
-      if @food_resources_zip.count >= 2
-         @food_resources = @food_resources_zip
-      end
-      #in this case there is 1 food pantry in the user's zip
-      if @food_resources_zip.count == 1
-         @food_resources_first = @food_resources_zip.first
-         @food_resources_second = @food_resources.first
-      end
-      #in this caser there are no food pantries in the user's zip
-      if  @food_resources_zip.count == 0
-          @food_resources_first = @food_resources.first
-          @food_resources_second = @food_resources.second
-      end
+          #in this case there are 2 food pantries in the user's zip
+          if @food_resources_zip.count >= 2
+             @food_resources = @food_resources_zip
+          end
+          #in this case there is 1 food pantry in the user's zip
+          if @food_resources_zip.count == 1
+             @food_resources_first = @food_resources_zip.first
+             @food_resources_second = @food_resources.first
+          end
+          #in this caser there are no food pantries in the user's zip
+          if  @food_resources_zip.count == 0
+              @food_resources_first = @food_resources.first
+              @food_resources_second = @food_resources.second
+          end
 
 
       #HERE IS THE LOGIC FOR RENTAL ASSISTANCE
-      @d.name_on_lease = params[:lease]
-      @d.next_month_rent = params[:next_rent]
-      @d.rental_status = params[:rental_status]
+      @a.name_on_lease = params[:lease]
+      @a.next_month_rent = params[:next_rent]
+      @a.rental_status = params[:rental_status]
 
-      rental_eligibility = RentalAssistance.find_by({ :rental_dependent_no => dependent_no })
-      rental_cut_off =  rental_eligibility.rental_gross_income
-      rental_cut_off_plus_200 = rental_eligibility.rental_gross_income + 200
+      if @current_user.rental_assistance == "checked"
+        @rental_eligible = "already receiving"
+      else
+          rental_eligibility = RentalAssistance.find_by({ :rental_dependent_no => dependent_no })
+          rental_cut_off =  rental_eligibility.rental_gross_income
+          rental_cut_off_plus_200 = rental_eligibility.rental_gross_income + 200
 
-        if params[:lease] == "no" || params[:next_rent] == "no"
-          @rental_eligible = "no"
-
-        elsif params[:lease] == "yes"
-            if ninety_day_gross_income < rental_eligibility.rental_gross_income && params[:rental_status] != "none of the above"
-              @rental_eligible = "yes"
-            elsif ninety_day_gross_income < rental_cut_off_plus_200 && ninety_day_gross_income >= rental_cut_off && params[:rental_status] != "none of the above"
-              @rental_eligible = "maybe"
-            else
+            if params[:lease] == "no" || params[:next_rent] == "no"
               @rental_eligible = "no"
-            end
-        end # closes the if statement about the lease agreement
 
-      if params[:rental_status] == "medical circumstance"
-        @medical_circumstance = "yes"
-      elsif params[:rental_status] == "a victim of natural disaster or fire"
-        @natural_disaster = "yes"
-      elsif params[:rental_status] == "have experienced a temporary loss of income"
-        @temporary_loss = "yes"
-      elsif params[:rental_status] == "a victim of domestic violence"
-        @domestic_violence = "yes"
-      end
+            elsif params[:lease] == "yes"
+                if ninety_day_gross_income < rental_eligibility.rental_gross_income && params[:rental_status] != "none of the above"
+                  @rental_eligible = "yes"
+                elsif ninety_day_gross_income < rental_cut_off_plus_200 && ninety_day_gross_income >= rental_cut_off && params[:rental_status] != "none of the above"
+                  @rental_eligible = "maybe"
+                else
+                  @rental_eligible = "no"
+                end
+            end # closes the if statement about the lease agreement
 
-      housing = []
-      ServiceCenter.all.each do |center|
-        if center.description.match("housing")
-          housing.push(center)
-        end
-      end
-
-      @pb_zipcode = @user_zipcode.chomp(".0")
-        @housing_resources = housing
-        @housing_resources_zip = []
-
-        housing.each do |center|
-          if center.zip.match(@pb_zipcode)
-            @housing_resources_zip.push(center)
+          if params[:rental_status] == "medical circumstance"
+            @medical_circumstance = "yes"
+          elsif params[:rental_status] == "a victim of natural disaster or fire"
+            @natural_disaster = "yes"
+          elsif params[:rental_status] == "have experienced a temporary loss of income"
+            @temporary_loss = "yes"
+          elsif params[:rental_status] == "a victim of domestic violence"
+            @domestic_violence = "yes"
           end
-        end
+      end
 
-        #in this case there are 2 housing centers in the user's zip
-        if @housing_resources_zip.count >= 2
-           @housing_resources = @housing_resources_zip
-        end
+          housing = []
+          ServiceCenter.all.each do |center|
+            if center.description.match("housing")
+              housing.push(center)
+            end
+          end
 
-        #in this case there is 1 aabd center in the user's zip
-        if @housing_resources_zip.count == 1
-           @housing_resources_first = @housing_resources_zip.first
-           @housing_resources_second = @housing_resources.first
-        end
+          @pb_zipcode = @user_zipcode.chomp(".0")
+            @housing_resources = housing
+            @housing_resources_zip = []
 
-        #in this caser there are no aabd centers in the user's zip
-        if  @housing_resources_zip.count == 0
-            @housing_resources_first = @housing_resources.first
-            @housing_resources_second = @housing_resources.second
-        end
+            housing.each do |center|
+              if center.zip.match(@pb_zipcode)
+                @housing_resources_zip.push(center)
+              end
+            end
+
+            #in this case there are 2 housing centers in the user's zip
+            if @housing_resources_zip.count >= 2
+               @housing_resources = @housing_resources_zip
+            end
+            #in this case there is 1 aabd center in the user's zip
+            if @housing_resources_zip.count == 1
+               @housing_resources_first = @housing_resources_zip.first
+               @housing_resources_second = @housing_resources.first
+            end
+            #in this caser there are no aabd centers in the user's zip
+            if  @housing_resources_zip.count == 0
+                @housing_resources_first = @housing_resources.first
+                @housing_resources_second = @housing_resources.second
+            end
 
       #HERE IS THE LOGIC FOR RTA RIDE FREE
-       rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => dependent_no })
-
-       if params[:disabled] != 'No' || @age > 65
-        if annual_gross_income < rta_eligibility.rta_gross_income
-         @eligible_rta = "yes"
+      if @current_user.rta_ride_free == "checked"
+        @eligible_rta = "already receiving"
+      else
+        rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => dependent_no })
+        if params[:disabled] != 'No' || @age > 65
+         if annual_gross_income < rta_eligibility.rta_gross_income
+          @eligible_rta = "yes"
+         else
+           @eligible_rta = "no"
+         end
         else
           @eligible_rta = "no"
         end
-      else
-        @eligible_rta = "no"
       end
 
       transportation = []
@@ -409,15 +404,18 @@ class AllCityProgramsController < ApplicationController
       end
 
       #HERE IS THE LOGIC FOR MEDICAID
-      medicaid_eligibility = Medicaid.find_by({ :medicaid_household_size => dependent_no})
-
-      if params[:citizen] == 'no'
-          @eligible_medicaid = 'maybe'
-      elsif params[:citizen] == 'yes'
-        if annual_gross_income < medicaid_eligibility.medicaid_gross_income
-          @eligible_medicaid = 'yes'
-        else
-          @eligible_medicaid = 'no'
+      if @current_user.medicaid == "checked"
+        @eligible_medicaid = "already receiving"
+      else
+        medicaid_eligibility = Medicaid.find_by({ :medicaid_household_size => dependent_no})
+        if params[:citizen] == 'no'
+            @eligible_medicaid = 'maybe'
+        elsif params[:citizen] == 'yes'
+          if monthly_gross_income  < medicaid_eligibility.medicaid_gross_income
+            @eligible_medicaid = 'yes'
+          else
+            @eligible_medicaid = 'no'
+          end
         end
       end
 
@@ -428,7 +426,7 @@ class AllCityProgramsController < ApplicationController
         end
       end
 
-      @pb_zipcode = @user_zipcode.chomp(".0")
+        @pb_zipcode = @user_zipcode.chomp(".0")
         @medical_resources = primarycare
         @medical_resources_zip = []
 
@@ -455,126 +453,135 @@ class AllCityProgramsController < ApplicationController
 
 
       # HERE IS THE LOGIC FOR ALL KIDS
-      @d.pregnant = params[:pregnant]
-      @d.child_health_insurance_state = params[:status]
+      @a.pregnant = params[:pregnant]
+      @a.child_health_insurance_state = params[:status]
 
-      if params[:pregnant].present?
-         dependent_no_kids = dependent_no + 1
-         dependent_no_kids = dependent_no_kids.to_i
-         kids_eligibility = AllKid.find_by({ :kids_household_size => dependent_no_kids })
+      if @current_user.all_kids == "checked"
+        @eligible_all_kids = "already receiving"
       else
-        kids_eligibility = AllKid.find_by({ :kids_household_size => dependent_no })
-      end
+        if params[:pregnant].present?
+           dependent_no_kids = dependent_no + 1
+           dependent_no_kids = dependent_no_kids.to_i
+           kids_eligibility = AllKid.find_by({ :kids_household_size => dependent_no_kids })
+        else
+          kids_eligibility = AllKid.find_by({ :kids_household_size => dependent_no })
+        end
 
+        if monthly_gross_income  < kids_eligibility.premium_1_gross_income
+           @eligible_all_kids = "yes"
+        else
+          @eligible_all_kids = "no"
+        end
 
-      if monthly_gross_income  < kids_eligibility.premium_1_gross_income
-         @eligible_all_kids = "yes"
-      else
-        @eligible_all_kids = "no"
-      end
-
-       if @eligible_all_kids == "yes"
-        # now find out which version they are eligible for
-          if monthly_gross_income <= kids_eligibility.assist_gross_income
-            @assist_eligible = "yes"
-          elsif monthly_gross_income <= kids_eligibility.share_gross_income && monthly_gross_income > kids_eligibility.assist_gross_income
-            @share_eligible = "yes"
-          elsif monthly_gross_income <= kids_eligibility.premium_1_gross_income && monthly_gross_income > kids_eligibility.share_gross_income
-            @premium1_eligible = "yes"
-          end
-       end
-
-        #this is the logic for premium 2
-        if monthly_gross_income <= kids_eligibility.premium_2_gross_income && monthly_gross_income > kids_eligibility.premium_1_gross_income
-            if params["status"] == 'none'
-               @eligible_all_kids = "no"
-            else
-              @eligible_all_kids = "yes"
-              @premium2_eligible = "yes"
+         if @eligible_all_kids == "yes"
+          # now find out which version they are eligible for
+            if monthly_gross_income <= kids_eligibility.assist_gross_income
+              @assist_eligible = "yes"
+            elsif monthly_gross_income <= kids_eligibility.share_gross_income && monthly_gross_income > kids_eligibility.assist_gross_income
+              @share_eligible = "yes"
+            elsif monthly_gross_income <= kids_eligibility.premium_1_gross_income && monthly_gross_income > kids_eligibility.share_gross_income
+              @premium1_eligible = "yes"
             end
-        end
+         end
 
-        if monthly_gross_income > kids_eligibility.premium_2_gross_income
-          @eligible_all_kids = "no"
-        end
+          #this is the logic for premium 2
+          if monthly_gross_income <= kids_eligibility.premium_2_gross_income && monthly_gross_income > kids_eligibility.premium_1_gross_income
+              if params["status"] == 'none'
+                 @eligible_all_kids = "no"
+              else
+                @eligible_all_kids = "yes"
+                @premium2_eligible = "yes"
+              end
+          end
 
-        if dependent_no == 1
-          @eligible_all_kids = "no"
-        end
-
-        if params[:status] == "no_children"
-          @eligible_all_kids = "no"
-        end
+          if monthly_gross_income > kids_eligibility.premium_2_gross_income
+            @eligible_all_kids = "no"
+          end
+          if dependent_no == 1
+            @eligible_all_kids = "no"
+          end
+          if params[:status] == "no_children"
+            @eligible_all_kids = "no"
+          end
+    end
 
     #HERE IS THE LOGIC FOR MEDICARE COST SHARING
-    if medicare_household_size == 0
-      @eligible_medicare_cost_sharing = "no"
-
-    elsif dependent_no == 1 && assets > 7280
-      @eligible_medicare_cost_sharing = "no"
-
-    elsif dependent_no > 1 && assets > 10930
-      @eligible_medicare_cost_sharing = "no"
-
+    if @current_user.medicare_cost_sharing == "checked"
+      @eligible_medicare_cost_sharing = "already receiving"
     else
-      if medicare_household_size == 1
-        monthly_gross_income = monthly_gross_income - 25
-      elsif medicare_household_size == 2
-        monthly_gross_income = monthly_gross_income - 50
-      end
+      if medicare_household_size == 0
+        @eligible_medicare_cost_sharing = "no"
 
-      medicare_sharing_eligibility = MedicareCostSharing.find_by({ :household_size => dependent_no })
+      elsif dependent_no == 1 && assets > 7280
+        @eligible_medicare_cost_sharing = "no"
 
-      if monthly_gross_income < medicare_sharing_eligibility.premium_only
-        @eligible_medicare_cost_sharing = "yes"
+      elsif dependent_no > 1 && assets > 10930
+        @eligible_medicare_cost_sharing = "no"
 
-        if monthly_gross_income < medicare_sharing_eligibility.medicare_cost_sharing
-          @eligible_p_d_c = "yes"
-
-        elsif monthly_gross_income >= medicare_sharing_eligibility.medicare_cost_sharing
-          @eligible_p = "yes"
+      else
+        if medicare_household_size == 1
+          monthly_gross_income = monthly_gross_income - 25
+        elsif medicare_household_size == 2
+          monthly_gross_income = monthly_gross_income - 50
         end
-      end
-     end
-    end #this ends the present if statement
+
+        medicare_sharing_eligibility = MedicareCostSharing.find_by({ :household_size => dependent_no })
+
+        if monthly_gross_income < medicare_sharing_eligibility.premium_only
+          @eligible_medicare_cost_sharing = "yes"
+
+          if monthly_gross_income < medicare_sharing_eligibility.medicare_cost_sharing
+            @eligible_p_d_c = "yes"
+
+          elsif monthly_gross_income >= medicare_sharing_eligibility.medicare_cost_sharing
+            @eligible_p = "yes"
+          end
+        end
+       end
+    end
+    # end #this ends the present if statement
 
     # HERE IS THE LOGIC FOR AABD
-    if params[:disabled] != 'No' || @age > 65
-      if dependent_no  == 1
-        if net_income + monthly_benefits < 821.38
-          if assets < 2000
-            @aabd_eligible = 'yes'
-          else # exceed asset limit
-            @aabd_eligible = 'no'
-          end
-        else # exceed income limit
-          @aabd_eligible = "no"
-        end
-      elsif dependent_no  == 2
-        if net_income + monthly_benefits < 724.38
-          if assets < 3000
-            @aabd_eligible = 'yes'
-          else # exceed asset limit
-            @aabd_eligible = 'no'
-          end
-        else # exceed income limit
-          @aabd_eligible = "no"
-        end
-      else #household size is greater than 2
-        if net_income + monthly_benefits < 724.38
-          @aabd_eligible= 'maybe'
-        else
-          @aabd_eligible= 'no'
-        end
-      end
-
+    if @current_user.aabd == "checked"
+      @aabd_eligible = "already receiving"
     else
-      @aabd_eligible = 'no'
-    end
-    # if they are NOT receiving payment and are NOT over 65, not eligible
+      if params[:disabled] != 'No' || @age > 65
+        if dependent_no  == 1
+          if net_income + monthly_benefits < 821.38
+            if assets < 2000
+              @aabd_eligible = 'yes'
+            else # exceed asset limit
+              @aabd_eligible = 'no'
+            end
+          else # exceed income limit
+            @aabd_eligible = "no"
+          end
+        elsif dependent_no  == 2
+          if net_income + monthly_benefits < 724.38
+            if assets < 3000
+              @aabd_eligible = 'yes'
+            else # exceed asset limit
+              @aabd_eligible = 'no'
+            end
+          else # exceed income limit
+            @aabd_eligible = "no"
+          end
+        else #household size is greater than 2
+          if net_income + monthly_benefits < 724.38
+            @aabd_eligible= 'maybe'
+          else
+            @aabd_eligible= 'no'
+          end
+        end
 
-    if params[:citizen] == 'no'
-      @aabd_eligible = 'maybe'
+      else
+        @aabd_eligible = 'no'
+      end
+      # if they are NOT receiving payment and are NOT over 65, not eligible
+
+      if params[:citizen] == 'no'
+        @aabd_eligible = 'maybe'
+      end
     end
 
     aabd = []
@@ -603,13 +610,11 @@ class AllCityProgramsController < ApplicationController
       if @aabd_resources_zip.count >= 2
          @aabd_resources = @aabd_resources_zip
       end
-
       #in this case there is 1 aabd center in the user's zip
       if @aabd_resources_zip.count == 1
          @aabd_resources_first = @aabd_resources_zip.first
          @aabd_resources_second = @aabd_resources.first
       end
-
       #in this caser there are no aabd centers in the user's zip
       if  @aabd_resources_zip.count == 0
           @aabd_resources_first = @aabd_resources.first
@@ -617,63 +622,66 @@ class AllCityProgramsController < ApplicationController
       end
 
       # HERE IS THE LOGIC FOR TANF
-      @d.pregnant_or_caring_for_child = params[:care_for_child] || params[:pregnant] || params[:no_children]
-      @d.relationship_to_child = params[:relationship]
-      @d.pregnant_with_first_child = params[:first_child]
-      @d.tanif_sixty_months = params[:tanif_sixty_months]
-      @d.anticipate_other_income = params[:anticipate_income]
-      @d.teen_parent = params[:teen_parent]
-      @d.child_in_school = params[:no_highschool]
+      @a.pregnant_or_caring_for_child = params[:care_for_child] || params[:pregnant] || params[:no_children]
+      @a.relationship_to_child = params[:relationship]
+      @a.pregnant_with_first_child = params[:first_child]
+      @a.tanif_sixty_months = params[:tanif_sixty_months]
+      @a.anticipate_other_income = params[:anticipate_income]
+      @a.teen_parent = params[:teen_parent]
+      @a.child_in_school = params[:no_highschool]
 
-      if params[:pregnant].present? || params[:care_for_child].present? || params[:first_child].present?
-        if params[:relationship] == "adult_relative"
-          @eligible_tanif = "maybe"
-        else
-          if params[:first_child] == "first_child"
-            dependent_no == 1
-          end
-          if params[:tanif_sixty_months] == "yes"
-             @eligible_tanif = "no"
+      if @current_user.tanf == "checked"
+        @eligible_tanif  = "already receiving"
+      else
+        if params[:pregnant].present? || params[:care_for_child].present? || params[:first_child].present?
+          if params[:relationship] == "adult_relative"
+            @eligible_tanif = "maybe"
           else
-            if children < dependent_no - 1
-              @eligible_tanif = "maybe"
+            if params[:first_child] == "first_child"
+              dependent_no == 1
+            end
+            if params[:tanif_sixty_months] == "yes"
+               @eligible_tanif = "no"
             else
-              tanif_eligibility = Tanif.find_by({ :household_size => dependent_no })
-              reduced_gross_income = net_income * 0.75
-              child_support = expect_child_support - 50
-              total_income = reduced_gross_income + child_support
-              if total_income > tanif_eligibility.max_income
-                @eligible_tanif = "no"
+              if children < dependent_no - 1
+                @eligible_tanif = "maybe"
               else
-                if params[:anticipate_income] == "yes"
-                  @eligible_tanif = "maybe"
+                tanif_eligibility = Tanif.find_by({ :household_size => dependent_no })
+                reduced_gross_income = net_income * 0.75
+                child_support = expect_child_support - 50
+                total_income = reduced_gross_income + child_support
+                if total_income > tanif_eligibility.max_income
+                  @eligible_tanif = "no"
                 else
-                  if params[:teen_parent] == "teen_parent"
+                  if params[:anticipate_income] == "yes"
                     @eligible_tanif = "maybe"
                   else
-                    if params[:citizen] == "no"
+                    if params[:teen_parent] == "teen_parent"
                       @eligible_tanif = "maybe"
                     else
-                       if params[:highschool] == "no_highschool" && dependent_no == 2
-                         @eligible_tanif = "no"
-                       elsif params[:highschool] == "no_highschool" && dependent_no > 2
-                         @eligible_tanif = "maybe"
-                       else
-                         @eligible_tanif = "yes"
-                       end
+                      if params[:citizen] == "no"
+                        @eligible_tanif = "maybe"
+                      else
+                         if params[:highschool] == "no_highschool" && dependent_no == 2
+                           @eligible_tanif = "no"
+                         elsif params[:highschool] == "no_highschool" && dependent_no > 2
+                           @eligible_tanif = "maybe"
+                         else
+                           @eligible_tanif = "yes"
+                         end
+                      end
                     end
                   end
                 end
               end
             end
           end
+        else
+          @eligible_tanif = "no"
         end
-      else
-        @eligible_tanif = "no"
-      end
-
-      if params[:citizen] == "no"
-        @eligible_tanif = "maybe"
+        if params[:citizen] == "no"
+          @eligible_tanif = "maybe"
+        end
       end
 
       childcare = []
@@ -714,103 +722,137 @@ class AllCityProgramsController < ApplicationController
     @eligible_count = 0
     if  @eligible_snap == "yes"
       @eligible_count = @eligible_count + 1
-      @d.snap_eligibility_status = "yes"
+      @a.snap_eligibility_status = "yes"
     end
     if @eligible_all_kids == "yes"
       @eligible_count = @eligible_count + 1
-      @d.all_kids_eligibility_status = "yes"
+      @a.all_kids_eligibility_status = "yes"
     end
     if @eligible_rta == "yes"
       @eligible_count = @eligible_count + 1
-      @d.rta_eligibility_status = "yes"
+      @a.rta_eligibility_status = "yes"
     end
     if @eligible_medicaid == "yes"
       @eligible_count = @eligible_count + 1
-      @d.medicaid_eligibility_status = "yes"
+      @a.medicaid_eligibility_status = "yes"
     end
     if @eligible_medicare_cost_sharing == "yes"
       @eligible_count = @eligible_count + 1
-      @d.medicare_cost_sharing_eligibility_status = "yes"
+      @a.medicare_cost_sharing_eligibility_status = "yes"
     end
     if @rental_eligible == "yes"
       @eligible_count = @eligible_count + 1
-      @d.rental_eligibility_status = "yes"
+      @a.rental_eligibility_status = "yes"
     end
     if @aabd_eligible == "yes"
       @eligible_count = @eligible_count + 1
-      @d.aabd_eligibility_status = "yes"
+      @a.aabd_eligibility_status = "yes"
     end
     if @eligible_tanif == "yes"
       @eligible_count = @eligible_count + 1
-      @d.tanf_eligibility_status = "yes"
+      @a.tanf_eligibility_status = "yes"
     end
 
 
     @ineligible_count = 0
     if @eligible_snap == "no"
       @ineligible_count = @ineligible_count + 1
-      @d.snap_eligibility_status = "no"
+      @a.snap_eligibility_status = "no"
     end
     if @eligible_all_kids == "no"
       @ineligible_count = @ineligible_count + 1
-      @d.all_kids_eligibility_status = "no"
+      @a.all_kids_eligibility_status = "no"
     end
     if @eligible_rta == "no"
       @ineligible_count = @ineligible_count + 1
-      @d.rta_eligibility_status = "no"
+      @a.rta_eligibility_status = "no"
     end
     if @eligible_medicaid == "no"
       @ineligible_count = @ineligible_count + 1
-      @d.medicaid_eligibility_status = "no"
+      @a.medicaid_eligibility_status = "no"
     end
     if @eligible_medicare_cost_sharing == "no"
       @ineligible_count = @ineligible_count + 1
-      @d.medicare_cost_sharing_eligibility_status = "no"
+      @a.medicare_cost_sharing_eligibility_status = "no"
     end
     if @rental_eligible == "no"
       @ineligible_count = @ineligible_count + 1
-      @d.rental_eligibility_status = "no"
+      @a.rental_eligibility_status = "no"
     end
     if @aabd_eligible == "no"
       @ineligible_count = @ineligible_count + 1
-      @d.aabd_eligibility_status = "no"
+      @a.aabd_eligibility_status = "no"
     end
     if @eligible_tanif == "no"
       @ineligible_count = @ineligible_count + 1
-      @d.tanf_eligibility_status = "no"
+      @a.tanf_eligibility_status = "no"
     end
 
 
     @indeterminate_count = 0
     if  @eligible_snap == "maybe"
       @indeterminate_count = @indeterminate_count + 1
-      @d.snap_eligibility_status = "maybe"
+      @a.snap_eligibility_status = "maybe"
     end
     if @eligible_medicaid == 'maybe'
       @indeterminate_count = @indeterminate_count + 1
-      @d.medicaid_eligibility_status = "maybe"
+      @a.medicaid_eligibility_status = "maybe"
     end
     if @rental_eligible == "maybe"
       @indeterminate_count = @indeterminate_count + 1
-      @d.rental_eligibility_status = "maybe"
+      @a.rental_eligibility_status = "maybe"
     end
     if @aabd_eligible == 'maybe'
       @indeterminate_count = @indeterminate_count + 1
-      @d.aabd_eligibility_status = "maybe"
+      @a.aabd_eligibility_status = "maybe"
     end
     if @eligible_tanif == 'maybe'
       @indeterminate_count = @indeterminate_count + 1
-      @d.tanf_eligibility_status = "maybe"
+      @a.tanf_eligibility_status = "maybe"
     end
 
-    @d.phone_number = params[:phone_number] if params[:phone_number].present?
-    @d.save
-
-    if params[:citizen].present? && params[:disabled].present? && params[:education].present? && params[:anticipate_income].present?
-    else
-       flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
-      render "new"
+    @already_receiving_count = 0
+    if @eligible_snap == "already receiving"
+      @already_receiving_count = @already_receiving_count + 1
+      @a.snap_eligibility_status = "already receiving"
     end
+    if @eligible_all_kids == "already receiving"
+      @already_receiving_count = @already_receiving_count + 1
+      @a.all_kids_eligibility_status = "already receiving"
+    end
+    if @eligible_rta == "already receiving"
+      @already_receiving_count = @already_receiving_count + 1
+      @a.rta_eligibility_status = "already receiving"
+    end
+    if @eligible_medicaid == "already receiving"
+      @already_receiving_count = @already_receiving_count + 1
+      @a.medicaid_eligibility_status = "already receiving"
+    end
+    if @eligible_medicare_cost_sharing == "already receiving"
+      @already_receiving_count = @already_receiving_count + 1
+      @a.medicare_cost_sharing_eligibility_status = "already receiving"
+    end
+    if @rental_eligible == "already receiving"
+      @already_receiving_count = @already_receiving_count + 1
+      @a.rental_eligibility_status = "already receiving"
+    end
+    if @aabd_eligible == "already receiving"
+      @already_receiving_count = @already_receiving_count + 1
+      @a.aabd_eligibility_status = "already receiving"
+    end
+    if @eligible_tanif == "already receiving"
+      @already_receiving_count = @already_receiving_count + 1
+      @a.tanf_eligibility_status = "already receiving"
+    end
+
+    @a.phone_number = params[:phone_number] if params[:phone_number].present?
+    @a.save
+
+    # if params[:citizen].present? && params[:disabled].present? && params[:education].present? && params[:anticipate_income].present?
+    # else
+    #    flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
+    #   render "new"
+    # end
   end
 
 

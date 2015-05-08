@@ -12,9 +12,14 @@
   <div class="row">
     <h1 style="text-align:center;">Check your eligibility for benefits in Chicago & Illinois</h1>
     <p class="subhead">Eligibility requirements can be difficult to find, we've created a process that makes it easy</p>
-    <div style="text-align:center;">
-    <%= link_to("Get Started", "/programs", :class => "btn btn-primary btn-lg", :role => "button") %>
+    <div class="row text-center">
+
+        <%= link_to("View All Programs", "/programs", :class => "btn btn-primary btn-lg", :role => "button") %>
+        <h3 class="inline_text">or</h3>
+        <%= link_to("Filter Programs", "/filter", :class => "btn btn-primary btn-lg", :role => "button") %>
+
     </div>
+
   </div>
 </header>
 

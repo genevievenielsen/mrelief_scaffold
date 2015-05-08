@@ -17,58 +17,46 @@
 
     <form action="/rta_free_rides" role="form" method="post">
 
-   <div class="row">
-     <div class="form-group col-sm-9">
-       <label for="age">How old are you?</label>
-       <input type="text" id="age" name="age" placeholder="For example: 27" class="form-control" value="<%= @r.age %>"   required>
-     </div>
-   </div>
+    <!-- age question -->
+    <%= render "programs/age_question" %>
 
-  <div class="row">
+    <!-- disability question -->
+    <%= render "programs/disability_question" %>
+
+    <!-- dependent_no question -->
+    <div class="row">
     <div class="form-group col-sm-9">
-      <label for="disabled" id="disabled">Are you receiving disability benefits?</label>
-        <div id="disabled">
-          <%= radio_button_tag 'disabled', 'social-security' %>  Yes, from Social Security <br>
-          <%= radio_button_tag 'disabled', 'railroad' %> Yes, from the Railroad Retirement Board <br>
-          <%= radio_button_tag 'disabled', 'veterans' %>  Yes, from Veterans Affairs <br>
-          <%= radio_button_tag 'disabled', 'none' %> No <br>
-        </div>
-    </div>
-  </div>
-
-  <!-- Label and input for rta_dependent_no -->
-  <div class="row">
-  <div class="form-group col-sm-9">
-    <label for="rta_dependent_no">How many dependents (including yourself) are in your household?
-    <button type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself, your spouse (if applicable), and/or resident for whom you (or you and your spouse) provided more than half of that person's total financial support last year." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-    </label>
-    <div class="row">
-       <div class="form-group col-md-12">
-       <p type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself, your spouse (if applicable), and/or resident for whom you (or you and your spouse) provided more than half of that person's total financial support last year." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-        <input type="text" id="rta_dependent_no" name="rta_dependent_no" placeholder="For example: 3" class="form-control" value="<%= @r.dependent_no %>" required>
-        </p>
-      </div>
-    </div>
-  </div>
-  </div>
-
-  <!-- Label and input for rta_gross_income -->
-    <div class="row">
-      <div class="form-group col-sm-9">
-        <label for="rta_gross_income">
-          What is your gross annual income?
-        </label>
-          <button type="button" data-toggle="popover" data-content="Your total income before tax deductions, including your spouse's income if married and living together on December 31 of last year, and that of a qualified additional resident (if applicable)." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-        <div class="input-group">
-          <span class="input-group-addon">$</span>
-          <p type="button" data-toggle="popover" data-content="Your total income before tax deductions, including your spouse's income if married and living together on December 31 of last year, and that of a qualified additional resident (if applicable)." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-            <input type="text" id="rta_gross_income" name="rta_gross_income" placeholder="For example: 30000" class="form-control" value= "<%= @r.gross_annual_income %>" required>
+      <label for="rta_dependent_no">How many dependents (including yourself) are in your household?
+      <button type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself,  your spouse (if applicable), and/or resident for whom you (or you and your spouse) provided more than half of that person's  total financial support last year." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+      </label>
+      <div class="row">
+         <div class="form-group col-md-12">
+         <p type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself, your spouse (if applicable), and/or resident for whom you (or you and your spouse) provided more than half of that person's  total financial support last year." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+          <input type="text" id="rta_dependent_no" name="rta_dependent_no" placeholder="For example: 3" class="form-control" value ="<%= @current_user.try(:household_size)  %>" required>
           </p>
-          <span class="input-group-addon">.00</span>
         </div>
       </div>
     </div>
+    </div>
 
+    <!-- gross_income question -->
+     <div class="row">
+       <div class="form-group col-sm-9">
+         <label for="rta_gross_income">
+           What is your gross annual income?
+         </label>
+           <button type="button" data-toggle="popover" data-content="Your total income before tax deductions, including your spouse's income if married and living together on December 31 of last year, and that of a qualified additional resident (if applicable)." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+         <div class="input-group">
+           <span class="input-group-addon">$</span>
+           <p type="button" data-toggle="popover" data-content="Your total income before tax deductions, including your spouse's income if married and living together on December 31 of last year, and that of a qualified additional resident (if applicable)." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+             <input type="text" id="rta_gross_income" name="rta_gross_income" placeholder="For example: 30000" class="form-control" value= "<%= @r.gross_annual_income %>" required>
+           </p>
+           <span class="input-group-addon">.00</span>
+         </div>
+       </div>
+     </div>
+
+     <!-- zipcode question -->
      <div class="row">
       <div class="form-group col-sm-9 ">
         <label for="zipcode">What is your zipcode?</label>
@@ -76,32 +64,31 @@
       </div>
      </div>
 
-    <div class="row">
+     <!-- location question -->
+      <div class="row">
+        <div class="form-group col-sm-9">
+        <label for="location" id="location_dropdown">Where are you completing this form? </label>
+        <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], [' Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Center for Working Families', 'center_for_working_families'], ['CTA Bus', 'cta_bus'],['Other', 'other']], @r.user_location), :class => " form-control", :prompt => "Select a location") %>
+        </div>
+      </div>
+
+      <div class="row">
       <div class="form-group col-sm-9">
-      <label for="location" id="location_dropdown">Where are you completing this form? </label>
-      <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], ['Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Center for Working Families', 'center_for_working_families'], ['CTA Bus', 'cta_bus'],['Other', 'other']], @r.user_location), :class => "form-control", :prompt => "Select a location") %>
+        <label for="phone_number">What is your cell phone number?</label>
+          <button type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the  application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa   fa-info-circle"></i></button>
+        <div>
+          <p type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the   application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
+            <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control"   value="<%= @r.phone_number %>" required>
+          </p>
+        </div>
       </div>
-    </div>
+      </div>
 
-    <div class="row">
-    <div class="form-group col-sm-9">
-      <label for="phone_number">What is your cell phone number?</label>
-        <button type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
       <div>
-        <p type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-          <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control" value="<%= @r.phone_number %>" required>
-        </p>
+        <button type="submit" class="btn btn-primary program-btn">See if I qualify</button>
       </div>
-    </div>
-    </div>
 
-
-  <div>
-    <button type="submit" class="btn btn-primary program-btn">See if I qualify</button>
-  </div>
-
-
-</form>
+  </form>
 </div>
 
 </div>

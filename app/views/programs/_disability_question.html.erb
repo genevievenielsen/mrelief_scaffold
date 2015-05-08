@@ -1,0 +1,9 @@
+   <div class="row">
+     <div class="form-group col-md-12">
+           <label for="disabled" id="disabled">Are you receiving disability benefits?</label>
+       <% [ 'Yes, from Social Security', 'Yes, from the Railroad Retirement Board ', 'Yes, from Veterans Affairs', 'No' ].each  do |disabled| %>
+         <br><%= radio_button_tag 'disabled', disabled, @current_user.try(:disability_benefits) == disabled %>
+         <%= disabled.humanize %>
+       <% end %>
+     </div>
+   </div>

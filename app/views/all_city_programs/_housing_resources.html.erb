@@ -1,0 +1,11 @@
+<h4>Some additional resources from Purple Binder:</h4>
+
+<% if @housing_resources_zip.count >= 2 %>
+  <p><%= @housing_resources_zip.first.name %> | <%= @housing_resources_zip.first.street %>  <%= @housing_resources_zip.first.city %> <%= @housing_resources_zip.first.state %>, <%= @housing_resources_zip.first.zip %> | <%= @housing_resources_zip.first.phone %> </p>
+  <p><%= @housing_resources_zip.second.name %> | <%= @housing_resources_zip.second.street %>  <%= @housing_resources_zip.second.city %> <%= @housing_resources_zip.second.state %>, <%= @housing_resources_zip.second.zip %> | <%= @housing_resources_zip.second.phone %> </p>
+<% end %>
+
+<% if @housing_resources_first.present? %>
+  <p><%= @housing_resources_first.name %> | <%= @housing_resources_first.street %>  <%= @housing_resources_first.city %> <%= @housing_resources_first.state %>, <%= @housing_resources_first.zip %> | <%= @housing_resources_first.phone %> </p>
+  <p><%= @housing_resources_second.name %> | <%= @housing_resources_second.street %>  <%= @housing_resources_second.city %> <%= @housing_resources_second.state %>, <%= @housing_resources_second.zip %> | <%= @housing_resources_second.phone %> </p>
+<% end %>

@@ -55,7 +55,7 @@
           <div class="input-group">
             <span class="input-group-addon">$</span>
             <p type="button" data-toggle="popover" data-content="Monthly income includes wages, Social Security, SSI, pensions, rental income, unemployment, worker's compensation, or other disability payments." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-              <input type="text" id="medicaid_gross_income" name="medicaid_gross_income" placeholder="For example: 30000" class="   form-control" value="<%= @m.monthly_gross_income %>" required>
+              <input type="text" id="medicaid_gross_income" name="medicaid_gross_income" placeholder="For example: 30000" class="   form-control" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %> " required>
             </p>
             <span class="input-group-addon">.00</span>
           </div>

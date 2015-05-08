@@ -136,7 +136,6 @@
 
 <script>
 $(document).ready(function() {
-
   //this is the calculator scroll down thing
   $(window).scroll(function() {
     if($(this).scrollTop() > 310 && $(this).width() > 750) {
@@ -145,24 +144,20 @@ $(document).ready(function() {
       $('.calculator_box').removeClass('sticky_calculator');
     }
   });
-
   $(window).scroll(function() {
     if($(this).scrollTop() < 310) {
       $('.calculator_box').removeClass('sticky_calculator');
     }
   });
-
   $(window).scroll(function() {
     if($(this).width() < 750) {
       $('.calculator').removeClass('sticky_calculator');
     }
   });
-
   //popover code
   $(function (){
     $("[data-toggle='popover']").popover();
   });
-
   $('body').on('click', function (e) {
       $('[data-toggle="popover"]').each(function () {
           //the 'is' for buttons that trigger popups
@@ -172,8 +167,6 @@ $(document).ready(function() {
           }
       });
   });
-
-
   //education hover mechanism
      $( "#education_question" ).hover(
        function() {
@@ -183,9 +176,6 @@ $(document).ready(function() {
          $( this ).find( "p:last" ).remove();
        }
      );
-
-
-
     //student JavaScript
     $("input:radio[name=education]").click(function() {
     var value = $(this).val();
@@ -199,8 +189,5 @@ $(document).ready(function() {
     if($('input:radio[name=education][value="yes"]').prop('checked')){
         $('.place_for_student_questions').append("<%= escape_javascript(render "snap_eligibilities/student_questions",   :work_status => @d.work_status, :student_status => @d.student_status ) %>");
     }
-
 });
 </script>
-
-

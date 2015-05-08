@@ -7,6 +7,7 @@ class RtaFreeRidesController < ApplicationController
   def new
     @rta_free_ride = RtaFreeRide.new
     @r = RtaFreeRideData.new
+    @current_user = current_user
   end
 
   def create
@@ -43,9 +44,6 @@ class RtaFreeRidesController < ApplicationController
 
     if rta_gross_income.present? && rta_dependent_no.present?
       rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => rta_dependent_no })
-
-       p "rta_gross_income = #{rta_gross_income}"
-       p "rta_eligibility.rta_gross_income = #{rta_eligibility.rta_gross_income}"
 
       if params[:disabled] != 'none' || age > 65
         if rta_gross_income < rta_eligibility.rta_gross_income

@@ -6,16 +6,13 @@
   <p class="subhead">Programs include Food Stamps, RTA Ride Free, All Kids, Medicare Cost Sharing, Rental Assistance, Medicaid, Aged, Blind and Disabled (AABD), Cash Assistance and Temporary Assistance for Needy Families </p>
 </div>
 
-<%#= render "layouts/print_button" %>
 
 <% if @eligible_count > 0 %>
-<div class="panel panel-default allcitypanel">
-  <div class="allcityheading">
+  <div class="panel panel-default allcitypanel">
+    <div class="allcityheading">
       <h2>You may qualify ( <%= pluralize(@eligible_count, 'program') %>)</h2>
-
-
       <p class="subhead" style="text-align:left;">Below are the programs you may qualify for:</p>
-  </div>
+    </div>
 
     <ul class="list-group">
     <!-- Food Stamps -->
@@ -132,6 +129,8 @@
   </div>
   <% end %>
 
+
+
 <% if @indeterminate_count > 0  %>
 <div class="panel panel-default allcitypanel">
   <div class="allcityheading">
@@ -142,35 +141,19 @@
     <ul class="list-group">
     <!-- Food Stamps -->
       <% if @eligible_snap == "maybe" %>
-      <li class="list-group-item">
-        <h3 class="allcityheader">Food Stamps</h3>
-       <p>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a Food Stamp expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your food stamp eligibility with you. </p>
-
-        <div class="sectiondivider"></div>
-        <% if @laf_disclaimer.present?  %>
-            <h5><%= @laf_disclaimer %></h5>
-        <% else %>
-          <h4>The LAF expert nearest you:</h4>
-        <% end %>
-        <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %>| <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
-
-      </li>
+        <li class="list-group-item">
+          <h3 class="allcityheader">Food Stamps</h3>
+          <p>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a Food Stamp expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your food stamp eligibility with you. </p>
+          <%= render "all_city_programs/laf_center" %>
+        </li>
       <% end %>
 
       <% if @eligible_medicaid == "maybe" %>
-      <li class="list-group-item">
-        <h3 class="allcityheader">Medicaid</h3>
-        <p>You may need to discuss your situation with a Medicaid expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your Medicaid eligibility with you.</p>
-
-         <div class="sectiondivider"></div>
-        <% if @laf_disclaimer.present?  %>
-            <h5><%= @laf_disclaimer %></h5>
-        <% else %>
-          <h4>The LAF expert nearest you:</h4>
-        <% end %>
-        <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %>| <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
-
-      </li>
+        <li class="list-group-item">
+          <h3 class="allcityheader">Medicaid</h3>
+          <p>You may need to discuss your situation with a Medicaid expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your Medicaid eligibility with you.</p>
+          <%= render "all_city_programs/laf_center" %>
+        </li>
       <% end %>
 
       <% if @rental_eligible == "maybe" %>
@@ -190,27 +173,16 @@
       <% if @aabd_eligible == "maybe" %>
         <li class="list-group-item">
           <h3 class="allcityheader">AABD Cash Assistance</h3>
-         <p>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a Aged, Blind and Disabled (AABD) Cash Asistanceexpert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your eligibility with you.</p>
-          <div class="sectiondivider"></div>
-          <% if @laf_disclaimer.present?  %>
-              <h5><%= @laf_disclaimer %></h5>
-          <% else %>
-            <h4>The LAF expert nearest you:</h4>
-          <% end %>
-          <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %>| <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
+          <p>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a Aged, Blind and Disabled (AABD) Cash Asistanceexpert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your eligibility with you.</p>
+          <%= render "all_city_programs/laf_center" %>
         </li>
       <% end %>
+
       <% if @eligible_tanif == "maybe" %>
         <li class="list-group-item">
           <h3 class="allcityheader">TANF Cash Assistance</h3>
-         <p>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a TANF expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your TANF eligibility with you.</p>
-          <div class="sectiondivider"></div>
-          <% if @laf_disclaimer.present?  %>
-              <h5><%= @laf_disclaimer %></h5>
-          <% else %>
-            <h4>The LAF expert nearest you:</h4>
-          <% end %>
-          <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %>| <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
+          <p>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a TANF expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your TANF eligibility with you.</p>
+          <%= render "all_city_programs/laf_center" %>
         </li>
       <% end %>
     </ul>
@@ -226,208 +198,130 @@
 
     <ul class="list-group">
     <!-- Food Stamps -->
-    <% if @eligible_snap == "no" %>
-      <li class="list-group-item">
-        <h3 class="allcityheader">Food Stamps</h3>
-
-        <p>Direct2Food is an online resource that will help you locate the food pantries, soup kitchens, and meal programs closest to you. </p>
-        <%= link_to "Click Here to find resources near you", "http://www.direct2food.org/", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'food_stamps_all_city_program', 'direct2food', 1);" %>
-        <div class="sectiondivider"></div>
-
-        <h4>Some additional resources from Purple Binder:</h4>
-
-        <% if @food_resources_zip.count >= 2 %>
-        <p><%= @food_resources_zip.first.name %> | <%= @food_resources_zip.first.street %>  <%= @food_resources_zip.first.city %> <%= @food_resources_zip.first.state %>, <%= @food_resources_zip.first.zip %> | <%= @food_resources_zip.first.phone %> </p>
-
-        <p><%= @food_resources_zip.second.name %> | <%= @food_resources_zip.second.street %>  <%= @food_resources_zip.second.city %> <%= @food_resources_zip.second.state %>, <%= @food_resources_zip.second.zip %> | <%= @food_resources_zip.second.phone %> </p>
-        <% end %>
-
-        <% if @food_resources_first.present? %>
-        <p><%= @food_resources_first.name %> | <%= @food_resources_first.street %>  <%= @food_resources_first.city %> <%= @food_resources_first.state %>, <%= @food_resources_first.zip %> | <%= @food_resources_first.phone %> </p>
-
-        <p><%= @food_resources_second.name %> | <%= @food_resources_second.street %>  <%= @food_resources_second.city %> <%= @food_resources_second.state %>, <%= @food_resources_second.zip %> | <%= @food_resources_second.phone %> </p>
-
-        <% end %>
-      </li>
+      <% if @eligible_snap == "no" %>
+        <li class="list-group-item">
+          <h3 class="allcityheader">Food Stamps</h3>
+          <%= render "all_city_programs/food_resources" %>
+        </li>
       <% end %>
 
       <% if @eligible_rta == "no" %>
-      <li class="list-group-item">
-        <h3 class="allcityheader">RTA Ride Free</h3>
-        <p> Call 312-913-3110 for information about the Reduced Fare Program.
-           </p>
-      <div class="sectiondivider"></div>
-
-      <h4>Some additional resources from Purple Binder:</h4>
-
-      <% if @transportation_resources_zip.count >= 2 %>
-      <p><%= @transportation_resources_zip.first.name %> | <%= @transportation_resources_zip.first.street %>  <%= @transportation_resources_zip.first.city %> <%= @transportation_resources_zip.first.state %>, <%= @transportation_resources_zip.first.zip %> | <%= @transportation_resources_zip.first.phone %> </p>
-
-      <p><%= @transportation_resources_zip.second.name %> | <%= @transportation_resources_zip.second.street %>  <%= @transportation_resources_zip.second.city %> <%= @transportation_resources_zip.second.state %>, <%= @transportation_resources_zip.second.zip %> | <%= @transportation_resources_zip.second.phone %> </p>
-      <% end %>
-
-      <% if @transportation_resources_first.present? %>
-      <p><%= @transportation_resources_first.name %> | <%= @transportation_resources_first.street %>  <%= @transportation_resources_first.city %> <%= @transportation_resources_first.state %>, <%= @transportation_resources_first.zip %> | <%= @transportation_resources_first.phone %> </p>
-
-      <p><%= @transportation_resources_second.name %> | <%= @transportation_resources_second.street %>  <%= @transportation_resources_second.city %> <%= @transportation_resources_second.state %>, <%= @transportation_resources_second.zip %> | <%= @transportation_resources_second.phone %> </p>
-
-      <% end %>
-      </li>
+        <li class="list-group-item">
+          <h3 class="allcityheader">RTA Ride Free</h3>
+          <%= render "all_city_programs/transportation_resources" %>
+        </li>
       <% end %>
 
       <% if @eligible_all_kids == "no" %>
-      <li class="list-group-item">
-        <h3 class="allcityheader">All Kids</h3>
-        <p>If you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.</p>
-        <%= link_to "Click Here to learn more about fees", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'all_kids_all_city_program', 'health_care_fees', 1);" %>
-
-        <%= link_to "Click Here to find Get Covered Illinois events in your area", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'all_kids_all_city_program', 'get_covered_illinois', 1);" %>
-
-        <p>You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.</p>
-        <div class="sectiondivider"></div>
-
-        <h4>Some additional resources from Purple Binder:</h4>
-
-        <% if @medical_resources_zip.count >= 2 %>
-        <p><%= @medical_resources_zip.first.name %> | <%= @medical_resources_zip.first.street %>  <%= @medical_resources_zip.first.city %> <%= @medical_resources_zip.first.state %>, <%= @medical_resources_zip.first.zip %> | <%= @medical_resources_zip.first.phone %> </p>
-
-        <p><%= @medical_resources_zip.second.name %> | <%= @medical_resources_zip.second.street %>  <%= @medical_resources_zip.second.city %> <%= @medical_resources_zip.second.state %>, <%= @medical_resources_zip.second.zip %> | <%= @medical_resources_zip.second.phone %> </p>
-        <% end %>
-
-        <% if @medical_resources_first.present? %>
-        <p><%= @medical_resources_first.name %> | <%= @medical_resources_first.street %>  <%= @medical_resources_first.city %> <%= @medical_resources_first.state %>, <%= @medical_resources_first.zip %> | <%= @medical_resources_first.phone %> </p>
-
-        <p><%= @medical_resources_second.name %> | <%= @medical_resources_second.street %>  <%= @medical_resources_second.city %> <%= @medical_resources_second.state %>, <%= @medical_resources_second.zip %> | <%= @medical_resources_second.phone %> </p>
-
-        <% end %>
-      </li>
+        <li class="list-group-item">
+          <h3 class="allcityheader">All Kids</h3>
+          <%= render "all_city_programs/medical_resources" %>
+        </li>
       <% end %>
 
       <% if @eligible_medicaid == "no" %>
-      <li class="list-group-item">
-        <h3 class="allcityheader">Medicaid</h3>
-        <p> If you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.</p>
-
-        <%= link_to "Click Here to learn more about fees", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicaid_all_city_program', 'health_care_fees', 1);" %>
-
-
-        <p>Get Covered Illinois is a resource that helps families register for insurance at in-person events.</p>
-        <%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'all_kids_all_city_program', 'get_covered_illinois', 1);" %>
-         to find Get Covered Illinois events in your area. You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.
-        <div class="sectiondivider"></div>
-
-        <h4>Some additional resources from Purple Binder:</h4>
-
-        <% if @medical_resources_zip.count >= 2 %>
-        <p><%= @medical_resources_zip.first.name %> | <%= @medical_resources_zip.first.street %>  <%= @medical_resources_zip.first.city %> <%= @medical_resources_zip.first.state %>, <%= @medical_resources_zip.first.zip %> | <%= @medical_resources_zip.first.phone %> </p>
-
-        <p><%= @medical_resources_zip.second.name %> | <%= @medical_resources_zip.second.street %>  <%= @medical_resources_zip.second.city %> <%= @medical_resources_zip.second.state %>, <%= @medical_resources_zip.second.zip %> | <%= @medical_resources_zip.second.phone %> </p>
-        <% end %>
-
-        <% if @medical_resources_first.present? %>
-        <p><%= @medical_resources_first.name %> | <%= @medical_resources_first.street %>  <%= @medical_resources_first.city %> <%= @medical_resources_first.state %>, <%= @medical_resources_first.zip %> | <%= @medical_resources_first.phone %> </p>
-
-        <p><%= @medical_resources_second.name %> | <%= @medical_resources_second.street %>  <%= @medical_resources_second.city %> <%= @medical_resources_second.state %>, <%= @medical_resources_second.zip %> | <%= @medical_resources_second.phone %> </p>
-
-        <% end %>
-      </li>
+        <li class="list-group-item">
+          <h3 class="allcityheader">Medicaid</h3>
+          <%= render "all_city_programs/medical_resources" %>
+        </li>
       <% end %>
+
+
       <% if @eligible_medicare_cost_sharing == "no" %>
         <li class="list-group-item">
-        <h3 class="allcityheader">Medicare Cost Sharing</h3>
-        <p> However, if you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.</p>
-        <%= link_to "Click Here to learn more about fees", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'medicare_cost_sharing_all_city_program', 'health_care_fees', 1);"  %>
-
-        <p>Get Covered Illinois is a resource that helps families register for insurance at in-person events.</p>
-        <%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicare_cost_sharing_all_city_program', 'get_covered_illinois', 1);" %>
-        to find Get Covered Illinois events in your area. You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.
-
-      <div class="sectiondivider"></div>
-
-      <h4>Some additional resources from Purple Binder:</h4>
-
-      <% if @medical_resources_zip.count >= 2 %>
-      <p><%= @medical_resources_zip.first.name %> | <%= @medical_resources_zip.first.street %>  <%= @medical_resources_zip.first.city %> <%= @medical_resources_zip.first.state %>, <%= @medical_resources_zip.first.zip %> | <%= @medical_resources_zip.first.phone %> </p>
-
-      <p><%= @medical_resources_zip.second.name %> | <%= @medical_resources_zip.second.street %>  <%= @medical_resources_zip.second.city %> <%= @medical_resources_zip.second.state %>, <%= @medical_resources_zip.second.zip %> | <%= @medical_resources_zip.second.phone %> </p>
-      <% end %>
-
-      <% if @medical_resources_first.present? %>
-      <p><%= @medical_resources_first.name %> | <%= @medical_resources_first.street %>  <%= @medical_resources_first.city %> <%= @medical_resources_first.state %>, <%= @medical_resources_first.zip %> | <%= @medical_resources_first.phone %> </p>
-
-      <p><%= @medical_resources_second.name %> | <%= @medical_resources_second.street %>  <%= @medical_resources_second.city %> <%= @medical_resources_second.state %>, <%= @medical_resources_second.zip %> | <%= @medical_resources_second.phone %> </p>
-
-      <% end %>
-      </li>
+          <h3 class="allcityheader">Medicare Cost Sharing</h3>
+          <%= render "all_city_programs/medical_resources" %>
+        </li>
       <% end %>
 
 
       <% if @rental_eligible == "no" %>
-      <li class="list-group-item">
-        <h3 class="allcityheader">Rental Assistance</h3>
-        <h4>Some additional resources from Purple Binder:</h4>
-
-        <% if @housing_resources_zip.count >= 2 %>
-        <p><%= @housing_resources_zip.first.name %> | <%= @housing_resources_zip.first.street %>  <%= @housing_resources_zip.first.city %> <%= @housing_resources_zip.first.state %>, <%= @housing_resources_zip.first.zip %> | <%= @housing_resources_zip.first.phone %> </p>
-
-        <p><%= @housing_resources_zip.second.name %> | <%= @housing_resources_zip.second.street %>  <%= @housing_resources_zip.second.city %> <%= @housing_resources_zip.second.state %>, <%= @housing_resources_zip.second.zip %> | <%= @housing_resources_zip.second.phone %> </p>
-        <% end %>
-
-        <% if @housing_resources_first.present? %>
-        <p><%= @housing_resources_first.name %> | <%= @housing_resources_first.street %>  <%= @housing_resources_first.city %> <%= @housing_resources_first.state %>, <%= @housing_resources_first.zip %> | <%= @housing_resources_first.phone %> </p>
-
-        <p><%= @housing_resources_second.name %> | <%= @housing_resources_second.street %>  <%= @housing_resources_second.city %> <%= @housing_resources_second.state %>, <%= @housing_resources_second.zip %> | <%= @housing_resources_second.phone %> </p>
-        <% end %>
-      </li>
+        <li class="list-group-item">
+          <h3 class="allcityheader">Rental Assistance</h3>
+          <%= render "all_city_programs/housing_resources" %>
+        </li>
       <% end %>
 
       <% if @aabd_eligible == "no" %>
         <li class="list-group-item">
           <h3 class="allcityheader">AABD Cash Assistance</h3>
-
-          <h4>Some additional resources from Purple Binder:</h4>
-
-          <% if @aabd_resources_zip.count >= 2 %>
-          <p><%= @aabd_resources_zip.first.name %> | <%= @aabd_resources_zip.first.street %>  <%= @aabd_resources_zip.first.city %> <%= @aabd_resources_zip.first.state %>, <%= @aabd_resources_zip.first.zip %> | <%= @aabd_resources_zip.first.phone %> </p>
-
-          <p><%= @aabd_resources_zip.second.name %> | <%= @aabd_resources_zip.second.street %>  <%= @aabd_resources_zip.second.city %> <%= @aabd_resources_zip.second.state %>, <%= @aabd_resources_zip.second.zip %> | <%= @aabd_resources_zip.second.phone %> </p>
-          <% end %>
-
-          <% if @aabd_resources_first.present? %>
-          <p><%= @aabd_resources_first.name %> | <%= @aabd_resources_first.street %>  <%= @aabd_resources_first.city %> <%= @aabd_resources_first.state %>, <%= @aabd_resources_first.zip %> | <%= @aabd_resources_first.phone %> </p>
-
-          <p><%= @aabd_resources_second.name %> | <%= @aabd_resources_second.street %>  <%= @aabd_resources_second.city %> <%= @aabd_resources_second.state %>, <%= @aabd_resources_second.zip %> | <%= @aabd_resources_second.phone %> </p>
-
-          <% end %>
+          <%= render "all_city_programs/aabd_resources" %>
         </li>
-        <% end %>
-      <% if @eligible_tanif == "no" %>
-      <li class="list-group-item">
-        <h3 class="allcityheader">TANF Cash Assistance</h3>
-
-        <h4>Some additional resources from Purple Binder:</h4>
-
-        <% if @child_resources_zip.count >= 2 %>
-        <p><%= @child_resources_zip.first.name %> | <%= @child_resources_zip.first.street %>  <%= @child_resources_zip.first.city %> <%= @child_resources_zip.first.state %>, <%= @child_resources_zip.first.zip %> | <%= @child_resources_zip.first.phone %> </p>
-
-        <p><%= @child_resources_zip.second.name %> | <%= @child_resources_zip.second.street %>  <%= @child_resources_zip.second.city %> <%= @child_resources_zip.second.state %>, <%= @child_resources_zip.second.zip %> | <%= @child_resources_zip.second.phone %> </p>
-        <% end %>
-
-        <% if @child_resources_first.present? %>
-        <p><%= @child_resources_first.name %> | <%= @child_resources_first.street %>  <%= @child_resources_first.city %> <%= @child_resources_first.state %>, <%= @child_resources_first.zip %> | <%= @child_resources_first.phone %> </p>
-
-        <p><%= @child_resources_second.name %> | <%= @child_resources_second.street %>  <%= @child_resources_second.city %> <%= @child_resources_second.state %>, <%= @child_resources_second.zip %> | <%= @child_resources_second.phone %> </p>
-
-        <% end %>
-      </li>
       <% end %>
+
+      <% if @eligible_tanif == "no" %>
+        <li class="list-group-item">
+          <h3 class="allcityheader">TANF Cash Assistance</h3>
+          <%= render "all_city_programs/child_resources" %>
+        </li>
+      <% end %>
+
+    </ul>
+  </div>
+<% end %>
+
+
+<!-- Community Resources -->
+<% if @already_receiving_count > 0 %>
+<div class="panel panel-default allcitypanel">
+  <div class="allcityheading">
+      <h2>Community Resources</h2>
+      <p class="subhead" style="text-align:left;">Below are community resources that can help you:</p>
+  </div>
+
+    <ul class="list-group">
+    <!-- Food Resources-->
+    <% if @eligible_snap == "already receiving" %>
+      <li class="list-group-item">
+        <h3 class="allcityheader">Food Resources</h3>
+        <%= render "all_city_programs/food_resources" %>
+      </li>
+    <% end %>
+
+    <!-- Transportation Resources -->
+    <% if @eligible_rta == "already receiving" %>
+      <li class="list-group-item">
+        <h3 class="allcityheader">Transportation Resources</h3>
+        <%= render "all_city_programs/transportation_resources" %>
+      </li>
+    <% end %>
+
+    <!-- Health Resources -->
+    <% if @eligible_all_kids == "already receiving" || @eligible_medicaid == "already receiving" || @eligible_medicare_cost_sharing == "already receiving"%>
+      <li class="list-group-item">
+        <h3 class="allcityheader">Health Resources</h3>
+        <%= render "all_city_programs/medical_resources" %>
+      </li>
+    <% end %>
+
+    <!-- Housing Resources -->
+    <% if @rental_eligible == "already receiving" %>
+      <li class="list-group-item">
+        <h3 class="allcityheader">Housing Resources</h3>
+        <%= render "all_city_programs/housing_resources" %>
+      </li>
+    <% end %>
+
+    <!-- Aabd Resources -->
+    <% if @aabd_eligible == "already receiving" %>
+      <li class="list-group-item">
+        <h3 class="allcityheader">Elderly Resources</h3>
+        <%= render "all_city_programs/aabd_resources" %>
+      </li>
+    <% end %>
+
+    <!-- Child Care Resources -->
+    <% if @eligible_tanif == "already receiving" %>
+      <li class="list-group-item">
+        <h3 class="allcityheader">Child Care Resources</h3>
+        <%= render "all_city_programs/child_resources" %>
+      </li>
+    <% end %>
 
     </ul>
   </div>
 
 <% end %>
 
-
 <%= render "layouts/print_center_button" %>
 </div>
-

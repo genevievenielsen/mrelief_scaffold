@@ -1,0 +1,138 @@
+
+<div class="container">
+  <div class ="row">
+    <div class="col-md-10 col-md-offset-1">
+      <h1 class="page-header">Programs for Chicago & Illinois</h1>
+
+
+      <p class="subhead"> Below are the benefits that you are still in the running for! </p>
+
+      <p class="subhead">At the bottom are community resources that address the same issues as the programs you are ineligible for or already receiving.</p>
+
+    </div>
+  </div>
+</div>
+
+
+<div>
+  <h4 style="text-align:center">Click on a benefit below to continue the pre-screening process.</h4>
+</div>
+
+
+<br>
+
+<!-- City of Chicago Programs  -->
+<div class="container">
+ <div class="row">
+    <div class="col-md-12">
+      <h3 class="program-heading" style="padding-bottom:0px">CHICAGO PROGRAMS</h3>
+        <h4 style="text-align:center">Accessible in Community Service Centers</h4>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+
+  <% @programs.each_with_index do |program| %>
+
+      <div class="col-md-4" >
+        <a href="<%= program.url %>" class="thumbnail" style="padding:0 20px 20px 20px">
+          <span class="caption">
+            <h3><%= program.name %></h3>
+            <p><%= program.description %></p>
+          </span>
+        </a>
+      </div>
+  <% end %>
+  </div>
+
+<hr>
+
+
+<!-- Illinois Programs  -->
+ <div class="row">
+    <div class="col-md-12">
+      <h3 class="program-heading">STATE OF ILLINOIS PROGRAMS</h3>
+    </div>
+  </div>
+
+  <div class="row">
+  <% @illinois_programs.each_with_index do |program| %>
+
+      <div class="col-md-4">
+        <a href="<%= program.url %>" class="thumbnail">
+          <span class="caption">
+            <h3><%= program.name %></h3>
+            <p><%= program.description %></p>
+          </span>
+        </a>
+      </div>
+  <% end %>
+  </div>
+
+<hr>
+
+<!-- Community Resources -->
+ <div class="row">
+   <div class="col-md-12">
+     <h3 class="program-heading">NON-PROFIT RESOURCES</h3>
+   </div>
+ </div>
+
+ <div class="row">
+ <% @community_resources.each do |resource| %>
+    <div class="col-md-4">
+      <a href="#" class="thumbnail" data-toggle="modal" data-target="#myModal">
+        <span class="caption">
+          <h3><%= resource.capitalize %></h3>
+          <p>Find <%= resource %> resources that can help you in your community</p>
+        </span>
+      </a>
+    </div>
+
+ <% end %>
+ </div>
+
+</div>
+
+ <!-- Zipcode Modal -->
+ <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+     <div class="modal-content">
+
+        <div class="modal-header">
+            <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+
+         <div class="modal-body">
+         <div class="container">
+           <div class="col-md-9">
+              <%= form_tag community_resources_url, method: :post do %>
+
+                  <div class="form-group col-md-9">
+                     <label for="zipcode">What is your zipcode?</label>
+                       <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" required>
+                   </div>
+
+                 <%= hidden_field_tag :resources, @community_resources %>
+
+                <div class="form-group col-md-9">
+                  <%= submit_tag "Enter", name: nil, :class => "btn btn-primary btn-sm col-sm-4", :style=>"display:block-inline;" %>
+                </div>
+               <% end %>
+
+           </div>
+         </div>
+       </div>
+
+     </div>
+   </div>
+ </div>
+
+
+
+
+
+<br>
+<br>
+<br>
+

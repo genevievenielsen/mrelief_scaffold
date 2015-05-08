@@ -1,0 +1,10 @@
+<h4>Some additional resources from Purple Binder:</h4>
+<% if @child_resources_zip.count >= 2 %>
+  <p><%= @child_resources_zip.first.name %> | <%= @child_resources_zip.first.street %>  <%= @child_resources_zip.first.city %> <%= @child_resources_zip.first.state %>, <%= @child_resources_zip.first.zip %> | <%= @child_resources_zip.first.phone %> </p>
+  <p><%= @child_resources_zip.second.name %> | <%= @child_resources_zip.second.street %>  <%= @child_resources_zip.second.city %> <%= @child_resources_zip.second.state %>, <%= @child_resources_zip.second.zip %> | <%= @child_resources_zip.second.phone %> </p>
+<% end %>
+
+<% if @child_resources_first.present? %>
+  <p><%= @child_resources_first.name %> | <%= @child_resources_first.street %>  <%= @child_resources_first.city %> <%= @child_resources_first.state %>, <%= @child_resources_first.zip %> | <%= @child_resources_first.phone %> </p>
+  <p><%= @child_resources_second.name %> | <%= @child_resources_second.street %>  <%= @child_resources_second.city %> <%= @child_resources_second.state %>, <%= @child_resources_second.zip %> | <%= @child_resources_second.phone %> </p>
+<% end %>

@@ -312,11 +312,6 @@ a:hover {
   margin-top: 5px;
   margin-bottom: 5px;
 }
-/*
-.print-button-right{
-  margin-right:10px;
-}
-*/
 
 .calculator {
   border-radius: 4px;
@@ -350,4 +345,12 @@ a:hover {
   -webkit-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
   box-shadow: 0 5px 10px rgba(0,0,0,0.2);
   white-space: normal;
+}
+
+.missing_global_question {
+  z-index: 100;
+}
+
+.inline_text {
+  display: inline;
 }
