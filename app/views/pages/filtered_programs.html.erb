@@ -99,7 +99,7 @@
  </div>
 
  <div class="row">
- <% @community_resources.each do |resource| %>
+ <% @community_resources.uniq.each do |resource| %>
     <div class="col-md-4">
       <a href="#" class="thumbnail" data-toggle="modal" data-target="#myModal">
         <span class="caption">

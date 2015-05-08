@@ -270,8 +270,8 @@ class PagesController < ApplicationController
   end
 
   def community_resources
-    @resources = params[:resources]
-    @community_resources = @resources.uniq
+
+    @community_resources = params[:resources]
     @user_zipcode = params[:zipcode]
 
     # FOOD RESOURCES
