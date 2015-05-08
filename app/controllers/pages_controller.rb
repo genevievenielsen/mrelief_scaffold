@@ -169,7 +169,7 @@ class PagesController < ApplicationController
     end
 
     if params[:aabd].present?
-      @community_resources.push("elderly")
+      @community_resources.push("aging")
     else
       @aabd = Program.find_by(:name_en => "AABD Cash Assistance")
       @programs.push(@aabd)
