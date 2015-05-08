@@ -83,10 +83,13 @@ class PagesController < ApplicationController
     # CHICAGO PROGRAMS
     @programs = []
     @community_resources = []
+    @ineligible_or_receiving_programs = []
 
+    @snap = Program.find_by(:name_en => "Food Stamps")
     if params[:food_stamps].present?
       # User is already receiving food stamps
       @community_resources.push("food")
+      @ineligible_or_receiving_programs.push(@snap)
     else
       # Food Stamps logic, based on household size, age, disability status and gross monthly income
       if  params[:disabled] != "No"
@@ -98,87 +101,97 @@ class PagesController < ApplicationController
       end
 
       if params[:gross_income].to_i < @snap_eligibility.snap_gross_income
-        @snap = Program.find_by(:name_en => "Food Stamps")
         @programs.push(@snap)
       else
         @community_resources.push("food")
       end
     end
 
+    @rta_ride_free = Program.find_by(:name_en => "RTA Ride Free")
     if params[:rta_ride_free].present?
       @community_resources.push("transportation")
+      @ineligible_or_receiving_programs.push(@rta_ride_free)
     else
       # RTA Ride Free logic, based on age and disability status
       if @age > 64 || params[:disabled] != "No"
-        @rta_ride_free = Program.find_by(:name_en => "RTA Ride Free")
         @programs.push(@rta_ride_free)
       else
         @community_resources.push("transportation")
+        @ineligible_or_receiving_programs.push(@rta_ride_free)
       end
     end
 
+    @medicaid = Program.find_by(:name_en => "Medicaid")
     if params[:medicaid].present?
       @community_resources.push("health")
+      @ineligible_or_receiving_programs.push(@medicaid)
     else
       # Medicaid logic, based on household size and gross monthly income
       @medicaid_eligibility = Medicaid.find_by({ :medicaid_household_size => @dependent_no})
       if params[:gross_income].to_i < @medicaid_eligibility.medicaid_gross_income
-        @medicaid = Program.find_by(:name_en => "Medicaid")
         @programs.push(@medicaid)
       else
         @community_resources.push("health")
+        @ineligible_or_receiving_programs.push(@medicaid)
       end
     end
 
+    @medicare_cost_sharing = Program.find_by(:name_en => "Medicare Cost Sharing")
     if params[:medicare_cost_sharing].present?
       @community_resources.push("health")
+      @ineligible_or_receiving_programs.push(@medicare_cost_sharing)
     else
       # Medicare Cost Sharing logic, based on household size and gross monthly income
       @medicare_sharing_eligibility = MedicareCostSharing.find_by({ :household_size => @dependent_no})
       if params[:gross_income].to_i < @medicare_sharing_eligibility.premium_only
-        @medicare_cost_sharing = Program.find_by(:name_en => "Medicare Cost Sharing")
         @programs.push(@medicare_cost_sharing)
       else
         @community_resources.push("health")
+        @ineligible_or_receiving_programs.push(@medicare_cost_sharing)
       end
     end
 
+    @all_kids = Program.find_by(:name_en => "All Kids")
     if params[:all_kids].present?
       @community_resources.push("health")
+      @ineligible_or_receiving_programs.push(@all_kids)
     else
       # all kids - householdsize and gross monthly income
       if @dependent_no > 1
         number_of_kids = @dependent_no - 1
         @kids_eligibility = AllKid.find_by({ :kids_household_size => number_of_kids })
         if params[:gross_income].to_i < @kids_eligibility.premium_1_gross_income
-          @all_kids = Program.find_by(:name_en => "All Kids")
           @programs.push(@all_kids)
         else
           @community_resources.push("health")
+          @ineligible_or_receiving_programs.push(@all_kids)
         end
       end
     end
 
     # programs that we can't screen for with global questions - rental assistance (90 day gross income),
     #aabd cash assistance, tanf cash assistance
+    @rental_assistance = Program.find_by(:name_en => "Rental Assistance")
     if params[:rental_assistance].present?
       @community_resources.push("housing")
+      @ineligible_or_receiving_programs.push(@rental_assistance)
     else
-      @rental_assistance = Program.find_by(:name_en => "Rental Assistance")
       @programs.push(@rental_assistance)
     end
 
+    @aabd = Program.find_by(:name_en => "AABD Cash Assistance")
     if params[:aabd].present?
       @community_resources.push("aging")
+      @ineligible_or_receiving_programs.push(@aabd)
     else
-      @aabd = Program.find_by(:name_en => "AABD Cash Assistance")
       @programs.push(@aabd)
     end
 
+    @tanf = Program.find_by(:name_en => "TANF")
     if params[:tanf].present?
       @community_resources.push("child care")
+      @ineligible_or_receiving_programs.push(@tanf)
     else
-      @tanf = Program.find_by(:name_en => "TANF")
       @programs.push(@tanf)
     end
 
@@ -190,55 +203,68 @@ class PagesController < ApplicationController
     # ILLINOIS PROGRAMS
     @illinois_programs = []
 
+    @child_care = Program.find_by(:name_en => "Child Care Voucher")
     if params[:child_care_vouchers].present?
       @community_resources.push("child care")
+      @ineligible_or_receiving_programs.push(@child_care)
     else
       # child care vouchers - householdsize and gross monthly income
       @ccdf_eligibility = ChildCareVoucher.find_by({ :ccdf_dependent_no => @dependent_no})
       if params[:gross_income].to_i < @ccdf_eligibility.ccdf_gross_income
-        @child_care = Program.find_by(:name_en => "Child Care Voucher")
         @illinois_programs.push(@child_care)
       else
         @community_resources.push("child care")
+        @ineligible_or_receiving_programs.push(@child_care)
       end
     end
 
+    @wic = Program.find_by(:name_en => "Women, Infants and Children (WIC)")
     if params[:wic].present?
       @community_resources.push("child care")
+      @ineligible_or_receiving_programs.push(@wic)
     else
       # wic - household size and gross monthly income
       @wic_eligibility = Wic.find_by({ :wic_household_size => @dependent_no})
       if params[:gross_income].to_i < @wic_eligibility.wic_gross_income
-        @wic = Program.find_by(:name_en => "Women, Infants and Children (WIC)")
         @illinois_programs.push(@wic)
       else
         @community_resources.push("child care")
+        @ineligible_or_receiving_programs.push(@wic)
       end
     end
 
+    @ehs = Program.find_by(:name_en => "Early Head Start")
     if params[:early_head_start].present?
       @community_resources.push("early head start")
+      @ineligible_or_receiving_programs.push(@ehs)
     else
       # early head start - household size and gross monthly income
       @ehs_eligibility = EarlyHeadStart.find_by({ :ehs_dependent_no => @dependent_no})
       if params[:gross_income].to_i< @ehs_eligibility.ehs_gross_income
-        @ehs = Program.find_by(:name_en => "Early Head Start")
         @illinois_programs.push(@ehs)
       else
         @community_resources.push("early head start")
+        @ineligible_or_receiving_programs.push(@ehs)
       end
     end
 
+    @head_start = Program.find_by(:name_en => "Head Start")
     if params[:head_start].present?
       @community_resources.push("head start")
+      @ineligible_or_receiving_programs.push(@head_start)
     else
       # head start - household size
       if @dependent_no > 1
-        @head_start = Program.find_by(:name_en => "Head Start")
         @illinois_programs.push(@head_start)
       else
         @community_resources.push("head start")
+        @ineligible_or_receiving_programs.push(@head_start)
       end
+    end
+
+    @ineligible_or_receiving_programs_names = []
+    @ineligible_or_receiving_programs.each do |program|
+      @ineligible_or_receiving_programs_names.push(program.name_en)
     end
 
   end
