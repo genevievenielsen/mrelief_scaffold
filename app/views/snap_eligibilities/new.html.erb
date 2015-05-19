@@ -91,7 +91,7 @@
 
 
     <div class="form-group col-md-9">
-          <label for="disabled" id="disabled">Are you receiving disability benefits?</label>
+      <label for="disabled" id="disabled">Are you receiving disability benefits?</label>
       <% [ 'Yes, from Social Security', 'Yes, from the Railroad Retirement Board ', 'Yes, from Veterans Affairs', 'No' ].each do |disabled| %>
         <br><%= radio_button_tag 'disabled', disabled, @d.disabled_status == disabled %>
         <%= disabled.humanize %>
@@ -99,15 +99,14 @@
     </div>
 
     <div class="form-group col-md-9">
-    <label for="location" id="location_dropdown">Where are you completing this form? </label>
-    <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], ['Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Center for Working Families', 'center_for_working_families'], ['CTA Bus', 'cta_bus'], ['Other', 'other']], @d.user_location), :class => "form-control", :prompt => "Select a location") %>
+      <label for="location" id="location_dropdown">Where are you completing this form? </label>
+      <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], ['Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Center for Working Families', 'center_for_working_families'], ['CTA Bus', 'cta_bus'], ['Other', 'other']], @d.user_location), :class => "form-control", :prompt => "Select a location") %>
     </div>
 
 
   <div class="form-group col-md-9">
     <label for="phone_number">What is your cell phone number?</label>
       <button type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-
       <p type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA" >
         <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control" value="<%= @d.phone_number %>" required>
       </p>
@@ -158,6 +157,7 @@ $(document).ready(function() {
   $(function (){
     $("[data-toggle='popover']").popover();
   });
+
   $('body').on('click', function (e) {
       $('[data-toggle="popover"]').each(function () {
           //the 'is' for buttons that trigger popups
