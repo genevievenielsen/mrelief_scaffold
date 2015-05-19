@@ -22,11 +22,11 @@
   box-sizing:border-box;
 }
 
-header{
+header {
   margin-top: 60px;
 }
 
-body{
+body {
   margin-left: 0px;
   margin-right: 0px;
 }
@@ -78,13 +78,12 @@ body{
 
 }
 
-ul {
+/*ul {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
 h1,h2,h3 {
   font-family: 'Source Sans Pro', sans-serif;
-  /*text-align: center;*/
 }
 
 h4 {
@@ -96,7 +95,7 @@ p {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: normal 400;
   /*text-align: center;*/
-}
+}*/
 
 /*HOMEPAGE*/
 

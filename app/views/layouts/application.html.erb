@@ -3,64 +3,52 @@
 <head>
   <meta charset="utf-8">
   <title>mRelief</title>
-
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css">
-
-  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="assets/sitestyles.css">
-
-  <style>
-    /* Only necessary if you are using navbar-fixed-top */
-   /* body {
-      padding-top: 50px;
-    }
-*/
-  </style>
-
   <%= stylesheet_link_tag    "application", :media => "all" %>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="stylesheets/mrelief-root.scss">
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.9.3/typeahead.min.js" %>
   <%= csrf_meta_tags %>
-
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
       <a href="/" class="navbar-brand logo">mRelief</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-left">
         <li><a href="/programs">Programs</a></li>
-        <li><a href="/how_mrelief_works">How Mrelief Works</a></li>
-        <li><a href="/about_us">About Us</a></li>
-        <li><a href="/contact">Contact Us</a></li>
-        <li><a href="/press_release">Press Release</a></li>
+<!--         <li><a href="#">About</a>
+          <ul>
+            <li><a href="how_mrelief_works">How mRelief Works</a></li>
+            <li><a href="/about_us">The team</a></li>
+            <li><a href="/press_release">Press releases</a></li>
+          </ul> -->
+        </li>
+        <li><a href="/about_us">Contact</a></li>
+        <li><a href="https://www.goodcitychicago.org/donate/" class="btn-donate" data-toggle="tooltip" data-placement="bottom" title="Please select &ldquo;mRelief&rdquo; on the program section">Donate</a></li>
         <li>
           <% if I18n.locale == :es %>
-            <%= link_to "English", set_language_english_path %>
+            <%= link_to "EN", set_language_english_path %>
           <% elsif I18n.locale = :en %>
-            <%= link_to "Español", set_language_spanish_path %>
+            <%= link_to "ES", set_language_spanish_path %>
           <% end %>
         </li>
-        <li><a href="https://www.goodcitychicago.org/donate/" class="btn-donate" data-toggle="tooltip" data-placement="bottom" title="Please select &ldquo;mRelief&rdquo; on the program section">Donate</a></li>
       </ul>
   </nav>
   </div>
@@ -89,23 +77,6 @@
 </div>
 </div>
 
-    <footer class="navbar-default footer" role="navigation">
-      <div class="container">
-      <div class="col-md-2">
-        <div class="row">
-          <a href="/" class="navbar-brand logo">mRelief</a>
-        </div>
-        <div>
-            <a href ="https://www.facebook.com/mRelief"><i class="fa fa-facebook-square pull-left fa-2x"></i></a>
-            <a href ="https://twitter.com/mrelief_form"><i class="fa fa-twitter-square pull-left fa-2x"></i></a>
-            <a href ="https://plus.google.com/117049110248209318421 "><i class="fa fa-google-plus-square pull-left fa-2x"></i></a>
-        </div>
-      </div>
-        <div class="col-md-10 col-sm-12 col-xs-12">
-           <p id="disclaimer"> *mRelief does not predict with 100% accuracy whether users will definitely be approved for benefits; but instead provides users with information about whether it is worth it to invest the time required for the application process. However, we are working to make our forms more inclusive everyday. If you are undocumented, a legal permanent resident, or have a very specific case, our system refers you to paralegals who can help. Stay tuned for more updates!</p>
-        </div>
-      </div>
-    </footer>
 
     </div>
   </div>
