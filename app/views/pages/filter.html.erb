@@ -60,6 +60,7 @@
         <div class="row">
           <div class="form-group col-md-12">
                 <label for="benefits" id="benefits">Are you currently receiving public benefits?</label><br>
+                <p>If you are already receiving a program and do NOT want to be screened for that program when checking your eligibility, please check all of the benefits that you are currently receiving. </p>
             <% [ 'yes', 'no' ].each do |benefits| %>
               <%= radio_button_tag 'benefits', benefits, @current_user.try(:benefits) == benefits  %>
               <%= benefits.humanize %>
