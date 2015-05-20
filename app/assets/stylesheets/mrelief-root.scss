@@ -1,6 +1,8 @@
 /*This stylesheet is for all root elements*/
 
 $font-stack: 'Open Sans', sans-serif;
+$form-label: rgb(39, 33, 33);
+$button-color: #61d395;
 
 body, h1, h2, h3 {
   font-family: $font-stack;
@@ -10,6 +12,56 @@ body, h1, h2, h3 {
   margin-top: 50px;
 
   label {
+    display: inline-block;
+    margin-bottom: 15px;
+    font-weight: 400;
+    color: $form-label;
+  }
+}
 
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.form-field {
+  display: block;
+  width: 60%;
+  font-size: 16px;
+  padding: 15px 20px;
+  margin-bottom: 50px;
+  border: 1px solid rgb(181, 181, 181);
+  border-radius: 3px;
+  background-color: rgb(247, 247, 247);
+
+  &:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6);
+  }
+}
+
+.drop-down {
+  height: 50px;
+}
+
+.radio-button {
+  margin-bottom: 40px;
+}
+
+button {
+  font-family: $font-stack;
+  padding: 15px 30px;
+  border-radius: 3px;
+  border: 1px solid $button-color;
+  background-color: $button-color;
+  color: #fff;
+
+  &:hover {
+    background-color: #39c378;
+    border: 1px solid #39c378;
   }
 }

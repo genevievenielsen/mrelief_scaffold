@@ -1,3 +1,4 @@
+<div class="container">
 <section class="content-section">
   <div class="row">
     <div class="col-md-12">
@@ -9,95 +10,98 @@
 <section class="content-section">
   <form action="/snap_eligibilities" role="form" method="post">
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-5">
         <label for="age">How old are you?</label>
-        <input type="text" id="age" name="age" placeholder="For example: 27" class="form-control" value="<%= @d.age %>" required>
+        <input type="text" id="age" name="age" placeholder="For example: 27" class="form-field" value="<%= @d.age %>" required>
       </div>
     </div>
 <!-- Form for household size -->
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-5">
         <label for="snap_dependent_no">What is the number of people living in your household including yourself?</label>
-        <button type="button" data-toggle="popover" data-content="This should include the number of people who purchase and prepare food with you." data-placement="top"><i class="fa fa-info-circle"></i></button>
-        <div type="button" data-toggle="popover" data-content="This should include the number of people who purchase and prepare food with you." data-placement="top"></div>
-        <input type="text" id="snap_dependent_no" name="snap_dependent_no" placeholder="For example: 3" class="form-control" value="<%= @d.dependent_no %>" required>
+        <input type="text" id="snap_dependent_no" name="snap_dependent_no" placeholder="For example: 3" class="form-field" value="<%= @d.dependent_no %>" required>
       </div>
     </div>
 <!-- Form for gross monthly income -->
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-5">
         <label for="snap_gross_income">What is your gross monthly income?</label>
-        <button type="button" data-toggle="popover" data-content="This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions." data-placement="top"><i class="fa fa-info-circle"></i></button>
-        <div type="button" data-toggle="popover" data-content="This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions." data-placement="top"></div>
-        <input type="text" id="snap_gross_income" name="snap_gross_income" placeholder="For example: 1000"class="form-control" value="<%= @d.monthly_gross_income %>" required>
+        <input type="text" id="snap_gross_income" name="snap_gross_income" placeholder="For example: 1000" class="form-field" value="<%= @d.monthly_gross_income %>" required>
       </div>
     </div>
 <!-- Form for zipcode -->
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-5">
         <label for="zipcode">What is your zipcode?</label>
-          <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" value="<%= @d.zipcode.chop.chop if @d.zipcode.present? %>"required>
+          <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-field" value="<%= @d.zipcode.chop.chop if @d.zipcode.present? %>"required>
       </div>
     </div>
 <!-- Form for education -->
     <div class="row">
-      <div class="col-md-4" id="education_question">
+      <div class="col-md-5" id="education_question">
         <label for="education" id="education">Are you enrolled in college/institution of higher education?</label>
-        <div id="education_explanation" type="button" data-toggle="popover" data-content="Eligible schools include: a business, technical, trade, or vocational school that normally requires a high school diploma or the equivalent for enrollment in the course of study; or regular courses, including internet, mail, self-study, or correspondence courses, at an accredited college or university that offers degree programs." data-placement="top"><i class="fa fa-info-circle"></i></div>
-        <% [ 'yes', 'no'].each do |education| %>
-          <%= radio_button_tag 'education', education, @d.enrolled_in_education == education %>
-          <%= education.humanize %>
-        <% end %>
+        <div class="radio-button">
+          <% [ 'yes', 'no'].each do |education| %>
+            <%= radio_button_tag 'education', education, @d.enrolled_in_education == education %>
+            <%= education.humanize %><br>
+          <% end %>
+        </div>
       </div>
     </div>
     <div class="place_for_student_questions"></div>
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-5">
         <label for="citizen" id="citizen">Are you a citizen of the United States or a legal permanent resident who has lived in the US for at least 5 years?</label>
+        <div class="radio-button">
           <% [ 'yes', 'no'].each do |citizen| %>
             <%= radio_button_tag 'citizen', citizen, @d.citizen == citizen %>
-            <%= citizen.humanize %>
+            <%= citizen.humanize %><br>
           <% end %>
+        </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-5">
         <label for="amount_in_account" id="amount_in_account">Do you have $100 or less in cash or in a checking or savings account?</label>
-        <% [ 'yes', 'no'].each do |amount_in_account| %>
-          <%= radio_button_tag 'amount_in_account', amount_in_account, @d.amount_in_account == amount_in_account %>
-          <%= amount_in_account.humanize %>
-        <% end %>
+        <div class="radio-button">
+          <% [ 'yes', 'no'].each do |amount_in_account| %>
+            <%= radio_button_tag 'amount_in_account', amount_in_account, @d.amount_in_account == amount_in_account %>
+            <%= amount_in_account.humanize %><br>
+          <% end %>
+        </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-5">
         <label for="disabled" id="disabled">Are you receiving disability benefits?</label>
-          <% [ 'Yes, from Social Security', 'Yes, from the Railroad Retirement Board ', 'Yes, from Veterans Affairs', 'No' ].each do |disabled| %>
-          <br><%= radio_button_tag 'disabled', disabled, @d.disabled_status == disabled %>
-          <%= disabled.humanize %>
+        <div class="radio-button">
+        <% [ 'Yes, from Social Security', 'Yes, from the Railroad Retirement Board ', 'Yes, from Veterans Affairs', 'No' ].each do |disabled| %>
+          <%= radio_button_tag 'disabled', disabled, @d.disabled_status == disabled %>
+          <%= disabled.humanize %><br>
         <% end %>
+        </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-5">
         <label for="location" id="location_dropdown">Where are you completing this form? </label>
-        <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], ['Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Center for Working Families', 'center_for_working_families'], ['CTA Bus', 'cta_bus'], ['Other', 'other']], @d.user_location), :class => "form-control", :prompt => "Select a location") %>
+        <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], ['Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Center for Working Families', 'center_for_working_families'], ['CTA Bus', 'cta_bus'], ['Other', 'other']], @d.user_location), :class => "form-field drop-down", :prompt => "Select a location") %>
       </div>
     </div>
    <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-5">
         <label for="phone_number">What is your cell phone number?</label>
-        <button type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top"><i class="fa fa-info-circle"></i></button>
-        <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control" value="<%= @d.phone_number %>" required>
+        <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-field" value="<%= @d.phone_number %>" required>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-5">
         <button type="submit" class="">See if I qualify</button>
       </div>
     </div>
   </form>
 </section>
+</div>
 
 
 <script>
