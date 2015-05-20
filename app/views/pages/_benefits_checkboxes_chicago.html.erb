@@ -1,6 +1,6 @@
 <div class="benefits_checkboxes">
 
-  <p class="allthatapply">Check all of the benefits that you are currenty receiving:</p>
+  <p class="allthatapply">Check all of the benefits that you are currently receiving:</p>
 
   <% if @current_user.try(:food_stamps) == "checked" %>
     <%= check_box_tag "food_stamps", "checked", :checked => true %> Food Stamps<br>
