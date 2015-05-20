@@ -1,14 +1,14 @@
 
 <div class="container">
   <div class ="row">
-    <div class="col-md-10 col-md-offset-1">
-      <h1 class="page-header">Programs for Chicago & Illinois</h1>
+    <div class="col-md-12">
+      <h1 class="page-header">Continue the Screening Process</h1>
 
 
-      <p class="subhead"> Below are the benefits that you are still in the running for! </p>
+      <p class="subhead">You don’t have to retype anything you just shared. Find out if you qualify for programs and access resources that interest you. </p>
 
       <% if @ineligible_or_receiving_programs.count >= 1 %>
-      <p class="subhead">At the bottom are community resources that address the same issues as the programs you are ineligible for or already receiving:
+      <p class="subhead">Below are community resources that address the same issues as the programs you are ineligible for or already receiving:
 
       <% @program_count = @ineligible_or_receiving_programs.count %>
         <% @count = 0 %>
@@ -34,85 +34,50 @@
 </div>
 
 
-<div>
-  <h4 style="text-align:center">Click on a benefit below to continue the pre-screening process.</h4>
-</div>
 
 
 <br>
 
-<!-- City of Chicago Programs  -->
+<!-- Eligible Programs  -->
 <div class="container">
  <div class="row">
-    <div class="col-md-12">
-      <h3 class="program-heading" style="padding-bottom:0px">CHICAGO PROGRAMS</h3>
-        <h4 style="text-align:center">Accessible in Community Service Centers</h4>
-    </div>
-  </div>
-  <br>
-  <div class="row">
+    <div class="col-md-6">
+      <h3 class="program-heading" style="padding-bottom:0px">You are still in the runnings for… </h3>
 
-  <% @programs.each_with_index do |program| %>
-
-      <div class="col-md-4" >
-        <a href="<%= program.url %>" class="thumbnail" style="padding:0 20px 20px 20px">
-          <span class="caption">
-            <h3><%= program.name %></h3>
-            <p><%= program.description %></p>
-          </span>
-        </a>
-      </div>
-  <% end %>
+      <% @all_programs.each_with_index do |program| %>
+        <div class="col-md-12" >
+          <a href="<%= program.url %>" class="thumbnail" style="padding:0 20px 20px 20px">
+            <span class="caption">
+              <h3><%= program.name %></h3>
+              <p><%= program.description %></p>
+            </span>
+          </a>
+        </div>
+      <% end %>
   </div>
 
-<hr>
 
 
-<!-- Illinois Programs  -->
- <div class="row">
-    <div class="col-md-12">
-      <h3 class="program-heading">STATE OF ILLINOIS PROGRAMS</h3>
-    </div>
-  </div>
-
-  <div class="row">
-  <% @illinois_programs.each_with_index do |program| %>
-
-      <div class="col-md-4">
-        <a href="<%= program.url %>" class="thumbnail">
-          <span class="caption">
-            <h3><%= program.name %></h3>
-            <p><%= program.description %></p>
-          </span>
-        </a>
-      </div>
-  <% end %>
-  </div>
 
 <% if @ineligible_or_receiving_programs.count >= 1 %>
-<hr>
 <!-- Community Resources -->
- <div class="row">
-   <div class="col-md-12">
-     <h3 class="program-heading">NON-PROFIT RESOURCES</h3>
+   <div class="col-md-6">
+     <h3 class="program-heading"> Something else in mind!</h3>
+
+    <% @community_resources.uniq.each do |resource| %>
+      <div class="col-md-12">
+        <a href="#" class="thumbnail" data-toggle="modal" data-target="#myModal">
+          <span class="caption">
+            <h3><%= resource.capitalize %></h3>
+            <p>Find <%= resource %> resources that can help you in your community</p>
+          </span>
+        </a>
+      </div>
+    <% end %>
    </div>
- </div>
-
- <div class="row">
- <% @community_resources.uniq.each do |resource| %>
-    <div class="col-md-4">
-      <a href="#" class="thumbnail" data-toggle="modal" data-target="#myModal">
-        <span class="caption">
-          <h3><%= resource.capitalize %></h3>
-          <p>Find <%= resource %> resources that can help you in your community</p>
-        </span>
-      </a>
-    </div>
-
- <% end %>
- </div>
 <% end %>
 
+</div>
 </div>
 
  <!-- Zipcode Modal -->

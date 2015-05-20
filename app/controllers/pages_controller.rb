@@ -267,6 +267,7 @@ class PagesController < ApplicationController
       @ineligible_or_receiving_programs_names.push(program.name_en)
     end
 
+    @all_programs = @programs + @illinois_programs
   end
 
   def community_resources
