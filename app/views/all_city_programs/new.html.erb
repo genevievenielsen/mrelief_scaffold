@@ -30,7 +30,7 @@
         <button type="button" data-toggle="popover" data-content="This should include the number of people who purchase  and prepare food with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i  class="fa fa-info-circle"></i></button>
       <div>
         <p type="button" data-toggle="popover" data-content="This should include the number of people who purchase and  prepare food with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-          <input type="text" id="dependent_no" name="dependent_no" placeholder="For example: 3" class="form-control" value= "<%= @d.dependent_no %>" required>
+          <input type="text" id="dependent_no" name="dependent_no" placeholder="For example: 3" class="form-control" value="<%= @current_user.try(:household_size) %>" required>
         </p>
       </div>
     </div>

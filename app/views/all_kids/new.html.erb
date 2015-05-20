@@ -25,7 +25,7 @@
     <label for="kids_household_size">How many children are living in your household?</label>
      <button type="button" data-toggle="popover" data-content="The number of children living in your household." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
       <p type="button" data-toggle="popover" data-content="The number of children living in your household." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-      <input type="text" id="kids_household_size" name="kids_household_size" placeholder="For example: 3" class="form-control" value="<%= @current_user.try(:household_size) %>"required>
+      <input type="text" id="kids_household_size" name="kids_household_size" placeholder="For example: 3" class="form-control" value="<%= @current_user.try(:household_size) %>" required>
       </p>
   </div>
 
