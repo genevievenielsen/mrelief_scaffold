@@ -34,7 +34,7 @@ class AllCityProgramsController < ApplicationController
     if current_user.present?
       @current_user = current_user
     else
-      @current_user = User.new
+      @current_user = User.last
     end
 
     if params[:dependent_no].present?
@@ -294,6 +294,7 @@ class AllCityProgramsController < ApplicationController
       @a.rental_status = params[:rental_status]
 
       if @current_user.rental_assistance == "checked"
+        puts "I made it here"
         @rental_eligible = "already receiving"
       else
           rental_eligibility = RentalAssistance.find_by({ :rental_dependent_no => dependent_no })
