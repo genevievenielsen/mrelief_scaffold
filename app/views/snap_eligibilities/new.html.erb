@@ -15,10 +15,9 @@
   <div class="panel-body">
     <form action="/snap_eligibilities" role="form" method="post">
 
-  <div class="form-group col-md-9">
-    <label for="age">How old are you?</label>
-      <input type="text" id="age" name="age" placeholder="For example: 27" class="form-control" value="<%= @d.age %>" required>
-  </div>
+    <!-- age question -->
+    <%= render "programs/age_question" %>
+
 
 <!-- Label and input for snap_dependent_no -->
   <div class="form-group col-md-9">
@@ -26,7 +25,7 @@
       <button type="button" data-toggle="popover" data-content="This should include the number of people who purchase and prepare food with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
     </label>
         <p type="button" data-toggle="popover" data-content="This should include the number of people who purchase and prepare food with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-          <input type="text" id="snap_dependent_no" name="snap_dependent_no" placeholder="For example: 3" class="form-control" value="<%= @d.dependent_no %>" required>
+          <input type="text" id="snap_dependent_no" name="snap_dependent_no" placeholder="For example: 3" class="form-control" value="<%= @current_user.try(:household_size) %>" required>
         </p>
   </div>
 
@@ -40,7 +39,7 @@
     <div class="input-group">
       <span class="input-group-addon">$</span>
          <p type="button" data-toggle="popover" data-content="This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-          <input type="text" id="snap_gross_income" name="snap_gross_income" placeholder="For example: 1000"class="form-control" value="<%= @d.monthly_gross_income %>" required>
+          <input type="text" id="snap_gross_income" name="snap_gross_income" placeholder="For example: 1000"class="form-control" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %> " required>
         </p>
       <span class="input-group-addon">.00</span>
     </div>

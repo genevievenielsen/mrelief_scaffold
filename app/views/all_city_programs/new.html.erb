@@ -72,7 +72,7 @@
         <div class="input-group">
           <span class="input-group-addon">$</span>
           <p type="button" data-toggle="popover" data-content="This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-           <input type="text" id="monthly_gross_income" name="monthly_gross_income" placeholder="For example: 1000"class="    form-control" value="<%= @d.monthly_gross_income %>" required>
+           <input type="text" id="monthly_gross_income" name="monthly_gross_income" placeholder="For example: 1000"class="form-control" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %> " required>
            </p>
          <span class="input-group-addon">.00</span>
         </div>

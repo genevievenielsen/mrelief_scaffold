@@ -25,7 +25,7 @@
     <label for="kids_household_size">How many children are living in your household?</label>
      <button type="button" data-toggle="popover" data-content="The number of children living in your household." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
       <p type="button" data-toggle="popover" data-content="The number of children living in your household." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-      <input type="text" id="kids_household_size" name="kids_household_size" placeholder="For example: 3" class="form-control" value="<%= @a.household_size %>"required>
+      <input type="text" id="kids_household_size" name="kids_household_size" placeholder="For example: 3" class="form-control" value="<%= @current_user.try(:household_size) %>"required>
       </p>
   </div>
 
@@ -47,7 +47,7 @@
     <div class="input-group">
       <span class="input-group-addon">$</span>
          <p type="button" data-toggle="popover" data-content="Total monthly income from all sources." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-          <input type="text" id="kids_gross_income" name="kids_gross_income" placeholder="For example: 1000" class="form-control"  value="<%= @a.monthly_gross_income %>" required>
+          <input type="text" id="kids_gross_income" name="kids_gross_income" placeholder="For example: 1000" class="form-control"  value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %> " required>
          </p>
       <span class="input-group-addon">.00</span>
     </div>

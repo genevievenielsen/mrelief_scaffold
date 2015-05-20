@@ -8,6 +8,7 @@ class AllKidsController < ApplicationController
   def new
     @all_kid = AllKid.new
     @a = AllKidsData.new
+    @current_user = current_user
   end
 
   # POST /all_kids
