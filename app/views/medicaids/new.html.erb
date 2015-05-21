@@ -36,7 +36,7 @@
        <div class="col-md-9">
        <p type="button" data-toggle="popover" data-content="Household size: How many people live in your home (including yourself)?" data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
 
-        <input type="text" id="medicaid_household_size" name="medicaid_household_size" placeholder="For example: 3" class="form-control"  value="<%= @m.household_size %>" required>
+        <input type="text" id="medicaid_household_size" name="medicaid_household_size" placeholder="For example: 3" class="form-control"  value="<%= @d.household_size %>" required>
        </p>
        </div>
      </div>
@@ -64,49 +64,27 @@
     </div>
     </div>
 
+    <!-- Form for zipcode -->
+      <%= render "programs/zipcode_question" %>
 
-   <div class="row">
-    <div class="form-group col-sm-9 pull-left">
-      <label for="zipcode">What is your zipcode?</label>
-        <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" value="<%= @m.zipcode.chop.chop if @m.zipcode.present? %>"required>
-    </div>
-   </div>
+    <!-- Form for location question -->
+      <%= render "programs/location_question" %>
 
-  <div class="row">
-    <div class="form-group col-sm-9">
-    <label for="location" id="location_dropdown">Where are you completing this form? </label>
-    <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], ['Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Center for Working Families', 'center_for_working_families'], ['CTA Bus', 'cta_bus'], ['Other', 'other']], @m.user_location), :class => "form-control", :prompt => "Select a location") %>
-    </div>
-  </div>
+    <!-- Form for cellphone question -->
+      <%= render "programs/cellphone_question" %>
 
-  <div class="row">
-  <div class="form-group col-sm-9">
-    <label for="phone_number">What is your cell phone number?</label>
-      <button type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-    <div>
-      <p type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-      <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control" value="<%= @m.phone_number %>" required>
-      </p>
-    </div>
-  </div>
-  </div>
+    <!-- Submit button -->
+      <%= render "programs/submit_button" %>
 
-
-
-<div>
-    <button type="submit" class="btn btn-primary program-btn">See if I qualify</button>
-</div>
 </form>
-</div>
 
-</div>
-  <div class="col-md-3 sm-3 xs-12 pull-left">
+ <!--  <div class="col-md-3 sm-3 xs-12 pull-left">
      <div class="calculator_box">
-       <%= render "programs/calculator" %>
+       <%#= render "programs/calculator" %>
      </div>
-   </div>
+   </div> -->
 
-</div>
+
 </div>
 
 <script>
