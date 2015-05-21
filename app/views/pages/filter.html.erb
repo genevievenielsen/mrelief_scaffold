@@ -1,70 +1,56 @@
-<div class="alert alert-warning alert-dismissible" role="alert">
-  <div class="container">
-   <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-    <strong>Check your eligibility via SMS:</strong> Text "hello" to 1-773-377-8946.
+<div class="container">
+<section class="content-section">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>All Programs At Once</h1>
+      <p> Enter your information below to check your eligibility for public assistance.</p>
+    </div>
   </div>
-</div>
-
-<div class="row">
-  <div class="col-md-offset-2 col-md-8">
-    <h2>All At Once</h2>
-    <p>Enter your information below to check your eligibility for public assistance.</p>
-  </div>
-</div>
+</section>
 
 
 
-<div class="row">
-  <div class="panel panel-default col-md-offset-2 col-md-8">
-    <div class="panel-body">
-      <form action="/filtered_programs" role="form" method="get">
 
-      <!-- age question -->
+<section class="content-section">
+  <form action="/filtered_programs" role="form" method="get">
+
+    <!-- Form for age question -->
       <%= render "programs/age_question" %>
 
-      <!-- income question -->
+    <!-- Form for household question -->
       <div class="row">
-        <div class="form-group col-md-12">
+        <div class="col-md-5">
           <label for="dependent_no">What is the number of people living in your household including yourself?</label>
-            <button type="button" data-toggle="popover" data-content="This should include the number of people who purchase and prepare food with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-          <div class="row">
-            <div class="col-md-9">
-              <p type="button" data-toggle="popover" data-content="This should include the number of people who purchase and prepare food with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-                <input type="text" id="dependent_no" name="dependent_no" placeholder="For example: 3" class="form-control" value="<%= @current_user.try(:household_size) %>" required>
-              </p>
-            </div>
-          </div>
+            <!-- <button type="button" data-toggle="popover" data-content="This should include the number of people who purchase and prepare food with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
+              <input type="text" id="dependent_no" name="dependent_no" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>" required>
         </div>
       </div>
 
-      <!-- gross income question-->
+    <!-- Form for gross income question-->
       <div class="row">
-        <div class="form-group col-md-9">
+        <div class=" col-md-5">
           <label for="gross_income">
             What is your gross monthly income?
           </label>
-          <button type="button" data-toggle="popover" data-content="This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as   Social Security, child support, and unemployment insurance before any deductions." data-placement="top    " style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-          <div class="input-group">
-            <span class="input-group-addon">$</span>
-               <p type="button" data-toggle="popover" data-content="This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-                <input type="text" id="gross_income" name="gross_income" placeholder="For example: 1000"class="form-control" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %>" required>
-              </p>
-            <span class="input-group-addon">.00</span>
-          </div>
+            <!--  <button type="button" data-toggle="popover" data-content="This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as   Social Security, child support, and unemployment insurance before any deductions." data-placement="top    " style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
+              <input type="text" id="gross_income" name="gross_income" placeholder="For example: 1000"class="form-field" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %>" required>
           </div>
         </div>
 
-        <!-- disability question -->
+      <!-- Form for disability question -->
         <%= render "programs/disability_question" %>
 
-        <!-- benefits question -->
+      <!-- Form for benefits question -->
         <div class="row">
-          <div class="form-group col-md-12">
-                <label for="benefits" id="benefits">Are you currently receiving public benefits?</label><br>
+          <div class="col-md-5">
+            <label for="benefits" id="benefits">Are you currently receiving public benefits?</label><br>
+            <div class="radio-button">
             <% [ 'yes', 'no' ].each do |benefits| %>
               <%= radio_button_tag 'benefits', benefits, @current_user.try(:benefits) == benefits  %>
               <%= benefits.humanize %>
+              <br>
             <% end %>
+            </div>
           </div>
         </div>
 
@@ -72,14 +58,13 @@
         </div>
 
         <div class="row">
-          <div class="col-md-12">
-            <button type="submit" class="btn btn-primary program-btn">Continue</button>
+          <div class="col-md-5">
+            <button type="submit" >Continue</button>
           </div>
         </div>
 
-      </form>
-    </div>
-  </div>
+    </form>
+  </section>
 </div>
 
 <script type="text/javascript">
