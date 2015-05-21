@@ -6,17 +6,18 @@ class ChildCareVouchersController < ApplicationController
   # GET /child_care_vouchers/new
  def new
     @child_care_voucher = ChildCareVoucher.new
+    @d = ChildCareVoucherData.new
   end
 
   def create
-    c = ChildCareVoucherData.new
+    @d = ChildCareVoucherData.new
     # if the params hash contains a letter
     if params[:ccdf_dependent_no] !~ /\D/  # returns true if all numbers
       ccdf_dependent_no = params[:ccdf_dependent_no].to_i
-      c.dependent_no = ccdf_dependent_no
+      @d.dependent_no = ccdf_dependent_no
     else
       ccdf_dependent_no = params[:ccdf_dependent_no].in_numbers
-      c.dependent_no = ccdf_dependent_no
+      @d.dependent_no = ccdf_dependent_no
     end
 
 
@@ -26,13 +27,13 @@ class ChildCareVouchersController < ApplicationController
 
     if ccdf_gross_income !~ /\D/
       ccdf_gross_income = ccdf_gross_income.to_i
-      c.gross_monthly_income = ccdf_gross_income
+      @d.gross_monthly_income = ccdf_gross_income
     else
       if ccdf_gross_income.include?("dollars")
         ccdf_gross_income.slice!"dollars"
       end
       ccdf_gross_income = ccdf_gross_income.in_numbers
-      c.gross_monthly_income = ccdf_gross_income
+      @d.gross_monthly_income = ccdf_gross_income
     end
 
     if ccdf_gross_income.present? && ccdf_dependent_no.present?
@@ -45,9 +46,9 @@ class ChildCareVouchersController < ApplicationController
 
        if ccdf_gross_income < ccdf_eligibility.ccdf_gross_income
          @eligible = true
-         c.eligibility_status = "yes"
+         @d.eligibility_status = "yes"
        else
-          c.eligibility_status = "no"
+          @d.eligibility_status = "no"
        end
      else
        redirect_to :back, :notice => "All fields are required."
@@ -99,10 +100,10 @@ class ChildCareVouchersController < ApplicationController
        end
 
   # DATA STORAGE
-    c.user_location = params[:user_location]
-    c.phone_number = params[:phone_number] if params[:phone_number].present?
-    c.zipcode = params[:zipcode]
-    c.save
+    @d.user_location = params[:user_location]
+    @d.phone_number = params[:phone_number] if params[:phone_number].present?
+    @d.zipcode = params[:zipcode]
+    @d.save
 end
 
 
