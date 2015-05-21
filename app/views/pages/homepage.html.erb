@@ -1,43 +1,32 @@
-<div class="alert alert-warning alert-dismissible" role="alert">
-  <div class="container">
-   <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-    <strong>Check your eligibility via SMS:</strong> Text "hello" to 1-773-377-8946.
-  </div>
-</div>
-<header>
-<div class="container">
-
+<section class="container content-section">
   <div class="row">
-    <h1 style="text-align:center;">Find out if you qualify for public assistance</h1>
-    <p class="subhead">Eligibility requirements can be difficult to find, we've created a process that makes it easy</p>
-  </div>
-
-  <br>
-  <br>
-
-  <div class="row">
-    <div class="col-md-6"  >
-      <div class="panel panel-body">
-        <span class="caption" >
-          <h3>Choose Your Program </h3>
-          <p>mRelief has screeners for programs helping with food, transportation, healthcare, housing and children.</p>
-          <%= link_to("Start Here", "/programs", :class => "btn", :role => "button") %>
-        </span>
-      </div>
-    </div>
-
     <div class="col-md-6">
-      <div class="panel panel-body">
-        <span class="caption" >
-          <h3>All Programs At Once </h3>
-          <p>Screen for multiple programs and find out about alternative resources if you are ineligible for public assistance. </p>
+      <h1>Find out if you qualify for public assistance</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <p>Eligibility requirements can be difficult to find, we've created a process that makes it easy</p>
+    </div>
+  </div>
+</section>
+
+<section class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="">
+        <h3>Choose Your Program</h3>
+        <p>mRelief has screeners for programs helping with food, transportation, healthcare, housing and children.</p>
+        <%= link_to("Start Here", "/programs", :class => "btn", :role => "button") %>
+      </div>
+    </div>
+
+    <div class="col-md-5 col-md-offset-1">
+      <div class="">
+          <h3>All Programs At Once</h3>
+          <p>Screen for multiple programs and find out about alternative resources if you are ineligible for public assistance.</p>
           <%= link_to("Start Here", "/filter", :class => "btn ", :role => "button") %>
-        </span>
       </div>
     </div>
   </div>
-
-
-</header>
-
-
+</section>
