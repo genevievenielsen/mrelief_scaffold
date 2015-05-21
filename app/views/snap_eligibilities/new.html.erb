@@ -10,6 +10,8 @@
   </div>
 </section>
 <section class="content-section">
+<div class="row">
+<div class="col-md-8">
   <form action="/snap_eligibilities" role="form" method="post">
 
   <!-- Form for age question -->
@@ -17,7 +19,7 @@
 
   <!-- Form for household size -->
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="snap_dependent_no">What is the number of people living in your household including yourself?</label>
         <input type="text" id="snap_dependent_no" name="snap_dependent_no" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>" required>
       </div>
@@ -25,7 +27,7 @@
 
   <!-- Form for gross monthly income -->
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="snap_gross_income">What is your gross monthly income?</label>
         <input type="text" id="snap_gross_income" name="snap_gross_income" placeholder="For example: 1000" class="form-field" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %>" required>
       </div>
@@ -36,7 +38,7 @@
 
   <!-- Form for education -->
     <div class="row">
-      <div class="col-md-5" id="education_question">
+      <div class="col-md-9" id="education_question">
         <label for="education" id="education">Are you enrolled in college/institution of higher education?</label>
         <div class="radio-button">
           <% [ 'yes', 'no'].each do |education| %>
@@ -54,7 +56,7 @@
 
   <!-- Form for amount in account -->
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-12">
         <label for="amount_in_account" id="amount_in_account">Do you have $100 or less in cash or in a checking or savings account?</label>
         <div class="radio-button">
           <% [ 'yes', 'no'].each do |amount_in_account| %>
@@ -77,12 +79,43 @@
   <!-- Submit button -->
     <%= render "programs/submit_button" %>
   </form>
+</div>
+
+<div class="col-md-3 sm-3 xs-12 pull-left">
+    <div class="calculator_box">
+      <%= render "programs/calculator" %>
+    </div>
+  </div>
+
+</div>
 </section>
 </div>
 
 
 <script>
 $(document).ready(function() {
+
+  //this is the map scroll down thing
+  $(window).scroll(function() {
+    if($(this).scrollTop() > 310 && $(this).width() > 750) {
+      $('.calculator_box').addClass('sticky_calculator');
+    } else {
+      $('.calculator_box').removeClass('sticky_calculator');
+    }
+  });
+
+  $(window).scroll(function() {
+    if($(this).scrollTop() < 310) {
+      $('.calculator_box').removeClass('sticky_calculator');
+    }
+  });
+
+  $(window).scroll(function() {
+    if($(this).width() < 750) {
+      $('.calculator').removeClass('sticky_calculator');
+    }
+  });
+
   //popover code
   $(function (){
     $("[data-toggle='popover']").popover();
