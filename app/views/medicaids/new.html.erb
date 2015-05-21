@@ -27,7 +27,7 @@
         <div class="row">
           <div class="col-md-5">
             <label for="medicaid_gross_income"> What is your monthly income?</label>
-              <input type="text" id="medicaid_gross_income" name="medicaid_gross_income" placeholder="For example: 30000" class="form-field" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %> " required>
+              <input type="text" id="medicaid_gross_income" name="medicaid_gross_income" placeholder="For example: 3000" class="form-field" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %>" required>
           </div>
         </div>
 
@@ -43,7 +43,7 @@
       <!-- Submit button -->
         <%= render "programs/submit_button" %>
 
-</form>
+  </form>
 </section>
  <!--  <div class="col-md-3 sm-3 xs-12 pull-left">
      <div class="calculator_box">

@@ -12,7 +12,7 @@
 <section class="content-section">
   <form action="/snap_eligibilities" role="form" method="post">
 
-  <!-- For for age question -->
+  <!-- Form for age question -->
     <%= render "programs/age_question" %>
 
   <!-- Form for household size -->
@@ -46,11 +46,13 @@
         </div>
       </div>
     </div>
+
     <div class="place_for_student_questions"></div>
 
   <!-- Form for citizen question -->
     <%= render "programs/citizen_question" %>
 
+  <!-- Form for amount in account -->
     <div class="row">
       <div class="col-md-5">
         <label for="amount_in_account" id="amount_in_account">Do you have $100 or less in cash or in a checking or savings account?</label>
@@ -62,6 +64,7 @@
         </div>
       </div>
     </div>
+
   <!-- Form for disability question -->
     <%= render "programs/disability_question" %>
 

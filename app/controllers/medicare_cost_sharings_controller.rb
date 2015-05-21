@@ -6,62 +6,63 @@ class MedicareCostSharingsController < ApplicationController
 
   def new
     @medicare_cost_sharing = MedicareCostSharing.new
+    @d = MedicareCostSharingData.new
   end
 
   def create
-    m = MedicareCostSharingData.new
+    @m = MedicareCostSharingData.new
     if params[:household_size] !~ /\D/  # returns true if all numbers
       household_size = params[:household_size].to_i
-      m.household_size = household_size
+      @m.household_size = household_size
     else
       household_size = params[:household_size].in_numbers
-      m.household_size = household_size
+      @m.household_size = household_size
     end
 
     if params[:medicare_household_size] !~ /\D/
       medicare_household_size = params[:medicare_household_size].to_i
-      m.medicare_household_size = medicare_household_size
+      @m.medicare_household_size = medicare_household_size
     else
       medicare_household_size = params[:medicare_household_size].in_numbers
-      m.medicare_household_size = medicare_household_size
+      @m.medicare_household_size = medicare_household_size
     end
 
     monthly_income = params[:monthly_income]
     monthly_income = monthly_income.gsub(/[^0-9\.]/, '')
     if monthly_income !~ /\D/
       monthly_income = monthly_income.to_i
-      m.monthly_gross_income = monthly_income
+      @m.monthly_gross_income = monthly_income
     else
       if monthly_income.include?("dollars")
         monthly_income.slice!"dollars"
       end
       monthly_income = monthly_income.in_numbers
-      m.monthly_gross_income = monthly_income
+      @m.monthly_gross_income = monthly_income
     end
 
     assets = params[:assets]
     assets = assets.gsub(/[^0-9\.]/, '')
     if assets !~ /\D/
       assets = assets.to_i
-      m.assets = assets
+      @m.assets = assets
     else
       if assets.include?("dollars")
         assets.slice!"dollars"
       end
       assets = assets.in_numbers
-      m.assets = assets
+      @m.assets = assets
     end
 
     #this is the logic for the form
     if medicare_household_size == 0
       @eligible = "no"
-      m.medicare_cost_sharing_eligibility_status = @eligible
+      @m.medicare_cost_sharing_eligibility_status = @eligible
     elsif household_size == 1 && assets > 7280
       @eligible = "no"
-      m.medicare_cost_sharing_eligibility_status = @eligible
+      @m.medicare_cost_sharing_eligibility_status = @eligible
     elsif household_size > 1 && assets > 10930
       @eligible = "no"
-      m.medicare_cost_sharing_eligibility_status = @eligible
+      @m.medicare_cost_sharing_eligibility_status = @eligible
     else
       if medicare_household_size == 1
         monthly_income = monthly_income - 25
@@ -72,7 +73,7 @@ class MedicareCostSharingsController < ApplicationController
       medicare_sharing_eligibility = MedicareCostSharing.find_by({ :household_size => household_size })
       if monthly_income < medicare_sharing_eligibility.premium_only
         @eligible = "yes"
-        m.medicare_cost_sharing_eligibility_status = @eligible
+        @m.medicare_cost_sharing_eligibility_status = @eligible
         if monthly_income < medicare_sharing_eligibility.medicare_cost_sharing
           @eligible_p_d_c = "yes"
         elsif monthly_income >= medicare_sharing_eligibility.medicare_cost_sharing
@@ -82,10 +83,10 @@ class MedicareCostSharingsController < ApplicationController
      end
 
      #DATA STORAGE
-     m.phone_number = params[:phone_number] if params[:phone_number].present?
-     m.user_location = params[:user_location]
-     m.zipcode = params[:zipcode]
-     m.save
+     @m.phone_number = params[:phone_number] if params[:phone_number].present?
+     @m.user_location = params[:user_location]
+     @m.zipcode = params[:zipcode]
+     @m.save
 
      # this is the logic for the zipcode and the laf center
       @user_zipcode = params[:zipcode]
