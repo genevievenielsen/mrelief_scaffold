@@ -41,15 +41,15 @@
 
 
   <!-- Label and input for wic_household_size -->
-  <div class="row">
-    <div class="col-md-5">
-      <label for="rental_dependent_no">What is your household size?</label>
-      <!-- <button type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself and your child[ren]." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
-      <!-- <p type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself and your child[ren]." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"> -->
-        <input type="text" id="wic_household_size" name="wic_household_size" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>" required>
-      <!-- </p> -->
+    <div class="row">
+      <div class="col-md-5">
+        <label for="rental_dependent_no">What is your household size?</label>
+        <!-- <button type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself and your child[ren]." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
+        <!-- <p type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself and your child[ren]." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"> -->
+          <input type="text" id="wic_household_size" name="wic_household_size" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>" required>
+        <!-- </p> -->
+      </div>
     </div>
-  </div>
 
 
   <!-- Label and input for wic_gross_income -->

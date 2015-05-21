@@ -6,16 +6,17 @@ class EarlyHeadStartsController < ApplicationController
   # GET /early_head_starts/new
  def new
     @early_head_start = EarlyHeadStart.new
+    @e = EarlyHeadStartData.new
   end
 
   def create
-    e = EarlyHeadStartData.new
+    @e = EarlyHeadStartData.new
    if params[:ehs_dependent_no] !~ /\D/  # returns true if all numbers
       ehs_dependent_no = params[:ehs_dependent_no].to_i
-      e.dependent_no = ehs_dependent_no
+      @e.dependent_no = ehs_dependent_no
     else
       ehs_dependent_no = params[:ehs_dependent_no].in_numbers
-      e.dependent_no = ehs_dependent_no
+      @e.dependent_no = ehs_dependent_no
     end
 
 
@@ -24,13 +25,13 @@ class EarlyHeadStartsController < ApplicationController
 
     if ehs_gross_income !~ /\D/
       ehs_gross_income = ehs_gross_income.to_i
-      e.gross_monthly_income = ehs_gross_income
+      @e.gross_monthly_income = ehs_gross_income
     else
       if ehs_gross_income.include?("dollars")
         ehs_gross_income.slice!"dollars"
       end
       ehs_gross_income = ehs_gross_income.in_numbers
-      e.gross_monthly_income = ehs_gross_income
+      @e.gross_monthly_income = ehs_gross_income
     end
 
 
@@ -44,9 +45,9 @@ class EarlyHeadStartsController < ApplicationController
 
        if ehs_gross_income < ehs_eligibility.ehs_gross_income
          @eligible = true
-         e.eligibility_status = "yes"
+         @e.eligibility_status = "yes"
        else
-          e.eligibility_status = "no"
+          @e.eligibility_status = "no"
         end
      else
        redirect_to :back, :notice => "All fields are required."
@@ -92,10 +93,10 @@ class EarlyHeadStartsController < ApplicationController
           @earlyheadstart_resources_second = @earlyheadstart_resources.second
       end
 
-      e.user_location = params[:user_location]
-      e.phone_number = params[:phone_number] if params[:phone_number].present?
-      e.zipcode = params[:zipcode]
-      e.save
+      @e.user_location = params[:user_location]
+      @e.phone_number = params[:phone_number] if params[:phone_number].present?
+      @e.zipcode = params[:zipcode]
+      @e.save
   end
 
 
