@@ -6,18 +6,18 @@ class RtaFreeRidesController < ApplicationController
 
   def new
     @rta_free_ride = RtaFreeRide.new
-    @r = RtaFreeRideData.new
+    @d = RtaFreeRideData.new
     @current_user = current_user
   end
 
   def create
-    @r = RtaFreeRideData.new
+    @d = RtaFreeRideData.new
     if params[:rta_dependent_no] !~ /\D/  # returns true if all numbers
       rta_dependent_no = params[:rta_dependent_no].to_i
-      @r.dependent_no = rta_dependent_no
+      @d.dependent_no = rta_dependent_no
     else
       rta_dependent_no = params[:rta_dependent_no].in_numbers
-      @r.dependent_no = rta_dependent_no
+      @d.dependent_no = rta_dependent_no
     end
 
     rta_gross_income = params[:rta_gross_income]
@@ -25,21 +25,21 @@ class RtaFreeRidesController < ApplicationController
 
     if rta_gross_income !~ /\D/
       rta_gross_income = rta_gross_income.to_i
-      @r.gross_annual_income = rta_gross_income
+      @d.gross_annual_income = rta_gross_income
     else
       if rta_gross_income.include?("dollars")
         rta_gross_income.slice!"dollars"
       end
       rta_gross_income = rta_gross_income.in_numbers
-      @r.gross_annual_income = rta_gross_income
+      @d.gross_annual_income = rta_gross_income
     end
 
     if params[:age] !~ /\D/
       age = params[:age].to_i
-      @r.age = age
+      @d.age = age
     else
       age = params[:age].in_numbers
-      @r.age = age
+      @d.age = age
     end
 
     if rta_gross_income.present? && rta_dependent_no.present?
@@ -48,14 +48,14 @@ class RtaFreeRidesController < ApplicationController
       if params[:disabled] != 'none' || age > 65
         if rta_gross_income < rta_eligibility.rta_gross_income
           @eligible = "yes"
-          @r.rta_eligibility_status = "yes"
+          @d.rta_eligibility_status = "yes"
         else
           @eligible = "no"
-          @r.rta_eligibility_status = "no"
+          @d.rta_eligibility_status = "no"
         end
       else
         @eligible = "no"
-        @r.rta_eligibility_status = "no"
+        @d.rta_eligibility_status = "no"
       end
 
     else
@@ -63,11 +63,11 @@ class RtaFreeRidesController < ApplicationController
     end
 
     #DATA STORAGE
-    @r.user_location = params[:user_location]
-    @r.phone_number = params[:phone_number] if params[:phone_number].present?
-    @r.disabled_status = params[:disabled]
-    @r.zipcode = params[:zipcode]
-    @r.save
+    @d.user_location = params[:user_location]
+    @d.phone_number = params[:phone_number] if params[:phone_number].present?
+    @d.disabled_status = params[:disabled]
+    @d.zipcode = params[:zipcode]
+    @d.save
 
      @user_zipcode = params[:zipcode]
      @zipcode = @user_zipcode << ".0"
@@ -123,7 +123,7 @@ class RtaFreeRidesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_rta_free_ride
-      @rta_free_ride = RtaFreeRide.find(params[:id])
+      @dta_free_ride = RtaFreeRide.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

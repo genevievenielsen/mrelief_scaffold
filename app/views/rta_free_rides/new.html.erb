@@ -1,104 +1,65 @@
 <div class= "container">
 
-<div class="page-header col-md-10 col-md-offset-1" style="border:none;">
-   <h1>Do I qualify for RTA Ride Free?</h1>
- <div class="subhead"> <p>RTA Ride Free provides free rides on fixed-route transit (regularly scheduled CTA, Metra and Pace buses or trains) for any Illinois resident who is enrolled in the Illinois Department on Aging Benefit Access Program. You must also have a disability or be a senior aged 65 or older.</p>
- </div>
+<section class="content-section">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>RTA Ride Free</h1>
+      <p>RTA Ride Free provides free rides on fixed-route transit (regularly scheduled CTA, Metra and Pace buses or trains) for any Illinois resident who is enrolled in the Illinois Department on Aging Benefit Access Program. You must also have a disability or be a senior aged 65 or older.
+      You can find more information about RTA Ride Free by <a href="http://www.rtachicago.com/images/stories/Ride_Free_Brochure_2013.pdf">clicking here.</a>
+      Please <a href="http://www.illinois.gov/aging/BenefitsAccess/Pages/Eligibility%20and%20Frequently-Asked-Questions.aspx">click  here</a> for disability criteria.</p>
+    </div>
+  </div>
+</section>
 
-  <p>You can find more information about RTA RIDE FREE by <a href="http://www.rtachicago.com/images/stories/Ride_Free_Brochure_2013.pdf">clicking here.</a></p>
 
-  <p>Please click <a href="http://www.illinois.gov/aging/BenefitsAccess/Pages/Eligibility%20and%20Frequently-Asked-Questions.aspx">here</a> for disability criteria.</p>
-</div>
-
-
-<div class="row">
-  <div class="panel panel-default col-md-8 col-sm-7 pull-left">
-    <div class="panel-body">
+  <section class="content-section">
 
     <form action="/rta_free_rides" role="form" method="post">
 
-    <!-- age question -->
+    <!-- Form for age question -->
     <%= render "programs/age_question" %>
 
-    <!-- disability question -->
+    <!-- Form fro disability question -->
     <%= render "programs/disability_question" %>
 
-    <!-- dependent_no question -->
+    <!-- Form for dependent_no question -->
     <div class="row">
-    <div class="form-group col-sm-9">
-      <label for="rta_dependent_no">How many dependents (including yourself) are in your household?
-      <button type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself,  your spouse (if applicable), and/or resident for whom you (or you and your spouse) provided more than half of that person's  total financial support last year." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-      </label>
-      <div class="row">
-         <div class="form-group col-md-12">
-         <p type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself, your spouse (if applicable), and/or resident for whom you (or you and your spouse) provided more than half of that person's  total financial support last year." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-          <input type="text" id="rta_dependent_no" name="rta_dependent_no" placeholder="For example: 3" class="form-control" value ="<%= @current_user.try(:household_size)  %>" required>
+      <div class="col-md-5">
+        <label for="rta_dependent_no">How many dependents (including yourself) are in your household?</label>
+        <input type="text" id="rta_dependent_no" name="rta_dependent_no" placeholder="For example: 3" class="form-field"value ="<%= @current_user.try(:household_size)  %>" required>
           </p>
-        </div>
       </div>
     </div>
-    </div>
 
-    <!-- gross_income question -->
+    <!-- Form for gross_income question -->
      <div class="row">
-       <div class="form-group col-sm-9">
-         <label for="rta_gross_income">
-           What is your gross annual income?
-         </label>
-           <button type="button" data-toggle="popover" data-content="Your total income before tax deductions, including your spouse's income if married and living together on December 31 of last year, and that of a qualified additional resident (if applicable)." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-         <div class="input-group">
-           <span class="input-group-addon">$</span>
-           <p type="button" data-toggle="popover" data-content="Your total income before tax deductions, including your spouse's income if married and living together on December 31 of last year, and that of a qualified additional resident (if applicable)." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-             <input type="text" id="rta_gross_income" name="rta_gross_income" placeholder="For example: 30000" class="form-control" value= "<%= @r.gross_annual_income %>" required>
-           </p>
-           <span class="input-group-addon">.00</span>
-         </div>
+       <div class="col-md-5">
+         <label for="rta_gross_income"> What is your gross annual income?</label>
+             <input type="text" id="rta_gross_income" name="rta_gross_income" placeholder="For example: 30000" class="form-field" value= "<%= @d.gross_annual_income %>" required>
        </div>
      </div>
 
-     <!-- zipcode question -->
-     <div class="row">
-      <div class="form-group col-sm-9 ">
-        <label for="zipcode">What is your zipcode?</label>
-          <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" value="<%= @r.zipcode.chop.chop if @r.zipcode.present? %>"required>
-      </div>
-     </div>
+    <!-- Form for zipcode -->
+    <%= render "programs/zipcode_question" %>
 
-     <!-- location question -->
-      <div class="row">
-        <div class="form-group col-sm-9">
-        <label for="location" id="location_dropdown">Where are you completing this form? </label>
-        <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], [' Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Center for Working Families', 'center_for_working_families'], ['CTA Bus', 'cta_bus'],['Other', 'other']], @r.user_location), :class => " form-control", :prompt => "Select a location") %>
-        </div>
-      </div>
+    <!-- Form for location question -->
+    <%= render "programs/location_question" %>
 
-      <div class="row">
-      <div class="form-group col-sm-9">
-        <label for="phone_number">What is your cell phone number?</label>
-          <button type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the  application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa   fa-info-circle"></i></button>
-        <div>
-          <p type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the   application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-            <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control"   value="<%= @r.phone_number %>" required>
-          </p>
-        </div>
-      </div>
-      </div>
+    <!-- Form for cellphone question -->
+    <%= render "programs/cellphone_question" %>
 
-      <div>
-        <button type="submit" class="btn btn-primary program-btn">See if I qualify</button>
-      </div>
+    <!-- Submit button -->
+    <%= render "programs/submit_button" %>
 
   </form>
+</section>
+<!-- <div class="col-md-3 sm-3 xs-12 pull-left">
+  <div class="calculator_box">
+    <%#= render "programs/calculator" %>
+  </div>
+</div> -->
 </div>
 
-</div>
-<div class="col-md-3 sm-3 xs-12 pull-left">
-  <div class="calculator_box">
-    <%= render "programs/calculator" %>
-  </div>
-</div>
-</div>
-</div>
 
 <script>
 $(document).ready(function() {

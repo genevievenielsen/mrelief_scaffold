@@ -1,6 +1,6 @@
 <div class="row">
-  <div class="form-group col-sm-9">
+  <div class="col-md-5">
     <label for="age">How old are you?</label>
-      <input type="text" id="age" name="age" placeholder="For example: 27" class="form-control" value="<%= @current_user.try(:age) %>"   required>
+    <input type="text" id="age" name="age" placeholder="For example: 27" class="form-field" value="<%= @current_user.try(:age) %>"  required>
   </div>
 </div>
