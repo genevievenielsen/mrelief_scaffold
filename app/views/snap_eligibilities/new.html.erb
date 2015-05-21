@@ -14,6 +14,7 @@
 
   <!-- For for age question -->
     <%= render "programs/age_question" %>
+
   <!-- Form for household size -->
     <div class="row">
       <div class="col-md-5">
@@ -21,6 +22,7 @@
         <input type="text" id="snap_dependent_no" name="snap_dependent_no" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>" required>
       </div>
     </div>
+
   <!-- Form for gross monthly income -->
     <div class="row">
       <div class="col-md-5">
@@ -28,8 +30,10 @@
         <input type="text" id="snap_gross_income" name="snap_gross_income" placeholder="For example: 1000" class="form-field" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %>" required>
       </div>
     </div>
+
   <!-- Form for zipcode -->
     <%= render "programs/zipcode_question" %>
+
   <!-- Form for education -->
     <div class="row">
       <div class="col-md-5" id="education_question">
@@ -43,17 +47,10 @@
       </div>
     </div>
     <div class="place_for_student_questions"></div>
-    <div class="row">
-      <div class="col-md-5">
-        <label for="citizen" id="citizen">Are you a citizen of the United States or a legal permanent resident who has lived in the US for at least 5 years?</label>
-        <div class="radio-button">
-          <% [ 'yes', 'no'].each do |citizen| %>
-            <%= radio_button_tag 'citizen', citizen, @d.citizen == citizen %>
-            <%= citizen.humanize %><br>
-          <% end %>
-        </div>
-      </div>
-    </div>
+
+  <!-- Form for citizen question -->
+    <%= render "programs/citizen_question" %>
+
     <div class="row">
       <div class="col-md-5">
         <label for="amount_in_account" id="amount_in_account">Do you have $100 or less in cash or in a checking or savings account?</label>
