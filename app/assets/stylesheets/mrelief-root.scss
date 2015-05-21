@@ -4,17 +4,32 @@ $font-stack: 'proxima-nova', sans-serif;
 $form-label: rgb(39, 33, 33);
 $button-color: #37BC9B;
 
-body, h1, h2, h3 {
+body {
   font-family: $font-stack;
 }
 
 h1, h2, h3 {
+  font-family: $font-stack;
   font-style: normal;
   font-weight: 800;
 }
 
+a {
+  font-family: $font-stack;
+  color: $button-color;
+  -webkit-transition: color .1s ease .1s;
+  -moz-transition: color .1s ease .1s;
+  -o-transition: color .1s ease .1s;
+  transition: color .1s ease .1s;
+
+  &:hover {
+    color: darken($button-color, 10%);
+  }
+}
+
 .content-section {
-  margin-top: 100px;
+  margin-top: 90px;
+  margin-bottom: 120px;
 
   label {
     display: inline-block;
@@ -71,5 +86,19 @@ button {
 
   &:hover {
     background-color: darken($button-color, 10%);
+  }
+}
+
+/*HOME PAGE*/
+
+.program-options {
+  h3 {
+    margin-top: 75px;
+    border-bottom: 4px solid black;
+    padding-bottom: 10px;
+  }
+
+  p {
+    margin: 20px 0 30px 0;
   }
 }
