@@ -17,39 +17,33 @@
     <form action="/rta_free_rides" role="form" method="post">
 
     <!-- Form for age question -->
-    <%= render "programs/age_question" %>
+      <%= render "programs/age_question" %>
 
     <!-- Form fro disability question -->
-    <%= render "programs/disability_question" %>
+      <%= render "programs/disability_question" %>
 
     <!-- Form for dependent_no question -->
-    <div class="row">
-      <div class="col-md-5">
-        <label for="rta_dependent_no">How many dependents (including yourself) are in your household?</label>
-        <input type="text" id="rta_dependent_no" name="rta_dependent_no" placeholder="For example: 3" class="form-field"value ="<%= @current_user.try(:household_size)  %>" required>
-          </p>
-      </div>
-    </div>
+      <%= render "programs/dependent_question" %>
 
     <!-- Form for gross_income question -->
-     <div class="row">
-       <div class="col-md-5">
-         <label for="rta_gross_income"> What is your gross annual income?</label>
-             <input type="text" id="rta_gross_income" name="rta_gross_income" placeholder="For example: 30000" class="form-field" value= "<%= @d.gross_annual_income %>" required>
-       </div>
-     </div>
+      <div class="row">
+        <div class="col-md-5">
+          <label for="rta_gross_income"> What is your gross annual income?</label>
+              <input type="text" id="rta_gross_income" name="rta_gross_income" placeholder="For example: 30000" class="form-field" value= "<%= @d.gross_annual_income %>" required>
+        </div>
+      </div>
 
-    <!-- Form for zipcode -->
-    <%= render "programs/zipcode_question" %>
+     <!-- Form for zipcode -->
+     <%= render "programs/zipcode_question" %>
 
-    <!-- Form for location question -->
-    <%= render "programs/location_question" %>
+     <!-- Form for location question -->
+     <%= render "programs/location_question" %>
 
-    <!-- Form for cellphone question -->
-    <%= render "programs/cellphone_question" %>
+     <!-- Form for cellphone question -->
+     <%= render "programs/cellphone_question" %>
 
-    <!-- Submit button -->
-    <%= render "programs/submit_button" %>
+     <!-- Submit button -->
+     <%= render "programs/submit_button" %>
 
   </form>
 </section>

@@ -12,11 +12,11 @@ class RtaFreeRidesController < ApplicationController
 
   def create
     @d = RtaFreeRideData.new
-    if params[:rta_dependent_no] !~ /\D/  # returns true if all numbers
-      rta_dependent_no = params[:rta_dependent_no].to_i
+    if params[:dependent_no] !~ /\D/  # returns true if all numbers
+      rta_dependent_no = params[:dependent_no].to_i
       @d.dependent_no = rta_dependent_no
     else
-      rta_dependent_no = params[:rta_dependent_no].in_numbers
+      rta_dependent_no = params[:dependent_no].in_numbers
       @d.dependent_no = rta_dependent_no
     end
 

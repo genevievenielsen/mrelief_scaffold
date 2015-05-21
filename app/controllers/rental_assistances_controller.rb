@@ -8,30 +8,30 @@ class RentalAssistancesController < ApplicationController
 
   def new
     @rental_assistance = RentalAssistance.new
-    @r = RentalAssistanceData.new
+    @d = RentalAssistanceData.new
   end
 
   def create
-    @r = RentalAssistanceData.new
+    @d = RentalAssistanceData.new
     if params[:rental_dependent_no] !~ /\D/  # returns true if all numbers
-      rental_dependent_no = params[:rental_dependent_no].to_i
-      @r.dependent_no = rental_dependent_no
+      rental_dependent_no = params[:dependent_no].to_i
+      @d.dependent_no = rental_dependent_no
     else
-      rental_dependent_no = params[:rental_dependent_no].in_numbers
-      @r.dependent_no = rental_dependent_no
+      rental_dependent_no = params[:dependent_no].in_numbers
+      @d.dependent_no = rental_dependent_no
     end
 
     rental_gross_income = params[:rental_gross_income]
     rental_gross_income = rental_gross_income.gsub(/[^0-9\.]/, '').to_i
     if rental_gross_income !~ /\D/
       rental_gross_income = rental_gross_income.to_i
-      @r.ninety_day_gross_income = rental_gross_income
+      @d.ninety_day_gross_income = rental_gross_income
     else
       if rental_gross_income.include?("dollars")
         rental_gross_income.slice!"dollars"
       end
       rental_gross_income = rental_gross_income.in_numbers
-      @r.ninety_day_gross_income = rental_gross_income
+      @d.ninety_day_gross_income = rental_gross_income
     end
 
     if rental_gross_income.present? && rental_dependent_no.present?
@@ -44,17 +44,17 @@ class RentalAssistancesController < ApplicationController
 
        if params[:lease] == "no" || params[:next_rent] == "no"
          @eligible = "no"
-         @r.rental_eligibility_status = @eligible
+         @d.rental_eligibility_status = @eligible
        elsif params[:lease] == "yes"
         if rental_gross_income < rental_eligibility.rental_gross_income && params[:rental_status] != "none of the above"
           @eligible = "yes"
-          @r.rental_eligibility_status = @eligible
+          @d.rental_eligibility_status = @eligible
         elsif rental_gross_income< rental_cut_off_plus_200 && rental_gross_income >= rental_cut_off && params[:rental_status] != "none of the above"
           @eligible = "maybe"
-          @r.rental_eligibility_status = @eligible
+          @d.rental_eligibility_status = @eligible
         else
           @eligible = "no"
-          @r.rental_eligibility_status = @eligible
+          @d.rental_eligibility_status = @eligible
          end
         end # closes the if statement about the lease agreement
       end #closes first if statement
@@ -71,13 +71,13 @@ class RentalAssistancesController < ApplicationController
       end
 
       # DATA STORAGE
-      @r.user_location = params[:user_location]
-      @r.phone_number = params[:phone_number] if params[:phone_number].present?
-      @r.name_on_lease = params[:lease]
-      @r.next_month_rent = params[:next_rent]
-      @r.rental_status = params[:rental_status]
-      @r.zipcode = params[:zipcode]
-      @r.save
+      @d.user_location = params[:user_location]
+      @d.phone_number = params[:phone_number] if params[:phone_number].present?
+      @d.name_on_lease = params[:lease]
+      @d.next_month_rent = params[:next_rent]
+      @d.rental_status = params[:rental_status]
+      @d.zipcode = params[:zipcode]
+      @d.save
 
       @user_zipcode = params[:zipcode]
       @zipcode = @user_zipcode << ".0"
