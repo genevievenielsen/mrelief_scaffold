@@ -10,10 +10,12 @@
 </section>
 
 <section class="content-section">
+<div class="row">
+  <div class="col-md-8">
     <form action="/tanifs" role="form" method="post">
 
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="relationship" id="relationship">Describe your biological relationship to the child you are caring for:</label>
         <div class="radio-button">
           <% [ 'parent', 'adult relative'].each do |relationship| %>
@@ -26,7 +28,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label>Select all that apply to you:</label>
         <div class="radio-button">
           <input type="checkbox" name="pregnant" value="pregnant"> I am pregnant<br>
@@ -40,7 +42,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
       <label for="tanif_sixty_months" id="tanif_sixty_months">As a parent have you been receiving TANF for 60 months or more?</label>
         <div class="radio-button">
           <% [ 'yes', 'no', 'I am a caretaker relative, this does not apply to me.'].each do |tanif_sixty_months| %>
@@ -53,7 +55,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="children">How many children 18 and under are you caring for?</label>
         <div class="row">
           <div class="col-md-12">
@@ -65,7 +67,7 @@
 
   <!-- Label and input for household_size -->
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="household_size">What is your household size?</label>
           <!-- <button type="button" data-toggle="popover" data-content="The number of people in your household including   yourself." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info- circle"></i></button> -->
             <input type="text" id="household_size" name="household_size" placeholder="For example: 3" class="form-field"    value="<%= @current_user.try(:household_size) %>" required>
@@ -74,7 +76,7 @@
 
   <!-- Label and input for gross_income -->
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="gross_income">
            How much do you anticipate to earn in gross income in the next 30 days?
           <!--  <button type="button" data-toggle="popover" data-content="This should include income you or your child earn from your work, self employment and rental income (contributions from people who live with you.) This should NOT include child support or SSI benefits." data-placement="top" style="border: 0px; color: #4582ec; background-color:  #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
@@ -86,7 +88,7 @@
 
   <!-- Form for anticipate child support -->
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="anticipate_income" id="anticipate_income">Do you or your child anticipate getting any other source of income outside of your job, child support or SSI?
         <!-- <button type="button" data-toggle="popover" data-content="This includes unemployment insurance, pensions,  workers compensation and any other form of income." data-placement="top" style="border: 0px; color: #4582ec;   background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
         </label>
@@ -103,7 +105,7 @@
 
   <!-- Label and input for expect_child_support -->
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="expect_child_support">
           How much do you expect to receive in child support in the next 30 days?
         </label>
@@ -113,7 +115,7 @@
 
   <!-- Label and input for expect_ssi -->
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="expect_ssi">
           How much do you expect to receive in SSI in the next 30 days?
         </label>
@@ -136,16 +138,18 @@
   <!-- Submit button -->
     <%= render "programs/submit_button" %>
 
-</div>
-</form>
-</section>
- <!--  <div class="col-md-3 sm-3 xs-12 pull-left">
-    <div class="calculator_box">
-      <%#= render "programs/calculator" %>
+
+  </form>
+  </div>
+
+    <div class="col-md-3 sm-3 xs-12 pull-left">
+      <div class="calculator_box">
+        <%= render "programs/calculator" %>
+      </div>
     </div>
-  </div> -->
 
-
+  </div>
+  </section>
 </div>
 
 

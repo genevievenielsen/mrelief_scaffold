@@ -11,10 +11,12 @@
 
 
 <section class="content-section">
+<div class="row">
+  <div class="col-md-8">
   <form action="/all_kids" class="form-horizontal" method="post">
 
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label class="allthatapply">Please answer the following questions (check all that apply):</label>
          <label class="allthatapply">Has your child:</label>
         <div class="radio-button">
@@ -29,14 +31,14 @@
 
   <!-- Form for household size-->
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-9">
       <label for="kids_household_size">How many children are living in your household?</label>
         <input type="text" id="kids_household_size" name="kids_household_size" placeholder="For example: 3" class="form-field" value="<%= @d.household_size %>" required>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-9">
       <label for="pregnant" id="pregnant" >Are you pregnant ? </label>
       <div class="radio-button">
         <% [ 'yes', 'no'].each do |pregnant| %>
@@ -51,7 +53,7 @@
 
   <!-- Form for gross monthly income -->
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="kids_gross_income">What is your gross monthly income?</label>
         <input type="text" id="kids_gross_income" name="kids_gross_income" placeholder="For example: 1000" class="form-field" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %>" required>
       </div>
@@ -69,16 +71,17 @@
   <!-- Submit button -->
     <%= render "programs/submit_button" %>
 
-</form>
-</section>
+  </form>
+  </div>
 
-<!--   <div class="col-md-3 sm-3 xs-12 pull-left">
-    <div class="calculator_box">
-      <%#= render "programs/calculator" %>
+    <div class="col-md-3 sm-3 xs-12 pull-left">
+      <div class="calculator_box">
+        <%= render "programs/calculator" %>
+      </div>
     </div>
-  </div> -->
 
-
+  </div>
+  </section>
 </div>
 
 <script>

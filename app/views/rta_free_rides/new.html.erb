@@ -12,8 +12,9 @@
 </section>
 
 
-  <section class="content-section">
-
+<section class="content-section">
+<div class="row">
+  <div class="col-md-8">
     <form action="/rta_free_rides" role="form" method="post">
 
     <!-- Form for age question -->
@@ -27,7 +28,7 @@
 
     <!-- Form for gross_income question -->
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-9">
           <label for="rta_gross_income"> What is your gross annual income?</label>
               <input type="text" id="rta_gross_income" name="rta_gross_income" placeholder="For example: 30000" class="form-field" value= "<%= @d.gross_annual_income %>" required>
         </div>
@@ -46,14 +47,17 @@
      <%= render "programs/submit_button" %>
 
   </form>
-</section>
-<!-- <div class="col-md-3 sm-3 xs-12 pull-left">
-  <div class="calculator_box">
-    <%#= render "programs/calculator" %>
   </div>
-</div> -->
-</div>
 
+    <div class="col-md-3 sm-3 xs-12 pull-left">
+      <div class="calculator_box">
+        <%= render "programs/calculator" %>
+      </div>
+    </div>
+
+  </div>
+  </section>
+</div>
 
 <script>
 $(document).ready(function() {

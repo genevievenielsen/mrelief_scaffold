@@ -10,10 +10,12 @@
   </section>
 
   <section class="content-section">
+  <div class="row">
+    <div class="col-md-8">
     <form action="/rental_assistances" role="form" method="post">
 
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label>What circumstance explains why you are unable to pay rent at this time? </label>
         <div class="radio-button">
           <div class="relative" id="rental_status">
@@ -45,7 +47,7 @@
 
 
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
       <label for="lease" id="lease" >Is your name currently on the lease of the apartment that you are renting?</label>
       <div class="radio-button">
         <% [ 'yes', 'no' ].each do |lease| %>
@@ -58,7 +60,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
       <label for="next_rent" id="next_rent">Can you document that you can afford next month’s rent? </label>
       <div class="radio-button">
         <% [ 'yes', 'no' ].each do |next_rent| %>
@@ -76,7 +78,7 @@
 
   <!-- Label and input for rental_gross_income -->
     <div class="row">
-      <div class="col-sm-5">
+      <div class="col-md-9">
         <label for="rental_gross_income"> What is your income over the past 90 days? </label>
            <input type="text" id="rental_gross_income" name="rental_gross_income" placeholder="For example: 4000" class="form-field" value="<%= @d.ninety_day_gross_income %>" required>
       </div>
@@ -93,18 +95,20 @@
 
   <!-- Submit button -->
     <%= render "programs/submit_button" %>
-</form>
-</section>
+  </form>
+  </div>
 
-
-
-<!--   <div class="col-md-3 sm-3 xs-12 pull-left">
-    <div class="calculator_box">
-      <%#= render "programs/calculator" %>
+    <div class="col-md-3 sm-3 xs-12 pull-left">
+      <div class="calculator_box">
+        <%= render "programs/calculator" %>
+      </div>
     </div>
-  </div> -->
 
+  </div>
+  </section>
 </div>
+
+
 <script>
 $(document).ready(function() {
 

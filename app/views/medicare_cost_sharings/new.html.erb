@@ -9,11 +9,13 @@
   </section>
 
   <section class="content-section">
+  <div class="row">
+    <div class="col-md-8">
     <form action="/medicare_cost_sharings" role="form" method="post">
 
   <!-- Label and input for household_size -->
     <div class="row">
-     <div class="col-md-5">
+     <div class="col-md-9">
       <label for="household_size">What is your household size? </label>
          <input type="text" id="household_size" name="household_size" placeholder="For example: 3" class="form-field"   required>
       </div>
@@ -21,7 +23,7 @@
 
    <!-- Form for Medicare household -->
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
        <label for="medicare_household_size">How many people in your household receive Medicare?</label>
          <input type="text" id="medicare_household_size" name="medicare_household_size" placeholder="For example: 2" class="   form-field"  required>
        </div>
@@ -29,7 +31,7 @@
 
     <!-- Form for monthly income -->
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-9">
           <label for="assets">What is you gross monthly income?</label>
             <input type="text" id="monthly_income" name="monthly_income" placeholder="For example: 1000" class="form-field"     required>
         </div>
@@ -37,7 +39,7 @@
 
     <!-- Label and input for premium_only -->
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-9">
           <label for="assets">Please estimate the value of your assets. (Exclude the value of your home and car.)</label>
             <input type="text" id="assets" name="assets" placeholder="For example: 5000" class="form-field" required>
         </div>
@@ -56,17 +58,17 @@
       <%= render "programs/submit_button" %>
 
   </form>
-</section>
+  </div>
 
-  <!-- <div class="col-md-3 sm-3 xs-12 pull-left">
-     <div class="calculator_box">
-       <%#= render "programs/calculator" %>
-     </div>
-   </div> -->
+    <div class="col-md-3 sm-3 xs-12 pull-left">
+      <div class="calculator_box">
+        <%= render "programs/calculator" %>
+      </div>
+    </div>
 
-
+  </div>
+  </section>
 </div>
-
 
 <script>
   $(document).ready(function() {

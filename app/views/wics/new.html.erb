@@ -13,6 +13,8 @@
 
 
 <section class="content-section">
+<div class="row">
+<div class="col-md-8">
   <form action="/wics" role="form" method="post">
 
     <div class="row">
@@ -22,7 +24,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <div class="relative" id="wic_status">
          <label>Describe your current health status:</label>
          <div class="radio-button">
@@ -42,7 +44,7 @@
 
   <!-- Label and input for wic_household_size -->
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="rental_dependent_no">What is your household size?</label>
         <!-- <button type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself and your child[ren]." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
         <!-- <p type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself and your child[ren]." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"> -->
@@ -54,7 +56,7 @@
 
   <!-- Label and input for wic_gross_income -->
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="rta_gross_income">What is gross monthly income?</label>
         <!-- <button type="button" data-toggle="popover" data-content="Total monthly income from all sources." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></  button> -->
           <!-- <p type="button" data-toggle="popover" data-content="Total monthly income from all sources." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"> -->
@@ -75,15 +77,17 @@
     <!-- Submit button -->
       <%= render "programs/submit_button" %>
   </form>
+  </div>
+
+  <div class="col-md-3 sm-3 xs-12 pull-left">
+    <div class="calculator_box">
+      <%= render "programs/calculator" %>
+    </div>
+  </div>
+
+  </div>
 </section>
 </div>
-
- <!--  <div class="col-md-3 sm-3 xs-12 pull-left">
-    <div class="calculator_box">
-      <%#= render "programs/calculator" %>
-    </div>
-  </div> -->
-
 
 <script>
 $(document).ready(function() {

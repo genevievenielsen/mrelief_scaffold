@@ -9,18 +9,20 @@
   </section>
 
   <section class="content-section">
+  <div class="row">
+  <div class="col-md-8">
    <form action="/early_head_starts" role="form" method="post">
 
     <div class="row">
       <div class="col-md-12">
-        <p class="allthatapply">If you are either pregnant or have a child who is between 0 and 2 years old, you may be   eligible for Early Head Start.</p>
+        <p>If you are either pregnant or have a child who is between 0 and 2 years old, you may be   eligible for Early Head Start.</p>
       </div>
     </div>
 
 
      <!-- Form for dependent number-->
      <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
          <label for="ehs_dependent_no">How many dependents (including yourself) are in your household?</label>
           <!-- <button type="button" data-toggle="popover" data-content="Children under the age of 19." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
           <!-- <p type="button" data-toggle="popover" data-content="Children under the age of 19." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"> -->
@@ -31,7 +33,7 @@
 
     <!-- Label and input for ehs_gross_income -->
     <div class="row">
-     <div class="col-md-5">
+     <div class="col-md-9">
       <label for="ehs_gross_income">What is your gross monthly income?</label>
         <!-- <button type="button" data-toggle="popover" data-content="Your income per year before tax deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
           <!-- <p type="button" data-toggle="popover" data-content="Your income per year before tax deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"> -->
@@ -55,14 +57,17 @@
 
 
   </form>
-</section>
-</div>
-  <!-- <div class="col-md-3 sm-3 xs-12 pull-left">
+  </div>
+
+  <div class="col-md-3 sm-3 xs-12 pull-left">
     <div class="calculator_box">
-      <%#= render "programs/calculator" %>
+      <%= render "programs/calculator" %>
     </div>
   </div>
- -->
+
+  </div>
+</section>
+</div>
 
 <script>
 $(document).ready(function() {

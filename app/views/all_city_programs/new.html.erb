@@ -2,13 +2,16 @@
 <div class="container">
 <section class="content-section">
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-12">
       <h1>All City Programs within mRelief</h1>
       <p> Programs include Food Stamps, RTA Ride Free, All Kids, Medicare Cost Sharing, Rental Assistance, Medicaid,  Aged, Blind and Disabled (AABD), Cash Assistance and Temporary Assistance for Needy Families</p>
     </div>
   </div>
 </section>
+
 <section class="content-section">
+<div class="row">
+  <div class="col-md-8">
   <form action="/all_city_programs" role="form" method="post">
 
 
@@ -21,12 +24,12 @@
   <!-- Form for dependent no -->
   <% if @current_user.food_stamps != "checked" || @current_user.rta_ride_free != "checked" || @current_user.rental_assistance != "checked" || @current_user.medicaid != "checked" || @current_user.medicare_cost_sharing != "checked" || @current_user.aabd != "checked" || @current_user.tanf != "checked" %>
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="dependent_no">What is the number of people living in your household including yourself?</label>
           <!-- <button type="button" data-toggle="popover" data-content="This should include the number of people who purchase  and prepare food with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i  class="fa fa-info-circle"></i></button> -->
         <div>
           <!-- <p type="button" data-toggle="popover" data-content="This should include the number of people who purchase and  prepare food with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"> -->
-            <input type="text" id="dependent_no" name="dependent_no" placeholder="For example: 3" class="form-field" value= "<%= @d.dependent_no %>" required>
+            <input type="text" id="dependent_no" name="dependent_no" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>"  required>
           <!-- </p> -->
         </div>
       </div>
@@ -35,7 +38,7 @@
 
   <% if @current_user.all_kids != "checked" || @current_user.tanf != "checked" %>
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="children">How many children 18 and under are you caring for?</label>
             <input type="text" id="children" name="children" placeholder="For example: 3" class="form-field"  value="<%= @d.number_of_children %>" required>
       </div>
@@ -44,7 +47,7 @@
 
   <% if @current_user.medicare_cost_sharing != "checked" %>
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
        <label for="medicare_household_size">How many people in your household receive Medicare?</label>
          <input type="text" id="medicare_household_size" name="medicare_household_size" placeholder="For example: 2" class="   form-field"  required>
        </div>
@@ -54,7 +57,7 @@
   <!-- Form for gross monthly income -->
   <% if @current_user.food_stamps != "checked" || @current_user.all_kids != "checked"  || @current_user.medicaid != "checked" || @current_user.medicare_cost_sharing != "checked" %>
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-9">
           <label for="monthly_gross_income"> What is your household's gross monthly income?</label>
           <!-- <button type="button" data-toggle="popover" data-content="This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
             <!-- <p type="button" data-toggle="popover" data-content="This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"> -->
@@ -67,7 +70,7 @@
 
   <% if @current_user.aabd != "checked" || @current_user.tanf != "checked" %>
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="net_income">
          How much do you anticipate to earn in net income in the next 30 days? (After taxes have been taken out)
         </label>
@@ -83,7 +86,7 @@
 
   <% if @current_user.aabd != "checked" %>
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="monthly_benefits">
          What is your monthly income expected from government benefits or other assistance?
         </label>
@@ -97,7 +100,7 @@
 
   <% if @current_user.tanf != "checked" %>
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="anticipate_income" id="anticipate_income">Do you or your child anticipate getting any other source of income outside of your job, child support or SSI?
         <!-- <button type="button" data-toggle="popover" data-content="This includes unemployment insurance, pensions,  workers compensation and any other form of income." data-placement="top" style="border: 0px; color: #4582ec;   background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
         </label>
@@ -113,7 +116,7 @@
 
     <!-- Label and input for expect_child_support -->
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="expect_child_support">
           How much do you expect to receive in child support in the next 30 days?
         </label>
@@ -123,7 +126,7 @@
 
       <!-- Label and input for expect_ssi -->
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-9">
           <label for="expect_ssi">
             How much do you expect to receive in SSI in the next 30 days?
           </label>
@@ -135,7 +138,7 @@
   <!-- if the user is already receiving rental assistance, do not show these questions -->
    <% if @current_user.rental_assistance != "checked" %>
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="ninety_day_gross_income">
           What is your income over the past 90 days? </label>
          <!--  <button type="button" data-toggle="popover" data-content="Includes cash receipts from all sources including money wages and salaries before any deductions, unemployment compensation, public assistance, alimony, child support, lottery/gambling winnings, dividends and all other income." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
@@ -150,7 +153,7 @@
   <!-- Form for gross annual income -->
   <% if @current_user.rta_ride_free != "checked" %>
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
        <label for="annual_gross_income">What is your gross annual income? </label>
         <!-- <button type="button" data-toggle="popover" data-content="Your total income before tax deductions, including your   spouse's income if married and living together on December 31 of last year, and that of a qualified additional  resident (if applicable)." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
           <!-- <p type="button" data-toggle="popover" data-content="Your total income before tax deductions, including your  spouse's income if married and living together on December 31 of last year, and that of a qualified additional resident (if applicable)." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"> -->
@@ -162,7 +165,7 @@
 
   <% if @current_user.medicare_cost_sharing != "checked" || @current_user.aabd != "checked"%>
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
       <label for="assets">Please estimate the value of your assets. (Exclude the value of your home and car.)</label>
         <!-- <button type="button" data-toggle="popover" data-content="Personal property is anything owned by a person that is not land or permanently affixed to land. This includes such items as: money in checking and savings accounts;stocks, bonds, savings certificates, and other securities;farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
  -->
@@ -175,7 +178,7 @@
 
   <% if @current_user.food_stamps != "checked" %>
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="education" id="education">Are you enrolled in college/institution of higher education? </label>
         <div class="radio-button">
           <% [ 'yes', 'no'].each do |education| %>
@@ -199,7 +202,7 @@
 
   <% if @current_user.all_kids != "checked" || @current_user.tanf != "checked" %>
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label>Select all that apply to you:</label>
         <div class="radio-button">
           <input type="checkbox" name="pregnant" value="pregnant"> I am pregnant<br>
@@ -215,7 +218,7 @@
 
   <% if @current_user.tanf != "checked" %>
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="relationship" id="relationship">Describe your biological relationship to the child you are caring for:</label>
         <div class="radio-button">
           <% [ 'parent', 'adult relative'].each do |relationship| %>
@@ -228,7 +231,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
       <label for="tanif_sixty_months" id="tanif_sixty_months">As a parent have you been receiving TANF for 60 months or more?</label>
         <div class="radio-button">
           <% [ 'yes', 'no', 'I am a caretaker relative, this does not apply to me.'].each do |tanif_sixty_months| %>
@@ -245,7 +248,7 @@
   <!-- if the user is already receiving rental assistance, do not show these questions -->
 
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
       <label for="lease" id="lease" >Is your name currently on the lease of the apartment that you are renting?</label>
       <div class="radio-button">
         <% [ 'yes', 'no' ].each do |lease| %>
@@ -258,7 +261,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
       <label for="next_rent" id="next_rent">Can you document that you can afford next month’s rent? </label>
       <div class="radio-button">
         <% [ 'yes', 'no' ].each do |next_rent| %>
@@ -271,7 +274,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label>If you are unable to pay your rent at this time, what circumstance explains why you are unable to pay rent? </label>
         <div class="radio-button">
           <div class="relative" id="rental_status">
@@ -305,7 +308,7 @@
 
   <% if  @current_user.all_kids != "checked"  %>
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="status" id="status" class="pull-left">If you have a child, check the box below that describes your child's health insurance status:</label>
 
         <div class="radio-button">
@@ -335,20 +338,17 @@
   <!-- Submit button -->
     <%= render "programs/submit_button" %>
 
-</form>
+  </form>
+  </div>
 
-
-</div>
-</div>
-
-  <!-- <div class="col-md-3 sm-3 xs-12 pull-left">
-    <div class="calculator_box">
-      <%#= render "programs/calculator" %>
+    <div class="col-md-3 sm-3 xs-12 pull-left">
+      <div class="calculator_box">
+        <%= render "programs/calculator" %>
+      </div>
     </div>
-  </div> -->
-</div>
 
-
+  </div>
+  </section>
 </div>
 
 <script>

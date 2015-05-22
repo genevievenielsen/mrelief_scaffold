@@ -8,6 +8,8 @@
   </div>
 </section>
 <section class="content-section">
+<div class="row">
+  <div class="col-md-8">
     <form action="/head_starts" role="form" method="post">
 
 
@@ -19,7 +21,7 @@
 
     <!-- Label and input for child-birthdate -->
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-9">
           <label for="child_birthdate" id="case_management" >Is the applicant child 3-years-old by Sep. 1st and not 5-years-old before Sep. 1st?</label>
             <div class="radio-button">
             <div id="child-birthdate">
@@ -33,7 +35,7 @@
 
     <!-- Label and input for hs_dependent_no -->
       <div class="row">
-       <div class="col-md-5">
+       <div class="col-md-9">
         <label for="hs_dependent_no">How many dependents (including yourself) are in your household?</label>
           <!-- <button type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
           <!-- <p type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"> -->
@@ -46,7 +48,7 @@
 
     <!-- Form for gross annual income -->
       <div class="row">
-       <div class="col-md-5">
+       <div class="col-md-9">
         <label for="hs_gross_income">What is your gross annual income?</label>
         <!-- <button type="button" data-toggle="popover" data-content="Your income per year before tax deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
           <!-- <p type="button" data-toggle="popover" data-content="Your income per year before tax deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"> -->
@@ -68,16 +70,17 @@
     <!-- Submit button -->
       <%= render "programs/submit_button" %>
 
+  </form>
+  </div>
 
-</form>
-</section>
-  <!-- <div class="col-md-3 sm-3 xs-12 pull-left">
+  <div class="col-md-3 sm-3 xs-12 pull-left">
     <div class="calculator_box">
-      <%#= render "programs/calculator" %>
+      <%= render "programs/calculator" %>
     </div>
-  </div> -->
+  </div>
 
-
+  </div>
+</section>
 </div>
 
 <script>

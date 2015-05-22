@@ -12,6 +12,8 @@
 
 
 <section class="content-section">
+<div class="row">
+<div class="col-md-8">
   <form action="/child_care_vouchers" role="form" method="post">
 
     <div class="row">
@@ -23,7 +25,7 @@
 
   <!-- Form for dependents question -->
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="ccdf_dependent_no">How many dependents (including yourself) are in your household?</label>
           <!-- <button type="button" data-toggle="popover" data-content="Total family size, including yourself and child[ren]." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
          <!-- <p type="button" data-toggle="popover" data-content="Total family size, including yourself and child[ren]." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"> -->
@@ -34,7 +36,7 @@
 
   <!-- Form for gross income question -->
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="ccdf_gross_income">What is your gross monthly income?</label>
           <!-- <button type="button" data-toggle="popover" data-content="Total monthly income from all sources, including work, child support, TANF, and Social Security before any deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
             <!-- <p type="button" data-toggle="popover" data-content="Total monthly income from all sources, including work, child support, TANF, and Social Security before any deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"> -->
@@ -57,14 +59,17 @@
 
 
   </form>
+  </div>
+
+    <div class="col-md-3 sm-3 xs-12 pull-left">
+      <div class="calculator_box">
+        <%= render "programs/calculator" %>
+      </div>
+    </div>
+
+</div>
 </section>
 </div>
-  <!-- <div class="col-md-3 sm-3 xs-12 pull-left">
-    <div class="calculator_box">
-      <%#= render "programs/calculator" %>
-    </div>
-  </div> -->
-
 
 <script>
 $(document).ready(function() {

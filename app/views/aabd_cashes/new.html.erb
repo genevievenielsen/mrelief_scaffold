@@ -9,7 +9,9 @@
   </section>
 
 
- <section class="content-section">
+  <section class="content-section">
+  <div class="row">
+    <div class="col-md-8">
     <form action="/aabd_cashes" role="form" method="post">
 
     <!-- Form for age question -->
@@ -21,7 +23,7 @@
 
   <!-- Label and input for aabd_household_size -->
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="aabd_household_size">What is your household size?</label>
           <input type="text" id="aabd_household_size" name="aabd_household_size" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>" required>
       </div>
@@ -30,7 +32,7 @@
 
   <!-- Form for net income question -->
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-9">
         <label for="aabd_net_income">How much do you anticipate to earn in net income in the next 30 days? (After taxes have been taken out)</label>
             <input type="text" id="aabd_net_income" name="aabd_net_income" placeholder="For example: 1000"class="form-field" value="<%= @d.thirty_day_net_income %>" required>
         </div>
@@ -38,7 +40,7 @@
 
     <!-- Form for government benefits question -->
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-9">
           <label for="aabd_benefits">What is your monthly income expected from government benefits or other assistance?</label>
             <input type="text" id="aabd_benefits" name="aabd_benefits" placeholder="For example: 1000"class="form-field" value="<%= @d.government_benefits %>" required>
         </div>
@@ -46,7 +48,7 @@
 
     <!-- Form for assets question -->
       <div class="row">
-        <div class="form-group col-md-5">
+        <div class="form-group col-md-9">
           <label for="aabd_assets">What are your assets worth?</label>
               <input type="text" id="aabd_assets" name="aabd_assets" placeholder="For example: 1000"class="form-field" value="<%= @d.assets %>" required>
         </div>
@@ -68,16 +70,16 @@
       <%= render "programs/submit_button" %>
 
   </form>
-</section>
-
-
-<!--   <div class="col-md-3 sm-3 xs-12 pull-left">
-    <div class="calculator_box">
-      <%#= render "programs/calculator" %>
-    </div>
   </div>
- -->
 
+    <div class="col-md-3 sm-3 xs-12 pull-left">
+      <div class="calculator_box">
+        <%= render "programs/calculator" %>
+      </div>
+    </div>
+
+  </div>
+  </section>
 </div>
 
 <script>
