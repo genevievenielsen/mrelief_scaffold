@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <!-- Label and input for child-birthdate -->
+    <!-- Form for child birthdate -->
       <div class="row">
         <div class="col-md-9">
           <label for="child_birthdate" id="case_management" >Is the applicant child 3-years-old by Sep. 1st and not 5-years-old before Sep. 1st?</label>
@@ -33,14 +33,13 @@
       </div>
 
 
-    <!-- Label and input for hs_dependent_no -->
+    <!-- Form for dependent no -->
       <div class="row">
        <div class="col-md-9">
         <label for="hs_dependent_no">How many dependents (including yourself) are in your household?</label>
-          <!-- <button type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
-          <!-- <p type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"> -->
+          <p type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself." data-placement="right" style="border: 0px; color: #4582ec;">
             <input type="text" id="hs_dependent_no" name="hs_dependent_no" placeholder="For example: 3" class="form-field" value="<%= @d.dependent_no %>" required>
-          <!-- </p> -->
+          </p>
         </div>
       </div>
 
@@ -50,10 +49,9 @@
       <div class="row">
        <div class="col-md-9">
         <label for="hs_gross_income">What is your gross annual income?</label>
-        <!-- <button type="button" data-toggle="popover" data-content="Your income per year before tax deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
-          <!-- <p type="button" data-toggle="popover" data-content="Your income per year before tax deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"> -->
+          <p type="button" data-toggle="popover" data-content="Your income per year before tax deductions." data-placement="right" style="border: 0px; color: #4582ec;">
            <input type="text" id="hs_gross_income" name="hs_gross_income" placeholder="For example: 30000" class="form-field" value="<%= @d.gross_annual_income %>" required>
-           <!-- </p> -->
+           </p>
         </div>
       </div>
 

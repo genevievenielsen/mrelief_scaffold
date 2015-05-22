@@ -80,7 +80,11 @@
     <div class="row">
       <div class="col-md-9">
         <label for="rental_gross_income"> What is your income over the past 90 days? </label>
+          <p type="button" data-toggle="popover" data-content="Includes cash receipts from all sources including money wages and salaries before any deductions, unemployment compensation, public assistance, alimony, child support, lottery/gambling winnings, dividends and all other income." data-placement="right" style="border: 0px; color: #4582ec;">
+
            <input type="text" id="rental_gross_income" name="rental_gross_income" placeholder="For example: 4000" class="form-field" value="<%= @d.ninety_day_gross_income %>" required>
+
+          </p>
       </div>
     </div>
 

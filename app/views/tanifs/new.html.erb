@@ -65,23 +65,23 @@
       </div>
     </div>
 
-  <!-- Label and input for household_size -->
+  <!-- Form for household size -->
     <div class="row">
       <div class="col-md-9">
         <label for="household_size">What is your household size?</label>
-          <!-- <button type="button" data-toggle="popover" data-content="The number of people in your household including   yourself." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info- circle"></i></button> -->
+          <p type="button" data-toggle="popover" data-content="The number of people in your household including   yourself." data-placement="right" style="border: 0px; color: #4582e">
             <input type="text" id="household_size" name="household_size" placeholder="For example: 3" class="form-field"    value="<%= @current_user.try(:household_size) %>" required>
+          </p>
       </div>
     </div>
 
-  <!-- Label and input for gross_income -->
+  <!-- Form for gross income -->
     <div class="row">
       <div class="col-md-9">
-        <label for="gross_income">
-           How much do you anticipate to earn in gross income in the next 30 days?
-          <!--  <button type="button" data-toggle="popover" data-content="This should include income you or your child earn from your work, self employment and rental income (contributions from people who live with you.) This should NOT include child support or SSI benefits." data-placement="top" style="border: 0px; color: #4582ec; background-color:  #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
-        </label>
+        <label for="gross_income">How much do you anticipate to earn in gross income in the next 30 days?</label>
+          <p type="button" data-toggle="popover" data-content="This should include income you or your child earn from your work, self employment and rental income (contributions from people who live with you.) This should NOT include child support or SSI benefits." data-placement="right" style="border: 0px; color: #4582ec;">
             <input type="text" id="gross_income" name="gross_income" placeholder="For example: 1000"class="form-field" value="<%= @d.thirty_day_gross_income %>" required>
+          </p>
       </div>
     </div>
 
@@ -90,7 +90,7 @@
     <div class="row">
       <div class="col-md-9">
         <label for="anticipate_income" id="anticipate_income">Do you or your child anticipate getting any other source of income outside of your job, child support or SSI?
-        <!-- <button type="button" data-toggle="popover" data-content="This includes unemployment insurance, pensions,  workers compensation and any other form of income." data-placement="top" style="border: 0px; color: #4582ec;   background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
+        <!-- <p type="button" data-toggle="popover" data-content="This includes unemployment insurance, pensions,  workers compensation and any other form of income." data-placement="right" style="border: 0px; color: #4582ec;"></p> -->
         </label>
         <div class="radio-button">
           <% [ 'yes', 'no'].each do |anticipate_income| %>

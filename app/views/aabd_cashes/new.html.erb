@@ -21,11 +21,13 @@
    <!-- Form for disability question -->
      <%= render "programs/disability_question" %>
 
-  <!-- Label and input for aabd_household_size -->
+  <!-- Form for household size -->
     <div class="row">
       <div class="col-md-9">
         <label for="aabd_household_size">What is your household size?</label>
+          <p type="button" data-toggle="popover" data-content="Household is defined as anyone living in the same dwelling with you." data-placement="right" style="border: 0px; color: #4582ec;">
           <input type="text" id="aabd_household_size" name="aabd_household_size" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>" required>
+          </p>
       </div>
     </div>
 
@@ -34,7 +36,9 @@
     <div class="row">
       <div class="col-md-9">
         <label for="aabd_net_income">How much do you anticipate to earn in net income in the next 30 days? (After taxes have been taken out)</label>
+         <p type="button" data-toggle="popover" data-content="This should include income you earn from your work, self employment and rental income (contributions from people who live with you.)" data-placement="right" style="border: 0px; color: #4582ec;">
             <input type="text" id="aabd_net_income" name="aabd_net_income" placeholder="For example: 1000"class="form-field" value="<%= @d.thirty_day_net_income %>" required>
+          </p>
         </div>
       </div>
 
@@ -42,15 +46,19 @@
       <div class="row">
         <div class="col-md-9">
           <label for="aabd_benefits">What is your monthly income expected from government benefits or other assistance?</label>
-            <input type="text" id="aabd_benefits" name="aabd_benefits" placeholder="For example: 1000"class="form-field" value="<%= @d.government_benefits %>" required>
+            <p type="button" data-toggle="popover" data-content="This includes social security (SSI), veterans benefits, railroad assistance etc." data-placement="right" style="border: 0px; color: #4582ec;">
+              <input type="text" id="aabd_benefits" name="aabd_benefits" placeholder="For example: 1000"class="form-field" value="<%= @d.government_benefits %>" required>
+            </p>
         </div>
       </div>
 
     <!-- Form for assets question -->
       <div class="row">
-        <div class="form-group col-md-9">
+        <div class="col-md-9">
           <label for="aabd_assets">What are your assets worth?</label>
+            <p type="button" data-toggle="popover" data-content="Everything but your home, if you live in it, and one car." data-placement="right" style="border: 0px; color: #4582ec;">
               <input type="text" id="aabd_assets" name="aabd_assets" placeholder="For example: 1000"class="form-field" value="<%= @d.assets %>" required>
+            </p>
         </div>
       </div>
 

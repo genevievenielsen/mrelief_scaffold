@@ -11,7 +11,7 @@
 </section>
 <section class="content-section">
 <div class="row">
-<div class="col-md-8">
+<div class="col-sm-9 col-md-8 pull-left">
   <form action="/child_care_vouchers" role="form" method="post">
 
     <div class="row">
@@ -25,10 +25,9 @@
     <div class="row">
       <div class="col-md-9">
         <label for="ccdf_dependent_no">How many dependents (including yourself) are in your household?</label>
-          <!-- <button type="button" data-toggle="popover" data-content="Total family size, including yourself and child[ren]." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
-         <!-- <p type="button" data-toggle="popover" data-content="Total family size, including yourself and child[ren]." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"> -->
+         <p type="button" data-toggle="popover" data-content="Total family size, including yourself and child[ren]." data-placement="right" style="border: 0px; color: #4582ec;">
           <input type="text" id="ccdf_dependent_no" name="ccdf_dependent_no" placeholder="For example: 3" class="form-field"value="<%= @current_user.try(:household_size) %>" required>
-          <!-- </p> -->
+          </p>
       </div>
     </div>
 
@@ -36,10 +35,9 @@
     <div class="row">
       <div class="col-md-9">
         <label for="ccdf_gross_income">What is your gross monthly income?</label>
-          <!-- <button type="button" data-toggle="popover" data-content="Total monthly income from all sources, including work, child support, TANF, and Social Security before any deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
-            <!-- <p type="button" data-toggle="popover" data-content="Total monthly income from all sources, including work, child support, TANF, and Social Security before any deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"> -->
+            <p type="button" data-toggle="popover" data-content="Total monthly income from all sources, including work, child support, TANF, and Social Security before any deductions." data-placement="right" style="border: 0px; color: #4582ec;">
               <input type="text" id="ccdf_gross_income" name="ccdf_gross_income" placeholder="For example: 1500" class="form-field" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %>" required>
-            <!-- </p> -->
+            </p>
       </div>
     </div>
 
