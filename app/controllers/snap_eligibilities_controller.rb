@@ -179,10 +179,8 @@ class SnapEligibilitiesController < ApplicationController
 
 
         if params[:citizen].present? && params[:disabled].present? && params[:education] == "no"
-          puts "I made to save"
           @d.save
         elsif params[:citizen].present? && params[:disabled].present? && params[:education] == "yes" && params[:student].present? && params[:work].present?
-          puts "I made to save"
           @d.save
         else
            flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
@@ -204,7 +202,9 @@ class SnapEligibilitiesController < ApplicationController
     end
 
 
+    def documents
 
+    end
 
   private
     # Use callbacks to share common setup or constraints between actions.

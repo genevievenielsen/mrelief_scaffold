@@ -45,9 +45,9 @@ Rails.application.routes.draw do
   get("/filtered_programs", { :controller => "pages", :action => "filtered_programs" })
   post("/community_resources", { :controller => "pages", :action => "community_resources" })
 
-
   get('/snap_eligibilities/print/:id', :controller => 'snap_eligibilities', :action => 'print')
 
+  get("/documents", { :controller => "snap_eligibilities", :action => "documents" })
 
 
   resources :contact, only: [:index, :create]
