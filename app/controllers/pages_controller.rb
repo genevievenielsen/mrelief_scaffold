@@ -169,8 +169,22 @@ class PagesController < ApplicationController
       end
     end
 
+    @aabd = Program.find_by(:name_en => "AABD Cash Assistance")
+    if params[:aabd].present?
+      @community_resources.push("aging")
+      @ineligible_or_receiving_programs.push(@aabd)
+    else
+      # AABD logic, based on age and disability status
+      if @age > 64 || params[:disabled] != "No"
+        @programs.push(@aabd)
+      else
+        @community_resources.push("aging")
+        @ineligible_or_receiving_programs.push(@aabd)
+      end
+    end
+
     # programs that we can't screen for with global questions - rental assistance (90 day gross income),
-    #aabd cash assistance, tanf cash assistance
+    # tanf cash assistance
     @rental_assistance = Program.find_by(:name_en => "Rental Assistance")
     if params[:rental_assistance].present?
       @community_resources.push("housing")
@@ -179,13 +193,7 @@ class PagesController < ApplicationController
       @programs.push(@rental_assistance)
     end
 
-    @aabd = Program.find_by(:name_en => "AABD Cash Assistance")
-    if params[:aabd].present?
-      @community_resources.push("aging")
-      @ineligible_or_receiving_programs.push(@aabd)
-    else
-      @programs.push(@aabd)
-    end
+
 
     @tanf = Program.find_by(:name_en => "TANF")
     if params[:tanf].present?
