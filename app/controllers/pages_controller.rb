@@ -194,7 +194,6 @@ class PagesController < ApplicationController
     end
 
 
-
     @tanf = Program.find_by(:name_en => "TANF")
     if params[:tanf].present?
       @community_resources.push("child care")
@@ -202,10 +201,6 @@ class PagesController < ApplicationController
     else
       @programs.push(@tanf)
     end
-
-
-    @all_city = Program.find_by(:name_en => "All City Programs")
-    @programs.push(@all_city)
 
 
     # ILLINOIS PROGRAMS
@@ -270,6 +265,10 @@ class PagesController < ApplicationController
       end
     end
 
+    @all_city = Program.find_by(:name_en => "All City Programs")
+    @illinois_programs.push(@all_city)
+
+    # Just program name
     @ineligible_or_receiving_programs_names = []
     @ineligible_or_receiving_programs.each do |program|
       @ineligible_or_receiving_programs_names.push(program.name_en)
