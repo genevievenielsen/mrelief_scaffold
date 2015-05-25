@@ -30,6 +30,7 @@
         <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %>| <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
 
         <%= link_to "Click Here to apply online before you visit", "https://abe.illinois.gov/abe/access/", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'food_stamps_all_city_program', 'abe', 1);" %>
+        <%= link_to "Click Here to see the documents you will need ", documents_url %>
         </li>
         <% end %>
 
