@@ -7,6 +7,7 @@ class WicsController < ApplicationController
   def new
     @wic = Wic.new
     @d = WicData.new
+    @current_user = current_user
   end
 
   def create

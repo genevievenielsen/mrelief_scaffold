@@ -7,6 +7,7 @@ class MedicareCostSharingsController < ApplicationController
   def new
     @medicare_cost_sharing = MedicareCostSharing.new
     @d = MedicareCostSharingData.new
+    @current_user = current_user
   end
 
   def create

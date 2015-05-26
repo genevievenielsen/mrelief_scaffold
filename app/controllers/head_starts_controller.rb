@@ -11,6 +11,7 @@ class HeadStartsController < ApplicationController
   def new
     @head_start = HeadStart.new
     @d = HeadStartData.new
+    @current_user = current_user
   end
 
   def create

@@ -8,6 +8,7 @@
   def new
     @tanif = Tanif.new
     @d = TanfData.new
+    @current_user = current_user
   end
 
   # POST /tanifs

@@ -13,6 +13,7 @@ class SnapEligibilitiesController < ApplicationController
   def new
     @snap_eligibility = SnapEligibility.new
     @d = SnapEligibilityData.new
+    @current_user = current_user
   end
 
   def create

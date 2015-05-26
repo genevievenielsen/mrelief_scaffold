@@ -7,6 +7,7 @@ class EarlyHeadStartsController < ApplicationController
  def new
     @early_head_start = EarlyHeadStart.new
     @d = EarlyHeadStartData.new
+    @current_user = current_user
   end
 
   def create

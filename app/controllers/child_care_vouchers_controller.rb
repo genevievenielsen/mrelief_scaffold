@@ -7,6 +7,7 @@ class ChildCareVouchersController < ApplicationController
  def new
     @child_care_voucher = ChildCareVoucher.new
     @d = ChildCareVoucherData.new
+    @current_user = current_user
   end
 
   def create

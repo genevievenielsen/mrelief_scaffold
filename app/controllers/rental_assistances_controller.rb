@@ -9,6 +9,7 @@ class RentalAssistancesController < ApplicationController
   def new
     @rental_assistance = RentalAssistance.new
     @d = RentalAssistanceData.new
+    @current_user = current_user
   end
 
   def create

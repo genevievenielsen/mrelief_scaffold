@@ -8,6 +8,7 @@ class AabdCashesController < ApplicationController
   def new
     @aabd_cash = AabdCash.new
     @d = AabdCashData.new
+    @current_user = current_user
   end
 
   # POST /aabd_cashes
