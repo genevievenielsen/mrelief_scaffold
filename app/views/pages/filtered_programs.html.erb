@@ -99,9 +99,9 @@
            <div class="col-md-9">
               <%= form_tag community_resources_url, method: :post do %>
 
-                  <div class="form-group col-md-9">
+                  <div class="form-group col-md-6">
                      <label for="zipcode">What is your zipcode?</label>
-                       <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" required>
+                       <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-field" required>
                    </div>
 
                  <%= hidden_field_tag :resources, @community_resources %>
