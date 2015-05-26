@@ -85,6 +85,9 @@ class PagesController < ApplicationController
     @community_resources = []
     @ineligible_or_receiving_programs = []
 
+    # @all_city = Program.find_by(:name_en => "All City Programs")
+    # @programs.push(@all_city)
+
     @snap = Program.find_by(:name_en => "Food Stamps")
     if params[:food_stamps].present?
       # User is already receiving food stamps
@@ -265,8 +268,7 @@ class PagesController < ApplicationController
       end
     end
 
-    @all_city = Program.find_by(:name_en => "All City Programs")
-    @illinois_programs.push(@all_city)
+
 
     # Just program name
     @ineligible_or_receiving_programs_names = []

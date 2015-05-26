@@ -1,52 +1,27 @@
 
 <div class="container">
+<section class="content-section">
   <div class ="row">
     <div class="col-md-12">
-      <h1 class="page-header">Continue the Screening Process</h1>
-
-
-      <p class="subhead">You don’t have to retype anything you just shared. Find out if you qualify for programs and access resources that interest you. </p>
-
-      <% if @ineligible_or_receiving_programs.count >= 1 %>
-      <p class="subhead">Below are community resources that address the same issues as the programs you are ineligible for or already receiving:
-
-      <% @program_count = @ineligible_or_receiving_programs.count %>
-        <% @count = 0 %>
-        <% @ineligible_or_receiving_programs.each do |program| %>
-          <% if @count < @program_count.to_i - 2 %>
-            <%= program.name_en %>,
-
-          <% elsif @count < @program_count.to_i - 1 %>
-            <%= program.name_en %>
-
-          <% else %>
-            and <%= program.name_en %>.
-
-          <% end %>
-        <% @count += 1 %>
-      <% end %>
-
-      </p>
-      <% end %>
-
+      <h1>Continue the Screening Process</h1>
     </div>
   </div>
+</section>
 </div>
 
 
-
-
-<br>
 
 <!-- Eligible Programs  -->
 <div class="container">
  <div class="row">
     <div class="col-md-6">
-      <h3 class="program-heading" style="padding-bottom:0px">You are still in the runnings for… </h3>
+      <h3>You are still in the runnings for… </h3>
+      <p>You don’t have to retype anything you just shared. Find out if you qualify for programs and access resources that interest you. </p>
+
 
       <% @all_programs.each_with_index do |program| %>
         <div class="col-md-12" >
-          <a href="<%= program.url %>" class="thumbnail" style="padding:0 20px 20px 20px">
+          <a href="<%= program.url %>" class="thumbnail" >
             <span class="caption">
               <h3><%= program.name %></h3>
               <p><%= program.description %></p>
@@ -62,7 +37,27 @@
 <% if @ineligible_or_receiving_programs.count >= 1 %>
 <!-- Community Resources -->
    <div class="col-md-6">
-     <h3 class="program-heading"> Something else in mind!</h3>
+     <h3 > Something else in mind!</h3>
+
+     <p>Here are community resources that address the same issues as the programs you are ineligible for or already receiving:
+
+     <% @program_count = @ineligible_or_receiving_programs.count %>
+       <% @count = 0 %>
+       <% @ineligible_or_receiving_programs.each do |program| %>
+         <% if @count < @program_count.to_i - 2 %>
+           <%= program.name_en %>,
+
+         <% elsif @count < @program_count.to_i - 1 %>
+           <%= program.name_en %>
+
+         <% else %>
+           and <%= program.name_en %>.
+
+         <% end %>
+       <% @count += 1 %>
+     <% end %>
+     </p>
+
 
     <% @community_resources.uniq.each do |resource| %>
       <div class="col-md-12">

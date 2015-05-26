@@ -14,6 +14,9 @@ class AllCityProgramsController < ApplicationController
       @current_user = User.new
     end
 
+    #session hash
+    session[:user_id] = @current_user.id
+
     if params[:filtered_programs] == "false"
       @current_user.food_stamps = params[:food_stamps]
       @current_user.rta_ride_free = params[:rta_ride_free]
