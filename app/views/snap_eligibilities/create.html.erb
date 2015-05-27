@@ -182,15 +182,12 @@
 <!-- USER MAYBE ELIGIBLE FOR FOODSTAMPS -->
     <% elsif @eligible == 'maybe' %>
 
-      <div class="row" >
-        <div class="col-md-8 col-md-offset-2">
-          <i class="fa fa-exclamation-circle fa-5x"></i>
-            <h1>Something else in mind!</h1>
+    <div class="row">
+      <div class="col-md-7">
+        <h1>Results: Something else in mind!</h1>
+        <p>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a Food Stamp expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your food stamp eligibility with you. </p>
 
-             <h4>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a Food Stamp expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your food stamp eligibility with you. </h4>
-            <br>
 
-            <h4>The following information you reported impacted your eligibility status. Read More.</h4>
             <table class="table table-striped">
             <% if @hundred_dollar_range == true %>
               <tr id="income_row">
@@ -320,10 +317,10 @@
 <!-- USER IS NOT ELIGIBLE FOR FOODSTAMPS -->
     <% elsif @eligible == 'no' %>
 
-      <div class="row" style="text-align:center;">
-        <div class="col-md-8 col-md-offset-2">
-            <h1>Something else in mind!</h1>
-            <h3>You likely do not qualify for food stamps. The following information you reported impacted your eligibility status. Read More.</h3>
+      <div class="row">
+        <div class="col-md-7">
+          <h1>Results: Something else in mind!</h1>
+          <p>Below is the information you provided which impacted your eligibility status:</p>
 
 
             <table class="table table-striped">
