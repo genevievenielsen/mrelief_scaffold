@@ -1,6 +1,6 @@
 
 <div class="container">
-<section class="content-section">
+<section class="content-section marquee">
 
   <div class="row">
     <div class="col-md-12">
@@ -20,7 +20,7 @@
 <!-- Eligible Programs  -->
 <div class="container">
 <section>
-<div class="row">
+<div class="row resources">
   <div class="col-md-12">
     <h3>What We Know So Far</h3>
   </div>
@@ -32,16 +32,13 @@
 
 
       <% @all_programs.each_with_index do |program| %>
-        <div class="col-md-12" >
-          <a href="<%= program.url %>" class="thumbnail" >
-            <span class="caption">
-              <h3><%= program.name %></h3>
-              <p><%= program.description %></p>
-            </span>
-          </a>
+        <div class="col-md-12 programs" >
+          <h3><%= program.name %></h3>
+          <p><%= program.description %></p>
+          <a href="<%= program.url %>" >Continue &rarr;</a>
         </div>
       <% end %>
-  </div>
+    </div>
 
 
 <% if @ineligible_or_receiving_programs.count >= 1 %>
@@ -70,14 +67,14 @@
 
 
     <% @community_resources.uniq.each do |resource| %>
-      <div class="col-md-12">
-        <a href="#" class="thumbnail" data-toggle="modal" data-target="#myModal">
-          <span class="caption">
-            <h3><%= resource.capitalize %></h3>
-            <p>Find <%= resource %> resources that can help you in your community</p>
-          </span>
-        </a>
+      <div class="col-md-12 programs">
+        <h3><%= resource.capitalize %></h3>
+        <p>Find <%= resource %> resources that can help you in your community</p>
+        <a href="#" data-toggle="modal" data-target="#myModal">Continue &rarr;</a>
+
       </div>
+
+
     <% end %>
    </div>
 <% end %>
