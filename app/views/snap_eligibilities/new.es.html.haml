@@ -1,5 +1,5 @@
 .container
-  .row
+  .row.marquee
     .page-header.col-md-10.col-md-offset-1{:style => "border:none;"}
       %h2= t.snap.do_i_qualify | "Do I qualify for Food Stamps?"
       %p.subhead
@@ -17,7 +17,7 @@
           %label{:for => "age"}= t.snap.how_old | "How old are you?"
           .row
             .form-group.col-md-9
-              %input#age.form-control{:name => "age", :placeholder => I18n.t('placeholder.example_age', :default => "For example: 27"), :required => "", :type => "text", :value => @s.age}/
+              %input#age.form-control{:name => "age", :placeholder => I18n.t('placeholder.example_age', :default => "For example: 27"), :required => "", :type => "text", :value => @d.age}/
           / Label and input for snap_dependent_no
           .row
             .form-group.col-md-12
@@ -27,7 +27,7 @@
               .row
                 .col-md-9
                   %p{"data-content" => I18n.t('popover.info_hh', :default => "This should include the number of people who purchase and prepare food with you."), "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
-                    %input#snap_dependent_no.form-control{:name => "snap_dependent_no", :placeholder => I18n.t('placeholder.example_hh', :default => "For example: 3"), :required => "", :type => "text", :value => @s.dependent_no }/
+                    %input#snap_dependent_no.form-control{:name => "snap_dependent_no", :placeholder => I18n.t('placeholder.example_hh', :default => "For example: 3"), :required => "", :type => "text", :value => @d.dependent_no }/
           / Label and input for snap_gross_income
           .row
             .form-group.col-md-9
@@ -38,7 +38,7 @@
               .input-group
                 %span.input-group-addon $
                 %p{"data-content" => I18n.t('popover.info_income', :default => "This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions."), "data-placement" => "top", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; background-color: #FAFAFA", :type => "button"}
-                  %input#snap_gross_income.form-control{:name => "snap_gross_income", :placeholder => I18n.t('placeholder.example_income', :default => "For example: 1000"), :required => "", :type => "text", :value => @s.monthly_gross_income}/
+                  %input#snap_gross_income.form-control{:name => "snap_gross_income", :placeholder => I18n.t('placeholder.example_income', :default => "For example: 1000"), :required => "", :type => "text", :value => @d.monthly_gross_income}/
                 %span.input-group-addon .00
           = render 'programs/zipcode_question'
           .row
@@ -68,7 +68,7 @@
               %label#amount_in_account{:for => "amount_in_account"}= t.snap.checking_or_saving | "Do you have $100 or less in cash or in a checking or savings account?"
               %br/
               - [ 'yes', 'no'].each do |amount_in_account|
-                = radio_button_tag 'amount_in_account', amount_in_account, @s.amount_in_account == amount_in_account
+                = radio_button_tag 'amount_in_account', amount_in_account, @d.amount_in_account == amount_in_account
                 = amount_in_account.humanize
 
           .row
@@ -93,12 +93,12 @@
           .row
             .form-group.col-sm-12.col-md-9
               %label#location_dropdown{:for => "location"}= t.snap.location | "Where are you completing this form?"
-              = select_tag(:user_location, options_for_select([['Centro de Servicio Comunitario King', 'king_community_service_center'], ['Biblioteca Harold Washington', 'harold_washington_library'], ['Otra biblioteca', 'other_library'], ['Centro para Familias Trabajadoras', 'center_for_working_families'], ['Autobus del CTA', 'cta_bus'], ['Otro lugar', 'other']], @s.user_location), :class => "form-control", :prompt => "Escoja un lugar")
+              = select_tag(:user_location, options_for_select([['Centro de Servicio Comunitario King', 'king_community_service_center'], ['Biblioteca Harold Washington', 'harold_washington_library'], ['Otra biblioteca', 'other_library'], ['Centro para Familias Trabajadoras', 'center_for_working_families'], ['Autobus del CTA', 'cta_bus'], ['Otro lugar', 'other']], @d.user_location), :class => "form-control", :prompt => "Escoja un lugar")
 
           .row
             .form-group.col-sm-12.col-md-9
               %label#education{:for => "education"}= t.snap.cellphone_question | "What is your cell phone number?"
-              %input#phone_number.form-control{:name => "phone_number", :placeholder => "Por ejemplo: 3125555555", :required => "", :type => "text", :value => @s.phone_number}/
+              %input#phone_number.form-control{:name => "phone_number", :placeholder => "Por ejemplo: 3125555555", :required => "", :type => "text", :value => @d.phone_number}/
               %div
                 %button.btn.btn-primary.program-btn{:type => "submit"}= t.snap.see_if | "See if I qualify"
 
@@ -146,14 +146,14 @@
       $("input:radio[name=education]").click(function() {
       var value = $(this).val();
         if (value == "yes") {
-          $('.place_for_student_questions').empty().append("#{escape_javascript(render "snap_eligibilities/student_questions", :work_status => @s.work_status, :student_status => @s.student_status )}");
+          $('.place_for_student_questions').empty().append("#{escape_javascript(render "snap_eligibilities/student_questions", :work_status => @d.work_status, :student_status => @d.student_status )}");
         }
         if (value == "no") {
           $('.student_questions').remove();
         }
       });
       if($('input:radio[name=education][value="yes"]').prop('checked')){
-          $('.place_for_student_questions').empty().append("#{escape_javascript(render "snap_eligibilities/student_questions", :work_status => @s.work_status, :student_status => @s.student_status )}");
+          $('.place_for_student_questions').empty().append("#{escape_javascript(render "snap_eligibilities/student_questions", :work_status => @d.work_status, :student_status => @d.student_status )}");
       }
 
 
