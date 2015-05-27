@@ -70,28 +70,28 @@ class EarlyHeadStartsController < ApplicationController
       end
 
       @pb_zipcode = @user_zipcode.chomp(".0")
-        @earlyheadstart_resources = earlyheadstart
-        @earlyheadstart_resources_zip = []
+        @resources = earlyheadstart
+        @resources_zip = []
 
         earlyheadstart.each do |center|
           if center.zip.match(@pb_zipcode)
-            @earlyheadstart_resources_zip.push(center)
+            @resources_zip.push(center)
           end
         end
 
       #in this case there are 2 medical centers in the user's zip
-      if @earlyheadstart_resources_zip.count >= 2
-         @earlyheadstart_resources = @earlyheadstart_resources_zip
+      if @resources_zip.count >= 2
+         @resources = @resources_zip
       end
       #in this case there is 1 medical center in the user's zip
-      if @earlyheadstart_resources_zip.count == 1
-         @earlyheadstart_resources_first = @earlyheadstart_resources_zip.first
-         @earlyheadstart_resources_second = @earlyheadstart_resources.first
+      if @resources_zip.count == 1
+         @resources_first = @resources_zip.first
+         @resources_second = @resources.first
       end
       #in this caser there are no medical centers in the user's zip
-      if  @earlyheadstart_resources_zip.count == 0
-          @earlyheadstart_resources_first = @earlyheadstart_resources.first
-          @earlyheadstart_resources_second = @earlyheadstart_resources.second
+      if  @resources_zip.count == 0
+          @resources_first = @resources.first
+          @resources_second = @resources.second
       end
 
       @d.user_location = params[:user_location]

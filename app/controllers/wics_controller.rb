@@ -73,28 +73,28 @@ class WicsController < ApplicationController
 
 
     @pb_zipcode = @user_zipcode.chomp(".0")
-    @child_resources = childcare
-    @child_resources_zip = []
+    @resources = childcare
+    @resources_zip = []
 
     childcare.each do |center|
       if center.zip.match(@pb_zipcode)
-        @child_resources_zip.push(center)
+        @resources_zip.push(center)
       end
     end
 
     #in this case there are 2 medical centers in the user's zip
-    if @child_resources_zip.count >= 2
-       @child_resources = @child_resources_zip
+    if @resources_zip.count >= 2
+       @resources = @resources_zip
     end
     #in this case there is 1 medical center in the user's zip
-    if @child_resources_zip.count == 1
-       @child_resources_first = @child_resources_zip.first
-       @child_resources_second = @child_resources.first
+    if @resources_zip.count == 1
+       @resources_first = @resources_zip.first
+       @resources_second = @resources.first
     end
     #in this caser there are no medical centers in the user's zip
-    if  @child_resources_zip.count == 0
-        @child_resources_first = @child_resources.first
-        @child_resources_second = @child_resources.second
+    if  @resources_zip.count == 0
+        @resources_first = @resources.first
+        @resources_second = @resources.second
     end
 
     @d.user_location = params[:user_location]
