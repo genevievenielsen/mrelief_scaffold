@@ -3,12 +3,13 @@
 $font-stack: 'proxima-nova', sans-serif;
 $form-label: rgb(39, 33, 33);
 $button-color: #37BC9B;
+$secondary-link: #4582ec;
 
 body {
   font-family: $font-stack;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
   font-family: $font-stack;
   font-style: normal;
   font-weight: 800;
@@ -27,9 +28,16 @@ a {
   }
 }
 
+.secondary-link {
+  color: $secondary-link;
+
+  &:hover{
+    color: darken($secondary-link, 10%);
+  }
+}
+
 .content-section {
-  margin-top: 90px;
-  margin-bottom: 120px;
+  margin-bottom: 50px;
 
   label {
     display: inline-block;
@@ -44,6 +52,10 @@ a {
   margin-left: auto;
   padding-left: 50px;
   padding-right: 50px;
+}
+
+.marquee {
+  margin-top: 90px;
 }
 
 .form-field {
@@ -104,9 +116,49 @@ button {
   }
 }
 
+/*RESULTS PAGES*/
+
+.resources {
+  margin-top: 60px;
+
+  h3 {
+    border-bottom: 4px solid;
+    margin-bottom: 30px;
+  }
+}
+
+.laf-list {
+  margin-bottom: 50px;
+
+  ul {
+    list-style: none;
+    color: #747474;
+  }
+}
+
+.laf-headline {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/*TABLES*/
+
+table {
+  margin-top: 40px;
+  td {
+    text-align: left;
+    padding: 15px !important;
+  }
+}
+
 /*POPOVERS*/
 
 div.popover.fade.right.in {
   left: 280px !important;
+}
+
+/*ICONS*/
+.fa-check {
+  color: #349D6D;
 }
 

@@ -1,35 +1,32 @@
-<div class="container">
-<%= render "layouts/print_button" %>
-
+<div class="container marquee">
+  <%= render "layouts/print_button" %>
 <!-- USER IS ELIGIBLE FOR FOODSTAMPS -->
 <% if @eligible == 'yes' %>
-      <div class="row" style="text-align:center;">
-        <div class="col-md-8 col-md-offset-2">
-          <i class="fa fa-check-circle fa-5x"></i>
-           <h1>You may be in luck!</h1>
-           <h3>The following information you reported impacted your eligibility status. Read More.</h3>
-          <br>
-          <br>
-      <table class="table table-striped">
-      <tr id="income_row">
-        <td><i class="fa fa-check-circle "></i></td>
-        <% if @d.age.to_i <= 59 %>
-          <td><p>Your gross monthly income</p></td>
-        <% else %>
-          <td><p>Your gross monthly income and age</p></td>
-        <% end %>
-          <td><a href="#" data-toggle="modal" data-target="#income_explanation">Read More </a></td>
-      </tr>
+  <div class="row">
+    <div class="col-md-7">
+      <h1>Results: You may be in luck!</h1>
+      <p>Below is the information you provided which impacted your eligibility status:</p>
 
-      <% if @d.citizen == "yes" %>
+      <table class="table table-bordered">
+        <tr id="income_row">
+          <% if @d.age.to_i <= 59 %>
+            <td><i class="fa fa-check fa-2x"></i></td>
+            <td><p>Gross Monthly Income</p></td>
+          <% else %>
+            <td><p>Gross Monthly Income and Age</p></td>
+          <% end %>
+            <td><a href="#" class="secondary-link" data-toggle="modal" data-target="#income_explanation">Read More</a></td>
+        </tr>
+
         <tr id="citizenship_row">
-          <td><i class="fa fa-check-circle "></i></td>
-          <td><p>Your citizenship status</p></td>
-          <td><a href="#" data-toggle="modal" data-target="#citizenship_explanation">Read More </a></td>
+          <% if @d.citizen == "yes" %>
+            <td><i class="fa fa-check fa-2x"></i></td>
+            <td><p>Your citizenship status</p></td>
+            <td><a href="#" class="secondary-link" data-toggle="modal" data-target="#citizenship_explanation">Read More</a></td>
         </tr>
       <% else %>
         <tr id="citizenship_row">
-          <td><p>N/A</p></td>
+          <td><i class="fa fa-question fa-2x"></i></td>
           <td><p>Your citizenship status</p></td>
           <td></td>
         </tr>
@@ -37,23 +34,22 @@
 
       <% if @eligible_student == "yes" %>
         <tr id="education_row">
-          <td><i class="fa fa-check-circle "></i></td>
+          <td><i class="fa fa-check fa-2x"></i></td>
           <td><p>Your education status</p></td>
-          <td><a href="#" data-toggle="modal" data-target="#education_explanation">Read More </a></td>
+          <td><a href="#" class="secondary-link" data-toggle="modal" data-target="#education_explanation">Read More</a></td>
         </tr>
       <% else %>
         <tr id="education_row">
-          <td><p>N/A</p></td>
+          <td><i class="fa fa-question fa-2x"></i></td>
           <td><p>Your education status</p></td>
           <td></td>
         </tr>
       <% end %>
       </table>
 
-
       <!-- INCOME EXPLANATION -->
-        <% if @expedited == true  %>
-          <div class="modal fade" id="income_explanation" tabindex="-1" role="dialog" aria-hidden="true">
+      <% if @expedited == true  %>
+        <div class="modal fade" id="income_explanation" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                  <div class="modal-header">
@@ -159,28 +155,23 @@
              </div>
         <% end %>
 
-        <br>
-        <br>
         <% if @age <= 22 %>
           <p class="subhead">However, make sure you accounted for your parents income, if you are still living in the same household.</p>
         <% end %>
-
-        <br>
-         <% if @laf_disclaimer.present?  %>
-              <p class="subhead"><%= @laf_disclaimer %></p>
-         <% else  %>
-              <p class="subhead"> Based on your zipcode, here is the nearest Community Service Center to access your Food Stamps: </p>
+        <section class="content-section resources">
+          <h3>Resources</h3>
+          <% if @laf_disclaimer.present? %>
+            <p><%= @laf_disclaimer %></p>
+          <% else  %>
+            <p> To access your Food Stamps, below is the nearest Community Service Center: </p>
          <% end %>
+          <%= render 'layouts/community_center' %>
+         </section>
 
-         <%= render 'layouts/community_center' %>
-      </div>
-        <div class="row">
-          <div class="col-sm-offset-3 col-md-offset-3 col-md-6 col-sm-6 col-xs-6">
-            <p class="subhead"> To apply online before you visit:</p>
-            <a href="https://abe.illinois.gov/abe/access/" onclick="ga('send', 'event', 'button', 'food_stamps', 'abe', 1);" class="btn btn-success btn-resolution" target="_blank">Click Here</a>
-            <br>
-            <br>
-            <p class="subhead"><%= link_to "Click Here", documents_url %> to see the documents you will need for your caseworker interview after you submit your application online or at your nearest community service center.</p>
+          <div class="resources">
+            <h3>Apply for benefits</h3>
+            <p>Your home to apply for Healthcare, Food and Cash Assistance with the state of Illinois. <a href="https://abe.illinois.gov/abe/access/" onclick="ga('send', 'event', 'button', 'food_stamps', 'abe', 1);" class="secondary-link" target="_blank">Learn more at ABE</a></p>
+            <p>You will need a number of documents when meeting with your caseworker or when sumbitting your application. <%= link_to "Click here to see the list of documents.", documents_url , :class => "secondary-link" %></p>
           </div>
         </div>
     </div>
@@ -480,8 +471,3 @@
       </div>
 </div>
 </div>
-
-<br>
-<br>
-<br>
-<br>
