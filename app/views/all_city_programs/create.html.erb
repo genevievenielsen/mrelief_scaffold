@@ -1,10 +1,10 @@
 
 <div class="container marquee">
-<div class="page-header">
+<div class="row">
 <%= render "layouts/print_button" %>
   <h1>Do I qualify for All City Programs within mRelief?</h1>
-  <p class="subhead">Programs include Food Stamps, RTA Ride Free, All Kids, Medicare Cost Sharing, Rental Assistance, Medicaid, Aged, Blind and Disabled (AABD), Cash Assistance and Temporary Assistance for Needy Families </p>
-</div>
+  <p>Programs include Food Stamps, RTA Ride Free, All Kids, Medicare Cost Sharing, Rental Assistance, Medicaid, Aged, Blind and Disabled (AABD), Cash Assistance and Temporary Assistance for Needy Families </p>
+
 
 
 <% if @eligible_count > 0 %>
@@ -15,72 +15,79 @@
     </div>
 
     <ul class="list-group">
-    <!-- Food Stamps -->
+    <!-- Eligible for Food Stamps -->
       <% if @eligible_snap == 'yes' %>
-      <li class="list-group-item">
+        <li class="list-group-item">
         <h3 class="allcityheader">Food Stamps</h3>
         <% if @age <= 22 %>
-          <h5>However, make sure you accounted for your parents income, if you are still living in the same household</h5>
+          <p>However, make sure you accounted for your parents income, if you are still living in the same household</p>
         <% end %>
+
         <% if @laf_disclaimer.present?  %>
-           <h5><%= @laf_disclaimer %></h5>
+           <p><%= @laf_disclaimer %></p>
         <% else %>
-          <h5> Based on your zipcode, here is the nearest Community Service Center to access your Food Stamps: </h5>
+          <p> Based on your zipcode, here is the nearest Community Service Center to access your Food Stamps: </p>
         <% end %>
-        <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %>| <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
+        <p><%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %> | <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
 
-        <%= link_to "Click Here to apply online before you visit", "https://abe.illinois.gov/abe/access/", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'food_stamps_all_city_program', 'abe', 1);" %>
-        <%= link_to "Click Here to see the documents you will need ", documents_url %>
+        <%= link_to "Click Here to apply online before you visit", "https://abe.illinois.gov/abe/access/", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'food_stamps_all_city_program', 'abe', 1);" %>
+        <br>
+        <%= link_to "Click Here to see the documents you will need ", documents_url, :class => "secondary-link" %>
         </li>
-        <% end %>
+      <% end %>
 
-        <% if @eligible_rta == 'yes' %>
+    <!-- Eligible for RTA Ride Free -->
+      <% if @eligible_rta == 'yes' %>
         <li class="list-group-item">
-          <h3 class="allcityheader">RTA Free</h3>
-          <%= link_to "Click Here to apply online", "https://idoaweb.aging.illinois.gov/baa/Welcome.aspx", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'rta_ride_free_all_city_program', 'il_dept_aging', 1);" %>
+          <h3 class="allcityheader">RTA Ride Free</h3>
+          <%= link_to "Click Here to apply online", "https://idoaweb.aging.illinois.gov/baa/Welcome.aspx", :class => "secondary-link", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'rta_ride_free_all_city_program', 'il_dept_aging', 1);" %>
         </li>
-        <% end %>
+      <% end %>
 
+      <!-- Eligible for All Kids -->
         <% if @eligible_all_kids == 'yes' %>
-        <li class="list-group-item">
-          <h3 class="allcityheader">All Kids</h3>
-           <%= link_to "Click Here to complete your application online", "https://abe.illinois.gov/abe/access/jsp/access/Home.jsp", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'all_kids_all_city_program', 'abe', 1);" %>
+          <li class="list-group-item">
+            <h3 class="allcityheader">All Kids</h3>
+             <% if @assist_eligible == 'yes' %>
+               <p>Based on your household size and income, you likely qualify for All Kids Assist.</p>
+             <% elsif @share_eligible == 'yes' %>
+               <p>Based on your household size and income, you likely qualify for All Kids Share.</p>
+             <% elsif @premium1_eligible == 'yes' %>
+               <p>Based on your household size and income, you likely qualify for All Kids Premium Level 1.</p>
+             <% elsif @premium2_eligible == 'yes' %>
+               <p>Based on your household size and income, you likely qualify for All Kids Premium Level 2.</p>
+             <% end %>
 
-           <% if @assist_eligible == 'yes' %>
-             <p>Based on your household size and income, you likely qualify for All Kids Assist.</p>
-           <% elsif @share_eligible == 'yes' %>
-             <p>Based on your household size and income, you likely qualify for All Kids Share.</p>
-           <% elsif @premium1_eligible == 'yes' %>
-             <p>Based on your household size and income, you likely qualify for All Kids Premium Level 1.</p>
-           <% elsif @premium2_eligible == 'yes' %>
-             <p>Based on your household size and income, you likely qualify for All Kids Premium Level 2.</p>
-           <% end %>
-        </li>
+            <%= link_to "Click Here to complete your application online", "https://abe.illinois.gov/abe/access/jsp/access/Home.jsp", :class => "secondary-link", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'all_kids_all_city_program', 'abe', 1);" %>
+          </li>
         <% end %>
 
+      <!-- Eligible for Medicaid -->
         <% if @eligible_medicaid == 'yes' %>
-        <li class="list-group-item">
-          <h3 class="allcityheader">Medicaid</h3>
-          <p>Important Note:  At the current moment, this form does not include Medicaid's offerings for people with disabilities. However, we are working to make this form more inclusive. </p>
+          <li class="list-group-item">
+            <h3 class="allcityheader">Medicaid</h3>
+            <p>Important Note:  At the current moment, this form does not include Medicaid's offerings for people with disabilities. However, we are working to make this form more inclusive. </p>
 
-          <%= link_to "Click Here for more information", "https://abe.illinois.gov/abe/access/jsp/access/Home.jsp", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicaid_all_city_program', 'abe', 1);" %>
-
-        </li>
+            <%= link_to "Click Here for more information", "https://abe.illinois.gov/abe/access/jsp/access/Home.jsp", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicaid_all_city_program', 'abe', 1);" %>
+          </li>
         <% end %>
+
+      <!-- Eligible for Medicare Cost Sharing -->
         <% if @eligible_medicare_cost_sharing == "yes" %>
           <li class="list-group-item">
             <h3 class="allcityheader">Medicare Cost Sharing </h3>
             <p>Important Note:  If you previously opted out of Medicare part B, the Medicare cost sharing program, you may be able to get your Medicare premium paid now. Please contact or visit your LAF paralegal to re-enroll for Medicare Part B. You can see the nearest Community Service Center near you.</p>
             <div class="sectiondivider"></div>
             <% if @laf_disclaimer.present?  %>
-                <h5><%= @laf_disclaimer %></h5>
+                <p><%= @laf_disclaimer %></p>
             <% else %>
-              <h5>The LAF expert nearest you:</h5>
+              <p>The LAF expert nearest you:</p>
             <% end %>
             <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %>| <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
           </li>
         <% end %>
 
+      <!-- Eligible for Rental Assistance -->
         <% if @rental_eligible == "yes" %>
           <li class="list-group-item">
             <h3 class="allcityheader">Rental Assistance</h3>
@@ -98,22 +105,23 @@
             <p>The final decision will be made one-on-one by the case manager.</p>
             <div class="sectiondivider"></div>
             <% if @laf_disclaimer.present?  %>
-                <h5><%= @laf_disclaimer %></h5>
+                <p><%= @laf_disclaimer %></p>
             <% else %>
-              <h5>Based on your zipcode, here is the nearest Community Service Center:</h5>
+              <p>Based on your zipcode, here is the nearest Community Service Center:</p>
             <% end %>
             <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %>| <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
             <p>or call 3-1-1.</p>
           </li>
         <% end %>
 
+      <!-- Eligible for AABD -->
         <% if @aabd_eligible == "yes" %>
           <li class="list-group-item">
             <h3 class="allcityheader">AABD Cash Assistance</h3>
             <% if @laf_disclaimer.present?  %>
-               <h5><%= @laf_disclaimer %></h5>
+               <p><%= @laf_disclaimer %></p>
             <% else %>
-              <h5> Based on your zipcode, here is the nearest Community Service Center to access your AABD Cash Assistance: </h5>
+              <p> Based on your zipcode, here is the nearest Community Service Center to access your AABD Cash Assistance: </p>
             <% end %>
             <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %>| <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
             </li>
@@ -121,7 +129,7 @@
         <% if @eligible_tanif == "yes" %>
           <li class="list-group-item">
             <h3 class="allcityheader">TANF Cash Assistance</h3>
-            <%= link_to "to find your local Family Community Resource Center ", "https://www.dhs.state.il.us/page.aspx?module=12", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'tanf_all_city_program', 'dhs_office_locator', 1);" %>
+            <%= link_to "to find your local Family Community Resource Center ", "https://www.dhs.state.il.us/page.aspx?module=12", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'tanf_all_city_program', 'dhs_office_locator', 1);" %>
 
             <p>or contact the DHS Help Line at 1 800 843-6154 (voice) or 1 800 447-6404 (TTY).</p>
           </li>
@@ -140,7 +148,7 @@
   </div>
 
     <ul class="list-group">
-    <!-- Food Stamps -->
+    <!-- Maybe eligible for food stamps -->
       <% if @eligible_snap == "maybe" %>
         <li class="list-group-item">
           <h3 class="allcityheader">Food Stamps</h3>
@@ -149,6 +157,7 @@
         </li>
       <% end %>
 
+    <!-- Maybe eligible for medicaid -->
       <% if @eligible_medicaid == "maybe" %>
         <li class="list-group-item">
           <h3 class="allcityheader">Medicaid</h3>
@@ -157,20 +166,22 @@
         </li>
       <% end %>
 
+    <!-- Maybe eligible for rental assistance -->
       <% if @rental_eligible == "maybe" %>
         <li class="list-group-item">
           <h3 class="allcityheader"> Rental Assistance</h3>
          <p>According to the income guidelines of Rental Assistance, you make too much money to apply. However, in some cases the city may make an exception. Applications can be filed at any of the City’s six Community Service Centers. </p>
           <div class="sectiondivider"></div>
           <% if @laf_disclaimer.present?  %>
-              <h5><%= @laf_disclaimer %></h5>
+              <p><%= @laf_disclaimer %></p>
           <% else %>
-            <h5>Based on your zipcode, here is the nearest Community Service Center:</h5>
+            <p>Based on your zipcode, here is the nearest Community Service Center:</p>
           <% end %>
          <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %>| <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
         </li>
       <% end %>
 
+    <!-- Maybe eligible for AABD -->
       <% if @aabd_eligible == "maybe" %>
         <li class="list-group-item">
           <h3 class="allcityheader">AABD Cash Assistance</h3>
@@ -179,6 +190,7 @@
         </li>
       <% end %>
 
+    <!-- Maybe eligible for TANF -->
       <% if @eligible_tanif == "maybe" %>
         <li class="list-group-item">
           <h3 class="allcityheader">TANF Cash Assistance</h3>
@@ -198,7 +210,7 @@
   </div>
 
     <ul class="list-group">
-    <!-- Food Stamps -->
+    <!-- Ineligible for food stamps -->
       <% if @eligible_snap == "no" %>
         <li class="list-group-item">
           <h3 class="allcityheader">Food Stamps</h3>
@@ -206,6 +218,7 @@
         </li>
       <% end %>
 
+      <!-- Ineligible for RTA Ride Free -->
       <% if @eligible_rta == "no" %>
         <li class="list-group-item">
           <h3 class="allcityheader">RTA Ride Free</h3>
@@ -213,6 +226,7 @@
         </li>
       <% end %>
 
+      <!-- Ineligible for All Kids -->
       <% if @eligible_all_kids == "no" %>
         <li class="list-group-item">
           <h3 class="allcityheader">All Kids</h3>
@@ -220,6 +234,7 @@
         </li>
       <% end %>
 
+      <!-- Ineligible for Medicaid -->
       <% if @eligible_medicaid == "no" %>
         <li class="list-group-item">
           <h3 class="allcityheader">Medicaid</h3>
@@ -227,7 +242,7 @@
         </li>
       <% end %>
 
-
+      <!-- Ineligible for Medicare Cost Sharing -->
       <% if @eligible_medicare_cost_sharing == "no" %>
         <li class="list-group-item">
           <h3 class="allcityheader">Medicare Cost Sharing</h3>
@@ -235,7 +250,7 @@
         </li>
       <% end %>
 
-
+      <!-- Ineligible for Rental Assistance -->
       <% if @rental_eligible == "no" %>
         <li class="list-group-item">
           <h3 class="allcityheader">Rental Assistance</h3>
@@ -243,6 +258,7 @@
         </li>
       <% end %>
 
+    <!-- Ineligible for AABD -->
       <% if @aabd_eligible == "no" %>
         <li class="list-group-item">
           <h3 class="allcityheader">AABD Cash Assistance</h3>
@@ -250,6 +266,7 @@
         </li>
       <% end %>
 
+    <!-- Ineligible for TANF -->
       <% if @eligible_tanif == "no" %>
         <li class="list-group-item">
           <h3 class="allcityheader">TANF Cash Assistance</h3>
@@ -324,5 +341,6 @@
 
 <% end %>
 
-<%= render "layouts/print_center_button" %>
+<%= render "layouts/print_button" %>
+</div>
 </div>

@@ -4,7 +4,6 @@
 
 <!-- User is eligible -->
 <% if @eligible == 'yes' %>
-
   <div class="row">
     <div class="col-md-7">
       <h1>Results: You may be in luck!</h1>
@@ -17,34 +16,31 @@
         <p>To further pursue your Medicaid application you can also call the county care line (312-864-8200). If you already have a doctor, be sure to confirm they transfer over.</p>
       </div>
 
-      </div>
     </div>
+  </div>
 
 <!-- User might be eligible -->
   <% elsif @eligible == 'maybe' %>
+    <div class="row">
+      <div class="col-md-7">
+        <h1>Results: Something else in mind!</h1>
+        <p>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a Medicaid expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your Medicaid eligibility with you.</p>
 
-      <div class="row">
-        <div class="col-md-7">
-          <h1>Results: Something else in mind!</h1>
-          <p>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a Medicaid expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your Medicaid eligibility with you.</p>
+        <section class="content-section resources">
+          <h3>Resources</h3>
+          <% if @laf_disclaimer.present? %>
+            <p><%= @laf_disclaimer %></p>
+          <% else  %>
+         <% end %>
+          <%= render 'layouts/community_center' %>
+         </section>
 
-          <section class="content-section resources">
-            <h3>Resources</h3>
-            <% if @laf_disclaimer.present? %>
-              <p><%= @laf_disclaimer %></p>
-            <% else  %>
-           <% end %>
-            <%= render 'layouts/community_center' %>
-           </section>
-
-            <%= image_tag("LAFlogo.jpg", :class => "img-responsive") %>
-        </div>
+          <%= image_tag("LAFlogo.jpg", :class => "img-responsive") %>
       </div>
+    </div>
 
 <!-- User is inelgible -->
   <% elsif @eligible == 'no' %>
-
-
       <div class="row">
         <div class="col-md-7">
           <h1>Results: Something else in mind!</h1>
@@ -54,16 +50,12 @@
           <div class="resources">
             <h3>Resources</h3>
             <p><%= link_to "Click Here", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "secondary-link", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'medicaid', 'health_care_fees', 1);" %> to learn more about fees.</p>
-
             <p>Get Covered Illinois is a resource that helps families register for insurance at in-person events.</p>
-
             <p><%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicaid', 'get_covered_illinois', 1);" %> to find Get Covered Illinois events in your area.</p>
-
             <p>You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.</p>
           </div>
 
           <%= render "layouts/purple_binder_resources" %>
-
         </div>
     </div>
   <% else %>
@@ -77,7 +69,4 @@
 <% end %>
 
 </div>
-<br>
-<br>
-<br>
-<br>
+
