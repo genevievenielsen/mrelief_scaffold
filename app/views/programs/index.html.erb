@@ -29,7 +29,7 @@
         <div class="col-md-4 programs" >
           <h4><%= program.name %></h4>
           <p><%= program.description %></p>
-          <a href="#" data-toggle="modal" data-target="#receiving_benefits">Continue &rarr;</a>
+          <a href="<%= program.url %>" >Continue &rarr;</a>
         </div>
     <% end %>
   <% end %>
@@ -51,7 +51,7 @@
     <div class="col-md-4 programs">
       <h4><%= program.name %></h4>
       <p><%= program.description %></p>
-      <a href="#" data-toggle="modal" data-target="#receiving_benefits">Continue &rarr;</a>
+      <a href="<%= program.url %>">Continue &rarr;</a>
     </div>
   <% end %>
 
