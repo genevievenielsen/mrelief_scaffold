@@ -116,6 +116,23 @@ button {
   }
 }
 
+/*ALL PROGRAMS*/
+.program-wrapper {
+  @media (min-width: 1200px) {
+  .col-md-4 {
+    padding-right: 45px;
+    }
+  }
+}
+.programs {
+  margin-bottom: 45px;
+  margin-top: 20px;
+
+  h4 {
+    margin-bottom: 7px;
+  }
+}
+
 /*RESULTS PAGES*/
 
 .resources {
@@ -124,6 +141,7 @@ button {
   h3 {
     border-bottom: 4px solid;
     margin-bottom: 30px;
+    padding-bottom: 10px;
   }
 }
 
