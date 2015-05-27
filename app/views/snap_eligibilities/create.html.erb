@@ -49,7 +49,7 @@
 
       <!-- INCOME EXPLANATION -->
       <% if @expedited == true  %>
-        <div class="modal fade" id="income_explanation" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal fade" id="income_explanation" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                  <div class="modal-header">
@@ -149,8 +149,8 @@
                     <div class="modal-body">
                        <p>  Currently your student status is reported as (half-time or more) at  a business, technical, trade, or vocational school that normally requires a high school diploma or the equivalent for enrollment in the course of study; or regular courses, including internet, mail, self-study, or correspondence courses, at an accredited college or university that offers degree programs which is consistent with an institution satisfying the policy requirements defining a student of higher education under <a href="https://www.dhs.state.il.us/page.aspx?item=13273">P M 03-04-03-a </a> and you reported conditions that satisfy policy <a href="https://www.dhs.state.il.us/page.aspx?item=13275"> PM 03-04-03-b</a> of the Illinois Department of Human Services (DHS) Manual. Once you apply, you should hear within 30 business days about your in-person interview with DHS.
                       </p>
-                      <button data-dismiss="modal">Ok, I understand.</button>
                     </div>
+                     <button data-dismiss="modal">Ok, I understand.</button>
                   </div>
                 </div>
              </div>
@@ -188,33 +188,33 @@
         <p>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a Food Stamp expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your food stamp eligibility with you. </p>
 
 
-            <table class="table table-striped">
+            <table class="table table-bordered">
             <% if @hundred_dollar_range == true %>
               <tr id="income_row">
-                <td><i class="fa fa-question-circle"></i></td>
+                <td><i class="fa fa-question fa-2x"></i></td>
                 <td><p>Your gross monthly income</p></td>
-                <td><a href="#" data-toggle="modal" data-target="#income_explanation">Read More </a></td>
+                <td><a href="#" class="secondary-link" data-toggle="modal" data-target="#income_explanation">Read More </a></td>
               </tr>
               <% end %>
             <% if @d.citizen == "yes" %>
               <tr id="citizenship_row">
-                <td><i class="fa fa-check-circle "></i></td>
+                <td><i class="fa fa-check fa-2x"></i></td>
                 <td><p>Your citizenship status</p></td>
-                <td><a href="#" data-toggle="modal" data-target="#citizenship_explanation">Read More </a></td>
+                <td><a href="#" class="secondary-link" data-toggle="modal" data-target="#citizenship_explanation">Read More </a></td>
               </tr>
             <% elsif @d.citizen == "no" %>
               <tr id="citizenship_row">
-                <td><i class="fa fa-question-circle"></i></td>
+                <td><i class="fa fa-question fa-2x"></i></td>
                 <td><p>Your citizenship status</p></td>
-                <td><a href="#" data-toggle="modal" data-target="#citizenship_explanation">Read More </a></td>
+                <td><a href="#" class="secondary-link" data-toggle="modal" data-target="#citizenship_explanation">Read More </a></td>
               </tr>
             <% end %>
 
             <% if @eligible_student == "maybe" %>
               <tr id="education_row">
-                <td><i class="fa fa-question-circle"></i></td>
+                <td><i class="fa fa-question fa-2x"></i></td>
                 <td><p>Your education status</p></td>
-                <td><a href="#" data-toggle="modal" data-target="#education_explanation">Read More </a></td>
+                <td><a href="#" class="secondary-link" data-toggle="modal" data-target="#education_explanation">Read More </a></td>
               </tr>
             <% else %>
               <tr id="education_row">
@@ -228,20 +228,20 @@
 
           <!-- YOUR INCOME -->
           <% if @hundred_dollar_range == true %>
-            <div class="modal fade" id="income_explanation" tabindex="-1" role="dialog" aria-labelledby="income_explanationLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                  <div class="modal-content">
-                   <div class="modal-header">
-                      <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title">Your Income</h4>
-                    </div>
-                    <div class="modal-body">
-                       <p>Currently your reported income of $<%= @d.monthly_gross_income %> for your household size of <%= @d.dependent_no  %> is HIGHER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %>  according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> of the Illinois Department of Human Services Policy Manual. But since the amount is within $<%= @income_range %>, we recommend calling a Legal Assistance Foundation eligibility expert located community service centers.</p>
-                    </div>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
-             </div>
+             <div class="modal fade" id="income_explanation" tabindex="-1" role="dialog" aria-hidden="true">
+               <div class="modal-dialog">
+                   <div class="modal-content">
+                    <div class="modal-header">
+                       <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                       <h4 class="modal-title">Your Income Status</h4>
+                     </div>
+                     <div class="modal-body">
+                       <p>Currently your reported income of $<%= @d.monthly_gross_income %> is lower than $150 and therefore you may qualify for emergency or expedited SNAP (food stamp) benefits according to policy <a href="http://www.dhs.state.il.us/page.aspx?item=13005">PM-02-08-01</a>  of the Illinois Department of Human Services (DHS) manual. Once you apply, you should hear within 5 business days about your in-person interview with DHS.</p>
+                     </div>
+                     <button data-dismiss="modal">Ok, I understand.</button>
+                   </div>
+                 </div>
+              </div>
              <% end %>
 
              <!-- CITIZEN EXPLANATION -->
@@ -257,7 +257,7 @@
                            <p>  Currently your citizenship status is reported as a citizen or legal permanent resident for at least 5 years wherein citizenship is allowable under <a href="https://www.dhs.state.il.us/page.aspx?item=13100">PM 03-01-02-a</a> and legal permanent residency for at least 5 years is allowable under <a href="https://www.dhs.state.il.us/page.aspx?item=13183">PM 03-01-02-g</a> of the Illinois Department of Human Services (DHS) Manual.
                            </p>
                          </div>
-                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                             <button data-dismiss="modal">Ok, I understand.</button>
                        </div>
                      </div>
                   </div>
@@ -273,7 +273,7 @@
                           <p>  Currently your reported immigration status reported as NOT being a US citizen or a legal permanent resident who has lived in the US for 5 years or more doesn’t completely eliminate you from being eligible for food stamps. According to <a href="https://www.dhs.state.il.us/page.aspx?item=13091"> Section 3</a> of the Worker’s Action Guide in the Illinois Department of Human Services Policy Manual, refugees, asylees and other special immigration categories, and certain immigrants based on country, year of immigration and other factors may still be eligible. We recommend calling a Legal Assistance Foundation eligibility expert to explore if you are eligible through other policy provisions. They are located at community service centers referenced below.
                           </p>
                         </div>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button data-dismiss="modal">Ok, I understand.</button>
                       </div>
                     </div>
                  </div>
@@ -292,7 +292,7 @@
                            <p> Currently your reported student status as NOT working an average of 20 hours a week OR being in a work study program doesn’t completely eliminate you from being eligible for food stamps. According to <a href="https://www.dhs.state.il.us/page.aspx?item=13275"> PM 03-04-03-b</a> of the Illinois Department of Human Services Policy Manual,  you may still qualify on the basis of your status as a parent of a minor child, a caregiver of a person with disabilities or other work requirements. We recommend calling a Legal Assistance Foundation eligibility expert to explore if you are eligible through other policy provisions.
                           </p>
                         </div>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button data-dismiss="modal">Ok, I understand.</button>
                       </div>
                     </div>
                  </div>
@@ -323,26 +323,26 @@
           <p>Below is the information you provided which impacted your eligibility status:</p>
 
 
-            <table class="table table-striped">
+            <table class="table table-bordered">
               <% if @d.age >= 18  %>
               <tr id="income_row">
-                <td><i class="fa fa-times"></i></td>
+                <td><i class="fa fa-times fa-2x"></i></td>
                 <td><p>Your gross monthly income</p></td>
-                <td><a href="#" data-toggle="modal" data-target="#income_explanation">Read More </a></td>
+                <td><a href="#" class="secondary-link" data-toggle="modal" data-target="#income_explanation">Read More </a></td>
               </tr>
               <% else %>
                 <tr id="income_row">
-                  <td><i class="fa fa-times"></i></td>
+                  <td><i class="fa fa-times fa-2x"></i></td>
                   <td><p>Your age</p></td>
-                  <td><a href="#" data-toggle="modal" data-target="#income_explanation">Read More </a></td>
+                  <td><a href="#" class="secondary-link" data-toggle="modal" data-target="#income_explanation">Read More </a></td>
                 </tr>
               <% end %>
 
               <% if @d.citizen == "yes" %>
                 <tr id="citizenship_row">
-                  <td><i class="fa fa-check-circle "></i></td>
+                  <td><i class="fa fa-check fa-2x"></i></td>
                   <td><p>Your citizenship status</p></td>
-                  <td><a href="#" data-toggle="modal" data-target="#citizenship_explanation">Read More </a></td>
+                  <td><a href="#" class="secondary-link" data-toggle="modal" data-target="#citizenship_explanation">Read More </a></td>
                 </tr>
               <% else %>
                 <tr id="citzenship_row">
@@ -373,7 +373,7 @@
                       <div class="modal-body">
                          <p>Currently your reported income of $<%= @d.monthly_gross_income %> for your household size of <%= @d.dependent_no  %> is HIGHER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to  <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> of the Illinois Department of Human Services Policy Manual and you do not qualify for SNAP (food stamps) benefits. However, below are some local resources that can help. </p>
                       </div>
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          <button data-dismiss="modal">Ok, I understand.</button>
                     </div>
                   </div>
                </div>
@@ -389,7 +389,7 @@
                       <div class="modal-body">
                         <p>Currently your reported age of <%= @d.age %> is below 18. Children generally must apply as part of their larger household (and this service is not available to single minor households). However, below are some local resources that can help.</p>
                       </div>
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          <button data-dismiss="modal">Ok, I understand.</button>
                     </div>
                   </div>
                </div>
@@ -408,63 +408,18 @@
                           <p>  Currently your citizenship status is reported as a citizen or legal permanent resident for at least 5 years wherein citizenship is allowable under <a href="https://www.dhs.state.il.us/page.aspx?item=13100"> PM 03-01-02-a</a> and legal permanent residency for at least 5 years is allowable under <a href="https://www.dhs.state.il.us/page.aspx?item=13183">PM 03-01-02-g</a> of the Illinois Department of Human Services (DHS) Manual.
                           </p>
                         </div>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button data-dismiss="modal">Ok, I understand.</button>
                       </div>
                     </div>
                  </div>
             <% end %>
 
-          <br>
-          <div class="row">
-            <p class="subhead">Direct2Food is an online resource that will help you locate the food pantries, soup kitchens, and meal programs closest to you. To find resources near you</p>
-            <a href="http://www.direct2food.org/" onclick="ga('send', 'event', 'button', 'food_stamps', 'direct2food', 1);" class="btn btn-success btn-resolution" target="_blank">Click Here</a>
+            <div class="resources">
+              <h3>Resources</h3>
+              <p>Direct2Food is an online resource that will help you locate the food pantries, soup kitchens, and meal programs closest to you. To find resources near you, <a href="http://www.direct2food.org/" onclick="ga('send', 'event', 'button', 'food_stamps', 'direct2food', 1);" class="secondary-link" target="_blank">click here</a></p>
           </div>
 
-          <br>
-
-          <div class="row">
-            <h4>Here are some additional resources from Purple Binder:</h4>
-          </div>
-          <br>
-
-          <div class="row">
-          <% if @food_resources_zip.count >= 2 %>
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @food_resources_zip.first.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @food_resources_zip.first.street %>  <%= @food_resources_zip.first.city %> <%= @food_resources_zip.first.state %>, <%= @food_resources_zip.first.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @food_resources_zip.first.phone %> </li>
-              </ul>
-            </div>
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @food_resources_zip.second.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @food_resources_zip.second.street %>  <%= @food_resources_zip.second.city %> <%= @food_resources_zip.second.state %>, <%= @food_resources_zip.second.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @food_resources_zip.second.phone %> </li>
-              </ul>
-            </div>
-            <% end %>
-          </div>
-
-          <div class="row">
-          <% if @food_resources_first.present? %>
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @food_resources_first.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @food_resources_first.street %>  <%= @food_resources_first.city %> <%= @food_resources_first.state %>, <%= @food_resources_first.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @food_resources_first.phone %> </li>
-              </ul>
-            </div>
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @food_resources_second.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @food_resources_second.street %>  <%= @food_resources_second.city %> <%= @food_resources_second.state %>, <%= @food_resources_second.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @food_resources_second.phone %> </li>
-              </ul>
-            </div>
-            <% end %>
-          </div>
-          <%= image_tag("pblogo.jpg", :class => "logo-padding") %>
+          <%= render "layouts/purple_binder_resources" %>
         <% end %>
       </div>
 </div>

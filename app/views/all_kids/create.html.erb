@@ -1,123 +1,56 @@
 <div class="container">
 <%= render "layouts/print_button" %>
+
 <% if @eligible %>
+ <div class="row">
+   <div class="col-md-7">
+      <h1>Results: You may be in luck!</h1>
+      <% if @assist_eligible %>
+        <p>Based on your household size and income, you likely qualify for All Kids Assist.</p>
+      <% elsif @share_eligible %>
+        <p>Based on your household size and income, you likely qualify for All Kids Share.</p>
+      <% elsif @premium1_eligible %>
+        <p>Based on your household size and income, you likely qualify for All Kids Premium Level 1.</p>
+      <% elsif @premium2_eligible %>
+        <p>Based on your household size and income, you likely qualify for All Kids Premium Level 2.</p>
+      <% end %>
 
- <div class="row" style="text-align:center;">
-    <div class="col-md-8 col-md-offset-2">
-        <i class="fa fa-check-circle fa-5x"></i>
-          <h1>You may be in luck!</h1>
+      <div class="resources">
+        <h3>Apply for benefits</h3>
+        <p>To complete your application online, <%= link_to "Click Here", "https://abe.illinois.gov/abe/access/jsp/access/Home.jsp", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'all_kids', 'abe', 1);" %>
+        </p>
+      </div >
 
-          <% if @assist_eligible %>
-            <h4>Based on your household size and income, you likely qualify for All Kids Assist.</h4>
-          <% elsif @share_eligible %>
-            <h4>Based on your household size and income, you likely qualify for All Kids Share.</h4>
-
-          <% elsif @premium1_eligible %>
-            <h4>Based on your household size and income, you likely qualify for All Kids Premium Level 1.</h4>
-
-          <% elsif @premium2_eligible %>
-            <h4>Based on your household size and income, you likely qualify for All Kids Premium Level 2.</h4>
-
-          <% end %>
-          <br>
-
-          <p class="subhead">To complete your application online</p>
-          <%= link_to "Click Here", "https://abe.illinois.gov/abe/access/jsp/access/Home.jsp", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'all_kids', 'abe', 1);" %>
-      </div>
     </div>
+  </div>
 
   <% else %>
-      <br>
-      <br>
-  <div class="row" style="text-align:center;">
-    <div class="col-md-8 col-md-offset-2">
-        <h1>Something else in mind!</h1>
 
-            <h4>So, it looks like you possibly don't qualify for <a href="/all_kids/new"> All Kids</a>. However, our friends at
-            Purple Binder found some other resources that might help. If you and your family don't have health coverage in 2014, you may have to pay a fee - and all of your health care.
-            </h4>
+  <div class="row">
+    <div class="col-md-7">
+        <h1>Results: Something else in mind!</h1>
 
-            <br>
-            <br>
+            <p>Based on your household size and income, you likely qualify for All Kids. If you and your family don't have health coverage in 2014, you may have to pay a fee - and all of your health care.
+            </p>
 
-        <div class="row">
-          <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="resources">
+              <h3>Resources</h3>
 
-            <p class="subhead">To learn more about fees<br> from Get Covered</p>
-            <%= link_to "Click Here", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'all_kids', 'abe', 1);" %>
-          </div>
+              <p>To learn more about fees from Get Covered,
+              <%= link_to "Click Here", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'all_kids', 'abe', 1);" %>
 
-          <div class="col-md-6 col-sm-6 col-xs-6">
+              <p> To find Get Covered Illinois events in your area,
+              <%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'all_kids', 'abe', 1);" %>
+              </p>
 
-            <p class="subhead"> To find Get Covered <br>Illinois events in your area</p>
-            <%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'all_kids', 'abe', 1);" %>
-          </div>
-        </div>
-
-        <br>
-        <br>
-        <br>
-
-          <div>
-            <p> Get Covered Illinois is a resource that helps families register for insurance at in-person events.<br>You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.</p>
-          </div>
-
-          <br>
-
-          <div class="row">
-            <h4>Here are some additional resources from Purple Binder:</h4>
-          </div>
-          <br>
-
-          <div class="row">
-
-          <% if @medical_resources_zip.count >= 2 %>
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @medical_resources_zip.first.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @medical_resources_zip.first.street %>  <%= @medical_resources_zip.first.city %> <%= @medical_resources_zip.first.state %>, <%= @medical_resources_zip.first.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @medical_resources_zip.first.phone %> </li>
-              </ul>
+              <p> Get Covered Illinois is a resource that helps families register for insurance at in-person events.  You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.</p>
             </div>
 
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @medical_resources_zip.second.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @medical_resources_zip.second.street %>  <%= @medical_resources_zip.second.city %> <%= @medical_resources_zip.second.state %>, <%= @medical_resources_zip.second.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @medical_resources_zip.second.phone %> </li>
-              </ul>
-            </div>
-            <% end %>
-          </div>
+        <%= render "layouts/purple_binder_resources" %>
 
-          <div class="row">
-          <% if @medical_resources_first.present? %>
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @medical_resources_first.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @medical_resources_first.street %>  <%= @medical_resources_first.city %> <%= @medical_resources_first.state %>, <%= @medical_resources_first.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @medical_resources_first.phone %> </li>
-              </ul>
-            </div>
-
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @medical_resources_second.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @medical_resources_second.street %>  <%= @medical_resources_second.city %> <%= @medical_resources_second.state %>, <%= @medical_resources_second.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @medical_resources_second.phone %> </li>
-              </ul>
-            </div>
-            <% end %>
-          </div>
-
-          <%= image_tag("pblogo.jpg", :class => "logo-padding") %>
-
-        <% end %>
       </div>
+    </div>
+  <% end %>
 </div>
-</div>
-<br>
-<br>
-<br>
 
 

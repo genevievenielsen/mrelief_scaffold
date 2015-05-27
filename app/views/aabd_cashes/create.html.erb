@@ -1,116 +1,51 @@
 <div class="container">
 <%= render "layouts/print_button" %>
 <% if @eligible == 'yes' %>
+   <div class="row">
+     <div class="col-md-7">
+      <h1>Results: You may be in luck!</h1>
+      <p>Based on your household size and income, you likely qualify for Aged, Blind and Disabled (AABD) Cash Assistance</p>
 
-      <div class="row" style="text-align:center;">
-         <div class="col-md-8 col-md-offset-2">
-             <i class="fa fa-check-circle fa-5x"></i>
-              <h1>You may be in luck!</h1>
-              <h4>Based on your household size and income, you likely qualify for Aged, Blind and Disabled (AABD) Cash Assistance</h4>
-          <br>
+      <section class="content-section resources">
+        <h3>Resources</h3>
+        <% if @laf_disclaimer.present? %>
+          <p><%= @laf_disclaimer %></p>
+        <% else  %>
+          <p> Based on your zipcode, here is the nearest Community Service Center to access your AABD Cash Assistance:</p>
+       <% end %>
+        <%= render 'layouts/community_center' %>
+       </section>
+    </div>
+  </div>
 
-          </div>
-          <!-- community service center -->
-          <div class="row">
-          <div class="col-md-12">
-          <% if @laf_disclaimer.present?  %>
-               <p class="subhead"><%= @laf_disclaimer %></p>
-          <% else  %>
-               <p class="subhead"> Based on your zipcode, here is the nearest Community Service Center to access your AABD Cash Assistance: </p>
-          <% end %>
-          </div>
-          </div>
+<% elsif @eligible == 'maybe' %>
+  <div class="row">
+    <div class="col-md-7">
+
+      <h1>Results: Something else in mind!</h1>
+        <p>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a Aged, Blind and Disabled (AABD) Cash Asistanceexpert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your eligibility with you. </p>
+
+        <section class="content-section resources">
+          <h3>Resources</h3>
+          <% if @laf_disclaimer.present? %>
+            <p><%= @laf_disclaimer %></p>
+         <% end %>
           <%= render 'layouts/community_center' %>
-    </div>
+         </section>
 
-    <% elsif @eligible == 'maybe' %>
-
-      <div class="row" style="text-align:center;">
-        <div class="col-md-8 col-md-offset-2">
-          <i class="fa fa-exclamation-circle fa-5x"></i>
-            <h1>Something else in mind!</h1>
-             <h4>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a Aged, Blind and Disabled (AABD) Cash Asistanceexpert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your eligibility with you. </h4>
-            <br>
-
-            <% if @laf_disclaimer.present?  %>
-              <p class="subhead"><%= @laf_disclaimer %></p>
-            <% end %>
-
-            <%= render 'layouts/community_center' %>
-        </div>
-      <div class="row">
-        <div class="col-md-offset-4 col-md-4">
         <%= image_tag("LAFlogo.jpg", :class => "img-responsive") %>
-        </div>
-      </div>
 
     </div>
+  </div>
 
 
-      <% elsif @eligible == 'no' %>
-
-      <div class="row" style="text-align:center;">
-        <div class="col-md-8 col-md-offset-2">
-            <h1>Something else in mind!</h1>
-            <h4>Based on your household size and income, you likely do not qualify for Aged, Blind and Disabled (AABD) Cash Asistance.</h4>
-
-            <br>
-
-                <div class="row">
-                  <h4>Here are some additional resources from Purple Binder:</h4>
-                </div>
-                <br>
-
-                <div class="row">
-
-                <% if @aabd_resources_zip.count >= 2 %>
-                  <div class="col-md-6 col-sm-6">
-                    <ul class="list-group" style="text-align:left;">
-                      <li class="list-group-item" style="font-weight:bold"><%= @aabd_resources_zip.first.name %>  </li>
-                      <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @aabd_resources_zip.first.street %>  <%= @aabd_resources_zip.first.city %> <%= @aabd_resources_zip.first.state %>, <%= @aabd_resources_zip.first.zip %> </li>
-                      <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @aabd_resources_zip.first.phone %> </li>
-                    </ul>
-                  </div>
-
-                  <div class="col-md-6 col-sm-6">
-                    <ul class="list-group" style="text-align:left;">
-                      <li class="list-group-item" style="font-weight:bold"><%= @aabd_resources_zip.second.name %>  </li>
-                      <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @aabd_resources_zip.second.street %>  <%= @aabd_resources_zip.second.city %> <%= @aabd_resources_zip.second.state %>, <%= @aabd_resources_zip.second.zip %> </li>
-                      <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @aabd_resources_zip.second.phone %> </li>
-                    </ul>
-                  </div>
-                  <% end %>
-                </div>
-
-                <div class="row">
-                <% if @aabd_resources_first.present? %>
-                  <div class="col-md-6 col-sm-6">
-                    <ul class="list-group" style="text-align:left;">
-                      <li class="list-group-item" style="font-weight:bold"><%= @aabd_resources_first.name %>  </li>
-                      <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @aabd_resources_first.street %>  <%= @aabd_resources_first.city %> <%= @aabd_resources_first.state %>, <%= @aabd_resources_first.zip %> </li>
-                      <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @aabd_resources_first.phone %> </li>
-                    </ul>
-                  </div>
-
-                  <div class="col-md-6 col-sm-6">
-                    <ul class="list-group" style="text-align:left;">
-                      <li class="list-group-item" style="font-weight:bold"><%= @aabd_resources_second.name %>  </li>
-                      <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @aabd_resources_second.street %>  <%= @aabd_resources_second.city %> <%= @aabd_resources_second.state %>, <%= @aabd_resources_second.zip %> </li>
-                      <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @aabd_resources_second.phone %> </li>
-                    </ul>
-                  </div>
-                  <% end %>
-                </div>
-
-            </div>
-
-             <%= image_tag("pblogo.jpg", :class => "logo-padding") %>
-          <br>
-
-      </div>
-</div>
+<% elsif @eligible == 'no' %>
+  <div class="row">
+    <div class="col-md-7">
+      <h1>Results: Something else in mind!</h1>
+      <p>Based on your household size and income, you likely do not qualify for Aged, Blind and Disabled (AABD) Cash Asistance.</p>
+      <%= render "layouts/purple_binder_resources" %>
+    </div>
+  </div>
 <% end %>
-<br>
-<br>
-<br>
-<br>
+

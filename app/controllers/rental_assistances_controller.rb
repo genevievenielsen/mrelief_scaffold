@@ -98,30 +98,30 @@ class RentalAssistancesController < ApplicationController
       end
 
       @pb_zipcode = @user_zipcode.chomp(".0")
-        @housing_resources = housing
-        @housing_resources_zip = []
+        @resources = housing
+        @resources_zip = []
 
         housing.each do |center|
           if center.zip.match(@pb_zipcode)
-            @housing_resources_zip.push(center)
+            @resources_zip.push(center)
           end
         end
 
         #in this case there are 2 housing centers in the user's zip
-        if @housing_resources_zip.count >= 2
-           @housing_resources = @housing_resources_zip
+        if @resources_zip.count >= 2
+           @resources = @resources_zip
         end
 
         #in this case there is 1 aabd center in the user's zip
-        if @housing_resources_zip.count == 1
-           @housing_resources_first = @housing_resources_zip.first
-           @housing_resources_second = @housing_resources.first
+        if @resources_zip.count == 1
+           @resources_first = @resources_zip.first
+           @resources_second = @resources.first
         end
 
         #in this caser there are no aabd centers in the user's zip
-        if  @housing_resources_zip.count == 0
-            @housing_resources_first = @housing_resources.first
-            @housing_resources_second = @housing_resources.second
+        if  @resources_zip.count == 0
+            @resources_first = @resources.first
+            @resources_second = @resources.second
         end
 
       if params[:lease].present? && params[:rental_status].present? && params[:next_rent].present?

@@ -158,24 +158,24 @@ class SnapEligibilitiesController < ApplicationController
 
           #this is the logic for the community resources
           @user_zipcode = @user_zipcode.chomp(".0")
-          @food_resources = ServiceCenter.where(:description => "food pantry")
-          @food_resources_zip = @food_resources.where(:zip => @user_zipcode)
+          @resources = ServiceCenter.where(:description => "food pantry")
+          @resources_zip = @resources.where(:zip => @user_zipcode)
 
             #in this case there are 2 food pantries in the user's zip
-            if @food_resources_zip.count >= 2
-               @food_resources = @food_resources_zip
+            if @resources_zip.count >= 2
+               @resources = @resources_zip
             end
 
             #in this case there is 1 food pantry in the user's zip
-            if @food_resources_zip.count == 1
-               @food_resources_first = @food_resources_zip.first
-               @food_resources_second = @food_resources.first
+            if @resources_zip.count == 1
+               @resources_first = @resources_zip.first
+               @resources_second = @resources.first
             end
 
             #in this caser there are no food pantries in the user's zip
-            if  @food_resources_zip.count == 0
-                @food_resources_first = @food_resources.first
-                @food_resources_second = @food_resources.second
+            if  @resources_zip.count == 0
+                @resources_first = @resources.first
+                @resources_second = @resources.second
             end
 
 

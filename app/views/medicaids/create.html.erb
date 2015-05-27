@@ -28,11 +28,14 @@
           <h1>Results: Something else in mind!</h1>
           <p>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a Medicaid expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your Medicaid eligibility with you.</p>
 
-          <% if @laf_disclaimer.present?  %>
-            <p class="subhead"><%= @laf_disclaimer %></p>
-          <% end %>
-
+          <section class="content-section resources">
+            <h3>Resources</h3>
+            <% if @laf_disclaimer.present? %>
+              <p><%= @laf_disclaimer %></p>
+            <% else  %>
+           <% end %>
             <%= render 'layouts/community_center' %>
+           </section>
 
             <%= image_tag("LAFlogo.jpg", :class => "img-responsive") %>
         </div>
@@ -48,62 +51,19 @@
           <p>Based on your household size and income, you likely do not qualify for Medicaid.</p>
           <p>However, if you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.</p>
 
-          <p><%= link_to "Click Here", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "secondary-link", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'medicaid', 'health_care_fees', 1);" %> to learn more about fees.</p>
-
-
-          <p>Get Covered Illinois is a resource that helps families register for insurance at in-person events.</p>
-
-          <p><%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicaid', 'get_covered_illinois', 1);" %> to find Get Covered Illinois events in your area.</p>
-
-            <p>You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.
-            </p>
-
-
-
           <div class="resources">
-            <h3>Here are some additional resources from Purple Binder:</h3>
+            <h3>Resources</h3>
+            <p><%= link_to "Click Here", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "secondary-link", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'medicaid', 'health_care_fees', 1);" %> to learn more about fees.</p>
+
+            <p>Get Covered Illinois is a resource that helps families register for insurance at in-person events.</p>
+
+            <p><%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicaid', 'get_covered_illinois', 1);" %> to find Get Covered Illinois events in your area.</p>
+
+            <p>You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.</p>
           </div>
 
+          <%= render "layouts/purple_binder_resources" %>
 
-          <% if @medical_resources_zip.count >= 2 %>
-            <div class="laf-list">
-              <ul>
-                <li class="laf-headline"><%= @medical_resources_zip.first.name %> </li>
-                <li><%= @medical_resources_zip.first.street %>  <%= @medical_resources_zip.first.city %> <%= @medical_resources_zip.first.state %>, <%= @medical_resources_zip.first.zip %>  </li>
-                <li><%= @medical_resources_zip.first.phone %> </li>
-              </ul>
-            </div>
-
-            <div class="laf-list">
-              <ul>
-                <li class="laf-headline"><%= @medical_resources_zip.second.name %> </li>
-                <li><%= @medical_resources_zip.second.street %>  <%= @medical_resources_zip.second.city %> <%= @medical_resources_zip.second.state %>, <%= @medical_resources_zip.second.zip %>  </li>
-                <li><%= @medical_resources_zip.second.phone %> </li>
-              </ul>
-            </div>
-          <% end %>
-
-
-          <% if @medical_resources_first.present? %>
-            <div class="laf-list">
-              <ul>
-                <li class="laf-headline"><%= @medical_resources_first.name %> </li>
-                <li><%= @medical_resources_first.street %>  <%= @medical_resources_first.city %> <%= @medical_resources_first.state %>, <%= @medical_resources_first.zip %>  </li>
-                <li><%= @medical_resources_first.phone %> </li>
-              </ul>
-            </div>
-
-            <div class="laf-list">
-              <ul>
-                <li class="laf-headline"><%= @medical_resources_second.name %> </li>
-                <li><%= @medical_resources_second.street %>  <%= @medical_resources_second.city %> <%= @medical_resources_second.state %>, <%= @medical_resources_second.zip %>  </li>
-                <li><%= @medical_resources_second.phone %> </li>
-              </ul>
-            </div>
-         <% end %>
-
-
-           <%= image_tag("pblogo.jpg", :class => "logo-padding") %>
         </div>
     </div>
   <% else %>

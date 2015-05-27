@@ -1,118 +1,51 @@
 <div class="container">
 <%= render "layouts/print_button" %>
 <% if @eligible_tanif == "yes" %>
+  <div class="row">
+   <div class="col-md-7">
+    <h1>Results: You may be in luck!</h1>
+    <p>Based on your household size, income, and ages of your children, you may qualify for TANF. </p>
 
-
-     <div class="row" style="text-align:center;">
-      <div class="col-md-8 col-md-offset-2">
-          <i class="fa fa-check-circle fa-5x"></i>
-           <h1>You may be in luck!</h1>
-           <h4>Based on your household size, income, and ages of your children, you may qualify for TANF. </h4>
-          <br>
-          <br>
-          <br>
-          <div class="row">
-            <div class="text-center">
-              <p class="subhead">  Use the DHS Office Locator to find your local Family Community Resource Center :</p>
-            <%= link_to "Click Here", "https://www.dhs.state.il.us/page.aspx?module=12", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'tanf', 'dhs_office_locator', 1);" %>
-            </div>
-            <br>
-          </div>
-        </div>
+      <div class="resources">
+        <h3>Apply for benefits</h3>
+        <p>To use the DHS Office Locator to find your local Family Community Resource Center,  <%= link_to "Click Here", "https://www.dhs.state.il.us/page.aspx?module=12", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'tanf', 'dhs_office_locator', 1);" %> </p>
+        <p>or contact the DHS Help Line at 1 800 843-6154 (voice) or 1 800 447-6404 (TTY).</p>
       </div>
-      <div class="row">
-        <div class="text-center">
-          <p class="subhead">or contact the DHS Help Line at 1 800 843-6154 (voice) or 1 800 447-6404 (TTY).</p>
-        </div>
-      </div>
+    </div>
+  </div>
 
 <% elsif @eligible_tanif == "maybe" %>
 
-     <div class="row" style="text-align:center;">
-       <div class="col-md-8 col-md-offset-2">
-         <i class="fa fa-exclamation-circle fa-5x"></i>
-           <h1>Something else in mind!</h1>
-            <h4>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a TANF expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your TANF eligibility with you. </h4>
-           <br>
+    <div class="row">
+      <div class="col-md-7">
 
-           <% if @laf_disclaimer.present?  %>
-              <p class="subhead"><%= @laf_disclaimer %></p>
+         <h1>Results: Something else in mind!</h1>
+         <p>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a TANF expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your TANF eligibility with you. </p>
+
+          <section class="content-section resources">
+            <h3>Resources</h3>
+            <% if @laf_disclaimer.present? %>
+              <p><%= @laf_disclaimer %></p>
             <% end %>
+            <%= render 'layouts/community_center' %>
+           </section>
 
-           <%= render 'layouts/community_center' %>
-     </div>
-      <div class="row">
-      <div class="col-md-offset-4 col-md-4">
-        <%= image_tag("LAFlogo.jpg", :class => "img-responsive") %>
-      </div>
-      </div>
-
-   </div>
+       <%= image_tag("LAFlogo.jpg", :class => "img-responsive") %>
+    </div>
+  </div>
 
 
 <% elsif @eligible_tanif == "no" %>
 
-        <div class="row" style="text-align:center;">
-          <div class="col-md-8 col-md-offset-2">
-              <h1>Something else in mind!</h1>
-              <h4>Based on your household size and income, you likely do not qualify for TANF. </h4>
+  <div class="row">
+    <div class="col-md-7">
+      <h1>Results: Something else in mind!</h1>
+      <p>Based on your household size and income, you likely do not qualify for TANF. </p>
 
-              <br>
-
-           <div class="row">
-            <h4>Here are some additional resources from Purple Binder:</h4>
-          </div>
-          <br>
-
-          <div class="row">
-
-          <% if @child_resources_zip.count >= 2 %>
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @child_resources_zip.first.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @child_resources_zip.first.street %>  <%= @child_resources_zip.first.city %> <%= @child_resources_zip.first.state %>, <%= @child_resources_zip.first.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @child_resources_zip.first.phone %> </li>
-              </ul>
-            </div>
-
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @child_resources_zip.second.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @child_resources_zip.second.street %>  <%= @child_resources_zip.second.city %> <%= @child_resources_zip.second.state %>, <%= @child_resources_zip.second.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @child_resources_zip.second.phone %> </li>
-              </ul>
-            </div>
-            <% end %>
-          </div>
-
-          <div class="row">
-          <% if @child_resources_first.present? %>
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @child_resources_first.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @child_resources_first.street %>  <%= @child_resources_first.city %> <%= @child_resources_first.state %>, <%= @child_resources_first.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @child_resources_first.phone %> </li>
-              </ul>
-            </div>
-
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @child_resources_second.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @child_resources_second.street %>  <%= @child_resources_second.city %> <%= @child_resources_second.state %>, <%= @child_resources_second.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @child_resources_second.phone %> </li>
-              </ul>
-            </div>
-            <% end %>
-          </div>
-
-           <%= image_tag("pblogo.jpg", :class => "logo-padding") %>
-        </div>
+      <%= render "layouts/purple_binder_resources" %>
+    </div>
   </div>
 
-  <br>
-  <br>
-  <br>
-  <br>
 
 <% end %>
 </div>

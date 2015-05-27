@@ -155,30 +155,30 @@ class AabdCashesController < ApplicationController
     end
 
     @pb_zipcode = @user_zipcode.chomp(".0")
-      @aabd_resources = aabd
-      @aabd_resources_zip = []
+      @resources = aabd
+      @resources_zip = []
 
       aabd.each do |center|
         if center.zip.match(@pb_zipcode)
-          @aabd_resources_zip.push(center)
+          @resources_zip.push(center)
         end
       end
 
       #in this case there are 2 aabd centers in the user's zip
-      if @aabd_resources_zip.count >= 2
-         @aabd_resources = @aabd_resources_zip
+      if @resources_zip.count >= 2
+         @resources = @resources_zip
       end
 
       #in this case there is 1 aabd center in the user's zip
-      if @aabd_resources_zip.count == 1
-         @aabd_resources_first = @aabd_resources_zip.first
-         @aabd_resources_second = @aabd_resources.first
+      if @resources_zip.count == 1
+         @resources_first = @resources_zip.first
+         @resources_second = @resources.first
       end
 
       #in this caser there are no aabd centers in the user's zip
-      if  @aabd_resources_zip.count == 0
-          @aabd_resources_first = @aabd_resources.first
-          @aabd_resources_second = @aabd_resources.second
+      if  @resources_zip.count == 0
+          @resources_first = @resources.first
+          @resources_second = @resources.second
       end
 
     if params[:citizen].present? && params[:disabled].present?

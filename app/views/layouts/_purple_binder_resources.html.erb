@@ -1,0 +1,44 @@
+ <div class="resources">
+   <h3>Here are some additional resources from Purple Binder:</h3>
+ </div>
+
+
+ <% if @resources_zip.count >= 2 %>
+   <div class="laf-list">
+     <ul>
+       <li class="laf-headline"><%= @resources_zip.first.name %> </li>
+       <li><%= @resources_zip.first.street %>  <%= @resources_zip.first.city %> <%= @resources_zip.first.state %>, <%= @resources_zip.first.zip %>  </li>
+       <li><%= @resources_zip.first.phone %> </li>
+     </ul>
+   </div>
+
+   <div class="laf-list">
+     <ul>
+       <li class="laf-headline"><%= @resources_zip.second.name %> </li>
+       <li><%= @resources_zip.second.street %>  <%= @resources_zip.second.city %> <%= @resources_zip.second.state %>, <%= @resources_zip.second.zip %>  </li>
+       <li><%= @resources_zip.second.phone %> </li>
+     </ul>
+   </div>
+ <% end %>
+
+
+ <% if @resources_first.present? %>
+   <div class="laf-list">
+     <ul>
+       <li class="laf-headline"><%= @resources_first.name %> </li>
+       <li><%= @resources_first.street %>  <%= @resources_first.city %> <%= @resources_first.state %>, <%= @resources_first.zip %>  </li>
+       <li><%= @resources_first.phone %> </li>
+     </ul>
+   </div>
+
+   <div class="laf-list">
+     <ul>
+       <li class="laf-headline"><%= @resources_second.name %> </li>
+       <li><%= @resources_second.street %>  <%= @resources_second.city %> <%= @resources_second.state %>, <%= @resources_second.zip %>  </li>
+       <li><%= @resources_second.phone %> </li>
+     </ul>
+   </div>
+<% end %>
+
+
+  <%= image_tag("pblogo.jpg", :class => "logo-padding") %>
