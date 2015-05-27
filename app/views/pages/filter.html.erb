@@ -64,39 +64,34 @@
 
     </form>
     </div>
+
+    <div class="col-md-3 sm-4 xs-12 pull-left">
+        <div class="calculator_box">
+          <%= render "programs/calculator" %>
+        </div>
+      </div>
+
     </div>
   </section>
 </div>
 
 <script type="text/javascript">
-  //popover code
-  $(function (){
-    $("[data-toggle='popover']").popover();
-  });
 
-  $('body').on('click', function (e) {
-      $('[data-toggle="popover"]').each(function () {
-          //the 'is' for buttons that trigger popups
-          //the 'has' for icons within a button that triggers a popup
-          if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-              $(this).popover('hide');
-          }
-      });
-  });
-
-    //benefits JavaScript onclick
-    $("input:radio[name=benefits]").click(function() {
-    var value = $(this).val();
-      if (value == "yes") {
-        $('.place_for_benefits_checkboxes').empty().append("<%= escape_javascript(render "pages/benefits_checkboxes") %>");
-      }
-      if (value == "no") {
-        $('.benefits_checkboxes').remove();
-      }
-    });
 
   //benefits JavaScript on page load
   $(document).ready(function() {
+
+      //benefits JavaScript onclick
+      $("input:radio[name=benefits]").click(function() {
+      var value = $(this).val();
+        if (value == "yes") {
+          $('.place_for_benefits_checkboxes').empty().append("<%= escape_javascript(render "pages/benefits_checkboxes") %>");
+        }
+        if (value == "no") {
+          $('.benefits_checkboxes').remove();
+        }
+      });
+
 
     if($('input:radio[name=benefits][value="yes"]').prop('checked')){
 

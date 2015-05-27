@@ -2,7 +2,7 @@
   <section class="marquee">
     <div class="row">
       <div class="col-md-12">
-        <a href="/all_city_programs/new">Continue screening All Programs &rarr;</a>
+        <a href="/all_city_programs/new">Continue screening All Programs in Chicago Community Service Centers &rarr;</a>
       </div>
     </div>
   </section>
@@ -19,8 +19,8 @@
 
  <div class="row">
     <div class="col-md-5 resources">
-      <h3>Programs you <em>may</em> qualify for</h3>
-      <!-- <h3>You are still in the runnings for… </h3> -->
+      <!-- <h3>Programs you <em>may</em> qualify for</h3> -->
+      <h3>You are still in the runnings for… </h3>
 
       <p>You don’t have to retype anything you just shared. Find out if you qualify for programs and access resources that interest you. </p>
       <% @all_programs.each_with_index do |program| %>
@@ -36,8 +36,8 @@
 <% if @ineligible_or_receiving_programs.count >= 1 %>
 <!-- Community Resources -->
    <div class="col-md-5 col-md-offset-2 resources">
-     <h3> Programs you <em>may not</em> qualify for</h3>
-    <!--  <h3 > Something else in mind!</h3> -->
+<!--      <h3> Programs you <em>may not</em> qualify for</h3>
+ -->  <h3 > Something else in mind!</h3>
      <p>Here are community resources that address the same issues as the programs you are ineligible for or already receiving:
 
      <% @program_count = @ineligible_or_receiving_programs.count %>

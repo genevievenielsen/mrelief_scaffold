@@ -47,7 +47,10 @@ Rails.application.routes.draw do
 
   get('/snap_eligibilities/print/:id', :controller => 'snap_eligibilities', :action => 'print')
 
-  get("/documents", { :controller => "snap_eligibilities", :action => "documents" })
+  get("/snap_documents", { :controller => "snap_eligibilities", :action => "documents" })
+
+  get("/rental_documents", { :controller => "rental_assistances", :action => "documents" })
+
 
 
   resources :contact, only: [:index, :create]
