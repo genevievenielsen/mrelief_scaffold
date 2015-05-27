@@ -58,8 +58,8 @@
                   </div>
                   <div class="modal-body">
                     <p>Currently your reported income of $<%= @d.monthly_gross_income %> is lower than $150 and therefore you may qualify for emergency or expedited SNAP (food stamp) benefits according to policy <a href="http://www.dhs.state.il.us/page.aspx?item=13005">PM-02-08-01</a>  of the Illinois Department of Human Services (DHS) manual. Once you apply, you should hear within 5 business days about your in-person interview with DHS.</p>
+                    <button data-dismiss="modal">Ok, I understand.</button>
                   </div>
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
               </div>
            </div>
@@ -75,8 +75,9 @@
                   </div>
                   <div class="modal-body">
                      <p>Currently your reported income of $<%= @d.monthly_gross_income %> for your household size of <%= @d.dependent_no  %> is LOWER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> of the Illinois Department of Human Services (DHS) Manual. Once you apply, you should hear within 30 business days about your in-person interview with DHS.</p>
+                     <button data-dismiss="modal">Ok, I understand.</button>
                   </div>
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
                 </div>
               </div>
            </div>
@@ -92,8 +93,8 @@
                   </div>
                   <div class="modal-body">
                     <p> Currently your reported income of $<%= @d.monthly_gross_income %> combined with your receipt of disability benefits is LOWER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412"> policy 124 </a> and <a href="http://www.dhs.state.il.us/page.aspx?item=13632"> PM-05-06-01</a> of the Illinois Department of Human Services (DHS) Manual. Once you apply, you should hear within 30 business days about your in-person interview with DHS.</p>
+                    <button data-dismiss="modal">Ok, I understand.</button>
                   </div>
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
               </div>
            </div>
@@ -109,8 +110,8 @@
                   </div>
                   <div class="modal-body">
                      <p> Currently your reported income of $<%= @d.monthly_gross_income %> combined with your reported age of <%= @d.age %> is LOWER than the maximum income allowable $<%= number_with_precision(@snap_eligibility.snap_gross_income, precision: 2) %> according to <a href="http://www.dhs.state.il.us/page.aspx?item=33412">policy 124 </a> and <a href="http://www.dhs.state.il.us/page.aspx?item=13632"> PM-05-06-01</a> of the Illinois Department of Human Services (DHS) Manual. Once you apply, you should hear within 30 business days about your in-person interview with DHS.</p>
+                     <button data-dismiss="modal">Ok, I understand.</button>
                   </div>
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
               </div>
            </div>
@@ -129,8 +130,8 @@
                     <div class="modal-body">
                       <p>  Currently your citizenship status is reported as a citizen or legal permanent resident for at least 5 years wherein citizenship is allowable under <a href="https://www.dhs.state.il.us/page.aspx?item=13100"> PM 03-01-02-a</a> and legal permanent residency for at least 5 years is allowable under <a href="https://www.dhs.state.il.us/page.aspx?item=13183"> PM 03-01-02-g</a> of the Illinois Department of Human Services (DHS) Manual.
                       </p>
+                      <button data-dismiss="modal">Ok, I understand.</button>
                     </div>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   </div>
                 </div>
              </div>
@@ -148,8 +149,8 @@
                     <div class="modal-body">
                        <p>  Currently your student status is reported as (half-time or more) at  a business, technical, trade, or vocational school that normally requires a high school diploma or the equivalent for enrollment in the course of study; or regular courses, including internet, mail, self-study, or correspondence courses, at an accredited college or university that offers degree programs which is consistent with an institution satisfying the policy requirements defining a student of higher education under <a href="https://www.dhs.state.il.us/page.aspx?item=13273">P M 03-04-03-a </a> and you reported conditions that satisfy policy <a href="https://www.dhs.state.il.us/page.aspx?item=13275"> PM 03-04-03-b</a> of the Illinois Department of Human Services (DHS) Manual. Once you apply, you should hear within 30 business days about your in-person interview with DHS.
                       </p>
+                      <button data-dismiss="modal">Ok, I understand.</button>
                     </div>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   </div>
                 </div>
              </div>
