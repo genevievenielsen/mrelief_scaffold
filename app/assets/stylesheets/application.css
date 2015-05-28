@@ -35,41 +35,53 @@ body {
   font-family: 'Droid Serif', serif;
   font-style: italic;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .btn-donate {
-  border-radius: 0px !important;
-  background-color: #3fad46;
+  background-color: #5F5F5F;
   color: white !important;
 
 }
 
 .btn-donate:hover {
-  border-radius: 0px !important;
-  background-color: #349a3a !important;
+  background-color: #454545 !important;
   color: white !important;
 
 }
 
 .navbar {
-  border-bottom: 1px solid #CCCCCC;
+  border-bottom: 1px solid #EAEAEA;
 }
 
 .navbar-default .navbar-nav>li>a{
- color: #333333;
+ color: #A6A6A6;
+ font-size: 15px;
+ border: none;
 }
 
 .navbar-default .navbar-nav>li>a:hover{
-  color: #0056ec;
+  color: #4C4C4C;
 }
 
-.nav li a{
-  border: white;
+.nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
+  border: none;
 }
 
-.nav li a:hover{
-  border: white;
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
+  color: #37BC9B;
+}
+
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
+  color: #37BC9B;
+  background-color: #fff;
+}
+
+.dropdown-menu {
+  font-size: 15px;
+  right: -90px !important;
+  top: 50px;
+  box-shadow: none;
 }
 
 .alert {
@@ -77,25 +89,6 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
 
 }
-
-/*ul {
-  font-family: 'Source Sans Pro', sans-serif;
-}
-
-h1,h2,h3 {
-  font-family: 'Source Sans Pro', sans-serif;
-}
-
-h4 {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-weight: normal 400;
-}
-
-p {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-weight: normal 400;
-  /*text-align: center;
-}*/
 
 
 
