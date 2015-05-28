@@ -37,7 +37,7 @@ class AllCityProgramsController < ApplicationController
     if current_user.present?
       @current_user = current_user
     else
-      @current_user = User.new
+      @current_user = User.last
     end
 
     if params[:dependent_no].present?
@@ -506,7 +506,7 @@ class AllCityProgramsController < ApplicationController
           if params[:status] == "no_children"
             @eligible_all_kids = "no"
           end
-    end
+      end
 
     #HERE IS THE LOGIC FOR MEDICARE COST SHARING
     if @current_user.medicare_cost_sharing == "checked"
