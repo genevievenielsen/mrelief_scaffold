@@ -15,6 +15,10 @@ h1, h2, h3, h4 {
   font-weight: 800;
 }
 
+ul {
+  list-style: none;
+}
+
 a {
   font-family: $font-stack;
   color: $button-color;
@@ -167,6 +171,12 @@ button {
 .laf-headline {
   font-weight: bold;
   font-size: 18px;
+}
+
+.all-city-results {
+  margin-bottom: 60px;
+  padding-bottom: 40px;
+  border-bottom: 2px dashed $button-color;
 }
 
 /*TABLES*/

@@ -1,51 +1,54 @@
-
 <div class="container marquee">
-<div class="row">
-<%= render "layouts/print_button" %>
-  <h1>Do I qualify for All City Programs within mRelief?</h1>
-  <p>Programs include Food Stamps, RTA Ride Free, All Kids, Medicare Cost Sharing, Rental Assistance, Medicaid, Aged, Blind and Disabled (AABD), Cash Assistance and Temporary Assistance for Needy Families </p>
-
-<% if @eligible_count > 0 %>
-  <div class="panel panel-default allcitypanel">
-    <div class="allcityheading">
-      <h2>You may qualify ( <%= pluralize(@eligible_count, 'program') %>)</h2>
-      <p class="subhead" style="text-align:left;">Below are the programs you may qualify for:</p>
+  <%= render "layouts/print_button" %>
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Results: All City Programs</h2>
     </div>
-
-    <ul class="list-group">
+  </div>
+<% if @eligible_count > 0 %>
+  <div class="row">
+    <div class="col-md-12 resources">
+      <h3>You may qualify for: ( <%= pluralize(@eligible_count, 'program') %>)</h3>
+    </div>
+    <div class="col-md-12 laf-list">
     <!-- Eligible for Food Stamps -->
+
       <% if @eligible_snap == 'yes' %>
-        <li class="list-group-item">
-        <h3 class="allcityheader">Food Stamps</h3>
-        <% if @age <= 22 %>
-          <p>However, make sure you accounted for your parents income, if you are still living in the same household</p>
-        <% end %>
-
-        <% if @laf_disclaimer.present?  %>
-           <p><%= @laf_disclaimer %></p>
-        <% else %>
-          <p> Based on your zipcode, here is the nearest Community Service Center to access your Food Stamps: </p>
-        <% end %>
-        <p><%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %> | <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
-
-        <%= link_to "Click Here to apply online before you visit", "https://abe.illinois.gov/abe/access/", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'food_stamps_all_city_program', 'abe', 1);" %>
-        <br>
-        <%= link_to "Click Here to see the documents you will need ", snap_documents_url, :class => "secondary-link" %>
-        </li>
+        <div class="all-city-results">
+          <h3>Food Stamps</h3>
+          <% if @age <= 22 %>
+            <p>However, make sure you accounted for your parents income, if you are still living in the same household</p>
+          <% end %>
+          <% if @laf_disclaimer.present?  %>
+            <p><%= @laf_disclaimer %></p>
+          <% else %>
+          <p>To access, Food Stamps this is your nearest community center: </p>
+          <% end %>
+          <ul>
+            <li class="laf-headline"><%= @lafcenter.center %></li>
+            <li><%=  @lafcenter.address %> <%= @lafcenter.city %> <%= @lafcenter.zipcode.to_i %></li>
+            <li><%= @lafcenter.telephone %></li>
+            <li>Days that Spanish is spoken - <%= @lafcenter.spanish %></li>
+          </ul>
+          <p>Apply online before you visit <%= link_to "here", "https://abe.illinois.gov/abe/access/", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'food_stamps_all_city_program', 'abe', 1);" %>.</p>
+          <p>See the documents you will need <%= link_to "here", snap_documents_url, :class => "secondary-link" %>.</p>
+      </div>
       <% end %>
+
 
     <!-- Eligible for RTA Ride Free -->
       <% if @eligible_rta == 'yes' %>
-        <li class="list-group-item">
-          <h3 class="allcityheader">RTA Ride Free</h3>
-          <%= link_to "Click Here to apply online", "https://idoaweb.aging.illinois.gov/baa/Welcome.aspx", :class => "secondary-link", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'rta_ride_free_all_city_program', 'il_dept_aging', 1);" %>
-        </li>
+      <div class="all-city-results">
+        <h3>RTA Ride Free</h3>
+        <p>Apply online
+          <%= link_to "here", "https://idoaweb.aging.illinois.gov/baa/Welcome.aspx", :class => "secondary-link", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'rta_ride_free_all_city_program', 'il_dept_aging', 1);" %>.</p>
+        </div>
       <% end %>
 
       <!-- Eligible for All Kids -->
         <% if @eligible_all_kids == 'yes' %>
-          <li class="list-group-item">
-            <h3 class="allcityheader">All Kids</h3>
+        <div class="all-city-results">
+            <h3>All Kids</h3>
              <% if @assist_eligible == 'yes' %>
                <p>Based on your household size and income, you likely qualify for All Kids Assist.</p>
              <% elsif @share_eligible == 'yes' %>
@@ -56,40 +59,42 @@
                <p>Based on your household size and income, you likely qualify for All Kids Premium Level 2.</p>
              <% end %>
 
-            <%= link_to "Click Here to complete your application online", "https://abe.illinois.gov/abe/access/jsp/access/Home.jsp", :class => "secondary-link", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'all_kids_all_city_program', 'abe', 1);" %>
-          </li>
+            <p>Complete your application onilne <%= link_to "here", "https://abe.illinois.gov/abe/access/jsp/access/Home.jsp", :class => "secondary-link", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'all_kids_all_city_program', 'abe', 1);" %>.</p>
+          </div>
         <% end %>
 
       <!-- Eligible for Medicaid -->
         <% if @eligible_medicaid == 'yes' %>
-          <li class="list-group-item">
-            <h3 class="allcityheader">Medicaid</h3>
-            <p>Important Note:  At the current moment, this form does not include Medicaid's offerings for people with disabilities. However, we are working to make this form more inclusive. </p>
-
-            <%= link_to "Click Here for more information", "https://abe.illinois.gov/abe/access/jsp/access/Home.jsp", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicaid_all_city_program', 'abe', 1);" %>
-          </li>
+        <div class="all-city-results">
+          <h3>Medicaid</h3>
+            <p>Note: Currently, this form does not include Medicaid's offerings for people with disabilities. However, we are working to make this form more inclusive.</p>
+            <p>For more information, <%= link_to "click here", "https://abe.illinois.gov/abe/access/jsp/access/Home.jsp", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicaid_all_city_program', 'abe', 1);" %>.</p>
+        </div>
         <% end %>
 
       <!-- Eligible for Medicare Cost Sharing -->
         <% if @eligible_medicare_cost_sharing == "yes" %>
-          <li class="list-group-item">
-            <h3 class="allcityheader">Medicare Cost Sharing </h3>
+        <div class="all-city-results">
+          <h3>Medicare Cost Sharing </h3>
             <p>Important Note:  If you previously opted out of Medicare part B, the Medicare cost sharing program, you may be able to get your Medicare premium paid now. Please contact or visit your LAF paralegal to re-enroll for Medicare Part B. You can see the nearest Community Service Center near you.</p>
-            <div class="sectiondivider"></div>
             <% if @laf_disclaimer.present?  %>
                 <p><%= @laf_disclaimer %></p>
             <% else %>
               <p>The LAF expert nearest you:</p>
             <% end %>
-            <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %>| <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
-          </li>
+            <ul>
+              <li class="laf-headline"><%= @lafcenter.center %></li>
+              <li><%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %></li>
+              <li><%= @lafcenter.telephone %></li>
+              <li>Days that Spanish is spoken - <%= @lafcenter.spanish %></li>
+            </ul>
+          </div>
         <% end %>
 
       <!-- Eligible for Rental Assistance -->
         <% if @rental_eligible == "yes" %>
-          <li class="list-group-item">
-            <h3 class="allcityheader">Rental Assistance</h3>
-
+        <div class="all-city-results">
+            <h3>Rental Assistance</h3>
              <% if @medical_circumstance == "yes" %>
               <p>You must be able to obtain documents from your employer showing that you took time off as well as from the hospital or attending physician.</p>
              <% elsif @natural_disaster == "yes" %>
@@ -101,47 +106,53 @@
               <p>You must be able to prove this by providing a report from the police department or a document showing an order of protection/restraining order.</p>
             <% end %>
             <p>The final decision will be made one-on-one by the case manager.</p>
-            <div class="sectiondivider"></div>
+
             <% if @laf_disclaimer.present?  %>
                 <p><%= @laf_disclaimer %></p>
             <% else %>
-              <p>Based on your zipcode, here is the nearest Community Service Center:</p>
+              <p>Your nearest Community Service Center:</p>
             <% end %>
-            <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %>| <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
+            <ul>
+              <li><%= @lafcenter.center %></li>
+              <li><%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %></li>
+              <li><%= @lafcenter.telephone %><li>
+              <li>Days that Spanish is spoken - <%= @lafcenter.spanish %></li>
+            </ul>
             <p>or call 3-1-1.</p>
-            <%= link_to "Click Here to see the documents you will need ", rental_documents_url, :class => "secondary-link" %>
-
-          </li>
+            <p>See the documents you need <%= link_to "here", rental_documents_url, :class => "secondary-link" %>.</p>
+          </div>
         <% end %>
 
       <!-- Eligible for AABD -->
         <% if @aabd_eligible == "yes" %>
-          <li class="list-group-item">
-            <h3 class="allcityheader">AABD Cash Assistance</h3>
+        <div class="all-city-results">
+            <h3>AABD Cash Assistance</h3>
             <% if @laf_disclaimer.present?  %>
                <p><%= @laf_disclaimer %></p>
             <% else %>
-              <p> Based on your zipcode, here is the nearest Community Service Center to access your AABD Cash Assistance: </p>
+              <p>Your nearest Community Service Center to access your AABD Cash Assistance: </p>
             <% end %>
-            <p> <%= @lafcenter.center %> | <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %>| <%= @lafcenter.telephone %>  | Days that Spanish is spoken - <%= @lafcenter.spanish %> </p>
-            </li>
+            <ul>
+              <li><%= @lafcenter.center %></li>
+              <li><%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %></li>
+              <li><%= @lafcenter.telephone %></li>
+              <li>Days that Spanish is spoken - <%= @lafcenter.spanish %></li>
+            </ul>
+          </div>
         <% end %>
-        <% if @eligible_tanif == "yes" %>
-          <li class="list-group-item">
-            <h3 class="allcityheader">TANF Cash Assistance</h3>
-            <%= link_to "to find your local Family Community Resource Center ", "https://www.dhs.state.il.us/page.aspx?module=12", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'tanf_all_city_program', 'dhs_office_locator', 1);" %>
 
-            <p>or contact the DHS Help Line at 1 800 843-6154 (voice) or 1 800 447-6404 (TTY).</p>
-          </li>
+        <% if @eligible_tanif == "yes" %>
+        <div class="all-city-results">
+          <h3>TANF Cash Assistance</h3>
+          <p>Find your local family community resoure center <%= link_to "here", "https://www.dhs.state.il.us/page.aspx?module=12", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'tanf_all_city_program', 'dhs_office_locator', 1);" %>. Or contact the DHS Help Line at 1 800 843-6154 (voice) or 1 800 447-6404 (TTY).</p>
+        </div>
         <% end %>
-    </ul>
   </div>
   <% end %>
 
 
-
 <% if @indeterminate_count > 0  %>
-<div class="panel panel-default allcitypanel">
+<div class="">
   <div class="allcityheading">
       <h2>Something else in mind!( <%= pluralize(@indeterminate_count, 'program') %>)</h2>
       <p class="subhead" style="text-align:left;">Based on the information received, we cannot determine your eligibility at this time.</p>
@@ -203,7 +214,7 @@
   <% end %>
 
 <% if @ineligible_count > 0 %>
-<div class="panel panel-default allcitypanel">
+<div class="">
   <div class="allcityheading">
       <h2>Do not likely qualify ( <%= pluralize(@ineligible_count, 'program') %> )</h2>
       <p class="subhead" style="text-align:left;">Below are the programs you may not qualify for:</p>
