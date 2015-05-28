@@ -17,16 +17,16 @@
 
 $(document).ready(function() {
 
-  // window.onbeforeunload = function(event) {
-  //     $.get({
-  //       url: "/session_clear",
-  //     });
+  window.onbeforeunload = function(event) {
+      $.ajax({
+        url: "/session_clear",
+      });
 
-  //     return 'i made it ';
+      // return 'i made it ';
 
 
-  //     return null;
-  // };
+      // return null;
+  };
 
 
 
