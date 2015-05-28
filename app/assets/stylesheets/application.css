@@ -84,10 +84,9 @@ body {
   box-shadow: none;
 }
 
-.alert {
+.alert-info {
+  background-color: #4582ec;
   padding-top: 50px;
-  font-family: 'Source Sans Pro', sans-serif;
-
 }
 
 
@@ -293,9 +292,6 @@ a:hover {
   background: transparent;
 }
 
-.alert {
-  border-radius: 0px;
-}
 
 .how-to {
   padding: 0 60px 60px 60px;
