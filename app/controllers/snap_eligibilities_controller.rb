@@ -12,12 +12,23 @@ class SnapEligibilitiesController < ApplicationController
 
   def new
     @snap_eligibility = SnapEligibility.new
-    @d = SnapEligibilityData.new
     @current_user = current_user
+
+    # current_user_data = SnapEligibilityData.where(:user_id => @current_user).last
+
+    # if current_user_data.present?
+    #   @d = current_user_data
+    # else
+      @d = SnapEligibilityData.new
+    # end
+
   end
 
   def create
+
       @d = SnapEligibilityData.new
+      # @current_user = current_user
+      # @d.user_id = @current_user.id
 
         dependent_no = params[:snap_dependent_no].strip
         # this is the words into numbers logic

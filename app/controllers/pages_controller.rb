@@ -541,4 +541,11 @@ class PagesController < ApplicationController
   def press_release
   end
 
+  def session_clear
+    session[:user_id ] = nil
+        session[:EsignDisclosureAccepted] = nil
+       session[:AccountNo] = nil
+       render :text => "session cleared"
+  end
+
 end
