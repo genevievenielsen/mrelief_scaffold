@@ -15,7 +15,6 @@ class SnapEligibilitiesController < ApplicationController
     @current_user = current_user
 
     # current_user_data = SnapEligibilityData.where(:user_id => @current_user).last
-
     # if current_user_data.present?
     #   @d = current_user_data
     # else

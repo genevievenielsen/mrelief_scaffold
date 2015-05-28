@@ -38,7 +38,7 @@
        <div class="col-md-9">
         <label for="hs_dependent_no">How many dependents (including yourself) are in your household?</label>
           <p type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself." data-placement="right" style="border: 0px; color: #4582ec;">
-            <input type="text" id="hs_dependent_no" name="hs_dependent_no" placeholder="For example: 3" class="form-field" value="<%= @d.dependent_no %>" required>
+            <input type="text" id="hs_dependent_no" name="hs_dependent_no" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>" required>
           </p>
         </div>
       </div>

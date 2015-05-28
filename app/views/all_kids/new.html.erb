@@ -33,7 +33,7 @@
   <div class="row">
     <div class="col-md-9">
       <label for="kids_household_size">How many children are living in your household?</label>
-        <input type="text" id="kids_household_size" name="kids_household_size" placeholder="For example: 3" class="form-field" value="<%= @d.household_size %>" required>
+        <input type="text" id="kids_household_size" name="kids_household_size" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>" required>
     </div>
   </div>
 

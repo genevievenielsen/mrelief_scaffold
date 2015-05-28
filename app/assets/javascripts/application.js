@@ -21,13 +21,7 @@ $(document).ready(function() {
       $.ajax({
         url: "/session_clear",
       });
-
-      // return 'i made it ';
-
-
-      // return null;
   };
-
 
 
   //popover code
