@@ -207,10 +207,10 @@ a:hover {
 }
 
 .team {
-  width: 150px;
+  width: 250px;
   height: auto;
-  border-radius: 150px;
   border: 2px solid #e7e7e7;
+  margin: 50px 0 30px 0;
 }
 
 .panel {
