@@ -124,6 +124,21 @@ button {
   }
 }
 
+.instructions {
+  width: 90%;
+  margin-top: 50px;
+
+  h4 {
+    border-bottom: 4px solid;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-weight: 400;
+    margin-top: 50px;
+  }
+}
+
 /*ALL PROGRAMS*/
 .program-wrapper {
   @media (min-width: 1200px) {
