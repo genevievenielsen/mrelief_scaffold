@@ -45,8 +45,15 @@ Rails.application.routes.draw do
   get("/filtered_programs", { :controller => "pages", :action => "filtered_programs" })
   post("/community_resources", { :controller => "pages", :action => "community_resources" })
 
-
   get('/snap_eligibilities/print/:id', :controller => 'snap_eligibilities', :action => 'print')
+
+  get("/snap_documents", { :controller => "snap_eligibilities", :action => "documents" })
+
+  get("/rental_documents", { :controller => "rental_assistances", :action => "documents" })
+
+
+  get("/session_clear", {:controller => "pages", :action => "session_clear"})
+
 
 
 

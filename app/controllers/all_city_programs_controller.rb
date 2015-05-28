@@ -14,6 +14,9 @@ class AllCityProgramsController < ApplicationController
       @current_user = User.new
     end
 
+    #session hash
+    session[:user_id] = @current_user.id
+
     if params[:filtered_programs] == "false"
       @current_user.food_stamps = params[:food_stamps]
       @current_user.rta_ride_free = params[:rta_ride_free]
@@ -30,7 +33,7 @@ class AllCityProgramsController < ApplicationController
   # POST /all_city_programs
   # POST /all_city_programs.json
    def create
-    @a = AllCityProgramDatum.new
+    @d = AllCityProgramDatum.new
     if current_user.present?
       @current_user = current_user
     else
@@ -41,30 +44,30 @@ class AllCityProgramsController < ApplicationController
       # this is the words into numbers logic
       if params[:dependent_no] !~ /\D/  # returns true if all numbers
         dependent_no = params[:dependent_no].to_i
-        @a.dependent_no = dependent_no
+        @d.dependent_no = dependent_no
       else
         dependent_no = params[:dependent_no].in_numbers
-        @a.dependent_no = dependent_no
+        @d.dependent_no = dependent_no
       end
     end
 
     if params[:medicaid_household_size].present?
       if params[:medicare_household_size] !~ /\D/
         medicare_household_size = params[:medicare_household_size].to_i
-        @a.medicare_household_size = medicare_household_size
+        @d.medicare_household_size = medicare_household_size
       else
         medicare_household_size = params[:medicare_household_size].in_numbers
-        @a.medicare_household_size = medicare_household_size
+        @d.medicare_household_size = medicare_household_size
       end
     end
 
     if params[:age].present?
       if params[:age] !~ /\D/
         @age = params[:age].to_i
-        @a.age = @age
+        @d.age = @age
       else
         @age = params[:age].in_numbers
-        @a.age = @age
+        @d.age = @age
       end
     end
 
@@ -73,13 +76,13 @@ class AllCityProgramsController < ApplicationController
       monthly_gross_income = monthly_gross_income.gsub(/[^0-9\.]/, '')
       if monthly_gross_income !~ /\D/
         monthly_gross_income = monthly_gross_income.to_i
-        @a.monthly_gross_income = monthly_gross_income
+        @d.monthly_gross_income = monthly_gross_income
       else
         if monthly_gross_income.include?("dollars")
           monthly_gross_income.slice!"dollars"
         end
         monthly_gross_income = monthly_gross_income.in_numbers
-        @a.monthly_gross_income = monthly_gross_income
+        @d.monthly_gross_income = monthly_gross_income
       end
     end
 
@@ -88,13 +91,13 @@ class AllCityProgramsController < ApplicationController
       net_income = net_income.gsub(/[^0-9\.]/, '')
       if net_income !~ /\D/
         net_income = net_income.to_i
-        @a.thirty_day_net_income = net_income
+        @d.thirty_day_net_income = net_income
       else
         if net_income.include?("dollars")
           net_income.slice!"dollars"
         end
         net_income = net_income.in_numbers
-        @a.thirty_day_net_income = net_income
+        @d.thirty_day_net_income = net_income
       end
     end
 
@@ -103,13 +106,13 @@ class AllCityProgramsController < ApplicationController
       expect_child_support = expect_child_support.gsub(/[^0-9\.]/, '')
       if expect_child_support !~ /\D/
         expect_child_support = expect_child_support.to_i
-        @a.child_support = expect_child_support
+        @d.child_support = expect_child_support
       else
         if expect_child_support.include?("dollars")
           expect_child_support.slice!"dollars"
         end
         expect_child_support = expect_child_support.in_numbers
-        @a.child_support = expect_child_support
+        @d.child_support = expect_child_support
       end
     end
 
@@ -118,13 +121,13 @@ class AllCityProgramsController < ApplicationController
       expect_ssi = expect_ssi.gsub(/[^0-9\.]/, '')
       if expect_ssi !~ /\D/
         expect_ssi = expect_ssi.to_i
-        @a.ssi = expect_ssi
+        @d.ssi = expect_ssi
       else
         if expect_ssi.include?("dollars")
           expect_ssi.slice!"dollars"
         end
         expect_ssi = expect_ssi.in_numbers
-        @a.ssi = expect_ssi
+        @d.ssi = expect_ssi
       end
     end
 
@@ -133,13 +136,13 @@ class AllCityProgramsController < ApplicationController
       monthly_benefits = monthly_benefits.gsub(/[^0-9\.]/, '')
       if monthly_benefits !~ /\D/
         monthly_benefits = monthly_benefits.to_i
-        @a.monthly_benefits = monthly_benefits
+        @d.monthly_benefits = monthly_benefits
       else
         if monthly_benefits.include?("dollars")
           monthly_benefits.slice!"dollars"
         end
         monthly_benefits = monthly_benefits.in_numbers
-        @a.monthly_benefits = montly_benefits
+        @d.monthly_benefits = montly_benefits
       end
     end
 
@@ -148,13 +151,13 @@ class AllCityProgramsController < ApplicationController
       ninety_day_gross_income = ninety_day_gross_income.gsub(/[^0-9\.]/, '')
       if ninety_day_gross_income !~ /\D/
         ninety_day_gross_income = ninety_day_gross_income.to_i
-        @a.ninety_day_gross_income = ninety_day_gross_income
+        @d.ninety_day_gross_income = ninety_day_gross_income
       else
         if ninety_day_gross_income.include?("dollars")
           ninety_day_gross_income.slice!"dollars"
         end
         ninety_day_gross_income = ninety_day_gross_income.in_numbers
-        @a.ninety_day_gross_income = ninety_day_gross_income
+        @d.ninety_day_gross_income = ninety_day_gross_income
       end
     end
 
@@ -163,13 +166,13 @@ class AllCityProgramsController < ApplicationController
       annual_gross_income = annual_gross_income.gsub(/[^0-9\.]/, '')
       if annual_gross_income !~ /\D/
         annual_gross_income = annual_gross_income.to_i
-        @a.annual_gross_income = annual_gross_income
+        @d.annual_gross_income = annual_gross_income
       else
         if annual_gross_income.include?("dollars")
           annual_gross_income.slice!"dollars"
         end
         annual_gross_income = annual_gross_income.in_numbers
-        @a.annual_gross_income = annual_gross_income
+        @d.annual_gross_income = annual_gross_income
       end
     end
 
@@ -178,32 +181,32 @@ class AllCityProgramsController < ApplicationController
       assets = assets.gsub(/[^0-9\.]/, '')
       if assets !~ /\D/
         assets = assets.to_i
-        @a.assets = assets
+        @d.assets = assets
       else
         if assets.include?("dollars")
           assets.slice!"dollars"
         end
         assets = assets.in_numbers
-        @a.assets = assets
+        @d.assets = assets
       end
     end
 
     if params[:children].present?
       if params[:children] !~ /\D/  # returns true if all numbers
         children = params[:children].to_i
-        @a.number_of_children = children
+        @d.number_of_children = children
       else
         children = params[:children].in_numbers
-        @a.number_of_children = children
+        @d.number_of_children = children
       end
     end
 
     # Data storage
-      @a.user_location = params[:user_location]
-      @a.enrolled_in_education = params[:education]
-      @a.citizen = params[:citizen]
-      @a.zipcode = params[:zipcode]
-      @a.disabled_status = params[:disabled]
+      @d.user_location = params[:user_location]
+      @d.enrolled_in_education = params[:education]
+      @d.citizen = params[:citizen]
+      @d.zipcode = params[:zipcode]
+      @d.disabled_status = params[:disabled]
       @user_zipcode = params[:zipcode]
 
 
@@ -289,9 +292,9 @@ class AllCityProgramsController < ApplicationController
 
 
       #HERE IS THE LOGIC FOR RENTAL ASSISTANCE
-      @a.name_on_lease = params[:lease]
-      @a.next_month_rent = params[:next_rent]
-      @a.rental_status = params[:rental_status]
+      @d.name_on_lease = params[:lease]
+      @d.next_month_rent = params[:next_rent]
+      @d.rental_status = params[:rental_status]
 
       if @current_user.rental_assistance == "checked"
         puts "I made it here"
@@ -454,8 +457,8 @@ class AllCityProgramsController < ApplicationController
 
 
       # HERE IS THE LOGIC FOR ALL KIDS
-      @a.pregnant = params[:pregnant]
-      @a.child_health_insurance_state = params[:status]
+      @d.pregnant = params[:pregnant]
+      @d.child_health_insurance_state = params[:status]
 
       if @current_user.all_kids == "checked"
         @eligible_all_kids = "already receiving"
@@ -504,7 +507,7 @@ class AllCityProgramsController < ApplicationController
           if params[:status] == "no_children"
             @eligible_all_kids = "no"
           end
-    end
+      end
 
     #HERE IS THE LOGIC FOR MEDICARE COST SHARING
     if @current_user.medicare_cost_sharing == "checked"
@@ -623,13 +626,13 @@ class AllCityProgramsController < ApplicationController
       end
 
       # HERE IS THE LOGIC FOR TANF
-      @a.pregnant_or_caring_for_child = params[:care_for_child] || params[:pregnant] || params[:no_children]
-      @a.relationship_to_child = params[:relationship]
-      @a.pregnant_with_first_child = params[:first_child]
-      @a.tanif_sixty_months = params[:tanif_sixty_months]
-      @a.anticipate_other_income = params[:anticipate_income]
-      @a.teen_parent = params[:teen_parent]
-      @a.child_in_school = params[:no_highschool]
+      @d.pregnant_or_caring_for_child = params[:care_for_child] || params[:pregnant] || params[:no_children]
+      @d.relationship_to_child = params[:relationship]
+      @d.pregnant_with_first_child = params[:first_child]
+      @d.tanif_sixty_months = params[:tanif_sixty_months]
+      @d.anticipate_other_income = params[:anticipate_income]
+      @d.teen_parent = params[:teen_parent]
+      @d.child_in_school = params[:no_highschool]
 
       if @current_user.tanf == "checked"
         @eligible_tanif  = "already receiving"
@@ -723,131 +726,131 @@ class AllCityProgramsController < ApplicationController
     @eligible_count = 0
     if  @eligible_snap == "yes"
       @eligible_count = @eligible_count + 1
-      @a.snap_eligibility_status = "yes"
+      @d.snap_eligibility_status = "yes"
     end
     if @eligible_all_kids == "yes"
       @eligible_count = @eligible_count + 1
-      @a.all_kids_eligibility_status = "yes"
+      @d.all_kids_eligibility_status = "yes"
     end
     if @eligible_rta == "yes"
       @eligible_count = @eligible_count + 1
-      @a.rta_eligibility_status = "yes"
+      @d.rta_eligibility_status = "yes"
     end
     if @eligible_medicaid == "yes"
       @eligible_count = @eligible_count + 1
-      @a.medicaid_eligibility_status = "yes"
+      @d.medicaid_eligibility_status = "yes"
     end
     if @eligible_medicare_cost_sharing == "yes"
       @eligible_count = @eligible_count + 1
-      @a.medicare_cost_sharing_eligibility_status = "yes"
+      @d.medicare_cost_sharing_eligibility_status = "yes"
     end
     if @rental_eligible == "yes"
       @eligible_count = @eligible_count + 1
-      @a.rental_eligibility_status = "yes"
+      @d.rental_eligibility_status = "yes"
     end
     if @aabd_eligible == "yes"
       @eligible_count = @eligible_count + 1
-      @a.aabd_eligibility_status = "yes"
+      @d.aabd_eligibility_status = "yes"
     end
     if @eligible_tanif == "yes"
       @eligible_count = @eligible_count + 1
-      @a.tanf_eligibility_status = "yes"
+      @d.tanf_eligibility_status = "yes"
     end
 
 
     @ineligible_count = 0
     if @eligible_snap == "no"
       @ineligible_count = @ineligible_count + 1
-      @a.snap_eligibility_status = "no"
+      @d.snap_eligibility_status = "no"
     end
     if @eligible_all_kids == "no"
       @ineligible_count = @ineligible_count + 1
-      @a.all_kids_eligibility_status = "no"
+      @d.all_kids_eligibility_status = "no"
     end
     if @eligible_rta == "no"
       @ineligible_count = @ineligible_count + 1
-      @a.rta_eligibility_status = "no"
+      @d.rta_eligibility_status = "no"
     end
     if @eligible_medicaid == "no"
       @ineligible_count = @ineligible_count + 1
-      @a.medicaid_eligibility_status = "no"
+      @d.medicaid_eligibility_status = "no"
     end
     if @eligible_medicare_cost_sharing == "no"
       @ineligible_count = @ineligible_count + 1
-      @a.medicare_cost_sharing_eligibility_status = "no"
+      @d.medicare_cost_sharing_eligibility_status = "no"
     end
     if @rental_eligible == "no"
       @ineligible_count = @ineligible_count + 1
-      @a.rental_eligibility_status = "no"
+      @d.rental_eligibility_status = "no"
     end
     if @aabd_eligible == "no"
       @ineligible_count = @ineligible_count + 1
-      @a.aabd_eligibility_status = "no"
+      @d.aabd_eligibility_status = "no"
     end
     if @eligible_tanif == "no"
       @ineligible_count = @ineligible_count + 1
-      @a.tanf_eligibility_status = "no"
+      @d.tanf_eligibility_status = "no"
     end
 
 
     @indeterminate_count = 0
     if  @eligible_snap == "maybe"
       @indeterminate_count = @indeterminate_count + 1
-      @a.snap_eligibility_status = "maybe"
+      @d.snap_eligibility_status = "maybe"
     end
     if @eligible_medicaid == 'maybe'
       @indeterminate_count = @indeterminate_count + 1
-      @a.medicaid_eligibility_status = "maybe"
+      @d.medicaid_eligibility_status = "maybe"
     end
     if @rental_eligible == "maybe"
       @indeterminate_count = @indeterminate_count + 1
-      @a.rental_eligibility_status = "maybe"
+      @d.rental_eligibility_status = "maybe"
     end
     if @aabd_eligible == 'maybe'
       @indeterminate_count = @indeterminate_count + 1
-      @a.aabd_eligibility_status = "maybe"
+      @d.aabd_eligibility_status = "maybe"
     end
     if @eligible_tanif == 'maybe'
       @indeterminate_count = @indeterminate_count + 1
-      @a.tanf_eligibility_status = "maybe"
+      @d.tanf_eligibility_status = "maybe"
     end
 
     @already_receiving_count = 0
     if @eligible_snap == "already receiving"
       @already_receiving_count = @already_receiving_count + 1
-      @a.snap_eligibility_status = "already receiving"
+      @d.snap_eligibility_status = "already receiving"
     end
     if @eligible_all_kids == "already receiving"
       @already_receiving_count = @already_receiving_count + 1
-      @a.all_kids_eligibility_status = "already receiving"
+      @d.all_kids_eligibility_status = "already receiving"
     end
     if @eligible_rta == "already receiving"
       @already_receiving_count = @already_receiving_count + 1
-      @a.rta_eligibility_status = "already receiving"
+      @d.rta_eligibility_status = "already receiving"
     end
     if @eligible_medicaid == "already receiving"
       @already_receiving_count = @already_receiving_count + 1
-      @a.medicaid_eligibility_status = "already receiving"
+      @d.medicaid_eligibility_status = "already receiving"
     end
     if @eligible_medicare_cost_sharing == "already receiving"
       @already_receiving_count = @already_receiving_count + 1
-      @a.medicare_cost_sharing_eligibility_status = "already receiving"
+      @d.medicare_cost_sharing_eligibility_status = "already receiving"
     end
     if @rental_eligible == "already receiving"
       @already_receiving_count = @already_receiving_count + 1
-      @a.rental_eligibility_status = "already receiving"
+      @d.rental_eligibility_status = "already receiving"
     end
     if @aabd_eligible == "already receiving"
       @already_receiving_count = @already_receiving_count + 1
-      @a.aabd_eligibility_status = "already receiving"
+      @d.aabd_eligibility_status = "already receiving"
     end
     if @eligible_tanif == "already receiving"
       @already_receiving_count = @already_receiving_count + 1
-      @a.tanf_eligibility_status = "already receiving"
+      @d.tanf_eligibility_status = "already receiving"
     end
 
-    @a.phone_number = params[:phone_number] if params[:phone_number].present?
-    @a.save
+    @d.phone_number = params[:phone_number] if params[:phone_number].present?
+    @d.save
 
     # if params[:citizen].present? && params[:disabled].present? && params[:education].present? && params[:anticipate_income].present?
     # else

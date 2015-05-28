@@ -1,139 +1,86 @@
 <div class= "container">
-
-<div class="page-header col-md-10 col-md-offset-1" style="border:none;">
-  <h1> Do I qualify for WIC?</h1>
-
-  <div class="subhead"> <p>The Women, Infants and Children (WIC) Program, funded by the United States Department of Agriculture, is a supplemental nutrition program focused on eating healthy for moms and kids. WIC can provide nutrition education, nutrition counseling, breastfeeding support, nutritious foods and referrals to other services as needed.</p>
+<section class="content-section marquee">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>WIC</h1>
+      <p> The Women, Infants and Children (WIC) Program, funded by the United States Department of Agriculture, is a supplemental nutrition program focused on eating healthy for moms and kids. WIC can provide nutrition education, nutrition counseling, breastfeeding support, nutritious foods and referrals to other services as needed. You can find more information about WIC by <a href="http://www.cedaorg.net/www2/HNS.html"> clicking here.</a></p>
+    </div>
   </div>
+</section>
 
-  <p>You can find more information about WIC by <a href="http://www.cedaorg.net/www2/HNS.html"> clicking here.</a></p>
-</div>
 
+<section class="content-section">
 <div class="row">
-  <div class="panel panel-default col-md-8 col-sm-7 pull-left">
-  <div class="panel-body">
-  <p class="allthatapply">If you are pregnant, breastfeeding, have had a baby in the past six months, or have a child or infant younger than five years old, you may be able to qualify for WIC benefits.</p>
-
+<div class="col-sm-6 col-md-8">
   <form action="/wics" role="form" method="post">
-    <div class="relative" id="wic_status">
-     <p>Describe your current health status:</p>
-      <%= radio_button_tag 'wic_status', 'anemic' %> anemic
-      <br><%= radio_button_tag 'wic_status', 'underweight' %> underweight
-      <br><%= radio_button_tag 'wic_status', 'of a risky maternal age' %> of a risky maternal age
-      <br><%= radio_button_tag 'wic_status', 'have a history of pregnancy complications ' %> have a history of pregnancy complications
-      <br><%= radio_button_tag 'wic_status', 'have a history of poor pregnancy outcomes' %> have a history of poor pregnancy outcomes
-      <br><%= radio_button_tag 'wic_status', 'has an inadequate dietary pattern' %> has an inadequate dietary pattern
-      <br><%= radio_button_tag 'wic_status', 'none of the above' %> None of the above
+
+    <div class="row">
+      <div class="col-md-12">
+         <label>If you are pregnant, breastfeeding, have had a baby in the past six months, or have a child or infant younger than five years old, you may be able to qualify for WIC benefits.</label>
+      </div>
     </div>
 
-    <br>
-
-  <!-- Label and input for wic_household_size -->
-  <div class="row">
-    <div class="form-group col-sm-9">
-      <label for="rental_dependent_no">What is your household size?</label>
-      <button type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself and your child[ren]." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-      <p type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself and your child[ren]." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-        <input type="text" id="wic_household_size" name="wic_household_size" placeholder="For example: 3" class="form-control" value="<%= @w.household_size %>" required>
-      </p>
+    <div class="row">
+      <div class="col-md-9">
+        <div class="relative" id="wic_status">
+         <label>Describe your current health status:</label>
+         <div class="radio-button">
+          <%= radio_button_tag 'wic_status', 'anemic' %> anemic
+          <br><%= radio_button_tag 'wic_status', 'underweight' %> underweight
+          <br><%= radio_button_tag 'wic_status', 'of a risky maternal age' %> of a risky maternal age
+          <br><%= radio_button_tag 'wic_status', 'have a history of pregnancy complications ' %> have a history of pregnancy complications
+          <br><%= radio_button_tag 'wic_status', 'have a history of poor pregnancy outcomes' %> have a history of poor pregnancy outcomes
+          <br><%= radio_button_tag 'wic_status', 'has an inadequate dietary pattern' %> has an inadequate dietary pattern
+          <br><%= radio_button_tag 'wic_status', 'none of the above' %> None of the above
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
 
 
-  <!-- Label and input for wic_gross_income -->
-  <div class="row">
-    <div class="form-group col-sm-9">
-    <label for="rta_gross_income">
-      What is gross monthly income?
-    </label>
-    <button type="button" data-toggle="popover" data-content="Total monthly income from all sources." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-    <div class="input-group">
-      <span class="input-group-addon">$</span>
-        <p type="button" data-toggle="popover" data-content="Total monthly income from all sources." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-          <input type="text" id="wic_gross_income" name="wic_gross_income" placeholder="For example: 1000" class="form-control" value="<%= @w.gross_monthly_income %>" required>
+  <!-- Form for household size-->
+    <div class="row">
+      <div class="col-md-9">
+        <label for="rental_dependent_no">What is your household size?</label>
+        <p type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself and your child[ren]." data-placement="right" style="border: 0px; color: #4582ec;">
+          <input type="text" id="wic_household_size" name="wic_household_size" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>" required>
         </p>
-      <span class="input-group-addon">.00</span>
+      </div>
     </div>
+
+
+  <!-- Form for gross income -->
+    <div class="row">
+      <div class="col-md-9">
+        <label for="rta_gross_income">What is gross monthly income?</label>
+          <p type="button" data-toggle="popover" data-content="Total monthly income from all sources." data-placement="right" style="border: 0px; color: #4582ec;">
+            <input type="text" id="wic_gross_income" name="wic_gross_income" placeholder="For example: 1000" class="form-field  " value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %>" required>
+          </p>
+      </div>
     </div>
+
+   <!-- Form for zipcode -->
+    <%= render "programs/zipcode_question" %>
+
+   <!-- Form for location question -->
+    <%= render "programs/location_question" %>
+
+    <!-- Form for cellphone question -->
+      <%= render "programs/cellphone_question" %>
+
+    <!-- Submit button -->
+      <%= render "programs/submit_button" %>
+  </form>
   </div>
 
-   <div class="row">
-    <div class="form-group col-sm-9">
-      <label for="zipcode">What is your zipcode?</label>
-        <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" value="<%= @w.zipcode.chop.chop if @w.zipcode.present? %>"required>
-    </div>
-   </div>
-
-  <div class="row">
-    <div class="form-group col-sm-9">
-    <label for="location" id="location_dropdown">Where are you completing this form? </label>
-    <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], ['Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Center for Working Families', 'center_for_working_families'], ['CTA Bus', 'cta_bus'], ['Other', 'other']], @w.user_location), :class => "form-control", :prompt => "Select a location") %>
-    </div>
-  </div>
-
-  <div class="row">
-  <div class="form-group col-sm-9">
-    <label for="phone_number">What is your cell phone number?</label>
-      <button type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-    <div>
-      <p type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-        <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control" value="<%= @w.phone_number %>" required>
-      </p>
-    </div>
-  </div>
-  </div>
-
-
-  <div class="col-sm-9">
-      <button type="submit" class="btn btn-primary program-btn">See if I qualify</button>
-  </div>
-
-</form>
-</div>
-</div>
   <div class="col-md-3 sm-3 xs-12 pull-left">
     <div class="calculator_box">
       <%= render "programs/calculator" %>
     </div>
   </div>
+
+  </div>
+</section>
 </div>
-</div>
 
-<script>
-$(document).ready(function() {
-
-  //this is the map scroll down thing
-  $(window).scroll(function() {
-    if($(this).scrollTop() > 310 && $(this).width() > 750) {
-      $('.calculator_box').addClass('sticky_calculator');
-    } else {
-      $('.calculator_box').removeClass('sticky_calculator');
-    }
-  });
-
-  $(window).scroll(function() {
-    if($(this).scrollTop() < 310) {
-      $('.calculator_box').removeClass('sticky_calculator');
-    }
-  });
-
-  $(window).scroll(function() {
-    if($(this).width() < 750) {
-      $('.calculator').removeClass('sticky_calculator');
-    }
-  });
-    $(function ()
-      { $("[data-toggle='popover']").popover();
-    });
-     $('body').on('click', function (e) {
-        $('[data-toggle="popover"]').each(function () {
-            //the 'is' for buttons that trigger popups
-            //the 'has' for icons within a button that triggers a popup
-            if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-                $(this).popover('hide');
-            }
-        });
-    });
-});
-</script>
 

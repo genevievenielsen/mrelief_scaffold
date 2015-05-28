@@ -5,45 +5,45 @@ class MedicaidsController < ApplicationController
 
   def new
     @medicaid = Medicaid.new
-    @m = MedicaidData.new
+    @d = MedicaidData.new
     @current_user = current_user
   end
 
   def create
-    @m = MedicaidData.new
+    @d = MedicaidData.new
     if params[:medicaid_household_size] !~ /\D/  # returns true if all numbers
       medicaid_household_size = params[:medicaid_household_size].to_i
-      @m.household_size = medicaid_household_size
+      @d.household_size = medicaid_household_size
     else
       medicaid_household_size = params[:medicaid_household_size].in_numbers
-      @m.household_size = medicaid_household_size
+      @d.household_size = medicaid_household_size
     end
 
     medicaid_gross_income = params[:medicaid_gross_income]
     medicaid_gross_income = medicaid_gross_income.gsub(/[^0-9\.]/, '')
     if medicaid_gross_income !~ /\D/
       medicaid_gross_income = medicaid_gross_income.to_i
-      @m.monthly_gross_income = medicaid_gross_income
+      @d.monthly_gross_income = medicaid_gross_income
     else
       if medicaid_gross_income.include?("dollars")
         medicaid_gross_income.slice!"dollars"
       end
       medicaid_gross_income = medicaid_gross_income.in_numbers
-      @m.monthly_gross_income = medicaid_gross_income
+      @d.monthly_gross_income = medicaid_gross_income
     end
 
     medicaid_eligibility = Medicaid.find_by({ :medicaid_household_size => medicaid_household_size})
 
     if params[:citizen] == 'no'
       @eligible = 'maybe'
-      @m.medicaid_eligibility_status = @eligible
+      @d.medicaid_eligibility_status = @eligible
     elsif params[:citizen] == 'yes'
       if medicaid_gross_income < medicaid_eligibility.medicaid_gross_income
         @eligible = 'yes'
-        @m.medicaid_eligibility_status = @eligible
+       @d.medicaid_eligibility_status = @eligible
       else
         @eligible = 'no'
-        @m.medicaid_eligibility_status = @eligible
+       @d.medicaid_eligibility_status = @eligible
       end
     end
 
@@ -66,38 +66,38 @@ class MedicaidsController < ApplicationController
     end
 
     @pb_zipcode = @user_zipcode.chomp(".0")
-      @medical_resources = primarycare
-      @medical_resources_zip = []
+      @resources = primarycare
+      @resources_zip = []
 
       primarycare.each do |center|
         if center.zip.match(@pb_zipcode)
-          @medical_resources_zip.push(center)
+          @resources_zip.push(center)
         end
       end
 
       #in this case there are 2 medical centers in the user's zip
-      if @medical_resources_zip.count >= 2
-         @medical_resources = @medical_resources_zip
+      if @resources_zip.count >= 2
+         @resources = @resources_zip
       end
 
       #in this case there is 1 medical center in the user's zip
-      if @medical_resources_zip.count == 1
-         @medical_resources_first = @medical_resources_zip.first
-         @medical_resources_second = @medical_resources.first
+      if @resources_zip.count == 1
+         @resources_first = @resources_zip.first
+         @resources_second = @resources.first
       end
 
       #in this caser there are no medical centers in the user's zip
-      if  @medical_resources_zip.count == 0
-          @medical_resources_first = @medical_resources.first
-          @medical_resources_second = @medical_resources.second
+      if  @resources_zip.count == 0
+          @resources_first = @resources.first
+          @resources_second = @resources.second
       end
 
     #DATA STORAGE
-    @m.user_location = params[:user_location]
-    @m.phone_number = params[:phone_number] if params[:phone_number].present?
-    @m.citizen = params[:citizen]
-    @m.zipcode = params[:zipcode]
-    @m.save
+   @d.user_location = params[:user_location]
+   @d.phone_number = params[:phone_number] if params[:phone_number].present?
+   @d.citizen = params[:citizen]
+   @d.zipcode = params[:zipcode]
+   @d.save
 
     if params[:citizen].present?
     else

@@ -1,198 +1,93 @@
 <div class= "container">
-
-  <div class="row">
-    <div class="page-header col-md-10 col-md-offset-1" style="border:none;">
-      <h2>Do I qualify for Aged, Blind and Disabled (AABD) Cash Assistance?</h2>
-        <p class="subhead">If you are 65 and older and a resident of Illinois, you may qualify for Senior and Persons with Disabilities.</p>
-        <p>This currently includes cash assistance and not eligibility for medical assistance. </p>
+  <section class="content-section marquee">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Aged, Blind and Disabled (AABD) Cash Assistance</h1>
+        <p> If you are 65 and older and a resident of Illinois, you may qualify for Senior and Persons with Disabilities. This currently includes cash assistance and not eligibility for medical assistance.</p>
+      </div>
     </div>
-  </div>
+  </section>
 
-<div class="row">
-<div class="panel panel-default col-md-8 col-sm-7 pull-left">
-  <div class="panel-body">
+
+  <section class="content-section">
+  <div class="row">
+    <div class="col-sm-6 col-md-8">
     <form action="/aabd_cashes" role="form" method="post">
 
-    <label for="age">How old are you?</label>
-    <div class="row">
-      <div class="form-group col-md-9">
-        <input type="text" id="age" name="age" placeholder="For example: 27" class="form-control" value="<%= @a.age %>" required>
-      </div>
-   </div>
+    <!-- Form for age question -->
+      <%= render "programs/age_question" %>
 
 
-   <div class="row">
-     <div class="form-group col-md-9">
-      <label for="disabled" id="disabled">Are you receiving disability benefits?</label>
-       <% [ 'Yes, from Social Security', 'Yes, from the Railroad Retirement Board ', 'Yes, from Veterans Affairs', 'No' ].each do |disabled| %>
-         <br><%= radio_button_tag 'disabled', disabled, @a.disabled_status == disabled %>
-         <%= disabled.humanize %>
-       <% end %>
-     </div>
-   </div>
+   <!-- Form for disability question -->
+     <%= render "programs/disability_question" %>
 
-  <!-- Label and input for aabd_household_size -->
-
-<div class="row">
-  <div class="form-group col-md-12">
-    <label for="aabd_household_size">What is your household size?</label>
-
-      <button type="button" data-toggle="popover" data-content="Household is defined as anyone living in the same dwelling with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-
+  <!-- Form for household size -->
     <div class="row">
       <div class="col-md-9">
-        <p type="button" data-toggle="popover" data-content="Household is defined as anyone living in the same dwelling with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-          <input type="text" id="aabd_household_size" name="aabd_household_size" placeholder="For example: 3" class="form-control" value="<%= @a.household_size %>" required>
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-  <!-- Label and input for aabd_net_income -->
-<div class="row">
-  <div class="form-group col-md-9">
-    <label for="aabd_net_income">
-     How much do you anticipate to earn in net income in the next 30 days? (After taxes have been taken out)
-       <button type="button" data-toggle="popover" data-content="This should include income you earn from your work, self employment and rental income (contributions from people who live with you.)" data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-    </label>
-    <div class="input-group">
-      <span class="input-group-addon">$</span>
-        <p type="button" data-toggle="popover" data-content="This should include income you earn from your work, self employment and rental income (contributions from people who live with you.)" data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-        <input type="text" id="aabd_net_income" name="aabd_net_income" placeholder="For example: 1000"class="form-control" value="<%= @a.thirty_day_net_income %>" required>
-        </p>
-      <span class="input-group-addon">.00</span>
-    </div>
-    </div>
-  </div>
-
-    <!-- Label and input for aabd_benefits -->
-  <div class="row">
-    <div class="form-group col-md-9">
-      <label for="aabd_benefits">
-       What is your monthly income expected from government benefits or other assistance?
-         <button type="button" data-toggle="popover" data-content="This includes social security (SSI), veterans benefits, railroad assistance etc." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-      </label>
-      <div class="input-group">
-        <span class="input-group-addon">$</span>
-          <p type="button" data-toggle="popover" data-content="This includes social security (SSI), veterans benefits, railroad assistance etc." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-          <input type="text" id="aabd_benefits" name="aabd_benefits" placeholder="For example: 1000"class="form-control" value="<%= @a.government_benefits %>" required>
+        <label for="aabd_household_size">What is your household size?</label>
+          <p type="button" data-toggle="popover" data-content="Household is defined as anyone living in the same dwelling with you." data-placement="right" style="border: 0px; color: #4582ec;">
+          <input type="text" id="aabd_household_size" name="aabd_household_size" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>" required>
           </p>
-        <span class="input-group-addon">.00</span>
-      </div>
       </div>
     </div>
 
-      <!-- Label and input for aabd_assets -->
+
+  <!-- Form for net income question -->
     <div class="row">
-      <div class="form-group col-md-9">
-        <label for="aabd_assets">
-          What are your assets worth?
-           <button type="button" data-toggle="popover" data-content="Everything but your home, if you live in it, and one car." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-        </label>
-        <div class="input-group">
-          <span class="input-group-addon">$</span>
-            <p type="button" data-toggle="popover" data-content="Everything but your home, if you live in it, and one car." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-              <input type="text" id="aabd_assets" name="aabd_assets" placeholder="For example: 1000"class="form-control" value="<%= @a.assets %>" required>
-            </p>
-          <span class="input-group-addon">.00</span>
-        </div>
+      <div class="col-md-9">
+        <label for="aabd_net_income">How much do you anticipate to earn in net income in the next 30 days? (After taxes have been taken out)</label>
+         <p type="button" data-toggle="popover" data-content="This should include income you earn from your work, self employment and rental income (contributions from people who live with you.)" data-placement="right" style="border: 0px; color: #4582ec;">
+            <input type="text" id="aabd_net_income" name="aabd_net_income" placeholder="For example: 1000"class="form-field" value="<%= @d.thirty_day_net_income %>" required>
+          </p>
         </div>
       </div>
 
+    <!-- Form for government benefits question -->
+      <div class="row">
+        <div class="col-md-9">
+          <label for="aabd_benefits">What is your monthly income expected from government benefits or other assistance?</label>
+            <p type="button" data-toggle="popover" data-content="This includes social security (SSI), veterans benefits, railroad assistance etc." data-placement="right" style="border: 0px; color: #4582ec;">
+              <input type="text" id="aabd_benefits" name="aabd_benefits" placeholder="For example: 1000"class="form-field" value="<%= @d.government_benefits %>" required>
+            </p>
+        </div>
+      </div>
 
-  <div class="row">
-    <div class="form-group col-md-9">
-      <label for="citizen" id="citizen">Are you a citizen of the United States? </label>
-      <br>
-        <% [ 'yes', 'no'].each do |citizen| %>
-          <%= radio_button_tag 'citizen', citizen, @a.citizen == citizen %>
-          <%= citizen.humanize %>
-        <% end %>
+    <!-- Form for assets question -->
+      <div class="row">
+        <div class="col-md-9">
+          <label for="aabd_assets">What are your assets worth?</label>
+            <p type="button" data-toggle="popover" data-content="Everything but your home, if you live in it, and one car." data-placement="right" style="border: 0px; color: #4582ec;">
+              <input type="text" id="aabd_assets" name="aabd_assets" placeholder="For example: 1000"class="form-field" value="<%= @d.assets %>" required>
+            </p>
+        </div>
+      </div>
+
+    <!-- Form for citizen question -->
+      <%= render "programs/citizen_question" %>
+
+    <!-- Form for disability question -->
+      <%= render "programs/zipcode_question" %>
+
+    <!-- Form for location question -->
+      <%= render "programs/location_question" %>
+
+    <!-- Form for cellphone question -->
+      <%= render "programs/cellphone_question" %>
+
+    <!-- Submit button -->
+      <%= render "programs/submit_button" %>
+
+  </form>
+  </div>
+
+    <div class="col-md-3 sm-3 xs-12 pull-left">
+      <div class="calculator_box">
+        <%= render "programs/calculator" %>
+      </div>
     </div>
+
   </div>
-
-  <div class="row">
-   <div class="form-group col-sm-9 pull-left">
-     <label for="zipcode">What is your zipcode?</label>
-       <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" value="<%= @a.zipcode.chop.chop if @a.zipcode.present? %>"required>
-   </div>
-  </div>
-
- <div class="row">
-   <div class="form-group col-sm-9">
-   <label for="location" id="location_dropdown">Where are you completing this form? </label>
-   <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], ['Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Center for Working Families', 'center_for_working_families'], ['CTA Bus', 'cta_bus'], ['Other', 'other']], @a.user_location), :class => "form-control", :prompt => "Select a location") %>
-   </div>
- </div>
-
- <div class="row">
- <div class="form-group col-sm-9">
-   <label for="phone_number">What is your cell phone number?</label>
-     <button type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-
-      <p type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-        <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control" value="<%= @a.phone_number %>" required>
-      </p>
-
- </div>
- </div>
-
-    <div>
-      <button type="submit" class="btn btn-primary program-btn ">See if I qualify</button>
-    </div>
-  </div>
-</form>
-
+  </section>
 </div>
 
-  <div class="col-md-3 sm-3 xs-12 pull-left">
-    <div class="calculator_box">
-      <%= render "programs/calculator" %>
-    </div>
-  </div>
-
-</div>
-</div>
-
-<script>
-$(document).ready(function() {
-
-  //this is the map scroll down thing
-  $(window).scroll(function() {
-    if($(this).scrollTop() > 310 && $(this).width() > 750) {
-      $('.calculator_box').addClass('sticky_calculator');
-    } else {
-      $('.calculator_box').removeClass('sticky_calculator');
-    }
-  });
-
-  $(window).scroll(function() {
-    if($(this).scrollTop() < 310) {
-      $('.calculator_box').removeClass('sticky_calculator');
-    }
-  });
-
-  $(window).scroll(function() {
-    if($(this).width() < 750) {
-      $('.calculator').removeClass('sticky_calculator');
-    }
-  });
-
-  $(function ()
-    { $("[data-toggle='popover']").popover();
-  });
-
-   $('body').on('click', function (e) {
-      $('[data-toggle="popover"]').each(function () {
-          //the 'is' for buttons that trigger popups
-          //the 'has' for icons within a button that triggers a popup
-          if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-              $(this).popover('hide');
-          }
-      });
-  });
-});
-</script>
 

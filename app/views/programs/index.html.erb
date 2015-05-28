@@ -1,67 +1,46 @@
-
-  <div class="container">
+<div class="container marquee">
   <div class ="row">
-    <div class="col-md-10 col-md-offset-1">
-      <h1 class="page-header">Programs for Chicago & Illinois</h1>
-
-      <p class="subhead"> Below are the benefits that mRelief currently offers for prescreening. Although these are not <em> all </em> the benefits the city and state offers, we are working to provide you with as much as we can.</p>
+    <div class="col-md-10">
+      <h2>All programs</h2>
+      <p> Below are the benefits that mRelief currently offers for prescreening. Although these are not <em> all </em> the benefits the city and state offers, we are working to provide you with as much as we can. Click on a benefit below to begin the pre-screening process.</p>
     </div>
   </div>
 </div>
-
-
-<div>
-  <h4 style="text-align:center">Click on a benefit below to begin the pre-screening process.</h4>
-</div>
-
-
-
-<br>
 
 <!-- City of Chicago Programs  -->
-<div class="container">
+<div class="container program-wrapper">
  <div class="row">
-    <div class="col-md-12">
-      <h3 class="program-heading" style="padding-bottom:0px">CHICAGO PROGRAMS</h3>
-        <h4 style="text-align:center">Accessible in Community Service Centers</h4>
+    <div class="col-md-12 resources">
+      <h3>Accessible in Chicago Community Service Centers</h3>
     </div>
   </div>
-  <br>
-  <div class="row">
 
+  <div class="row">
   <% chicago_programs = Program.where(:location => "chicago") %>
   <% chicago_programs.each_with_index do |program| %>
 
     <% if program.name_en == "All City Programs" %>
-      <div class="col-md-4" >
-        <a href="#" class="thumbnail" style="padding:0 20px 20px 20px" data-toggle="modal" data-target="#receiving_benefits">
-          <span class="caption">
-            <h3><%= program.name %></h3>
-            <p><%= program.description %></p>
-          </span>
-        </a>
+      <div class="col-md-4 programs">
+        <h4><%= program.name %></h4>
+        <p><%= program.description %></p>
+        <a href="#" data-toggle="modal" data-target="#receiving_benefits">Continue &rarr;</a>
       </div>
-
     <% else %>
-        <div class="col-md-4" >
-          <a href="<%= program.url %>" class="thumbnail" style="padding:0 20px 20px 20px">
-            <span class="caption">
-              <h3><%= program.name %></h3>
-              <p><%= program.description %></p>
-            </span>
-          </a>
+        <div class="col-md-4 programs" >
+          <h4><%= program.name %></h4>
+          <p><%= program.description %></p>
+          <a href="<%= program.url %>" >Continue &rarr;</a>
         </div>
     <% end %>
   <% end %>
   </div>
 
-<hr>
-
+<br>
 
 <!-- Illinois Programs  -->
  <div class="row">
-    <div class="col-md-12">
-      <h3 class="program-heading">STATE OF ILLINOIS PROGRAMS</h3>
+    <div class="col-md-12 resources">
+      <h3>State of Illinois Programs</h3>
     </div>
   </div>
 <div>
@@ -69,23 +48,15 @@
   <% chicago_programs = Program.where(:location => "illinois") %>
   <% chicago_programs.each_with_index do |program| %>
 
-      <div class="col-md-4">
-        <a href="<%= program.url %>" class="thumbnail">
-          <span class="caption">
-            <h3><%= program.name %></h3>
-            <p><%= program.description %></p>
-          </span>
-        </a>
-      </div>
+    <div class="col-md-4 programs">
+      <h4><%= program.name %></h4>
+      <p><%= program.description %></p>
+      <a href="<%= program.url %>">Continue &rarr;</a>
+    </div>
   <% end %>
 
 </div>
 </div>
-
-
-<br>
-<br>
-<br>
 </div>
 
 

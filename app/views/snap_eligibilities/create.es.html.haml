@@ -12,7 +12,7 @@
           %tr#income_row
             %td
               %i.fa.fa-check-circle
-            - if @s.age.to_i <= 59
+            - if @d.age.to_i <= 59
               %td
                 %p= t.snap.your_income | "Your gross monthly income"
             - else
@@ -20,7 +20,7 @@
                 %p= t.snap.your_income_and_age | "Your gross monthly income and age"
             %td
               %a{"data-target" => "#income_explanation", "data-toggle" => "modal", :href => "#"}= t.snap.read_more | "Read More"
-          - if @s.citizen == "yes"
+          - if @d.citizen == "yes"
             %tr#citizenship_row
               %td
                 %i.fa.fa-check-circle
@@ -61,11 +61,11 @@
                   %h4.modal-title= t.snap.your_income | "Your gross monthly income"
                 .modal-body
                   %p
-                    El ingreso que usted reportó de $#{@s.monthly_gross_income} está por debajo de los $150 y por lo tanto es posible que usted cumpla con los requisitos para obtener SNAP (cupones de alimentos) de emergencia, según
+                    El ingreso que usted reportó de $#{@d.monthly_gross_income} está por debajo de los $150 y por lo tanto es posible que usted cumpla con los requisitos para obtener SNAP (cupones de alimentos) de emergencia, según
                     %a{:href => "http://www.dhs.state.il.us/page.aspx?item=13005"} la ley PM-02-08-01
                     del manual del Departamento de Servicios Humanos de Illinois (DHS, por sus siglas en inglés). Una vez usted envíe su solicitud, DHS se comunicará con usted en un plazo de 5 días laborales para fijar una fecha para una entrevista en persona.
                 %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}= t.snap.close | "Close"
-        - elsif @disabled != true && @s.age.to_i <= 59
+        - elsif @disabled != true && @d.age.to_i <= 59
           #income_explanation.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
             .modal-dialog
               .modal-content
@@ -75,7 +75,7 @@
                   %h4.modal-title= t.snap.your_income | "Your gross monthly income"
                 .modal-body
                   %p
-                    El ingreso que usted reportó de $#{@s.monthly_gross_income} para un hogar de #{@s.dependent_no} miembros está por debajo del ingreso máximo permitido de $#{number_with_precision(@snap_eligibility.snap_gross_income, precision: 2)} según
+                    El ingreso que usted reportó de $#{@d.monthly_gross_income} para un hogar de #{@d.dependent_no} miembros está por debajo del ingreso máximo permitido de $#{number_with_precision(@snap_eligibility.snap_gross_income, precision: 2)} según
                     %a{:href => "http://www.dhs.state.il.us/page.aspx?item=33412"} la ley 124
                     del manual del Departamento de Servicios Humanos de Illinois (DHS, por sus siglas en inglés). Una vez usted envíe su solicitud, DHS se comunicará con usted en un plazo de 30 días laborales para fijar una fecha para una entrevista en persona.
                 %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}= t.snap.close | "Close"
@@ -89,11 +89,11 @@
                   %h4.modal-title= t.snap.your_income | "Your gross monthly income"
                 .modal-body
                   %p
-                    El ingreso que usted reportó de $#{@s.monthly_gross_income}, junto con la cantidad que usted recibe en beneficios de discapacidad está por DEBAJO del ingreso máximo permitido de $#{number_with_precision(@snap_eligibility.snap_gross_income, precision: 2)} según
+                    El ingreso que usted reportó de $#{@d.monthly_gross_income}, junto con la cantidad que usted recibe en beneficios de discapacidad está por DEBAJO del ingreso máximo permitido de $#{number_with_precision(@snap_eligibility.snap_gross_income, precision: 2)} según
                     %a{:href => "http://www.dhs.state.il.us/page.aspx?item=33412"} la ley 124
                     del manual del Departamento de Servicios Humanos de Illinois (DHS, por sus siglas en inglés). Una vez usted envíe su solicitud, DHS se comunicará con usted en un plazo de 30 días laborales para fijar una fecha para una entrevista en persona.
                 %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}= t.snap.close | "Close"
-        - elsif @s.age.to_i > 59
+        - elsif @d.age.to_i > 59
           #income_explanation.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
             .modal-dialog
               .modal-content
@@ -103,14 +103,14 @@
                   %h4.modal-title= t.snap.your_income | "Your gross monthly income"
                 .modal-body
                   %p
-                    El ingreso que usted reportó de $#{@s.monthly_gross_income}, junto con la edad que usted reportó de #{@s.age} está por DEBAJO del ingreso máximo permitido de $#{number_with_precision(@snap_eligibility.snap_gross_income, precision: 2)} según las leyes
+                    El ingreso que usted reportó de $#{@d.monthly_gross_income}, junto con la edad que usted reportó de #{@d.age} está por DEBAJO del ingreso máximo permitido de $#{number_with_precision(@snap_eligibility.snap_gross_income, precision: 2)} según las leyes
                     %a{:href => "http://www.dhs.state.il.us/page.aspx?item=33412"} 124
                     y
                     %a{:href => "http://www.dhs.state.il.us/page.aspx?item=13632"} PM-05-06-01
                     del manual del Departamento de Servicios Humanos de Illinois (DHS, por sus siglas en inglés). Una vez usted envíe su solicitud, DHS se comunicará con usted en un plazo de 30 días laborales para fijar una fecha para una entrevista en persona.
                 %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}= t.snap.close | "Close"
         / CITIZEN EXPLANATION
-        - if @s.citizen == "yes"
+        - if @d.citizen == "yes"
           #citizenship_explanation.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
             .modal-dialog
               .modal-content
@@ -190,7 +190,7 @@
                 %p= t.snap.your_income | "Your gross monthly income"
               %td
                 %a{"data-target" => "#income_explanation", "data-toggle" => "modal", :href => "#"}= t.snap.read_more | "Read More"
-          - if @s.citizen == "yes"
+          - if @d.citizen == "yes"
             %tr#citizenship_row
               %td
                 %i.fa.fa-check-circle
@@ -198,7 +198,7 @@
                 %p= t.snap.your_citizenship | "Your citizenship status"
               %td
                 %a{"data-target" => "#citizenship_explanation", "data-toggle" => "modal", :href => "#"}= t.snap.read_more | "Read More"
-          - elsif @s.citizen == "no"
+          - elsif @d.citizen == "no"
             %tr#citizenship_row
               %td
                 %i.fa.fa-question-circle
@@ -233,12 +233,12 @@
                   %h4.modal-title= t.snap.your_income | "Your gross monthly income"
                 .modal-body
                   %p
-                    El ingreso que usted reportó de $#{@s.monthly_gross_income} para un hogar de #{@s.dependent_no} miembros está POR ENCIMA del ingreso máximo permitido de $#{number_with_precision(@snap_eligibility.snap_gross_income, precision: 2)}  según la ley
+                    El ingreso que usted reportó de $#{@d.monthly_gross_income} para un hogar de #{@d.dependent_no} miembros está POR ENCIMA del ingreso máximo permitido de $#{number_with_precision(@snap_eligibility.snap_gross_income, precision: 2)}  según la ley
                     %a{:href => "http://www.dhs.state.il.us/page.aspx?item=33412"} 124
                     del manual del Departamento de Servicios Humanos de Illinois (DHS, por sus siglas en inglés). Pero, como dicha cantidad cae dentro de $#{@income_range}, nosotros le recomendamos comunicarse con un experto de la Fundación de Asistencia Legal, en uno de los Centros de Servicio Comunitario.
                 %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}= t.snap.close | "Close"
         / CITIZEN EXPLANATION
-        - if @s.citizen == "yes"
+        - if @d.citizen == "yes"
           #citizenship_explanation.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
             .modal-dialog
               .modal-content
@@ -254,7 +254,7 @@
                     %a{:href => "https://www.dhs.state.il.us/page.aspx?item=13183"} PM 03-01-02-g
                     del manual del Departamento de Servicios Humanos de Illinois (DHS, por sus siglas en inglés).
                 %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}= t.snap.close | "Close"
-        - elsif @s.citizen == "no"
+        - elsif @d.citizen == "no"
           #citizenship_explanation.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
             .modal-dialog
               .modal-content
@@ -310,7 +310,7 @@
         %h1= t.snap.something_else | "Something else in mind!"
         %h3= t.snap.based_on_the_info_not | "You likely do not qualify for food stamps. The following information you reported impacted your eligibility status. Read More."
         %table.table.table-striped
-          - if @s.age >= 18
+          - if @d.age >= 18
             %tr#income_row
               %td
                 %i.fa.fa-times
@@ -326,7 +326,7 @@
                 %p= t.snap.your_age | "Your age"
               %td
                 %a{"data-target" => "#income_explanation", "data-toggle" => "modal", :href => "#"}= t.snap.read_more | "Read More"
-          - if @s.citizen == "yes"
+          - if @d.citizen == "yes"
             %tr#citizenship_row
               %td
                 %i.fa.fa-check-circle
@@ -341,7 +341,7 @@
               %td
                 %p= t.snap.your_citizenship | "Your citizenship status"
               %td
-          - if @s.enrolled_in_education == "no"
+          - if @d.enrolled_in_education == "no"
             %tr#education_row
               %td
                 %p= t.snap.n_a | "N/A"
@@ -349,7 +349,7 @@
                 %p= t.snap.your_education | "Your education status"
               %td
         / INCOME EXPLANATION
-        - if @s.age >= 18
+        - if @d.age >= 18
           #income_explanation.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "income_explanationLabel", :role => "dialog", :tabindex => "-1"}
             .modal-dialog
               .modal-content
@@ -359,7 +359,7 @@
                   %h4.modal-title= t.snap.your_income | "Your gross monthly income"
                 .modal-body
                   %p
-                    El ingreso que usted reportó de $#{@s.monthly_gross_income} para un hogar de #{@s.dependent_no} miembros está POR ENCIMA del ingreso máximo permitido de #{number_with_precision(@snap_eligibility.snap_gross_income, precision: 2)} según
+                    El ingreso que usted reportó de $#{@d.monthly_gross_income} para un hogar de #{@d.dependent_no} miembros está POR ENCIMA del ingreso máximo permitido de #{number_with_precision(@snap_eligibility.snap_gross_income, precision: 2)} según
                     %a{:href => "http://www.dhs.state.il.us/page.aspx?item=33412"} policy 124
                     del manual del Departamento de Servicios Humanos de Illinois (DHS, por sus siglas en inglés) y usted no califica para recibir beneficios de SNAP (Cupones de Alimentos). Sin embargo, estos son algunos recursos locales que le pueden ayudar.
                 %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}= t.snap.close | "Close"
@@ -373,10 +373,10 @@
                   %h4.modal-title= t.snap.your_age | "Your Age"
                 .modal-body
                   %p
-                    Usted reportó una edad de #{@s.age} años, la cual está por debajo de los 18 años.  Los menores de edad, por lo general, deben solicitar servicios bajo una aplicación familiar (y este servicio no está disponible para hogares conformados solamente por un menor de edad). Sin embargo, a continuación le damos información de recursos locales que le pueden ayudar.
+                    Usted reportó una edad de #{@d.age} años, la cual está por debajo de los 18 años.  Los menores de edad, por lo general, deben solicitar servicios bajo una aplicación familiar (y este servicio no está disponible para hogares conformados solamente por un menor de edad). Sin embargo, a continuación le damos información de recursos locales que le pueden ayudar.
                 %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}= t.snap.close | "Close"
         / CITIZEN EXPLANATION
-        - if @s.citizen == "yes"
+        - if @d.citizen == "yes"
           #citizenship_explanation.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
             .modal-dialog
               .modal-content

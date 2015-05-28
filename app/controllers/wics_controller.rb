@@ -6,17 +6,18 @@ class WicsController < ApplicationController
   # GET /wics/new
   def new
     @wic = Wic.new
-    @w = WicData.new
+    @d = WicData.new
+    @current_user = current_user
   end
 
   def create
-    @w = WicData.new
+    @d = WicData.new
     if params[:wic_household_size] !~ /\D/  # returns true if all numbers
       wic_household_size = params[:wic_household_size].to_i
-      @w.household_size = wic_household_size
+      @d.household_size = wic_household_size
     else
       wic_household_size = params[:wic_household_size].in_numbers
-      @w.household_size = wic_household_size
+      @d.household_size = wic_household_size
     end
 
     wic_gross_income = params[:wic_gross_income]
@@ -24,18 +25,18 @@ class WicsController < ApplicationController
 
     if wic_gross_income !~ /\D/
       wic_gross_income = wic_gross_income.to_i
-      @w.gross_monthly_income = wic_gross_income
+      @d.gross_monthly_income = wic_gross_income
     else
       if wic_gross_income.include?("dollars")
         wic_gross_income.slice!"dollars"
       end
       wic_gross_income = wic_gross_income.in_numbers
-      @w.gross_monthly_income = wic_gross_income
+      @d.gross_monthly_income = wic_gross_income
     end
 
 
     wic_status = params[:wic_status]
-    @w.health_status = params[:wic_status]
+    @d.health_status = params[:wic_status]
 
     if  wic_gross_income.present? && wic_household_size.present?
 
@@ -44,9 +45,9 @@ class WicsController < ApplicationController
       if wic_gross_income < wic_eligibility.wic_gross_income
         if wic_status != 'none of the above'
           @eligible = true
-          @w.eligibility_status = "yes"
+          @d.eligibility_status = "yes"
         else
-          @w.eligibility_status = "no"
+          @d.eligibility_status = "no"
         end
       end
 
@@ -72,34 +73,34 @@ class WicsController < ApplicationController
 
 
     @pb_zipcode = @user_zipcode.chomp(".0")
-    @child_resources = childcare
-    @child_resources_zip = []
+    @resources = childcare
+    @resources_zip = []
 
     childcare.each do |center|
       if center.zip.match(@pb_zipcode)
-        @child_resources_zip.push(center)
+        @resources_zip.push(center)
       end
     end
 
     #in this case there are 2 medical centers in the user's zip
-    if @child_resources_zip.count >= 2
-       @child_resources = @child_resources_zip
+    if @resources_zip.count >= 2
+       @resources = @resources_zip
     end
     #in this case there is 1 medical center in the user's zip
-    if @child_resources_zip.count == 1
-       @child_resources_first = @child_resources_zip.first
-       @child_resources_second = @child_resources.first
+    if @resources_zip.count == 1
+       @resources_first = @resources_zip.first
+       @resources_second = @resources.first
     end
     #in this caser there are no medical centers in the user's zip
-    if  @child_resources_zip.count == 0
-        @child_resources_first = @child_resources.first
-        @child_resources_second = @child_resources.second
+    if  @resources_zip.count == 0
+        @resources_first = @resources.first
+        @resources_second = @resources.second
     end
 
-    @w.user_location = params[:user_location]
-    @w.phone_number = params[:phone_number] if params[:phone_number].present?
-    @w.zipcode = params[:zipcode]
-    @w.save
+    @d.user_location = params[:user_location]
+    @d.phone_number = params[:phone_number] if params[:phone_number].present?
+    @d.zipcode = params[:zipcode]
+    @d.save
 
     if params[:wic_status].present?
     else

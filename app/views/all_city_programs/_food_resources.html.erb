@@ -1,18 +1,34 @@
-<p>Direct2Food is an online resource that will help you locate the food pantries, soup kitchens, and meal programs closest to you. </p>
-<%= link_to "Click Here to find resources near you", "http://www.direct2food.org/", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'food_stamps_all_city_program', 'direct2food', 1);" %>
-<div class="sectiondivider"></div>
+<p>Direct2Food is an online resource that will help you locate the food pantries, soup kitchens, and meal programs closest to you.</p>
+<p><%= link_to "Click Here to find resources near you", "http://www.direct2food.org/", :class => "secondary-link", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'food_stamps_all_city_program', 'direct2food', 1);" %></p>
 
-<h4>Some additional resources from Purple Binder:</h4>
+
+<p>Some additional resources from Purple Binder:</p>
 
 <% if @food_resources_zip.count >= 2 %>
-<p><%= @food_resources_zip.first.name %> | <%= @food_resources_zip.first.street %>  <%= @food_resources_zip.first.city %> <%= @food_resources_zip.first.state %>, <%= @food_resources_zip.first.zip %> | <%= @food_resources_zip.first.phone %> </p>
+  <ul>
+    <li class="laf-headline"><%= @food_resources_zip.first.name %> </li>
+    <li> <%= @food_resources_zip.first.street %>  <%= @food_resources_zip.first.city %> <%= @food_resources_zip.first.state %>, <%= @food_resources_zip.first.zip %> </li>
+    <li><%= @food_resources_zip.first.phone %></li>
+  </ul>
 
-<p><%= @food_resources_zip.second.name %> | <%= @food_resources_zip.second.street %>  <%= @food_resources_zip.second.city %> <%= @food_resources_zip.second.state %>, <%= @food_resources_zip.second.zip %> | <%= @food_resources_zip.second.phone %> </p>
+  <ul>
+    <li class="laf-headline"><%= @food_resources_zip.second.name %> </li>
+    <li> <%= @food_resources_zip.second.street %>  <%= @food_resources_zip.second.city %> <%= @food_resources_zip.second.state %>, <%= @food_resources_zip.second.zip %> </li>
+    <li><%= @food_resources_zip.second.phone %></li>
+  </ul>
 <% end %>
 
 <% if @food_resources_first.present? %>
-<p><%= @food_resources_first.name %> | <%= @food_resources_first.street %>  <%= @food_resources_first.city %> <%= @food_resources_first.state %>, <%= @food_resources_first.zip %> | <%= @food_resources_first.phone %> </p>
+  <ul>
+    <li class="laf-headline"><%= @food_resources_first.name %> </li>
+    <li> <%= @food_resources_first.street %>  <%= @food_resources_first.city %> <%= @food_resources_first.state %>, <%= @food_resources_first.zip %> </li>
+    <li><%= @food_resources_first.phone %></li>
+  </ul>
 
-<p><%= @food_resources_second.name %> | <%= @food_resources_second.street %>  <%= @food_resources_second.city %> <%= @food_resources_second.state %>, <%= @food_resources_second.zip %> | <%= @food_resources_second.phone %> </p>
+  <ul>
+    <li class="laf-headline"><%= @food_resources_second.name %> </li>
+    <li> <%= @food_resources_second.street %>  <%= @food_resources_second.city %> <%= @food_resources_second.state %>, <%= @food_resources_second.zip %> </li>
+    <li><%= @food_resources_second.phone %></li>
+  </ul>
 
 <% end %>

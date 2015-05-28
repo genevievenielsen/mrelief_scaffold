@@ -1,41 +1,40 @@
-<div class="alert alert-warning alert-dismissible" role="alert">
+<div class="alert-info alert-dismissible" role="alert">
   <div class="container">
-   <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-    <strong>Check your eligibility via SMS:</strong> Text "hello" to 1-773-377-8946.
+    <p>Check your eligibility via SMS: Text "hello" to 1-773-377-8946.</p>
   </div>
 </div>
-<header>
-<div class="container">
-  <div class="row">
-    <%= image_tag("homepage_marquee.png", :class => "img-responsive homepage-marquee") %>
+<section class="container content-section">
+  <div class="row home-page-marquee">
+    <div class="col-md-8">
+      <h1>Find out if you qualify for public assistance in Chicago & Illinois</h1>
+    </div>
   </div>
   <div class="row">
-    <h1 style="text-align:center;">Check your eligibility for benefits in Chicago & Illinois</h1>
-    <p class="subhead">Eligibility requirements can be difficult to find, we've created a process that makes it easy</p>
-    <div class="row text-center">
+    <div class="col-md-5">
+      <p>Eligibility requirements can be difficult to find, we've created a process that makes it easy</p>
+    </div>
+  </div>
 
-        <%= link_to("Choose Your Program", "/programs", :class => "btn btn-primary btn-lg", :role => "button") %>
-        <h3 class="inline_text">or</h3>
-        <%= link_to("All Programs at Once", "/filter", :class => "btn btn-primary btn-lg", :role => "button") %>
-
+  <div class="row program-options">
+    <div class="col-md-5">
+      <h3>Choose Your Program</h3>
+      <p>mRelief has screeners for programs helping with food, transportation, healthcare, housing and children.</p>
+      <%= link_to("Start Here →", "/programs") %>
     </div>
 
-  </div>
-</header>
-
-<hr style="margin-top:10px">
-
-<div class="container">
-  <div class="row">
-    <h2 class="subsection">A Little More About Us</h2>
-    <p class="col-md-10 col-md-offset-1" style="text-align:center;">We are ruby developers and alumni of The Starter League’s Web Development program, based in Chicago. Our additional expertise include Public Policy, Economics, and Design. We are working in partnership with Mayor Rahm Emanuel’s Innovation Delivery Team and Chicago’s Community Service Centers. We have also received tremendous support from civic tech group, Open City and their "Open Gov Hack Night", a group of developers and open data lovers dedicated to open government data in the city of Chicago. Our community resources are provided to you by Purple Binder.</p>
-      <div class="col-md-12" style="text-align:center;">
-        <%= image_tag("logos.jpg", :class => "") %>
+    <div class="col-md-5 col-md-offset-1">
+      <div class="">
+          <h3>All Programs At Once</h3>
+          <p>Screen for multiple programs and find out about alternative resources if you are ineligible for public assistance.</p>
+          <%= link_to("Start Here →", "/filter") %>
       </div>
-      <div style="text-align:center;">
-          <%= link_to("Learn More About Us", "/about_us", :class => "btn btn-info") %>
-      </div>
+    </div>
   </div>
-  </div>
-</div>
+</section>
 
+
+<script type="text/javascript">
+  $.ajax({
+    url: "/session_clear",
+  });
+</script>

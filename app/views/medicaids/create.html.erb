@@ -1,147 +1,72 @@
-<div class="container">
+<div class="container marquee">
 <%= render "layouts/print_button" %>
+
+
+<!-- User is eligible -->
 <% if @eligible == 'yes' %>
+  <div class="row">
+    <div class="col-md-7">
+      <h1>Results: You may be in luck!</h1>
+      <p>Based on your household size and income, you likely qualify for Medicaid</p>
 
-
-      <div class="row" style="text-align:center;">
-         <div class="col-md-8 col-md-offset-2">
-             <i class="fa fa-check-circle fa-5x"></i>
-              <h1>You may be in luck!</h1>
-              <h4>Based on your household size and income, you likely qualify for Medicaid</h4>
-
-        <br>
-        <br>
-        <br>
-
-        <div class="row">
-
-          <div class=" text-center">
-            <p class="subhead">You can call 1 (866) 311-1119 for your coverage options.</p>
-            <p class="subhead"> To apply online:</p>
-
-          <%= link_to "Click Here", "https://abe.illinois.gov/abe/access/jsp/access/Home.jsp", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicaid', 'abe', 1);" %>
-
-          <p class="subhead">To further pursue your Medicaid application you can also call the county care line (312-864-8200). If you already have a doctor, be sure to confirm they transfer over.</p>
-          </div>
-
+      <div class="resources">
+        <h3>Apply for benefits</h3>
+        <p>You can call 1 (866) 311-1119 for your coverage options.</p>
+        <p>To apply online, <%= link_to "Click Here", "https://abe.illinois.gov/abe/access/jsp/access/Home.jsp", :class => "  secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicaid', 'abe', 1);" %>. </p>
+        <p>To further pursue your Medicaid application you can also call the county care line (312-864-8200). If you already have a doctor, be sure to confirm they transfer over.</p>
       </div>
+
     </div>
-    </div>
+  </div>
 
-    <% elsif @eligible == 'maybe' %>
+<!-- User might be eligible -->
+  <% elsif @eligible == 'maybe' %>
+    <div class="row">
+      <div class="col-md-7">
+        <h1>Results: Something else in mind!</h1>
+        <p>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a Medicaid expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your Medicaid eligibility with you.</p>
 
+        <section class="content-section resources">
+          <h3>Resources</h3>
+          <% if @laf_disclaimer.present? %>
+            <p><%= @laf_disclaimer %></p>
+          <% else  %>
+         <% end %>
+          <%= render 'layouts/community_center' %>
+         </section>
 
-      <div class="row" style="text-align:center;">
-        <div class="col-md-8 col-md-offset-2">
-          <i class="fa fa-exclamation-circle fa-5x"></i>
-            <h1>Something else in mind!</h1>
-             <h4>Based on the information received, we cannot determine your eligibility at this time. You may need to discuss your situation with a Medicaid expert that can share more information on your probable eligibility. A Legal Assistance Foundation (LAF) Paralegal near you can discuss your Medicaid eligibility with you.</h4>
-            <br>
-
-            <% if @laf_disclaimer.present?  %>
-              <p class="subhead"><%= @laf_disclaimer %></p>
-            <% end %>
-
-            <%= render 'layouts/community_center' %>
-      </div>
-      <div class="row">
-      <div class="col-md-offset-4 col-md-4">
           <%= image_tag("LAFlogo.jpg", :class => "img-responsive") %>
-        </div>
-        </div>
-
+      </div>
     </div>
 
+<!-- User is inelgible -->
+  <% elsif @eligible == 'no' %>
+      <div class="row">
+        <div class="col-md-7">
+          <h1>Results: Something else in mind!</h1>
+          <p>Based on your household size and income, you likely do not qualify for Medicaid.</p>
+          <p>However, if you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.</p>
 
-      <% elsif @eligible == 'no' %>
-
-
-      <div class="row" style="text-align:center;">
-        <div class="col-md-8 col-md-offset-2">
-            <h1>Something else in mind!</h1>
-            <h4>Based on your household size and income, you likely do not qualify for Medicaid.</h4>
-
-            <p> However, if you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.
-
-            <p>
-            <%= link_to "Click Here", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'medicaid', 'health_care_fees', 1);" %> to learn more about fees.
-            </p>
-            <br>
-            <p>
-            Get Covered Illinois is a resource that helps families register for insurance at in-person events.
-            </p>
-            <br>
-            <p>
-            <%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicaid', 'get_covered_illinois', 1);" %> to find Get Covered Illinois events in your area.
-            </p>
-            <br>
-            <p>
-            You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.
-            </p>
-
-            </p>
-
-            <br>
-
-          <div class="row">
-            <h4>Here are some additional resources from Purple Binder:</h4>
-          </div>
-          <br>
-
-          <div class="row">
-
-          <% if @medical_resources_zip.count >= 2 %>
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @medical_resources_zip.first.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @medical_resources_zip.first.street %>  <%= @medical_resources_zip.first.city %> <%= @medical_resources_zip.first.state %>, <%= @medical_resources_zip.first.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @medical_resources_zip.first.phone %> </li>
-              </ul>
-            </div>
-
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @medical_resources_zip.second.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @medical_resources_zip.second.street %>  <%= @medical_resources_zip.second.city %> <%= @medical_resources_zip.second.state %>, <%= @medical_resources_zip.second.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @medical_resources_zip.second.phone %> </li>
-              </ul>
-            </div>
-            <% end %>
+          <div class="resources">
+            <h3>Resources</h3>
+            <p><%= link_to "Click Here", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "secondary-link", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'medicaid', 'health_care_fees', 1);" %> to learn more about fees.</p>
+            <p>Get Covered Illinois is a resource that helps families register for insurance at in-person events.</p>
+            <p><%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicaid', 'get_covered_illinois', 1);" %> to find Get Covered Illinois events in your area.</p>
+            <p>You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.</p>
           </div>
 
-
-          <div class="row">
-          <% if @medical_resources_first.present? %>
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @medical_resources_first.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @medical_resources_first.street %>  <%= @medical_resources_first.city %> <%= @medical_resources_first.state %>, <%= @medical_resources_first.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @medical_resources_first.phone %> </li>
-              </ul>
-            </div>
-
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @medical_resources_second.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @medical_resources_second.street %>  <%= @medical_resources_second.city %> <%= @medical_resources_second.state %>, <%= @medical_resources_second.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @medical_resources_second.phone %> </li>
-              </ul>
-            </div>
-            <% end %>
-          </div>
-
-           <%= image_tag("pblogo.jpg", :class => "logo-padding") %>
+          <%= render "layouts/purple_binder_resources" %>
         </div>
     </div>
   <% else %>
+
   <div class="row">
-    <p class="subhead">Looks like you forgot to answer one of the questions. Please go back and make sure you answered all questions!</p>
+    <div class="col-md-7">
+      <p>Looks like you forgot to answer one of the questions. Please go back and make sure you answered all questions!</p>
+    </div>
   </div>
 
 <% end %>
 
 </div>
-<br>
-<br>
-<br>
-<br>
+

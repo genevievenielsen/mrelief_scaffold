@@ -10,18 +10,19 @@ class HeadStartsController < ApplicationController
 
   def new
     @head_start = HeadStart.new
-    @h = HeadStartData.new
+    @d = HeadStartData.new
+    @current_user = current_user
   end
 
   def create
-    @h = HeadStartData.new
+    @d = HeadStartData.new
      # if the params hash contains a letter
     if params[:hs_dependent_no] !~ /\D/  # returns true if all numbers
       hs_dependent_no = params[:hs_dependent_no].to_i
-      @h.dependent_no = hs_dependent_no
+      @d.dependent_no = hs_dependent_no
     else
       hs_dependent_no = params[:hs_dependent_no].in_numbers
-      @h.dependent_no = hs_dependent_no
+      @d.dependent_no = hs_dependent_no
     end
 
     hs_gross_income = params[:hs_gross_income]
@@ -29,13 +30,13 @@ class HeadStartsController < ApplicationController
 
     if hs_gross_income !~ /\D/
       hs_gross_income = hs_gross_income.to_i
-      @h.gross_annual_income = hs_gross_income
+      @d.gross_annual_income = hs_gross_income
     else
       if hs_gross_income.include?("dollars")
         hs_gross_income.slice!"dollars"
       end
       hs_gross_income = hs_gross_income.in_numbers
-      @h.gross_annual_income = hs_gross_income
+      @d.gross_annual_income = hs_gross_income
     end
 
     if  hs_gross_income.present? && hs_dependent_no.present?
@@ -45,12 +46,12 @@ class HeadStartsController < ApplicationController
        if hs_gross_income < hs_eligibility.hs_gross_income
          if params[:child_birthdate]  == "yes"
             @eligible = true
-            @h.eligibility_status = "yes"
+            @d.eligibility_status = "yes"
           else
-            @h.eligibility_status = "no"
+            @d.eligibility_status = "no"
           end
        else
-        @h.eligibility_status = "no"
+        @d.eligibility_status = "no"
       end
     end #closes if statement
 
@@ -71,37 +72,37 @@ class HeadStartsController < ApplicationController
      end
 
      @pb_zipcode = @user_zipcode.chomp(".0")
-       @headstart_resources = headstart
-       @headstart_resources_zip = []
+       @resources = headstart
+       @resources_zip = []
 
        headstart.each do |center|
          if center.zip.match(@pb_zipcode)
-           @headstart_resources_zip.push(center)
+           @resources_zip.push(center)
          end
        end
 
       #in this case there are 2 medical centers in the user's zip
-      if @headstart_resources_zip.count >= 2
-         @headstart_resources = @headstart_resources_zip
+      if @resources_zip.count >= 2
+         @resources = @resources_zip
       end
 
       #in this case there is 1 medical center in the user's zip
-      if @headstart_resources_zip.count == 1
-         @headstart_resources_first = @headstart_resources_zip.first
-         @headstart_resources_second = @headstart_resources.first
+      if @resources_zip.count == 1
+         @resources_first = @resources_zip.first
+         @resources_second = @resources.first
       end
 
       #in this caser there are no medical centers in the user's zip
-      if  @headstart_resources_zip.count == 0
-          @headstart_resources_first = @headstart_resources.first
-          @headstart_resources_second = @headstart_resources.second
+      if  @resources_zip.count == 0
+          @resources_first = @resources.first
+          @resources_second = @resources.second
       end
 
-    @h.user_location = params[:user_location]
-    @h.phone_number = params[:phone_number] if params[:phone_number].present?
-    @h.child_birthdate = params[:child_birthdate]
-    @h.zipcode = params[:zipcode]
-    @h.save
+    @d.user_location = params[:user_location]
+    @d.phone_number = params[:phone_number] if params[:phone_number].present?
+    @d.child_birthdate = params[:child_birthdate]
+    @d.zipcode = params[:zipcode]
+    @d.save
 
     if params[:child_birthdate].present?
     else

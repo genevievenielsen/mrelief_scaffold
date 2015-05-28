@@ -6,16 +6,18 @@ class EarlyHeadStartsController < ApplicationController
   # GET /early_head_starts/new
  def new
     @early_head_start = EarlyHeadStart.new
+    @d = EarlyHeadStartData.new
+    @current_user = current_user
   end
 
   def create
-    e = EarlyHeadStartData.new
+    @d = EarlyHeadStartData.new
    if params[:ehs_dependent_no] !~ /\D/  # returns true if all numbers
       ehs_dependent_no = params[:ehs_dependent_no].to_i
-      e.dependent_no = ehs_dependent_no
+      @d.dependent_no = ehs_dependent_no
     else
       ehs_dependent_no = params[:ehs_dependent_no].in_numbers
-      e.dependent_no = ehs_dependent_no
+      @d.dependent_no = ehs_dependent_no
     end
 
 
@@ -24,13 +26,13 @@ class EarlyHeadStartsController < ApplicationController
 
     if ehs_gross_income !~ /\D/
       ehs_gross_income = ehs_gross_income.to_i
-      e.gross_monthly_income = ehs_gross_income
+      @d.gross_monthly_income = ehs_gross_income
     else
       if ehs_gross_income.include?("dollars")
         ehs_gross_income.slice!"dollars"
       end
       ehs_gross_income = ehs_gross_income.in_numbers
-      e.gross_monthly_income = ehs_gross_income
+      @d.gross_monthly_income = ehs_gross_income
     end
 
 
@@ -44,9 +46,9 @@ class EarlyHeadStartsController < ApplicationController
 
        if ehs_gross_income < ehs_eligibility.ehs_gross_income
          @eligible = true
-         e.eligibility_status = "yes"
+         @d.eligibility_status = "yes"
        else
-          e.eligibility_status = "no"
+          @d.eligibility_status = "no"
         end
      else
        redirect_to :back, :notice => "All fields are required."
@@ -68,34 +70,34 @@ class EarlyHeadStartsController < ApplicationController
       end
 
       @pb_zipcode = @user_zipcode.chomp(".0")
-        @earlyheadstart_resources = earlyheadstart
-        @earlyheadstart_resources_zip = []
+        @resources = earlyheadstart
+        @resources_zip = []
 
         earlyheadstart.each do |center|
           if center.zip.match(@pb_zipcode)
-            @earlyheadstart_resources_zip.push(center)
+            @resources_zip.push(center)
           end
         end
 
       #in this case there are 2 medical centers in the user's zip
-      if @earlyheadstart_resources_zip.count >= 2
-         @earlyheadstart_resources = @earlyheadstart_resources_zip
+      if @resources_zip.count >= 2
+         @resources = @resources_zip
       end
       #in this case there is 1 medical center in the user's zip
-      if @earlyheadstart_resources_zip.count == 1
-         @earlyheadstart_resources_first = @earlyheadstart_resources_zip.first
-         @earlyheadstart_resources_second = @earlyheadstart_resources.first
+      if @resources_zip.count == 1
+         @resources_first = @resources_zip.first
+         @resources_second = @resources.first
       end
       #in this caser there are no medical centers in the user's zip
-      if  @earlyheadstart_resources_zip.count == 0
-          @earlyheadstart_resources_first = @earlyheadstart_resources.first
-          @earlyheadstart_resources_second = @earlyheadstart_resources.second
+      if  @resources_zip.count == 0
+          @resources_first = @resources.first
+          @resources_second = @resources.second
       end
 
-      e.user_location = params[:user_location]
-      e.phone_number = params[:phone_number] if params[:phone_number].present?
-      e.zipcode = params[:zipcode]
-      e.save
+      @d.user_location = params[:user_location]
+      @d.phone_number = params[:phone_number] if params[:phone_number].present?
+      @d.zipcode = params[:zipcode]
+      @d.save
   end
 
 

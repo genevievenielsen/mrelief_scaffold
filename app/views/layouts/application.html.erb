@@ -3,45 +3,30 @@
 <head>
   <meta charset="utf-8">
   <title>mRelief</title>
-
+  <script src="//use.typekit.net/jay0smv.js"></script>
+  <script>try{Typekit.load();}catch(e){}</script>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css">
-
-  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="assets/sitestyles.css">
-
-  <style>
-    /* Only necessary if you are using navbar-fixed-top */
-   /* body {
-      padding-top: 50px;
-    }
-*/
-  </style>
-
   <%= stylesheet_link_tag    "application", :media => "all" %>
+  <link rel="stylesheet" type="text/css" href="stylesheets/mrelief-root.scss">
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.9.3/typeahead.min.js" %>
   <%= csrf_meta_tags %>
-
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
       <a href="/" class="navbar-brand logo">mRelief</a>
     </div>
 
@@ -49,23 +34,29 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/programs">Programs</a></li>
-        <li><a href="/how_mrelief_works">How Mrelief Works</a></li>
-        <li><a href="/about_us">About Us</a></li>
-        <li><a href="/contact">Contact Us</a></li>
-        <li><a href="/press_release">Press Release</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">About <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/how_mrelief_works">How mRelief Works</a></li>
+                <li><a href="/about_us">The Team</a></li>
+                <li><a href="/press_release">Press Releases</a></li>
+              </ul>
+          </li>
+        </li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="https://www.goodcitychicago.org/donate/" class="btn-donate" data-toggle="tooltip" data-placement="bottom" title="Please select &ldquo;mRelief&rdquo; on the program section">Donate</a></li>
         <li>
           <% if I18n.locale == :es %>
-            <%= link_to "English", set_language_english_path %>
+            <%= link_to "EN", set_language_english_path %>
           <% elsif I18n.locale = :en %>
-            <%= link_to "Español", set_language_spanish_path %>
+            <%= link_to "ES", set_language_spanish_path %>
           <% end %>
         </li>
-        <li><a href="https://www.goodcitychicago.org/donate/" class="btn-donate" data-toggle="tooltip" data-placement="bottom" title="Please select &ldquo;mRelief&rdquo; on the program section">Donate</a></li>
       </ul>
   </nav>
   </div>
 
-  <div class="container">
+  <div>
 
 
 
@@ -84,126 +75,20 @@
     <% end %>
 
     <%= yield %>
-
+    <%= render "pages/footer" %>
     </div>
 </div>
 </div>
 
-    <footer class="navbar-default footer" role="navigation">
-      <div class="container">
-      <div class="col-md-2">
-        <div class="row">
-          <a href="/" class="navbar-brand logo">mRelief</a>
-        </div>
-        <div>
-            <a href ="https://www.facebook.com/mRelief"><i class="fa fa-facebook-square pull-left fa-2x"></i></a>
-            <a href ="https://twitter.com/mrelief_form"><i class="fa fa-twitter-square pull-left fa-2x"></i></a>
-            <a href ="https://plus.google.com/117049110248209318421 "><i class="fa fa-google-plus-square pull-left fa-2x"></i></a>
-        </div>
-      </div>
-        <div class="col-md-10 col-sm-12 col-xs-12">
-           <p id="disclaimer"> *mRelief does not predict with 100% accuracy whether users will definitely be approved for benefits; but instead provides users with information about whether it is worth it to invest the time required for the application process. However, we are working to make our forms more inclusive everyday. If you are undocumented, a legal permanent resident, or have a very specific case, our system refers you to paralegals who can help. Stay tuned for more updates!</p>
-        </div>
-      </div>
-    </footer>
 
     </div>
   </div>
   <%= render "layouts/google_analytics" %>
 
-  <script type="text/javascript">
-      // Get all the keys from document
-        var keys = document.querySelectorAll('#js-calculator span');
-        var operators = ['+', '-', 'x', '÷'];
-        var decimalAdded = false;
 
-        // Add onclick event to all the keys and perform operations
-        for(var i = 0; i < keys.length; i++) {
-          keys[i].onclick = function(e) {
-            // Get the input and button values
-            var input = document.querySelector('.screen');
-            var inputVal = input.innerHTML;
-            var btnVal = this.innerHTML;
-
-            // Now, just append the key values (btnValue) to the input string and finally use javascript's eval function to get the result
-            // If clear key is pressed, erase everything
-            if(btnVal == 'C') {
-              input.innerHTML = '';
-              decimalAdded = false;
-            }
-
-            // If eval key is pressed, calculate and display the result
-            else if(btnVal == '=') {
-              var equation = inputVal;
-              var lastChar = equation[equation.length - 1];
-
-              // Replace all instances of x and ÷ with * and / respectively. This can be done easily using regex and the 'g' tag which will replace all instances of the matched character/substring
-              equation = equation.replace(/x/g, '*').replace(/÷/g, '/');
-
-              // Final thing left to do is checking the last character of the equation. If it's an operator or a decimal, remove it
-              if(operators.indexOf(lastChar) > -1 || lastChar == '.')
-                equation = equation.replace(/.$/, '');
-
-              if(equation)
-                input.innerHTML = eval(equation);
-
-              decimalAdded = false;
-            }
-
-            // Basic functionality of the calculator is complete. But there are some problems like
-            // 1. No two operators should be added consecutively.
-            // 2. The equation shouldn't start from an operator except minus
-            // 3. not more than 1 decimal should be there in a number
-
-            // We'll fix these issues using some simple checks
-
-            // indexOf works only in IE9+
-            else if(operators.indexOf(btnVal) > -1) {
-              // Operator is clicked
-              // Get the last character from the equation
-              var lastChar = inputVal[inputVal.length - 1];
-
-              // Only add operator if input is not empty and there is no operator at the last
-              if(inputVal != '' && operators.indexOf(lastChar) == -1)
-                input.innerHTML += btnVal;
-
-              // Allow minus if the string is empty
-              else if(inputVal == '' && btnVal == '-')
-                input.innerHTML += btnVal;
-
-              // Replace the last operator (if exists) with the newly pressed operator
-              if(operators.indexOf(lastChar) > -1 && inputVal.length > 1) {
-                // Here, '.' matches any character while $ denotes the end of string, so anything (will be an operator in this case) at the end of string will get replaced by new operator
-                input.innerHTML = inputVal.replace(/.$/, btnVal);
-              }
-
-              decimalAdded =false;
-            }
-
-            // Now only the decimal problem is left. We can solve it easily using a flag 'decimalAdded' which we'll set once the decimal is added and prevent more decimals to be added once it's set. It will be reset when an operator, eval or clear key is pressed.
-            else if(btnVal == '.') {
-              if(!decimalAdded) {
-                input.innerHTML += btnVal;
-                decimalAdded = true;
-              }
-            }
-
-            // if any other key is pressed, just append it
-            else {
-              input.innerHTML += btnVal;
-            }
-
-            // prevent page jumps
-            // e.preventDefault();
-          }
-        }
-
-        $(function () {
-          $('[data-toggle="tooltip"]').tooltip()
-        })
-
-  </script>
 </body>
 </html>
+
+
 
 

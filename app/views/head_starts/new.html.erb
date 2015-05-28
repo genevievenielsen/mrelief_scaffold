@@ -1,142 +1,84 @@
 <div class= "container">
-
-
-<div class="page-header col-md-10 col-md-offset-1" style="border:none;">
-  <h1>Do I qualify for Head Start?</h1>
-
-  <div class="subhead">
-  <p>Head Start provides educational and early childhood development activities that promote school readiness for three to five year old children from low-income families. It includes free medical, dental, and mental health services and nutritious meals, as well as parent education and training.</p>
-  </div>
-
-  <p>You can find more information on Head Start by <a href="http://chicagoearlylearning.org/faq"> clicking here.</a></p>
-</div>
-
-<div class="row">
-  <div class="panel panel-default col-md-8 col-sm-7 pull-left">
-  <div class="panel-body">
-    <form action="/head_starts" role="form" method="post">
-
-<!-- Label and input for child-birthdate -->
-
-<div class="form-group col-sm-12">
-<p class="allthatapply">If you are either pregnant or have a child who is between 3 and 5 years old, you may be eligible for Head Start.</p>
-    <label for="child_birthdate" id="case_management" >Is the applicant child 3-years-old by Sep. 1st and not 5-years-old before Sep. 1st?</label>
+<section class="content-section marquee">
   <div class="row">
     <div class="col-md-12">
-        <div id="child-birthdate">
-         <%= radio_button_tag 'child_birthdate', 'yes' %> yes
-        <%= radio_button_tag 'child_birthdate', 'no' %> no
-        </div>
+      <h1>Head Start</h1>
+      <p> Head Start provides educational and early childhood development activities that promote school readiness for three to five year old children from low-income families. It includes free medical, dental, and mental health services and nutritious meals, as well as parent education and training.You can find more information on Head Start by <a href="http://chicagoearlylearning.org/faq"> clicking here.</a></p>
+    </div>
+  </div>
+</section>
+<section class="content-section">
+<div class="row">
+  <div class="col-sm-6 col-md-8">
+    <form action="/head_starts" role="form" method="post">
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <label>If you are either pregnant or have a child who is between 3 and 5 years old, you may be eligible for Head Start.</label>
       </div>
     </div>
+
+    <!-- Form for child birthdate -->
+      <div class="row">
+        <div class="col-md-9">
+          <label for="child_birthdate" id="case_management" >Is the applicant child 3-years-old by Sep. 1st and not 5-years-old before Sep. 1st?</label>
+            <div class="radio-button">
+            <div id="child-birthdate">
+             <%= radio_button_tag 'child_birthdate', 'yes' %> yes
+            <%= radio_button_tag 'child_birthdate', 'no' %> no
+            </div>
+            </div>
+        </div>
+      </div>
+
+
+    <!-- Form for dependent no -->
+      <div class="row">
+       <div class="col-md-9">
+        <label for="hs_dependent_no">How many dependents (including yourself) are in your household?</label>
+          <p type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself." data-placement="right" style="border: 0px; color: #4582ec;">
+            <input type="text" id="hs_dependent_no" name="hs_dependent_no" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>" required>
+          </p>
+        </div>
+      </div>
+
+
+
+    <!-- Form for gross annual income -->
+      <div class="row">
+       <div class="col-md-9">
+        <label for="hs_gross_income">What is your gross annual income?</label>
+          <p type="button" data-toggle="popover" data-content="Your income per year before tax deductions." data-placement="right" style="border: 0px; color: #4582ec;">
+           <input type="text" id="hs_gross_income" name="hs_gross_income" placeholder="For example: 30000" class="form-field" value="<%= @d.gross_annual_income %>" required>
+           </p>
+        </div>
+      </div>
+
+
+    <!-- Form for zipcode -->
+      <%= render "programs/zipcode_question" %>
+
+    <!-- Form for location question -->
+      <%= render "programs/location_question" %>
+
+    <!-- Form for cellphone question -->
+      <%= render "programs/cellphone_question" %>
+
+    <!-- Submit button -->
+      <%= render "programs/submit_button" %>
+
+  </form>
   </div>
 
-
-  <!-- Label and input for hs_dependent_no -->
-   <div class="form-group col-md-12">
-    <label for="hs_dependent_no">How many
-        dependents (including yourself) are in your household?
-    </label>
-    <button type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-
-      <p type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-        <input type="text" id="hs_dependent_no" name="hs_dependent_no" placeholder="For example: 3" class="form-control" value="<%= @h.dependent_no %>" required>
-      </p>
-
-  </div>
-
-
-
-  <!-- Label and input for hs_gross_income -->
-   <div class="form-group col-md-12">
-    <label for="hs_gross_income">
-      What is your gross annual income?
-    </label>
-    <button type="button" data-toggle="popover" data-content="Your income per year before tax deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-    <div class="input-group">
-      <span class="input-group-addon">$</span>
-      <p type="button" data-toggle="popover" data-content="Your income per year before tax deductions." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-       <input type="text" id="hs_gross_income" name="hs_gross_income" placeholder="For example: 30000" class="form-control" value="<%= @h.gross_annual_income %>" required>
-       </p>
-      <span class="input-group-addon">.00</span>
-    </div>
-  </div>
-
-
-  <div class="form-group col-md-12">
-    <label for="zipcode">What is your zipcode?</label>
-      <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" value="<%= @h.zipcode.chop.chop if @h.zipcode.present? %>"required>
-  </div>
-
-
-  <div class="form-group col-md-12">
-    <label for="location" id="location_dropdown">Where are you completing this form? </label>
-    <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], ['Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Center for Working Families', 'center_for_working_families'], ['CTA Bus', 'cta_bus'], ['Other', 'other']], @h.user_location), :class => "form-control", :prompt => "Select a location") %>
-  </div>
-
-
-  <div class="form-group col-md-12">
-    <label for="phone_number">What is your cell phone number?</label>
-      <button type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-    <div>
-      <p type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-        <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control" value="<%= @h.phone_number %>" required>
-      </p>
-    </div>
-  </div>
-
-
-  <div class=" col-md-12">
-      <button type="submit" class="btn btn-primary program-btn">See if I qualify</button>
-  </div>
-
-
-</form>
-</div>
-</div>
   <div class="col-md-3 sm-3 xs-12 pull-left">
     <div class="calculator_box">
       <%= render "programs/calculator" %>
     </div>
   </div>
 
+  </div>
+</section>
 </div>
-</div>
 
-<script>
-$(document).ready(function() {
 
-  //this is the map scroll down thing
-  $(window).scroll(function() {
-    if($(this).scrollTop() > 310 && $(this).width() > 750) {
-      $('.calculator_box').addClass('sticky_calculator');
-    } else {
-      $('.calculator_box').removeClass('sticky_calculator');
-    }
-  });
-
-  $(window).scroll(function() {
-    if($(this).scrollTop() < 310) {
-      $('.calculator_box').removeClass('sticky_calculator');
-    }
-  });
-
-  $(window).scroll(function() {
-    if($(this).width() < 750) {
-      $('.calculator').removeClass('sticky_calculator');
-    }
-  });
-  $(function ()
-    { $("[data-toggle='popover']").popover();
-  });
-   $('body').on('click', function (e) {
-      $('[data-toggle="popover"]').each(function () {
-          //the 'is' for buttons that trigger popups
-          //the 'has' for icons within a button that triggers a popup
-          if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-              $(this).popover('hide');
-          }
-      });
-  });
-});
-</script>

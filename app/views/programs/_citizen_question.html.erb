@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col-md-8">
+    <label for="citizen" id="citizen">Are you a citizen of the United States or a legal permanent resident who has lived in the US for at least 5 years?</label>
+    <div class="radio-button">
+      <% [ 'yes', 'no'].each do |citizen| %>
+        <%= radio_button_tag 'citizen', citizen, @d.citizen == citizen %>
+        <%= citizen.humanize %><br>
+      <% end %>
+    </div>
+  </div>
+</div>

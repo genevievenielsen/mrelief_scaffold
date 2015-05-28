@@ -1,107 +1,46 @@
-<div class="container" style="padding-bottom:150px">
+<div class="container marquee">
 <%= render "layouts/print_button" %>
+
 <% if @eligible == 'yes' %>
 
-    <div class="row" style="text-align:center;">
-      <div class="col-md-8 col-md-offset-2">
-        <i class="fa fa-exclamation-circle fa-5x"></i>
-          <h1>You may be in luck!</h1>
-           <h4>Based on your answers, you may qualify for a Medicare Cost Sharing Program.  Important Note:  If you previously opted out of Medicare part B, the Medicare cost sharing program, you may be able to get your Medicare premium paid now. Please contact or visit your LAF paralegal to re-enroll for Medicare Part B. You can see the nearest Community Service Center near you.</h4>
-          <br>
+    <div class="row" >
+      <div class="col-md-7">
+        <h1>Results: You may be in luck!</h1>
+        <p>Based on your answers, you may qualify for a Medicare Cost Sharing Program.  Important Note:  If you previously opted out of Medicare part B, the Medicare cost sharing program, you may be able to get your Medicare premium paid now. Please contact or visit your LAF paralegal to re-enroll for Medicare Part B. You can see the nearest Community Service Center near you.</p>
 
-          <% if @laf_disclaimer.present?  %>
-              <p class="subhead"><%= @laf_disclaimer %></p>
-            <% end %>
-
+        <section class="content-section resources">
+          <h3>Resources</h3>
+          <% if @laf_disclaimer.present? %>
+            <p><%= @laf_disclaimer %></p>
+          <% else  %>
+         <% end %>
           <%= render 'layouts/community_center' %>
-    </div>
-    <div class="row">
-    <div class="col-md-offset-4 col-md-4">
+         </section>
+
         <%= image_tag("LAFlogo.jpg", :class => "img-responsive") %>
-      </div>
-      </div>
+
+    </div>
   </div>
 
 <% else %>
 
-      <div class="row" style="text-align:center;">
-        <div class="col-md-8 col-md-offset-2">
-            <i class="fa fa-exclamation-circle fa-5x"></i>
-            <h1>Something else in mind!</h1>
-            <h4>Based on your household size and income, you likely do not qualify for the medicare cost sharing program.</h4>
+  <div class="row" >
+    <div class="col-md-7">
+      <h1>Results: Something else in mind!</h1>
+      <p>Based on your household size and income, you likely do not qualify for the Medicare Cost Sharing Program. However, if you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.</p>
 
-              <p> However, if you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.
-
-              <p>
-              <%= link_to "Click Here", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'medicare_cost_sharing', 'health_care_fees', 1);"  %> to learn more about fees.
-              </p>
-              <br>
-              <p>
-              Get Covered Illinois is a resource that helps families register for insurance at in-person events.
-              </p>
-              <br>
-              <p>
-              <%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "btn btn-success btn-resolution", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicare_cost_sharing', 'get_covered_illinois', 1);" %> to find Get Covered Illinois events in your area.
-              </p>
-              <br>
-              <p>
-              You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.
-              </p>
-
-              </p>
-
-            <br>
-
-            <div class="row">
-              <h4>Here are some additional resources from Purple Binder:</h4>
-            </div>
-            <br>
-
-            <div class="row">
-
-            <% if @medical_resources_zip.count >= 2 %>
-              <div class="col-md-6 col-sm-6">
-                <ul class="list-group" style="text-align:left;">
-                  <li class="list-group-item" style="font-weight:bold"><%= @medical_resources_zip.first.name %>  </li>
-                  <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @medical_resources_zip.first.street %>  <%= @medical_resources_zip.first.city %> <%= @medical_resources_zip.first.state %>, <%= @medical_resources_zip.first.zip %> </li>
-                  <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @medical_resources_zip.first.phone %> </li>
-                </ul>
-              </div>
-
-              <div class="col-md-6 col-sm-6">
-                <ul class="list-group" style="text-align:left;">
-                  <li class="list-group-item" style="font-weight:bold"><%= @medical_resources_zip.second.name %>  </li>
-                  <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @medical_resources_zip.second.street %>  <%= @medical_resources_zip.second.city %> <%= @medical_resources_zip.second.state %>, <%= @medical_resources_zip.second.zip %> </li>
-                  <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @medical_resources_zip.second.phone %> </li>
-                </ul>
-              </div>
-              <% end %>
-            </div>
-
-            <div class="row">
-            <% if @medical_resources_first.present? %>
-              <div class="col-md-6 col-sm-6">
-                <ul class="list-group" style="text-align:left;">
-                  <li class="list-group-item" style="font-weight:bold"><%= @medical_resources_first.name %>  </li>
-                  <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @medical_resources_first.street %>  <%= @medical_resources_first.city %> <%= @medical_resources_first.state %>, <%= @medical_resources_first.zip %> </li>
-                  <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @medical_resources_first.phone %> </li>
-                </ul>
-              </div>
-
-              <div class="col-md-6 col-sm-6">
-                <ul class="list-group" style="text-align:left;">
-                  <li class="list-group-item" style="font-weight:bold"><%= @medical_resources_second.name %>  </li>
-                  <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @medical_resources_second.street %>  <%= @medical_resources_second.city %> <%= @medical_resources_second.state %>, <%= @medical_resources_second.zip %> </li>
-                  <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @medical_resources_second.phone %> </li>
-                </ul>
-              </div>
-              <% end %>
-            </div>
-
+        <div class="resources">
+          <h3>Resources</h3>
+          <p><%= link_to "Click Here", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "secondary-link", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'medicare_cost_sharing', 'health_care_fees', 1);"  %> to learn more about fees.</p>
+          <p>Get Covered Illinois is a resource that helps families register for insurance at in-person events.</p>
+          <p><%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicare_cost_sharing', 'get_covered_illinois', 1);" %> to find Get Covered Illinois events in your area.</p>
+          <p>You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.</p>
         </div>
 
-         <%= image_tag("pblogo.jpg", :class => "logo-padding") %>
-        </div>
+        <%= render "layouts/purple_binder_resources" %>
+
+    </div>
+  </div>
 <% end %>
 
 

@@ -1,133 +1,88 @@
-<div class="container">
+<div class="container marquee">
 
-<div class="page-header col-md-10 col-md-offset-1" style="border:none;">
-  <h1> Do I qualify for All Kids?</h1>
+<section class="content-section">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>All Kids</h1>
+      <p>If your child is 18 or younger and lives in the state of Illinois,<br> you may qualify for All Kids health insurance.</p>
+    </div>
+  </div>
+</section>
 
-  <p class="subhead">If your child is 18 or younger and lives in the state of Illinois,<br> you may qualify for All Kids health insurance.</p>
 
-</div>
-
+<section class="content-section">
 <div class="row">
-  <div class="panel panel-default col-md-8 col-sm-7 pull-left">
-  <div class="panel-body">
-    <form action="/all_kids" class="form-horizontal" method="post">
-  <!-- Label and input for kids_household_size -->
+  <div class="col-sm-6 col-md-8">
+  <form action="/all_kids" class="form-horizontal" method="post">
 
-    <p class="allthatapply">Please answer the following questions (check all that apply):</p>
-    <p class="allthatapply">Has your child:</p>
-    <input type="checkbox" name="status" value="uninsured">  been uninsured for 12 months<br>
-    <input type="checkbox" name="status" value="job_ended"> lost insurance because a JOB ended<br>
-    <input type="checkbox" name="status" value="cobra"> lost insurance because the insurance was COBRA<br>
-    <input type="checkbox" name="status" value="none"> none of the above<br>
-    <br>
+    <div class="row">
+      <div class="col-md-9">
+        <label class="allthatapply">Please answer the following questions (check all that apply):</label>
+         <label class="allthatapply">Has your child:</label>
+        <div class="radio-button">
+          <input type="checkbox" name="status" value="uninsured">  been uninsured for 12 months<br>
+          <input type="checkbox" name="status" value="job_ended"> lost insurance because a JOB ended<br>
+          <input type="checkbox" name="status" value="cobra"> lost insurance because the insurance was COBRA<br>
+          <input type="checkbox" name="status" value="none"> none of the above<br>
+        </div>
+      </div>
+    </div>
 
-  <div class="form-group col-sm-9">
-    <label for="kids_household_size">How many children are living in your household?</label>
-     <button type="button" data-toggle="popover" data-content="The number of children living in your household." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-      <p type="button" data-toggle="popover" data-content="The number of children living in your household." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-      <input type="text" id="kids_household_size" name="kids_household_size" placeholder="For example: 3" class="form-control" value="<%= @current_user.try(:household_size) %>" required>
-      </p>
-  </div>
 
-  <div class="form-group col-md-12">
-    <label for="pregnant" id="pregnant" >Are you pregnant ? </label>
-    <br>
-      <% [ 'yes', 'no'].each do |pregnant| %>
-        <%= radio_button_tag 'pregnant', pregnant, @a.pregnant == pregnant %>
-        <%= pregnant.humanize %>
-      <% end %>
-  </div>
-
-  <!-- Label and input for kids_gross_income -->
-  <div class="form-group col-sm-9">
-    <label for="kids_gross_income">
-      What is your gross monthly income?
-    </label>
-    <button type="button" data-toggle="popover" data-content="Total monthly income from all sources." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-    <div class="input-group">
-      <span class="input-group-addon">$</span>
-         <p type="button" data-toggle="popover" data-content="Total monthly income from all sources." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-          <input type="text" id="kids_gross_income" name="kids_gross_income" placeholder="For example: 1000" class="form-control"  value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %> " required>
-         </p>
-      <span class="input-group-addon">.00</span>
+  <!-- Form for household size-->
+  <div class="row">
+    <div class="col-md-9">
+      <label for="kids_household_size">How many children are living in your household?</label>
+        <input type="text" id="kids_household_size" name="kids_household_size" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>" required>
     </div>
   </div>
 
-  <div class="form-group col-sm-9 pull-left">
-    <label for="zipcode">What is your zipcode?</label>
-      <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" value="<%= @a.zipcode.chop.chop if @a.zipcode.present? %>"required>
-  </div>
-
-
-  <div class="form-group col-sm-9">
-    <label for="location" id="location_dropdown">Where are you completing this form? </label>
-    <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], ['Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Center for Working Families', 'center_for_working_families'], ['CTA Bus', 'cta_bus'], ['Other', 'other']], @a.user_location), :class => "form-control", :prompt => "Select a location") %>
-  </div>
-
-  <div class="form-group col-sm-9">
-    <label for="phone_number">What is your cell phone number?</label>
-      <button type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-    <div>
-       <p type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-          <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control" value="<%= @a.phone_number %>" required>
-      </p>
+  <div class="row">
+    <div class="col-md-9">
+      <label for="pregnant" id="pregnant" >Are you pregnant ? </label>
+      <div class="radio-button">
+        <% [ 'yes', 'no'].each do |pregnant| %>
+          <%= radio_button_tag 'pregnant', pregnant, @d.pregnant == pregnant %>
+          <%= pregnant.humanize %>
+          <br>
+        <% end %>
+      </div>
     </div>
   </div>
 
 
-    <div class="col-sm-9">
-      <button type="submit" class="btn btn-primary">See if I qualify</button>
+  <!-- Form for gross monthly income -->
+    <div class="row">
+      <div class="col-md-9">
+        <label for="kids_gross_income">What is your gross monthly income?</label>
+          <p type="button" data-toggle="popover" data-content="Total monthly income from all sources." data-placement="right" style="border: 0px; color: #4582ec; ">
+           <input type="text" id="kids_gross_income" name="kids_gross_income" placeholder="For example: 1000" class="form-field" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %>" required>
+          </p>
+      </div>
     </div>
+
+  <!-- Form for zipcode -->
+    <%= render "programs/zipcode_question" %>
+
+  <!-- Form for location question -->
+    <%= render "programs/location_question" %>
+
+  <!-- Form for cellphone question -->
+    <%= render "programs/cellphone_question" %>
+
+  <!-- Submit button -->
+    <%= render "programs/submit_button" %>
+
+  </form>
   </div>
 
-</form>
+    <div class="col-md-3 sm-3 xs-12 pull-left">
+      <div class="calculator_box">
+        <%= render "programs/calculator" %>
+      </div>
+    </div>
+
+  </div>
+  </section>
 </div>
 
-  <div class="col-md-3 sm-3 xs-12 pull-left">
-    <div class="calculator_box">
-      <%= render "programs/calculator" %>
-    </div>
-  </div>
-
-</div>
-</div>
-
-<script>
-$(document).ready(function() {
-
-  //this is the map scroll down thing
-  $(window).scroll(function() {
-    if($(this).scrollTop() > 310 && $(this).width() > 750) {
-      $('.calculator_box').addClass('sticky_calculator');
-    } else {
-      $('.calculator_box').removeClass('sticky_calculator');
-    }
-  });
-
-  $(window).scroll(function() {
-    if($(this).scrollTop() < 310) {
-      $('.calculator_box').removeClass('sticky_calculator');
-    }
-  });
-
-  $(window).scroll(function() {
-    if($(this).width() < 750) {
-      $('.calculator').removeClass('sticky_calculator');
-    }
-  });
-
-    $(function ()
-      { $("[data-toggle='popover']").popover();
-    });
-
-    $('body').on('click', function (e) {
-        $('[data-toggle="popover"]').each(function () {
-            //the 'is' for buttons that trigger popups
-            //the 'has' for icons within a button that triggers a popup
-            if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-                $(this).popover('hide');
-            }
-        });
-    });
-  });
-  </script>

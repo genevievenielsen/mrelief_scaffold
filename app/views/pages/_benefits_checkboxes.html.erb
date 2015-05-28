@@ -1,77 +1,86 @@
-<div class="benefits_checkboxes">
 
-  <p class="allthatapply">Check all of the benefits that you are currently receiving:</p>
+<div class="row">
+  <div class="col-md-5">
+    <div class="benefits_checkboxes">
 
-  <% if @current_user.try(:food_stamps) == "checked" %>
-    <%= check_box_tag "food_stamps", "checked", :checked => true %> Food Stamps<br>
-  <% else %>
-    <%= check_box_tag "food_stamps", "checked" %> Food Stamps<br>
-  <% end %>
+      <label>Check all of the benefits that you are currently receiving:</label>
 
-  <% if @current_user.try(:rta_ride_free) == "checked" %>
-    <%= check_box_tag "rta_ride_free", "checked", :checked => true %> RTA Ride Free<br>
-  <% else %>
-    <%= check_box_tag "rta_ride_free", "checked" %> RTA Ride Free<br>
-  <% end %>
+      <div class="radio-button">
+      <% if @current_user.try(:food_stamps) == "checked" %>
+        <%= check_box_tag "food_stamps", "checked", :checked => true %> Food Stamps<br>
+      <% else %>
+        <%= check_box_tag "food_stamps", "checked" %> Food Stamps<br>
+      <% end %>
 
-  <% if @current_user.try(:rental_assistance) == "checked" %>
-    <%= check_box_tag "rental_assistance", "checked", :checked => true %> Rental Assistance<br>
-  <% else %>
-    <%= check_box_tag "rental_assistance", "checked" %> Rental Assistance<br>
-  <% end %>
+      <% if @current_user.try(:rta_ride_free) == "checked" %>
+        <%= check_box_tag "rta_ride_free", "checked", :checked => true %> RTA Ride Free<br>
+      <% else %>
+        <%= check_box_tag "rta_ride_free", "checked" %> RTA Ride Free<br>
+      <% end %>
 
-  <% if @current_user.try(:all_kids) == "checked" %>
-    <%= check_box_tag "all_kids", "checked", :checked => true %> All Kids<br>
-  <% else %>
-    <%= check_box_tag "all_kids", "checked" %> All Kids<br>
-  <% end %>
+      <% if @current_user.try(:rental_assistance) == "checked" %>
+        <%= check_box_tag "rental_assistance", "checked", :checked => true %> Rental Assistance<br>
+      <% else %>
+        <%= check_box_tag "rental_assistance", "checked" %> Rental Assistance<br>
+      <% end %>
 
-  <% if @current_user.try(:medicaid) == "checked" %>
-    <%= check_box_tag "medicaid", "checked", :checked => true %> Medicaid <br>
-  <% else %>
-    <%= check_box_tag "medicaid", "checked" %> Medicaid <br>
-  <% end %>
+      <% if @current_user.try(:all_kids) == "checked" %>
+        <%= check_box_tag "all_kids", "checked", :checked => true %> All Kids<br>
+      <% else %>
+        <%= check_box_tag "all_kids", "checked" %> All Kids<br>
+      <% end %>
 
-  <% if @current_user.try(:medicare_cost_sharing) == "checked" %>
-    <%= check_box_tag "medicare_cost_sharing", "checked", :checked => true %> Medicare Cost Sharing<br>
-  <% else %>
-    <%= check_box_tag "medicare_cost_sharing", "checked" %> Medicare Cost Sharing<br>
-  <% end %>
+      <% if @current_user.try(:medicaid) == "checked" %>
+        <%= check_box_tag "medicaid", "checked", :checked => true %> Medicaid <br>
+      <% else %>
+        <%= check_box_tag "medicaid", "checked" %> Medicaid <br>
+      <% end %>
 
-  <% if @current_user.try(:aabd) == "checked" %>
-    <%= check_box_tag "aabd", "checked", :checked => true %> AABD Cash Assistance<br>
-  <% else %>
-    <%= check_box_tag "aabd", "checked" %> AABD Cash Assistance<br>
-  <% end %>
+      <% if @current_user.try(:medicare_cost_sharing) == "checked" %>
+        <%= check_box_tag "medicare_cost_sharing", "checked", :checked => true %> Medicare Cost Sharing<br>
+      <% else %>
+        <%= check_box_tag "medicare_cost_sharing", "checked" %> Medicare Cost Sharing<br>
+      <% end %>
 
-  <% if @current_user.try(:tanf) == "checked" %>
-    <%= check_box_tag "tanf", "checked", :checked => true %> TANF Cash Assistance<br>
-  <% else %>
-    <%= check_box_tag "tanf", "checked" %> TANF Cash Assistance<br>
-  <% end %>
+      <% if @current_user.try(:aabd) == "checked" %>
+        <%= check_box_tag "aabd", "checked", :checked => true %> AABD Cash Assistance<br>
+      <% else %>
+        <%= check_box_tag "aabd", "checked" %> AABD Cash Assistance<br>
+      <% end %>
 
-  <% if @current_user.try(:child_care_vouchers) == "checked" %>
-    <%= check_box_tag "child_care_vouchers", "checked", :checked => true %> Child Care Vouchers<br>
-  <% else %>
-    <%= check_box_tag "child_care_vouchers", "checked" %> Child Care Vouchers<br>
-  <% end %>
+      <% if @current_user.try(:tanf) == "checked" %>
+        <%= check_box_tag "tanf", "checked", :checked => true %> TANF Cash Assistance<br>
+      <% else %>
+        <%= check_box_tag "tanf", "checked" %> TANF Cash Assistance<br>
+      <% end %>
 
-  <% if @current_user.try(:wic) == "checked" %>
-    <%= check_box_tag "wic", "checked", :checked => true %> Women, Infants and Children (WIC)<br>
-  <% else %>
-    <%= check_box_tag "wic", "checked" %> Women, Infants and Children (WIC)<br>
-  <% end %>
+      <% if @current_user.try(:child_care_vouchers) == "checked" %>
+        <%= check_box_tag "child_care_vouchers", "checked", :checked => true %> Child Care Vouchers<br>
+      <% else %>
+        <%= check_box_tag "child_care_vouchers", "checked" %> Child Care Vouchers<br>
+      <% end %>
 
-  <% if @current_user.try(:early_head_start) == "checked" %>
-    <%= check_box_tag "early_head_start", "checked", :checked => true %> Early Head Start<br>
-  <% else %>
-    <%= check_box_tag "early_head_start", "checked" %> Early Head Start<br>
-  <% end %>
+      <% if @current_user.try(:wic) == "checked" %>
+        <%= check_box_tag "wic", "checked", :checked => true %> Women, Infants and Children (WIC)<br>
+      <% else %>
+        <%= check_box_tag "wic", "checked" %> Women, Infants and Children (WIC)<br>
+      <% end %>
 
-  <% if @current_user.try(:head_start) == "checked" %>
-    <%= check_box_tag "head_start", "checked", :checked => true %> Head Start<br>
-  <% else %>
-    <%= check_box_tag "head_start", "checked" %> Head Start<br>
-  <% end %>
+      <% if @current_user.try(:early_head_start) == "checked" %>
+        <%= check_box_tag "early_head_start", "checked", :checked => true %> Early Head Start<br>
+      <% else %>
+        <%= check_box_tag "early_head_start", "checked" %> Early Head Start<br>
+      <% end %>
 
+      <% if @current_user.try(:head_start) == "checked" %>
+        <%= check_box_tag "head_start", "checked", :checked => true %> Head Start<br>
+      <% else %>
+        <%= check_box_tag "head_start", "checked" %> Head Start<br>
+      <% end %>
+      </div>
+
+    </div>
+  </div>
 </div>
+
+

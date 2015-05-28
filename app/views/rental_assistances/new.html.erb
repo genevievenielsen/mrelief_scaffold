@@ -1,180 +1,116 @@
 <div class= "container">
-
-  <div class="page-header col-md-10 col-md-offset-1" style="border:none;">
-      <h1> Do I qualify for Rental Assistance?</h1>
-
-      <div class="subhead">
-        <p>Rental assistance is a homeless prevention program for those who have "suffered a financial loss related to an emergency." Eligible recipients can document this loss and prove that they can afford next month's rent. </p>
+  <section class="content-section marquee">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Rental Assistance</h1>
+        <p>Rental assistance is a homeless prevention program for those who have "suffered a financial loss related to an emergency." Eligible recipients can document this loss and prove that they can afford next month's rent.
+        You can find more information about rental assistance by <a href="http://www.cityofchicago.org/ city/en/depts/fss/provdrs/serv/svcs/how_to_find_rentalassistanceinchicago.html">clicking here.</a></p>
       </div>
+    </div>
+  </section>
 
-      <p>You can find more information about rental assistance by <a href="http://www.cityofchicago.org/ city/en/depts/fss/provdrs/serv/svcs/how_to_find_rentalassistanceinchicago.html">clicking here.</a></p>
-  </div>
-
-
-<div class="row">
-  <div class="panel panel-default col-md-8 col-sm-7 pull-left">
-  <div class="panel-body">
+  <section class="content-section">
+  <div class="row">
+    <div class="col-sm-6 col-md-8">
     <form action="/rental_assistances" role="form" method="post">
 
-  <label> <b>What circumstance explains why you are unable to pay rent at this time? </b></label>
+    <div class="row">
+      <div class="col-md-9">
+        <label>What circumstance explains why you are unable to pay rent at this time? </label>
+        <div class="radio-button">
+          <div class="relative" id="rental_status">
+            <%= radio_button_tag 'rental_status', 'medical circumstance' %> Someone experiencing a medical circumstance
 
-  <div class="relative" id="rental_status">
-    <%= radio_button_tag 'rental_status', 'medical circumstance' %> Someone experiencing a medical circumstance
+             <!-- <button type="button" data-toggle="popover" data-content="An emergency procedure (for example: surgery, related to complicated birth or other conditions) that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to your spouse, child, committed partner whose name is on the lease or grandparent who lives with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
 
-     <button type="button" data-toggle="popover" data-content="An emergency procedure (for example: surgery, related to complicated birth or other conditions) that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to your spouse, child, committed partner whose name is on the lease or grandparent who lives with you." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+            <br><%= radio_button_tag 'rental_status', 'a victim of natural disaster or fire' %> A victim of natural disaster or fire
 
-    <br><%= radio_button_tag 'rental_status', 'a victim of natural disaster or fire' %> A victim of natural disaster or fire
+            <!--  <button type="button" data-toggle="popover" data-content="A natural disaster includes instances such as a tornado or fire that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to floods for people who are renting a basement apartment who can not afford to replace those items and are seeking relocation." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
 
-     <button type="button" data-toggle="popover" data-content="A natural disaster includes instances such as a tornado or fire that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to floods for people who are renting a basement apartment who can not afford to replace those items and are seeking relocation." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+            <br><%= radio_button_tag 'rental_status', 'a recipient of an eviction notice' %> A recipient of an eviction notice
 
-    <br><%= radio_button_tag 'rental_status', 'a recipient of an eviction notice' %> A recipient of an eviction notice
+            <!--  <button type="button" data-toggle="popover" data-content="This must be a notice that is notarized and brought with you if you qualify." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
 
-     <button type="button" data-toggle="popover" data-content="This must be a notice that is notarized and brought with you if you qualify." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+            <br><%= radio_button_tag 'rental_status', 'have experienced a temporary loss of income' %> Have experienced a temporary loss of income
 
-    <br><%= radio_button_tag 'rental_status', 'have experienced a temporary loss of income' %> Have experienced a temporary loss of income
+            <!--  <button type="button" data-toggle="popover" data-content="This involves losing income due to an unforeseen event (layoff, termination,or other emergencies etc.) The month in between when you lose your job and qualify for unemployment would be admissible." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
 
-     <button type="button" data-toggle="popover" data-content="This involves losing income due to an unforeseen event (layoff, termination,or other emergencies etc.) The month in between when you lose your job and qualify for unemployment would be admissible." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+            <br><%= radio_button_tag 'rental_status', 'a victim of domestic violence' %> A victim of domestic violence
 
-    <br><%= radio_button_tag 'rental_status', 'a victim of domestic violence' %> A victim of domestic violence
+            <!--  <button type="button" data-toggle="popover" data-content="This involves losing income due to violence from your intimate partner. " data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
 
-     <button type="button" data-toggle="popover" data-content="This involves losing income due to violence from your intimate partner. " data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
+            <br><%= radio_button_tag 'rental_status', 'none of the above' %> None of the above
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <br><%= radio_button_tag 'rental_status', 'none of the above' %> None of the above
-  </div>
-  <br>
 
-  <div class="row">
-    <div class="form-group col-md-12">
-    <label for="lease" id="lease" >Is your name currently on the lease of the apartment that you are renting?</label>
-      <br>
+    <div class="row">
+      <div class="col-md-9">
+      <label for="lease" id="lease" >Is your name currently on the lease of the apartment that you are renting?</label>
+      <div class="radio-button">
         <% [ 'yes', 'no' ].each do |lease| %>
-          <%= radio_button_tag 'lease', lease, @r.name_on_lease == lease %>
+          <%= radio_button_tag 'lease', lease, @d.name_on_lease == lease %>
           <%= lease.humanize %>
+        <br>
         <% end %>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="form-group col-md-12">
-    <label for="next_rent" id="next_rent">Can you document that you can afford next month’s rent? </label>
-    <br>
+    <div class="row">
+      <div class="col-md-9">
+      <label for="next_rent" id="next_rent">Can you document that you can afford next month’s rent? </label>
+      <div class="radio-button">
         <% [ 'yes', 'no' ].each do |next_rent| %>
-          <%= radio_button_tag 'next_rent', next_rent, @r.next_month_rent == next_rent %>
+          <%= radio_button_tag 'next_rent', next_rent, @d.next_month_rent == next_rent %>
           <%= next_rent.humanize %>
+          <br>
         <% end %>
+      </div>
+      </div>
     </div>
-  </div>
 
-  <!-- Label and input for rental_dependent_no -->
-  <div class="row">
-    <div class="form-group col-sm-9">
-    <label for="rental_dependent_no">How many dependents (including yourself) are in your household? <button type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button></label>
 
-    <p type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-      <input type="text" id="rental_dependent_no" name="rental_dependent_no" placeholder="For example: 3" class="form-control" value="<%= @r.dependent_no %>" required>
-    </p>
-
-    </div>
-  </div>
-
+  <!-- Form for dependent_no question -->
+    <%= render "programs/dependent_question" %>
 
   <!-- Label and input for rental_gross_income -->
-  <div class="row">
-  <div class="form-group col-sm-9">
-    <label for="rental_gross_income">
-      What is your income over the past 90 days? </label>
-       <button type="button" data-toggle="popover" data-content="Includes cash receipts from all sources including money wages and salaries before any deductions, unemployment compensation, public assistance, alimony, child support, lottery/gambling winnings, dividends and all other income." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-    <div class="input-group">
-      <span class="input-group-addon">$</span>
-        <p type="button" data-toggle="popover" data-content="Includes cash receipts from all sources including money wages and salaries before any deductions, unemployment compensation, public assistance, alimony, child support, lottery/gambling winnings, dividends and all other income." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-         <input type="text" id="rental_gross_income" name="rental_gross_income" placeholder="For example: 4000" class="form-control" value="<%= @r.ninety_day_gross_income %>" required>
-        </p>
-      <span class="input-group-addon">.00</span>
+    <div class="row">
+      <div class="col-md-9">
+        <label for="rental_gross_income"> What is your income over the past 90 days? </label>
+          <p type="button" data-toggle="popover" data-content="Includes cash receipts from all sources including money wages and salaries before any deductions, unemployment compensation, public assistance, alimony, child support, lottery/gambling winnings, dividends and all other income." data-placement="right" style="border: 0px; color: #4582ec;">
+
+           <input type="text" id="rental_gross_income" name="rental_gross_income" placeholder="For example: 4000" class="form-field" value="<%= @d.ninety_day_gross_income %>" required>
+
+          </p>
+      </div>
     </div>
+
+  <!-- Form for zipcode -->
+    <%= render "programs/zipcode_question" %>
+
+  <!-- Form for location question -->
+    <%= render "programs/location_question" %>
+
+  <!-- Form for cellphone question -->
+    <%= render "programs/cellphone_question" %>
+
+  <!-- Submit button -->
+    <%= render "programs/submit_button" %>
+  </form>
   </div>
-  </div>
 
-  <div class="row">
-   <div class="form-group col-sm-9">
-     <label for="zipcode">What is your zipcode?</label>
-       <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-control" value="<%= @r.zipcode.chop.chop if @r.zipcode.present? %>"required>
-   </div>
-  </div>
-
- <div class="row">
-   <div class="form-group col-sm-9">
-   <label for="location" id="location_dropdown">Where are you completing this form? </label>
-   <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], ['Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Center for Working Families', 'center_for_working_families'], ['CTA Bus', 'cta_bus'], ['Other', 'other']], @r.user_location), :class => "form-control", :prompt => "Select a location") %>
-   </div>
- </div>
-
- <div class="row">
- <div class="form-group col-sm-9">
-   <label for="phone_number">What is your cell phone number?</label>
-     <button type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button>
-   <div>
-     <p type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA">
-      <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-control" value="<%= @r.phone_number %>" required>
-     </p>
-   </div>
- </div>
- </div>
-
- <div class="row">
-    <div>
-      <button type="submit" class="btn btn-primary">See if I qualify</button>
+    <div class="col-md-3 sm-3 xs-12 pull-left">
+      <div class="calculator_box">
+        <%= render "programs/calculator" %>
+      </div>
     </div>
-</div>
-</form>
-</div>
 
-</div>
-
-  <div class="col-md-3 sm-3 xs-12 pull-left">
-    <div class="calculator_box">
-      <%= render "programs/calculator" %>
-    </div>
   </div>
-
+  </section>
 </div>
-</div>
-<script>
-$(document).ready(function() {
 
-  //this is the map scroll down thing
-  $(window).scroll(function() {
-    if($(this).scrollTop() > 310 && $(this).width() > 750) {
-      $('.calculator_box').addClass('sticky_calculator');
-    } else {
-      $('.calculator_box').removeClass('sticky_calculator');
-    }
-  });
 
-  $(window).scroll(function() {
-    if($(this).scrollTop() < 310) {
-      $('.calculator_box').removeClass('sticky_calculator');
-    }
-  });
 
-  $(window).scroll(function() {
-    if($(this).width() < 750) {
-      $('.calculator').removeClass('sticky_calculator');
-    }
-  });
-
-  $(function ()
-    { $("[data-toggle='popover']").popover();
-  });
-
-  $('body').on('click', function (e) {
-      $('[data-toggle="popover"]').each(function () {
-          //the 'is' for buttons that trigger popups
-          //the 'has' for icons within a button that triggers a popup
-          if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-              $(this).popover('hide');
-          }
-      });
-  });
-
-});
-</script>

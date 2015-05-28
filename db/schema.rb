@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20150410144330) do
+ActiveRecord::Schema.define(version: 20150527224907) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -390,6 +389,7 @@ ActiveRecord::Schema.define(version: 20150410144330) do
     t.string   "work_status"
     t.string   "student_status"
     t.string   "amount_in_account"
+    t.integer  "user_id"
   end
 
   create_table "snap_eligibility_data_twilios", force: true do |t|

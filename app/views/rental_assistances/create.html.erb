@@ -1,159 +1,77 @@
-<div class="container">
+<div class="container marquee">
 <%= render "layouts/print_button" %>
  <% if @eligible == "yes" %>
 
-       <div class="row" style="text-align:center;">
-          <div class="col-md-8 col-md-offset-2">
-              <i class="fa fa-check-circle fa-5x"></i>
-               <h1>You may be in luck!</h1>
-               <h4> Based on your rental status, household size and income, you likely qualify for rental assistance.  Applications can be filed at any of the City’s six Community Service Centers.</h4>
+       <div class="row" >
+          <div class="col-md-7">
+            <h1>You may be in luck!</h1>
+              <p> Based on your rental status, household size and income, you likely qualify for rental assistance.  Applications can be filed at any of the City’s six Community Service Centers.</p>
 
-               <% if @medical_circumstance == "yes" %>
-                <h4>You must be able to obtain documents from your employer showing that you took time off as well as from the hospital or attending physician.</h4>
+              <% if @medical_circumstance == "yes" %>
+                <p>You must be able to obtain documents from your employer showing that you took time off as well as from the hospital or attending physician.</p>
 
-               <% elsif @natural_disaster == "yes" %>
-                <h4>You must be able to prove this by obtaining documents from a fire marshall (standard fire department reports). For floods, please provide a letter from your landlord and photographs.
-                </h4>
+              <% elsif @natural_disaster == "yes" %>
+                <p>You must be able to prove this by obtaining documents from a fire marshall (standard fire department reports). For floods, please provide a letter from your landlord and photographs.
+                </p>
 
               <% elsif @temporary_loss == "yes"%>
-                <h4>You must provide last 90 days of pay stubs and a letter from employer stating (layoff, termination, etc) and the return date to work. You can also provide unemployment assistance documentation.</h4>
+                <p>You must provide last 90 days of pay stubs and a letter from employer stating (layoff, termination, etc) and the return date to work. You can also provide unemployment assistance documentation.</p>
 
               <% elsif @domestic_violence == "yes"%>
-                <h4>You must be able to prove this by providing a report from the police department or a document showing an order of protection/restraining order.</h4>
+                <p>You must be able to prove this by providing a report from the police department or a document showing an order of protection/restraining order.</p>
 
               <% end %>
 
-              <h4>The final decision will be made one-on-one by the case manager.</h4>
-
-         <br>
-         <br>
-
-         <div class="row">
-           <div class="text-center">
-           <% if @laf_disclaimer.present?  %>
-                <p class="subhead"><%= @laf_disclaimer %></p>
-           <% else  %>
-                <p class="subhead"> Based on your zipcode, here is the nearest Community Service Center to complete your application: </p>
-           <% end %>
-
-            <%= render 'layouts/community_center' %>
-
-           </div>
-
-       </div>
-        <div class="row">
-          <p class="subhead">or call 3-1-1.</p>
-       </div>
-     </div>
+              <p>The final decision will be made one-on-one by the case manager.</p>
 
 
-     <div class="row">
-     <div class="col-md-12">
-      <br>
-      <br>
+        <section class="content-section resources">
+          <h3>Resources</h3>
+            <% if @laf_disclaimer.present? %>
+          <p><%= @laf_disclaimer %></p>
+          <% else  %>
+          <p> Based on your zipcode, here is the nearest Community Service Center to complete your application:  </p>
+          <% end %>
+        <%= render 'layouts/community_center' %>
+          <p>or call 3-1-1.</p>
+       </section>
 
-      <p class="subhead">Here are the documents you need to apply:</p>
+
+      <p>Here are the documents you need to apply:</p>
        <%= render "rental_assistances/documents" %>
        </div>
      </div>
 
  <% elsif @eligible == "maybe" %>
-<br>
-<br>
 
-   <div class="row" style="text-align:center;">
-     <div class="col-md-8 col-md-offset-2">
-       <i class="fa fa-exclamation-circle fa-5x"></i>
-         <h1>Close enough to apply!</h1>
-          <h4>According to the income guidelines of Rental Assistance, you make too much money to apply. However, in some cases the city may make an exception. Applications can be filed at any of the City’s six Community Service Centers.  </h4>
-         <br>
+   <div class="row" >
+     <div class="col-md-7">
+        <h1>Close enough to apply!</h1>
+        <p>According to the income guidelines of Rental Assistance, you make too much money to apply. However, in some cases the
 
-        <div class="row">
-           <div class="text-center">
-           <% if @laf_disclaimer.present?  %>
-                <p class="subhead"><%= @laf_disclaimer %></p>
-           <% else  %>
-                <p class="subhead"> Based on your zipcode, here is the nearest Community Service Center to complete your application: </p>
-           <% end %>
+        <section class="content-section resources">
+         <h3>Resources</h3>
+         <% if @laf_disclaimer.present? %>
+           <p><%= @laf_disclaimer %></p>
+         <% else  %>
+           <p> Based on your zipcode, here is the nearest Community Service Center to complete your application:  </p>
+        <% end %>
+         <%= render 'layouts/community_center' %>
+          <p>or call 3-1-1.</p>
+        </section>
 
-              <div class="col-md-offset-3 col-md-6 col-sm-6 text-center" style="text-align:center;">
-                <ul class="list-group" style="text-align:left;">
-                  <li class="list-group-item" style="font-weight:bold"><%= @lafcenter.center %> </li>
-                  <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %> </li>
-                  <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @lafcenter.telephone %> </li>
-                  <li class="list-group-item">Days that Spanish is spoken - <%= @lafcenter.spanish %> </li>
-                </ul>
+    </div>
+  </div>
 
-                <br>
-                <br>
-            </div>
+<% elsif @eligible == "no" %>
 
-           </div>
-
-       </div>
-        <div class="row">
-          <p class="subhead">or call 3-1-1.</p>
-       </div>
-     </div>
-
-  <% elsif @eligible == "no" %>
-
-        <div class="row" style="text-align:center;">
-          <div class="col-md-8 col-md-offset-2">
-              <h1>Something else in mind!</h1>
-              <h4>Based on your household size and income, you likely do not qualify for Rental Assistance.</h4>
-
-              <br>
-
-
-            <div class="row">
-              <h4>Here are some additional resources from Purple Binder:</h4>
-            </div>
-            <br>
-
-            <div class="row">
-
-            <% if @housing_resources_zip.count >= 2 %>
-              <div class="col-md-6 col-sm-6">
-                <ul class="list-group" style="text-align:left;">
-                  <li class="list-group-item" style="font-weight:bold"><%= @housing_resources_zip.first.name %>  </li>
-                  <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @housing_resources_zip.first.street %>  <%= @housing_resources_zip.first.city %> <%= @housing_resources_zip.first.state %>, <%= @housing_resources_zip.first.zip %> </li>
-                  <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @housing_resources_zip.first.phone %> </li>
-                </ul>
-              </div>
-
-              <div class="col-md-6 col-sm-6">
-                <ul class="list-group" style="text-align:left;">
-                  <li class="list-group-item" style="font-weight:bold"><%= @housing_resources_zip.second.name %>  </li>
-                  <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @housing_resources_zip.second.street %>  <%= @housing_resources_zip.second.city %> <%= @housing_resources_zip.second.state %>, <%= @housing_resources_zip.second.zip %> </li>
-                  <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @housing_resources_zip.second.phone %> </li>
-                </ul>
-              </div>
-              <% end %>
-            </div>
-
-
-            <div class="row">
-            <% if @housing_resources_first.present? %>
-              <div class="col-md-6 col-sm-6">
-                <ul class="list-group" style="text-align:left;">
-                  <li class="list-group-item" style="font-weight:bold"><%= @housing_resources_first.name %>  </li>
-                  <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @housing_resources_first.street %>  <%= @housing_resources_first.city %> <%= @housing_resources_first.state %>, <%= @housing_resources_first.zip %> </li>
-                  <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @housing_resources_first.phone %> </li>
-                </ul>
-              </div>
-
-              <div class="col-md-6 col-sm-6">
-                <ul class="list-group" style="text-align:left;">
-                  <li class="list-group-item" style="font-weight:bold"><%= @housing_resources_second.name %>  </li>
-                  <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @housing_resources_second.street %>  <%= @housing_resources_second.city %> <%= @housing_resources_second.state %>, <%= @housing_resources_second.zip %> </li>
-                  <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @housing_resources_second.phone %> </li>
-                </ul>
-              </div>
-              <% end %>
-            </div>
-
-            <%= image_tag("pblogo.jpg", :class => "logo-padding") %>
+    <div class="row">
+      <div class="col-md-7">
+        <h1>Results: Something else in mind!</h1>
+        <p>Based on your household size and income, you likely do not qualify for Rental Assistance.</p>
+        <%= render "layouts/purple_binder_resources" %>
+      </div>
+    </div>
 
   <% end %>
 </div>

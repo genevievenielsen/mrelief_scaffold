@@ -1,89 +1,36 @@
-<div class="container">
+<div class="container marquee">
 <%= render "layouts/print_button" %>
 <% if @eligible == "yes" %>
 
-   <div class="row" style="text-align:center;">
-      <div class="col-md-8 col-md-offset-2">
-          <i class="fa fa-check-circle fa-5x"></i>
-           <h1>You may be in luck!</h1>
+   <div class="row">
+     <div class="col-md-7">
+       <h1>Results: You may be in luck!</h1>
+       <p>Based on your household size and income, you likely qualify for RTA Ride Free.</p>
 
-          <br>
-          <br>
-          <br>
+       <div class="resources">
+         <h3>Apply for benefits</h3>
+         <p><%= link_to "Click Here to apply online", "https://idoaweb.aging.illinois.gov/baa/Welcome.aspx", :class => "secondary-link", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'rta_free_ride', 'il_dept_aging', 1);" %></p>
+         <p>Navigate to the Benefit Access tab and click on 'Benefit Access Application.'</p>
+       </div>
 
-          <div class="row">
-            <div class=" text-center">
-              <p class="subhead"> Based on your age, household size, and income, you likely qualify for RTA Ride Free.
-              <%= link_to "Click Here to apply online before you visit", "https://idoaweb.aging.illinois.gov/baa/Welcome.aspx", :class => "btn btn-success btn-resolution", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'rta_free_ride', 'il_dept_aging', 1);" %>
-              </p>
-              <p class="subhead">Navigate to the Benefit Access tab and click on 'Benefit Access Application.'</p>
-            </div>
-
-
-        </div>
       </div>
-
+    </div>
 
   <% else @eligible == "no" %>
 
-           <div class="row" style="text-align:center;">
-             <div class="col-md-8 col-md-offset-2">
-                 <h1>Something else in mind!</h1>
-                 <h4>Based on your household size and income, you likely do not qualify for RTA Ride Free.</h4>
+      <div class="row">
+        <div class="col-md-7">
+          <h1>Results: Something else in mind!</h1>
+          <p>Based on your household size and income, you likely do not qualify for RTA Ride Free.</p>
 
-                 <br>
-
-
-               <div class="row">
-                 <p class="subhead">Call 312-913-3110 for information about the Reduced Fare Program.
-                 </p>
-               </div>
-
-               <br>
-
-        <div class="row">
-          <% if @transportation_resources_zip.count >= 2 %>
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @transportation_resources_zip.first.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @transportation_resources_zip.first.street %>  <%= @transportation_resources_zip.first.city %> <%= @transportation_resources_zip.first.state %>, <%= @transportation_resources_zip.first.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @transportation_resources_zip.first.phone %> </li>
-              </ul>
-            </div>
-
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @transportation_resources_zip.second.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @transportation_resources_zip.second.street %>  <%= @transportation_resources_zip.second.city %> <%= @transportation_resources_zip.second.state %>, <%= @transportation_resources_zip.second.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @transportation_resources_zip.second.phone %> </li>
-              </ul>
-            </div>
-            <% end %>
+          <div class="resources">
+            <h3>Resources</h3>
+            <p>Call 312-913-3110 for information about the Reduced Fare Program.</p>
           </div>
 
+          <%= render "layouts/purple_binder_resources" %>
 
-          <div class="row">
-          <% if @transportation_resources_first.present? %>
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @transportation_resources_first.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @transportation_resources_first.street %>  <%= @transportation_resources_first.city %> <%= @transportation_resources_first.state %>, <%= @transportation_resources_first.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @transportation_resources_first.phone %> </li>
-              </ul>
-            </div>
-
-            <div class="col-md-6 col-sm-6">
-              <ul class="list-group" style="text-align:left;">
-                <li class="list-group-item" style="font-weight:bold"><%= @transportation_resources_second.name %>  </li>
-                <li class="list-group-item"><i class="fa fa-map-marker"></i>  <%= @transportation_resources_second.street %>  <%= @transportation_resources_second.city %> <%= @transportation_resources_second.state %>, <%= @transportation_resources_second.zip %> </li>
-                <li class="list-group-item"><i class="fa fa-phone"></i>  <%= @transportation_resources_second.phone %> </li>
-              </ul>
-            </div>
-            <% end %>
-          </div>
-
-           <%= image_tag("pblogo.jpg", :class => "logo-padding") %>
         </div>
+      </div>
+<% end %>
 
-  <% end %>
-  </div>
