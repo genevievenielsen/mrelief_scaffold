@@ -5,13 +5,8 @@
   <%= notice %>
   <%= alert %>
 
-      <div class="col-md-8 col-md-offset-2">
-
-
-        <h3 class="text-center">We would love to hear from you!</h3>
-        <br>
-
-
+      <div class="col-md-8">
+        <h3>We would love to hear from you!</h3>
       <%= form_tag(contact_index_url) do %>
         <div class="form-group">
           <%= label_tag(:contact_first_name, "First Name") %>
@@ -50,19 +45,16 @@
       <% end %>
       </div>
     </div>
-
-    <div class="divider"></div>
-    <br>
-    <br>
     <div>
-      <p class="subhead">Some ways to get in touch with us</p>
+      <h3>Some ways to get in touch with us</h3>
     </div>
 
-    <div style="padding-bottom:100px; text-align:center">
-    <a href ="mailto:mrelief.form@gmail.com"><i class="fa fa-envelope-square" style="  margin:30px; font-size:72px"></i></a>
-        <a href ="https://plus.google.com/117049110248209318421 "><i class="fa fa-google-plus-square" style="  margin:30px; font-size:72px"></i></a>
-        <a href ="https://twitter.com/mrelief_form"><i class="fa fa-twitter-square" style="margin:30px;   font-size:72px"></i></a>
-       <a href ="https://www.facebook.com/mRelief"><i class="fa fa-facebook-square" style="  margin:30px; font-size:72px"></i></a>
+    <div>
+      <ul>
+        <li><a href ="mailto:mrelief.form@gmail.com">Email</a></li>
+        <li><a href ="https://twitter.com/mrelief_form">Twitter</a></li>
+        <li><a href ="https://www.facebook.com/mRelief">Facebook</a></li>
+      </ul>
      </div>
 
   </div>
