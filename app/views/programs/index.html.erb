@@ -16,8 +16,8 @@
   </div>
 
   <div class="row">
-  <% chicago_programs = Program.where(:location => "chicago") %>
-  <% chicago_programs.each_with_index do |program| %>
+    <% chicago_programs = Program.where(:location => "chicago") %>
+    <% chicago_programs.each_with_index do |program| %>
 
     <% if program.name_en == "All City Programs" %>
       <div class="col-md-4 programs">
@@ -26,11 +26,11 @@
         <a href="#" data-toggle="modal" data-target="#receiving_benefits">Continue &rarr;</a>
       </div>
     <% else %>
-        <div class="col-md-4 programs" >
-          <h4><%= program.name %></h4>
-          <p><%= program.description %></p>
-          <a href="<%= program.url %>" >Continue &rarr;</a>
-        </div>
+      <div class="col-md-4 programs" >
+        <h4><%= program.name %></h4>
+        <p><%= program.description %></p>
+        <a href="<%= program.url %>" >Continue &rarr;</a>
+      </div>
     <% end %>
   <% end %>
   </div>
@@ -38,25 +38,23 @@
 <br>
 
 <!-- Illinois Programs  -->
- <div class="row">
+  <div class="row">
     <div class="col-md-12 resources">
-      <h3>State of Illinois Programs</h3>
+        <h3>State of Illinois Programs</h3>
     </div>
   </div>
-<div>
+
   <div class="row">
-  <% chicago_programs = Program.where(:location => "illinois") %>
-  <% chicago_programs.each_with_index do |program| %>
-
-    <div class="col-md-4 programs">
-      <h4><%= program.name %></h4>
-      <p><%= program.description %></p>
-      <a href="<%= program.url %>">Continue &rarr;</a>
-    </div>
-  <% end %>
-
-</div>
-</div>
+    <% chicago_programs = Program.where(:location => "illinois") %>
+    <% chicago_programs.each_with_index do |program| %>
+  
+      <div class="col-md-4 programs">
+        <h4><%= program.name %></h4>
+        <p><%= program.description %></p>
+        <a href="<%= program.url %>">Continue &rarr;</a>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 

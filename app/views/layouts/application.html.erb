@@ -28,7 +28,7 @@
           <span class="icon-bar"></span>
         </button>
       <a href="/" class="navbar-brand logo">mRelief</a>
-    </div>
+      </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -56,9 +56,6 @@
   </nav>
   </div>
 
-  <div>
-
-
 
     <% if alert.present? %>
       <div class="alert alert-dismissable alert-warning">
@@ -67,7 +64,7 @@
       </div>
     <% end %>
 
-      <% if notice.present? %>
+    <% if notice.present? %>
       <div class="alert alert-dismissable alert-success">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <%= notice %>
@@ -76,13 +73,13 @@
 
     <%= yield %>
     <%= render "pages/footer" %>
-    </div>
-</div>
-</div>
-
-
-    </div>
+  
   </div>
+</div>
+
+
+</div>
+</div>
   <%= render "layouts/google_analytics" %>
 
 

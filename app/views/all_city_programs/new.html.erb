@@ -23,26 +23,27 @@
 
   <!-- Form for dependent no -->
   <% if @current_user.food_stamps != "checked" || @current_user.rta_ride_free != "checked" || @current_user.rental_assistance != "checked" || @current_user.medicaid != "checked" || @current_user.medicare_cost_sharing != "checked" || @current_user.aabd != "checked" || @current_user.tanf != "checked" %>
-
     <div class="row">
       <div class="col-md-9">
         <label for="dependent_no">What is the number of people living in your household including yourself?</label>
           <p type="button" data-toggle="popover" data-content="This should include the number of people who purchase and  prepare food with you." data-placement="right" style="border: 0px; color: #4582ec; ">
-            <input type="text" id="dependent_no" name="dependent_no" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>"  required>
+          <input type="text" id="dependent_no" name="dependent_no" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>"  required>
           </p>
       </div>
     </div>
   <% end %>
 
+  <!-- Form for number of children -->
   <% if @current_user.all_kids != "checked" || @current_user.tanf != "checked" %>
     <div class="row">
       <div class="col-md-9">
         <label for="children">How many children 18 and under are you caring for?</label>
-            <input type="text" id="children" name="children" placeholder="For example: 3" class="form-field"  value="<%= @d.number_of_children %>" required>
+          <input type="text" id="children" name="children" placeholder="For example: 3" class="form-field"  value="<%= @d.number_of_children %>" required>
       </div>
     </div>
   <% end %>
 
+  <!-- Form for household receiving Medicare -->
   <% if @current_user.medicare_cost_sharing != "checked" %>
     <div class="row">
       <div class="col-md-9">
@@ -58,8 +59,8 @@
         <div class="col-md-9">
           <label for="monthly_gross_income"> What is your household's gross monthly income?</label>
             <p type="button" data-toggle="popover" data-content="This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions." data-placement="right" style="border: 0px; color: #4582ec; ">
-             <input type="text" id="monthly_gross_income" name="monthly_gross_income" placeholder="For example: 1000"class="    form-field" value="<%= @d.monthly_gross_income %>" required>
-             </p>
+            <input type="text" id="monthly_gross_income" name="monthly_gross_income" placeholder="For example: 1000"class="    form-field" value="<%= @d.monthly_gross_income %>" required>
+            </p>
         </div>
       </div>
    <% end %>
@@ -68,12 +69,10 @@
   <% if @current_user.aabd != "checked" || @current_user.tanf != "checked" %>
     <div class="row">
       <div class="col-md-9">
-        <label for="net_income">
-         How much do you anticipate to earn in net income in the next 30 days? (After taxes have been taken out)
-        </label>
-           <p type="button" data-toggle="popover" data-content="This should include income you earn from your work, self  employment and rental income (contributions from people who live with you.)" data-placement="right" style="border: 0px; color: #4582ec; ">
-            <input type="text" id="net_income" name="net_income" placeholder="For example: 1000"class="form-field" value="<%= @d.thirty_day_net_income %>" required>
-           </p>
+        <label for="net_income">How much do you anticipate to earn in net income in the next 30 days? (After taxes have been taken out)</label>
+          <p type="button" data-toggle="popover" data-content="This should include income you earn from your work, self  employment and rental income (contributions from people who live with you.)" data-placement="right" style="border: 0px; color: #4582ec; ">
+          <input type="text" id="net_income" name="net_income" placeholder="For example: 1000"class="form-field" value="<%= @d.thirty_day_net_income %>" required>
+          </p>
       </div>
     </div>
   <% end %>
@@ -85,9 +84,9 @@
         <label for="monthly_benefits">
          What is your monthly income expected from government benefits or other assistance?
         </label>
-            <p type="button" data-toggle="popover" data-content="This includes social security (SSI), veterans benefits, railroad assistance etc." data-placement="right" style="border: 0px; color: #4582ec; ">
-              <input type="text" id="monthly_benefits" name="monthly_benefits" placeholder="For example: 1000"class="form-field" value="<%= @d.monthly_benefits %>" required>
-            </p>
+          <p type="button" data-toggle="popover" data-content="This includes social security (SSI), veterans benefits, railroad assistance etc." data-placement="right" style="border: 0px; color: #4582ec; ">
+          <input type="text" id="monthly_benefits" name="monthly_benefits" placeholder="For example: 1000"class="form-field" value="<%= @d.monthly_benefits %>" required>
+          </p>
       </div>
     </div>
   <% end %>
@@ -118,15 +117,15 @@
       </div>
     </div>
 
-      <!-- Form for expect_ssi -->
-      <div class="row">
-        <div class="col-md-9">
-          <label for="expect_ssi">
-            How much do you expect to receive in SSI in the next 30 days?
-          </label>
-           <input type="text" id="expect_ssi" name="expect_ssi" placeholder="For example: 500" class="form-field" value="<%= @d.ssi %>" required>
-        </div>
+    <!-- Form for expect_ssi -->
+    <div class="row">
+      <div class="col-md-9">
+        <label for="expect_ssi">
+          How much do you expect to receive in SSI in the next 30 days?
+        </label>
+         <input type="text" id="expect_ssi" name="expect_ssi" placeholder="For example: 500" class="form-field" value="<%= @d.ssi %>" required>
       </div>
+    </div>
   <% end %>
 
   <!-- if the user is already receiving rental assistance, do not show these questions -->
@@ -235,7 +234,6 @@
 
   <% if @current_user.rental_assistance != "checked" %>
   <!-- if the user is already receiving rental assistance, do not show these questions -->
-
     <div class="row">
       <div class="col-md-9">
       <label for="lease" id="lease" >Is your name currently on the lease of the apartment that you are renting?</label>
@@ -295,11 +293,10 @@
 
   <% end %> <!-- this ends the rental assistance questions section -->
 
-  <% if  @current_user.all_kids != "checked"  %>
+  <% if @current_user.all_kids != "checked"  %>
     <div class="row">
       <div class="col-md-9">
         <label for="status" id="status" class="pull-left">If you have a child, check the box below that describes your child's health insurance status:</label>
-
         <div class="radio-button">
           <input type="checkbox" name="status" value="uninsured">  been uninsured for 12 months<br>
           <input type="checkbox" name="status" value="job_ended"> lost insurance because a JOB ended<br>
@@ -330,14 +327,14 @@
   </form>
   </div>
 
-    <div class="col-md-3 sm-3 xs-12 pull-left">
-      <div class="calculator_box">
-        <%= render "programs/calculator" %>
-      </div>
+  <div class="col-md-3 sm-3 xs-12 pull-left">
+    <div class="calculator_box">
+      <%= render "programs/calculator" %>
     </div>
+  </div>
 
   </div>
-  </section>
+</section>
 </div>
 
 <script>

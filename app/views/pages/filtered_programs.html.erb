@@ -8,7 +8,7 @@
   </section>
 </div>
 
-<!-- Eligible Programs  -->
+
 <div class="container">
 <section>
   <!-- <div class="row">
@@ -17,6 +17,7 @@
     </div>
   </div> -->
 
+<!-- Eligible Programs  -->
  <div class="row">
     <div class="col-md-5 resources">
       <!-- <h3>Programs you <em>may</em> qualify for</h3> -->
@@ -36,8 +37,7 @@
 <% if @ineligible_or_receiving_programs.count >= 1 %>
 <!-- Community Resources -->
    <div class="col-md-5 col-md-offset-2 resources">
-<!--      <h3> Programs you <em>may not</em> qualify for</h3>
- -->  <h3 > Something else in mind!</h3>
+    <h3 > Something else in mind!</h3>
      <p>Here are community resources that address the same issues as the programs you are ineligible for or already receiving:
 
      <% @program_count = @ineligible_or_receiving_programs.count %>
@@ -55,18 +55,14 @@
          <% end %>
        <% @count += 1 %>
      <% end %>
-     </p>
-
+    </p>
 
     <% @community_resources.uniq.each do |resource| %>
       <div class="filtered-results">
         <h4><%= resource.capitalize %></h4>
         <p>Find <%= resource %> resources that can help you in your community</p>
         <a href="#" class="programs" data-toggle="modal" data-target="#myModal">Continue &rarr;</a>
-
       </div>
-
-
     <% end %>
    </div>
 <% end %>
@@ -88,19 +84,15 @@
          <div class="container">
            <div class="col-md-9">
               <%= form_tag community_resources_url, method: :post do %>
-
                   <div class="form-group col-md-7">
                      <label for="zipcode">What is your zipcode?</label>
                        <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-field" required>
                    </div>
-
                  <%= hidden_field_tag :resources, @community_resources %>
-
                 <div class="form-group col-md-9">
                   <%= submit_tag "Enter", name: nil, :class => "btn btn-primary btn-sm col-sm-4", :style=>"display:block-inline;" %>
                 </div>
                <% end %>
-
            </div>
          </div>
        </div>
@@ -110,10 +102,4 @@
  </div>
 
 
-
-
-
-<br>
-<br>
-<br>
 

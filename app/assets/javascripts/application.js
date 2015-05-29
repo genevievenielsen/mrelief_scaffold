@@ -17,6 +17,7 @@
 
 $(document).ready(function() {
 
+  // clear cookies
   window.onbeforeunload = function(event) {
       $.ajax({
         url: "/session_clear",

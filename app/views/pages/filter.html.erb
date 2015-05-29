@@ -9,8 +9,8 @@
 </section>
 <section class="content-section">
 <div class="row">
-<div class="col-md-8">
-  <form action="/filtered_programs" role="form" method="get">
+  <div class="col-md-8">
+    <form action="/filtered_programs" role="form" method="get">
 
     <!-- Form for age question -->
       <%= render "programs/age_question" %>
@@ -20,7 +20,7 @@
         <div class="col-md-9">
           <label for="dependent_no">What is the number of people living in your household including yourself?</label>
             <p type="button" data-toggle="popover" data-content="This should include the number of people who purchase and prepare food with you." data-placement="right" style="border: 0px; color: #4582ec;">
-              <input type="text" id="dependent_no" name="dependent_no" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>" required>
+            <input type="text" id="dependent_no" name="dependent_no" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>" required>
             </p>
         </div>
       </div>
@@ -37,43 +37,42 @@
           </div>
         </div>
 
-      <!-- Form for disability question -->
-        <%= render "programs/disability_question" %>
+    <!-- Form for disability question -->
+      <%= render "programs/disability_question" %>
 
-      <!-- Form for benefits question -->
-        <div class="row">
-          <div class="col-md-9">
-            <label for="benefits" id="benefits">Are you currently receiving public benefits?</label><br>
-            <div class="radio-button">
-
-            <% [ 'yes', 'no' ].each do |benefits| %>
-              <%= radio_button_tag 'benefits', benefits, @current_user.try(:benefits) == benefits  %>
-              <%= benefits.humanize %>
-              <br>
-            <% end %>
-            </div>
+    <!-- Form for benefits question -->
+      <div class="row">
+        <div class="col-md-9">
+          <label for="benefits" id="benefits">Are you currently receiving public benefits?</label><br>
+          <div class="radio-button">
+          <% [ 'yes', 'no' ].each do |benefits| %>
+            <%= radio_button_tag 'benefits', benefits, @current_user.try(:benefits) == benefits  %>
+            <%= benefits.humanize %>
+            <br>
+          <% end %>
           </div>
-        </div>
-
-        <div class="place_for_benefits_checkboxes"></div>
-
-        <div class="row">
-          <div class="col-md-9">
-            <button type="submit" >Continue</button>
-          </div>
-        </div>
-
-    </form>
-    </div>
-
-    <div class="col-md-3 sm-4 xs-12 pull-left">
-        <div class="calculator_box">
-          <%= render "programs/calculator" %>
         </div>
       </div>
 
+      <div class="place_for_benefits_checkboxes"></div>
+
+      <div class="row">
+        <div class="col-md-9">
+          <button type="submit" >Continue</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="col-md-3 sm-4 xs-12 pull-left">
+    <div class="calculator_box">
+      <%= render "programs/calculator" %>
     </div>
-  </section>
+  </div>
+
+</div>
+</section>
 </div>
 
 <script type="text/javascript">
