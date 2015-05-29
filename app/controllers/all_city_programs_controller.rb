@@ -52,11 +52,8 @@ class AllCityProgramsController < ApplicationController
     end
 
     if params[:medicare_household_size].present?
-      puts "made it here"
       if params[:medicare_household_size] !~ /\D/
-        
         medicare_household_size = params[:medicare_household_size].to_i
-        puts "#{medicare_household_size}"
         @d.medicare_household_size = medicare_household_size
       else
         medicare_household_size = params[:medicare_household_size].in_numbers
