@@ -20,7 +20,7 @@
 
   <!-- Form for household size -->
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10">
         <label for="snap_dependent_no">What is the number of people living in your household including yourself?</label>
           <p data-toggle="popover" data-content="This should include the number of people who purchase and prepare food with you." data-placement="right">
           <input type="text" id="snap_dependent_no" name="snap_dependent_no" placeholder="For example: 3" class="form-field" value="<%= @d.try(:dependent_no) || @current_user.try(:household_size) %>" required>
@@ -30,7 +30,7 @@
 
   <!-- Form for gross monthly income -->
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10">
         <label for="snap_gross_income">What is your gross monthly income?</label>
           <p data-toggle="popover" data-content="This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions." data-placement="right">
           <input type="text" id="snap_gross_income" name="snap_gross_income" placeholder="For example: 1000" class="form-field" value="<%= number_with_precision(@d.try(:monthly_gross_income), precision: 0) || number_with_precision(@current_user.try(:gross_income), precision: 0) %>" required>
@@ -43,7 +43,7 @@
 
   <!-- Form for education -->
     <div class="row">
-      <div class="col-md-9" id="education_question">
+      <div class="col-md-9 col-sm-10" id="education_question">
         <label for="education" id="education">Are you enrolled in college/institution of higher education?</label>
         <div class="radio-button">
           <% [ 'yes', 'no'].each do |education| %>
@@ -61,7 +61,7 @@
 
   <!-- Form for amount in account -->
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10">
         <label for="amount_in_account" id="amount_in_account">Do you have $100 or less in cash or in a checking or savings account?</label>
         <div class="radio-button">
           <% [ 'yes', 'no'].each do |amount_in_account| %>
