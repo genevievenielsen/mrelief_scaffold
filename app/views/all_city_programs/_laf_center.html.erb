@@ -5,9 +5,25 @@
   <p>The LAF expert nearest you:</p>
 <% end %>
 
+<% if @lafcenter.center == "Garfield Community Service Center" %>
+	<% @zipcode = 60612 %>
+<% elsif @lafcenter.center == "Englewood Community Service Center" %>
+	<% @zipcode = 60620 %>
+<% elsif @lafcenter.center == "North Area Community Service Center" %>
+	<% @zipcode = 60640 %>
+<% elsif @lafcenter.center == "King Community Service Center" %>
+	<% @zipcode = 60653 %>
+<% elsif @lafcenter.center == "South Chicago Community Service Center" %>
+	<% @zipcode = 60617 %>
+<% elsif @lafcenter.center == "Trina Davila" %>
+	<% @zipcode = 60639 %>
+<% else %>
+	<% @zipcode = @lafcenter.zipcode.to_i %>
+<% end %>
+
 <ul>
   <li class="laf-headline"><%= @lafcenter.center %></li>
-  <li><%=  @lafcenter.address %> <%= @lafcenter.city %> <%= @lafcenter.zipcode.to_i %></li>
+  <li><%=  @lafcenter.address %> <%= @lafcenter.city %> <%= @zipcode %></li>
   <li><%= @lafcenter.telephone %></li>
   <li>Days that Spanish is spoken - <%= @lafcenter.spanish %></li>
 </ul>
