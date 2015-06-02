@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-9 col-sm-10 col-xs-12">
+  <div class="col-md-9 col-sm-12 col-xs-12">
     <label for="location" id="location_dropdown">Where are you completing this form? </label>
     <%= select_tag(:user_location, options_for_select([['King Community Service Center', 'king_community_service_center'], ['Garfield Community Service Center ', 'garfield'], ['North Area Community Service Center', 'north_area'], ['Harold Washington Library', 'harold_washington_library'], ['Other Library', 'other_library'], ['Center for Working Families', 'center_for_working_families'], ['CTA Bus', 'cta_bus'], ['Other', 'other']], @d.user_location), :class => "form-field drop-down", :prompt => "Select a location") %>
   </div>
