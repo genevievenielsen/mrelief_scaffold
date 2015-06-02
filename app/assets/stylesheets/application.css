@@ -338,3 +338,17 @@ a:hover {
 .inline_text {
   display: inline;
 }
+
+
+input::-webkit-input-placeholder {
+  color: #b5b5b5;
+}
+input::-moz-placeholder {
+  color: #b5b5b5; 
+}
+input:-moz-placeholder {   /* Older versions of Firefox */
+  color: #b5b5b5;
+}
+input:-ms-input-placeholder { 
+  color: #b5b5b5; 
+}
