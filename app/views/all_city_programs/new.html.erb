@@ -95,7 +95,9 @@
     <div class="row">
       <div class="col-md-9">
         <label for="anticipate_income" id="anticipate_income">Do you or your child anticipate getting any other source of income outside of your job, child support or SSI?
-        <!-- <button type="button" data-toggle="popover" data-content="This includes unemployment insurance, pensions,  workers compensation and any other form of income." data-placement="right" style="border: 0px; color: #4582ec;   "><i class="fa fa-info-circle"></i></button> -->
+       
+        <a data-toggle="popover" data-content="This includes unemployment insurance, pensions,  workers compensation and any other form of income." data-placement="right" style="border: 0px; color: #4582ec;">Learn More</a>
+
         </label>
         <div class="radio-button">
           <% [ 'yes', 'no'].each do |anticipate_income| %>
@@ -209,7 +211,7 @@
       <div class="col-md-9">
         <label for="relationship" id="relationship">Describe your biological relationship to the child you are caring for:</label>
         <div class="radio-button">
-          <% [ 'parent', 'adult relative'].each do |relationship| %>
+          <% [ 'parent', 'adult relative', 'I do not care for a child'].each do |relationship| %>
             <%= radio_button_tag 'relationship', relationship, @d.relationship_to_child == relationship %>
             <%= relationship.humanize %>
             <br>
@@ -267,23 +269,24 @@
           <div class="relative" id="rental_status">
             <%= radio_button_tag 'rental_status', 'medical circumstance' %> Someone experiencing a medical circumstance
 
-             <!-- <button type="button" data-toggle="popover" data-content="An emergency procedure (for example: surgery, related to complicated birth or other conditions) that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to your spouse, child, committed partner whose name is on the lease or grandparent who lives with you." data-placement="right" style="border: 0px; color: #4582ec; "><i class="fa fa-info-circle"></i></button> -->
+            <a data-toggle="popover" data-content="An emergency procedure (for example: surgery, related to complicated birth or other conditions) that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to your spouse, child, committed partner whose name is on the lease or grandparent who lives with you." data-placement="right" style="border: 0px; color: #4582ec; ">Learn More</a>
+
 
             <br><%= radio_button_tag 'rental_status', 'a victim of natural disaster or fire' %> A victim of natural disaster or fire
 
-            <!--  <button type="button" data-toggle="popover" data-content="A natural disaster includes instances such as a tornado or fire that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to floods for people who are renting a basement apartment who can not afford to replace those items and are seeking relocation." data-placement="right" style="border: 0px; color: #4582ec; "><i class="fa fa-info-circle"></i></button> -->
+            <a data-toggle="popover" data-content="A natural disaster includes instances such as a tornado or fire that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to floods for people who are renting a basement apartment who can not afford to replace those items and are seeking relocation." data-placement="right" style="border: 0px; color: #4582ec;">Learn More</a>
 
             <br><%= radio_button_tag 'rental_status', 'a recipient of an eviction notice' %> A recipient of an eviction notice
 
-            <!--  <button type="button" data-toggle="popover" data-content="This must be a notice that is notarized and brought with you if you qualify." data-placement="right" style="border: 0px; color: #4582ec; "><i class="fa fa-info-circle"></i></button> -->
+            <a data-toggle="popover" data-content="This must be a notice that is notarized and brought with you if you qualify." data-placement="right" style="border: 0px; color: #4582ec;">Learn More</a>
 
             <br><%= radio_button_tag 'rental_status', 'have experienced a temporary loss of income' %> Have experienced a temporary loss of income
 
-            <!--  <button type="button" data-toggle="popover" data-content="This involves losing income due to an unforeseen event (layoff, termination,or other emergencies etc.) The month in between when you lose your job and qualify for unemployment would be admissible." data-placement="right" style="border: 0px; color: #4582ec; "><i class="fa fa-info-circle"></i></button> -->
+             <a data-toggle="popover" data-content="This involves losing income due to an unforeseen event (layoff, termination,or other emergencies etc.) The month in between when you lose your job and qualify for unemployment would be admissible." data-placement="right" style="border: 0px; color: #4582ec;">Learn More</a>
 
             <br><%= radio_button_tag 'rental_status', 'a victim of domestic violence' %> A victim of domestic violence
 
-            <!--  <button type="button" data-toggle="popover" data-content="This involves losing income due to violence from your intimate partner. " data-placement="right" style="border: 0px; color: #4582ec; "><i class="fa fa-info-circle"></i></button> -->
+            <a data-toggle="popover" data-content="This involves losing income due to violence from your intimate partner. " data-placement="right" style="border: 0px; color: #4582ec;">Learn More</a>
 
             <br><%= radio_button_tag 'rental_status', 'none of the above' %> None of the above
           </div>

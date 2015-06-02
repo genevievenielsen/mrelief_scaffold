@@ -638,8 +638,10 @@ class AllCityProgramsController < ApplicationController
         @eligible_tanif  = "already receiving"
       else
         if params[:pregnant].present? || params[:care_for_child].present? || params[:first_child].present?
-          if params[:relationship] == "adult_relative"
+          if params[:relationship] == "adult relative"
             @eligible_tanif = "maybe"
+          elsif params[:relationship] == "I do not care for a child" 
+            @eligible_tanif = "no" unless params[:pregnant].present?
           else
             if params[:first_child] == "first_child"
               dependent_no == 1
