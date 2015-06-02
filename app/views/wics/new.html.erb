@@ -1,7 +1,7 @@
 <div class= "container">
 <section class="content-section marquee">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-8">
       <h1>WIC</h1>
       <p> The Women, Infants and Children (WIC) Program, funded by the United States Department of Agriculture, is a supplemental nutrition program focused on eating healthy for moms and kids. WIC can provide nutrition education, nutrition counseling, breastfeeding support, nutritious foods and referrals to other services as needed. You can find more information about WIC by <a href="http://www.cedaorg.net/www2/HNS.html"> clicking here.</a></p>
     </div>
@@ -11,17 +11,17 @@
 
 <section class="content-section">
 <div class="row">
-<div class="col-sm-6 col-md-8">
+<div class="col-md-8 col-sm-6 col-xs-12">
   <form action="/wics" role="form" method="post">
 
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-8">
          <label>If you are pregnant, breastfeeding, have had a baby in the past six months, or have a child or infant younger than five years old, you may be able to qualify for WIC benefits.</label>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10 col-xs-12">
         <div class="relative" id="wic_status">
          <label>Describe your current health status:</label>
          <div class="radio-button">
@@ -40,7 +40,7 @@
 
   <!-- Form for household size-->
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="rental_dependent_no">What is your household size?</label>
         <p type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself and your child[ren]." data-placement="right" style="border: 0px; color: #4582ec;">
           <input type="text" id="wic_household_size" name="wic_household_size" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>" required>
@@ -51,7 +51,7 @@
 
   <!-- Form for gross income -->
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="rta_gross_income">What is gross monthly income?</label>
           <p type="button" data-toggle="popover" data-content="Total monthly income from all sources." data-placement="right" style="border: 0px; color: #4582ec;">
             <input type="text" id="wic_gross_income" name="wic_gross_income" placeholder="For example: 1000" class="form-field  " value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %>" required>

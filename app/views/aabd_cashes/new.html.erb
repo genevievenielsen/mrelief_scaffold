@@ -1,17 +1,15 @@
 <div class= "container">
   <section class="content-section marquee">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-8">
         <h1>Aged, Blind and Disabled (AABD) Cash Assistance</h1>
         <p> If you are 65 and older and a resident of Illinois, you may qualify for Senior and Persons with Disabilities. This currently includes cash assistance and not eligibility for medical assistance.</p>
       </div>
     </div>
   </section>
-
-
   <section class="content-section">
   <div class="row">
-    <div class="col-sm-6 col-md-8">
+    <div class="col-md-8 col-sm-6 col-xs-12">
     <form action="/aabd_cashes" role="form" method="post">
 
     <!-- Form for age question -->
@@ -23,7 +21,7 @@
 
   <!-- Form for household size -->
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="aabd_household_size">What is your household size?</label>
           <p type="button" data-toggle="popover" data-content="Household is defined as anyone living in the same dwelling with you." data-placement="right" style="border: 0px; color: #4582ec;">
           <input type="text" id="aabd_household_size" name="aabd_household_size" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>" required>
@@ -31,10 +29,9 @@
       </div>
     </div>
 
-
   <!-- Form for net income question -->
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="aabd_net_income">How much do you anticipate to earn in net income in the next 30 days? (After taxes have been taken out)</label>
          <p type="button" data-toggle="popover" data-content="This should include income you earn from your work, self employment and rental income (contributions from people who live with you.)" data-placement="right" style="border: 0px; color: #4582ec;">
             <input type="text" id="aabd_net_income" name="aabd_net_income" placeholder="For example: 1000"class="form-field" value="<%= @d.thirty_day_net_income %>" required>
@@ -44,7 +41,7 @@
 
     <!-- Form for government benefits question -->
       <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-9 col-sm-10 col-xs-12">
           <label for="aabd_benefits">What is your monthly income expected from government benefits or other assistance?</label>
             <p type="button" data-toggle="popover" data-content="This includes social security (SSI), veterans benefits, railroad assistance etc." data-placement="right" style="border: 0px; color: #4582ec;">
               <input type="text" id="aabd_benefits" name="aabd_benefits" placeholder="For example: 1000"class="form-field" value="<%= @d.government_benefits %>" required>
@@ -54,7 +51,7 @@
 
     <!-- Form for assets question -->
       <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-9 col-sm-10 col-xs-12">
           <label for="aabd_assets">What are your assets worth?</label>
             <p type="button" data-toggle="popover" data-content="Everything but your home, if you live in it, and one car." data-placement="right" style="border: 0px; color: #4582ec;">
               <input type="text" id="aabd_assets" name="aabd_assets" placeholder="For example: 1000"class="form-field" value="<%= @d.assets %>" required>

@@ -2,7 +2,7 @@
 
 <section class="content-section marquee">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-8">
       <h1>TANF</h1>
       <p> If you are a resident of Illinois and related to a child that you are caring for, or pregnant with your first child, you may qualify for the Temporary Assistance for Needy Families (TANF) program. Note: At the current moment, this form estimates eligibility for parents  and caretaker relatives who live with their biological children. </p>
     </div>
@@ -11,11 +11,11 @@
 
 <section class="content-section">
 <div class="row">
-  <div class="col-sm-6 col-md-8">
+  <div class="col-md-8 col-sm-6 col-xs-12">
     <form action="/tanifs" role="form" method="post">
 
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="relationship" id="relationship">Describe your biological relationship to the child you are caring for:</label>
         <div class="radio-button">
           <% [ 'parent', 'adult relative'].each do |relationship| %>
@@ -28,7 +28,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10 col-xs-12">
         <label>Select all that apply to you:</label>
         <div class="radio-button">
           <input type="checkbox" name="pregnant" value="pregnant"> I am pregnant<br>
@@ -42,7 +42,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10 col-xs-12">
       <label for="tanif_sixty_months" id="tanif_sixty_months">As a parent have you been receiving TANF for 60 months or more?</label>
         <div class="radio-button">
           <% [ 'yes', 'no', 'I am a caretaker relative, this does not apply to me.'].each do |tanif_sixty_months| %>
@@ -55,7 +55,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="children">How many children 18 and under are you caring for?</label>
         <div class="row">
           <div class="col-md-12">
@@ -67,7 +67,7 @@
 
   <!-- Form for household size -->
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="household_size">What is your household size?</label>
           <p type="button" data-toggle="popover" data-content="The number of people in your household including   yourself." data-placement="right" style="border: 0px; color: #4582e">
             <input type="text" id="household_size" name="household_size" placeholder="For example: 3" class="form-field"    value="<%= @current_user.try(:household_size) %>" required>
@@ -77,7 +77,7 @@
 
   <!-- Form for gross income -->
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="gross_income">How much do you anticipate to earn in gross income in the next 30 days?</label>
           <p type="button" data-toggle="popover" data-content="This should include income you or your child earn from your work, self employment and rental income (contributions from people who live with you.) This should NOT include child support or SSI benefits." data-placement="right" style="border: 0px; color: #4582ec;">
             <input type="text" id="gross_income" name="gross_income" placeholder="For example: 1000"class="form-field" value="<%= @d.thirty_day_gross_income %>" required>
@@ -88,7 +88,7 @@
 
   <!-- Form for anticipate child support -->
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="anticipate_income" id="anticipate_income">Do you or your child anticipate getting any other source of income outside of your job, child support or SSI?
       
         <a data-toggle="popover" data-content="This includes unemployment insurance, pensions,  workers compensation and any other form of income." data-placement="right" style="border: 0px; color: #4582ec;">Learn More</a>
@@ -107,7 +107,7 @@
 
   <!-- Label and input for expect_child_support -->
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="expect_child_support">
           How much do you expect to receive in child support in the next 30 days?
         </label>
@@ -117,7 +117,7 @@
 
   <!-- Label and input for expect_ssi -->
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="expect_ssi">
           How much do you expect to receive in SSI in the next 30 days?
         </label>

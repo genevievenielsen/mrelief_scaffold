@@ -11,7 +11,7 @@
 
   <section class="content-section">
   <div class="row">
-  <div class="col-sm-6 col-md-8">
+  <div class="col-md-8 col-sm-6 col-xs-12">
   <form action="/medicaids" class="form-horizontal" method="post">
 
     <!-- Form for citizen question -->
@@ -19,7 +19,7 @@
 
     <!-- Form for household size -->
       <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-9 col-sm-10 col-xs-12">
           <label for="medicaid_household_size">What is your household size?</label>
             <p type="button" data-toggle="popover" data-content="The number of people living in your house including yourself" data-placement="right" style="border: 0px; color: #4582ec;">
             <input type="text" id="medicaid_household_size" name="medicaid_household_size" placeholder="For example: 3" class="form-field"  value="<%= @current_user.try(:household_size) %>"  required>
@@ -29,7 +29,7 @@
 
       <!-- Form for gross monthly income -->
         <div class="row">
-          <div class="col-md-9">
+          <div class="col-md-9 col-sm-10 col-xs-12">
             <label for="medicaid_gross_income"> What is your monthly income?</label>
               <p type="button" data-toggle="popover" data-content="Monthly income includes wages, Social Security, SSI, pensions, rental income, unemployment, worker's compensation, or other disability payments." data-placement="right" style="border: 0px; color: #4582ec;">
               <input type="text" id="medicaid_gross_income" name="medicaid_gross_income" placeholder="For example: 3000" class="form-field" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %>" required>

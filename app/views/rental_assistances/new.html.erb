@@ -11,11 +11,11 @@
 
   <section class="content-section">
   <div class="row">
-    <div class="col-sm-6 col-md-8">
+    <div class="col-md-8 col-sm-6 col-xs-12">
     <form action="/rental_assistances" role="form" method="post">
 
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10 col-xs-12">
         <label>What circumstance explains why you are unable to pay rent at this time? </label>
         <div class="radio-button">
           <div class="relative" id="rental_status">
@@ -46,7 +46,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10 col-xs-12">
       <label for="lease" id="lease" >Is your name currently on the lease of the apartment that you are renting?</label>
       <div class="radio-button">
         <% [ 'yes', 'no' ].each do |lease| %>
@@ -59,7 +59,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10 col-xs-12">
       <label for="next_rent" id="next_rent">Can you document that you can afford next month’s rent? </label>
       <div class="radio-button">
         <% [ 'yes', 'no' ].each do |next_rent| %>
@@ -76,7 +76,7 @@
 
   <!-- Label and input for rental_gross_income -->
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="rental_gross_income"> What is your income over the past 90 days? </label>
           <p type="button" data-toggle="popover" data-content="Includes cash receipts from all sources including money wages and salaries before any deductions, unemployment compensation, public assistance, alimony, child support, lottery/gambling winnings, dividends and all other income." data-placement="right" style="border: 0px; color: #4582ec;">
            <input type="text" id="rental_gross_income" name="rental_gross_income" placeholder="For example: 4000" class="form-field" value="<%= @d.ninety_day_gross_income %>" required>

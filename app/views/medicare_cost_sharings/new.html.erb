@@ -10,12 +10,12 @@
 
   <section class="content-section">
   <div class="row">
-    <div class="col-sm-6 col-md-8">
+    <div class="col-md-8 col-sm-6 col-xs-12">
     <form action="/medicare_cost_sharings" role="form" method="post">
 
   <!-- Form for household size -->
     <div class="row">
-     <div class="col-md-9">
+     <div class="col-md-9 col-sm-10 col-xs-12">
       <label for="household_size">What is your household size? </label>
         <p type="button" data-toggle="popover" data-content="Please include yourself, your spouse, your children under 18 who live with you" data-placement="right" style="border: 0px; color: #4582ec;">
          <input type="text" id="household_size" name="household_size" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>"  required>
@@ -25,7 +25,7 @@
 
    <!-- Form for Medicare household -->
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10 col-xs-12">
        <label for="medicare_household_size">How many people in your household receive Medicare?</label>
          <input type="text" id="medicare_household_size" name="medicare_household_size" placeholder="For example: 2" class="   form-field"  required>
        </div>
@@ -33,7 +33,7 @@
 
     <!-- Form for monthly income -->
       <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-9 col-sm-10 col-xs-12">
           <label for="assets">What is you gross monthly income?</label>
             <input type="text" id="monthly_income" name="monthly_income" placeholder="For example: 1000" class="form-field" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %>" required>
         </div>
@@ -41,7 +41,7 @@
 
     <!-- Form for assets -->
       <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-9 col-sm-10 col-xs-12">
           <label for="assets">Please estimate the value of your assets. (Exclude the value of your home and car.)</label>
             <p type="button" data-toggle="popover" data-content="Personal property is anything owned by a person that is not land or permanently affixed to land. This includes such items as: money in checking and savings accounts;stocks, bonds, savings certificates, and other securities;farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property." data-placement="right" style="border: 0px; color: #4582ec;">
             <input type="text" id="assets" name="assets" placeholder="For example: 5000" class="form-field" required>

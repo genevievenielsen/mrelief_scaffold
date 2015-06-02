@@ -12,11 +12,11 @@
 
 <section class="content-section">
 <div class="row">
-  <div class="col-sm-6 col-md-8">
+  <div class="col-md-8 col-sm-6 col-xs-12">
   <form action="/all_kids" class="form-horizontal" method="post">
 
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10 col-xs-12">
         <label class="allthatapply">Please answer the following questions (check all that apply):</label>
          <label class="allthatapply">Has your child:</label>
         <div class="radio-button">
@@ -31,14 +31,14 @@
 
   <!-- Form for household size-->
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-9 col-sm-10 col-xs-12">
       <label for="kids_household_size">How many children are living in your household?</label>
         <input type="text" id="kids_household_size" name="kids_household_size" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>" required>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-9 col-sm-10 col-xs-12">
       <label for="pregnant" id="pregnant" >Are you pregnant ? </label>
       <div class="radio-button">
         <% [ 'yes', 'no'].each do |pregnant| %>
@@ -53,7 +53,7 @@
 
   <!-- Form for gross monthly income -->
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="kids_gross_income">What is your gross monthly income?</label>
           <p type="button" data-toggle="popover" data-content="Total monthly income from all sources." data-placement="right" style="border: 0px; color: #4582ec; ">
            <input type="text" id="kids_gross_income" name="kids_gross_income" placeholder="For example: 1000" class="form-field" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %>" required>
