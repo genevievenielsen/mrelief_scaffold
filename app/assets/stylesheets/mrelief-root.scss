@@ -213,6 +213,16 @@ table {
 
 div.popover.fade.right.in {
   left: 280px !important;
+
+  @media(min-width:768px) and (max-width:991px){
+    left: 180px !important;
+
+  }
+
+  @media (max-width: 767px) {
+    left: 200px !important;
+  }
+
 }
 
 /*ICONS*/
