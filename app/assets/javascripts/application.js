@@ -41,12 +41,12 @@ $(document).ready(function() {
   });
 
   // popover close button
-  $("p").popover({
-      placement: 'right',
-      html: 'true',
-      title : '<span class="text-info"><strong></strong></span>'+
-              '<button type="button" id="close" class="close popover-close pull-left" onclick="$(&quot;p&quot;).popover(&quot;hide&quot;);">&times;</button>'
-  });
+  // $("p").popover({
+  //     placement: 'right',
+  //     html: 'true',
+  //     title : '<span class="text-info"><strong></strong></span>'+
+  //             '<button type="button" id="close" class="close popover-close pull-left" onclick="$(&quot;p&quot;).popover(&quot;hide&quot;);">&times;</button>'
+  // });
 
 
   //Scrolling calculator
