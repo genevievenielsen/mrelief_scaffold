@@ -22,7 +22,7 @@
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="snap_dependent_no">What is the number of people living in your household including yourself?</label>
-          <p data-toggle="popover" data-content="This should include the number of people who purchase and prepare food with you." data-placement="right">
+          <p data-toggle="popover" data-content="This should include the number of people who purchase and prepare food with you." data-placement="right" id="example">
           <input type="text" id="snap_dependent_no" name="snap_dependent_no" placeholder="For example: 3" class="form-field" value="<%= @d.try(:dependent_no) || @current_user.try(:household_size) %>" required>
           </p>
       </div>
