@@ -59,15 +59,19 @@ class RentalAssistancesController < ApplicationController
          end
         end # closes the if statement about the lease agreement
       end #closes first if statement
-      if params[:rental_status] == "medical circumstance"
+      if params[:medical].present?
         @medical_circumstance = "yes"
-      elsif params[:rental_status] == "a victim of natural disaster or fire"
+      end
+      if params[:natural_disaster].present?
         @natural_disaster = "yes"
-      elsif params[:rental_status] == "a recipient of an eviction notice"
+      end
+      if params[:eviction].present?
         @eviction = "yes"
-      elsif params[:rental_status] == "have experienced a temporary loss of income"
+      end
+      if params[:income].present?
         @temporary_loss = "yes"
-      elsif params[:rental_status] == "a victim of domestic violence"
+      end
+      if params[:domestic_violence] == "a victim of domestic violence"
         @domestic_violence = "yes"
       end
 
@@ -124,7 +128,7 @@ class RentalAssistancesController < ApplicationController
             @resources_second = @resources.second
         end
 
-      if params[:lease].present? && params[:rental_status].present? && params[:next_rent].present?
+      if params[:lease].present? && params[:next_rent].present?
       else
          flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
         render "new"
@@ -133,6 +137,12 @@ class RentalAssistancesController < ApplicationController
     end #closes method
 
   def documents
+
+    @medical_circumstance = params[:medical_circumstance] 
+    @natural_disaster = params[:natural_disaster]
+    @temporary_loss = params[:temporary_loss]
+    @domestic_violence = params[:domestic_violence]
+    @eviction = params[:eviction]
 
   end
 

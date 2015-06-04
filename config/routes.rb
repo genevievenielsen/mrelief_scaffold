@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   get("/rental_documents", { :controller => "rental_assistances", :action => "documents" })
 
 
+
   get("/session_clear", {:controller => "pages", :action => "session_clear"})
 
 

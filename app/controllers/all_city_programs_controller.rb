@@ -317,13 +317,19 @@ class AllCityProgramsController < ApplicationController
                 end
             end # closes the if statement about the lease agreement
 
-          if params[:rental_status] == "medical circumstance"
+          if params[:medical].present?
             @medical_circumstance = "yes"
-          elsif params[:rental_status] == "a victim of natural disaster or fire"
+          end
+          if params[:natural_disaster].present?
             @natural_disaster = "yes"
-          elsif params[:rental_status] == "have experienced a temporary loss of income"
+          end
+          if params[:eviction].present?
+            @eviction = "yes"
+          end
+          if params[:income].present?
             @temporary_loss = "yes"
-          elsif params[:rental_status] == "a victim of domestic violence"
+          end
+          if params[:domestic_violence] == "a victim of domestic violence"
             @domestic_violence = "yes"
           end
       end

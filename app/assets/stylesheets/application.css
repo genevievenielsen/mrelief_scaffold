@@ -339,16 +339,15 @@ a:hover {
   display: inline;
 }
 
-
+/*This makes placeholder text gray on Internet Explorer*/
 input::-webkit-input-placeholder {
-  color: #b5b5b5;
-}
-input::-moz-placeholder {
-  color: #b5b5b5; 
-}
-input:-moz-placeholder {   /* Older versions of Firefox */
   color: #b5b5b5;
 }
 input:-ms-input-placeholder { 
   color: #b5b5b5; 
+}
+
+.rental-link {
+  border:0;
+  background-color: #FFFFFF;
 }

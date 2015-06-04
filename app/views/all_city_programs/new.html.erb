@@ -264,32 +264,24 @@
 
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
-        <label>If you are unable to pay your rent at this time, what circumstance explains why you are unable to pay rent? </label>
+        <label class="allthatapply">What circumstance explains why you are unable to pay rent at this time? </label>
+        
         <div class="radio-button">
-          <div class="relative" id="rental_status">
-            <%= radio_button_tag 'rental_status', 'medical circumstance' %> Someone experiencing a medical circumstance
+          <input type="checkbox" name="medical" value="medical circumstance"> Someone experiencing a medical circumstance <a data-toggle="popover" data-content="An emergency procedure (for example: surgery, related to complicated birth or other conditions) that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to your spouse, child, committed partner whose name is on the lease or grandparent who lives with you." data-placement="right" style="border: 0px; color: #4582ec; ">Learn More</a><br>
 
-            <a data-toggle="popover" data-content="An emergency procedure (for example: surgery, related to complicated birth or other conditions) that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to your spouse, child, committed partner whose name is on the lease or grandparent who lives with you." data-placement="right" style="border: 0px; color: #4582ec; ">Learn More</a>
+          <input type="checkbox" name="natural_disaster" value="a victim of natural disaster or fire">  A victim of natural disaster or fire
+          <a data-toggle="popover" data-content="A natural disaster includes instances such as a tornado or fire that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to floods for people who are renting a basement apartment who can not afford to replace those items and are seeking relocation." data-placement="right" style="border: 0px; color: #4582ec;">Learn More</a><br>
 
+          <input type="checkbox" name="eviction" value="a recipient of an eviction notice"> A recipient of an eviction notice
+          <a data-toggle="popover" data-content="This must be a notice that is notarized and brought with you if you qualify." data-placement="right" style="border: 0px; color: #4582ec;">Learn More</a><br>
 
-            <br><%= radio_button_tag 'rental_status', 'a victim of natural disaster or fire' %> A victim of natural disaster or fire
+          <input type="checkbox" name="income" value="have experienced a temporary loss of income"> Have experienced a temporary loss of income
+           <a data-toggle="popover" data-content="This involves losing income due to an unforeseen event (layoff, termination,or other emergencies etc.) The month in between when you lose your job and qualify for unemployment would be admissible." data-placement="right" style="border: 0px; color: #4582ec;">Learn More</a><br>
 
-            <a data-toggle="popover" data-content="A natural disaster includes instances such as a tornado or fire that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to floods for people who are renting a basement apartment who can not afford to replace those items and are seeking relocation." data-placement="right" style="border: 0px; color: #4582ec;">Learn More</a>
+          <input type="checkbox" name="domestic_violence" value="a victim of domestic violence"> A victim of domestic violence
+           <a data-toggle="popover" data-content="This involves losing income due to violence from your intimate partner. " data-placement="right" style="border: 0px; color: #4582ec;">Learn More</a><br>
 
-            <br><%= radio_button_tag 'rental_status', 'a recipient of an eviction notice' %> A recipient of an eviction notice
-
-            <a data-toggle="popover" data-content="This must be a notice that is notarized and brought with you if you qualify." data-placement="right" style="border: 0px; color: #4582ec;">Learn More</a>
-
-            <br><%= radio_button_tag 'rental_status', 'have experienced a temporary loss of income' %> Have experienced a temporary loss of income
-
-             <a data-toggle="popover" data-content="This involves losing income due to an unforeseen event (layoff, termination,or other emergencies etc.) The month in between when you lose your job and qualify for unemployment would be admissible." data-placement="right" style="border: 0px; color: #4582ec;">Learn More</a>
-
-            <br><%= radio_button_tag 'rental_status', 'a victim of domestic violence' %> A victim of domestic violence
-
-            <a data-toggle="popover" data-content="This involves losing income due to violence from your intimate partner. " data-placement="right" style="border: 0px; color: #4582ec;">Learn More</a>
-
-            <br><%= radio_button_tag 'rental_status', 'none of the above' %> None of the above
-          </div>
+          <input type="checkbox" name="rental_status" value="none of the above"> None of the above<br>
         </div>
       </div>
     </div>

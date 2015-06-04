@@ -5,7 +5,7 @@ class MedicaidsController < ApplicationController
 
   def new
     @medicaid = Medicaid.new
-    @d = MedicaidData.new
+    @d = MedicaidData.new(JSON.parse(params[:data])) if params[:data].present? else @d = MedicaidData.new
     @current_user = current_user
   end
 
@@ -98,6 +98,8 @@ class MedicaidsController < ApplicationController
    @d.citizen = params[:citizen]
    @d.zipcode = params[:zipcode]
    @d.save
+
+   @d_json = @d.attributes.to_json
 
     if params[:citizen].present?
     else

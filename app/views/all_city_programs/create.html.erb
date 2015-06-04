@@ -94,16 +94,24 @@
           <div class="all-city-results">
             <h3>Rental Assistance</h3>
              <% if @medical_circumstance == "yes" %>
-              <p>You must be able to obtain documents from your employer showing that you took time off as well as from the hospital or attending physician.</p>
-             <% elsif @natural_disaster == "yes" %>
-              <p>You must be able to prove this by obtaining documents from a fire marshall (standard fire department reports). For floods, please provide a letter from your landlord and photographs.
-             </p>
-            <% elsif @temporary_loss == "yes"%>
-              <p>You must provide last 90 days of pay stubs and a letter from employer stating (layoff, termination, etc) and the return date to work. You can also provide unemployment assistance documentation.</p>
-            <% elsif @domestic_violence == "yes"%>
-              <p>You must be able to prove this by providing a report from the police department or a document showing an order of protection/restraining order.</p>
-            <% end %>
-            <p>The final decision will be made one-on-one by the case manager.</p>
+               <p>You must be able to obtain documents from your employer showing that you took time off as well as from the hospital or attending physician.</p>
+             <% end %>
+
+             <% if @natural_disaster == "yes" %>
+               <p>You must be able to prove this by obtaining documents from a fire marshall (standard fire department reports). For floods, please provide a letter from your landlord and photographs.
+               </p>
+             <% end %>
+
+             <% if @temporary_loss == "yes"%>
+               <p>You must provide last 90 days of pay stubs and a letter from employer stating (layoff, termination, etc) and the return date to work. You can also provide unemployment assistance documentation.</p>
+             <% end %>
+
+             <% if @domestic_violence == "yes"%>
+               <p>You must be able to prove this by providing a report from the police department or a document showing an order of protection/restraining order.</p>
+
+             <% end %>
+
+             <p>The final decision will be made one-on-one by the case manager.</p>
 
             <% if @laf_disclaimer.present?  %>
                 <p><%= @laf_disclaimer %></p>
@@ -117,7 +125,18 @@
               <li>Days that Spanish is spoken - <%= @lafcenter.spanish %></li>
             </ul>
             <p>or call 3-1-1.</p>
-            <p>See the documents you need <%= link_to "here", rental_documents_url, :class => "secondary-link" %>.</p>
+
+            <%= form_tag rental_documents_url, method: :get do %>
+              
+              <%= hidden_field_tag :medical_circumstance, @medical_circumstance  %>
+              <%= hidden_field_tag :natural_disaster, @natural_disaster  %>
+              <%= hidden_field_tag :temporary_loss, @temporary_loss  %>
+              <%= hidden_field_tag :domestic_violence, @domestic_violence  %>
+              <%= hidden_field_tag :eviction, @eviction  %>
+
+            <p>See the documents you need <%= submit_tag "here", :class => "secondary-link rental-link"  %>.</p>
+
+            <% end %>
           </div>
         <% end %>
 
