@@ -58,6 +58,7 @@
       <div class="row">
         <div class="col-md-9 col-sm-10 col-xs-12">
           <label for="monthly_gross_income"> What is your household's gross monthly income?</label>
+          <%= render "programs/popover_calculator" %>
             <p type="button" data-toggle="popover" data-content="This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
             <input type="text" id="monthly_gross_income" name="monthly_gross_income" placeholder="For example: 1000"class="    form-field" value="<%= @d.monthly_gross_income %>" required>
             </p>
@@ -70,6 +71,7 @@
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="net_income">How much do you anticipate to earn in net income in the next 30 days? (After taxes have been taken out)</label>
+        <%= render "programs/popover_calculator" %>
           <p type="button" data-toggle="popover" data-content="This should include income you earn from your work, self  employment and rental income (contributions from people who live with you.)" data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
           <input type="text" id="net_income" name="net_income" placeholder="For example: 1000"class="form-field" value="<%= @d.thirty_day_net_income %>" required>
           </p>
@@ -81,9 +83,8 @@
   <% if @current_user.aabd != "checked" %>
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
-        <label for="monthly_benefits">
-         What is your monthly income expected from government benefits or other assistance?
-        </label>
+        <label for="monthly_benefits">What is your monthly income expected from government benefits or other assistance</label>
+        <%= render "programs/popover_calculator" %>
           <p type="button" data-toggle="popover" data-content="This includes social security (SSI), veterans benefits, railroad assistance etc." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
           <input type="text" id="monthly_benefits" name="monthly_benefits" placeholder="For example: 1000"class="form-field" value="<%= @d.monthly_benefits %>" required>
           </p>
@@ -113,6 +114,7 @@
         <label for="expect_child_support">
           How much do you expect to receive in child support in the next 30 days?
         </label>
+        <%= render "programs/popover_calculator" %>
            <input type="text" id="expect_child_support" name="expect_child_support" placeholder="For example: 500" class="  form-field" value="<%= @d.child_support %>" required>
       </div>
     </div>
@@ -123,6 +125,7 @@
         <label for="expect_ssi">
           How much do you expect to receive in SSI in the next 30 days?
         </label>
+        <%= render "programs/popover_calculator" %>
          <input type="text" id="expect_ssi" name="expect_ssi" placeholder="For example: 500" class="form-field" value="<%= @d.ssi %>" required>
       </div>
     </div>
@@ -134,6 +137,7 @@
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="ninety_day_gross_income">
           What is your income over the past 90 days? </label>
+          <%= render "programs/popover_calculator" %>
           <p type="button" data-toggle="popover" data-content="Includes cash receipts from all sources including money wages and salaries before any deductions, unemployment compensation, public assistance, alimony, child support, lottery/gambling winnings, dividends and all other income." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
             <input type="text" id="ninety_day_gross_income" name="ninety_day_gross_income" placeholder="For example: 4000"    class="form-field" value="<%= @d.ninety_day_gross_income %>" required>
           </p>
@@ -146,6 +150,7 @@
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
        <label for="annual_gross_income">What is your gross annual income? </label>
+       <%= render "programs/popover_calculator" %>
           <p type="button" data-toggle="popover" data-content="Your total income before tax deductions, including your  spouse's income if married and living together on December 31 of last year, and that of a qualified additional resident (if applicable)." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
             <input type="text" id="annual_gross_income" name="annual_gross_income" placeholder="For example: 30000" class=" form-field" value="<%= @d.annual_gross_income %>" required>
           </p>
@@ -157,6 +162,7 @@
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
       <label for="assets">Please estimate the value of your assets. (Exclude the value of your home and car.)</label>
+      <%= render "programs/popover_calculator" %>
         <p type="button" data-toggle="popover" data-content="Personal property is anything owned by a person that is not land or permanently affixed to land. This includes such items as: money in checking and savings accounts;stocks, bonds, savings certificates, and other securities;farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
           <input type="text" id="assets" name="assets" placeholder="For example: 5000" class="form-field" value="<%= @d.assets %>" required>
           </p>

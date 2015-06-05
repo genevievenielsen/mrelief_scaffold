@@ -79,6 +79,7 @@
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="gross_income">How much do you anticipate to earn in gross income in the next 30 days?</label>
+        <%= render "programs/popover_calculator" %>
           <p type="button" data-toggle="popover" data-content="This should include income you or your child earn from your work, self employment and rental income (contributions from people who live with you.) This should NOT include child support or SSI benefits." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
             <input type="text" id="gross_income" name="gross_income" placeholder="For example: 1000"class="form-field" value="<%= @d.thirty_day_gross_income %>" required>
           </p>
@@ -111,6 +112,7 @@
         <label for="expect_child_support">
           How much do you expect to receive in child support in the next 30 days?
         </label>
+        <%= render "programs/popover_calculator" %>
            <input type="text" id="expect_child_support" name="expect_child_support" placeholder="For example: 500" class="  form-field" value="<%= @d.expect_child_support %>" required>
       </div>
     </div>
@@ -121,6 +123,7 @@
         <label for="expect_ssi">
           How much do you expect to receive in SSI in the next 30 days?
         </label>
+        <%= render "programs/popover_calculator" %>
            <input type="text" id="expect_ssi" name="expect_ssi" placeholder="For example: 500"class="form-field" value="<%= @d.expect_ssi %>" required>
       </div>
     </div>

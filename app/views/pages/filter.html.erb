@@ -94,17 +94,6 @@
 
 
     if($('input:radio[name=benefits][value="yes"]').prop('checked')){
-
-      //Check if the current URL contains '#'
-       // if(document.URL.indexOf("#")==-1){
-       //     // Set the URL to whatever it was plus "#".
-       //     url = document.URL+"#";
-       //     location = "#";
-
-       //     //Reload the page
-       //     location.reload(true);
-       // }
-
       $('.place_for_benefits_checkboxes').empty().append("<%= escape_javascript(render "pages/benefits_checkboxes") %>");
      };
   });

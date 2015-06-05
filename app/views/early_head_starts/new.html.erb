@@ -34,6 +34,7 @@
     <div class="row">
      <div class="col-md-9 col-sm-10 col-xs-12">
       <label for="ehs_gross_income">What is your gross monthly income?</label>
+      <%= render "programs/popover_calculator" %>
           <p type="button" data-toggle="popover" data-content="Your income per year before tax deductions." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
             <input type="text" id="ehs_gross_income" name="ehs_gross_income" placeholder="For example: 1,500" class="form-field" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %>" required>
           </p>

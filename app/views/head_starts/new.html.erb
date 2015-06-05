@@ -45,6 +45,7 @@
       <div class="row">
        <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="hs_gross_income">What is your gross annual income?</label>
+        <%= render "programs/popover_calculator" %>
           <p type="button" data-toggle="popover" data-content="Your income per year before tax deductions." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
            <input type="text" id="hs_gross_income" name="hs_gross_income" placeholder="For example: 30000" class="form-field" value="<%= @d.gross_annual_income %>" required>
            </p>

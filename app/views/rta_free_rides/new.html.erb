@@ -30,6 +30,7 @@
       <div class="row">
         <div class="col-md-9 col-sm-10 col-xs-12">
           <label for="rta_gross_income"> What is your gross annual income?</label>
+          <%= render "programs/popover_calculator" %>
               <p type="button" data-toggle="popover" data-content="Your total income before tax deductions, including your spouse's income if married and living together on December 31 of last year, and that of a qualified additional resident (if applicable)." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
 
               <input type="text" id="rta_gross_income" name="rta_gross_income" placeholder="For example: 30000" class="form-field" value= "<%= @d.gross_annual_income %>" required>
