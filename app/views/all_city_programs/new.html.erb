@@ -26,7 +26,7 @@
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="dependent_no">What is the number of people living in your household including yourself?</label>
-          <p type="button" data-toggle="popover" data-content="This should include the number of people who purchase and  prepare food with you." data-placement="right" style="border: 0px; color: #4582ec; ">
+          <p type="button" data-toggle="popover" data-content="This should include the number of people who purchase and  prepare food with you." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
           <input type="text" id="dependent_no" name="dependent_no" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>"  required>
           </p>
       </div>
@@ -58,7 +58,7 @@
       <div class="row">
         <div class="col-md-9 col-sm-10 col-xs-12">
           <label for="monthly_gross_income"> What is your household's gross monthly income?</label>
-            <p type="button" data-toggle="popover" data-content="This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions." data-placement="right" style="border: 0px; color: #4582ec; ">
+            <p type="button" data-toggle="popover" data-content="This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as Social Security, child support, and unemployment insurance before any deductions." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
             <input type="text" id="monthly_gross_income" name="monthly_gross_income" placeholder="For example: 1000"class="    form-field" value="<%= @d.monthly_gross_income %>" required>
             </p>
         </div>
@@ -70,7 +70,7 @@
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="net_income">How much do you anticipate to earn in net income in the next 30 days? (After taxes have been taken out)</label>
-          <p type="button" data-toggle="popover" data-content="This should include income you earn from your work, self  employment and rental income (contributions from people who live with you.)" data-placement="right" style="border: 0px; color: #4582ec; ">
+          <p type="button" data-toggle="popover" data-content="This should include income you earn from your work, self  employment and rental income (contributions from people who live with you.)" data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
           <input type="text" id="net_income" name="net_income" placeholder="For example: 1000"class="form-field" value="<%= @d.thirty_day_net_income %>" required>
           </p>
       </div>
@@ -84,7 +84,7 @@
         <label for="monthly_benefits">
          What is your monthly income expected from government benefits or other assistance?
         </label>
-          <p type="button" data-toggle="popover" data-content="This includes social security (SSI), veterans benefits, railroad assistance etc." data-placement="right" style="border: 0px; color: #4582ec; ">
+          <p type="button" data-toggle="popover" data-content="This includes social security (SSI), veterans benefits, railroad assistance etc." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
           <input type="text" id="monthly_benefits" name="monthly_benefits" placeholder="For example: 1000"class="form-field" value="<%= @d.monthly_benefits %>" required>
           </p>
       </div>
@@ -95,9 +95,7 @@
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="anticipate_income" id="anticipate_income">Do you or your child anticipate getting any other source of income outside of your job, child support or SSI?
-       
-        <a data-toggle="popover" data-content="This includes unemployment insurance, pensions,  workers compensation and any other form of income." data-placement="right" style="border: 0px; color: #4582ec;">Learn More</a>
-
+          <a data-toggle="popover" data-content="This includes unemployment insurance, pensions,  workers compensation and any other form of income." data-placement="right" style="border: 0px; color: #4582ec;">Learn More</a>
         </label>
         <div class="radio-button">
           <% [ 'yes', 'no'].each do |anticipate_income| %>
@@ -136,7 +134,7 @@
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="ninety_day_gross_income">
           What is your income over the past 90 days? </label>
-          <p type="button" data-toggle="popover" data-content="Includes cash receipts from all sources including money wages and salaries before any deductions, unemployment compensation, public assistance, alimony, child support, lottery/gambling winnings, dividends and all other income." data-placement="right" style="border: 0px; color: #4582ec; ">
+          <p type="button" data-toggle="popover" data-content="Includes cash receipts from all sources including money wages and salaries before any deductions, unemployment compensation, public assistance, alimony, child support, lottery/gambling winnings, dividends and all other income." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
             <input type="text" id="ninety_day_gross_income" name="ninety_day_gross_income" placeholder="For example: 4000"    class="form-field" value="<%= @d.ninety_day_gross_income %>" required>
           </p>
       </div>
@@ -148,7 +146,7 @@
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
        <label for="annual_gross_income">What is your gross annual income? </label>
-          <p type="button" data-toggle="popover" data-content="Your total income before tax deductions, including your  spouse's income if married and living together on December 31 of last year, and that of a qualified additional resident (if applicable)." data-placement="right" style="border: 0px; color: #4582ec; ">
+          <p type="button" data-toggle="popover" data-content="Your total income before tax deductions, including your  spouse's income if married and living together on December 31 of last year, and that of a qualified additional resident (if applicable)." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
             <input type="text" id="annual_gross_income" name="annual_gross_income" placeholder="For example: 30000" class=" form-field" value="<%= @d.annual_gross_income %>" required>
           </p>
       </div>
@@ -159,7 +157,7 @@
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
       <label for="assets">Please estimate the value of your assets. (Exclude the value of your home and car.)</label>
-        <p type="button" data-toggle="popover" data-content="Personal property is anything owned by a person that is not land or permanently affixed to land. This includes such items as: money in checking and savings accounts;stocks, bonds, savings certificates, and other securities;farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property." data-placement="right" style="border: 0px; color: #4582ec; ">
+        <p type="button" data-toggle="popover" data-content="Personal property is anything owned by a person that is not land or permanently affixed to land. This includes such items as: money in checking and savings accounts;stocks, bonds, savings certificates, and other securities;farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
           <input type="text" id="assets" name="assets" placeholder="For example: 5000" class="form-field" value="<%= @d.assets %>" required>
           </p>
       </div>

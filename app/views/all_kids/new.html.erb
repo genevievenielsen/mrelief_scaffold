@@ -55,7 +55,7 @@
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="kids_gross_income">What is your gross monthly income?</label>
-          <p type="button" data-toggle="popover" data-content="Total monthly income from all sources." data-placement="right" style="border: 0px; color: #4582ec; ">
+          <p type="button" data-toggle="popover" data-content="Total monthly income from all sources." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
            <input type="text" id="kids_gross_income" name="kids_gross_income" placeholder="For example: 1000" class="form-field" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %>" required>
           </p>
       </div>

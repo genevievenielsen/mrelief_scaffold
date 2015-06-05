@@ -69,7 +69,7 @@
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="household_size">What is your household size?</label>
-          <p type="button" data-toggle="popover" data-content="The number of people in your household including   yourself." data-placement="right" style="border: 0px; color: #4582e">
+          <p type="button" data-toggle="popover" data-content="The number of people in your household including   yourself." data-placement="right" style="border: 0px; color: #4582e" class="popover-body">
             <input type="text" id="household_size" name="household_size" placeholder="For example: 3" class="form-field"    value="<%= @current_user.try(:household_size) %>" required>
           </p>
       </div>
@@ -79,7 +79,7 @@
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="gross_income">How much do you anticipate to earn in gross income in the next 30 days?</label>
-          <p type="button" data-toggle="popover" data-content="This should include income you or your child earn from your work, self employment and rental income (contributions from people who live with you.) This should NOT include child support or SSI benefits." data-placement="right" style="border: 0px; color: #4582ec;">
+          <p type="button" data-toggle="popover" data-content="This should include income you or your child earn from your work, self employment and rental income (contributions from people who live with you.) This should NOT include child support or SSI benefits." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
             <input type="text" id="gross_income" name="gross_income" placeholder="For example: 1000"class="form-field" value="<%= @d.thirty_day_gross_income %>" required>
           </p>
       </div>

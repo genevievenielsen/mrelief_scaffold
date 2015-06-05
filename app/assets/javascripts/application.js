@@ -25,11 +25,12 @@ $(document).ready(function() {
   };
 
 
-  //popover code
+  //Trigger popover code
   $(function (){
     $("[data-toggle='popover']").popover();
   });
 
+  // close pover on click
   $('body').on('click', function (e) {
       $('[data-toggle="popover"]').each(function () {
           //the 'is' for buttons that trigger popups
@@ -41,12 +42,11 @@ $(document).ready(function() {
   });
 
   // popover close button
-  // $("p").popover({
-  //     placement: 'right',
-  //     html: 'true',
-  //     title : '<span class="text-info"><strong></strong></span>'+
-  //             '<button type="button" id="close" class="close popover-close pull-left" onclick="$(&quot;p&quot;).popover(&quot;hide&quot;);">&times;</button>'
-  // });
+  $(".popover-body").popover({
+      placement: 'right',
+      html: 'true',
+      title : '<button type="button" id="close" class="close popover-close pull-left" onclick="$(&quot;p&quot;).popover(&quot;hide&quot;);">&times;</button>'
+  });
 
 
   //Scrolling calculator
