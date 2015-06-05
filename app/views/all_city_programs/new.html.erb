@@ -83,7 +83,7 @@
   <% if @current_user.aabd != "checked" %>
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
-        <label for="monthly_benefits">What is your monthly income expected from government benefits or other assistance</label>
+        <label for="monthly_benefits">What is your monthly income expected from government benefits or other assistance?</label>
         <%= render "programs/popover_calculator" %>
           <p type="button" data-toggle="popover" data-content="This includes social security (SSI), veterans benefits, railroad assistance etc." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
           <input type="text" id="monthly_benefits" name="monthly_benefits" placeholder="For example: 1000"class="form-field" value="<%= @d.monthly_benefits %>" required>
@@ -326,11 +326,8 @@
   </form>
   </div>
 
-  <div class="col-md-3 sm-3 xs-12 pull-left">
-    <div class="calculator_box">
-      <%= render "programs/calculator" %>
-    </div>
-  </div>
+  <%= render "programs/calculator" %>
+
 
   </div>
 </section>
