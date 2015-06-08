@@ -7,6 +7,7 @@ $secondary-link: #4582ec;
 
 body {
   font-family: $font-stack;
+  font-size: 20px;
 }
 
 h1, h2, h3, h4 {
@@ -158,7 +159,6 @@ button {
 .programs {
   margin-bottom: 45px;
   margin-top: 20px;
-  color: #514C4C;
   height: 110px;
 
   h4 {

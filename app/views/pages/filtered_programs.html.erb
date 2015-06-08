@@ -2,7 +2,7 @@
   <section class="marquee">
     <div class="row">
       <div class="col-md-12">
-        <a href="/all_city_programs/new">Continue screening All Programs in Chicago Community Service Centers &rarr;</a>
+        <button class="pull-right" href="/all_city_programs/new">Continue screening All Programs &rarr;</button>
       </div>
     </div>
   </section>
@@ -10,13 +10,6 @@
 
 
 <div class="container">
-<section>
-  <!-- <div class="row">
-    <div class="col-md-12">
-      <h3>What We Know So Far</h3>
-    </div>
-  </div> -->
-
 <!-- Eligible Programs  -->
  <div class="row">
     <div class="col-md-5 resources">
@@ -28,7 +21,7 @@
         <div class="filtered-results">
           <h4><%= program.name %></h4>
           <p><%= program.description %></p>
-          <a href="<%= program.url %>" class="programs"> Continue &rarr;</a>
+          <a href="<%= program.url %>"> Continue &rarr;</a>
         </div>
       <% end %>
     </div>
@@ -61,7 +54,7 @@
       <div class="filtered-results">
         <h4><%= resource.capitalize %></h4>
         <p>Find <%= resource %> resources that can help you in your community</p>
-        <a href="#" class="programs" data-toggle="modal" data-target="#myModal">Continue &rarr;</a>
+        <a href="#" data-toggle="modal" data-target="#myModal">Continue &rarr;</a>
       </div>
     <% end %>
    </div>
