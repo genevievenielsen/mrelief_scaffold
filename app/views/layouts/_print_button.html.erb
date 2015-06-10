@@ -3,10 +3,8 @@
 
 
   <% if request.path == "/medicaids" %>
+  <a> <%= link_to "← Back", new_medicaid_path(data: @d_json), :class => "previous pull-left", onclick: "onClick()" %></a>
   
-    <a> <%= link_to "← Back", new_medicaid_path(data: @d_json), :class => "previous pull-left", onclick: "onClick()" %></a>
-       <p>i made it here</p>  
-
   <% elsif request.path == "/snap_eligibilities" %>
     <a><%= link_to "← Back", new_snap_eligibility_path(data: @d_json), :class => "previous pull-left", onclick: "onClick()" %></a> 
 
