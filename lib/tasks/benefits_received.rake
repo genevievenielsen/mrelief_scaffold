@@ -12,8 +12,8 @@ task :benefits_received => :environment do
 	puts "Number of phone numbers for food stamps: #{snap_eligible_phone_numbers.uniq.count}"
 
 	snap_eligible_phone_numbers.uniq.each do |phone_number|
-		# phone_number = phone_number.gsub!("-", "")	
-		puts "#{phone_number}"
+		number = phone_number.gsub!("-", "")	
+		puts "#{number}"
 	end
 
 	# All people who completed the all city programs form in the King Center and were eligible for rental assistance
@@ -28,13 +28,17 @@ task :benefits_received => :environment do
 	puts "Number of phone numbers for rental assistance: #{rental_eligible_phone_numbers.uniq.count}"
 
 	rental_eligible_phone_numbers.uniq.each do |phone_number|
-		# phone_number = phone_number.gsub!("-", "")
-		puts "#{phone_number}"
+		number = phone_number.gsub!("-", "")
+		puts "#{number}"
 	end
 
 
 	duplicates = snap_eligible_phone_numbers & rental_eligible_phone_numbers
 
 	puts "Duplicates: #{duplicates.count}"
+
+	duplicates.each do |duplicate|
+		puts "#{duplicate}"
+	end
 		
 end
