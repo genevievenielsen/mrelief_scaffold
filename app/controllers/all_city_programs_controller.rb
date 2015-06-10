@@ -507,7 +507,7 @@ class AllCityProgramsController < ApplicationController
         @eligible_all_kids = "already receiving"
       else
         
-      if children != 0
+      if children != 0 && params[:pregnant] == nil
         if params[:pregnant].present?
            dependent_no_kids = children + 1
            dependent_no_kids = dependent_no_kids.to_i
