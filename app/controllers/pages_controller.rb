@@ -14,6 +14,12 @@ class PagesController < ApplicationController
   end
 
   def filtered_programs
+    # Check that all questions are answered
+    if params[:benefits].present? && params[:disabled].present? && params[:dependent_no].present? && params[:age].present? && params[:gross_income].present?
+    else
+      redirect_to :back, :alert => 'Looks like you forgot to answer a question! Please answer all questions below.'
+    end
+    
     # Clean data
     dependent_no = params[:dependent_no].strip
     if dependent_no !~ /\D/  # returns true if all numbers
@@ -45,13 +51,6 @@ class PagesController < ApplicationController
       @gross_income = gross_income.to_i
     else
       @gross_income = gross_income.in_numbers
-    end
-
-     # Check that all questions are answered
-    if params[:benefits].present? && params[:disabled].present? && params[:dependent_no].present? && params[:age].present? && params[:gross_income].present?
-    else
-      redirect_to :back, :alert => 'Looks like you forgot to answer a question! Please answer all questions below.'
-
     end
 
     #Data Storage
@@ -546,5 +545,7 @@ class PagesController < ApplicationController
        session[:AccountNo] = nil
        render :text => "session cleared"
   end
+
+
 
 end

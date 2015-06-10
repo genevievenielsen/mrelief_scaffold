@@ -11,19 +11,12 @@
 // about supported directives.
 //
 //= require jquery
+
 //= require jquery_ujs
 //= require_tree .
 
 
 $(document).ready(function() {
-
-  // clear cookies
-  window.onbeforeunload = function(event) {
-      $.ajax({
-        url: "/session_clear",
-      });
-  };
-
 
   //Trigger popover code
   $(function (){
