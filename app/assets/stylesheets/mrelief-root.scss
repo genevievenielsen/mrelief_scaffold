@@ -36,7 +36,7 @@ a {
 .secondary-link {
   color: $secondary-link;
 
-  &:hover{
+  &:hover {
     color: darken($secondary-link, 10%);
   }
 }
