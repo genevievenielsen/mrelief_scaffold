@@ -102,7 +102,7 @@ a {
   margin-bottom: 40px;
 }
 
-button {
+button, .button {
   font-family: $font-stack;
   padding: 15px 30px;
   border-radius: 3px;
@@ -116,6 +116,7 @@ button {
 
   &:hover {
     background-color: darken($button-color, 10%);
+    color: #fff;
   }
 }
 
