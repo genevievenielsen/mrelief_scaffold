@@ -5,7 +5,7 @@ task :benefits_received => :environment do
 
 
 	AllCityProgramDatum.all.each do |all_city|
-		if all_city.created_at >= "January 14, 2015" && all_city.phone_number.present? && all_city.phone_number != "7777777" && all_city.snap_eligibility_status == "yes"
+		if all_city.created_at >= "January 14, 2015" && all_city.phone_number.present? && all_city.phone_number != "7777777777" && all_city.snap_eligibility_status == "yes"
     	  snap_eligible_phone_numbers.push(all_city.phone_number)
     	end
 	end
