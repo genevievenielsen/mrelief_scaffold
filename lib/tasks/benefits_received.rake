@@ -10,7 +10,9 @@ task :benefits_received => :environment do
 
 	puts "Number of phone numbers for food stamps: #{snap_eligible_phone_numbers.uniq.count}"
 	snap_eligible_phone_numbers.uniq.each do |phone_number|
-		# phone_number = phone_number.gsub!("-", "")	
+		if phone_number.include?("-")
+			phone_number = phone_number.gsub!("-", "")	
+		end
 		puts "#{phone_number}"
 	end
 
@@ -25,7 +27,9 @@ task :benefits_received => :environment do
 	puts "Number of phone numbers for rental assistance: #{rental_eligible_phone_numbers.uniq.count}"
 
 	rental_eligible_phone_numbers.uniq.each do |phone_number|
-		# phone_number = phone_number.gsub!("-", "")
+		if phone_number.include?("-")
+			phone_number = phone_number.gsub!("-", "")	
+		end
 		puts "#{phone_number}"
 	end
 
