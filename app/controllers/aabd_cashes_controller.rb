@@ -7,7 +7,14 @@ class AabdCashesController < ApplicationController
   # GET /aabd_cashes/new
   def new
     @aabd_cash = AabdCash.new
-    @d = AabdCashData.new
+   
+    if params[:data].present? 
+      @d = AabdCashData.new(JSON.parse(params[:data])) 
+    else 
+      @d = AabdCashData.new
+    end
+
+
     @current_user = current_user
   end
 
@@ -129,6 +136,8 @@ class AabdCashesController < ApplicationController
     @d.disabled_status = params[:disabled]
     @d.zipcode = params[:zipcode]
     @d.save
+
+    @d_json = @d.attributes.to_json
 
     @user_zipcode = params[:zipcode]
     @zipcode = @user_zipcode << ".0"

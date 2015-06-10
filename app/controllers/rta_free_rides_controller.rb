@@ -7,6 +7,11 @@ class RtaFreeRidesController < ApplicationController
   def new
     @rta_free_ride = RtaFreeRide.new
     @d = RtaFreeRideData.new
+    if params[:data].present? 
+      @d = RtaFreeRideData.new(JSON.parse(params[:data])) 
+    else 
+      @d = RtaFreeRideData.new
+    end
     @current_user = current_user
   end
 
@@ -68,6 +73,8 @@ class RtaFreeRidesController < ApplicationController
     @d.disabled_status = params[:disabled]
     @d.zipcode = params[:zipcode]
     @d.save
+
+    @d_json = @d.attributes.to_json
 
      @user_zipcode = params[:zipcode]
      @zipcode = @user_zipcode << ".0"

@@ -13,22 +13,16 @@ class SnapEligibilitiesController < ApplicationController
   def new
     @snap_eligibility = SnapEligibility.new
     @current_user = current_user
-
-    # current_user_data = SnapEligibilityData.where(:user_id => @current_user).last
-    # if current_user_data.present?
-    #   @d = current_user_data
-    # else
+    if params[:data].present? 
+      @d = SnapEligibilityData.new(JSON.parse(params[:data])) 
+    else 
       @d = SnapEligibilityData.new
-    # end
-
+    end
   end
 
   def create
-
       @d = SnapEligibilityData.new
       @current_user = current_user
-      # @d.user_id = @current_user.id
-
         dependent_no = params[:snap_dependent_no].strip
         # this is the words into numbers logic
         if dependent_no !~ /\D/  # returns true if all numbers
@@ -74,6 +68,8 @@ class SnapEligibilitiesController < ApplicationController
         @d.student_status = params[:student]
         @d.work_status = params[:work]
         @d.amount_in_account = params[:amount_in_account]
+
+        @d_json = @d.attributes.to_json
 
           # user is not a student
           if params[:education]  == 'no'

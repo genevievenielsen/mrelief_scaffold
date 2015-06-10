@@ -5,7 +5,12 @@ class MedicaidsController < ApplicationController
 
   def new
     @medicaid = Medicaid.new
-    @d = MedicaidData.new(JSON.parse(params[:data])) if params[:data].present? else @d = MedicaidData.new
+    if params[:data].present? 
+      @d = MedicaidData.new(JSON.parse(params[:data])) 
+    else 
+      @d = MedicaidData.new
+    end
+
     @current_user = current_user
   end
 
@@ -47,7 +52,10 @@ class MedicaidsController < ApplicationController
       end
     end
 
+    
 
+
+   #RESOURCE LOOKUP
    @user_zipcode = params[:zipcode]
    @zipcode = @user_zipcode << ".0"
    @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
@@ -92,11 +100,11 @@ class MedicaidsController < ApplicationController
           @resources_second = @resources.second
       end
 
-    #DATA STORAGE
+   #DATA STORAGE
    @d.user_location = params[:user_location]
    @d.phone_number = params[:phone_number] if params[:phone_number].present?
    @d.citizen = params[:citizen]
-   @d.zipcode = params[:zipcode]
+   @d.zipcode = @user_zipcode.chop.chop
    @d.save
 
    @d_json = @d.attributes.to_json

@@ -6,7 +6,11 @@ class ChildCareVouchersController < ApplicationController
   # GET /child_care_vouchers/new
  def new
     @child_care_voucher = ChildCareVoucher.new
-    @d = ChildCareVoucherData.new
+    if params[:data].present? 
+      @d = ChildCareVoucherData.new(JSON.parse(params[:data])) 
+    else 
+      @d = ChildCareVoucherData.new
+    end
     @current_user = current_user
   end
 
@@ -82,9 +86,6 @@ class ChildCareVouchersController < ApplicationController
          end
        end
 
-
-       #@resources.where(:zip => @user_zipcode)
-
        #in this case there are 2 medical centers in the user's zip
        if @resources_zip.count >= 2
           @resources = @resources_zip
@@ -103,8 +104,11 @@ class ChildCareVouchersController < ApplicationController
   # DATA STORAGE
     @d.user_location = params[:user_location]
     @d.phone_number = params[:phone_number] if params[:phone_number].present?
-    @d.zipcode = params[:zipcode]
+    @d.zipcode = @user_zipcode.chop.chop
     @d.save
+
+    @d_json = @d.attributes.to_json
+
 end
 
 

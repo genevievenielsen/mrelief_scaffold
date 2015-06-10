@@ -6,7 +6,11 @@ class WicsController < ApplicationController
   # GET /wics/new
   def new
     @wic = Wic.new
-    @d = WicData.new
+    if params[:data].present? 
+      @d = WicData.new(JSON.parse(params[:data])) 
+    else 
+      @d = WicData.new
+    end
     @current_user = current_user
   end
 
@@ -99,8 +103,11 @@ class WicsController < ApplicationController
 
     @d.user_location = params[:user_location]
     @d.phone_number = params[:phone_number] if params[:phone_number].present?
-    @d.zipcode = params[:zipcode]
+    @d.zipcode = @user_zipcode.chop.chop
     @d.save
+
+    @d_json = @d.attributes.to_json
+
 
     if params[:wic_status].present?
     else

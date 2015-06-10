@@ -2,7 +2,7 @@ task :click_through => :environment do
 
   snap_correct_dates = []
   SnapEligibilityData.all.each do |snap_data|
-    if snap_data.created_at >= "February 2, 2015" && snap_data.created_at <= "April 19, 2015"
+    if snap_data.created_at >= "February 2, 2015" && snap_data.created_at <= "June 9, 2015"
       snap_correct_dates.push(snap_data)
     end
   end
@@ -21,7 +21,7 @@ task :click_through => :environment do
 
   medicaid_correct_dates = []
   MedicaidData.all.each do |medicaid_data|
-    if medicaid_data.created_at >= "February 2, 2015" && medicaid_data.created_at <= "April 19, 2015"
+    if medicaid_data.created_at >= "February 2, 2015" && medicaid_data.created_at <= "June 9, 2015"
       medicaid_correct_dates.push(medicaid_data)
     end
   end
@@ -41,7 +41,7 @@ task :click_through => :environment do
 
   allkids_correct_dates = []
   AllKidsData.all.each do |allkids_data|
-    if allkids_data.created_at >= "February 2, 2015" && allkids_data.created_at <= "April 19, 2015"
+    if allkids_data.created_at >= "February 2, 2015" && allkids_data.created_at <= "June 9, 2015"
       allkids_correct_dates.push(allkids_data)
     end
   end
@@ -58,7 +58,7 @@ task :click_through => :environment do
 
   allcity_correct_dates = []
   AllCityProgramDatum.all.each do |allcity_data|
-    if allcity_data.created_at >= "February 2, 2015" && allcity_data.created_at <= "April 19, 2015"
+    if allcity_data.created_at >= "February 2, 2015" && allcity_data.created_at <= "June 9, 2015"
       allcity_correct_dates.push(allcity_data)
     end
   end
@@ -86,7 +86,7 @@ task :click_through => :environment do
 
   rta_correct_dates = []
   RtaFreeRideData.all.each do |rta_data|
-    if rta_data.created_at >= "February 2, 2015" && rta_data.created_at <= "April 19, 2015"
+    if rta_data.created_at >= "February 2, 2015" && rta_data.created_at <= "June 9, 2015"
       rta_correct_dates.push(rta_data)
     end
   end
@@ -104,7 +104,7 @@ task :click_through => :environment do
 
   rental_correct_dates = []
   RentalAssistanceData.all.each do |rental_data|
-    if rental_data.created_at >= "February 2, 2015" && rental_data.created_at <= "April 19, 2015"
+    if rental_data.created_at >= "February 2, 2015" && rental_data.created_at <= "June 9, 2015"
       rental_correct_dates.push(rental_data)
     end
   end

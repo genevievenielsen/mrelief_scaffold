@@ -6,16 +6,22 @@ class AllCityProgramsController < ApplicationController
   # GET /all_city_programs/new
   def new
     @all_city_program = AllCityProgram.new
-    @d = AllCityProgramDatum.new
 
-    if current_user.present?
-      @current_user = @current_user
-    else
-      @current_user = User.new
+    if params[:data].present? 
+      @d = AllCityProgramDatum.new(JSON.parse(params[:data])) 
+    else 
+      @d = AllCityProgramDatum.new
     end
 
-    #session hash
-    session[:user_id] = @current_user.id
+    if current_user.present?
+      @current_user = current_user
+    else
+      @current_user = User.new
+      if @current_user.save
+        #session hash
+        session[:user_id] = @current_user.id
+      end
+    end
 
     if params[:filtered_programs] == "false"
       @current_user.food_stamps = params[:food_stamps]
@@ -292,46 +298,58 @@ class AllCityProgramsController < ApplicationController
 
 
       #HERE IS THE LOGIC FOR RENTAL ASSISTANCE
-      @d.name_on_lease = params[:lease]
-      @d.next_month_rent = params[:next_rent]
-      @d.rental_status = params[:rental_status]
+      
 
       if @current_user.rental_assistance == "checked"
         puts "I made it here"
         @rental_eligible = "already receiving"
       else
-          rental_eligibility = RentalAssistance.find_by({ :rental_dependent_no => dependent_no })
-          rental_cut_off =  rental_eligibility.rental_gross_income
-          rental_cut_off_plus_200 = rental_eligibility.rental_gross_income + 200
+       # Rental Status Variable
+        @rental_status = ""
+        if params[:medical].present?
+          @medical_circumstance = "yes"
+          @rental_status = @rental_status + "medical circumstance, " 
+        end
+        if params[:natural_disaster].present?
+          @natural_disaster = "yes"
+          @rental_status = @rental_status + "a victim of natural disaster or fire, "
+        end
+        if params[:eviction].present?
+          @eviction = "yes"
+          @rental_status = @rental_status + "a recipient of an eviction notice, "
+        end
+        if params[:income].present?
+          @temporary_loss = "yes"
+          @rental_status = @rental_status + "have experienced a temporary loss of income, "
 
-            if params[:lease] == "no" || params[:next_rent] == "no"
-              @rental_eligible = "no"
+        end
+        if params[:domestic_violence] == "a victim of domestic violence"
+          @domestic_violence = "yes"
+          @rental_status =  @rental_status + "a victim of domestic violence, "
+        end
 
-            elsif params[:lease] == "yes"
-                if ninety_day_gross_income < rental_eligibility.rental_gross_income && params[:rental_status] != "none of the above"
-                  @rental_eligible = "yes"
-                elsif ninety_day_gross_income < rental_cut_off_plus_200 && ninety_day_gross_income >= rental_cut_off && params[:rental_status] != "none of the above"
-                  @rental_eligible = "maybe"
-                else
-                  @rental_eligible = "no"
-                end
-            end # closes the if statement about the lease agreement
+      #Data Storage
+        @d.name_on_lease = params[:lease]
+        @d.next_month_rent = params[:next_rent]
+        @d.rental_status = @rental_status
 
-          if params[:medical].present?
-            @medical_circumstance = "yes"
-          end
-          if params[:natural_disaster].present?
-            @natural_disaster = "yes"
-          end
-          if params[:eviction].present?
-            @eviction = "yes"
-          end
-          if params[:income].present?
-            @temporary_loss = "yes"
-          end
-          if params[:domestic_violence] == "a victim of domestic violence"
-            @domestic_violence = "yes"
-          end
+      #Logic
+        rental_eligibility = RentalAssistance.find_by({ :rental_dependent_no => dependent_no })
+        rental_cut_off =  rental_eligibility.rental_gross_income
+        rental_cut_off_plus_200 = rental_eligibility.rental_gross_income + 200
+
+          if params[:lease] == "no" || params[:next_rent] == "no"
+            @rental_eligible = "no"
+
+          elsif params[:lease] == "yes"
+              if ninety_day_gross_income < rental_eligibility.rental_gross_income && params[:rental_status] != "none of the above"
+                @rental_eligible = "yes"
+              elsif ninety_day_gross_income < rental_cut_off_plus_200 && ninety_day_gross_income >= rental_cut_off && params[:rental_status] != "none of the above"
+                @rental_eligible = "maybe"
+              else
+                @rental_eligible = "no"
+              end
+          end # closes the if statement about the lease agreement
       end
 
           housing = []
@@ -342,29 +360,29 @@ class AllCityProgramsController < ApplicationController
           end
 
           @pb_zipcode = @user_zipcode.chomp(".0")
-            @housing_resources = housing
-            @housing_resources_zip = []
+          @housing_resources = housing
+          @housing_resources_zip = []
 
-            housing.each do |center|
-              if center.zip.match(@pb_zipcode)
-                @housing_resources_zip.push(center)
-              end
+          housing.each do |center|
+            if center.zip.match(@pb_zipcode)
+              @housing_resources_zip.push(center)
             end
+          end
 
-            #in this case there are 2 housing centers in the user's zip
-            if @housing_resources_zip.count >= 2
-               @housing_resources = @housing_resources_zip
-            end
-            #in this case there is 1 aabd center in the user's zip
-            if @housing_resources_zip.count == 1
-               @housing_resources_first = @housing_resources_zip.first
-               @housing_resources_second = @housing_resources.first
-            end
-            #in this caser there are no aabd centers in the user's zip
-            if  @housing_resources_zip.count == 0
-                @housing_resources_first = @housing_resources.first
-                @housing_resources_second = @housing_resources.second
-            end
+          #in this case there are 2 housing centers in the user's zip
+          if @housing_resources_zip.count >= 2
+             @housing_resources = @housing_resources_zip
+          end
+          #in this case there is 1 aabd center in the user's zip
+          if @housing_resources_zip.count == 1
+             @housing_resources_first = @housing_resources_zip.first
+             @housing_resources_second = @housing_resources.first
+          end
+          #in this caser there are no aabd centers in the user's zip
+          if  @housing_resources_zip.count == 0
+              @housing_resources_first = @housing_resources.first
+              @housing_resources_second = @housing_resources.second
+          end
 
       #HERE IS THE LOGIC FOR RTA RIDE FREE
       if @current_user.rta_ride_free == "checked"
@@ -463,18 +481,38 @@ class AllCityProgramsController < ApplicationController
 
 
       # HERE IS THE LOGIC FOR ALL KIDS
+      # Health care status variable
+      @healthcare_status = ""
+      if params[:uninsured].present?
+        @healthcare_status = @healthcare_status + "uninsured, " 
+        puts @healthcare_status
+      end
+      if params[:job_ended].present?
+        @healthcare_status = @healthcare_status + "job_ended, "
+        puts @healthcare_status
+      end
+      if params[:cobra].present?
+        @healthcare_status = @healthcare_status + "cobra, "
+        puts @healthcare_status
+      end
+      if params[:status] == "none"
+        @healthcare_status = @healthcare_status + "none"
+        puts @healthcare_status
+      end
+
       @d.pregnant = params[:pregnant]
-      @d.child_health_insurance_state = params[:status]
+      @d.child_health_insurance_state = @healthcare_status
 
       if @current_user.all_kids == "checked"
         @eligible_all_kids = "already receiving"
       else
+        
         if params[:pregnant].present?
-           dependent_no_kids = dependent_no + 1
+           dependent_no_kids = children + 1
            dependent_no_kids = dependent_no_kids.to_i
            kids_eligibility = AllKid.find_by({ :kids_household_size => dependent_no_kids })
         else
-          kids_eligibility = AllKid.find_by({ :kids_household_size => dependent_no })
+          kids_eligibility = AllKid.find_by({ :kids_household_size => children })
         end
 
         if monthly_gross_income  < kids_eligibility.premium_1_gross_income
@@ -632,7 +670,22 @@ class AllCityProgramsController < ApplicationController
       end
 
       # HERE IS THE LOGIC FOR TANF
-      @d.pregnant_or_caring_for_child = params[:care_for_child] || params[:pregnant] || params[:no_children]
+      # Pregnant or care for child
+      @pregnant_or_caring_for_child = ""
+      if params[:pregnant].present?
+        @pregnant_or_caring_for_child = @pregnant_or_caring_for_child + "pregnant, " 
+        puts @pregnant_or_caring_for_child
+      end
+      if params[:care_for_child].present?
+        @pregnant_or_caring_for_child = @pregnant_or_caring_for_child + "care_for_child,  "
+        puts @pregnant_or_caring_for_child
+      end
+      if params[:no_children].present?
+        @pregnant_or_caring_for_child = @pregnant_or_caring_for_child + "no_children, "
+        puts @pregnant_or_caring_for_child
+      end
+
+      @d.pregnant_or_caring_for_child = @pregnant_or_caring_for_child
       @d.relationship_to_child = params[:relationship]
       @d.pregnant_with_first_child = params[:first_child]
       @d.tanif_sixty_months = params[:tanif_sixty_months]
@@ -858,7 +911,9 @@ class AllCityProgramsController < ApplicationController
     end
 
     @d.phone_number = params[:phone_number] if params[:phone_number].present?
+    @d.zipcode = @user_zipcode
     @d.save
+    @d_json = @d.attributes.to_json
 
     # if params[:citizen].present? && params[:disabled].present? && params[:education].present? && params[:anticipate_income].present?
     # else

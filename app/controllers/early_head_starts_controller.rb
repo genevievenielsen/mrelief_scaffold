@@ -6,7 +6,11 @@ class EarlyHeadStartsController < ApplicationController
   # GET /early_head_starts/new
  def new
     @early_head_start = EarlyHeadStart.new
-    @d = EarlyHeadStartData.new
+    if params[:data].present? 
+      @d = EarlyHeadStartData.new(JSON.parse(params[:data])) 
+    else 
+      @d = EarlyHeadStartData.new
+    end
     @current_user = current_user
   end
 
@@ -35,12 +39,8 @@ class EarlyHeadStartsController < ApplicationController
       @d.gross_monthly_income = ehs_gross_income
     end
 
-
     if  ehs_gross_income.present? && ehs_dependent_no.present?
-
       ehs_eligibility = EarlyHeadStart.find_by({ :ehs_dependent_no => ehs_dependent_no })
-
-
        p "ehs_gross_income = #{ehs_gross_income}"
        p "ehs_eligibility.ehs_gross_income = #{ehs_eligibility.ehs_gross_income}"
 
@@ -96,8 +96,9 @@ class EarlyHeadStartsController < ApplicationController
 
       @d.user_location = params[:user_location]
       @d.phone_number = params[:phone_number] if params[:phone_number].present?
-      @d.zipcode = params[:zipcode]
+      @d.zipcode = @user_zipcode.chop.chop
       @d.save
+      @d_json = @d.attributes.to_json
   end
 
 

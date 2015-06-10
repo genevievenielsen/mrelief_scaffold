@@ -7,7 +7,12 @@ class AllKidsController < ApplicationController
   # GET /all_kids/new
   def new
     @all_kid = AllKid.new
-    @d = AllKidsData.new
+    if params[:data].present? 
+      @d = AllKidsData.new(JSON.parse(params[:data])) 
+    else 
+      @d = AllKidsData.new
+    end
+
     @current_user = current_user
   end
 
@@ -88,13 +93,35 @@ class AllKidsController < ApplicationController
         end
     end
 
+    # Health care status variable
+    @healthcare_status = ""
+    if params[:uninsured].present?
+      @healthcare_status = @healthcare_status + "uninsured, " 
+      puts @healthcare_status
+    end
+    if params[:job_ended].present?
+      @healthcare_status = @healthcare_status + "job_ended, "
+      puts @healthcare_status
+    end
+    if params[:cobra].present?
+      @healthcare_status = @healthcare_status + "cobra, "
+      puts @healthcare_status
+    end
+    if params[:status] == "none"
+      @healthcare_status = @healthcare_status + "none"
+      puts @healthcare_status
+    end
+    
+  
     # Data Storage
     @d.phone_number = params[:phone_number] if params[:phone_number].present?
     @d.user_location = params[:user_location]
     @d.pregnant = params[:pregnant]
-    @d.healthcare_status = params[:status]
+    @d.healthcare_status = @healthcare_status
     @d.zipcode = params[:zipcode]
     @d.save
+
+    @d_json = @d.attributes.to_json
 
     @user_zipcode = params[:zipcode]
     @zipcode = @user_zipcode << ".0"
@@ -123,9 +150,6 @@ class AllKidsController < ApplicationController
          end
        end
 
-
-       #@resources.where(:zip => @user_zipcode)
-
          #in this case there are 2 medical centers in the user's zip
          if @resources_zip.count >= 2
             @resources = @resources_zip
@@ -142,12 +166,16 @@ class AllKidsController < ApplicationController
              @resources_first = @resources.first
              @resources_second = @resources.second
          end
-      if params[:pregnant].present? && params[:status].present?
+      if params[:pregnant].present?
+        if params[:uninsured].present? || params[:job_ended].present? || params[:cobra].present? || params[:status].present?
+        else
+           flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
+          render "new"
+        end
       else
          flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
         render "new"
       end
-
 
   end
 

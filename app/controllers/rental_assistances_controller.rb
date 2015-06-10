@@ -8,7 +8,13 @@ class RentalAssistancesController < ApplicationController
 
   def new
     @rental_assistance = RentalAssistance.new
-    @d = RentalAssistanceData.new
+
+    if params[:data].present? 
+      @d = RentalAssistanceData.new(JSON.parse(params[:data])) 
+    else 
+      @d = RentalAssistanceData.new
+    end
+    
     @current_user = current_user
   end
 
@@ -59,20 +65,29 @@ class RentalAssistancesController < ApplicationController
          end
         end # closes the if statement about the lease agreement
       end #closes first if statement
+
+      # RENTAL STATUS VARIABLE
+      @rental_status = ""
       if params[:medical].present?
         @medical_circumstance = "yes"
+        @rental_status = @rental_status + "medical circumstance, " 
       end
       if params[:natural_disaster].present?
         @natural_disaster = "yes"
+        @rental_status = @rental_status + "a victim of natural disaster or fire, "
       end
       if params[:eviction].present?
         @eviction = "yes"
+        @rental_status = @rental_status + "a recipient of an eviction notice, "
       end
       if params[:income].present?
         @temporary_loss = "yes"
+        @rental_status = @rental_status + "have experienced a temporary loss of income, "
+
       end
       if params[:domestic_violence] == "a victim of domestic violence"
         @domestic_violence = "yes"
+        @rental_status =  @rental_status + "a victim of domestic violence, "
       end
 
       # DATA STORAGE
@@ -80,10 +95,14 @@ class RentalAssistancesController < ApplicationController
       @d.phone_number = params[:phone_number] if params[:phone_number].present?
       @d.name_on_lease = params[:lease]
       @d.next_month_rent = params[:next_rent]
-      @d.rental_status = params[:rental_status]
-      @d.zipcode = params[:zipcode]
+      @d.rental_status = @rental_status
+      @d.zipcode = params[:zipcode].chomp(".0")
       @d.save
 
+      @d_json = @d.attributes.to_json
+
+
+      # RESOURCE LOOKUP
       @user_zipcode = params[:zipcode]
       @zipcode = @user_zipcode << ".0"
       @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
@@ -101,7 +120,7 @@ class RentalAssistancesController < ApplicationController
         end
       end
 
-      @pb_zipcode = @user_zipcode.chomp(".0")
+        @pb_zipcode = @user_zipcode.chomp(".0")
         @resources = housing
         @resources_zip = []
 
@@ -115,13 +134,11 @@ class RentalAssistancesController < ApplicationController
         if @resources_zip.count >= 2
            @resources = @resources_zip
         end
-
         #in this case there is 1 aabd center in the user's zip
         if @resources_zip.count == 1
            @resources_first = @resources_zip.first
            @resources_second = @resources.first
         end
-
         #in this caser there are no aabd centers in the user's zip
         if  @resources_zip.count == 0
             @resources_first = @resources.first
@@ -129,6 +146,11 @@ class RentalAssistancesController < ApplicationController
         end
 
       if params[:lease].present? && params[:next_rent].present?
+        if params[:medical].present? || params[:natural_disaster].present? || params[:eviction].present? || params[:income].present? || params[:domestic_violence].present? || params[:rental_status].present?
+        else
+           flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
+          render "new"
+        end
       else
          flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
         render "new"

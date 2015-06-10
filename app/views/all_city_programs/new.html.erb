@@ -27,7 +27,7 @@
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="dependent_no">What is the number of people living in your household including yourself?</label>
           <p type="button" data-toggle="popover" data-content="This should include the number of people who purchase and  prepare food with you." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
-          <input type="text" id="dependent_no" name="dependent_no" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>"  required>
+          <input type="text" id="dependent_no" name="dependent_no" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) || @d.try(:dependent_no)%>"  required>
           </p>
       </div>
     </div>
@@ -38,7 +38,7 @@
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="children">How many children 18 and under are you caring for?</label>
-          <input type="text" id="children" name="children" placeholder="For example: 3" class="form-field"  value="<%= @d.number_of_children %>" required>
+          <input type="text" id="children" name="children" placeholder="For example: 3" class="form-field"  value="<%= @d.try(:number_of_children) %>" required>
       </div>
     </div>
   <% end %>
@@ -48,7 +48,7 @@
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
        <label for="medicare_household_size">How many people in your household receive Medicare?</label>
-         <input type="text" id="medicare_household_size" name="medicare_household_size" placeholder="For example: 2" class="   form-field"  required>
+         <input type="text" id="medicare_household_size" name="medicare_household_size" placeholder="For example: 2" class="   form-field" value="<%= @d.try(:medicare_household_size) %>"  required>
        </div>
      </div>
    <% end %>
@@ -199,12 +199,14 @@
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label>Select all that apply to you:</label>
         <div class="radio-button">
-          <input type="checkbox" name="pregnant" value="pregnant"> I am pregnant<br>
-          <input type="checkbox" name="first_child" value="first_child"> I am pregnant with my first child <br>
-          <input type="checkbox" name="teen_parent" value="teen_parent"> I am a teen parent <br>
-          <input type="checkbox" name="highschool" value="no_highschool"> I care for a child that is 18 and not enrolled full time in high school <br>
-          <input type="checkbox" name="care_for_child" value="care_for_child"> I care for a child that is under 19 years of age <br>
-          <input type="checkbox" name="no_children" value="no_children"> I care for no children <br>
+          <input type="checkbox" name="pregnant" value="pregnant"<% if @d.pregnant_or_caring_for_child != nil && @d.pregnant_or_caring_for_child.include?("pregnant") %>checked<% end %>> I am pregnant<br>
+
+          <input type="checkbox" name="first_child" value="first_child" <% if @d.pregnant_with_first_child != nil %>checked<% end %>> I am pregnant with my first child <br>
+          <input type="checkbox" name="teen_parent" value="teen_parent" <% if @d.teen_parent != nil %>checked<% end %>> I am a teen parent <br>
+          <input type="checkbox" name="no_highschool" value="no_highschool" <% if @d.child_in_school != nil %>checked<% end %>> I care for a child that is 18 and not enrolled full time in high school <br>
+
+          <input type="checkbox" name="care_for_child" value="care_for_child" <% if @d.pregnant_or_caring_for_child != nil && @d.pregnant_or_caring_for_child.include?("care_for_child") %>checked<% end %>> I care for a child that is under 19 years of age <br>
+          <input type="checkbox" name="no_children" value="no_children" <% if @d.pregnant_or_caring_for_child != nil && @d.pregnant_or_caring_for_child.include?("no_children") %>checked<% end %>> I care for no children <br>
         </div>
       </div>
     </div>
@@ -269,23 +271,29 @@
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label class="allthatapply">What circumstance explains why you are unable to pay rent at this time? </label>
-        
         <div class="radio-button">
-          <input type="checkbox" name="medical" value="medical circumstance"> Someone experiencing a medical circumstance <a data-toggle="popover" data-content="An emergency procedure (for example: surgery, related to complicated birth or other conditions) that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to your spouse, child, committed partner whose name is on the lease or grandparent who lives with you." data-placement="right" style="border: 0px; color: #4582ec; ">Learn More</a><br>
+          <input type="checkbox" name="medical" value="medical circumstance" 
+          <% if @d.rental_status != nil && @d.rental_status.include?("medical circumstance") %>checked<% end %>
+          > Someone experiencing a medical circumstance <a data-toggle="popover" data-content="An emergency procedure (for example: surgery, related to complicated birth or other conditions) that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to your spouse, child, committed partner whose name is on the lease or grandparent who lives with you." data-placement="right" style="border: 0px; color: #4582ec;" >Learn More</a><br>
 
-          <input type="checkbox" name="natural_disaster" value="a victim of natural disaster or fire">  A victim of natural disaster or fire
-          <a data-toggle="popover" data-content="A natural disaster includes instances such as a tornado or fire that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to floods for people who are renting a basement apartment who can not afford to replace those items and are seeking relocation." data-placement="right" style="border: 0px; color: #4582ec;">Learn More</a><br>
+          <input type="checkbox" name="natural_disaster" value="a victim of natural disaster or fire" 
+            <% if @d.rental_status != nil && @d.rental_status.include?("a victim of natural disaster or fire") %>checked<% end %>
+          >  A victim of natural disaster or fire 
+          <a data-toggle="popover" data-content="A natural disaster includes instances such as a tornado or fire that prevents you from returning to work immediately and then leads to temporarily losing income. This can also apply to floods for people who are renting a basement apartment who can not afford to replace those items and are seeking relocation." data-placement="right" style="border: 0px; color: #4582ec;" >Learn More</a><br>
 
-          <input type="checkbox" name="eviction" value="a recipient of an eviction notice"> A recipient of an eviction notice
-          <a data-toggle="popover" data-content="This must be a notice that is notarized and brought with you if you qualify." data-placement="right" style="border: 0px; color: #4582ec;">Learn More</a><br>
+          <input type="checkbox" name="eviction" value="a recipient of an eviction notice" <% if @d.rental_status != nil && @d.try(:rental_status).include?("a recipient of an eviction notice") %>checked<% end %>
+          > A recipient of an eviction notice
+          <a data-toggle="popover" data-content="This must be a notice that is notarized and brought with you if you qualify." data-placement="right" style="border: 0px; color: #4582ec;" >Learn More</a><br>
 
-          <input type="checkbox" name="income" value="have experienced a temporary loss of income"> Have experienced a temporary loss of income
-           <a data-toggle="popover" data-content="This involves losing income due to an unforeseen event (layoff, termination,or other emergencies etc.) The month in between when you lose your job and qualify for unemployment would be admissible." data-placement="right" style="border: 0px; color: #4582ec;">Learn More</a><br>
+          <input type="checkbox" name="income" value="have experienced a temporary loss of income" <% if @d.rental_status != nil &&  @d.try(:rental_status).include?("have experienced a temporary loss of income") %>checked<% end %>
+          > Have experienced a temporary loss of income
+           <a data-toggle="popover" data-content="This involves losing income due to an unforeseen event (layoff, termination,or other emergencies etc.) The month in between when you lose your job and qualify for unemployment would be admissible." data-placement="right" style="border: 0px; color: #4582ec;" >Learn More</a><br>
 
-          <input type="checkbox" name="domestic_violence" value="a victim of domestic violence"> A victim of domestic violence
-           <a data-toggle="popover" data-content="This involves losing income due to violence from your intimate partner. " data-placement="right" style="border: 0px; color: #4582ec;">Learn More</a><br>
+          <input type="checkbox" name="domestic_violence" value="a victim of domestic violence" <% if @d.rental_status != nil && @d.try(:rental_status).include?("a victim of domestic violence") %>checked<% end %>
+          > A victim of domestic violence
+           <a data-toggle="popover" data-content="This involves losing income due to violence from your intimate partner. " data-placement="right" style="border: 0px; color: #4582ec;" >Learn More</a><br>
 
-          <input type="checkbox" name="rental_status" value="none of the above"> None of the above<br>
+          <input type="checkbox" name="rental_status" value="none of the above" > None of the above<br>
         </div>
       </div>
     </div>
@@ -297,13 +305,15 @@
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="status" id="status" class="pull-left">If you have a child, check the box below that describes your child's health insurance status:</label>
         <div class="radio-button">
-          <input type="checkbox" name="status" value="uninsured">  been uninsured for 12 months<br>
-          <input type="checkbox" name="status" value="job_ended"> lost insurance because a JOB ended<br>
-          <input type="checkbox" name="status" value="cobra"> lost insurance because the insurance was COBRA<br>
-          <input type="checkbox" name="status" value="none"> none of the above<br>
+          <input type="checkbox" name="uninsured" value="uninsured" <% if @d.child_health_insurance_state != nil && @d.child_health_insurance_state.include?("uninsured") %>checked<% end %>
+          >  been uninsured for 12 months<br>
+          <input type="checkbox" name="job_ended" value="job_ended" <% if @d.child_health_insurance_state != nil && @d.child_health_insurance_state.include?("job_ended") %>checked<% end %>> lost insurance because a JOB ended<br>
+          <input type="checkbox" name="cobra" value="cobra" <% if @d.child_health_insurance_state != nil && @d.child_health_insurance_state.include?("cobra") %>checked<% end %>> lost insurance because the insurance was COBRA<br>
+          <input type="checkbox" name="status" value="none" <% if @d.child_health_insurance_state != nil && @d.child_health_insurance_state.include?("none") %>checked<% end %>> none of the above<br>
         </div>
       </div>
     </div>
+
   <% end %>
 
   <% if @current_user.food_stamps != "checked" || @current_user.rta_ride_free != "checked" || @current_user.aabd != "checked" %>

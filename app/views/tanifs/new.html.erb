@@ -31,12 +31,14 @@
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label>Select all that apply to you:</label>
         <div class="radio-button">
-          <input type="checkbox" name="pregnant" value="pregnant"> I am pregnant<br>
-          <input type="checkbox" name="first_child" value="first_child"> I am pregnant with my first child <br>
-          <input type="checkbox" name="teen_parent" value="teen_parent"> I am a teen parent <br>
-          <input type="checkbox" name="highschool" value="no_highschool"> I care for a child that is 18 and not enrolled full time in high school <br>
-          <input type="checkbox" name="care_for_child" value="care_for_child"> I care for a child that is under 19 years of age <br>
-          <input type="checkbox" name="no_children" value="no_children"> I care for no children <br>
+          <input type="checkbox" name="pregnant" value="pregnant"<% if @d.pregnant_or_caring_for_child != nil && @d.pregnant_or_caring_for_child.include?("pregnant") %>checked<% end %>> I am pregnant<br>
+
+          <input type="checkbox" name="first_child" value="first_child" <% if @d.pregnant_with_first_child != nil %>checked<% end %>> I am pregnant with my first child <br>
+          <input type="checkbox" name="teen_parent" value="teen_parent" <% if @d.teen_parent != nil %>checked<% end %>> I am a teen parent <br>
+          <input type="checkbox" name="no_highschool" value="no_highschool" <% if @d.enrolled_in_high_school != nil %>checked<% end %>> I care for a child that is 18 and not enrolled full time in high school <br>
+
+          <input type="checkbox" name="care_for_child" value="care_for_child" <% if @d.pregnant_or_caring_for_child != nil && @d.pregnant_or_caring_for_child.include?("care_for_child") %>checked<% end %>> I care for a child that is under 19 years of age <br>
+          <input type="checkbox" name="no_children" value="no_children" <% if @d.pregnant_or_caring_for_child != nil && @d.pregnant_or_caring_for_child.include?("no_children") %>checked<% end %>> I care for no children <br>
         </div>
       </div>
     </div>
@@ -59,7 +61,7 @@
         <label for="children">How many children 18 and under are you caring for?</label>
         <div class="row">
           <div class="col-md-12">
-            <input type="text" id="children" name="children" placeholder="For example: 3" class="form-field"  value="<%= @d.children %>" required>
+            <input type="text" id="children" name="children" placeholder="For example: 3" class="form-field"  value="<%= @d.try(:children) %>" required>
           </div>
         </div>
       </div>
@@ -70,7 +72,7 @@
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="household_size">What is your household size?</label>
           <p type="button" data-toggle="popover" data-content="The number of people in your household including   yourself." data-placement="right" style="border: 0px; color: #4582e" class="popover-body">
-            <input type="text" id="household_size" name="household_size" placeholder="For example: 3" class="form-field"    value="<%= @current_user.try(:household_size) %>" required>
+            <input type="text" id="household_size" name="household_size" placeholder="For example: 3" class="form-field"    value="<%= @current_user.try(:household_size) || @d.try(:household_size) %>" required>
           </p>
       </div>
     </div>
@@ -81,7 +83,7 @@
         <label for="gross_income">How much do you anticipate to earn in gross income in the next 30 days?</label>
         <%= render "programs/popover_calculator" %>
           <p type="button" data-toggle="popover" data-content="This should include income you or your child earn from your work, self employment and rental income (contributions from people who live with you.) This should NOT include child support or SSI benefits." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
-            <input type="text" id="gross_income" name="gross_income" placeholder="For example: 1000"class="form-field" value="<%= @d.thirty_day_gross_income %>" required>
+            <input type="text" id="gross_income" name="gross_income" placeholder="For example: 1000"class="form-field" value="<%= @d.try(:thirty_day_gross_income) %>" required>
           </p>
       </div>
     </div>
@@ -113,7 +115,7 @@
           How much do you expect to receive in child support in the next 30 days?
         </label>
         <%= render "programs/popover_calculator" %>
-           <input type="text" id="expect_child_support" name="expect_child_support" placeholder="For example: 500" class="  form-field" value="<%= @d.expect_child_support %>" required>
+           <input type="text" id="expect_child_support" name="expect_child_support" placeholder="For example: 500" class="  form-field" value="<%= @d.try(:expect_child_support) %>" required>
       </div>
     </div>
 

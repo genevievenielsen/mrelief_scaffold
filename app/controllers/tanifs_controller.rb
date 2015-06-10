@@ -7,7 +7,11 @@
   # GET /tanifs/new
   def new
     @tanif = Tanif.new
-    @d = TanfData.new
+    if params[:data].present? 
+      @d = TanfData.new(JSON.parse(params[:data])) 
+    else 
+      @d = TanfData.new
+    end
     @current_user = current_user
   end
 
@@ -137,20 +141,38 @@
      @d.tanf_eligibility_status = @eligible_tanif
   end
 
-    # DATA STORAGE
-    @d.user_location = params[:user_location]
-    @d.phone_number = params[:phone_number] if params[:phone_number].present?
-    @d.pregnant_or_caring_for_child = params[:care_for_child] || params[:pregant] || params[:no_children]
-    @d.relationship_to_child = params[:relationship]
-    @d.enrolled_in_high_school = params[:no_highschool]
-    @d.teen_parent = params[:teen_parent]
-    @d.pregnant_with_first_child = params[:first_child]
-    @d.anticipate_other_income = params[:anticipate_income]
-    @d.tanif_sixty_months = params[:tanif_sixty_months]
-    @d.citizen = params[:citizen]
-    @d.zipcode = params[:zipcode]
-    @d.save
+  # Pregnant or care for child
+  @pregnant_or_caring_for_child = ""
+  if params[:pregnant].present?
+    @pregnant_or_caring_for_child = @pregnant_or_caring_for_child + "pregnant, " 
+    puts @pregnant_or_caring_for_child
+  end
+  if params[:care_for_child].present?
+    @pregnant_or_caring_for_child = @pregnant_or_caring_for_child + "care_for_child,  "
+    puts @pregnant_or_caring_for_child
+  end
+  if params[:no_children].present?
+    @pregnant_or_caring_for_child = @pregnant_or_caring_for_child + "no_children, "
+    puts @pregnant_or_caring_for_child
+  end
 
+  # DATA STORAGE
+  @d.user_location = params[:user_location]
+  @d.phone_number = params[:phone_number] if params[:phone_number].present?
+  @d.pregnant_or_caring_for_child = @pregnant_or_caring_for_child
+  @d.relationship_to_child = params[:relationship]
+  @d.enrolled_in_high_school = params[:no_highschool]
+  @d.teen_parent = params[:teen_parent]
+  @d.pregnant_with_first_child = params[:first_child]
+  @d.anticipate_other_income = params[:anticipate_income]
+  @d.tanif_sixty_months = params[:tanif_sixty_months]
+  @d.citizen = params[:citizen]
+  @d.zipcode = params[:zipcode].chomp(".0")
+  @d.save
+
+  @d_json = @d.attributes.to_json
+
+    # RESOURCE LOOKUP
     @user_zipcode = params[:zipcode]
     @zipcode = @user_zipcode << ".0"
     @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
@@ -168,7 +190,6 @@
       end
     end
 
-
     @pb_zipcode = @user_zipcode.chomp(".0")
       @resources = childcare
       @resources_zip = []
@@ -183,13 +204,11 @@
       if @resources_zip.count >= 2
          @resources = @resources_zip
       end
-
       #in this case there is 1 medical center in the user's zip
       if @resources_zip.count == 1
          @resources_first = @resources_zip.first
          @resources_second = @resources.first
       end
-
       #in this caser there are no medical centers in the user's zip
       if  @resources_zip.count == 0
           @resources_first = @resources.first
@@ -197,6 +216,11 @@
       end
 
     if params[:relationship].present? && params[:tanif_sixty_months].present? && params[:anticipate_income].present? && params[:citizen].present?
+      if params[:pregnant].present? || params[:first_child].present? || params[:teen_parent].present? || params[:no_highschool].present? || params[:care_for_child].present? || params[:no_children].present?
+      else
+         flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
+        render "new"
+      end
     else
        flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
       render "new"

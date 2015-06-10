@@ -10,7 +10,11 @@ class HeadStartsController < ApplicationController
 
   def new
     @head_start = HeadStart.new
-    @d = HeadStartData.new
+    if params[:data].present? 
+      @d = HeadStartData.new(JSON.parse(params[:data])) 
+    else 
+      @d = HeadStartData.new
+    end
     @current_user = current_user
   end
 
@@ -101,8 +105,10 @@ class HeadStartsController < ApplicationController
     @d.user_location = params[:user_location]
     @d.phone_number = params[:phone_number] if params[:phone_number].present?
     @d.child_birthdate = params[:child_birthdate]
-    @d.zipcode = params[:zipcode]
+    @d.zipcode = @user_zipcode.chop.chop
     @d.save
+    @d_json = @d.attributes.to_json
+
 
     if params[:child_birthdate].present?
     else

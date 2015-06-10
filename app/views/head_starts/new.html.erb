@@ -21,13 +21,14 @@
     <!-- Form for child birthdate -->
       <div class="row">
         <div class="col-md-9 col-sm-10 col-xs-12">
-          <label for="child_birthdate" id="case_management" >Is the applicant child 3-years-old by Sep. 1st and not 5-years-old before Sep. 1st?</label>
-            <div class="radio-button">
-            <div id="child-birthdate">
-             <%= radio_button_tag 'child_birthdate', 'yes' %> yes
-            <%= radio_button_tag 'child_birthdate', 'no' %> no
-            </div>
-            </div>
+          <label for="child_birthdate" id="case_management">Is the applicant child 3-years-old by Sep. 1st and not 5-years-old before Sep. 1st?</label>
+          <div class="radio-button">
+            <% [ 'yes', 'no'].each do |child_birthdate| %>
+              <%= radio_button_tag 'child_birthdate', child_birthdate, @d.try(:child_birthdate) == child_birthdate %>
+              <%= child_birthdate.humanize %>
+              <br>
+            <% end %>
+          </div>
         </div>
       </div>
 
@@ -36,7 +37,7 @@
        <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="hs_dependent_no">How many dependents (including yourself) are in your household?</label>
           <p type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
-            <input type="text" id="hs_dependent_no" name="hs_dependent_no" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>" required>
+            <input type="text" id="hs_dependent_no" name="hs_dependent_no" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) || @d.try(:dependent_no) %>" required>
           </p>
         </div>
       </div>
@@ -47,7 +48,7 @@
         <label for="hs_gross_income">What is your gross annual income?</label>
         <%= render "programs/popover_calculator" %>
           <p type="button" data-toggle="popover" data-content="Your income per year before tax deductions." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
-           <input type="text" id="hs_gross_income" name="hs_gross_income" placeholder="For example: 30000" class="form-field" value="<%= @d.gross_annual_income %>" required>
+           <input type="text" id="hs_gross_income" name="hs_gross_income" placeholder="For example: 30000" class="form-field" value="<%= @d.gross_annual_income || @d.try(:gross_monthly_income) %>" required>
            </p>
         </div>
       </div>

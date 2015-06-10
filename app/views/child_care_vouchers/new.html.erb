@@ -26,7 +26,7 @@
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="ccdf_dependent_no">How many dependents (including yourself) are in your household?</label>
          <p type="button" data-toggle="popover" data-content="Total family size, including yourself and child[ren]." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
-          <input type="text" id="ccdf_dependent_no" name="ccdf_dependent_no" placeholder="For example: 3" class="form-field"value="<%= @current_user.try(:household_size) %>" required>
+          <input type="text" id="ccdf_dependent_no" name="ccdf_dependent_no" placeholder="For example: 3" class="form-field"value="<%= @current_user.try(:household_size) || @d.try(:dependent_no) %>" required>
           </p>
       </div>
     </div>
@@ -37,7 +37,7 @@
         <label for="ccdf_gross_income">What is your gross monthly income?</label>
           <%= render "programs/popover_calculator" %>
             <p type="button" data-toggle="popover" data-content="Total monthly income from all sources, including work, child support, TANF, and Social Security before any deductions." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body"class="popover-body">
-              <input type="text" id="ccdf_gross_income" name="ccdf_gross_income" placeholder="For example: 1500" class="form-field" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %>" required>
+              <input type="text" id="ccdf_gross_income" name="ccdf_gross_income" placeholder="For example: 1500" class="form-field" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) || @d.try(:gross_monthly_income) %>" required>
             </p>
       </div>
     </div>

@@ -24,7 +24,7 @@
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="aabd_household_size">What is your household size?</label>
           <p type="button" data-toggle="popover" data-content="Household is defined as anyone living in the same dwelling with you." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
-          <input type="text" id="aabd_household_size" name="aabd_household_size" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>" required>
+          <input type="text" id="aabd_household_size" name="aabd_household_size" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) || @d.try(:household_size)%>" required>
           </p>
       </div>
     </div>

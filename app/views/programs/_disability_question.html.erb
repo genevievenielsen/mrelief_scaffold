@@ -3,7 +3,7 @@
        <label for="disabled" id="disabled">Are you receiving disability benefits?</label>
        <div class="radio-button">
        <% [ 'Yes, from Social Security', 'Yes, from the Railroad Retirement Board ', 'Yes, from Veterans Affairs', 'No' ].each do |disabled| %>
-         <%= radio_button_tag 'disabled', disabled, @current_user.try(:disability_benefits) == disabled %>
+         <%= radio_button_tag 'disabled', disabled, @current_user.try(:disability_benefits) || @d.try(:disabled_status) == disabled %>
          <%= disabled.humanize %><br>
        <% end %>
        </div>

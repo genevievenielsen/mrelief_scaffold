@@ -1,17 +1,59 @@
 <div class="row content-section">
   <div class="col-md-12">
-  <!-- <a> <%#= link_to "← Back", new_medicaid_path(data: @d_json), :class => "previous pull-left", onclick: "onClick()" %></a> -->
-  <a href="#" class="secondary-link pull-right" onclick="onPrint();">Print this page</a>
+
+
+  <% if request.path == "/medicaids" %>
+  
+    <a> <%= link_to "← Back", new_medicaid_path(data: @d_json), :class => "previous pull-left", onclick: "onClick()" %></a>
+       <p>i made it here</p>  
+
+  <% elsif request.path == "/snap_eligibilities" %>
+    <a><%= link_to "← Back", new_snap_eligibility_path(data: @d_json), :class => "previous pull-left", onclick: "onClick()" %></a> 
+
+  <% elsif request.path == "/rta_free_rides" %>
+    <a><%= link_to "← Back", new_rta_free_ride_path(data: @d_json), :class => "previous pull-left", onclick: "onClick()" %></a> 
+  
+  <% elsif request.path == "/rental_assistances" %>
+    <a><%= link_to "← Back", new_rental_assistance_path(data: @d_json), :class => "previous pull-left", onclick: "onClick()" %></a> 
+  <% elsif request.path == "/all_kids" %>
+    <a><%= link_to "← Back", new_all_kid_path(data: @d_json), :class => "previous pull-left", onclick: "onClick()" %></a> 
+
+  <% elsif request.path == "/medicare_cost_sharings" %>
+    <a><%= link_to "← Back", new_medicare_cost_sharing_path(data: @d_json), :class => "previous pull-left", onclick: "onClick()" %></a> 
+
+  <% elsif request.path == "/aabd_cashes" %>
+    <a><%= link_to "← Back", new_aabd_cash_path(data: @d_json), :class => "previous pull-left", onclick: "onClick()" %></a> 
+
+  <% elsif request.path == "/tanifs" %>
+    <a><%= link_to "← Back", new_tanif_path(data: @d_json), :class => "previous pull-left", onclick: "onClick()" %></a> 
+
+  <% elsif request.path == "/all_city_programs" %>
+   <a><%= link_to "← Back", new_all_city_program_path(data: @d_json), :class => "previous pull-left", onclick: "onClick()" %></a>  
+
+  <% elsif request.path == "/wics" %>
+    <a><%= link_to "← Back", new_wic_path(data: @d_json), :class => "previous pull-left", onclick: "onClick()" %></a> 
+
+  <% elsif request.path == "/child_care_vouchers" %>
+    <a><%= link_to "← Back", new_child_care_voucher_path(data: @d_json), :class => "previous pull-left", onclick: "onClick()" %></a> 
+
+  <% elsif request.path == "/early_head_starts" %>
+    <a><%= link_to "← Back", new_early_head_start_path(data: @d_json), :class => "previous pull-left", onclick: "onClick()" %></a> 
+
+  <% elsif request.path == "/head_starts" %>
+    <a><%= link_to "← Back", new_head_start_path(data: @d_json), :class => "previous pull-left", onclick: "onClick()" %></a> 
+
+  <% else %>
+    <a><%= link_to "← Back", :back, :class => "previous pull-left", onclick: "onClick()" %></a> 
+    <p>I am at the end</p>
+  <% end %>
+
+    <a href="#" class="secondary-link pull-right" onclick="onPrint();">Print this page</a>
   </div>
 </div>
 
 <!-- function that puts the text below  -->
 
 <script type="text/javascript">
-
-function goBack() {
-    window.history.back();
-}
 
 var onPrint = function(){
 

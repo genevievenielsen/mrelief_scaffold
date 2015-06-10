@@ -8,7 +8,6 @@
   </div>
 </section>
 
-
 <section class="content-section">
 <div class="row">
 <div class="col-md-8 col-sm-6 col-xs-12">
@@ -43,7 +42,7 @@
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="rental_dependent_no">What is your household size?</label>
         <p type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself and your child[ren]." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
-          <input type="text" id="wic_household_size" name="wic_household_size" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) %>" required>
+          <input type="text" id="wic_household_size" name="wic_household_size" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) || @d.try(:household_size) %>" required>
         </p>
       </div>
     </div>
@@ -56,7 +55,7 @@
         <%= render "programs/popover_calculator" %>
 
           <p type="button" data-toggle="popover" data-content="Total monthly income from all sources." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
-            <input type="text" id="wic_gross_income" name="wic_gross_income" placeholder="For example: 1000" class="form-field  " value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %>" required>
+            <input type="text" id="wic_gross_income" name="wic_gross_income" placeholder="For example: 1000" class="form-field  " value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) || @d.try(:gross_monthly_income) %>" required>
           </p>
       </div>
     </div>

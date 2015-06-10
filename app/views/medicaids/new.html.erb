@@ -1,18 +1,16 @@
 <div class= "container">
   <section class="content-section marquee">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-8">
         <h1>Medicaid</h1>
         <p> If you are an adult (19 and over) and a resident in the state of Illinois, you may qualify for Medicaid. At the current moment, this form does not include Medicaid's offerings for people with disabilities. However, we are working to make this form more inclusive. Check back soon for more updates.</p>
       </div>
     </div>
   </section>
-
-
   <section class="content-section">
   <div class="row">
-  <div class="col-md-8 col-sm-6 col-xs-12">
-  <form action="/medicaids" class="form-horizontal" method="post">
+    <div class="col-md-8 col-sm-6 col-xs-12">
+    <form action="/medicaids" class="form-horizontal" method="post">
 
     <!-- Form for citizen question -->
       <%= render "programs/citizen_question" %>
@@ -22,18 +20,18 @@
         <div class="col-md-9 col-sm-10 col-xs-12">
           <label for="medicaid_household_size">What is your household size?</label>
             <p type="button" data-toggle="popover" data-content="The number of people living in your house including yourself" data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
-            <input type="text" id="medicaid_household_size" name="medicaid_household_size" placeholder="For example: 3" class="form-field"  value="<%= @current_user.try(:household_size) %>"  required>
+            <input type="text" id="medicaid_household_size" name="medicaid_household_size" placeholder="For example: 3" class="form-field"  value="<%= @current_user.try(:household_size) || @d.try(:household_size) %>"  required>
             </p>
         </div>
        </div>
 
-      <!-- Form for gross monthly income -->
+      <!-- Form for monthly income -->
         <div class="row">
           <div class="col-md-9 col-sm-10 col-xs-12">
             <label for="medicaid_gross_income"> What is your monthly income?</label>
             <%= render "programs/popover_calculator" %>
               <p type="button" data-toggle="popover" data-content="Monthly income includes wages, Social Security, SSI, pensions, rental income, unemployment, worker's compensation, or other disability payments." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
-              <input type="text" id="medicaid_gross_income" name="medicaid_gross_income" placeholder="For example: 3000" class="form-field" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %>" required>
+              <input type="text" id="medicaid_gross_income" name="medicaid_gross_income" placeholder="For example: 3000" class="form-field" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) || @d.try(:household_size) %>" required>
               </p>
           </div>
         </div>
@@ -50,11 +48,10 @@
       <!-- Submit button -->
         <%= render "programs/submit_button" %>
 
-  </form>
-  </div>
+    </form>
+    </div>
 
-  <%= render "programs/calculator" %>
-
+    <%= render "programs/calculator" %>
 
   </div>
 </section>

@@ -41,22 +41,22 @@
 
 <!-- User is inelgible -->
   <% elsif @eligible == 'no' %>
-      <div class="row">
-        <div class="col-md-7">
-          <h1>Results: Something else in mind!</h1>
-          <p>Based on your household size and income, you likely do not qualify for Medicaid.</p>
-          <p>However, if you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.</p>
+    <div class="row">
+      <div class="col-md-7">
+        <h1>Results: Something else in mind!</h1>
+        <p>Based on your household size and income, you likely do not qualify for Medicaid.</p>
+        <p>However, if you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.</p>
 
-          <div class="resources">
-            <h3>Resources</h3>
-            <p><%= link_to "Click Here", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "secondary-link", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'medicaid', 'health_care_fees', 1);" %> to learn more about fees.</p>
-            <p>Get Covered Illinois is a resource that helps families register for insurance at in-person events.</p>
-            <p><%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicaid', 'get_covered_illinois', 1);" %> to find Get Covered Illinois events in your area.</p>
-            <p>You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.</p>
-          </div>
-
-          <%= render "layouts/purple_binder_resources" %>
+        <div class="resources">
+          <h3>Resources</h3>
+          <p><%= link_to "Click Here", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "secondary-link", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'medicaid', 'health_care_fees', 1);" %> to learn more about fees.</p>
+           <p>Get Covered Illinois is a resource that helps families register for insurance at in-person events.</p>
+           <p><%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicaid', 'get_covered_illinois', 1);" %> to find Get Covered Illinois events in your area.</p>
+           <p>You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.</p>
         </div>
+
+        <%= render "layouts/purple_binder_resources" %>
+      </div>
     </div>
   <% else %>
 
