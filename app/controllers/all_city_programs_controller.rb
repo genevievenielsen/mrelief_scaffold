@@ -507,6 +507,7 @@ class AllCityProgramsController < ApplicationController
         @eligible_all_kids = "already receiving"
       else
         
+      if children != 0
         if params[:pregnant].present?
            dependent_no_kids = children + 1
            dependent_no_kids = dependent_no_kids.to_i
@@ -551,6 +552,10 @@ class AllCityProgramsController < ApplicationController
           if params[:status] == "no_children"
             @eligible_all_kids = "no"
           end
+        #no children
+        else
+          @eligible_all_kids = "no"
+        end
       end
 
     #HERE IS THE LOGIC FOR MEDICARE COST SHARING
