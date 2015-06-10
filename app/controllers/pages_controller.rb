@@ -50,7 +50,8 @@ class PagesController < ApplicationController
      # Check that all questions are answered
     if params[:benefits].present? && params[:disabled].present? && params[:dependent_no].present? && params[:age].present? && params[:gross_income].present?
     else
-      redirect_to :back, :notice => 'Looks like you forgot to answer a question! Please answer all questions below.'
+      redirect_to :back, :alert => 'Looks like you forgot to answer a question! Please answer all questions below.'
+
     end
 
     #Data Storage
@@ -267,8 +268,6 @@ class PagesController < ApplicationController
         @ineligible_or_receiving_programs.push(@head_start)
       end
     end
-
-
 
     # Just program name
     @ineligible_or_receiving_programs_names = []
