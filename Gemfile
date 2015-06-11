@@ -16,7 +16,7 @@ gem 'roo'
 gem "spreadsheet"
 gem 'rails_12factor', group: :production
 
-gem "chartkick"
+# gem "chartkick"
 
 # gem 'font-awesome-rails'
 
