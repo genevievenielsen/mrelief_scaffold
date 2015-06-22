@@ -75,6 +75,24 @@
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-md-9 col-sm-10 col-xs-12">
+        <div class="relative" id="wic_status">
+         <label>Describe your current health status:</label>
+         <div class="radio-button">
+          <%= radio_button_tag 'wic_status', 'anemic' %> anemic
+          <br><%= radio_button_tag 'wic_status', 'underweight' %> underweight
+          <br><%= radio_button_tag 'wic_status', 'of a risky maternal age' %> of a risky maternal age
+          <br><%= radio_button_tag 'wic_status', 'have a history of pregnancy complications ' %> have a history of pregnancy complications
+          <br><%= radio_button_tag 'wic_status', 'have a history of poor pregnancy outcomes' %> have a history of poor pregnancy outcomes
+          <br><%= radio_button_tag 'wic_status', 'has an inadequate dietary pattern' %> has an inadequate dietary pattern
+          <br><%= radio_button_tag 'wic_status', 'none of the above' %> None of the above
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 
   <!-- Form for zipcode -->
     <div class="row">

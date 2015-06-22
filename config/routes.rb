@@ -18,10 +18,12 @@ Rails.application.routes.draw do
   post('/twilio_spanish', { :controller => 'twilio_spanish', :action => 'text'})
   post 'twilio/voice', defaults: { format: 'xml' }
 
+
   #static pages 
   get('/about_us', { :controller => 'pages', :action => 'about_us' })
   get('/how_mrelief_works', { :controller => 'pages', :action => 'how_mrelief_works' })
   get('/press_release', { :controller => 'pages', :action => 'press_release' })
+
 
   # all programs at once
   get("/", { :controller => "pages", :action => "homepage" })
@@ -29,9 +31,9 @@ Rails.application.routes.draw do
   get("/filtered_programs", { :controller => "pages", :action => "filtered_programs" })
   post("/community_resources", { :controller => "pages", :action => "community_resources" })
 
+  # early childhood programs
   get("/early_learning_programs", { :controller => "pages", :action => "early_learning_programs" })
   get("/early_learning_programs_response", { :controller => "pages", :action => "early_learning_programs_response" })
-
 
 
   # print
@@ -40,6 +42,7 @@ Rails.application.routes.draw do
   #documents
   get("/snap_documents", { :controller => "snap_eligibilities", :action => "documents" })
   get("/rental_documents", { :controller => "rental_assistances", :action => "documents" })
+
 
   # clear session
   get("/session_clear", {:controller => "pages", :action => "session_clear"})
