@@ -1,0 +1,113 @@
+<div class="container marquee">
+
+<section class="content-section">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Early Learning Programs</h1>
+    </div>
+  </div>
+</section>
+
+
+<section class="content-section">
+<div class="row">
+  <div class="col-md-8 col-sm-6 col-xs-12">
+  <form class="form-horizontal">
+
+    <div class="row">
+      <div class="col-md-9 col-sm-10 col-xs-12">
+        <label class="allthatapply">Select all that apply to you:</label>
+        <div class="radio-button">
+          <input type="checkbox" name="uninsured" value="uninsured">  I care for a child that is between the ages of 0-3<br>
+          <input type="checkbox" name="job_ended" value="job_ended"> I care for a child that is between the ages of 3-5<br>
+          <input type="checkbox" name="cobra" value="cobra"> I am pregnant<br>
+          <input type="checkbox" name="status" value="none"> I care for no children<br>
+        </div>
+      </div>
+    </div>
+
+
+  <!-- Form for household size-->
+    <div class="row">
+      <div class="col-md-9 col-sm-10 col-xs-12">
+        <label for="kids_household_size">What is the number of people living in your household including yourself?</label>
+          <input type="text" id="kids_household_size" name="kids_household_size" placeholder="For example: 3" class="form-field"required>
+      </div>
+    </div>
+
+  
+
+  <!-- Form for gross monthly income -->
+    <div class="row">
+      <div class="col-md-9 col-sm-10 col-xs-12">
+        <label for="kids_gross_income">What is your gross monthly income?</label>
+        <%= render "programs/popover_calculator" %>
+          <p type="button" data-toggle="popover" data-content="Gross Income of All Family Members (Income means gross cash income and includes earned income, military income (including pay and allowances), veterans’ benefits, Social Security benefits, unemployment compensation, and public assistance benefits.)" data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
+           <input type="text" id="kids_gross_income" name="kids_gross_income" placeholder="For example: 1000" class="form-field" required>
+          </p>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-9 col-sm-10 col-xs-12">
+        <label class="allthatapply">Select all that apply to you:</label>
+        <div class="radio-button">
+          <input type="checkbox" name="uninsured" value="uninsured">  I am a foster parent<br>
+          <input type="checkbox" name="job_ended" value="job_ended"> I am homeless<br>
+          <input type="checkbox" name="cobra" value="cobra"> My family receives SSI<br>
+          <input type="checkbox" name="status" value="none"> My family receives TANF<br>
+          <input type="checkbox" name="status" value="none"> None of the Above<br>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-9 col-sm-10 col-xs-12" id="education_question">
+        <label for="education" id="education">Are you enrolled in college/institution of higher education?</label>
+        <div class="radio-button">
+          <% [ 'yes', 'no'].each do |education| %>
+            <%= radio_button_tag 'education', education %>
+            <%= education.humanize %><br>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+
+  <!-- Form for zipcode -->
+    <div class="row">
+      <div class="col-md-9 col-sm-10 col-xs-12">
+        <label for="zipcode">What is your zipcode?</label>
+          <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-field" required>
+      </div>
+    </div>
+
+
+  <!-- Form for cellphone question -->
+    <div class="row">
+       <div class="col-md-9 col-sm-10 col-xs-12">
+         <label for="phone_number">What is your cell phone number?</label>
+            <p type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
+              <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-field" required>
+            </p>
+       </div>
+     </div>
+
+
+  <!-- Submit button -->
+    <div class="row">
+      <div class="col-md-5">
+        <button >See if I qualify</button>
+      </div>
+    </div>
+
+  </form>
+  </div>
+
+  <%= render "programs/calculator" %>
+
+
+  </div>
+  </section>
+</div>

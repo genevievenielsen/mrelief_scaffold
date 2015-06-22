@@ -4,6 +4,9 @@ class PagesController < ApplicationController
 
    skip_before_filter :verify_authenticity_token
 
+  def early_learning_programs
+  end
+
   def homepage
   end
 
