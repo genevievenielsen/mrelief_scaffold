@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get ':controller/:action'
   get ':locale/:controller/:action'
 
+
+
   # twilio
   get("/twilio", { :controller => "send_text", :action => "send_text_message"})
   post('/', { :controller => 'twilio', :action => 'text'})
@@ -18,15 +20,14 @@ Rails.application.routes.draw do
   post('/twilio_spanish', { :controller => 'twilio_spanish', :action => 'text'})
   post 'twilio/voice', defaults: { format: 'xml' }
 
-
   #static pages 
+  root to: "pages#homepage"
   get('/about_us', { :controller => 'pages', :action => 'about_us' })
   get('/how_mrelief_works', { :controller => 'pages', :action => 'how_mrelief_works' })
   get('/press_release', { :controller => 'pages', :action => 'press_release' })
-
+  get('/public-template', { :controller => 'pages', :action => 'public_template' })
 
   # all programs at once
-  get("/", { :controller => "pages", :action => "homepage" })
   get("/filter", { :controller => "pages", :action => "filter" })
   get("/filtered_programs", { :controller => "pages", :action => "filtered_programs" })
   post("/community_resources", { :controller => "pages", :action => "community_resources" })
@@ -39,7 +40,7 @@ Rails.application.routes.draw do
   # print
   get('/snap_eligibilities/print/:id', :controller => 'snap_eligibilities', :action => 'print')
 
-  #documents
+  # documents
   get("/snap_documents", { :controller => "snap_eligibilities", :action => "documents" })
   get("/rental_documents", { :controller => "rental_assistances", :action => "documents" })
 
@@ -47,7 +48,9 @@ Rails.application.routes.draw do
   # clear session
   get("/session_clear", {:controller => "pages", :action => "session_clear"})
 
-
+  # email list
+  get 'email_lists/opt_in', to: 'email_lists#opt_in'
+  get 'email_lists/confirm_email', to: 'email_lists#confirm_email'
 
   resources :contact, only: [:index, :create]
 

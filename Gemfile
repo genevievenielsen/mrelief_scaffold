@@ -2,6 +2,9 @@ source "https://rubygems.org"
 
 ruby "2.1.2"
 
+#mailer
+gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
+
 gem 'geocoder'
 gem 'underscore-rails'
 
@@ -41,6 +44,10 @@ end
 group :development do
   gem 'sqlite3'
 end
+
+group :development, :test do
+  gem "letter_opener"
+end
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -75,6 +82,8 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 # translation tools
+
+
 
 gem 'r18n-rails'
 gem 'haml'
