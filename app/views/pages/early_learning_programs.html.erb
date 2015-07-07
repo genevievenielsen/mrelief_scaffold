@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-md-12">
       <h1>All Early Learning Programs</h1>
-      <p>All Early Learning Programs includes education and child wellness programs in the City of Chicago. This will provide eligibility determination for families with pregnant moms and families consisting of young children, and children up to 12 years old. Spanning programs that include child care assistance, food assistance, and education programs, enter your information to find out if you qualify and view early learning sites in your area.</p>
+      <p>If you are the primary caregiver of a child, you may be eligible for some of Chicago’s All Early Learnings offerings.</p>
     </div>
   </div>
 </section>
@@ -54,11 +54,23 @@
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label class="allthatapply">Select all that apply to you:</label>
         <div class="radio-button">
-          <input type="checkbox" name="uninsured" value="uninsured">  I am a foster parent<br>
-          <input type="checkbox" name="job_ended" value="job_ended"> I am homeless<br>
-          <input type="checkbox" name="cobra" value="cobra"> My family receives SSI<br>
-          <input type="checkbox" name="status" value="none"> My family receives TANF<br>
+          <input type="checkbox" name="foster_parent" value="foster_parent">  I am a foster parent<br>
+          <input type="checkbox" name="homeless" value="homeless"> I am homeless<br>
+          <input type="checkbox" name="ssi" value="ssi"> My family receives SSI<br>
+          <input type="checkbox" name="tanf" value="tanf"> My family receives TANF<br>
           <input type="checkbox" name="status" value="none"> None of the Above<br>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-9 col-sm-10 col-xs-12" id="employment_question">
+        <label for="employment" id="employment">Are you currently employed?</label>
+        <div class="radio-button">
+          <% [ 'yes', 'no'].each do |employment| %>
+            <%= radio_button_tag 'employment', employment %>
+            <%= employment.humanize %><br>
+          <% end %>
         </div>
       </div>
     </div>
@@ -75,30 +87,19 @@
       </div>
     </div>
 
+  <!-- Form for zipcode -->
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
-        <div class="relative" id="wic_status">
-         <label>Describe your current health status:</label>
-         <div class="radio-button">
-          <%= radio_button_tag 'wic_status', 'anemic' %> anemic
-          <br><%= radio_button_tag 'wic_status', 'underweight' %> underweight
-          <br><%= radio_button_tag 'wic_status', 'of a risky maternal age' %> of a risky maternal age
-          <br><%= radio_button_tag 'wic_status', 'have a history of pregnancy complications ' %> have a history of pregnancy complications
-          <br><%= radio_button_tag 'wic_status', 'have a history of poor pregnancy outcomes' %> have a history of poor pregnancy outcomes
-          <br><%= radio_button_tag 'wic_status', 'has an inadequate dietary pattern' %> has an inadequate dietary pattern
-          <br><%= radio_button_tag 'wic_status', 'none of the above' %> None of the above
-          </div>
-        </div>
+        <label for="zipcode">In which zipcode do you live? </label>
+          <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-field" required>
       </div>
     </div>
-
-
 
   <!-- Form for zipcode -->
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
-        <label for="zipcode">What is your zipcode?</label>
-          <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-field" required>
+        <label for="preferred_zipcode">In which zipcode would you prefer to receive early learning assistance?</label>
+          <input type="text" id="preferred_zipcode" name="preferred_zipcode" placeholder="For example: 60615" class="form-field" required>
       </div>
     </div>
 
@@ -130,3 +131,28 @@
   </div>
   </section>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    //education hover mechanism
+     $( "#education_question" ).hover(
+       function() {
+           $( this ).append( $( "<p class=\"hover_explanation\">Eligible schools include: a business, technical, trade, or vocational school that normally requires a high school diploma or the equivalent for enrollment in the course of study; or regular courses, including internet, mail, self-study, or correspondence courses, at an accredited college or university that offers degree programs. Enrolled means currently attending school.</p>" ) );
+         },
+       function() {
+         $( this ).find( "p:last" ).remove();
+       }
+     );
+
+     //employment hover mechanism
+      $( "#employment_question" ).hover(
+        function() {
+            $( this ).append( $( "<p class=\"hover_explanation\">Self-employment and cash-employment applies if it can be verified by a third party or a monthly statement.</p>" ) );
+          },
+        function() {
+          $( this ).find( "p:last" ).remove();
+        }
+      );
+  
+});
+</script>

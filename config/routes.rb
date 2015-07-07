@@ -33,8 +33,8 @@ Rails.application.routes.draw do
   post("/community_resources", { :controller => "pages", :action => "community_resources" })
 
   # early childhood programs
-  get("/early_learning_programs", { :controller => "pages", :action => "early_learning_programs" })
-  get("/early_learning_programs_response", { :controller => "pages", :action => "early_learning_programs_response" })
+  get("/early_learning_programs_testing", { :controller => "pages", :action => "early_learning_programs" })
+  get("/early_learning_programs_response_testing", { :controller => "pages", :action => "early_learning_programs_response" })
 
 
   # print
