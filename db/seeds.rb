@@ -3836,3 +3836,199 @@ LafCenter.create(:zipcode => '60661.0', :city => 'Chicago', :center => 'Garfield
                  :address => '10 South Kedzie Ave.', :contact => 'Shirley Wilkins', :telephone => '(312) 743 - 0312', :spanish => 'Spanish speaking staff on duty daily')
 LafCenter.create(:zipcode => '60827.0', :city => 'Chicago', :center => 'South Chicago Community Service Center',
                  :address => '8650 S. Commercial Ave', :contact => 'Jeanette Sandoval', :telephone => '(312) 745 - 1132', :spanish => 'All Days')
+
+#Early Learning Program Types
+EarlyLearningProgram.create(:agency => 'DFSS', :funder => 'Head Start - Childcare Collaboration', :site => 'Center Based',
+        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Type 1')
+EarlyLearningProgram.create(:agency => 'DFSS/CPS', :funder => 'Head Start - Preschool - Childcare Collaboration', :site => 'Center Based',
+        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Type 1')
+EarlyLearningProgram.create(:agency => 'CPS', :funder => 'Prevention Initiative', :site => 'Home Visiting',
+        :duration => 'NA', :ages_served => '0 - 3', :income_type => 'Type 2')
+EarlyLearningProgram.create(:agency => 'CPS', :funder => 'Preschool for All', :site => 'School Based',
+        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Type 2')
+EarlyLearningProgram.create(:agency => 'CPS', :funder => 'RTL/MRE Investments', :site => 'School Based',
+        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Type 2')
+EarlyLearningProgram.create(:agency => 'CPS', :funder => 'Title 1', :site => 'School Based Child Parent Center',
+        :duration => 'Half Day', :ages_served => '3 - 5', :income_type => 'Type 2')
+EarlyLearningProgram.create(:agency => 'CPS', :funder => 'Social Impact Bond', :site => 'School Based Child Parent Center',
+        :duration => 'Half Day', :ages_served => '3 - 5', :income_type => 'Type 2')
+EarlyLearningProgram.create(:agency => 'CPS', :funder => 'Preschool for All - Childcare Collaboration', :site => 'Center Based',
+        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Type 2')
+EarlyLearningProgram.create(:agency => 'CPS', :funder => 'Preschool for All', :site => 'School Based',
+        :duration => 'Half Day', :ages_served => '3 - 5', :income_type => 'Type 2')
+EarlyLearningProgram.create(:agency => 'CPS', :funder => 'RTL/MRE Investments', :site => 'School Based',
+        :duration => 'Half Day', :ages_served => '3 - 5', :income_type => 'Type 2')
+EarlyLearningProgram.create(:agency => 'DFSS', :funder => 'Head Start', :site => 'Center Based',
+        :duration => 'Half Day', :ages_served => '3 - 5', :income_type => 'Type 1')
+EarlyLearningProgram.create(:agency => 'DFSS', :funder => 'RTL/MRE Investments', :site => 'Center Based',
+        :duration => 'Half Day', :ages_served => '3 - 5', :income_type => 'Type 1')
+EarlyLearningProgram.create(:agency => 'DFSS', :funder => 'RTL/MRE Investments', :site => 'Center Based',
+        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Type 1')
+EarlyLearningProgram.create(:agency => 'DFSS', :funder => 'Early Head Start', :site => 'Center Based',
+        :duration => 'Full Day', :ages_served => '0 - 3', :income_type => 'Type 1')
+EarlyLearningProgram.create(:agency => 'CPS', :funder => 'Prevention Initiative', :site => 'Center Based',
+        :duration => 'Full Day', :ages_served => '0 - 3', :income_type => 'Type 1')
+EarlyLearningProgram.create(:agency => 'DFSS', :funder => 'Head Start', :site => 'FCCH',
+        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Type 1')
+EarlyLearningProgram.create(:agency => 'DFSS', :funder => 'RTL/MRE Investments', :site => 'FCCH',
+        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Type 1')
+EarlyLearningProgram.create(:agency => 'DFSS', :funder => 'Early Head Start', :site => 'FCCH',
+        :duration => 'Full Day', :ages_served => '0 - 3', :income_type => 'Type 1')
+EarlyLearningProgram.create(:agency => 'DFSS', :funder => 'Head Start', :site => 'Home Visiting',
+        :duration => 'NA', :ages_served => '3 - 5', :income_type => 'Type 1')
+EarlyLearningProgram.create(:agency => 'DFSS/CPS', :funder => 'Head Start', :site => 'School Based',
+        :duration => 'Half Day', :ages_served => '3 - 5', :income_type => 'Type 1')
+EarlyLearningProgram.create(:agency => 'DFSS/CPS', :funder => 'Head Start', :site => 'School Based',
+        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Type 1')
+
+#Early Learning Program Income Cutoffs
+EarlyLearningIncomeCutoff.create(household_size: 1,
+	income_type1: 981,
+	income_type2: 1815
+	)
+EarlyLearningIncomeCutoff.create(household_size: 2,
+	income_type1: 1328,
+	income_type2: 2456
+	)
+EarlyLearningIncomeCutoff.create(household_size: 3,
+	income_type1: 1674,
+	income_type2: 3097
+	)
+EarlyLearningIncomeCutoff.create(household_size: 4,
+	income_type1: 2021,
+	income_type2: 3739
+	)
+EarlyLearningIncomeCutoff.create(household_size: 5,
+	income_type1: 2368,
+	income_type2: 4380
+	)
+EarlyLearningIncomeCutoff.create(household_size: 6,
+	income_type1: 2714,
+	income_type2: 5021
+	)
+EarlyLearningIncomeCutoff.create(household_size: 7,
+	income_type1: 3061,
+	income_type2: 5663
+	)
+EarlyLearningIncomeCutoff.create(household_size: 8,
+	income_type1: 3408,
+	income_type2: 6304
+	)
+EarlyLearningIncomeCutoff.create(household_size: 9,
+	income_type1: 3754,
+	income_type2: 6945
+	)
+EarlyLearningIncomeCutoff.create(household_size: 10,
+	income_type1: 4101,
+	income_type2: 7587
+	)
+EarlyLearningIncomeCutoff.create(household_size: 11,
+	income_type1: 4448,
+	income_type2: 8228
+	)
+EarlyLearningIncomeCutoff.create(household_size: 12,
+	income_type1: 4794,
+	income_type2: 8869
+	)
+EarlyLearningIncomeCutoff.create(household_size: 13,
+	income_type1: 5141,
+	income_type2: 9511
+	)
+EarlyLearningIncomeCutoff.create(household_size: 14,
+	income_type1: 5488,
+	income_type2: 10152
+	)
+EarlyLearningIncomeCutoff.create(household_size: 15,
+	income_type1: 5834,
+	income_type2: 10793
+	)
+EarlyLearningIncomeCutoff.create(household_size: 16,
+	income_type1: 6181,
+	income_type2: 11435
+	)
+EarlyLearningIncomeCutoff.create(household_size: 17,
+	income_type1: 6528,
+	income_type2: 12076
+	)
+EarlyLearningIncomeCutoff.create(household_size: 18,
+	income_type1: 6874,
+	income_type2: 12717
+	)
+EarlyLearningIncomeCutoff.create(household_size: 19,
+	income_type1: 7221,
+	income_type2: 13359
+	)
+EarlyLearningIncomeCutoff.create(household_size: 20,
+	income_type1: 7568,
+	income_type2: 14000
+	)
+
+
+#Chicago Eligible Zipcode
+chicago_eligible_zipcodes = [
+"60601",
+"60602",
+"60603",
+"60604",
+"60605",
+"60606",
+"60607",
+"60608",
+"60609",
+"60610",
+"60611",
+"60612",
+"60613",
+"60614",
+"60615",
+"60616",
+"60617",
+"60618",
+"60619",
+"60620",
+"60621",
+"60622",
+"60623",
+"60624",
+"60625",
+"60626",
+"60628",
+"60629",
+"60630",
+"60631",
+"60632",
+"60633",
+"60634",
+"60636",
+"60637",
+"60638",
+"60639",
+"60640",
+"60641",
+"60642",
+"60643",
+"60643",
+"60644",
+"60645",
+"60646",
+"60647",
+"60649",
+"60651",
+"60652",
+"60653",
+"60654",
+"60655",
+"60656",
+"60657",
+"60659",
+"60660",
+"60661",
+"60666",
+"60707",
+"60707",
+"60827"]
+chicago_eligible_zipcodes.each do |zipcode|
+	ChicagoEligibleZipcode.create(zipcode: zipcode)
+end
+
+

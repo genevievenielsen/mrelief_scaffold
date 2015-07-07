@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  household_size: 1
+  income_type1: 1.5
+  income_type2: 1.5
+
+two:
+  household_size: 1
+  income_type1: 1.5
+  income_type2: 1.5

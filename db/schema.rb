@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150706144157) do
+ActiveRecord::Schema.define(version: 20150707044748) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -118,6 +118,12 @@ ActiveRecord::Schema.define(version: 20150706144157) do
     t.datetime "updated_at"
   end
 
+  create_table "chicago_eligible_zipcodes", force: true do |t|
+    t.string   "zipcode"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "child_care_voucher_data", force: true do |t|
     t.string   "dependent_no"
     t.string   "gross_monthly_income"
@@ -160,6 +166,45 @@ ActiveRecord::Schema.define(version: 20150706144157) do
     t.decimal  "ehs_gross_income"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "early_learning_data", force: true do |t|
+    t.boolean  "three_and_under",      default: false
+    t.boolean  "three_to_five",        default: false
+    t.boolean  "pregnant",             default: false
+    t.boolean  "no_children",          default: false
+    t.integer  "household_size"
+    t.float    "gross_monthly_income"
+    t.boolean  "foster_parent",        default: false
+    t.boolean  "homeless",             default: false
+    t.boolean  "ssi",                  default: false
+    t.boolean  "tanf",                 default: false
+    t.boolean  "employed"
+    t.boolean  "higher_education"
+    t.string   "zipcode"
+    t.string   "preferred_zipcode"
+    t.string   "phone_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "early_learning_income_cutoffs", force: true do |t|
+    t.integer  "household_size"
+    t.float    "income_type1"
+    t.float    "income_type2"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "early_learning_programs", force: true do |t|
+    t.string   "agency"
+    t.string   "funder"
+    t.string   "site"
+    t.string   "ages_served"
+    t.string   "income_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "duration"
   end
 
   create_table "email_lists", force: true do |t|

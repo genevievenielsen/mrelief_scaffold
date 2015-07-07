@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  three_and_under: false
+  three_to_five: false
+  pregnant: false
+  no_children: false
+  household_size: 1
+  gross_monthly_income: 1.5
+  foster_parent: false
+  homeless: false
+  ssi: false
+  tanf: false
+  employed: false
+  higher_education: false
+  zipcode: MyString
+  preferred_zipcode: MyString
+  phone_number: MyString
+
+two:
+  three_and_under: false
+  three_to_five: false
+  pregnant: false
+  no_children: false
+  household_size: 1
+  gross_monthly_income: 1.5
+  foster_parent: false
+  homeless: false
+  ssi: false
+  tanf: false
+  employed: false
+  higher_education: false
+  zipcode: MyString
+  preferred_zipcode: MyString
+  phone_number: MyString

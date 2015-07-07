@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  agency: MyString
+  funder: MyString
+  site: MyString
+  ages_served: MyString
+  income_type: MyString
+
+two:
+  agency: MyString
+  funder: MyString
+  site: MyString
+  ages_served: MyString
+  income_type: MyString
