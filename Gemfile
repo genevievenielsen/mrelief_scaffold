@@ -5,6 +5,10 @@ ruby "2.1.2"
 #mailer
 gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
 
+#scraping for medium blog
+gem 'mechanize'
+gem 'nokogiri', '~> 1.6.3.1'
+
 gem 'geocoder'
 gem 'underscore-rails'
 
@@ -18,10 +22,6 @@ gem 'pusher'
 gem 'roo'
 gem "spreadsheet"
 gem 'rails_12factor', group: :production
-
-# gem "chartkick"
-
-# gem 'font-awesome-rails'
 
 gem 'numbers_in_words'
 
