@@ -5,7 +5,7 @@ class EarlyLearningProgramsController < ApplicationController
 	end
 
 	def create
-    @d = EarlyLearningData.new
+    @user = EarlyLearningData.new
 
     # Clean Data
 		household_size = params[:household_size].strip
@@ -15,7 +15,7 @@ class EarlyLearningProgramsController < ApplicationController
     else
       household_size_clean = household_size.in_numbers
     end
-    @d.household_size = household_size_clean
+    @user.household_size = household_size_clean
 
 
     gross_income = params[:gross_monthly_income].strip
@@ -27,64 +27,93 @@ class EarlyLearningProgramsController < ApplicationController
       end
       gross_income_clean = gross_income.in_numbers
     end
-
-    @d.gross_monthly_income = gross_income_clean
+    @user.gross_monthly_income = gross_income_clean
 
     # Data Storage
     if params[:zero_to_three].present?
-      @d.three_and_under = true
+      @user.three_and_under = true
     end
     if params[:three_to_five].present?
-      @d.three_to_five = true
+      @user.three_to_five = true
     end
     if params[:pregnant].present?
-      @d.pregnant = true
+      @user.pregnant = true
     end
     if params[:no_children].present?
-      @d.no_children = true
+      @user.no_children = true
     end
 
     if params[:foster_parent].present?
-      @d.foster_parent = true
+      @user.foster_parent = true
     end
     if params[:homeless].present?
-      @d.homeless = true
+      @user.homeless = true
     end
     if params[:ssi].present?
-      @d.ssi = true
+      @user.ssi = true
     end
     if params[:tanf].present?
-      @d.tanf = true
+      @user.tanf = true
     end
 
-    @d.employed = params[:employed]
-    @d.higher_education = params[:education]
-    @d.zipcode = params[:zipcode]
-    @d.preferred_zipcode = params[:preferred_zipcode]
-    @d.phone_number = params[:phone_number] if params[:phone_number].present?
-    @d.save
+    @user.employed = params[:employed]
+    @user.higher_education = params[:education]
+    @user.zipcode = params[:zipcode]
+    @user.preferred_zipcode = params[:preferred_zipcode]
+    @user.phone_number = params[:phone_number] if params[:phone_number].present?
+    @user.save
 
-    if @d.no_children == true
+    # data storage to add
+    # income type 
+
+    if @user.no_children == true
       #user has no children
       @eligible = false
     else
-      if ChicagoEligibleZipcode.all.pluck(:zipcode).include?(@d.zipcode)
-        if @d.three_and_under == true || @d.pregnant == true || @d.three_to_five == true
-          under_three_programs = []
-          three_to_five_programs = []
+      if ChicagoEligibleZipcode.all.pluck(:zipcode).include?(@user.zipcode)
+        if @user.three_and_under == true || @user.pregnant == true || @user.three_to_five == true
           
-          if @d.three_and_under == true || @d.pregnant == true 
-            under_three_programs = EarlyLearningProgram.where(age_served: '0 - 3')
+          # determine correct ages 
+          if @user.three_and_under == true || @user.pregnant == true 
+            three_and_under_programs = EarlyLearningProgram.where(ages_served: '0 - 3')
+            correct_age_programs = three_and_under_programs
+            puts "I made it to 0 to 3"  
+          end        
+
+          if @user.three_to_five == true
+            three_to_five_programs = EarlyLearningProgram.where(ages_served: '3 - 5')
+            correct_age_programs = three_to_five_programs
+            puts "I made it to 3 to 5"  
           end
-          if @d.three_to_five == true
-            three_to_five_programs = EarlyLearningProgram.where(age_served: '3 - 5')
-          end
-          correct_age_programs = under_three_programs + three_to_five_programs
+        
+          if three_and_under_programs.present? && three_to_five_programs.present?
+            correct_age_programs = EarlyLearningProgram.all
+            puts "I made it to all ages"
+          end 
 
           # determine user income type
+          income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
 
-          correct_income_type_programs = correct_age_programs.where(income_type: user_income_type)
+          if @user.gross_monthly_income > income_row.income_type2
+            # user income exceeds income cutoff
+            @eligible = false
+          else
 
+            if @user.gross_monthly_income <= income_row.income_type2 && @user.gross_monthly_income > income_row.income_type1
+              user_income_type = 'Type 2'
+            elsif @user.gross_monthly_income <= income_row.income_type1
+              user_income_type = 'Type 1'  
+            end
+
+            @correct_income_type_programs = correct_age_programs.where(income_type: user_income_type)
+
+            @eligible_programs = []
+
+            if @user.employed == "yes" || @user.higher_education == "yes"
+              
+            end
+
+          end
         else
           # user does not have a child of the correct age
           @eligible = false
