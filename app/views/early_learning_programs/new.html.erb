@@ -1,0 +1,158 @@
+<div class="container marquee">
+
+<section class="content-section">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>All Early Learning Programs</h1>
+      <p>If you are the primary caregiver of a child, you may be eligible for some of Chicago’s All Early Learnings offerings.</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="content-section">
+<div class="row">
+  <div class="col-md-8 col-sm-6 col-xs-12">
+  <form action="/early_learning_programs" class="form-horizontal" method="post">
+
+    <div class="row">
+      <div class="col-md-9 col-sm-10 col-xs-12">
+        <label class="allthatapply">Select all that apply to you:</label>
+        <div class="radio-button">
+          <input type="checkbox" name="zero_to_three" value="zero_to_three">  I care for a child that is between the ages of 0-3<br>
+          <input type="checkbox" name="three_to_five" value="three_to_five"> I care for a child that is between the ages of 3-5<br>
+          <input type="checkbox" name="pregnant" value="pregnant"> I am pregnant<br>
+          <input type="checkbox" name="no_children" value="no_children"> I care for no children<br>
+        </div>
+      </div>
+    </div>
+
+
+  <!-- Form for household size-->
+    <div class="row">
+      <div class="col-md-9 col-sm-10 col-xs-12">
+        <label for="household_size">What is the number of people living in your household including yourself?</label>
+          <input type="text" id="household_size" name="household_size" placeholder="For example: 3" class="form-field"required>
+      </div>
+    </div>
+
+  
+
+  <!-- Form for gross monthly income -->
+    <div class="row">
+      <div class="col-md-9 col-sm-10 col-xs-12">
+        <label for="gross_monthly_income">What is your gross monthly income?</label>
+        <%= render "programs/popover_calculator" %>
+          <p type="button" data-toggle="popover" data-content="Gross Income of All Family Members (Income means gross cash income and includes earned income, military income (including pay and allowances), veterans’ benefits, Social Security benefits, unemployment compensation, and public assistance benefits.)" data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
+           <input type="text" id="gross_monthly_income" name="gross_monthly_income" placeholder="For example: 1000" class="form-field" required>
+          </p>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-9 col-sm-10 col-xs-12">
+        <label class="allthatapply">Select all that apply to you:</label>
+        <div class="radio-button">
+          <input type="checkbox" name="foster_parent" value="foster_parent">  I am a foster parent<br>
+          <input type="checkbox" name="homeless" value="homeless"> I am homeless<br>
+          <input type="checkbox" name="ssi" value="ssi"> My family receives SSI<br>
+          <input type="checkbox" name="tanf" value="tanf"> My family receives TANF<br>
+          <input type="checkbox" name="status" value="none"> None of the Above<br>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-9 col-sm-10 col-xs-12" id="employment_question">
+        <label for="employment" id="employment">Are you currently employed?</label>
+        <div class="radio-button">
+          <% [ 'yes', 'no'].each do |employment| %>
+            <%= radio_button_tag 'employment', employment %>
+            <%= employment.humanize %><br>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-9 col-sm-10 col-xs-12" id="education_question">
+        <label for="education" id="education">Are you enrolled in college/institution of higher education?</label>
+        <div class="radio-button">
+          <% [ 'yes', 'no'].each do |education| %>
+            <%= radio_button_tag 'education', education %>
+            <%= education.humanize %><br>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  <!-- Form for zipcode -->
+    <div class="row">
+      <div class="col-md-9 col-sm-10 col-xs-12">
+        <label for="zipcode">In which zipcode do you live? </label>
+          <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-field" required>
+      </div>
+    </div>
+
+  <!-- Form for zipcode -->
+    <div class="row">
+      <div class="col-md-9 col-sm-10 col-xs-12">
+        <label for="preferred_zipcode">In which zipcode would you prefer to receive early learning assistance?</label>
+          <input type="text" id="preferred_zipcode" name="preferred_zipcode" placeholder="For example: 60615" class="form-field" required>
+      </div>
+    </div>
+
+
+  <!-- Form for cellphone question -->
+    <div class="row">
+       <div class="col-md-9 col-sm-10 col-xs-12">
+         <label for="phone_number">What is your cell phone number?</label>
+            <p type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
+              <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-field" required>
+            </p>
+       </div>
+     </div>
+
+
+  <!-- Submit button -->
+    <div class="row">
+      <div class="col-md-5">
+        <button >See if I qualify</button>
+      </div>
+    </div>
+
+  </form>
+  </div>
+
+  <%= render "programs/calculator" %>
+
+
+  </div>
+  </section>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    //education hover mechanism
+     $( "#education_question" ).hover(
+       function() {
+           $( this ).append( $( "<p class=\"hover_explanation\">Eligible schools include: a business, technical, trade, or vocational school that normally requires a high school diploma or the equivalent for enrollment in the course of study; or regular courses, including internet, mail, self-study, or correspondence courses, at an accredited college or university that offers degree programs. Enrolled means currently attending school.</p>" ) );
+         },
+       function() {
+         $( this ).find( "p:last" ).remove();
+       }
+     );
+
+     //employment hover mechanism
+      $( "#employment_question" ).hover(
+        function() {
+            $( this ).append( $( "<p class=\"hover_explanation\">Self-employment and cash-employment applies if it can be verified by a third party or a monthly statement.</p>" ) );
+          },
+        function() {
+          $( this ).find( "p:last" ).remove();
+        }
+      );
+  
+});
+</script>

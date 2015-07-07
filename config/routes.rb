@@ -36,6 +36,9 @@ Rails.application.routes.draw do
   get("/early_learning_programs_testing", { :controller => "pages", :action => "early_learning_programs" })
   get("/early_learning_programs_response_testing", { :controller => "pages", :action => "early_learning_programs_response" })
 
+   get "early_learning_programs", to: "early_learning_programs#new"
+   post "early_learning_programs", to: "early_learning_programs#create"
+
 
   # print
   get('/snap_eligibilities/print/:id', :controller => 'snap_eligibilities', :action => 'print')

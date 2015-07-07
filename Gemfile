@@ -2,6 +2,9 @@ source "https://rubygems.org"
 
 ruby "2.1.2"
 
+# makes serve log easier to read
+gem 'quiet_assets'
+
 #mailer
 gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
 
