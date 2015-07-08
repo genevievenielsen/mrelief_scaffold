@@ -110,6 +110,7 @@ class EarlyLearningProgramsController < ApplicationController
               user_income_type = 'Type 1'  
             end
 
+            # find programs with correct age and income requirements
             @correct_income_type_programs = correct_age_programs.where(income_type: user_income_type)
 
             @eligible_early_learning_programs = []
