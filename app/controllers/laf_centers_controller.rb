@@ -12,9 +12,10 @@ class LafCentersController < ApplicationController
      duration = ex.cell(line,'D')
      ages_served = ex.cell(line,'E')
      income_type = ex.cell(line,'F')
+     additional_criteria = ex.cell(line,'G')
     
       @early_learning_program = EarlyLearningProgram.create(agency: agency, funder: funder, site: site, duration: duration, ages_served: ages_served, 
-        income_type: income_type)
+        income_type: income_type, additional_criteria: additional_criteria)
     end
   end
 

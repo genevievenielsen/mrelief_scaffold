@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150707044748) do
+ActiveRecord::Schema.define(version: 20150707153806) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -205,6 +205,7 @@ ActiveRecord::Schema.define(version: 20150707044748) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "duration"
+    t.string   "additional_criteria"
   end
 
   create_table "email_lists", force: true do |t|

@@ -55,21 +55,26 @@ class EarlyLearningProgramsController < ApplicationController
     if params[:tanf].present?
       @user.tanf = true
     end
-
-    @user.employed = params[:employed]
-    @user.higher_education = params[:education]
+    if params[:employment] == "yes"
+      @user.employed = true
+    end
+    if params[:education] == "yes"
+      @user.higher_education = true
+    end
     @user.zipcode = params[:zipcode]
     @user.preferred_zipcode = params[:preferred_zipcode]
     @user.phone_number = params[:phone_number] if params[:phone_number].present?
     @user.save
 
     # data storage to add
-    # income type 
+    # income type
+    # program eligibility 
 
     if @user.no_children == true
-      #user has no children
+      # user has no children
       @eligible = false
     else
+      # determine if user lives in correct zipcode
       if ChicagoEligibleZipcode.all.pluck(:zipcode).include?(@user.zipcode)
         if @user.three_and_under == true || @user.pregnant == true || @user.three_to_five == true
           
@@ -107,10 +112,31 @@ class EarlyLearningProgramsController < ApplicationController
 
             @correct_income_type_programs = correct_age_programs.where(income_type: user_income_type)
 
-            @eligible_programs = []
+            @eligible_early_learning_programs = []
 
-            if @user.employed == "yes" || @user.higher_education == "yes"
-              
+            # Must answer yes to one of the two questions: Are you currently employed?Are you enrolled in college/institution of higher education?
+            if @user.employed == true || @user.higher_education == true
+              employed_or_education_programs = @correct_income_type_programs.where(additional_criteria: "employed or in education")
+              @eligible_early_learning_programs += employed_or_education_programs
+              puts "I made it to employment or education"
+            end
+            # Must select either foster care or homelessness to be automatically eligible
+            if @user.foster_parent == true || @user.homeless == true
+              foster_or_homeless_programs = @correct_income_type_programs.where(additional_criteria: "foster care or homeless")
+              @eligible_early_learning_programs += foster_or_homeless_programs
+              puts "I made it to foster or homeless"
+            end
+            # Automatically eligible if in foster care, homeless, family receives SSI, family receives TANF
+            if @user.foster_parent == true || @user.homeless == true || @user.ssi == true || @user.tanf == true
+              foster_homeless_ssi_tanf_programs = @correct_income_type_programs.where(additional_criteria: "foster care, homeless, ssi or tanf")
+              @eligible_early_learning_programs += foster_homeless_ssi_tanf_programs
+              puts "I made it to foster, homeless, ssi or tanf"
+            end
+
+            if @eligible_early_learning_programs.length > 0
+              @eligible = true
+            else
+              @eligible = false
             end
 
           end
