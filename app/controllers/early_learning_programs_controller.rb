@@ -67,8 +67,14 @@ class EarlyLearningProgramsController < ApplicationController
     @user.save
 
     # data storage to add
+
     # income type
     # program eligibility 
+    # teen_parent: boolean
+    # six_to_twelve: boolean
+    # special_needs: boolean
+    # - eligible
+    # - eligible_count
 
     if @user.no_children == true
       # user has no children
@@ -107,6 +113,7 @@ class EarlyLearningProgramsController < ApplicationController
             if @user.gross_monthly_income <= income_row.income_type2 && @user.gross_monthly_income > income_row.income_type1
               user_income_type = 'Type 2'
             elsif @user.gross_monthly_income <= income_row.income_type1
+              # Type 1 and Type 2 
               user_income_type = 'Type 1'  
             end
 
@@ -136,6 +143,11 @@ class EarlyLearningProgramsController < ApplicationController
 
             if @eligible_early_learning_programs.length > 0
               @eligible = true
+
+              # if @eligible_early_learning_programs.each do |program|
+                
+              # end
+
             else
               @eligible = false
             end
