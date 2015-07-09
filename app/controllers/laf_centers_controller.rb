@@ -21,12 +21,12 @@ class LafCentersController < ApplicationController
 
 end
 
-    e = EarlyLearningProgram.all
+    # e = EarlyLearningProgram.all
 
-    e.each do |program|
-      puts "EarlyLearningProgram.create(:agency => '#{program.agency}', :funder => '#{program.funder}', :site => '#{program.site}',
-        :duration => '#{program.duration}', :ages_served => '#{program.ages_served}', :income_type => '#{program.income_type}')"
-    end
+    # e.each do |program|
+    #   puts "EarlyLearningProgram.create(:agency => '#{program.agency}', :funder => '#{program.funder}', :site => '#{program.site}',
+    #     :duration => '#{program.duration}', :ages_served => '#{program.ages_served}', :income_type => '#{program.income_type}')"
+    # end
 
 
     # l = LafCenter.all

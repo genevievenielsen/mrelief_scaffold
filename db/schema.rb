@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(version: 20150709035900) do
     t.datetime "updated_at"
   end
 
-  create_table "early_head_start_data", force: true do |t|
+  create_table "early_head_starts_head_start_data", force: true do |t|
     t.string   "dependent_no"
     t.string   "gross_monthly_income"
     t.string   "zipcode"
