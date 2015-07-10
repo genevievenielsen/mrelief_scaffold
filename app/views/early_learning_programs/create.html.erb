@@ -77,6 +77,12 @@
   <p>Based on your household size and income, you likely do not qualify for WIC.</p>
 <% end %>
 
+<% if @ccap_eligible == true %>
+  <h1>You Likely Qualify for CCAP</h1>
+ 
+<% else %>
+  <h1>You Likely Do Not Qualify for CCAP</h1>
+<% end %>
 
 
 

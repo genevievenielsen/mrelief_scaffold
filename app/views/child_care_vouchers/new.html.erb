@@ -14,9 +14,42 @@
 <div class="col-md-8 col-sm-6 col-xs-12">
   <form action="/child_care_vouchers" role="form" method="post">
 
+  <div class="row">
+    <div class="col-md-9 col-sm-10 col-xs-12">
+      <label class="allthatapply">Select all that apply to you:</label>
+      <div class="radio-button">
+        <input type="checkbox" name="tanf" value="tanf"> My family receives TANF<br>
+        <input type="checkbox" name="tanf" value="tanf">  I am a teen parent who is enrolled full-time in elementary, high school or GED classes to obtain a high school degree or its equivalent<br>
+        <input type="checkbox" name="special_needs" value="special_needs"> I care for a special needs child<br>
+        <input type="checkbox" name="status" value="none"> None of the Above<br>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form for caring for child -->
     <div class="row">
-      <div class="col-md-8">
-        <label>If your child is between the ages of 6 months and 12 years, you may qualify for a Child Care Voucher. Please answer the following questions to find out:</label>
+      <div class="col-md-9 col-sm-10 col-xs-12" id="employment_question">
+        <label for="child" id="child">Are you caring for a child under the age 13?</label>
+        <div class="radio-button">
+          <% [ 'yes', 'no'].each do |child| %>
+            <%= radio_button_tag 'child', child, @user.employed == child %>
+            <%= child.humanize %><br>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+
+  <!-- Form for employment -->
+    <div class="row">
+      <div class="col-md-9 col-sm-10 col-xs-12" id="employment_question">
+        <label for="employment" id="employment">Are you currently employed?</label>
+        <div class="radio-button">
+          <% [ 'yes', 'no'].each do |employment| %>
+            <%= radio_button_tag 'employment', employment, @user.employed == employment %>
+            <%= employment.humanize %><br>
+          <% end %>
+        </div>
       </div>
     </div>
 
@@ -24,7 +57,7 @@
   <!-- Form for dependents question -->
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
-        <label for="ccdf_dependent_no">How many dependents (including yourself) are in your household?</label>
+        <label for="ccdf_dependent_no">What is your household size?</label>
          <p type="button" data-toggle="popover" data-content="Total family size, including yourself and child[ren]." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
           <input type="text" id="ccdf_dependent_no" name="ccdf_dependent_no" placeholder="For example: 3" class="form-field"value="<%= @current_user.try(:household_size) || @d.try(:dependent_no) %>" required>
           </p>
@@ -53,7 +86,6 @@
 
   <!-- Submit button -->
     <%= render "programs/submit_button" %>
-
 
   </form>
   </div>

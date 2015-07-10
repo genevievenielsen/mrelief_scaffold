@@ -230,12 +230,22 @@ class EarlyLearningProgramsController < ApplicationController
     else
       # ineligible health status
       @wic_eligible = false
+    end
+    if @wic_eligible == true
+      @user.wic_eligible = true
+    else
+      @user.wic_eligible = false
     end 
 
     # CCAP ELIGIBILITY
     if condition
              
-    end       
+    end
+    if @ccap_eligible == true
+      @user.ccap_eligible = true
+    else
+      @user.ccap_eligible = false
+    end        
 
 
 	end # closes the method

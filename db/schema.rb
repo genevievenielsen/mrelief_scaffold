@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150710181400) do
+ActiveRecord::Schema.define(version: 20150710193052) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -133,6 +133,11 @@ ActiveRecord::Schema.define(version: 20150710181400) do
     t.string   "eligibility_status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "teen_parent",          default: false
+    t.boolean  "special_needs",        default: false
+    t.boolean  "tanf",                 default: false
+    t.boolean  "child",                default: false
+    t.boolean  "employed",             default: false
   end
 
   create_table "child_care_vouchers", force: true do |t|
@@ -210,6 +215,8 @@ ActiveRecord::Schema.define(version: 20150710181400) do
     t.boolean  "head_start_school_based_half_day_3to5",         default: false
     t.boolean  "head_start_school_based_full_day_3to5",         default: false
     t.integer  "eligible_count"
+    t.boolean  "wic_eligible",                                  default: false
+    t.boolean  "ccap_eligible",                                 default: false
   end
 
   create_table "early_learning_income_cutoffs", force: true do |t|
