@@ -32,7 +32,7 @@
         <label for="child" id="child">Are you caring for a child under the age 13?</label>
         <div class="radio-button">
           <% [ 'yes', 'no'].each do |child| %>
-            <%= radio_button_tag 'child', child, @user.employed == child %>
+            <%= radio_button_tag 'child', child, @d.employed == child %>
             <%= child.humanize %><br>
           <% end %>
         </div>
@@ -43,10 +43,10 @@
   <!-- Form for employment -->
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12" id="employment_question">
-        <label for="employment" id="employment">Are you currently employed?</label>
+        <label for="employment" id="employment">Are all adults in your household currently employed?</label>
         <div class="radio-button">
           <% [ 'yes', 'no'].each do |employment| %>
-            <%= radio_button_tag 'employment', employment, @user.employed == employment %>
+            <%= radio_button_tag 'employment', employment, @d.employed == employment %>
             <%= employment.humanize %><br>
           <% end %>
         </div>

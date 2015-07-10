@@ -238,15 +238,37 @@ class EarlyLearningProgramsController < ApplicationController
     end 
 
     # CCAP ELIGIBILITY
-    if condition
+      if @user.tanf == true || @user.teen_parent == true || @user.special_needs == true
+        if @user.three_and_under == true || @user.pregnant == true || @user.three_to_five == true || @user.six_to_twelve == true
+          if @user.employed == true || @user.higher_education == true
+            income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
+            if @user.gross_monthly_income < income_row.income_type4
+              @ccap_eligible = true
+            else
+               @ccap_eligible = false
+            end
+          else
+            # not employed 
+            @ccap_eligible = false
+          end
+        else
+          # no children 
+          @ccap_eligible = false
+        end
+      else
+        @ccap_eligible = false
+      end
              
-    end
+ 
     if @ccap_eligible == true
       @user.ccap_eligible = true
     else
       @user.ccap_eligible = false
-    end        
-
-
+    end
+    @user.save        
 	end # closes the method
+
+  def more_results
+    @user = EarlyLearningData.find(params[:id])
+  end
 end # closes the class

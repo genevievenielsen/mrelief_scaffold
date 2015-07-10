@@ -41,32 +41,49 @@ class ChildCareVouchersController < ApplicationController
       @d.gross_monthly_income = ccdf_gross_income
     end
 
-    if ccdf_gross_income.present? && ccdf_dependent_no.present?
+     if params[:tanf].present?
+      @d.tanf = true
+    end
+    if params[:teen_parent].present?
+      @d.teen_parent = true
+    end
+    if params[:special_needs].present?
+      @d.special_needs = true
+    end
+    if params[:child] == "yes"
+      @d.child = true
+    end
+    if params[:employment] == "yes"
+      @d.employed = true
+    end
 
-        ccdf_eligibility = ChildCareVoucher.find_by({ :ccdf_dependent_no => ccdf_dependent_no })
+    if @d.tanf == true || @d.teen_parent == true || @d.special_needs == true
+      if @d.child == true
+        if @d.employed == true
+          income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => ccdf_dependent_no})
+          if ccdf_gross_income < income_row.income_type4
+            @eligible = true
+          else
+             @eligible = false
+          end
+        else
+          # not employed 
+          @eligible = false
+        end
+      else
+        # no children 
+        @eligible = false
+      end
+    else
+      @eligible = false
+    end
 
-
-       p "ccdf_gross_income = #{ccdf_gross_income}"
-       p "ccdf_eligibility.ccdf_gross_income = #{ccdf_eligibility.ccdf_gross_income}"
-
-       if ccdf_gross_income < ccdf_eligibility.ccdf_gross_income
-         @eligible = true
-         @d.eligibility_status = "yes"
-       else
-          @d.eligibility_status = "no"
-       end
-     else
-       redirect_to :back, :notice => "All fields are required."
-     end
-
-     @user_zipcode = params[:zipcode]
-     @zipcode = @user_zipcode << ".0"
-     @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
-
-     if @lafcenter.present?
-     else
-       @lafcenter = LafCenter.find_by(:id => 10)
-     end
+    
+    if @eligible == true 
+      @d.eligibility_status = "yes"
+    else
+       @d.eligibility_status = "no"
+    end
 
      childcare = []
      ServiceCenter.all.each do |center|
@@ -75,7 +92,8 @@ class ChildCareVouchersController < ApplicationController
        end
      end
 
-
+     @user_zipcode = params[:zipcode]
+     @zipcode = @user_zipcode << ".0"
      @pb_zipcode = @user_zipcode.chomp(".0")
        @resources = childcare
        @resources_zip = []

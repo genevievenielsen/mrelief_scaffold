@@ -1,0 +1,24 @@
+<div class="container marquee">
+	<div class="row">
+		<div class="col-md-12">
+			<% if @user.wic_eligible == true %>
+			  <h1>You Likely Qualify for WIC </h1>
+			    <p>The Special Supplemental Nutrition Program for Women, Infants and Children (WIC) is a USDA food and nutrition program administered by the Illinois Department of Human Services (IDHS) and operated by Catholic Charities. The main line is Phone: (312) 951-9659/(773)729-3908. </p>
+			    <p>To find a resource center near you or for more information, <%= link_to "click here", "http://www.cedaorg.net/www2/index.htm", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'wic', 'ceda', 1);" %></p>
+			    <p> or call (855)WIC-CEDA (855-942-2332).</p>
+			<% else %>
+			  <h1>You Likely Do Not Qualify for WIC</h1>
+			  <p>Based on your household size and income, you likely do not qualify for WIC.</p>
+			<% end %>
+
+			<% if @user.ccap_eligible == true %>
+			  <h1>You Likely Qualify for CCAP</h1>
+			 
+			<% else %>
+			  <h1>You Likely Do Not Qualify for CCAP</h1>
+			<% end %>
+
+		</div>
+	</div>
+</div>
+

@@ -38,6 +38,8 @@ Rails.application.routes.draw do
 
    get "early_learning_programs", to: "early_learning_programs#new"
    post "early_learning_programs", to: "early_learning_programs#create"
+   get "early_learning_more_results/:id", to: "early_learning_programs#more_results", as: "more_results"
+
 
 
   # print

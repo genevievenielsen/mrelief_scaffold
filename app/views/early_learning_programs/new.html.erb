@@ -19,7 +19,7 @@
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label class="allthatapply">Select all that apply to you:</label>
         <div class="radio-button">
-          <input type="checkbox" name="zero_to_three" value="zero_to_three">  I care for a child that is between the ages of 0-3<br>
+          <input type="checkbox" name="zero_to_three" value="zero_to_three">  I care for a child that is between the ages of 0-2<br>
           <input type="checkbox" name="three_to_five" value="three_to_five"> I care for a child that is between the ages of 3-5<br>
           <input type="checkbox" name="six_to_twelve" value="six_to_twelve"> I care for a child that is between the ages of 6-12<br>
           <input type="checkbox" name="pregnant" value="pregnant"> I am pregnant<br>
@@ -82,7 +82,7 @@
 
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12" id="employment_question">
-        <label for="employment" id="employment">Are you currently employed?</label>
+        <label for="employment" id="employment">Are all adults in your household currently employed?</label>
         <div class="radio-button">
           <% [ 'yes', 'no'].each do |employment| %>
             <%= radio_button_tag 'employment', employment, @user.employed == employment %>
