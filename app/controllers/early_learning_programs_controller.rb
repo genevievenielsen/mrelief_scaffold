@@ -146,7 +146,6 @@ class EarlyLearningProgramsController < ApplicationController
               @preferred_early_learning_programs = @eligible_early_learning_programs.where(duration: @user.preferred_duration)
             end
 
-
         else
           # user does not have a child of the correct age
           @eligible = false
@@ -155,67 +154,62 @@ class EarlyLearningProgramsController < ApplicationController
         # user does not live in Chicago zipcodes
         @eligible = false
       end
+    end # ends user has no children
 
-      # Additional Data Storage
-      if @eligible != false
-        @user.income_type = @user_income_type.try(:to_s)
-
-        @eligible_descriptions = @eligible_early_learning_programs.pluck(:description)
-
-        if @eligible_descriptions.include?("Head Start - Childcare Collaboration")
-          @user.head_start_childcare_collaboration = true
-        end
-        if @eligible_descriptions.include?("Head Start - Preschool - Childcare Collaboration")
-          @user.head_start_preschool_childcare_collaboration = true 
-        end
-        if @eligible_descriptions.include?("Preschool for All - Childcare Collaboration")
-          @user.preschool_for_all_childcare_collaboration = true 
-        end
-        if @eligible_descriptions.include?("Prevention Initiative - Home Visiting - 0 to 2")
-          @user.prevention_initiative_home_visiting_0to2 = true 
-        end
-        if @eligible_descriptions.include?("School Based - No Co-Pay - Full Day")
-          @user.school_based_no_co_pay_full_day = true 
-        end
-        if @eligible_descriptions.include?("School Based - No Co-Pay - Half Day")
-          @user.school_based_no_co_pay_half_day = true 
-        end
-        if @eligible_descriptions.include?("School Based - Co-Pay - Full Day")
-          @user.school_based_co_pay_full_day = true 
-        end
-        if @eligible_descriptions.include?("School Based - Co-Pay - Half Day")
-          @user.school_based_co_pay_half_day = true 
-        end
-        if @eligible_descriptions.include?("Head Start - Center Based - Half Day - 3 to 5")
-          @user.head_start_center_based_half_day_3to5 = true 
-        end
-        if @eligible_descriptions.include?("Early Head Start - Childcare Collaboration")
-          @user.early_head_start_childcare_collaboration = true 
-        end
-        if @eligible_descriptions.include?("Prevention Initiative - Childcare Collaboration")
-          @user.prevention_initiative_childcare_collaboration = true 
-        end
-        if @eligible_descriptions.include?("Early Head Start - Home Visiting - 0 to 2")
-          @user.early_head_start_home_visiting_0to2 = true 
-        end
-        if @eligible_descriptions.include?("Head Start - Home Visting - 3 to 5")
-          @user.head_start_home_visting_3to5 = true 
-        end 
-        if @eligible_descriptions.include?("Head Start - School Based - Half Day - 3 to 5")
-          @user.head_start_school_based_half_day_3to5 = true 
-        end 
-        if @eligible_descriptions.include?("Head Start - School Based - Full Day - 3 to 5")
-          @user.head_start_school_based_full_day_3to5 = true 
-        end 
-
-        @user.eligible_count = @eligible_early_learning_programs.count
+    # Additional Data Storage
+    if @eligible == false
+    else
+      @user.income_type = @user_income_type.try(:to_s)
+      @eligible_descriptions = @eligible_early_learning_programs.pluck(:description)
+      if @eligible_descriptions.include?("Head Start - Childcare Collaboration")
+        @user.head_start_childcare_collaboration = true
       end
+      if @eligible_descriptions.include?("Head Start - Preschool - Childcare Collaboration")
+        @user.head_start_preschool_childcare_collaboration = true 
+      end
+      if @eligible_descriptions.include?("Preschool for All - Childcare Collaboration")
+        @user.preschool_for_all_childcare_collaboration = true 
+      end
+      if @eligible_descriptions.include?("Prevention Initiative - Home Visiting - 0 to 2")
+        @user.prevention_initiative_home_visiting_0to2 = true 
+      end
+      if @eligible_descriptions.include?("School Based - No Co-Pay - Full Day")
+        @user.school_based_no_co_pay_full_day = true 
+      end
+      if @eligible_descriptions.include?("School Based - No Co-Pay - Half Day")
+        @user.school_based_no_co_pay_half_day = true 
+      end
+      if @eligible_descriptions.include?("School Based - Co-Pay - Full Day")
+        @user.school_based_co_pay_full_day = true 
+      end
+      if @eligible_descriptions.include?("School Based - Co-Pay - Half Day")
+        @user.school_based_co_pay_half_day = true 
+      end
+      if @eligible_descriptions.include?("Head Start - Center Based - Half Day - 3 to 5")
+        @user.head_start_center_based_half_day_3to5 = true 
+      end
+      if @eligible_descriptions.include?("Early Head Start - Childcare Collaboration")
+        @user.early_head_start_childcare_collaboration = true 
+      end
+      if @eligible_descriptions.include?("Prevention Initiative - Childcare Collaboration")
+        @user.prevention_initiative_childcare_collaboration = true 
+      end
+      if @eligible_descriptions.include?("Early Head Start - Home Visiting - 0 to 2")
+        @user.early_head_start_home_visiting_0to2 = true 
+      end
+      if @eligible_descriptions.include?("Head Start - Home Visting - 3 to 5")
+        @user.head_start_home_visting_3to5 = true 
+      end 
+      if @eligible_descriptions.include?("Head Start - School Based - Half Day - 3 to 5")
+        @user.head_start_school_based_half_day_3to5 = true 
+      end 
+      if @eligible_descriptions.include?("Head Start - School Based - Full Day - 3 to 5")
+        @user.head_start_school_based_full_day_3to5 = true 
+      end 
+      @user.eligible_count = @eligible_early_learning_programs.count
+      @user.save
     end
+         
 
-  
-
-      
- 
-
-	end
-end
+	end # closes the method
+end # closes the class
