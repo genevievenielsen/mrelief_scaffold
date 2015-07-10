@@ -25,11 +25,14 @@
     <% @preferred_early_learning_programs.each do |program| %>
       <ul>
         <li class="laf-headline"> <%= program.funder %></li>
-        <li><%=  program.agency %></li>
-        <li><%= program.site %></li>
-        <li>Ages Served:<%= program.ages_served %></li>
-        <li>Income Type:<%= program.income_type %></li>
-        <li>Duration:<%= program.duration %></li>
+        <li>Agency: <%=  program.agency %></li>
+        <li>Site: <%= program.site %></li>
+        <li>Ages Served: <%= program.ages_served %></li>
+        <li>Income Type: <%= program.income_type %></li>
+        <% if program.income_type == "Greater than Type 2" %>
+          <li>May have a required fee based on the income of the parents or legal guardians. Use the calculator[link to CPS] estimate your families co-pay.</li>
+        <% end %>
+        <li>Duration: <%= program.duration %></li>
         <li>Additional Criteria: <%= program.additional_criteria %></li>
       </ul>
       <br>
@@ -46,11 +49,14 @@
     <% @eligible_early_learning_programs.each do |program| %>
       <ul>
         <li class="laf-headline"> <%= program.funder %></li>
-        <li><%=  program.agency %></li>
-        <li><%= program.site %></li>
-        <li>Ages Served:<%= program.ages_served %></li>
-        <li>Income Type:<%= program.income_type %></li>
-        <li>Duration:<%= program.duration %></li>
+        <li>Agency: <%=  program.agency %></li>
+        <li>Site: <%= program.site %></li>
+        <li>Ages Served: <%= program.ages_served %></li>
+        <li>Income Type: <%= program.income_type %></li>
+        <% if program.income_type == "Greater than Type 2" %>
+          <li>May have a required fee based on the income of the parents or legal guardians. Use the calculator[link to CPS] estimate your families co-pay.</li>
+        <% end %>
+        <li>Duration: <%= program.duration %></li>
         <li>Additional Criteria: <%= program.additional_criteria %></li>
       </ul>
       <br>

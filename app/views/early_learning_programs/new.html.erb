@@ -133,7 +133,7 @@
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="preferred_duration" id="preferred_duration">Do you have a preference for how long your child will participate in an early learning program in a given day?</label>
         <div class="radio-button">
-          <% [ 'Half Day', 'Full Day', 'Home-based'].each do |preferred_duration| %>
+          <% [ 'Half Day', 'Full Day', 'Home Visiting'].each do |preferred_duration| %>
             <%= radio_button_tag 'preferred_duration', preferred_duration %>
             <%= preferred_duration.humanize %><br>
           <% end %>
