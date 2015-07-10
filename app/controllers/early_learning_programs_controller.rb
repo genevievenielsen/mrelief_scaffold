@@ -265,7 +265,15 @@ class EarlyLearningProgramsController < ApplicationController
     else
       @user.ccap_eligible = false
     end
-    @user.save        
+    @user.save 
+
+
+    # if params[:health_status] == true && params[:employment] == true && params[:education] == "no"
+
+    # else
+    #    flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
+    #   render "new"
+    # end       
 	end # closes the method
 
   def more_results
