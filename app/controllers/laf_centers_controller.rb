@@ -5,7 +5,7 @@ class LafCentersController < ApplicationController
     def index
      ex = Roo::Excel.new("public/early_learning_programs.xls")
      ex.default_sheet = ex.sheets[0]
-     2.upto(22) do | line |
+     2.upto(16) do | line |
      agency = ex.cell(line,'A')
      funder = ex.cell(line,'B')
      site = ex.cell(line,'C')
@@ -13,9 +13,10 @@ class LafCentersController < ApplicationController
      ages_served = ex.cell(line,'E')
      income_type = ex.cell(line,'F')
      additional_criteria = ex.cell(line,'G')
+     description = ex.cell(line,'H')
     
       @early_learning_program = EarlyLearningProgram.create(agency: agency, funder: funder, site: site, duration: duration, ages_served: ages_served, 
-        income_type: income_type, additional_criteria: additional_criteria)
+        income_type: income_type, additional_criteria: additional_criteria, description: description)
     end
   end
 
@@ -25,7 +26,8 @@ end
 
     # e.each do |program|
     #   puts "EarlyLearningProgram.create(:agency => '#{program.agency}', :funder => '#{program.funder}', :site => '#{program.site}',
-    #     :duration => '#{program.duration}', :ages_served => '#{program.ages_served}', :income_type => '#{program.income_type}')"
+    #     :duration => '#{program.duration}', :ages_served => '#{program.ages_served}', :income_type => '#{program.income_type}',
+    #     :additional_criteria => '#{program.additional_criteria}', :description => '#{program.description}')"
     # end
 
 

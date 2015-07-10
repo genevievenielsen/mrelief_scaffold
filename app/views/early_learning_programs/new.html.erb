@@ -112,7 +112,7 @@
       </div>
     </div>
 
-  <!-- Form for other zipcode -->
+  <!-- Form for preferred zipcode -->
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12" >
         <label for="other_zipcode" id="other_zipcode">Do you have a preference of a zipcode where you would like early learning assistance (e.g. near home, work, or other)?</label>
@@ -126,7 +126,6 @@
     </div>
 
     <div class="place_for_preferred_zipcode">
-      
     </div>
 
   <!-- Form for duration preference -->
@@ -150,8 +149,7 @@
               <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-field" required>
             </p>
        </div>
-     </div>
-
+    </div>
 
   <!-- Submit button -->
     <div class="row">
@@ -203,7 +201,6 @@ $(document).ready(function() {
        );
 
       // preferred zipcode
-      //student JavaScript
       $("input:radio[name=other_zipcode]").click(function() {
       var value = $(this).val();
         if (value == "yes") {

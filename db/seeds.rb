@@ -3839,47 +3839,50 @@ LafCenter.create(:zipcode => '60827.0', :city => 'Chicago', :center => 'South Ch
 
 #Early Learning Program Types
 EarlyLearningProgram.create(:agency => 'DFSS', :funder => 'Head Start - Childcare Collaboration', :site => 'Center Based',
-        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Type 1')
+        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Less than Type 1',
+        :additional_criteria => 'foster care, homeless, ssi or tanf', :description => 'Head Start - Childcare Collaboration')
 EarlyLearningProgram.create(:agency => 'DFSS/CPS', :funder => 'Head Start - Preschool - Childcare Collaboration', :site => 'Center Based',
-        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Type 1')
-EarlyLearningProgram.create(:agency => 'CPS', :funder => 'Prevention Initiative', :site => 'Home Visiting',
-        :duration => 'NA', :ages_served => '0 - 3', :income_type => 'Type 2')
-EarlyLearningProgram.create(:agency => 'CPS', :funder => 'Preschool for All', :site => 'School Based',
-        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Type 2')
-EarlyLearningProgram.create(:agency => 'CPS', :funder => 'RTL/MRE Investments', :site => 'School Based',
-        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Type 2')
-EarlyLearningProgram.create(:agency => 'CPS', :funder => 'Title 1', :site => 'School Based Child Parent Center',
-        :duration => 'Half Day', :ages_served => '3 - 5', :income_type => 'Type 2')
-EarlyLearningProgram.create(:agency => 'CPS', :funder => 'Social Impact Bond', :site => 'School Based Child Parent Center',
-        :duration => 'Half Day', :ages_served => '3 - 5', :income_type => 'Type 2')
+        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Less than Type 1',
+        :additional_criteria => 'foster care, homeless, ssi or tanf', :description => 'Head Start - Preschool - Childcare Collaboration')
 EarlyLearningProgram.create(:agency => 'CPS', :funder => 'Preschool for All - Childcare Collaboration', :site => 'Center Based',
-        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Type 2')
-EarlyLearningProgram.create(:agency => 'CPS', :funder => 'Preschool for All', :site => 'School Based',
-        :duration => 'Half Day', :ages_served => '3 - 5', :income_type => 'Type 2')
-EarlyLearningProgram.create(:agency => 'CPS', :funder => 'RTL/MRE Investments', :site => 'School Based',
-        :duration => 'Half Day', :ages_served => '3 - 5', :income_type => 'Type 2')
+        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Less than Type 2',
+        :additional_criteria => 'foster care or homeless', :description => 'Preschool for All - Childcare Collaboration')
+EarlyLearningProgram.create(:agency => 'CPS', :funder => 'Prevention Initiative', :site => 'Home',
+        :duration => 'Home Visiting', :ages_served => '0 - 2', :income_type => 'Less than Type 2',
+        :additional_criteria => 'foster care, homeless, ssi or tanf', :description => 'Prevention Initiative - Home Visiting - 0 to 2')
+EarlyLearningProgram.create(:agency => 'CPS', :funder => 'School Based - No Co-Pay', :site => 'School Based',
+        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Less than Type 2',
+        :additional_criteria => 'foster care or homeless', :description => 'School Based - No Co-Pay - Full Day')
+EarlyLearningProgram.create(:agency => 'CPS', :funder => 'School Based - No Co-Pay', :site => 'School Based',
+        :duration => 'Half Day', :ages_served => '3 - 5', :income_type => 'Less than Type 2',
+        :additional_criteria => 'foster care or homeless', :description => 'School Based - No Co-Pay - Half Day')
+EarlyLearningProgram.create(:agency => 'CPS', :funder => 'School Based - Co-Pay', :site => 'School Based',
+        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Greater than Type 2',
+        :additional_criteria => 'foster care or homeless', :description => 'School Based - Co-Pay - Full Day')
+EarlyLearningProgram.create(:agency => 'CPS', :funder => 'School Based - Co-Pay', :site => 'School Based',
+        :duration => 'Half Day', :ages_served => '3 - 5', :income_type => 'Greater than Type 2',
+        :additional_criteria => 'foster care or homeless', :description => 'School Based - Co-Pay - Half Day')
 EarlyLearningProgram.create(:agency => 'DFSS', :funder => 'Head Start', :site => 'Center Based',
-        :duration => 'Half Day', :ages_served => '3 - 5', :income_type => 'Type 1')
-EarlyLearningProgram.create(:agency => 'DFSS', :funder => 'RTL/MRE Investments', :site => 'Center Based',
-        :duration => 'Half Day', :ages_served => '3 - 5', :income_type => 'Type 1')
-EarlyLearningProgram.create(:agency => 'DFSS', :funder => 'RTL/MRE Investments', :site => 'Center Based',
-        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Type 1')
-EarlyLearningProgram.create(:agency => 'DFSS', :funder => 'Early Head Start', :site => 'Center Based',
-        :duration => 'Full Day', :ages_served => '0 - 3', :income_type => 'Type 1')
-EarlyLearningProgram.create(:agency => 'CPS', :funder => 'Prevention Initiative', :site => 'Center Based',
-        :duration => 'Full Day', :ages_served => '0 - 3', :income_type => 'Type 1')
-EarlyLearningProgram.create(:agency => 'DFSS', :funder => 'Head Start', :site => 'FCCH',
-        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Type 1')
-EarlyLearningProgram.create(:agency => 'DFSS', :funder => 'RTL/MRE Investments', :site => 'FCCH',
-        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Type 1')
-EarlyLearningProgram.create(:agency => 'DFSS', :funder => 'Early Head Start', :site => 'FCCH',
-        :duration => 'Full Day', :ages_served => '0 - 3', :income_type => 'Type 1')
-EarlyLearningProgram.create(:agency => 'DFSS', :funder => 'Head Start', :site => 'Home Visiting',
-        :duration => 'NA', :ages_served => '3 - 5', :income_type => 'Type 1')
+        :duration => 'Half Day', :ages_served => '3 - 5', :income_type => 'Less than Type 1',
+        :additional_criteria => 'foster care, homeless, ssi or tanf', :description => 'Head Start - Center Based - Half Day - 3 to 5')
+EarlyLearningProgram.create(:agency => 'DFSS', :funder => 'Early Head Start - Childcare Collaboration', :site => 'Center Based',
+        :duration => 'Full Day', :ages_served => '0 - 2', :income_type => 'Less than Type 1',
+        :additional_criteria => 'foster care, homeless, ssi or tanf', :description => 'Early Head Start - Childcare Collaboration')
+EarlyLearningProgram.create(:agency => 'CPS', :funder => 'Prevention Initiative - Childcare Collaboration', :site => 'Center Based',
+        :duration => 'Full Day', :ages_served => '0 - 2', :income_type => 'Less than Type 1',
+        :additional_criteria => 'foster care or homeless', :description => 'Prevention Initiative - Childcare Collaboration')
+EarlyLearningProgram.create(:agency => 'DFSS', :funder => 'Early Head Start', :site => 'Home',
+        :duration => 'Home Visiting', :ages_served => '0 - 2', :income_type => 'Less than Type 1',
+        :additional_criteria => 'foster care, homeless, ssi or tanf', :description => 'Early Head Start - Home Visiting - 0 to 2')
+EarlyLearningProgram.create(:agency => 'DFSS', :funder => 'Head Start', :site => 'Home',
+        :duration => 'Home Visiting', :ages_served => '3 - 5', :income_type => 'Less than Type 1',
+        :additional_criteria => 'foster care, homeless, ssi or tanf', :description => 'Head Start - Home Visting - 3 to 5')
 EarlyLearningProgram.create(:agency => 'DFSS/CPS', :funder => 'Head Start', :site => 'School Based',
-        :duration => 'Half Day', :ages_served => '3 - 5', :income_type => 'Type 1')
+        :duration => 'Half Day', :ages_served => '3 - 5', :income_type => 'Less than Type 1',
+        :additional_criteria => 'foster care, homeless, ssi or tanf', :description => 'Head Start - School Based - Half Day - 3 to 5')
 EarlyLearningProgram.create(:agency => 'DFSS/CPS', :funder => 'Head Start', :site => 'School Based',
-        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Type 1')
+        :duration => 'Full Day', :ages_served => '3 - 5', :income_type => 'Less than Type 1',
+        :additional_criteria => 'foster care, homeless, ssi or tanf', :description => 'Head Start - School Based - Full Day - 3 to 5')
 
 #Early Learning Program Income Cutoffs
 EarlyLearningIncomeCutoff.create(household_size: 1,

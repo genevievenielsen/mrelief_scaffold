@@ -17,18 +17,41 @@
     </div>
   </div>
 
+  <% if @preferred_early_learning_programs.present? %>
   <div class="row">
     <div class="col-md-12">
+    <h1>Preferred Early Learning Programs</h1>
+    <br>
+    <% @preferred_early_learning_programs.each do |program| %>
+      <ul>
+        <li class="laf-headline"> <%= program.funder %></li>
+        <li><%=  program.agency %></li>
+        <li><%= program.site %></li>
+        <li>Ages Served:<%= program.ages_served %></li>
+        <li>Income Type:<%= program.income_type %></li>
+        <li>Duration:<%= program.duration %></li>
+        <li>Additional Criteria: <%= program.additional_criteria %></li>
+      </ul>
+      <br>
+    <% end %>
+     
+    </div>
+  </div>
+  <% end %>
 
+  <div class="row">
+    <div class="col-md-12">
+    <h1>All Eligible Early Learning Programs</h1>
     <br>
     <% @eligible_early_learning_programs.each do |program| %>
       <ul>
-        <li class="laf-headline"> <%= program[:funder] %></li>
-        <li><%=  program[:agency] %></li>
-        <li><%= program[:site] %></li>
-        <li>Ages Served:<%= program[:ages_served] %></li>
-        <li>Income Type:<%= program[:income_type] %></li>
-        <li>Additional Criteria: <%= program[:additional_criteria] %></li>
+        <li class="laf-headline"> <%= program.funder %></li>
+        <li><%=  program.agency %></li>
+        <li><%= program.site %></li>
+        <li>Ages Served:<%= program.ages_served %></li>
+        <li>Income Type:<%= program.income_type %></li>
+        <li>Duration:<%= program.duration %></li>
+        <li>Additional Criteria: <%= program.additional_criteria %></li>
       </ul>
       <br>
     <% end %>

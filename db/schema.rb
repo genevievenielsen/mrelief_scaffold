@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150710004046) do
+ActiveRecord::Schema.define(version: 20150710143549) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -169,16 +169,16 @@ ActiveRecord::Schema.define(version: 20150710004046) do
   end
 
   create_table "early_learning_data", force: true do |t|
-    t.boolean  "three_and_under",      default: false
-    t.boolean  "three_to_five",        default: false
-    t.boolean  "pregnant",             default: false
-    t.boolean  "no_children",          default: false
+    t.boolean  "three_and_under",                               default: false
+    t.boolean  "three_to_five",                                 default: false
+    t.boolean  "pregnant",                                      default: false
+    t.boolean  "no_children",                                   default: false
     t.integer  "household_size"
     t.float    "gross_monthly_income"
-    t.boolean  "foster_parent",        default: false
-    t.boolean  "homeless",             default: false
-    t.boolean  "ssi",                  default: false
-    t.boolean  "tanf",                 default: false
+    t.boolean  "foster_parent",                                 default: false
+    t.boolean  "homeless",                                      default: false
+    t.boolean  "ssi",                                           default: false
+    t.boolean  "tanf",                                          default: false
     t.boolean  "employed"
     t.boolean  "higher_education"
     t.string   "zipcode"
@@ -186,6 +186,30 @@ ActiveRecord::Schema.define(version: 20150710004046) do
     t.string   "phone_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "income_type"
+    t.boolean  "snap_or_medicaid",                              default: false
+    t.boolean  "health_status",                                 default: false
+    t.boolean  "teen_parent",                                   default: false
+    t.boolean  "six_to_twelve",                                 default: false
+    t.boolean  "special_needs",                                 default: false
+    t.boolean  "other_zipcode",                                 default: false
+    t.string   "preferred_duration"
+    t.boolean  "head_start_childcare_collaboration",            default: false
+    t.boolean  "head_start_preschool_childcare_collaboration",  default: false
+    t.boolean  "preschool_for_all_childcare_collaboration",     default: false
+    t.boolean  "prevention_initiative_home_visiting_0to2",      default: false
+    t.boolean  "school_based_no_co_pay_full_day",               default: false
+    t.boolean  "school_based_no_co_pay_half_day",               default: false
+    t.boolean  "school_based_co_pay_full_day",                  default: false
+    t.boolean  "school_based_co_pay_half_day",                  default: false
+    t.boolean  "head_start_center_based_half_day_3to5",         default: false
+    t.boolean  "early_head_start_childcare_collaboration",      default: false
+    t.boolean  "prevention_initiative_childcare_collaboration", default: false
+    t.boolean  "early_head_start_home_visiting_0to2",           default: false
+    t.boolean  "head_start_home_visting_3to5",                  default: false
+    t.boolean  "head_start_school_based_half_day_3to5",         default: false
+    t.boolean  "head_start_school_based_full_day_3to5",         default: false
+    t.integer  "eligible_count"
   end
 
   create_table "early_learning_income_cutoffs", force: true do |t|
@@ -208,6 +232,7 @@ ActiveRecord::Schema.define(version: 20150710004046) do
     t.datetime "updated_at"
     t.string   "duration"
     t.string   "additional_criteria"
+    t.string   "description"
   end
 
   create_table "email_lists", force: true do |t|
