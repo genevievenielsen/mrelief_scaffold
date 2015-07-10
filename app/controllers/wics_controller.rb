@@ -41,6 +41,8 @@ class WicsController < ApplicationController
 
     wic_status = params[:wic_status]
     @d.health_status = params[:wic_status]
+    @d.pregnant_or_child = params[:pregnant_or_child]
+    @d.snap_tanf_medicaid = params[:snap_tanf_medicaid]
 
     if  wic_gross_income.present? && wic_household_size.present?
 

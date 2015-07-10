@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150709035900) do
+ActiveRecord::Schema.define(version: 20150710004046) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(version: 20150709035900) do
     t.datetime "updated_at"
   end
 
-  create_table "early_head_starts_head_start_data", force: true do |t|
+  create_table "early_head_start_data", force: true do |t|
     t.string   "dependent_no"
     t.string   "gross_monthly_income"
     t.string   "zipcode"
@@ -541,6 +541,8 @@ ActiveRecord::Schema.define(version: 20150709035900) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "health_status"
+    t.string   "pregnant_or_child"
+    t.string   "snap_tanf_medicaid"
   end
 
   create_table "wics", force: true do |t|

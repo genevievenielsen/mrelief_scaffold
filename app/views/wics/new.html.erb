@@ -19,45 +19,47 @@
       </div>
     </div>
 
+  <!-- Health questions-->
     <div class="row">
-      <div class="col-md-9 col-sm-10 col-xs-12">
-        <div class="relative" id="wic_status">
-         <label>Describe your current health status:</label>
-         <div class="radio-button">
-          <%= radio_button_tag 'wic_status', 'anemic' %> anemic
-          <br><%= radio_button_tag 'wic_status', 'underweight' %> underweight
-          <br><%= radio_button_tag 'wic_status', 'of a risky maternal age' %> of a risky maternal age
-          <br><%= radio_button_tag 'wic_status', 'have a history of pregnancy complications ' %> have a history of pregnancy complications
-          <br><%= radio_button_tag 'wic_status', 'have a history of poor pregnancy outcomes' %> have a history of poor pregnancy outcomes
-          <br><%= radio_button_tag 'wic_status', 'has an inadequate dietary pattern' %> has an inadequate dietary pattern
-          <br><%= radio_button_tag 'wic_status', 'none of the above' %> None of the above
-          </div>
+      <div class="col-md-9 col-sm-10 col-xs-12" >
+        <label for="wic_status" id="wic_status">Do you have a medical-based or dietary-based health condition?</label>
+        <div class="radio-button">
+          <% [ 'yes', 'no'].each do |wic_status| %>
+            <%= radio_button_tag 'wic_status', wic_status, @d.health_status == wic_status %>
+            <%= wic_status.humanize %><br>
+          <% end %>
         </div>
       </div>
     </div>
 
-
-  <!-- Form for household size-->
+  <!-- WIC Status -->
     <div class="row">
-      <div class="col-md-9 col-sm-10 col-xs-12">
-        <label for="rental_dependent_no">What is your household size?</label>
-        <p type="button" data-toggle="popover" data-content="Number of people living in your household, including yourself and your child[ren]." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
-          <input type="text" id="wic_household_size" name="wic_household_size" placeholder="For example: 3" class="form-field" value="<%= @current_user.try(:household_size) || @d.try(:household_size) %>" required>
-        </p>
+      <div class="col-md-9 col-sm-10 col-xs-12" >
+        <label for="pregnant_or_child" id="pregnant_or_child">Are you pregnant or caring for a child younger than 5 years old?</label>
+        <div class="radio-button">
+          <% [ 'yes', 'no'].each do |pregnant_or_child| %>
+            <%= radio_button_tag 'pregnant_or_child', pregnant_or_child, @d.pregnant_or_child == pregnant_or_child %>
+            <%= pregnant_or_child.humanize %><br>
+          <% end %>
+        </div>
       </div>
     </div>
 
-
-  <!-- Form for gross income -->
+  <!-- WIC Status -->
     <div class="row">
-      <div class="col-md-9 col-sm-10 col-xs-12">
-        <label for="rta_gross_income">What is gross monthly income?</label>
-        <%= render "programs/popover_calculator" %>
-
-          <p type="button" data-toggle="popover" data-content="Total monthly income from all sources." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
-            <input type="text" id="wic_gross_income" name="wic_gross_income" placeholder="For example: 1000" class="form-field  " value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) || @d.try(:gross_monthly_income) %>" required>
-          </p>
+      <div class="col-md-9 col-sm-10 col-xs-12" >
+        <label for="snap_tanf_medicaid" id="snap_tanf_medicaid">Are you currently receiving SNAP, TANF or Medicaid?</label>
+        <div class="radio-button">
+          <% [ 'yes', 'no'].each do |snap_tanf_medicaid| %>
+            <%= radio_button_tag 'snap_tanf_medicaid', snap_tanf_medicaid, @d.snap_tanf_medicaid == snap_tanf_medicaid %>
+            <%= snap_tanf_medicaid.humanize %><br>
+          <% end %>
+        </div>
       </div>
+    </div>
+
+    <div class="place_for_income_questions">
+      
     </div>
 
    <!-- Form for zipcode -->
@@ -80,5 +82,23 @@
   </div>
 </section>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+      //income JavaScript
+    $("input:radio[name=snap_tanf_medicaid]").click(function() {
+    var value = $(this).val();
+      if (value == "no") {
+        $('.place_for_income_questions').empty().append("<%= escape_javascript(render "wics/income_questions", :household_size => @d.household_size, :gross_monthly_income => @d.gross_monthly_income ) %>");
+      }
+      if (value == "yes") {
+        $('.income_questions').remove();
+      }
+    });
+    if($('input:radio[name=esnap_tanf_medicaid][value="no"]').prop('checked')){
+        $('.place_for_income_questions').append("<%= escape_javascript(render "wics/income_questions",   :household_size => @d.household_size, :gross_monthly_income => @d.gross_monthly_income ) %>");
+    }
+  });
+</script>
 
 
