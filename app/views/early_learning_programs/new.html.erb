@@ -45,7 +45,7 @@
         <label for="gross_monthly_income">What is your gross monthly income?</label>
         <%= render "programs/popover_calculator" %>
           <p type="button" data-toggle="popover" data-content="Gross Income of All Family Members (Income means gross cash income and includes earned income, military income (including pay and allowances), veterans’ benefits, Social Security benefits, unemployment compensation, and public assistance benefits.)" data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
-           <input type="text" id="gross_monthly_income" name="gross_monthly_income" placeholder="For example: 1000" class="form-field" value="<%= @user.try(:gross_monthly_income) %>" required>
+           <input type="text" id="gross_monthly_income" name="gross_monthly_income" placeholder="For example: 1000" class="form-field" value="<%= number_with_precision(@user.try(:gross_monthly_income), precision: 0) %>" required>
           </p>
       </div>
     </div>
@@ -72,7 +72,7 @@
         <label for="health_status" id="health_status">Do you have a medical-based or dietary-based health condition?</label>
         <div class="radio-button">
           <% [ 'yes', 'no'].each do |health_status| %>
-            <%= radio_button_tag 'health_status', health_status %>
+            <%= radio_button_tag 'health_status', health_status, @user.health_status == health_status %>
             <%= health_status.humanize %><br>
           <% end %>
         </div>
@@ -85,7 +85,7 @@
         <label for="employment" id="employment">Are you currently employed?</label>
         <div class="radio-button">
           <% [ 'yes', 'no'].each do |employment| %>
-            <%= radio_button_tag 'employment', employment %>
+            <%= radio_button_tag 'employment', employment, @user.employed == employment %>
             <%= employment.humanize %><br>
           <% end %>
         </div>
@@ -97,7 +97,7 @@
         <label for="education" id="education">Are you enrolled in college/institution of higher education?</label>
         <div class="radio-button">
           <% [ 'yes', 'no'].each do |education| %>
-            <%= radio_button_tag 'education', education %>
+            <%= radio_button_tag 'education', education, @user.higher_education == education %>
             <%= education.humanize %><br>
           <% end %>
         </div>
@@ -118,7 +118,7 @@
         <label for="other_zipcode" id="other_zipcode">Do you have a preference of a zipcode where you would like early learning assistance (e.g. near home, work, or other)?</label>
         <div class="radio-button">
           <% [ 'yes', 'no'].each do |other_zipcode| %>
-            <%= radio_button_tag 'other_zipcode', other_zipcode %>
+            <%= radio_button_tag 'other_zipcode', other_zipcode, @user.other_zipcode == other_zipcode %>
             <%= other_zipcode.humanize %><br>
           <% end %>
         </div>
@@ -146,7 +146,7 @@
        <div class="col-md-9 col-sm-10 col-xs-12">
          <label for="phone_number">What is your cell phone number?</label>
             <p type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
-              <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-field" required>
+              <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-field" value="<%= @user.phone_number %>" required>
             </p>
        </div>
     </div>

@@ -4089,4 +4089,22 @@ chicago_eligible_zipcodes.each do |zipcode|
 	ChicagoEligibleZipcode.create(zipcode: zipcode)
 end
 
+# WIC locations
+WicLocation.create(address: '2907 S. Wabash Ave.', city: 'Chicago', state: 'IL', zipcode: '60616.0', phone_number: '(312) 326-5020')
+WicLocation.create(address: '416 E. 43rd St.', city: 'Chicago', state: 'IL', zipcode: '60653.0', phone_number: '(773) 924-7041')
+WicLocation.create(address: '6202 S. Halsted St.', city: 'Chicago', state: 'IL', zipcode: '60621.0', phone_number: '(773) 488-6800')
+WicLocation.create(address: '5332 S. Western Ave.', city: 'Chicago', state: 'IL', zipcode: '60609.0', phone_number: '(773) 778-1292')
+WicLocation.create(address: '2310 W. Roosevelt Rd', city: 'Chicago', state: 'IL', zipcode: '60608.0', phone_number: '(312) 666-4193')
+WicLocation.create(address: '3110 W. Armitage Ave.', city: 'Chicago', state: 'IL', zipcode: '60647.0', phone_number: '(773) 395-1010')
+WicLocation.create(address: '5125 W. Chicago Ave.', city: 'Chicago', state: 'IL', zipcode: '60651.0', phone_number: '(773) 378-8760')
+WicLocation.create(address: '1734 W. Chicago Ave.', city: 'Chicago', state: 'IL', zipcode: '60622.0', phone_number: '(312) 455-8595')
+WicLocation.create(address: '1643 W. Cermak Rd.', city: 'Chicago', state: 'IL', zipcode: '60608.0', phone_number: '(773) 523-0409')
+WicLocation.create(address: '3932 W. Madison St.', city: 'Chicago', state: 'IL', zipcode: '60624.0', phone_number: '(773) 533-9003')
+WicLocation.create(address: '1802 E. 71st St.', city: 'Chicago', state: 'IL', zipcode: '60649.0', phone_number: '(773) 667-3932')
+WicLocation.create(address: '4622 W. Diversey Ave.', city: 'Chicago', state: 'IL', zipcode: '60639.0', phone_number: '(773) 205-6575')
+WicLocation.create(address: '11255 S. Michigan Ave.', city: 'Chicago', state: 'IL', zipcode: '60628.0', phone_number: '(773) 785-1786')
+WicLocation.create(address: '8959 S. Commercial Ave.', city: 'Chicago', state: 'IL', zipcode: '60617.0', phone_number: '(773) 978-6235')
+WicLocation.create(address: '2400 S. Kedzie Ave.', city: 'Chicago', state: 'IL', zipcode: '60623.0', phone_number: '(773) 522-7220')
+WicLocation.create(address: '1106 W. 79th St.', city: 'Chicago', state: 'IL', zipcode: '60620.0', phone_number: '(773) 651-6690')
+
 

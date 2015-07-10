@@ -24,10 +24,8 @@ class WicsController < ApplicationController
       @d.household_size = wic_household_size
     end
 
-    wic_gross_income = params[:wic_gross_income]
-    wic_gross_income = wic_gross_income.gsub(/[^0-9\.]/, '')
 
-    if wic_gross_income !~ /\D/
+    if params[:wic_gross_income] !~ /\D/
       wic_gross_income = wic_gross_income.to_i
       @d.gross_monthly_income = wic_gross_income
     else
@@ -39,35 +37,47 @@ class WicsController < ApplicationController
     end
 
 
-    wic_status = params[:wic_status]
+    @d.health_status = params[:wic_status]
     @d.health_status = params[:wic_status]
     @d.pregnant_or_child = params[:pregnant_or_child]
     @d.snap_tanf_medicaid = params[:snap_tanf_medicaid]
 
-    if  wic_gross_income.present? && wic_household_size.present?
+    if @d.health_status == "yes"
 
-      wic_eligibility = Wic.find_by({ :wic_household_size => wic_household_size })
-
-      if wic_gross_income < wic_eligibility.wic_gross_income
-        if wic_status != 'none of the above'
+      if @d.pregnant_or_child == "yes"
+        if @d.snap_tanf_medicaid == "yes"
           @eligible = true
-          @d.eligibility_status = "yes"
         else
-          @d.eligibility_status = "no"
+          income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => wic_household_size})
+          if @d.household_size < income_row.income_type2
+            @eligible = true
+          else
+            @eligible = false
+          end
         end
+      else
+      # no children
+        @eligible = false
       end
-
     else
-       redirect_to :back, :notice => "All fields are required."
+      # ineligible wic status
+      @eligible = false
     end
+
+    if @eligible == false
+      @d.eligibility_status = "no"
+    else
+      @d.eligibility_status = "yes"
+    end
+
 
   @user_zipcode = params[:zipcode]
   @zipcode = @user_zipcode << ".0"
-  @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
+  @wic_location = WicLocation.find_by(:zipcode => @zipcode)
 
-  if @lafcenter.present?
+  if @wic_location.present?
   else
-    @lafcenter = LafCenter.find_by(:id => 10)
+    @wic_location = WicLocation.first
   end
 
   childcare = []

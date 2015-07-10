@@ -209,7 +209,34 @@ class EarlyLearningProgramsController < ApplicationController
       @user.eligible_count = @eligible_early_learning_programs.count
       @user.save
     end
-         
+
+    # WIC ELIGIBILITY
+    if @user.health_status == true
+      if @user.pregnant == true || @user.three_and_under == true || @user.three_to_five == true
+        if @user.snap_or_medicaid == true || @user.tanf == true
+          @wic_eligible = true
+        else
+          income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
+          if @user.gross_monthly_income < income_row.income_type3
+            @wic_eligible = true
+          else
+            @wic_eligible = false
+          end
+        end
+      else
+      # no children
+        @wic_eligible = false
+      end
+    else
+      # ineligible health status
+      @wic_eligible = false
+    end 
+
+    # CCAP ELIGIBILITY
+    if condition
+             
+    end       
+
 
 	end # closes the method
 end # closes the class

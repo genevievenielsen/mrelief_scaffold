@@ -8,8 +8,11 @@
 
         <div class="resources">
           <h3>Apply for benefits</h3>
-          <p>To find a resource center near you or for more information, <%= link_to "click here", "http://www.cedaorg.net/www2/index.htm", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'wic', 'ceda', 1);" %></p>
-          <p> or call (855)WIC-CEDA (855-942-2332).</p>
+          <p>The Special Supplemental Nutrition Program for Women, Infants and Children (WIC) is a USDA food and nutrition program administered by the Illinois Department of Human Services (IDHS) and operated by Catholic Charities. The main line is Phone: (312) 951-9659/(773)729-3908. The nearest WIC Food and Nutrition Center Sites near you is listed below and the hours of operation are Monday - Friday, 8 a.m. - 8 p.m. Saturday and Sunday, 9 a.m. - 5 p.m.</p>
+
+          <%= render "wics/wic_location" %>
+ 
+         
         </div>
 
       </div>
@@ -20,13 +23,6 @@
     <div class="col-md-7">
         <h1>Results: Something else in mind!</h1>
         <p>Based on your household size and income, you likely do not qualify for WIC.</p>
-
-        <div class="resources">
-          <h3>Resources</h3>
-          <p>Firman Community Services has programs focusing on the health of families and children. </p>
-          <p>To visit their website, <%= link_to "click here", "http://www.direct2food.org/", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'wic', 'direct2food', 1);" %></p>
-          <p>or call their office to identify the best resource at: 773- 373-3400.</p>
-        </div>
 
         <%= render "layouts/purple_binder_resources" %>
 
