@@ -18,10 +18,10 @@ class LafCentersController < ApplicationController
 
 end
 
-    w = WicLocation.all
-    w.each do |location|
-        puts "WicLocation.create(address: '#{location.address}', city: '#{location.city}', state: '#{location.state}', zipcode: '#{location.zipcode}', phone_number: '#{location.phone_number}')"
-    end
+    # w = WicLocation.all
+    # w.each do |location|
+    #     puts "WicLocation.create(address: '#{location.address}', city: '#{location.city}', state: '#{location.state}', zipcode: '#{location.zipcode}', phone_number: '#{location.phone_number}')"
+    # end
 
     # e = EarlyLearningProgram.all
 
