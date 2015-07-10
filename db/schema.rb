@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150710193052) do
+ActiveRecord::Schema.define(version: 20150710225910) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -184,8 +184,6 @@ ActiveRecord::Schema.define(version: 20150710193052) do
     t.boolean  "homeless",                                      default: false
     t.boolean  "ssi",                                           default: false
     t.boolean  "tanf",                                          default: false
-    t.boolean  "employed"
-    t.boolean  "higher_education"
     t.string   "zipcode"
     t.string   "preferred_zipcode"
     t.string   "phone_number"
@@ -193,11 +191,9 @@ ActiveRecord::Schema.define(version: 20150710193052) do
     t.datetime "updated_at"
     t.string   "income_type"
     t.boolean  "snap_or_medicaid",                              default: false
-    t.boolean  "health_status",                                 default: false
     t.boolean  "teen_parent",                                   default: false
     t.boolean  "six_to_twelve",                                 default: false
     t.boolean  "special_needs",                                 default: false
-    t.boolean  "other_zipcode",                                 default: false
     t.string   "preferred_duration"
     t.boolean  "head_start_childcare_collaboration",            default: false
     t.boolean  "head_start_preschool_childcare_collaboration",  default: false
@@ -217,6 +213,10 @@ ActiveRecord::Schema.define(version: 20150710193052) do
     t.integer  "eligible_count"
     t.boolean  "wic_eligible",                                  default: false
     t.boolean  "ccap_eligible",                                 default: false
+    t.string   "employed"
+    t.string   "higher_education"
+    t.string   "health_status"
+    t.string   "other_zipcode"
   end
 
   create_table "early_learning_income_cutoffs", force: true do |t|

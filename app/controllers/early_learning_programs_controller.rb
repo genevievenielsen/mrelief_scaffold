@@ -71,18 +71,14 @@ class EarlyLearningProgramsController < ApplicationController
     end
 
     # yes or no questions
-    if params[:employment] == "yes"
-      @user.employed = true
-    end
-    if params[:education] == "yes"
-      @user.higher_education = true
-    end
-    if params[:other_zipcode] == "yes"
-      @user.other_zipcode = true
-    end
-    if params[:health_status] == "yes"
-      @user.health_status = true
-    end
+      @user.employed = params[:employment] 
+      @user.higher_education = params[:education]
+      @user.health_status = params[:health_status]
+      @user.other_zipcode = params[:other_zipcode]
+  
+  
+      
+
     @user.zipcode = params[:zipcode]
     @user.preferred_zipcode = params[:preferred_zipcode]
     @user.phone_number = params[:phone_number] if params[:phone_number].present?
@@ -268,12 +264,13 @@ class EarlyLearningProgramsController < ApplicationController
     @user.save 
 
 
-    # if params[:health_status] == true && params[:employment] == true && params[:education] == "no"
-
-    # else
-    #    flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
-    #   render "new"
-    # end       
+    if params[:health_status].present? && params[:employment].present? && params[:education].present? && params[:other_zipcode] && params[:preferred_duration]
+      
+      
+    else
+       flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
+      render "new"
+    end       
 	end # closes the method
 
   def more_results
