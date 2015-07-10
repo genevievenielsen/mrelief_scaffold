@@ -33,7 +33,7 @@
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="household_size">What is the number of people living in your household including yourself?</label>
-          <input type="text" id="household_size" name="household_size" placeholder="For example: 3" class="form-field"required>
+          <input type="text" id="household_size" name="household_size" placeholder="For example: 3" class="form-field" value="<%= @user.try(:household_size) %>" required>
       </div>
     </div>
 
@@ -45,7 +45,7 @@
         <label for="gross_monthly_income">What is your gross monthly income?</label>
         <%= render "programs/popover_calculator" %>
           <p type="button" data-toggle="popover" data-content="Gross Income of All Family Members (Income means gross cash income and includes earned income, military income (including pay and allowances), veterans’ benefits, Social Security benefits, unemployment compensation, and public assistance benefits.)" data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
-           <input type="text" id="gross_monthly_income" name="gross_monthly_income" placeholder="For example: 1000" class="form-field" required>
+           <input type="text" id="gross_monthly_income" name="gross_monthly_income" placeholder="For example: 1000" class="form-field" value="<%= @user.try(:gross_monthly_income) %>" required>
           </p>
       </div>
     </div>
@@ -59,12 +59,26 @@
           <input type="checkbox" name="homeless" value="homeless"> I am homeless<br>
           <input type="checkbox" name="ssi" value="ssi"> My family receives SSI<br>
           <input type="checkbox" name="tanf" value="tanf"> My family receives TANF<br>
+           <input type="checkbox" name="tanf" value="tanf"> I am receiving SNAP or Medicaid<br>
           <input type="checkbox" name="tanf" value="tanf">  I am a teen parent who is enrolled full-time in elementary, high school or GED classes to obtain a high school degree or its equivalent <!-- <a data-toggle="popover" data-content="A teen is from 13 through 19" data-placement="right" style="border: 0px; color: #4582ec;" >Learn More</a> --><br>
           <input type="checkbox" name="special_needs" value="special_needs"> I care for a special needs child<br>
           <input type="checkbox" name="status" value="none"> None of the Above<br>
         </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-md-9 col-sm-10 col-xs-12" id="health_question">
+        <label for="health_status" id="health_status">Do you have a medical-based or dietary-based health condition?</label>
+        <div class="radio-button">
+          <% [ 'yes', 'no'].each do |health_status| %>
+            <%= radio_button_tag 'health_status', health_status %>
+            <%= health_status.humanize %><br>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
 
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12" id="employment_question">
@@ -94,18 +108,39 @@
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="zipcode">In which zipcode do you live? </label>
-          <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-field" required>
+          <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-field" value="<%= @user.try(:zipcode) %>" required>
       </div>
     </div>
 
-  <!-- Form for zipcode -->
+  <!-- Form for other zipcode -->
+    <div class="row">
+      <div class="col-md-9 col-sm-10 col-xs-12" >
+        <label for="other_zipcode" id="other_zipcode">Do you have a preference of a zipcode where you would like early learning assistance (e.g. near home, work, or other)?</label>
+        <div class="radio-button">
+          <% [ 'yes', 'no'].each do |other_zipcode| %>
+            <%= radio_button_tag 'other_zipcode', other_zipcode %>
+            <%= other_zipcode.humanize %><br>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="place_for_preferred_zipcode">
+      
+    </div>
+
+  <!-- Form for duration preference -->
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
-        <label for="preferred_zipcode">Do you have a preference of a zipcode where you would like early learning assistance (e.g. near home, work, or other)?</label>
-          <input type="text" id="preferred_zipcode" name="preferred_zipcode" placeholder="For example: 60615" class="form-field" required>
+        <label for="preferred_duration" id="preferred_duration">Do you have a preference for how long your child will participate in an early learning program in a given day?</label>
+        <div class="radio-button">
+          <% [ 'Half Day', 'Full Day', 'Home-based'].each do |preferred_duration| %>
+            <%= radio_button_tag 'preferred_duration', preferred_duration %>
+            <%= preferred_duration.humanize %><br>
+          <% end %>
+        </div>
       </div>
     </div>
-
 
   <!-- Form for cellphone question -->
     <div class="row">
@@ -156,6 +191,31 @@ $(document).ready(function() {
           $( this ).find( "p:last" ).remove();
         }
       );
+
+      //employment hover mechanism
+       $( "#health_question" ).hover(
+         function() {
+             $( this ).append( $( "<p class=\"hover_explanation\">Examples of medical-based conditions include anemia (low blood levels), underweight, or history of poor pregnancy outcome.  A dietary-based condition includes, for example, a poor diet.</p>" ) );
+           },
+         function() {
+           $( this ).find( "p:last" ).remove();
+         }
+       );
+
+      // preferred zipcode
+      //student JavaScript
+      $("input:radio[name=other_zipcode]").click(function() {
+      var value = $(this).val();
+        if (value == "yes") {
+          $('.place_for_preferred_zipcode').empty().append("<%= escape_javascript(render "early_learning_programs/preferred_zipcode", :preferred_zipcode => @user.preferred_zipcode ) %>");
+        }
+        if (value == "no") {
+          $('.preferred_zipcode_questions').remove();
+        }
+      });
+      if($('input:radio[name=other_zipcode][value="yes"]').prop('checked')){
+          $('.place_for_preferred_zipcode').append("<%= escape_javascript(render "early_learning_programs/preferred_zipcode",   :preferred_zipcode => @user.preferred_zipcode ) %>");
+      }
   
 });
 </script>

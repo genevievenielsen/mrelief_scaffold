@@ -1,7 +1,7 @@
 class EarlyLearningProgramsController < ApplicationController
 
 	def new
-		
+		@user = EarlyLearningData.new
 	end
 
 	def create
@@ -70,9 +70,13 @@ class EarlyLearningProgramsController < ApplicationController
 
     # income type
     # program eligibility 
+    # snap_or_medicaid: boolean
+    # health_status: boolean
     # teen_parent: boolean
     # six_to_twelve: boolean
     # special_needs: boolean
+    # other_zipcode
+    # preferred_duration
     # - eligible
     # - eligible_count
 
