@@ -69,15 +69,16 @@ class EarlyLearningProgramsController < ApplicationController
     if params[:special_needs].present?
       @user.special_needs = true
     end
+    if params[:none_of_the_above].present?
+      @user.none_of_the_above = true
+    end
 
     # yes or no questions
-      @user.employed = params[:employment] 
-      @user.higher_education = params[:education]
-      @user.health_status = params[:health_status]
-      @user.other_zipcode = params[:other_zipcode]
-  
-  
-      
+    @user.employed = params[:employment] 
+    @user.higher_education = params[:education]
+    @user.health_status = params[:health_status]
+    @user.other_zipcode = params[:other_zipcode]
+
 
     @user.zipcode = params[:zipcode]
     @user.preferred_zipcode = params[:preferred_zipcode]
@@ -96,8 +97,8 @@ class EarlyLearningProgramsController < ApplicationController
           
           # determine correct ages - returns correct_age_programs
           if @user.three_and_under == true || @user.pregnant == true 
-            three_and_under_programs = EarlyLearningProgram.where(ages_served: '0 - 3')
-            correct_age_programs = three_and_under_programs  
+            three_and_under_programs = EarlyLearningProgram.where(ages_served: '0 - 2')
+            correct_age_programs = three_and_under_programs 
           end        
 
           if @user.three_to_five == true
@@ -111,13 +112,15 @@ class EarlyLearningProgramsController < ApplicationController
 
             # Eligible prgrams based on criteria and income - returns @eligible_early_learning_programs
             if @user.foster_parent == true || @user.homeless == true || @user.ssi == true || @user.tanf == true
-      
+    
               if @user.foster_parent == true || @user.homeless == true
                 additional_criteria = ["foster care, homeless, ssi or tanf", "foster care or homeless"]
                 @eligible_early_learning_programs = correct_age_programs.where(additional_criteria: additional_criteria)
 
               else
                 @eligible_early_learning_programs = correct_age_programs.where(additional_criteria: "foster care, homeless, ssi or tanf")
+                puts "I made it here" 
+                puts "#{@eligible_early_learning_programs.count}"
               end
           
             else
@@ -207,7 +210,7 @@ class EarlyLearningProgramsController < ApplicationController
     end
 
     # WIC ELIGIBILITY
-    if @user.health_status == true
+    if @user.health_status == "yes"
       if @user.pregnant == true || @user.three_and_under == true || @user.three_to_five == true
         if @user.snap_or_medicaid == true || @user.tanf == true
           @wic_eligible = true
@@ -236,7 +239,7 @@ class EarlyLearningProgramsController < ApplicationController
     # CCAP ELIGIBILITY
       if @user.tanf == true || @user.teen_parent == true || @user.special_needs == true
         if @user.three_and_under == true || @user.pregnant == true || @user.three_to_five == true || @user.six_to_twelve == true
-          if @user.employed == true || @user.higher_education == true
+          if @user.employed == "yes" || @user.higher_education == "yes"
             income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
             if @user.gross_monthly_income < income_row.income_type4
               @ccap_eligible = true
@@ -266,9 +269,22 @@ class EarlyLearningProgramsController < ApplicationController
 
     if params[:health_status].present? && params[:employment].present? && params[:education].present? && params[:other_zipcode] && params[:preferred_duration]
       
-      
+      if params[:zero_to_three].present? || params[:three_to_five].present? || params[:six_to_twelve].present? || params[:pregnant].present? || params[:no_children].present?
+    
+        if params[:foster_parent].present? || params[:homeless].present? || params[:ssi].present? || params[:tanf].present? || params[:snap_or_medicaid].present? || params[:teen_parent].present? || params[:special_needs].present? || params[:none_of_the_above].present?
+
+        else
+          flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
+          render "new"
+        end
+
+      else
+        flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
+        render "new"
+      end
+
     else
-       flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
+      flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
       render "new"
     end       
 	end # closes the method

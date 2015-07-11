@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150710225910) do
+ActiveRecord::Schema.define(version: 20150710231836) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -217,6 +217,7 @@ ActiveRecord::Schema.define(version: 20150710225910) do
     t.string   "higher_education"
     t.string   "health_status"
     t.string   "other_zipcode"
+    t.boolean  "none_of_the_above"
   end
 
   create_table "early_learning_income_cutoffs", force: true do |t|
