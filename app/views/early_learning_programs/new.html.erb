@@ -230,14 +230,14 @@ $(document).ready(function() {
       $("input:radio[name=other_zipcode]").click(function() {
       var value = $(this).val();
         if (value == "yes") {
-          $('.place_for_preferred_zipcode').empty().append("<%= escape_javascript(render "early_learning_programs/preferred_zipcode", :preferred_zipcode => @user.preferred_zipcode ) %>");
+          $('.place_for_preferred_zipcode').empty().append("<%= escape_javascript(render "early_learning_programs/preferred_zipcode", :user => @user ) %>");
         }
         if (value == "no") {
           $('.preferred_zipcode_questions').remove();
         }
       });
       if($('input:radio[name=other_zipcode][value="yes"]').prop('checked')){
-          $('.place_for_preferred_zipcode').append("<%= escape_javascript(render "early_learning_programs/preferred_zipcode",   :preferred_zipcode => @user.preferred_zipcode ) %>");
+          $('.place_for_preferred_zipcode').append("<%= escape_javascript(render "early_learning_programs/preferred_zipcode", :user => @user ) %>");
       }
   
 });

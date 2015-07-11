@@ -1,8 +1,10 @@
+
+
 <div class="preferred_zipcode_questions">
 	<div class="row">
 	  <div class="col-md-9 col-sm-10 col-xs-12">
 	    <label for="preferred_zipcode">In which zipcode would you prefer early learning assistance? </label>
-	      <input type="text" id="preferred_zipcode" name="preferred_zipcode" placeholder="For example: 60615" class="form-field" value="<%= @user.try(:preferred_zipcode) %>" required>
+	      <input type="text" id="preferred_zipcode" name="preferred_zipcode" placeholder="For example: 60615" class="form-field" value="<%= user.try(:preferred_zipcode) %>" required>
 	  </div>
 	</div>
 </div>
