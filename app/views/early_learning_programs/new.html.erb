@@ -19,19 +19,19 @@
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label class="allthatapply">Select all that apply to you:</label>
         <div class="radio-button">
-          <input type="checkbox" name="zero_to_three" value="zero_to_three" 
+          <input type="checkbox" name="zero_to_three" value="zero_to_three" id="zero_to_three"
             <% if @user.three_and_under != nil && @user.three_and_under == true %>checked<% end %>>  
             I care for a child that is between the ages of 0-2<br>
-          <input type="checkbox" name="three_to_five" value="three_to_five"
+          <input type="checkbox" name="three_to_five" value="three_to_five" id="three_to_five"
             <% if @user.three_to_five != nil && @user.three_to_five == true %>checked<% end %>> 
             I care for a child that is between the ages of 3-5<br>
-          <input type="checkbox" name="six_to_twelve" value="six_to_twelve"
+          <input type="checkbox" name="six_to_twelve" value="six_to_twelve" id="six_to_twelve"
             <% if @user.six_to_twelve != nil && @user.six_to_twelve == true %>checked<% end %>> 
             I care for a child that is between the ages of 6-12<br>
-          <input type="checkbox" name="pregnant" value="pregnant"
+          <input type="checkbox" name="pregnant" value="pregnant" id="pregnant"
             <% if @user.pregnant != nil && @user.pregnant == true %>checked<% end %>> 
             I am pregnant<br>
-          <input type="checkbox" name="no_children" value="no_children"
+          <input type="checkbox" name="no_children" value="no_children" id="no_children"
             <% if @user.no_children != nil && @user.no_children == true %>checked<% end %>> 
             I care for no children<br>
         </div>
@@ -46,7 +46,6 @@
           <input type="text" id="household_size" name="household_size" placeholder="For example: 3" class="form-field" value="<%= @user.try(:household_size) %>" required>
       </div>
     </div>
-
   
 
   <!-- Form for gross monthly income -->
@@ -65,28 +64,28 @@
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label class="allthatapply">Select all that apply to you:</label>
         <div class="radio-button">
-          <input type="checkbox" name="foster_parent" value="foster_parent"
+          <input type="checkbox" name="foster_parent" value="foster_parent" id="foster_parent"
             <% if @user.foster_parent != nil && @user.foster_parent == true %>checked<% end %>>  
             I am a foster parent<br>
-          <input type="checkbox" name="homeless" value="homeless"
+          <input type="checkbox" name="homeless" value="homeless" id="homeless"
             <% if @user.homeless != nil && @user.homeless == true %>checked<% end %>> 
             I am homeless<br>
-          <input type="checkbox" name="ssi" value="ssi"
+          <input type="checkbox" name="ssi" value="ssi" id="ssi"
             <% if @user.ssi != nil && @user.ssi == true %>checked<% end %>> 
             My family receives SSI<br>
-          <input type="checkbox" name="tanf" value="tanf"
+          <input type="checkbox" name="tanf" value="tanf" id="tanf"
             <% if @user.tanf != nil && @user.tanf == true %>checked<% end %>> 
             My family receives TANF<br>
-          <input type="checkbox" name="snap_or_medicaid" value="snap_or_medicaid"
+          <input type="checkbox" name="snap_or_medicaid" value="snap_or_medicaid" id="snap_or_medicaid"
             <% if @user.snap_or_medicaid != nil && @user.snap_or_medicaid == true %>checked<% end %>> 
             I am receiving SNAP or Medicaid<br>
-          <input type="checkbox" name="teen_parent" value="teen_parent"
+          <input type="checkbox" name="teen_parent" value="teen_parent" id="teen_parent"
             <% if @user.teen_parent != nil && @user.teen_parent == true %>checked<% end %>>  
             I am a teen parent who is enrolled full-time in elementary, high school or GED classes to obtain a high school degree or its equivalent <!-- <a data-toggle="popover" data-content="A teen is from 13 through 19" data-placement="right" style="border: 0px; color: #4582ec;" >Learn More</a> --><br>
-          <input type="checkbox" name="special_needs" value="special_needs"
+          <input type="checkbox" name="special_needs" value="special_needs" id="special_needs"
             <% if @user.special_needs != nil && @user.special_needs == true %>checked<% end %>> 
             I care for a special needs child<br>
-          <input type="checkbox" name="none_of_the_above" value="none_of_the_above"
+          <input type="checkbox" name="none_of_the_above" value="none_of_the_above" id="none_of_the_above"
             <% if @user.none_of_the_above != nil && @user.none_of_the_above == true %>checked<% end %>> 
             None of the Above<br>
         </div>
@@ -225,6 +224,25 @@ $(document).ready(function() {
            $( this ).find( "p:last" ).remove();
          }
        );
+
+       // select all that apply
+       $("#none_of_the_above").click(function() {
+        if($("#none_of_the_above").is(':checked')) {
+          if($("#foster_parent").is(':checked') || $("#homeless").is(':checked') || $("#ssi").is(':checked') || $("#tanf").is(':checked') || $("#snap_or_medicaid").is(':checked') || $("#teen_parent").is(':checked')|| $("#special_needs").is(':checked')) {
+            alert("None of the above cannot be selected with any of the other options to this question.");
+          }
+        }
+       });
+       
+      // children question
+      // select all that apply
+      $("#no_children").click(function() {
+       if($("#no_children").is(':checked')) {
+         if($("#zero_to_three").is(':checked') || $("#three_to_five").is(':checked') || $("#six_to_twelve").is(':checked') || $("#pregnant").is(':checked')) {
+           alert("No children cannot be selected with any of the other options to this question.");
+         }
+       }
+      });
 
       // preferred zipcode
       $("input:radio[name=other_zipcode]").click(function() {
