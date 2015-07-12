@@ -1,46 +1,6 @@
 class AllCityProgramDataController < ApplicationController
   before_action :set_all_city_program_datum, only: [:show, :edit, :update, :destroy]
 
-  # GET /all_city_program_data
-  # GET /all_city_program_data.json
-   #ALL INPUTS
-  #dependent_no - integer
-  #medicare_household_size - integer
-  #age - integer
-  #monthly_gross_income integer
-  #thirty_day_net_income - integer
-  #child_support - integer
-  #ssi - integer
-  #montly_benefits - integer
-  #ninety_day_gross_income - integer
-  #annual_gross_income - integer
-  #assets - integer
-  #number_of_children - integer
-  #enrolled_in_education - string
-  #citizen - string
-  #zipcode - string
-  #disabled_status - string
-  #name_on_lease - string
-  #rental_status - string
-  #pregnant - string
-  #child_health_insurance_state - string
-  #pregnant_or_caring_for_child  - string
-  #relationship_to_child - string
-  #pregnant_with_first_child - string
-  #tanif_sixty_months - string
-  #anticipate_other_income - string
-  #teen_parent - string
-  #child_in_school - string
-
-  # Results
-  #snap_eligibility_status
-  #all_kids_eligibility_status
-  #rta_eligibility_status
-  #medicaid_eligibility_status
-  #medicare_cost_sharing_eligibility_status
-  #rental_eligibility_status
-  #aabd_eligibility_status
-  #tanf_eligibility_status
 
   def index
     @all_city_program_data = AllCityProgramDatum.all
