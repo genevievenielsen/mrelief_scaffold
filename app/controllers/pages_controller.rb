@@ -8,12 +8,6 @@ class PagesController < ApplicationController
     
   end
 
-  def early_learning_programs
-  end
-
-  def early_learning_programs_response
-  end
-
   def homepage
   end
 

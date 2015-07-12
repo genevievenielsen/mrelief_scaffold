@@ -11,8 +11,6 @@ Rails.application.routes.draw do
   get ':controller/:action'
   get ':locale/:controller/:action'
 
-
-
   # twilio
   get("/twilio", { :controller => "send_text", :action => "send_text_message"})
   post('/', { :controller => 'twilio', :action => 'text'})
@@ -32,15 +30,9 @@ Rails.application.routes.draw do
   get("/filtered_programs", { :controller => "pages", :action => "filtered_programs" })
   post("/community_resources", { :controller => "pages", :action => "community_resources" })
 
-  # early childhood programs
-  get("/early_learning_programs_testing", { :controller => "pages", :action => "early_learning_programs" })
-  get("/early_learning_programs_response_testing", { :controller => "pages", :action => "early_learning_programs_response" })
-
-   get "early_learning_programs", to: "early_learning_programs#new"
-   post "early_learning_programs", to: "early_learning_programs#create"
-   get "early_learning_more_results/:id", to: "early_learning_programs#more_results", as: "more_results"
-
-
+  get "early_learning_programs", to: "early_learning_programs#new"
+  post "early_learning_programs", to: "early_learning_programs#create"
+  get "early_learning_more_results/:id", to: "early_learning_programs#more_results", as: "more_results"
 
   # print
   get('/snap_eligibilities/print/:id', :controller => 'snap_eligibilities', :action => 'print')
@@ -48,7 +40,6 @@ Rails.application.routes.draw do
   # documents
   get("/snap_documents", { :controller => "snap_eligibilities", :action => "documents" })
   get("/rental_documents", { :controller => "rental_assistances", :action => "documents" })
-
 
   # clear session
   get("/session_clear", {:controller => "pages", :action => "session_clear"})
