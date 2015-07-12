@@ -18,7 +18,7 @@
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label class="allthatapply">Select all that apply to you:</label>
-        <div class="radio-button">
+        <div class="radio-button" id="children_questions">
           <input type="checkbox" name="zero_to_three" value="zero_to_three" id="zero_to_three"
             <% if @user.three_and_under != nil && @user.three_and_under == true %>checked<% end %>>  
             I care for a child that is between the ages of 0-2<br>
@@ -63,7 +63,7 @@
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label class="allthatapply">Select all that apply to you:</label>
-        <div class="radio-button">
+        <div class="radio-button" id="select_all_questions">
           <input type="checkbox" name="foster_parent" value="foster_parent" id="foster_parent"
             <% if @user.foster_parent != nil && @user.foster_parent == true %>checked<% end %>>  
             I am a foster parent<br>
@@ -226,19 +226,18 @@ $(document).ready(function() {
        );
 
        // select all that apply
-       $("#none_of_the_above").click(function() {
-        if($("#none_of_the_above").is(':checked')) {
-          if($("#foster_parent").is(':checked') || $("#homeless").is(':checked') || $("#ssi").is(':checked') || $("#tanf").is(':checked') || $("#snap_or_medicaid").is(':checked') || $("#teen_parent").is(':checked')|| $("#special_needs").is(':checked')) {
+       $("#select_all_questions").click(function() {
+        if($("#foster_parent").is(':checked') || $("#homeless").is(':checked') || $("#ssi").is(':checked') || $("#tanf").is(':checked') || $("#snap_or_medicaid").is(':checked') || $("#teen_parent").is(':checked')|| $("#special_needs").is(':checked')) {
+          if($("#none_of_the_above").is(':checked')) {
             alert("None of the above cannot be selected with any of the other options to this question.");
           }
         }
        });
        
       // children question
-      // select all that apply
-      $("#no_children").click(function() {
-       if($("#no_children").is(':checked')) {
-         if($("#zero_to_three").is(':checked') || $("#three_to_five").is(':checked') || $("#six_to_twelve").is(':checked') || $("#pregnant").is(':checked')) {
+      $("#children_questions").click(function() {
+        if($("#zero_to_three").is(':checked') || $("#three_to_five").is(':checked') || $("#six_to_twelve").is(':checked') || $("#pregnant").is(':checked')) {
+          if($("#no_children").is(':checked')) {
            alert("No children cannot be selected with any of the other options to this question.");
          }
        }
