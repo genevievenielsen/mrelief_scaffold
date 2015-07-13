@@ -1,0 +1,8 @@
+<div class="bilingual_language_question">
+	<div class="row">
+	  <div class="col-md-9 col-sm-10 col-xs-12">
+	    <label for="bilingual_language">Which language would you prefer?</label>
+	      <%= select_tag(:bilingual_language, options_for_select([ ["Spanish", "Spanish"], ["Polish", "Polish"], ["Mandarin", "Mandarin"] ], @user.try(:bilingual_language)), :class => "form-field drop-down", :prompt => "Select a language") %>
+	  </div>
+	</div>
+</div>

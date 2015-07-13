@@ -75,6 +75,7 @@ class EarlyLearningProgramsController < ApplicationController
 
     # yes or no questions
     @user.employed = params[:employment] 
+    # remove this
     @user.higher_education = params[:education]
     @user.health_status = params[:health_status]
     @user.other_zipcode = params[:other_zipcode]
@@ -83,7 +84,13 @@ class EarlyLearningProgramsController < ApplicationController
     @user.zipcode = params[:zipcode]
     @user.preferred_zipcode = params[:preferred_zipcode]
     @user.phone_number = params[:phone_number] if params[:phone_number].present?
-    @user.preferred_duration = params[:preferred_duration]
+    
+    if params[:preferred_duration].include?("(")
+      preferred_duration = params[:duration].split("(").first.strip
+      @user.preferred_duration = preferred_duration
+    else
+      @user.preferred_duration = params[:preferred_duration]
+    end
     @user.save
 
 
@@ -91,68 +98,73 @@ class EarlyLearningProgramsController < ApplicationController
       # user has no children
       @eligible = false
     else
-      # determine if user lives in correct zipcode
-      if ChicagoEligibleZipcode.all.pluck(:zipcode).include?(@user.zipcode)
-        if @user.three_and_under == true || @user.pregnant == true || @user.three_to_five == true
+      if @user.household_size == 1 && @user.pregant == false
+        # user has a household size of 1 and is not pregant
+        @eligible = false
+      else
+        # determine if user lives in correct zipcode
+        if ChicagoEligibleZipcode.all.pluck(:zipcode).include?(@user.zipcode)
+          if @user.three_and_under == true || @user.pregnant == true || @user.three_to_five == true
+            
+            # determine correct ages - returns correct_age_programs
+            if @user.three_and_under == true || @user.pregnant == true 
+              three_and_under_programs = EarlyLearningProgram.where(ages_served: '0 - 2')
+              correct_age_programs = three_and_under_programs 
+            end        
+
+            if @user.three_to_five == true
+              three_to_five_programs = EarlyLearningProgram.where(ages_served: '3 - 5')
+              correct_age_programs = three_to_five_programs 
+            end
           
-          # determine correct ages - returns correct_age_programs
-          if @user.three_and_under == true || @user.pregnant == true 
-            three_and_under_programs = EarlyLearningProgram.where(ages_served: '0 - 2')
-            correct_age_programs = three_and_under_programs 
-          end        
+            if three_and_under_programs.present? && three_to_five_programs.present?
+              correct_age_programs = EarlyLearningProgram.all
+            end 
 
-          if @user.three_to_five == true
-            three_to_five_programs = EarlyLearningProgram.where(ages_served: '3 - 5')
-            correct_age_programs = three_to_five_programs 
-          end
-        
-          if three_and_under_programs.present? && three_to_five_programs.present?
-            correct_age_programs = EarlyLearningProgram.all
-          end 
+              # Eligible prgrams based on criteria and income - returns @eligible_early_learning_programs
+              if @user.foster_parent == true || @user.homeless == true || @user.ssi == true || @user.tanf == true
+      
+                if @user.foster_parent == true || @user.homeless == true
+                  additional_criteria = ["foster care, homeless, ssi or tanf", "foster care or homeless"]
+                  @eligible_early_learning_programs = correct_age_programs.where(additional_criteria: additional_criteria)
 
-            # Eligible prgrams based on criteria and income - returns @eligible_early_learning_programs
-            if @user.foster_parent == true || @user.homeless == true || @user.ssi == true || @user.tanf == true
-    
-              if @user.foster_parent == true || @user.homeless == true
-                additional_criteria = ["foster care, homeless, ssi or tanf", "foster care or homeless"]
-                @eligible_early_learning_programs = correct_age_programs.where(additional_criteria: additional_criteria)
-
-              else
-                @eligible_early_learning_programs = correct_age_programs.where(additional_criteria: "foster care, homeless, ssi or tanf")
-                puts "I made it here" 
-                puts "#{@eligible_early_learning_programs.count}"
-              end
-          
-            else
-            # User is not automatically eligible 
-              income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
-
-              @user_income_type = []
-                if @user.gross_monthly_income > income_row.income_type2 # Is there a cap?
-                  @user_income_type = ['Greater than Type 2']
-                elsif @user.gross_monthly_income <= income_row.income_type2 && @user.gross_monthly_income > income_row.income_type1
-                  @user_income_type = ['Less than Type 2']
-                elsif @user.gross_monthly_income <= income_row.income_type1
-                  # Type 1 and Type 2 
-                  @user_income_type = ['Less than Type 1', 'Less than Type 2']
+                else
+                  @eligible_early_learning_programs = correct_age_programs.where(additional_criteria: "foster care, homeless, ssi or tanf")
+                  puts "I made it here" 
+                  puts "#{@eligible_early_learning_programs.count}"
                 end
+            
+              else
+              # User is not automatically eligible 
+                income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
 
-                @eligible_early_learning_programs = correct_age_programs.where(income_type: @user_income_type)
-            end
+                @user_income_type = []
+                  if @user.gross_monthly_income > income_row.income_type2 # Is there a cap?
+                    @user_income_type = ['Greater than Type 2']
+                  elsif @user.gross_monthly_income <= income_row.income_type2 && @user.gross_monthly_income > income_row.income_type1
+                    @user_income_type = ['Less than Type 2']
+                  elsif @user.gross_monthly_income <= income_row.income_type1
+                    # Type 1 and Type 2 
+                    @user_income_type = ['Less than Type 1', 'Less than Type 2']
+                  end
 
-            # Preferred Early Learning Programs
-            if @eligible_early_learning_programs.count > 1
-              @preferred_early_learning_programs = @eligible_early_learning_programs.where(duration: @user.preferred_duration)
-            end
+                  @eligible_early_learning_programs = correct_age_programs.where(income_type: @user_income_type)
+              end
 
+              # Preferred Early Learning Programs
+              if @eligible_early_learning_programs.count > 1
+                @preferred_early_learning_programs = @eligible_early_learning_programs.where(duration: @user.preferred_duration)
+              end
+
+          else
+            # user does not have a child of the correct age
+            @eligible = false
+          end
         else
-          # user does not have a child of the correct age
+          # user does not live in Chicago zipcodes
           @eligible = false
         end
-      else
-        # user does not live in Chicago zipcodes
-        @eligible = false
-      end
+      end # ends household size 1 and not pregnant
     end # ends user has no children
 
     # Additional Data Storage
@@ -239,7 +251,7 @@ class EarlyLearningProgramsController < ApplicationController
     # CCAP ELIGIBILITY
       if @user.tanf == true || @user.teen_parent == true || @user.special_needs == true
         if @user.three_and_under == true || @user.pregnant == true || @user.three_to_five == true || @user.six_to_twelve == true
-          if @user.employed == "yes" || @user.higher_education == "yes"
+          if @user.employed == "yes" 
             income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
             if @user.gross_monthly_income < income_row.income_type4
               @ccap_eligible = true
@@ -267,7 +279,7 @@ class EarlyLearningProgramsController < ApplicationController
     @user.save 
 
 
-    if params[:health_status].present? && params[:employment].present? && params[:education].present? && params[:other_zipcode] && params[:preferred_duration]
+    if params[:health_status].present? && params[:employment].present? && params[:other_zipcode] && params[:preferred_duration]
       
       if params[:zero_to_three].present? || params[:three_to_five].present? || params[:six_to_twelve].present? || params[:pregnant].present? || params[:no_children].present?
     

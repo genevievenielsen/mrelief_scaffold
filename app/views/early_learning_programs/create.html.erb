@@ -33,9 +33,12 @@
           <li>May have a required fee based on the income of the parents or legal guardians. Use the calculator[link to CPS] estimate your families co-pay.</li>
         <% end %>
         <li>Duration: <%= program.duration %></li>
+
         <li>Additional Criteria: <%= program.additional_criteria %></li>
-        <% if program.funder.include?("Childcare Collaboration") && @ccap_eligible %>
-          <li>This is a CCAP Compatible Program, and our results show that you also may qualify for that CCAP.</li>
+        <% if program.funder.include?("Childcare Collaboration") && @ccap_eligible == true  %>
+          <li>This is a CCAP Compatible Program, and our results show that you also may qualify for CCAP.</li>
+        <% elsif program.funder.include?("Childcare Collaboration") && @ccap_eligible == false %>
+          <li>This is a CCAP Compatible Program, but you may not qualify for CCAP.</li>
         <% end %>
       </ul>
       <br>
@@ -61,8 +64,10 @@
         <% end %>
         <li>Duration: <%= program.duration %></li>
         <li>Additional Criteria: <%= program.additional_criteria %></li>
-        <% if program.funder.include?("Childcare Collaboration") && @ccap_eligible %>
-          <li>This is a CCAP Compatible Program, and our results show that you also may qualify for that CCAP.</li>
+        <% if program.funder.include?("Childcare Collaboration") && @ccap_eligible == true  %>
+          <li>This is a CCAP Compatible Program, and our results show that you also may qualify for CCAP.</li>
+        <% elsif program.funder.include?("Childcare Collaboration") && @ccap_eligible == false %>
+          <li>This is a CCAP Compatible Program, but you may not qualify for CCAP.</li>
         <% end %>
       </ul>
       <br>

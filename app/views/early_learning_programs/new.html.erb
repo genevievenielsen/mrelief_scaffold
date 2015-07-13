@@ -117,17 +117,6 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-9 col-sm-10 col-xs-12" id="education_question">
-        <label for="education" id="education">Are you enrolled in college/institution of higher education?</label>
-        <div class="radio-button">
-          <% [ 'yes', 'no'].each do |education| %>
-            <%= radio_button_tag 'education', education, @user.higher_education == education %>
-            <%= education.humanize %><br>
-          <% end %>
-        </div>
-      </div>
-    </div>
 
   <!-- Form for zipcode -->
     <div class="row">
@@ -140,7 +129,7 @@
   <!-- Form for preferred zipcode -->
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12" >
-        <label for="other_zipcode" id="other_zipcode">Do you have a preference of a zipcode where you would like early learning assistance (e.g. near home, work, or other)?</label>
+        <label for="other_zipcode" id="other_zipcode">We will show you programs where you live, but would you prefer for us to show you programs near where you go to school, employed etc.?</label>
         <div class="radio-button">
           <% [ 'yes', 'no'].each do |other_zipcode| %>
             <%= radio_button_tag 'other_zipcode', other_zipcode, @user.other_zipcode == other_zipcode %>
@@ -158,12 +147,40 @@
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="preferred_duration" id="preferred_duration">Do you have a preference for how long your child will participate in an early learning program in a given day?</label>
         <div class="radio-button">
-          <% [ 'Half Day', 'Full Day', 'Home Visiting', 'No Preference'].each do |preferred_duration| %>
+          <% [ 'Half Day (Less than 6 hours)', 'Full Day (6 hours or more)', 'Home Visiting', 'No Preference'].each do |preferred_duration| %>
             <%= radio_button_tag 'preferred_duration', preferred_duration, @user.preferred_duration == preferred_duration  %>
             <%= preferred_duration.humanize %><br>
           <% end %>
         </div>
       </div>
+    </div>
+
+  <!-- Form for frequency preference -->
+    <div class="row">
+      <div class="col-md-9 col-sm-10 col-xs-12">
+        <label for="preferred_frequency" id="preferred_frequency">Do you have a preference for part-week or full-week programs?</label>
+        <div class="radio-button">
+          <% [ 'Part-week', 'Full-week', 'No Preference'].each do |preferred_frequency| %>
+            <%= radio_button_tag 'preferred_frequency', preferred_frequency %>
+            <%= preferred_frequency.humanize %><br>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-9 col-sm-10 col-xs-12" >
+        <label for="bilingual" id="bilingual">Would you prefer to enroll your child in a bilingual early learning program?</label>
+        <div class="radio-button">
+          <% [ 'yes', 'no'].each do |bilingual| %>
+            <%= radio_button_tag 'bilingual', bilingual %>
+            <%= bilingual.humanize %><br>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="place_for_bilingual_language">
     </div>
 
   <!-- Form for cellphone question -->
@@ -255,6 +272,20 @@ $(document).ready(function() {
       });
       if($('input:radio[name=other_zipcode][value="yes"]').prop('checked')){
           $('.place_for_preferred_zipcode').append("<%= escape_javascript(render "early_learning_programs/preferred_zipcode", :user => @user ) %>");
+      }
+
+      // bilingual language
+      $("input:radio[name=bilingual]").click(function() {
+      var value = $(this).val();
+        if (value == "yes") {
+          $('.place_for_bilingual_language').empty().append("<%= escape_javascript(render "early_learning_programs/bilingual_language", :user => @user ) %>");
+        }
+        if (value == "no") {
+          $('.bilingual_language_question').remove();
+        }
+      });
+      if($('input:radio[name=bilingual][value="yes"]').prop('checked')){
+          $('.place_for_bilingual_language').append("<%= escape_javascript(render "early_learning_programs/bilingual_language", :user => @user ) %>");
       }
   
 });
