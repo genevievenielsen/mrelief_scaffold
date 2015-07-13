@@ -129,7 +129,7 @@
   <!-- Form for preferred zipcode -->
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12" >
-        <label for="other_zipcode" id="other_zipcode">We will show you programs where you live, but would you prefer for us to show you programs near where you go to school, employed etc.?</label>
+        <label for="other_zipcode" id="other_zipcode">We will show you programs where you live, but would you prefer for us to show you programs near where you go to school, work etc.?</label>
         <div class="radio-button">
           <% [ 'yes', 'no'].each do |other_zipcode| %>
             <%= radio_button_tag 'other_zipcode', other_zipcode, @user.other_zipcode == other_zipcode %>
@@ -147,7 +147,7 @@
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="preferred_duration" id="preferred_duration">Do you have a preference for how long your child will participate in an early learning program in a given day?</label>
         <div class="radio-button">
-          <% [ 'Half Day (Less than 6 hours)', 'Full Day (6 hours or more)', 'Home Visiting', 'No Preference'].each do |preferred_duration| %>
+          <% [ 'Half Day (2 or 3 hours)', 'Full Day (6 hours or more)', 'Home Visiting', 'No Preference'].each do |preferred_duration| %>
             <%= radio_button_tag 'preferred_duration', preferred_duration, @user.preferred_duration == preferred_duration  %>
             <%= preferred_duration.humanize %><br>
           <% end %>
@@ -161,7 +161,7 @@
         <label for="preferred_frequency" id="preferred_frequency">Do you have a preference for part-week or full-week programs?</label>
         <div class="radio-button">
           <% [ 'Part-week', 'Full-week', 'No Preference'].each do |preferred_frequency| %>
-            <%= radio_button_tag 'preferred_frequency', preferred_frequency %>
+            <%= radio_button_tag 'preferred_frequency', preferred_frequency, @user.preferred_frequency == preferred_frequency  %>
             <%= preferred_frequency.humanize %><br>
           <% end %>
         </div>
@@ -173,7 +173,7 @@
         <label for="bilingual" id="bilingual">Would you prefer to enroll your child in a bilingual early learning program?</label>
         <div class="radio-button">
           <% [ 'yes', 'no'].each do |bilingual| %>
-            <%= radio_button_tag 'bilingual', bilingual %>
+            <%= radio_button_tag 'bilingual', bilingual, @user.bilingual == bilingual %>
             <%= bilingual.humanize %><br>
           <% end %>
         </div>

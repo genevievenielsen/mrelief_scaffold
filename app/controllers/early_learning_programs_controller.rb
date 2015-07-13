@@ -75,11 +75,11 @@ class EarlyLearningProgramsController < ApplicationController
 
     # yes or no questions
     @user.employed = params[:employment] 
-    # remove this
-    @user.higher_education = params[:education]
     @user.health_status = params[:health_status]
     @user.other_zipcode = params[:other_zipcode]
-
+    @user.bilingual = params[:bilingual]
+    @user.bilingual_language = params[:bilingual_language]
+    @user.preferred_frequency = params[:preferred_frequency]
 
     @user.zipcode = params[:zipcode]
     @user.preferred_zipcode = params[:preferred_zipcode]
@@ -98,7 +98,7 @@ class EarlyLearningProgramsController < ApplicationController
       # user has no children
       @eligible = false
     else
-      if @user.household_size == 1 && @user.pregant == false
+      if @user.household_size == 1 && @user.pregnant == false
         # user has a household size of 1 and is not pregant
         @eligible = false
       else
