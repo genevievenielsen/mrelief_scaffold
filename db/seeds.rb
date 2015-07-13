@@ -3883,6 +3883,7 @@ EarlyLearningProgram.create(:agency => 'DFSS/CPS', :funder => 'Head Start', :sit
 EarlyLearningProgram.create(:agency => 'DFSS/CPS', :funder => 'Head Start', :site => 'School Based',
         :duration => 'Full Day (6 hours or more)', :ages_served => '3 - 5', :income_type => 'Less than Type 1',
         :additional_criteria => 'foster care, homeless, ssi or tanf', :description => 'Head Start - School Based - Full Day - 3 to 5')
+
 #Early Learning Program Income Cutoffs
 EarlyLearningIncomeCutoff.create(household_size: 1,
 	income_type1: 981,
