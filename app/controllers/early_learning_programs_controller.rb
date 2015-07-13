@@ -84,13 +84,15 @@ class EarlyLearningProgramsController < ApplicationController
     @user.zipcode = params[:zipcode]
     @user.preferred_zipcode = params[:preferred_zipcode]
     @user.phone_number = params[:phone_number] if params[:phone_number].present?
+    @user.preferred_duration = params[:preferred_duration]
+
     
-    if params[:preferred_duration].include?("(")
-      preferred_duration = params[:duration].split("(").first.strip
-      @user.preferred_duration = preferred_duration
-    else
-      @user.preferred_duration = params[:preferred_duration]
-    end
+    # if params[:preferred_duration].include?("(")
+    #   preferred_duration = params[:duration].split("(").first.strip
+    #   @user.preferred_duration = preferred_duration
+    # else
+    #   @user.preferred_duration = params[:preferred_duration]
+    # end
     @user.save
 
 
