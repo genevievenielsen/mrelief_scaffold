@@ -161,7 +161,7 @@
         <label for="preferred_frequency" id="preferred_frequency">Do you have a preference for part-week or full-week programs?</label>
         <div class="radio-button">
           <% [ 'Part-week', 'Full-week', 'No Preference'].each do |preferred_frequency| %>
-            <%= radio_button_tag 'preferred_frequency', preferred_frequency, @user.preferred_frequency == preferred_frequency  %>
+            <%= radio_button_tag 'preferred_frequency', preferred_frequency, @user.preferred_frequency == preferred_frequency %>
             <%= preferred_frequency.humanize %><br>
           <% end %>
         </div>
