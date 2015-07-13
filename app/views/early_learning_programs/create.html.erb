@@ -61,6 +61,9 @@
         <% end %>
         <li>Duration: <%= program.duration %></li>
         <li>Additional Criteria: <%= program.additional_criteria %></li>
+        <% if program.funder.include?("Childcare Collaboration") && @ccap_eligible %>
+          <li>This is a CCAP Compatible Program, and our results show that you also may qualify for that CCAP.</li>
+        <% end %>
       </ul>
       <br>
     <% end %>
