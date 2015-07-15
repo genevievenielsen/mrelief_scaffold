@@ -34,7 +34,7 @@ class TwilioController < ApplicationController
       session["counter"] = 0
    end
    if params[:Body].strip.downcase == "kids"
-      message = "Text the letters that apply to you. - a) Child between 0-2 years b) Child between 3-5 years c) Children between 6-12 years d) Pregant e) No Children. For example, b or ac."
+      message = "Text the letters that apply to you. - a) Child between 0-2 years b) Child between 3-5 years c) Children between 6-12 years d) No Children. For example, b or ac."
       session["page"] = "age_of_children"
       session["counter"] = 1
    end
@@ -47,10 +47,10 @@ class TwilioController < ApplicationController
       @user.phone_number = params[:From]
       @user.children_ages = params[:Body].strip.downcase
 
-      if @user.children_ages.include?("e")
+      if @user.children_ages.include?("d")
         @user.no_children = true
         message = "You do not qualify for early learning programs."
-      elsif @user.children_ages.include?("a") || @user.children_ages.include?("b") || @user.children_ages.include?("c") || @user.children_ages.include?("d")
+      elsif @user.children_ages.include?("a") || @user.children_ages.include?("b") || @user.children_ages.include?("c") 
         # Data storage for children ages
         if @user.children_ages.include?("a")
           @user.three_and_under = true
@@ -61,28 +61,49 @@ class TwilioController < ApplicationController
         if @user.children_ages.include?("c")
           @user.six_to_twelve = true
         end
-        if @user.children_ages.include?("d")
-          @user.pregnant = true
-        end
-        # Determine correct age programs
-        if @user.three_and_under == true || @user.pregnant == true 
-          three_and_under_programs = EarlyLearningProgram.where(ages_served: '0 - 2')
-          correct_age_programs = three_and_under_programs 
-        end        
-        if @user.three_to_five == true
-          three_to_five_programs = EarlyLearningProgram.where(ages_served: '3 - 5')
-          correct_age_programs = three_to_five_programs 
-        end
-        if three_and_under_programs.present? && three_to_five_programs.present?
-          correct_age_programs = EarlyLearningProgram.all
-        end 
 
-        session["page"] = "zipcode"
-        message = "What is your zipcode?"
+        message = "Are you pregnant? Enter yes or no." 
+        session["page"] = "pregnant"
+
       else
-         message = "Oops looks like there is a typo! Please type a, b, c, d or e cominbation that describes your household."
+         message = "Oops looks like there is a typo! Please type a, b, c, d or a cominbation that describes your household."
          session["counter"] = 1
       end
+      @user.completed = false
+      @user.save
+    end
+
+    # Pregnancy question
+    if session["page"] == "pregnant"
+      @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
+      pregnant = params[:Body].strip.downcase
+      
+      # Data Storage
+      if pregnant == "yes"
+        @user.pregnant == true
+      elsif pregnant == "no"
+        @user.pregnant == false
+      else
+        message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
+        session["counter"] = 1
+      end
+
+      # Determine correct age programs
+      if @user.three_and_under == true || @user.pregnant == true 
+        three_and_under_programs = EarlyLearningProgram.where(ages_served: '0 - 2')
+        correct_age_programs = three_and_under_programs 
+      end        
+      if @user.three_to_five == true
+        three_to_five_programs = EarlyLearningProgram.where(ages_served: '3 - 5')
+        correct_age_programs = three_to_five_programs 
+      end
+      if three_and_under_programs.present? && three_to_five_programs.present?
+        correct_age_programs = EarlyLearningProgram.all
+      end 
+
+      session["page"] = "zipcode"
+      message = "In which zipcode do you live? Example: 60615"
+
       @user.completed = false
       @user.save
     end
@@ -93,19 +114,30 @@ class TwilioController < ApplicationController
     @user.zipcode = params[:Body].strip
 
     if ChicagoEligibleZipcode.all.pluck(:zipcode).include?(@user.zipcode)
-      message = 
-      session["page"] = 
+      message = "Are you a foster parent, homeless or does your family receive SSI? Enter yes or no."
+      session["page"] = "foster_homeless_ssi"
     else
+      # INELIGIBLE
       message = "You do not qualify for Chicago early learning programs."
     end
 
     @s.completed = false
     @s.save
-   
+   end
+
+   # Foster, homeless, SSI question
+   if session["page"] == "foster_homeless_ssi" 
+    @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
+    @user.foster_homeless_ssi = params[:Body].strip
+
+    message = "What is the number of people living in your household including yourself? Enter a number"
+    session["page"] = "household_size"
+
+    @s.completed = false
+    @s.save
    end
 
 
-  message = "What is the number of people living in your household including yourself? Enter a number"
    # Household size question
    if session["page"] == "household_size" 
     @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
@@ -118,8 +150,8 @@ class TwilioController < ApplicationController
       end
       @user.household_size = household_size_cleaned
 
-      message = 
-      session["page"] = 
+      message = "What is your gross monthly income?"
+      session["page"] = "income"
       @s.completed = false
       @s.save
    
@@ -149,7 +181,7 @@ class TwilioController < ApplicationController
       @eligible_early_learning_programs = correct_age_programs.where(income_type: @user_income_type)
 
 
-      message = 
+      message = "Are all adults in your household currently employed? Enter yes or no"
       session["page"] = 
       @s.completed = false
       @s.save

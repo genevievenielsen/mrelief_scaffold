@@ -18,7 +18,8 @@
   <!-- Form for child age question -->
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
-        <label class="allthatapply">Select all that apply to you:</label>
+        <label class="allthatapply">Select all that apply to you as a parent or guardian:</label>
+        <label><i>Note - This question applies to the age of your child as of September 1st, 2015</i></label>
         <div class="radio-button" id="children_questions">
           <input type="checkbox" name="zero_to_three" value="zero_to_three" id="zero_to_three"
             <% if @user.three_and_under != nil && @user.three_and_under == true %>checked<% end %>>  
@@ -34,7 +35,7 @@
             I am pregnant<br>
           <input type="checkbox" name="no_children" value="no_children" id="no_children"
             <% if @user.no_children != nil && @user.no_children == true %>checked<% end %>> 
-            I care for no children<br>
+            I care for no children in these age groups<br>
         </div>
       </div>
     </div>
@@ -77,9 +78,6 @@
           <input type="checkbox" name="tanf" value="tanf" id="tanf"
             <% if @user.tanf != nil && @user.tanf == true %>checked<% end %>> 
             My family receives TANF<br>
-          <input type="checkbox" name="snap_or_medicaid" value="snap_or_medicaid" id="snap_or_medicaid"
-            <% if @user.snap_or_medicaid != nil && @user.snap_or_medicaid == true %>checked<% end %>> 
-            I am receiving SNAP or Medicaid<br>
           <input type="checkbox" name="teen_parent" value="teen_parent" id="teen_parent"
             <% if @user.teen_parent != nil && @user.teen_parent == true %>checked<% end %>>  
             I am a teen parent who is enrolled full-time in elementary, high school or GED classes to obtain a high school degree or its equivalent <!-- <a data-toggle="popover" data-content="A teen is from 13 through 19" data-placement="right" style="border: 0px; color: #4582ec;" >Learn More</a> --><br>
@@ -92,19 +90,7 @@
         </div>
       </div>
     </div>
-
-  <!-- Form for health question -->
-    <div class="row">
-      <div class="col-md-9 col-sm-10 col-xs-12" id="health_question">
-        <label for="health_status" id="health_status">Do you have a medical-based or dietary-based health condition?</label>
-        <div class="radio-button">
-          <% [ 'yes', 'no'].each do |health_status| %>
-            <%= radio_button_tag 'health_status', health_status, @user.health_status == health_status %>
-            <%= health_status.humanize %><br>
-          <% end %>
-        </div>
-      </div>
-    </div>
+   
 
   <!-- Form for employment -->
     <div class="row">
@@ -162,7 +148,7 @@
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="preferred_frequency" id="preferred_frequency">Do you have a preference for part-week or full-week programs?</label>
         <div class="radio-button">
-          <% [ 'Part-week', 'Full-week', 'No Preference'].each do |preferred_frequency| %>
+          <% [ 'Part-week (2 to 3 days)', 'Full-week (4 to 5 days)', 'No Preference'].each do |preferred_frequency| %>
             <%= radio_button_tag 'preferred_frequency', preferred_frequency, @user.preferred_frequency == preferred_frequency %>
             <%= preferred_frequency.humanize %><br>
           <% end %>

@@ -75,7 +75,8 @@ class EarlyLearningProgramsController < ApplicationController
 
     # yes or no questions
     @user.employed = params[:employment] 
-    @user.health_status = params[:health_status]
+    # remove this
+    # @user.health_status = params[:health_status]
     @user.other_zipcode = params[:other_zipcode]
     @user.bilingual = params[:bilingual]
     @user.bilingual_language = params[:bilingual_language]
@@ -87,12 +88,7 @@ class EarlyLearningProgramsController < ApplicationController
     @user.preferred_duration = params[:preferred_duration]
 
     
-    # if params[:preferred_duration].include?("(")
-    #   preferred_duration = params[:duration].split("(").first.strip
-    #   @user.preferred_duration = preferred_duration
-    # else
-    #   @user.preferred_duration = params[:preferred_duration]
-    # end
+  
     @user.save
 
 
@@ -132,12 +128,11 @@ class EarlyLearningProgramsController < ApplicationController
 
                 else
                   @eligible_early_learning_programs = correct_age_programs.where(additional_criteria: "foster care, homeless, ssi or tanf")
-                  puts "I made it here" 
                   puts "#{@eligible_early_learning_programs.count}"
                 end
             
               else
-              # User is not automatically eligible 
+              # User is not automatically income seligible 
                 income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
 
                 @user_income_type = []
@@ -281,7 +276,7 @@ class EarlyLearningProgramsController < ApplicationController
     @user.save 
 
 
-    if params[:health_status].present? && params[:employment].present? && params[:other_zipcode] && params[:preferred_duration]
+    if params[:employment].present? && params[:other_zipcode] && params[:preferred_duration]
       
       if params[:zero_to_three].present? || params[:three_to_five].present? || params[:six_to_twelve].present? || params[:pregnant].present? || params[:no_children].present?
     
