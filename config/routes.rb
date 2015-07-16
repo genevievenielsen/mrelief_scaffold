@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   get("/twilio_spanish", { :controller => "send_text", :action => "send_spanish_text_message"})
   post('/twilio_spanish', { :controller => 'twilio_spanish', :action => 'text'})
   
-  #twilio text
+  #twilio test
   get("/twilio_test", { :controller => "send_text", :action => "send_test_text_message"})
   post('/twilio_test', { :controller => 'twilio_testing', :action => 'text'})
    

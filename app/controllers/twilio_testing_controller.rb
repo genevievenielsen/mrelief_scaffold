@@ -26,7 +26,7 @@ class TwilioTestingController < ApplicationController
     session["counter"] = 0
   end
    if session["counter"] == 0
-    message = "Welcome to mRelief! We help you check your eligibility for public assistance. For foodstamps, text 'food'. For RTA ride free, text 'ride.' For Medicaid, text 'medicaid.' For Medicare Cost Sharing, text 'medicare.' If you make a mistake, send the message 'reset'."
+    message = "Welcome to mRelief! We help you check your eligibility for public assistance. For foodstamps, text 'food'. For RTA ride free, text 'ride.' For Medicaid, text 'medicaid.' For early learning programs, text 'kids' If you make a mistake, send the message 'reset'."
    end
 
    if params[:Body].strip.downcase == "menu"
@@ -34,7 +34,7 @@ class TwilioTestingController < ApplicationController
       session["counter"] = 0
    end
    if params[:Body].strip.downcase == "kids"
-      message = "Text the letters that apply to you. - a) Child between 0-2 years b) Child between 3-5 years c) Children between 6-12 years d) No Children. For example, b or ac."
+      message = "Text the letter(s) that applies to your child by 9/1/15. I care for a child ages: a. 0-2  b. 3-5 c. 6-12. d. none of these Ex: ‘a’ or ‘ab’"
       session["page"] = "age_of_children"
       session["counter"] = 1
    end
@@ -62,7 +62,7 @@ class TwilioTestingController < ApplicationController
           @user.six_to_twelve = true
         end
 
-        message = "Are you pregnant? Enter yes or no." 
+        message = "Are you pregnant? Enter yes or no" 
         session["page"] = "pregnant"
 
       else
@@ -74,9 +74,9 @@ class TwilioTestingController < ApplicationController
     end
 
     # Pregnancy question
-    if session["page"] == "pregnant"
+    if session["page"] == "pregnant" && session["counter"] == 3
       @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
-      pregnant = params[:Body].strip.downcase
+      @user.pregnant = params[:Body].strip.downcase
       
       # Data Storage
       if pregnant == "yes"
@@ -109,7 +109,7 @@ class TwilioTestingController < ApplicationController
     end
 
    # Zipcode question
-   if session["page"] == "zipcode" 
+   if session["page"] == "zipcode" && session["counter"] == 4
     @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
     @user.zipcode = params[:Body].strip
 
@@ -126,7 +126,7 @@ class TwilioTestingController < ApplicationController
    end
 
    # Foster, homeless, SSI question
-   if session["page"] == "foster_homeless_ssi" 
+   if session["page"] == "foster_homeless_ssi" && session["counter"] == 5
     @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
     @user.foster_homeless_ssi = params[:Body].strip
 
@@ -139,7 +139,7 @@ class TwilioTestingController < ApplicationController
 
 
    # Household size question
-   if session["page"] == "household_size" 
+   if session["page"] == "household_size" && session["counter"] == 6
     @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
     household_size = params[:Body].strip
       # Convert to an integer
@@ -150,7 +150,7 @@ class TwilioTestingController < ApplicationController
       end
       @user.household_size = household_size_cleaned
 
-      message = "What is your gross monthly income?"
+      message = "What is your gross monthly income? Example - 1000"
       session["page"] = "income"
       @s.completed = false
       @s.save
@@ -159,7 +159,7 @@ class TwilioTestingController < ApplicationController
 
 
    # Income question
-   if session["page"] == "income" 
+   if session["page"] == "income" && session["counter"] == 7
     @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
     income = params[:Body].strip
       # Convert to an integer
@@ -180,16 +180,11 @@ class TwilioTestingController < ApplicationController
       end
       @eligible_early_learning_programs = correct_age_programs.where(income_type: @user_income_type)
 
-
       message = "Are all adults in your household currently employed? Enter yes or no"
       session["page"] = 
       @s.completed = false
       @s.save
-   
    end
-
-
-
 
    twiml = Twilio::TwiML::Response.new do |r|
        r.Message message
