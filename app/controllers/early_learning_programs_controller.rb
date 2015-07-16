@@ -341,7 +341,6 @@ class EarlyLearningProgramsController < ApplicationController
         @eligible_locations_in_zip = @eligible_locations_in_zip.uniq
       end
 
-      puts " This is the eligible count #{@eligible_locations_in_zip.count}"
 
 
       if @eligible_locations_in_zip.length == 3
