@@ -33,7 +33,7 @@
   <div class="row">
   <% @top_referral_keys %>
     <% @top_referrals.each do |center| %>
-    <div class="col-md-4 col-sm-12">
+    <div class="col-md-12 col-sm-12">
       <ul>
         <li class="laf-headline"><%= center["site_name"] %></li>
         <li><%#= center["program_information"] %></li>
@@ -57,62 +57,41 @@
           <li><%= link_to "Center Website", center["url"], target: "_blank" %></li>
         <% end %>
 
+        <% if center["program_information"].include?("CPS Based") || center["program_information"].include?("CPS Based, Head Start") %>
+          <% if @user.income_type == "[\"Greater than Type 2\"]" %>
+            <p>You may have a required co-pay for this program. Use <%= link_to "this CPS calculator", "http://cps.edu/Schools/EarlyChildhood/Pages/EarlyChildhoodCalculator.aspx", target: "_blank" %> to estimate your families co-pay.</p>
+          <% end %>
+        <% end %>
+
+        <% if @ccap_eligible == true %>
+          <% if center["program_information"].include?("Head Start") && center["program_information"].exclude?("CPS Based") && center["weekday_availability"].include?("Full Day") %>
+              <li>This is a CCAP Compatible Program, and our results show that you also may qualify for CCAP.</li>
+          <% elsif center["program_information"].exclude?("Head Start") && center["program_information"].exclude?("CPS Based") && center["weekday_availability"].include?("Full Day") %>
+              <li>This is a CCAP Compatible Program, and our results show that you also may qualify for CCAP.</li>
+          <% elsif center["program_information"].include?("Early Head Start") && center["weekday_availability"].include?("Full Day") %>
+            <li>This is a CCAP Compatible Program, and our results show that you also may qualify for CCAP.</li>
+          <% elsif center["program_information"].include?("Community Based") && center["program_information"].exclude?("Head Start")&& center["program_information"].exclude?("Early Head Start") && center["weekday_availability"].include?("Full Day") %>
+            <li>This is a CCAP Compatible Program, and our results show that you also may qualify for CCAP.</li>
+          <% end %>
+
+        <% elsif @user.ccap_eligible == false %>
+        <%= puts "I made it here" %>
+          <% if center["program_information"].include?("Head Start") && center["program_information"].exclude?("CPS Based") && center["weekday_availability"].include?("Full Day") %>
+              <li>This is a CCAP Compatible Program, and our results show that you also may not qualify for CCAP.</li>
+          <% elsif center["program_information"].exclude?("Head Start") && center["program_information"].exclude?("CPS Based") && center["weekday_availability"].include?("Full Day") %>
+              <li>This is a CCAP Compatible Program, and our results show that you also may not qualify for CCAP.</li>
+          <% elsif center["program_information"].include?("Early Head Start") && center["weekday_availability"].include?("Full Day") %>
+            <li>This is a CCAP Compatible Program, and our results show that you also may not qualify for CCAP.</li>
+          <% elsif center["program_information"].include?("Community Based") && center["program_information"].exclude?("Head Start")&& center["program_information"].exclude?("Early Head Start") && center["weekday_availability"].include?("Full Day") %>
+            <li>This is a CCAP Compatible Program, and our results show that you also may not qualify for CCAP.</li>
+          <% end %>
+
+        <% end %>
+
         <% @top_referral_keys = "#{@top_referral_keys}" + center["key"] + "," %>
       </ul>
       </div>
     <% end %>
-  </div>
-  <br>
-  <br>
-  <br>  
-  <div class="row">
-    <div class="col-md-12">
-      <a href="http://chicagoearlylearning.org/favorites/<%= @top_referral_keys %>/" target="_blank">Learn more about these centers on the Early Learning Portal →</a>
-    </div>
-  </div>
-  <br>
-  <br>
-  <br>  
-  <div class="row">
-    <div class="col-md-12">
-      <%= link_to  "More Results: CCAP Eligibility →", more_results_url(@user) %>
-    </div>
-  </div>
 
-  <br>
-  <br>
-  <br>
-  <div class="row">
-    <div class="col-md-12">
-    <h1>All Eligible Early Learning Programs</h1>
-    <br>
-    <% @eligible_early_learning_programs.each do |program| %>
-      <ul>
-        <li class="laf-headline"> <%= program.funder %></li>
-        <li>Agency: <%=  program.agency %></li>
-        <li>Site: <%= program.site %></li>
-        <li>Ages Served: <%= program.ages_served %></li>
-        <li>Income Type: <%= program.income_type %></li>
-        <% if program.income_type == "Greater than Type 2" %>
-          <li>May have a required fee based on the income of the parents or legal guardians. Use the calculator[link to CPS] estimate your families co-pay.</li>
-        <% end %>
-        <li>Duration: <%= program.duration %></li>
-        <li>Additional Criteria: <%= program.additional_criteria %></li>
-        <% if program.funder.include?("Childcare Collaboration") && @ccap_eligible == true  %>
-          <li>This is a CCAP Compatible Program, and our results show that you also may qualify for CCAP.</li>
-        <% elsif program.funder.include?("Childcare Collaboration") && @ccap_eligible == false %>
-          <li>This is a CCAP Compatible Program, but you may not qualify for CCAP.</li>
-        <% end %>
-      </ul>
-      <br>
-    <% end %>
-     
-    </div>
-  </div>
 <% end %>
-
-
-
-
-
 </div>

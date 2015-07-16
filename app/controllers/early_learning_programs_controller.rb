@@ -9,7 +9,6 @@ class EarlyLearningProgramsController < ApplicationController
 	def create
     # TO DO 
     # - save center keys that we refer people to 
-    # - ccap messages
     @user = EarlyLearningData.new
 
     # Clean Data
@@ -246,13 +245,13 @@ class EarlyLearningProgramsController < ApplicationController
         end
 
         if @user.school_based_no_co_pay_full_day == true || @user.school_based_co_pay_full_day == true
-          if location["program_information"].include?("CPS Based") && location["program_information"].include?("Head Start") && location["weekday_availability"].include?("Full Day")
+          if location["program_information"].include?("CPS Based") && location["program_information"].include?("CPS Based, Head Start") && location["weekday_availability"].include?("Full Day")
             @all_eligible_locations.push(location)
           end
         end 
 
         if @user.school_based_no_co_pay_half_day == true || @user.school_based_co_pay_half_day == true
-          if location["program_information"].include?("CPS Based") || location["program_information"].include?("Head Start") && location["weekday_availability"].include?("Part Day")
+          if location["program_information"].include?("CPS Based") || location["program_information"].include?("CPS Based, Head Start") && location["weekday_availability"].include?("Part Day")
              @all_eligible_locations.push(location)
           end
         end
