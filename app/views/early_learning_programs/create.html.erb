@@ -17,37 +17,48 @@
     </div>
   </div>
 
-  <% if @preferred_early_learning_programs.present? %>
+  <p>Total Eligible Count: <%= @eligible_locations.count %></p>
+  <p>Eligible In Zipcode: <%= @eligible_locations_in_zip.count %></p>
+  <p>Eligible In Zipcode and Day Preference: <%= @eligible_locations_in_zip_preferred_duration.try(:count) %></p>
+  <p>Eligible In Zipcode, Day Preference Language: <%= @eligible_locations_in_zip_preferred_duration_language.try(:count) %></p>
+
+
   <div class="row">
     <div class="col-md-12">
-    <h1>Preferred Early Learning Programs</h1>
-    <br>
-    <% @preferred_early_learning_programs.each do |program| %>
-      <ul>
-        <li class="laf-headline"> <%= program.funder %></li>
-        <li>Agency: <%=  program.agency %></li>
-        <li>Site: <%= program.site %></li>
-        <li>Ages Served: <%= program.ages_served %></li>
-        <li>Income Type: <%= program.income_type %></li>
-        <% if program.income_type == "Greater than Type 2" %>
-          <li>May have a required fee based on the income of the parents or legal guardians. Use the calculator[link to CPS] estimate your families co-pay.</li>
-        <% end %>
-        <li>Duration: <%= program.duration %></li>
-
-        <li>Additional Criteria: <%= program.additional_criteria %></li>
-        <% if program.funder.include?("Childcare Collaboration") && @ccap_eligible == true  %>
-          <li>This is a CCAP Compatible Program, and our results show that you also may qualify for CCAP.</li>
-        <% elsif program.funder.include?("Childcare Collaboration") && @ccap_eligible == false %>
-          <li>This is a CCAP Compatible Program, but you may not qualify for CCAP.</li>
-        <% end %>
-      </ul>
-      <br>
-    <% end %>
-     
-    </div>
+      <h1>Early Learning Centers Near You</h1>
+    </div> 
   </div>
+
+  <% if @referral_centers.length > 3 %>
+    <% @top_referrals = @referral_centers.sample(3) %>
   <% end %>
 
+  <div class="row">
+    
+      <% @top_referrals.each do |center| %>
+      <div class="col-md-4 col-sm-12">
+        <ul>
+          <li class="laf-headline"><%= center["site_name"] %></li>
+          <li><%= center["program_information"] %></li>
+          <li><%= center["address"] %></li>
+          <li><%= center["city"].strip %>, <%= center["state"] %> <%= center["zip"] %></li>
+          <li><%= center["phone_number"] %></li>
+          <% if center["url"].present? %>
+            <li><%= link_to "Center Website", center["url"], target: "_blank" %></li>
+          <% end %>
+    
+        </ul>
+        </div>
+      <% end %>
+    
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <a href="http://chicagoearlylearning.org/location/<%= @top_referrals.first["key"] %>/" target="_blank">Learn more about these centers on the Early Learning Portal →</a>
+    </div>
+  </div>
+    
   <div class="row">
     <div class="col-md-12">
     <h1>All Eligible Early Learning Programs</h1>

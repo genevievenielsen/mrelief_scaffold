@@ -30,67 +30,65 @@
 
 # 	parsed_data.each do |location|
 
-# 		if location["program_information"].include?("Head Start") && location["program_information"].exclude?("CPS Based") && location["weekday_availability"].include?("Full Day")
-# 			head_start_childare_collaboration.push(location)
-# 		end
+# 		# if location["program_information"].include?("Head Start") && location["program_information"].exclude?("CPS Based") && location["weekday_availability"].include?("Full Day")
+# 		# 	head_start_childare_collaboration.push(location)
+# 		# end
 
-# 		if location["program_information"].include?("Head Start") && location["program_information"].exclude?("CPS Based") && location["weekday_availability"].include?("Full Day")
-# 			head_start_preschool_childcare_collaboration.push(location)
-# 		end
+# 		# if location["program_information"].include?("Head Start") && location["program_information"].exclude?("CPS Based") && location["weekday_availability"].include?("Full Day")
+# 		# 	head_start_preschool_childcare_collaboration.push(location)
+# 		# end
 
-# 		if location["program_information"].include?("Head Start") && location["program_information"].exclude?("CPS Based") && location["weekday_availability"].include?("Full Day")
-# 			preschool_for_all_childcare_collaboration.push(location)
-# 		end
+# 		# if location["program_information"].exclude?("Head Start") && location["program_information"].exclude?("CPS Based") && location["weekday_availability"].include?("Full Day")
+# 		# 	preschool_for_all_childcare_collaboration.push(location)
+# 		# end
 
-# 		if location["program_information"].include?("Home Visiting") && location["program_information"].exclude?("Head Start") && location["program_information"].exclude?("Early Head Start") #&& location["weekday_availability"].include?("Home Visiting")
-# 			prevention_initiative_home_visiting_0to2.push(location)
-# 		end
+# 		# if location["program_information"].include?("Home Visiting") && location["program_information"].exclude?("Head Start") && location["program_information"].exclude?("Early Head Start") #&& location["weekday_availability"].include?("Home Visiting")
+# 		# 	prevention_initiative_home_visiting_0to2.push(location)
+# 		# end
 
-# 		if location["program_information"].include?("CPS Based") && location["program_information"].include?(" Head Start") && location["weekday_availability"].include?("Full Day")
-# 			school_based_no_co_pay_full_day.push(location)
-# 		end
+# 		# if location["program_information"].include?("CPS Based") && location["program_information"].include?(" Head Start") && location["weekday_availability"].include?("Full Day")
+# 		# 	school_based_no_co_pay_full_day.push(location)
+# 		# end
 
-# 		if location["program_information"].include?("CPS Based") || location["program_information"].include?("CPS Based, Head Start") && location["weekday_availability"].include?("Part Day")
-# 			school_based_no_co_pay_half_day.push(location)
-# 		end
+# 		# if location["program_information"].include?("CPS Based") || location["program_information"].include?("CPS Based, Head Start") && location["weekday_availability"].include?("Part Day")
+# 		# 	school_based_no_co_pay_half_day.push(location)
+# 		# end
 
-# 		if location["program_information"].include?("CPS Based") && location["program_information"].include?("Head Start") && location["weekday_availability"].include?("Full Day")
-# 			school_based_co_pay_full_day.push(location)
-# 		end
+# 		# if location["program_information"].include?("CPS Based") && location["program_information"].include?("Head Start") && location["weekday_availability"].include?("Full Day")
+# 		# 	school_based_co_pay_full_day.push(location)
+# 		# end
 
-# 		# this returns zero results
-# 		if location["program_information"].include?("CPS Based") && location["program_information"].include?("Head Start") && location["weekday_availability"].include?("Part Day")
-# 			school_based_co_pay_half_day.push(location)
-# 		end
+# 		# if location["program_information"].include?("CPS Based") && location["program_information"].include?("Head Start") && location["weekday_availability"].include?("Part Day")
+# 		# 	school_based_co_pay_half_day.push(location)
+# 		# end
 
-# 		if location["program_information"].include?("Head Start") && location["program_information"].exclude?("CPS Based") && location["weekday_availability"].include?("Full Day")
-# 			head_start_center_based_half_day_3to5.push(location)
-# 		end
+# 		# if location["program_information"].include?("Head Start") && location["program_information"].exclude?("CPS Based") && location["weekday_availability"].include?("Full Day")
+# 		# 	head_start_center_based_half_day_3to5.push(location)
+# 		# end
 
-# 		if location["program_information"].include?("Early Head Start") && location["weekday_availability"].include?("Full Day")
-# 			early_head_start_childcare_collaboration.push(location)
-# 		end
+# 		# if location["program_information"].include?("Early Head Start") && location["weekday_availability"].include?("Full Day")
+# 		# 	early_head_start_childcare_collaboration.push(location)
+# 		# end
 
-# 		if location["program_information"].include?("Community Based") && location["program_information"].exclude?("Head Start")&& location["program_information"].exclude?("Early Head Start") && location["weekday_availability"].include?("Full Day")
-# 			prevention_initiative_childcare_collaboration.push(location)
-# 		end
+# 		# if location["program_information"].include?("Community Based") && location["program_information"].exclude?("Head Start")&& location["program_information"].exclude?("Early Head Start") && location["weekday_availability"].include?("Full Day")
+# 		# 	prevention_initiative_childcare_collaboration.push(location)
+# 		# end
 
-# 		if location["program_information"].include?("Early Head Start") && location["program_information"].include?("Home Visiting") 
-# 			early_head_start_home_visiting_0to2.push(location)
-# 		end
+# 		# if location["program_information"].include?("Early Head Start") && location["program_information"].include?("Home Visiting") 
+# 		# 	early_head_start_home_visiting_0to2.push(location)
+# 		# end
 
-# 		if location["program_information"].include?("Head Start") && location["program_information"].include?("Home Visiting")
-# 			head_start_home_visting_3to5.push(location)
-# 		end
+# 		# if location["program_information"].include?("Head Start") && location["program_information"].include?("Home Visiting")
+# 		# 	head_start_home_visting_3to5.push(location)
+# 		# end
 
-# 		# this returns zero results
-# 		if location["program_information"].include?("CPS Based") && location["program_information"].include?("Head Start") && location["weekday_availability"].include?("Part Day")
-# 			head_start_school_based_half_day_3to5.push(location)
-# 		end
+# 		# if location["program_information"].include?("CPS Based") && location["program_information"].include?("Head Start") && location["weekday_availability"].include?("Part Day")
+# 		# 	head_start_school_based_half_day_3to5.push(location)
+# 		# end
 
-# 		if location["program_information"].include?("CPS Based") && location["program_information"].include?("Head Start") && location["weekday_availability"].include?("Full Day")
-# 			head_start_school_based_full_day_3to5.push(location)
-# 		end
+# 		# if location["program_information"].include?("CPS Based") && location["program_information"].include?("Head Start") && location["weekday_availability"].include?("Full Day")
+# 		# 	head_start_school_based_full_day_3to5.push(location)
+# 		# end
 
 # 		@user = EarlyLearningData.last
 # 		if @user.preferred_zipcode != nil && location["zip"].include?(@user.preferred_zipcode) 
