@@ -1,4 +1,4 @@
-task :early_learning_zipcodes => :environment do
+task :early_childhood_zipcodes => :environment do
 
 	require 'open-uri'
 	require 'json'

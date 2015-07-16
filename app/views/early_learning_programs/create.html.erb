@@ -17,12 +17,6 @@
     </div>
   </div>
 
-  <p>Total Eligible Count: <%= @eligible_locations.count %></p>
-  <p>Eligible In Zipcode: <%= @eligible_locations_in_zip.count %></p>
-  <p>Eligible In Zipcode and Day Preference: <%= @eligible_locations_in_zip_preferred_duration.try(:count) %></p>
-  <p>Eligible In Zipcode, Day Preference Language: <%= @eligible_locations_in_zip_preferred_duration_language.try(:count) %></p>
-
-
   <div class="row">
     <div class="col-md-12">
       <h1>Early Learning Centers Near You</h1>
@@ -41,8 +35,8 @@
     <div class="col-md-4 col-sm-12">
       <ul>
         <li class="laf-headline"><%= center["site_name"] %></li>
-        <li><%= center["program_information"] %></li>
-        <li>Addgress: <%= center["address"] %></li>
+        <li><%#= center["program_information"] %></li>
+        <li> <%= center["address"] %></li>
         <li><%= center["city"].strip %>, <%= center["state"] %> <%= center["zip"] %></li>
         <li>Phone Number: <%= center["phone_number"] %></li>
 
@@ -67,7 +61,9 @@
       </div>
     <% end %>
   </div>
-
+   <br>
+  <br>
+  <br>  
   <div class="row">
     <div class="col-md-12">
       <a href="http://chicagoearlylearning.org/favorites/<%= @top_referral_keys %>/" target="_blank">Learn more about these centers on the Early Learning Portal →</a>

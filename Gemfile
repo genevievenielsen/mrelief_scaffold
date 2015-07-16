@@ -2,13 +2,17 @@ source "https://rubygems.org"
 
 ruby "2.1.2"
 
+# geocoder 
+gem 'geocoder'
+gem 'area'
+
 # makes serve log easier to read
 gem 'quiet_assets'
 
-#mailer
+# mailer
 gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
 
-#scraping for medium blog
+# scraping for medium blog
 gem 'mechanize'
 gem 'nokogiri', '~> 1.6.3.1'
 

@@ -28,11 +28,5 @@ task :early_childhood_languages => :environment do
 		puts "#{language}"
 	end
 
-	# parsed_data.each do |location|
-	# 	if location["languages_other_than_english"].present? && location["languages_other_than_english"].include?("Uraba")
-	# 		puts "#{location}"
-	# 	end
-	# end
-
 end
 

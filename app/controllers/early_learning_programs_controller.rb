@@ -8,7 +8,8 @@ class EarlyLearningProgramsController < ApplicationController
 
 	def create
     # TO DO 
-    # - save centers that we refer people to 
+    # - save center keys that we refer people to 
+    # - ccap messages
     @user = EarlyLearningData.new
 
     # Clean Data
@@ -222,7 +223,7 @@ class EarlyLearningProgramsController < ApplicationController
       parsed_data = JSON.parse(raw_data)
       @all_eligible_locations = []
 
-      # Add age flags here
+      # ADD AGE FILERS HERE 
 
       # Eligible Programs
       parsed_data.each do |location|
@@ -300,6 +301,8 @@ class EarlyLearningProgramsController < ApplicationController
       end
 
       @eligible_locations = @all_eligible_locations.uniq
+
+
       # Filter by Zipcode
       @eligible_locations_in_zip = []
       @eligible_locations.each do |location|
@@ -314,13 +317,36 @@ class EarlyLearningProgramsController < ApplicationController
         end
       end
 
+      # If there are not 3 locations in zipcode
+      if @eligible_locations_in_zip.length < 3
+        if @user.preferred_zipcode.present?
+          eligible_zipcode = ChicagoEligibleZipcode.find_by(zipcode: @user.preferred_zipcode)
+        else
+          eligible_zipcode = ChicagoEligibleZipcode.find_by(zipcode: @user.zipcode)
+        end
+
+        nearby_zipcodes = ChicagoEligibleZipcode.near([eligible_zipcode.latitude, eligible_zipcode.longitude], 10, :order => "distance")
+
+        nearby_zipcodes.each do |nearby_zipcode|
+          @eligible_locations.each_with_index do |location, index|
+            if index == 0
+            else
+              if location["zip"].include?(nearby_zipcode.zipcode)
+                @eligible_locations_in_zip.push(location)
+              end
+              break if @eligible_locations_in_zip.uniq.count >= 3
+            end
+          end
+        end  
+        @eligible_locations_in_zip = @eligible_locations_in_zip.uniq
+      end
+
+      puts " This is the eligible count #{@eligible_locations_in_zip.count}"
+
+
       if @eligible_locations_in_zip.length == 3
         @referral_centers = @eligible_locations_in_zip
-      elsif @eligible_locations_in_zip.length < 3
-        # find locations nearby 
-
       else
-
         # Filter by Day 
         @eligible_locations_in_zip_preferred_duration = []
         if @user.preferred_duration == "No Preference"
@@ -433,7 +459,7 @@ class EarlyLearningProgramsController < ApplicationController
             else
               @referral_centers = @eligible_locations_in_zip_preferred_duration_language_frequency
               
-            end
+            end # end preferred frequency
           end # ends language
         end # ends the eligibile locations in zip with preferred duration if statement
       end # ends the eligible locations in zip if statement

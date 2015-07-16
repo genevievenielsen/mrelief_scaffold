@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150713213257) do
+ActiveRecord::Schema.define(version: 20150716180418) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -122,6 +122,8 @@ ActiveRecord::Schema.define(version: 20150713213257) do
     t.string   "zipcode"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   create_table "child_care_voucher_data", force: true do |t|
