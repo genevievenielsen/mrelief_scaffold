@@ -31,34 +31,52 @@
 
   <% if @referral_centers.length > 3 %>
     <% @top_referrals = @referral_centers.sample(3) %>
+  <% else %>
+    <% @top_referrals = @referral_centers %>
   <% end %>
 
   <div class="row">
-    
-      <% @top_referrals.each do |center| %>
-      <div class="col-md-4 col-sm-12">
-        <ul>
-          <li class="laf-headline"><%= center["site_name"] %></li>
-          <li><%= center["program_information"] %></li>
-          <li><%= center["address"] %></li>
-          <li><%= center["city"].strip %>, <%= center["state"] %> <%= center["zip"] %></li>
-          <li><%= center["phone_number"] %></li>
-          <% if center["url"].present? %>
-            <li><%= link_to "Center Website", center["url"], target: "_blank" %></li>
-          <% end %>
-    
-        </ul>
-        </div>
-      <% end %>
-    
+  <% @top_referral_keys %>
+    <% @top_referrals.each do |center| %>
+    <div class="col-md-4 col-sm-12">
+      <ul>
+        <li class="laf-headline"><%= center["site_name"] %></li>
+        <li><%= center["program_information"] %></li>
+        <li>Addgress: <%= center["address"] %></li>
+        <li><%= center["city"].strip %>, <%= center["state"] %> <%= center["zip"] %></li>
+        <li>Phone Number: <%= center["phone_number"] %></li>
+
+         <% if center["weekday_availability"].present? %>
+          <li>Weekday Availability: <%= center["weekday_availability"] %></li>
+        <% end %>
+
+         <% if center["program_information"].present? %>
+          <li>Program Information: <%= center["program_information"] %></li>
+        <% end %>
+
+        <% if center["languages_other_than_english"].present? %>
+          <li>Languages other than English: <%= center["languages_other_than_english"] %></li>
+        <% end %>
+
+        <% if center["url"].present? %>
+          <li><%= link_to "Center Website", center["url"], target: "_blank" %></li>
+        <% end %>
+
+        <% @top_referral_keys = "#{@top_referral_keys}" + center["key"] + "," %>
+      </ul>
+      </div>
+    <% end %>
   </div>
 
   <div class="row">
     <div class="col-md-12">
-      <a href="http://chicagoearlylearning.org/location/<%= @top_referrals.first["key"] %>/" target="_blank">Learn more about these centers on the Early Learning Portal →</a>
+      <a href="http://chicagoearlylearning.org/favorites/<%= @top_referral_keys %>/" target="_blank">Learn more about these centers on the Early Learning Portal →</a>
     </div>
   </div>
-    
+
+  <br>
+  <br>
+  <br>
   <div class="row">
     <div class="col-md-12">
     <h1>All Eligible Early Learning Programs</h1>

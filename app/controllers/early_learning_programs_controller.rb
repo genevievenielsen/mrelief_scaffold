@@ -7,6 +7,8 @@ class EarlyLearningProgramsController < ApplicationController
 	end
 
 	def create
+    # TO DO 
+    # - save centers that we refer people to 
     @user = EarlyLearningData.new
 
     # Clean Data
@@ -318,6 +320,7 @@ class EarlyLearningProgramsController < ApplicationController
         # find locations nearby 
 
       else
+
         # Filter by Day 
         @eligible_locations_in_zip_preferred_duration = []
         if @user.preferred_duration == "No Preference"
@@ -350,10 +353,11 @@ class EarlyLearningProgramsController < ApplicationController
           non_duplicate_centers = @eligible_locations_in_zip - @eligible_locations_in_zip_preferred_duration
           random_additional_centers =  non_duplicate_centers.sample(difference)
          
-          @referral_centers.push(random_additional_centers)
+          @referral_centers = @referral_centers + random_additional_centers
          
         else
-          # find locations in the language preference 
+
+          # Filter by language
           @eligible_locations_in_zip_preferred_duration_language = []
 
           if @user.bilingual_language == nil
@@ -361,19 +365,21 @@ class EarlyLearningProgramsController < ApplicationController
           else
             @eligible_locations_in_zip_preferred_duration.each do |location|
               if @user.bilingual_language == "Spanish"
-                if location["languages_other_than_english"].include?("Spanish")
+                if location["languages_other_than_english"].present? && location["languages_other_than_english"].include?("Spanish")
                   @eligible_locations_in_zip_preferred_duration_language.push(location)
                 end
               elsif @user.bilingual_language == "Mandarin"
-                if location["languages_other_than_english"].include?("Chinese") || location["languages_other_than_english"].include?("Cantonese") || location["languages_other_than_english"].include?("Cantinese")
-                  @eligible_locations_in_zip_preferred_duration_language.push(location)
+                if location["languages_other_than_english"].present? 
+                  if location["languages_other_than_english"].include?("Chinese") || location["languages_other_than_english"].include?("Cantonese") || location["languages_other_than_english"].include?("Cantinese")
+                    @eligible_locations_in_zip_preferred_duration_language.push(location)
+                  end
                 end
               elsif @user.bilingual_language == "Yoruba"
-                if location["languages_other_than_english"].include?("Uraba")
+                if location["languages_other_than_english"].present? && location["languages_other_than_english"].include?("Uraba")
                   @eligible_locations_in_zip_preferred_duration_language.push(location)
                 end
               else
-                if location["languages_other_than_english"].include?(@user.preferred_language)
+                if location["languages_other_than_english"].present? && location["languages_other_than_english"].include?(@user.bilingual_language)
                    @eligible_locations_in_zip_preferred_duration_language.push(location)
                 end
               end
@@ -385,13 +391,16 @@ class EarlyLearningProgramsController < ApplicationController
           elsif @eligible_locations_in_zip_preferred_duration_language.length < 3
             # find locations nearby that are not in the preferred duration
             @referral_centers = @eligible_locations_in_zip_preferred_duration_language
-            difference = 3 - @eligible_locations_in_zip_preferred_duration_language.length.to_i 
-            non_duplicates = @eligible_locations_in_zip - @eligible_locations_in_zip_preferred_duration_language
 
-              # difference.times.do |i|
-              #  @referral_centers.push(non_duplicates[i])
-              # end
+            difference = 3 - @eligible_locations_in_zip_preferred_duration_language.length.to_i 
+            non_duplicate_centers = @eligible_locations_in_zip_preferred_duration - @eligible_locations_in_zip_preferred_duration_language
+            random_additional_centers =  non_duplicate_centers.sample(difference)
+
+            @referral_centers = @referral_centers + random_additional_centers
+            
           else
+
+            # Filter by frequency
             @eligible_locations_in_zip_preferred_duration_language_frequency = []
             if @user.preferred_frequency == "No Preference"
               @eligible_locations_in_zip_preferred_duration_language_frequency = @eligible_locations_in_zip_preferred_duration_language
@@ -412,13 +421,20 @@ class EarlyLearningProgramsController < ApplicationController
             if @eligible_locations_in_zip_preferred_duration_language_frequency == 3
               @referral_centers = @eligible_locations_in_zip_preferred_duration_language_frequency
             elsif @eligible_locations_in_zip_preferred_duration_language_frequency.length < 3
+              # find locations nearby that are not in the preferred duration
+              @referral_centers = @eligible_locations_in_zip_preferred_duration_language_frequency
+              
+              difference = 3 - @eligible_locations_in_zip_preferred_duration_language_frequency.length.to_i 
+              non_duplicate_centers = @eligible_locations_in_zip_preferred_duration_language - @eligible_locations_in_zip_preferred_duration_language_frequency
+              random_additional_centers =  non_duplicate_centers.sample(difference)
+
+              @referral_centers = referral_centers + random_additional_centers
 
             else
               @referral_centers = @eligible_locations_in_zip_preferred_duration_language_frequency
               
             end
-
-          end 
+          end # ends language
         end # ends the eligibile locations in zip with preferred duration if statement
       end # ends the eligible locations in zip if statement
     end # ends the eligible if statement
