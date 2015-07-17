@@ -6,7 +6,7 @@ class TwilioTestingController < ApplicationController
 
   def text
 
-  # session["counter"] ||= 0
+  session["counter"] ||= 0
   puts session["counter"]
   puts session["page"]
 
