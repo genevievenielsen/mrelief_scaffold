@@ -170,7 +170,7 @@ class TwilioTestingController < ApplicationController
       @user.gross_monthly_income = income_cleaned
       # Determine income eligible programs
       income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
-      puts "This is the income row: #{income}"
+      puts "This is the income row: #{income_row}"
 
       @user_income_type = []
       if @user.gross_monthly_income > income_row.income_type2 # Is there a cap?
@@ -205,7 +205,7 @@ class TwilioTestingController < ApplicationController
    # Employment question
    if session["page"] == "employment" && session["counter"] == 8
      @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
-     @user.employment = params[:Body].strip.downcase
+     employment = params[:Body].strip.downcase
      
      # Data Storage
      if employment == "yes"
@@ -227,7 +227,7 @@ class TwilioTestingController < ApplicationController
    # Tanf and special needs question
    if session["page"] == "tanf_special_needs" && session["counter"] == 9
      @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
-     @user.tanf_special_needs = params[:Body].strip.downcase
+     tanf_special_needs = params[:Body].strip.downcase
      
      # Data Storage
      if tanf_special_needs == "yes"
@@ -250,7 +250,7 @@ class TwilioTestingController < ApplicationController
    # Teen parent question
    if session["page"] == "teen_parent" && session["counter"] == 9
      @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
-     @user.teen_parent = params[:Body].strip.downcase
+     teen_parent = params[:Body].strip.downcase
      
      # Data Storage
      if teen_parent == "yes"
