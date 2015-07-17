@@ -6,10 +6,8 @@ class TwilioTestingController < ApplicationController
 
   def text
     # Questions for Rose 
-    # - co-pay message
-    # - CCAP message
-    # - don't have a child of correct age
-    # - early learning programs specific
+    # - child 6-12
+
 
   session["counter"] ||= 0
 
@@ -97,15 +95,18 @@ class TwilioTestingController < ApplicationController
       # Data Storage
       if pregnant == "yes"
         @user.pregnant == true
+        message = "In which zipcode do you live? Example: 60615"
+        session["page"] = "zipcode"
+
       elsif pregnant == "no"
         @user.pregnant == false
+        message = "In which zipcode do you live? Example: 60615"
+        session["page"] = "zipcode"
+
       else
         message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
         session["counter"] = 1
       end
-      
-      message = "In which zipcode do you live? Example: 60615"
-      session["page"] = "zipcode"
 
       @user.completed = false
       @user.save
@@ -118,8 +119,8 @@ class TwilioTestingController < ApplicationController
     @user.zipcode = params[:Body].strip
 
     if ChicagoEligibleZipcode.all.pluck(:zipcode).include?(@user.zipcode)
-      message = "Are you a foster parent, homeless or does your family receive SSI? Enter yes or no."
-      session["page"] = "foster_homeless_ssi"
+      message = "What is the number of people living in your household including yourself? Enter a number"
+      session["page"] = "household_size"
       @user.completed = false
       @user.save
     else
