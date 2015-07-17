@@ -182,6 +182,8 @@ class TwilioTestingController < ApplicationController
       end
       @user.gross_monthly_income = income_cleaned
       # Determine income eligible programs
+      income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
+
       @user_income_type = []
       if @user.gross_monthly_income > income_row.income_type2 # Is there a cap?
         @user_income_type = ['Greater than Type 2']
