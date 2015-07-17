@@ -129,7 +129,6 @@ class EarlyLearningProgramsController < ApplicationController
 
                 else
                   @eligible_early_learning_programs = correct_age_programs.where(additional_criteria: "foster care, homeless, ssi or tanf")
-                  puts "#{@eligible_early_learning_programs.count}"
                 end
             
               else
@@ -464,21 +463,19 @@ class EarlyLearningProgramsController < ApplicationController
     end # ends the eligible if statement
 
     # CCAP ELIGIBILITY
-      if @user.tanf == true || @user.teen_parent == true || @user.special_needs == true
-        if @user.three_and_under == true || @user.pregnant == true || @user.three_to_five == true || @user.six_to_twelve == true
-          if @user.employed == "yes" 
+      if @user.three_and_under == true || @user.pregnant == true || @user.three_to_five == true || @user.six_to_twelve == true
+        if @user.tanf == true || @user.teen_parent == true || @user.special_needs == true
+          @ccap_eligible = true
+          
+        elsif @user.employed == "yes" 
             income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
             if @user.gross_monthly_income < income_row.income_type4
               @ccap_eligible = true
             else
                @ccap_eligible = false
             end
-          else
-            # not employed 
-            @ccap_eligible = false
-          end
+    
         else
-          # no children 
           @ccap_eligible = false
         end
       else

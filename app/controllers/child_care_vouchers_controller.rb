@@ -57,21 +57,17 @@ class ChildCareVouchersController < ApplicationController
       @d.employed = true
     end
 
-    if @d.tanf == true || @d.teen_parent == true || @d.special_needs == true
-      if @d.child == true
-        if @d.employed == true
+    if @d.child == true
+      if @d.tanf == true || @d.teen_parent == true || @d.special_needs == true
+        @eligible = true
+      elsif @d.employed == true
           income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => ccdf_dependent_no})
           if ccdf_gross_income < income_row.income_type4
             @eligible = true
           else
              @eligible = false
           end
-        else
-          # not employed 
-          @eligible = false
-        end
       else
-        # no children 
         @eligible = false
       end
     else

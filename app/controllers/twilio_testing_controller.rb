@@ -8,6 +8,8 @@ class TwilioTestingController < ApplicationController
     # Questions for Rose 
     # - co-pay message
     # - CCAP message
+    # - don't have a child of correct age
+    # - early learning programs specific
 
   session["counter"] ||= 0
 
@@ -130,34 +132,9 @@ class TwilioTestingController < ApplicationController
     end
    end
 
-   # Foster, homeless, SSI question
-   if session["page"] == "foster_homeless_ssi" 
-    if session["counter"] == 4 || session["counter"] == 6
-      @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
-      foster_homeless_ssi = params[:Body].strip.downcase
-  
-      # Data Storage
-      if foster_homeless_ssi == "yes"
-        @user.foster_homeless_ssi == true
-      elsif foster_homeless_ssi == "no"
-        @user.foster_homeless_ssi == false
-      else
-        message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
-        session["counter"] = 1
-      end
-  
-      message = "What is the number of people living in your household including yourself? Enter a number"
-      session["page"] = "household_size"
-  
-      @user.completed = false
-      @user.save
-    end
-   end
-
-
    # Household size question
    if session["page"] == "household_size" 
-    if session["counter"] == 5 || session["counter"] == 7
+    if session["counter"] == 4 || session["counter"] == 6
     @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
     household_size = params[:Body].strip
       # Convert to an integer
@@ -168,7 +145,6 @@ class TwilioTestingController < ApplicationController
       end
       @user.household_size = household_size_cleaned.to_i
       @user.save
-      puts "Household size: #{@user.household_size}"
 
       message = "What is your gross monthly income? Example - 1000"
       session["page"] = "income"
@@ -177,10 +153,9 @@ class TwilioTestingController < ApplicationController
     end
    end
 
-
    # Income question
    if session["page"] == "income" 
-    if session["counter"] == 6 || session["counter"] == 8
+    if session["counter"] == 5 || session["counter"] == 7
     @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
     income = params[:Body].strip
       # Convert to an integer
@@ -191,9 +166,7 @@ class TwilioTestingController < ApplicationController
       end
       @user.gross_monthly_income = income_cleaned.to_f
       # Determine income eligible programs
-      puts "This is the #{@user.household_size}"
       income_row = EarlyLearningIncomeCutoff.find_by(household_size: @user.household_size.to_i)
-      puts "This is the income row: #{income_row}"
 
       @user_income_type = []
       if @user.gross_monthly_income > income_row.income_type2 # Notice about co-pay?
@@ -205,23 +178,9 @@ class TwilioTestingController < ApplicationController
       end
       @user.income_type = @user_income_type.try(:to_s)
 
-      # Determine correct age programs
-      if @user.three_and_under == true || @user.pregnant == true 
-        three_and_under_programs = EarlyLearningProgram.where(ages_served: '0 - 2')
-        correct_age_programs = three_and_under_programs 
-      end        
-      if @user.three_to_five == true
-        three_to_five_programs = EarlyLearningProgram.where(ages_served: '3 - 5')
-        correct_age_programs = three_to_five_programs 
-      end
-      if three_and_under_programs.present? && three_to_five_programs.present?
-        correct_age_programs = EarlyLearningProgram.all
-      end 
-
-      @eligible_early_learning_programs = correct_age_programs.where(income_type: @user_income_type)
-
       message = "Are all adults in your household currently employed? Enter yes or no"
       session["page"] = "employment"
+      @user.early_learning_eligible = true
       @user.completed = false
       @user.save
     end
@@ -229,17 +188,25 @@ class TwilioTestingController < ApplicationController
 
    # Employment question
    if session["page"] == "employment" 
-    if session["counter"] == 7 || session["counter"] == 9
+    if session["counter"] == 6 || session["counter"] == 8
      @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
      employment = params[:Body].strip.downcase
      
-
      if employment == "yes"
        @user.employment == true
        # RESPONSE MESSAGE
-       message = "You may be in luck, and likely qualify for Chicago early learning programs. Call (312) 229-1690 or visit bit.ly/XXX for info."
-       @user.completed = true
-
+       # CCAP eligible if below income cutoff 
+        income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
+        if @user.gross_monthly_income < income_row.income_type4
+          @user.ccap_eligible = true
+          message = "You may be in luck, and likely qualify for Chicago early learning programs. You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/XXX for info."
+          @user.completed = true
+        else
+          session["page"] = "tanf_special_needs"
+          message = "Does your family receive TANF or do you care for a special needs child? Enter yes or no"
+          @user.completed = false
+        end
+        
      elsif employment == "no"
        @user.employment == false
        session["page"] = "tanf_special_needs"
@@ -258,7 +225,7 @@ class TwilioTestingController < ApplicationController
 
    # Tanf and special needs question
    if session["page"] == "tanf_special_needs"
-    if session["counter"] == 8 || session["counter"] == 10
+    if session["counter"] == 7 || session["counter"] == 9
      @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
      tanf_special_needs = params[:Body].strip.downcase
      
@@ -266,7 +233,8 @@ class TwilioTestingController < ApplicationController
      if tanf_special_needs == "yes"
        @user.tanf_special_needs == true
        # RESPONSE MESSAGE 
-       message = "You may be in luck, and likely qualify for Chicago early learning programs. Call (312) 229-1690 or visit bit.ly/XXX for info."
+       # eligible for CCAP
+       message = "You may be in luck, and likely qualify for Chicago early learning programs. You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/XXX for info."
        @user.completed = true
 
      elsif tanf_special_needs == "no"
@@ -284,26 +252,38 @@ class TwilioTestingController < ApplicationController
     end
    end
 
-
    # Teen parent question
    if session["page"] == "teen_parent"
-    if session["counter"] == 9 || session["counter"] == 11
+    if session["counter"] == 8 || session["counter"] == 10
      @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
      teen_parent = params[:Body].strip.downcase
      
      # Data Storage
      if teen_parent == "yes"
+       # RESPONSE MESSAGE
+       # eligible for CCAP
+       message = "You may be in luck, and likely qualify for Chicago early learning programs. You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/XXX for info."
        @user.teen_parent == true
+       @user.ccap_eligible = true
+       @user.completed = true
      elsif teen_parent == "no"
+       # eligible for early learning 
        @user.teen_parent == false
+        # eligble with co-pay
+       if @user.income_type == "[\"Greater than Type 2\"]" 
+        message = "You may be in luck, and likely qualify for Chicago early learning programs. Call (312) 229-1690 or visit bit.ly/XXX for info. Note: Based on your income, you may have some additional fees. Calculate your estimated co-pay here."
+       # eligible with no co-pay
+       else
+         message = "You may be in luck, and likely qualify for Chicago early learning programs. Call (312) 229-1690 or visit bit.ly/XXX for info."
+       end
+        @user.completed = true
      else
        message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
        session["counter"] = 1
+       @user.completed = false
      end
 
      message = "You may be in luck, and likely qualify for Chicago early learning programs. Call (312) 229-1690 or visit bit.ly/XXX for info."
-
-     @user.completed = true
      @user.save
     end
    end

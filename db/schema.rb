@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150717022011) do
+ActiveRecord::Schema.define(version: 20150717232907) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -227,23 +227,24 @@ ActiveRecord::Schema.define(version: 20150717022011) do
   create_table "early_learning_data_twilios", force: true do |t|
     t.string   "phone_number"
     t.string   "children_ages"
-    t.boolean  "no_children",          default: false
-    t.boolean  "three_and_under",      default: false
-    t.boolean  "three_to_five",        default: false
-    t.boolean  "six_to_twelve",        default: false
-    t.boolean  "completed",            default: false
-    t.boolean  "pregnant",             default: false
+    t.boolean  "no_children",             default: false
+    t.boolean  "three_and_under",         default: false
+    t.boolean  "three_to_five",           default: false
+    t.boolean  "six_to_twelve",           default: false
+    t.boolean  "completed",               default: false
+    t.boolean  "pregnant",                default: false
     t.string   "zipcode"
-    t.boolean  "foster_homeless_ssi",  default: false
+    t.boolean  "foster_homeless_ssi",     default: false
     t.integer  "household_size"
     t.float    "gross_monthly_income"
     t.string   "income_type"
-    t.boolean  "employment",           default: false
-    t.boolean  "tanf_special_needs",   default: false
-    t.boolean  "teen_parent",          default: false
-    t.boolean  "eligible",             default: false
+    t.boolean  "employment",              default: false
+    t.boolean  "tanf_special_needs",      default: false
+    t.boolean  "teen_parent",             default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "early_learning_eligible", default: false
+    t.boolean  "ccap_eligible",           default: false
   end
 
   create_table "early_learning_income_cutoffs", force: true do |t|
