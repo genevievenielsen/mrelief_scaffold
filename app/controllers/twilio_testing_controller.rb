@@ -170,6 +170,7 @@ class TwilioTestingController < ApplicationController
       @user.gross_monthly_income = income_cleaned
       # Determine income eligible programs
       income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
+      puts "This is the income row: #{income}"
 
       @user_income_type = []
       if @user.gross_monthly_income > income_row.income_type2 # Is there a cap?
@@ -192,7 +193,7 @@ class TwilioTestingController < ApplicationController
       if three_and_under_programs.present? && three_to_five_programs.present?
         correct_age_programs = EarlyLearningProgram.all
       end 
-      
+
       @eligible_early_learning_programs = correct_age_programs.where(income_type: @user_income_type)
 
       message = "Are all adults in your household currently employed? Enter yes or no"
