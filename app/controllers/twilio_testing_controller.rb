@@ -5,6 +5,9 @@ class TwilioTestingController < ApplicationController
   require 'numbers_in_words/duck_punch' #see why later
 
   def text
+    # Questions for Rose 
+    # - co-pay message
+    # - CCAP message
 
   session["counter"] ||= 0
 
@@ -47,10 +50,13 @@ class TwilioTestingController < ApplicationController
       @user = EarlyLearningDataTwilio.new
       @user.phone_number = params[:From]
       @user.children_ages = params[:Body].strip.downcase
-
+      # no children
       if @user.children_ages.include?("d")
         @user.no_children = true
         message = "You may not be eligible for Chicago: Ready to Learn! early learning programs at this time.  Call 312-299-1690 for info on other opportunities."
+        @user.completed = true
+        @user.save
+      # children
       elsif @user.children_ages.include?("a") || @user.children_ages.include?("b") || @user.children_ages.include?("c") 
         # Data storage for children ages
         if @user.children_ages.include?("a")
@@ -70,13 +76,15 @@ class TwilioTestingController < ApplicationController
           message = "In which zipcode do you live? Example: 60615"
           session["page"] = "zipcode"
         end
-
+        @user.completed = false
+        @user.save
+      # error 
       else
          message = "Oops looks like there is a typo! Please type a, b, c, d or a cominbation that describes your household."
          session["counter"] = 1
+         @user.completed = false
+         @user.save
       end
-      @user.completed = false
-      @user.save
     end
 
     # Pregnancy question
@@ -93,7 +101,6 @@ class TwilioTestingController < ApplicationController
         message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
         session["counter"] = 1
       end
-
       
       message = "In which zipcode do you live? Example: 60615"
       session["page"] = "zipcode"
@@ -111,13 +118,15 @@ class TwilioTestingController < ApplicationController
     if ChicagoEligibleZipcode.all.pluck(:zipcode).include?(@user.zipcode)
       message = "Are you a foster parent, homeless or does your family receive SSI? Enter yes or no."
       session["page"] = "foster_homeless_ssi"
+      @user.completed = false
+      @user.save
     else
       # INELIGIBLE
       message = "You may not be eligible for Chicago: Ready to Learn! early learning programs at this time.  Call 312-299-1690 for info on other opportunities."
+      @user.completed = true
+      @user.save
     end
 
-    @user.completed = false
-    @user.save
     end
    end
 
@@ -136,7 +145,6 @@ class TwilioTestingController < ApplicationController
         message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
         session["counter"] = 1
       end
-  
   
       message = "What is the number of people living in your household including yourself? Enter a number"
       session["page"] = "household_size"
@@ -188,13 +196,14 @@ class TwilioTestingController < ApplicationController
       puts "This is the income row: #{income_row}"
 
       @user_income_type = []
-      if @user.gross_monthly_income > income_row.income_type2 # Is there a cap?
+      if @user.gross_monthly_income > income_row.income_type2 # Notice about co-pay?
         @user_income_type = ['Greater than Type 2']
       elsif @user.gross_monthly_income <= income_row.income_type2 && @user.gross_monthly_income > income_row.income_type1
         @user_income_type = ['Less than Type 2']
       elsif @user.gross_monthly_income <= income_row.income_type1
         @user_income_type = ['Less than Type 1', 'Less than Type 2']
       end
+      @user.income_type = @user_income_type.try(:to_s)
 
       # Determine correct age programs
       if @user.three_and_under == true || @user.pregnant == true 
@@ -228,6 +237,7 @@ class TwilioTestingController < ApplicationController
      if employment == "yes"
        @user.employment == true
        # RESPONSE MESSAGE
+       message = "You may be in luck, and likely qualify for Chicago early learning programs. Call (312) 229-1690 or visit bit.ly/XXX for info."
        @user.completed = true
 
      elsif employment == "no"
@@ -242,7 +252,6 @@ class TwilioTestingController < ApplicationController
        @user.completed = false
      end
     
-     
      @user.save
     end
    end
@@ -257,6 +266,7 @@ class TwilioTestingController < ApplicationController
      if tanf_special_needs == "yes"
        @user.tanf_special_needs == true
        # RESPONSE MESSAGE 
+       message = "You may be in luck, and likely qualify for Chicago early learning programs. Call (312) 229-1690 or visit bit.ly/XXX for info."
        @user.completed = true
 
      elsif tanf_special_needs == "no"

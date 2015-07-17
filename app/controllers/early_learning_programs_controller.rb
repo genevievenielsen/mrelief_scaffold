@@ -133,7 +133,7 @@ class EarlyLearningProgramsController < ApplicationController
                 end
             
               else
-              # User is not automatically income seligible 
+              # User is not automatically income eligible 
                 income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
 
                 @user_income_type = []
