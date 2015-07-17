@@ -95,8 +95,9 @@ class TwilioTestingController < ApplicationController
         session["counter"] = 1
       end
 
-      session["page"] = "zipcode"
+      
       message = "In which zipcode do you live? Example: 60615"
+      session["page"] = "zipcode"
 
       @user.completed = false
       @user.save
