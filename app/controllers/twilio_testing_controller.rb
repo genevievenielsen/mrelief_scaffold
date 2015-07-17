@@ -64,8 +64,13 @@ class TwilioTestingController < ApplicationController
           @user.six_to_twelve = true
         end
 
-        message = "Are you pregnant? Enter yes or no" 
-        session["page"] = "pregnant"
+        if @user.three_and_under != true
+          message = "Are you pregnant? Enter yes or no" 
+          session["page"] = "pregnant"
+        else
+          message = "In which zipcode do you live? Example: 60615"
+          session["page"] = "zipcode"
+        end
 
       else
          message = "Oops looks like there is a typo! Please type a, b, c, d or a cominbation that describes your household."
@@ -98,7 +103,8 @@ class TwilioTestingController < ApplicationController
     end
 
    # Zipcode question
-   if session["page"] == "zipcode" && session["counter"] == 4
+   if session["page"] == "zipcode"
+    if session["counter"] == 3 || session["counter"] == 4
     @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
     @user.zipcode = params[:Body].strip
 
@@ -112,34 +118,38 @@ class TwilioTestingController < ApplicationController
 
     @user.completed = false
     @user.save
+    end
    end
 
    # Foster, homeless, SSI question
-   if session["page"] == "foster_homeless_ssi" && session["counter"] == 5
-    @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
-    foster_homeless_ssi = params[:Body].strip.downcase
-
-    # Data Storage
-    if foster_homeless_ssi == "yes"
-      @user.foster_homeless_ssi == true
-    elsif foster_homeless_ssi == "no"
-      @user.foster_homeless_ssi == false
-    else
-      message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
-      session["counter"] = 1
+   if session["page"] == "foster_homeless_ssi" 
+    if session["counter"] == 4 || session["counter"] == 5
+      @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
+      foster_homeless_ssi = params[:Body].strip.downcase
+  
+      # Data Storage
+      if foster_homeless_ssi == "yes"
+        @user.foster_homeless_ssi == true
+      elsif foster_homeless_ssi == "no"
+        @user.foster_homeless_ssi == false
+      else
+        message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
+        session["counter"] = 1
+      end
+  
+  
+      message = "What is the number of people living in your household including yourself? Enter a number"
+      session["page"] = "household_size"
+  
+      @user.completed = false
+      @user.save
     end
-
-
-    message = "What is the number of people living in your household including yourself? Enter a number"
-    session["page"] = "household_size"
-
-    @user.completed = false
-    @user.save
    end
 
 
    # Household size question
-   if session["page"] == "household_size" && session["counter"] == 6
+   if session["page"] == "household_size" 
+    if session["counter"] == 5 || session["counter"] == 6
     @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
     household_size = params[:Body].strip
       # Convert to an integer
@@ -154,11 +164,13 @@ class TwilioTestingController < ApplicationController
       session["page"] = "income"
       @user.completed = false
       @user.save
+    end
    end
 
 
    # Income question
-   if session["page"] == "income" && session["counter"] == 7
+   if session["page"] == "income" 
+    if session["counter"] == 6 || session["counter"] == 7
     @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
     income = params[:Body].strip
       # Convert to an integer
@@ -200,10 +212,12 @@ class TwilioTestingController < ApplicationController
       session["page"] = "employment"
       @user.completed = false
       @user.save
+    end
    end
 
    # Employment question
-   if session["page"] == "employment" && session["counter"] == 8
+   if session["page"] == "employment" 
+    if session["counter"] == 7 || session["counter"] == 8
      @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
      employment = params[:Body].strip.downcase
      
@@ -222,10 +236,12 @@ class TwilioTestingController < ApplicationController
 
      @user.completed = false
      @user.save
+    end
    end
 
    # Tanf and special needs question
-   if session["page"] == "tanf_special_needs" && session["counter"] == 9
+   if session["page"] == "tanf_special_needs"
+    if session["counter"] == 8 || session["counter"] == 9
      @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
      tanf_special_needs = params[:Body].strip.downcase
      
@@ -244,11 +260,13 @@ class TwilioTestingController < ApplicationController
 
      @user.completed = false
      @user.save
+    end
    end
 
 
    # Teen parent question
-   if session["page"] == "teen_parent" && session["counter"] == 9
+   if session["page"] == "teen_parent"
+    if session["counter"] == 8 || session["counter"] == 9
      @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
      teen_parent = params[:Body].strip.downcase
      
@@ -262,11 +280,11 @@ class TwilioTestingController < ApplicationController
        session["counter"] = 1
      end
 
-     
      message = "You may be in luck, and likely qualify for Chicago early learning programs. Call (312) 229-1690 or visit bit.ly/XXX for info."
 
      @user.completed = true
      @user.save
+    end
    end
 
 
