@@ -104,7 +104,7 @@ class TwilioTestingController < ApplicationController
     end
 
    # Zipcode question
-   if session["page"] == "zipcode"
+   if session["page"] == "zipcode" && params[:Body].present?
     if session["counter"] == 3 || session["counter"] == 4
     @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
     @user.zipcode = params[:Body].strip
