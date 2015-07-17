@@ -182,7 +182,7 @@ class TwilioTestingController < ApplicationController
       end
       @user.gross_monthly_income = income
       # Determine income eligible programs
-      puts "This is the #{@user.hou}"
+      puts "This is the #{@user.household_size}"
       income_row = EarlyLearningIncomeCutoff.find_by(household_size: @user.household_size.to_i)
       puts "This is the income row: #{income_row}"
 
