@@ -45,7 +45,7 @@ class TwilioTestingController < ApplicationController
    # HERE IS THE EARLY LEARNING LOGIC
    # number of children question
     if session["page"] == "age_of_children" && session["counter"] == 2
-      @user = EarlyLEarningDataTwilio.new
+      @user = EarlyLearningDataTwilio.new
       @user.phone_number = params[:From]
       @user.children_ages = params[:Body].strip.downcase
 
