@@ -90,19 +90,6 @@ class TwilioTestingController < ApplicationController
         session["counter"] = 1
       end
 
-      # Determine correct age programs
-      if @user.three_and_under == true || @user.pregnant == true 
-        three_and_under_programs = EarlyLearningProgram.where(ages_served: '0 - 2')
-        correct_age_programs = three_and_under_programs 
-      end        
-      if @user.three_to_five == true
-        three_to_five_programs = EarlyLearningProgram.where(ages_served: '3 - 5')
-        correct_age_programs = three_to_five_programs 
-      end
-      if three_and_under_programs.present? && three_to_five_programs.present?
-        correct_age_programs = EarlyLearningProgram.all
-      end 
-
       session["page"] = "zipcode"
       message = "In which zipcode do you live? Example: 60615"
 
@@ -192,6 +179,20 @@ class TwilioTestingController < ApplicationController
       elsif @user.gross_monthly_income <= income_row.income_type1
         @user_income_type = ['Less than Type 1', 'Less than Type 2']
       end
+
+      # Determine correct age programs
+      if @user.three_and_under == true || @user.pregnant == true 
+        three_and_under_programs = EarlyLearningProgram.where(ages_served: '0 - 2')
+        correct_age_programs = three_and_under_programs 
+      end        
+      if @user.three_to_five == true
+        three_to_five_programs = EarlyLearningProgram.where(ages_served: '3 - 5')
+        correct_age_programs = three_to_five_programs 
+      end
+      if three_and_under_programs.present? && three_to_five_programs.present?
+        correct_age_programs = EarlyLearningProgram.all
+      end 
+      
       @eligible_early_learning_programs = correct_age_programs.where(income_type: @user_income_type)
 
       message = "Are all adults in your household currently employed? Enter yes or no"
