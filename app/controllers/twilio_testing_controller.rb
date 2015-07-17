@@ -161,7 +161,7 @@ class TwilioTestingController < ApplicationController
       end
       @user.household_size = household_size_cleaned.to_i
       @user.save
-      puts "Household size: #{@user.househol}"
+      puts "Household size: #{@user.household}"
 
       message = "What is your gross monthly income? Example - 1000"
       session["page"] = "income"
