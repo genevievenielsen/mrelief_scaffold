@@ -153,12 +153,12 @@ class TwilioTestingController < ApplicationController
     @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
     household_size = params[:Body].strip
       # Convert to an integer
-      # if household_size !~ /\D/  # returns true if all numbers
-      #   household_size_cleaned = household_size.to_i
-      # else
-      #   household_size_cleaned = household_size.in_numbers
-      # end
-      @user.household_size = household_size.to_i
+      if household_size !~ /\D/  # returns true if all numbers
+        household_size_cleaned = household_size.to_i
+      else
+        household_size_cleaned = household_size.in_numbers
+      end
+      @user.household_size = household_size_cleaned.to_i
       @user.save
       puts "Household size: #{@user.household_size}"
 
