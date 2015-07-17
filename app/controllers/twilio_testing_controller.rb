@@ -84,7 +84,7 @@ class TwilioTestingController < ApplicationController
     if session["page"] == "pregnant" && session["counter"] == 3
       @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
       pregnant = params[:Body].strip.downcase
-      
+      session["counter"] += 1
       # Data Storage
       if pregnant == "yes"
         @user.pregnant == true
@@ -104,8 +104,8 @@ class TwilioTestingController < ApplicationController
     end
 
    # Zipcode question
-   if session["page"] == "zipcode" && params[:Body].present?
-    if session["counter"] == 3 || session["counter"] == 4
+   if session["page"] == "zipcode" 
+    if session["counter"] == 3 || session["counter"] == 5
     @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
     @user.zipcode = params[:Body].strip
 
@@ -124,7 +124,7 @@ class TwilioTestingController < ApplicationController
 
    # Foster, homeless, SSI question
    if session["page"] == "foster_homeless_ssi" 
-    if session["counter"] == 4 || session["counter"] == 5
+    if session["counter"] == 4 || session["counter"] == 6
       @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
       foster_homeless_ssi = params[:Body].strip.downcase
   
