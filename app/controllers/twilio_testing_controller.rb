@@ -7,6 +7,8 @@ class TwilioTestingController < ApplicationController
   def text
 
   session["counter"] ||= 0
+  puts session["counter"]
+  puts session["page"]
 
   if params[:Body].include?('"')
     params[:Body] = params[:Body].tr('"', '')
