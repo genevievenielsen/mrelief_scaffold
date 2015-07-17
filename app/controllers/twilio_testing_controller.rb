@@ -50,7 +50,7 @@ class TwilioTestingController < ApplicationController
 
       if @user.children_ages.include?("d")
         @user.no_children = true
-        message = "You do not qualify for early learning programs."
+        message = "You may not be eligible for Chicago: Ready to Learn! early learning programs at this time.  Call 312-299-1690 for info on other opportunities."
       elsif @user.children_ages.include?("a") || @user.children_ages.include?("b") || @user.children_ages.include?("c") 
         # Data storage for children ages
         if @user.children_ages.include?("a")
@@ -113,7 +113,7 @@ class TwilioTestingController < ApplicationController
       session["page"] = "foster_homeless_ssi"
     else
       # INELIGIBLE
-      message = "You do not qualify for Chicago early learning programs."
+      message = "You may not be eligible for Chicago: Ready to Learn! early learning programs at this time.  Call 312-299-1690 for info on other opportunities."
     end
 
     @user.completed = false
