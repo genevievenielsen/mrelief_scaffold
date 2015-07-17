@@ -75,144 +75,196 @@ class TwilioTestingController < ApplicationController
       @user.save
     end
 
-   #  # Pregnancy question
-   #  if session["page"] == "pregnant" && session["counter"] == 3
-   #    @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
-   #    @user.pregnant = params[:Body].strip.downcase
+    # Pregnancy question
+    if session["page"] == "pregnant" && session["counter"] == 3
+      @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
+      pregnant = params[:Body].strip.downcase
       
-   #    # Data Storage
-   #    if pregnant == "yes"
-   #      @user.pregnant == true
-   #    elsif pregnant == "no"
-   #      @user.pregnant == false
-   #    else
-   #      message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
-   #      session["counter"] = 1
-   #    end
+      # Data Storage
+      if pregnant == "yes"
+        @user.pregnant == true
+      elsif pregnant == "no"
+        @user.pregnant == false
+      else
+        message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
+        session["counter"] = 1
+      end
 
-   #    # Determine correct age programs
-   #    if @user.three_and_under == true || @user.pregnant == true 
-   #      three_and_under_programs = EarlyLearningProgram.where(ages_served: '0 - 2')
-   #      correct_age_programs = three_and_under_programs 
-   #    end        
-   #    if @user.three_to_five == true
-   #      three_to_five_programs = EarlyLearningProgram.where(ages_served: '3 - 5')
-   #      correct_age_programs = three_to_five_programs 
-   #    end
-   #    if three_and_under_programs.present? && three_to_five_programs.present?
-   #      correct_age_programs = EarlyLearningProgram.all
-   #    end 
+      # Determine correct age programs
+      if @user.three_and_under == true || @user.pregnant == true 
+        three_and_under_programs = EarlyLearningProgram.where(ages_served: '0 - 2')
+        correct_age_programs = three_and_under_programs 
+      end        
+      if @user.three_to_five == true
+        three_to_five_programs = EarlyLearningProgram.where(ages_served: '3 - 5')
+        correct_age_programs = three_to_five_programs 
+      end
+      if three_and_under_programs.present? && three_to_five_programs.present?
+        correct_age_programs = EarlyLearningProgram.all
+      end 
 
-   #    session["page"] = "zipcode"
-   #    message = "In which zipcode do you live? Example: 60615"
+      session["page"] = "zipcode"
+      message = "In which zipcode do you live? Example: 60615"
 
-   #    @user.completed = false
-   #    @user.save
-   #  end
+      @user.completed = false
+      @user.save
+    end
 
-   # # Zipcode question
-   # if session["page"] == "zipcode" && session["counter"] == 4
-   #  @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
-   #  @user.zipcode = params[:Body].strip
+   # Zipcode question
+   if session["page"] == "zipcode" && session["counter"] == 4
+    @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
+    @user.zipcode = params[:Body].strip
 
-   #  if ChicagoEligibleZipcode.all.pluck(:zipcode).include?(@user.zipcode)
-   #    message = "Are you a foster parent, homeless or does your family receive SSI? Enter yes or no."
-   #    session["page"] = "foster_homeless_ssi"
-   #  else
-   #    # INELIGIBLE
-   #    message = "You do not qualify for Chicago early learning programs."
-   #  end
+    if ChicagoEligibleZipcode.all.pluck(:zipcode).include?(@user.zipcode)
+      message = "Are you a foster parent, homeless or does your family receive SSI? Enter yes or no."
+      session["page"] = "foster_homeless_ssi"
+    else
+      # INELIGIBLE
+      message = "You do not qualify for Chicago early learning programs."
+    end
 
-   #  @s.completed = false
-   #  @s.save
-   # end
+    @user.completed = false
+    @user.save
+   end
 
-   # # Foster, homeless, SSI question
-   # if session["page"] == "foster_homeless_ssi" && session["counter"] == 5
-   #  @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
-   #  @user.foster_homeless_ssi = params[:Body].strip
+   # Foster, homeless, SSI question
+   if session["page"] == "foster_homeless_ssi" && session["counter"] == 5
+    @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
+    foster_homeless_ssi = params[:Body].strip.downcase
 
-   #  message = "What is the number of people living in your household including yourself? Enter a number"
-   #  session["page"] = "household_size"
-
-   #  @s.completed = false
-   #  @s.save
-   # end
-
-
-   # # Household size question
-   # if session["page"] == "household_size" && session["counter"] == 6
-   #  @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
-   #  household_size = params[:Body].strip
-   #    # Convert to an integer
-   #    if household_size !~ /\D/  # returns true if all numbers
-   #      household_size_cleaned = household_size.to_i
-   #    else
-   #      household_size_cleaned = household_size.in_numbers
-   #    end
-   #    @user.household_size = household_size_cleaned
-
-   #    message = "What is your gross monthly income? Example - 1000"
-   #    session["page"] = "income"
-   #    @s.completed = false
-   #    @s.save
-   
-   # end
+    # Data Storage
+    if foster_homeless_ssi == "yes"
+      @user.foster_homeless_ssi == true
+    elsif foster_homeless_ssi == "no"
+      @user.foster_homeless_ssi == false
+    else
+      message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
+      session["counter"] = 1
+    end
 
 
-   # # Income question
-   # if session["page"] == "income" && session["counter"] == 7
-   #  @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
-   #  income = params[:Body].strip
-   #    # Convert to an integer
-   #    if income !~ /\D/  # returns true if all numbers
-   #      income_cleaned = income.to_i
-   #    else
-   #      income_cleaned = income.in_numbers
-   #    end
-   #    @user.gross_monthly_income = income_cleaned
-   #    # Determine income eligible programs
-   #    @user_income_type = []
-   #    if @user.gross_monthly_income > income_row.income_type2 # Is there a cap?
-   #      @user_income_type = ['Greater than Type 2']
-   #    elsif @user.gross_monthly_income <= income_row.income_type2 && @user.gross_monthly_income > income_row.income_type1
-   #      @user_income_type = ['Less than Type 2']
-   #    elsif @user.gross_monthly_income <= income_row.income_type1
-   #      @user_income_type = ['Less than Type 1', 'Less than Type 2']
-   #    end
-   #    @eligible_early_learning_programs = correct_age_programs.where(income_type: @user_income_type)
+    message = "What is the number of people living in your household including yourself? Enter a number"
+    session["page"] = "household_size"
 
-   #    message = "Are all adults in your household currently employed? Enter yes or no"
-   #    session["page"] = "employment"
-   #    @s.completed = false
-   #    @s.save
-   # end
+    @user.completed = false
+    @user.save
+   end
 
-   # # Employment question
-   # if session["page"] == "employment" && session["counter"] == 3
-   #   @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
-   #   @user.employment = params[:Body].strip.downcase
+
+   # Household size question
+   if session["page"] == "household_size" && session["counter"] == 6
+    @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
+    household_size = params[:Body].strip
+      # Convert to an integer
+      if household_size !~ /\D/  # returns true if all numbers
+        household_size_cleaned = household_size.to_i
+      else
+        household_size_cleaned = household_size.in_numbers
+      end
+      @user.household_size = household_size_cleaned
+
+      message = "What is your gross monthly income? Example - 1000"
+      session["page"] = "income"
+      @user.completed = false
+      @user.save
+   end
+
+
+   # Income question
+   if session["page"] == "income" && session["counter"] == 7
+    @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
+    income = params[:Body].strip
+      # Convert to an integer
+      if income !~ /\D/  # returns true if all numbers
+        income_cleaned = income.to_i
+      else
+        income_cleaned = income.in_numbers
+      end
+      @user.gross_monthly_income = income_cleaned
+      # Determine income eligible programs
+      @user_income_type = []
+      if @user.gross_monthly_income > income_row.income_type2 # Is there a cap?
+        @user_income_type = ['Greater than Type 2']
+      elsif @user.gross_monthly_income <= income_row.income_type2 && @user.gross_monthly_income > income_row.income_type1
+        @user_income_type = ['Less than Type 2']
+      elsif @user.gross_monthly_income <= income_row.income_type1
+        @user_income_type = ['Less than Type 1', 'Less than Type 2']
+      end
+      @eligible_early_learning_programs = correct_age_programs.where(income_type: @user_income_type)
+
+      message = "Are all adults in your household currently employed? Enter yes or no"
+      session["page"] = "employment"
+      @user.completed = false
+      @user.save
+   end
+
+   # Employment question
+   if session["page"] == "employment" && session["counter"] == 8
+     @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
+     @user.employment = params[:Body].strip.downcase
      
-   #   # Data Storage
-   #   if employment == "yes"
-   #     @user.employment == true
-   #   elsif employment == "no"
-   #     @user.employment == false
-   #   else
-   #     message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
-   #     session["counter"] = 1
-   #   end
+     # Data Storage
+     if employment == "yes"
+       @user.employment == true
+     elsif employment == "no"
+       @user.employment == false
+     else
+       message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
+       session["counter"] = 1
+     end
 
-   #   session["page"] = "tanf_special_needs"
-   #   message = "Does your family receive TANF or do you care for a special needs child? Enter yes or no"
+     session["page"] = "tanf_special_needs"
+     message = "Does your family receive TANF or do you care for a special needs child? Enter yes or no"
 
-   #   @user.completed = false
-   #   @user.save
-   # end
+     @user.completed = false
+     @user.save
+   end
 
    # Tanf and special needs question
+   if session["page"] == "tanf_special_needs" && session["counter"] == 9
+     @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
+     @user.tanf_special_needs = params[:Body].strip.downcase
+     
+     # Data Storage
+     if tanf_special_needs == "yes"
+       @user.tanf_special_needs == true
+     elsif tanf_special_needs == "no"
+       @user.tanf_special_needs == false
+     else
+       message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
+       session["counter"] = 1
+     end
+
+     session["page"] = "teen_parent"
+     message = "Are you a teen parent who is enrolled full-time in school or GED classes or its equivalent? Enter yes or no"
+
+     @user.completed = false
+     @user.save
+   end
+
 
    # Teen parent question
+   if session["page"] == "teen_parent" && session["counter"] == 9
+     @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
+     @user.teen_parent = params[:Body].strip.downcase
+     
+     # Data Storage
+     if teen_parent == "yes"
+       @user.teen_parent == true
+     elsif teen_parent == "no"
+       @user.teen_parent == false
+     else
+       message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
+       session["counter"] = 1
+     end
+
+     
+     message = "You may be in luck, and likely qualify for Chicago early learning programs. Call (312) 229-1690 or visit bit.ly/XXX for info."
+
+     @user.completed = true
+     @user.save
+   end
+
 
    twiml = Twilio::TwiML::Response.new do |r|
        r.Message message
@@ -226,7 +278,7 @@ class TwilioTestingController < ApplicationController
    end
   end
 
-  
+
   include Webhookable
 
    after_filter :set_header

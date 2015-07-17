@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150716180418) do
+ActiveRecord::Schema.define(version: 20150717022011) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -222,6 +222,28 @@ ActiveRecord::Schema.define(version: 20150716180418) do
     t.string   "bilingual_language"
     t.string   "preferred_frequency"
     t.string   "bilingual"
+  end
+
+  create_table "early_learning_data_twilios", force: true do |t|
+    t.string   "phone_number"
+    t.string   "children_ages"
+    t.boolean  "no_children"
+    t.boolean  "three_and_under"
+    t.boolean  "three_to_five"
+    t.boolean  "six_to_twelve"
+    t.boolean  "completed"
+    t.boolean  "pregnant"
+    t.string   "zipcode"
+    t.boolean  "foster_homeless_ssi"
+    t.integer  "household_size"
+    t.float    "gross_monthly_income"
+    t.string   "income_type"
+    t.boolean  "employment"
+    t.boolean  "tanf_special_needs"
+    t.boolean  "teen_parent"
+    t.boolean  "eligible"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "early_learning_income_cutoffs", force: true do |t|

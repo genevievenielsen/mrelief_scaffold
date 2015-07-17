@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  phone_number: MyString
+  children_ages: MyString
+  no_children: false
+  three_and_under: false
+  three_to_five: false
+  six_to_twelve: false
+  completed: false
+  pregnant: false
+  zipcode: MyString
+  foster_homeless_ssi: false
+  household_size: MyString
+  gross_monthly_income: 1
+  income_type: MyString
+  employment: false
+  tanf_special_needs: false
+  teen_parent: false
+  completed: false
+  eligible: false
+
+two:
+  phone_number: MyString
+  children_ages: MyString
+  no_children: false
+  three_and_under: false
+  three_to_five: false
+  six_to_twelve: false
+  completed: false
+  pregnant: false
+  zipcode: MyString
+  foster_homeless_ssi: false
+  household_size: MyString
+  gross_monthly_income: 1
+  income_type: MyString
+  employment: false
+  tanf_special_needs: false
+  teen_parent: false
+  completed: false
+  eligible: false
