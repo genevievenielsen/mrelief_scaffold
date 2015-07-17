@@ -227,21 +227,21 @@ ActiveRecord::Schema.define(version: 20150717022011) do
   create_table "early_learning_data_twilios", force: true do |t|
     t.string   "phone_number"
     t.string   "children_ages"
-    t.boolean  "no_children"
-    t.boolean  "three_and_under"
-    t.boolean  "three_to_five"
-    t.boolean  "six_to_twelve"
-    t.boolean  "completed"
-    t.boolean  "pregnant"
+    t.boolean  "no_children",          default: false
+    t.boolean  "three_and_under",      default: false
+    t.boolean  "three_to_five",        default: false
+    t.boolean  "six_to_twelve",        default: false
+    t.boolean  "completed",            default: false
+    t.boolean  "pregnant",             default: false
     t.string   "zipcode"
-    t.boolean  "foster_homeless_ssi"
+    t.boolean  "foster_homeless_ssi",  default: false
     t.integer  "household_size"
     t.float    "gross_monthly_income"
     t.string   "income_type"
-    t.boolean  "employment"
-    t.boolean  "tanf_special_needs"
-    t.boolean  "teen_parent"
-    t.boolean  "eligible"
+    t.boolean  "employment",           default: false
+    t.boolean  "tanf_special_needs",   default: false
+    t.boolean  "teen_parent",          default: false
+    t.boolean  "eligible",             default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
