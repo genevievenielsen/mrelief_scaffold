@@ -84,7 +84,7 @@ class TwilioTestingController < ApplicationController
     if session["page"] == "pregnant" && session["counter"] == 3
       @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
       pregnant = params[:Body].strip.downcase
-      session["counter"] += 1
+      session["counter"] += 1 # +1 to optional questions
       # Data Storage
       if pregnant == "yes"
         @user.pregnant == true
@@ -150,7 +150,7 @@ class TwilioTestingController < ApplicationController
 
    # Household size question
    if session["page"] == "household_size" 
-    if session["counter"] == 5 || session["counter"] == 6
+    if session["counter"] == 5 || session["counter"] == 7
     @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
     household_size = params[:Body].strip
       # Convert to an integer
@@ -171,7 +171,7 @@ class TwilioTestingController < ApplicationController
 
    # Income question
    if session["page"] == "income" 
-    if session["counter"] == 6 || session["counter"] == 7
+    if session["counter"] == 6 || session["counter"] == 8
     @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
     income = params[:Body].strip
       # Convert to an integer
@@ -218,48 +218,56 @@ class TwilioTestingController < ApplicationController
 
    # Employment question
    if session["page"] == "employment" 
-    if session["counter"] == 7 || session["counter"] == 8
+    if session["counter"] == 7 || session["counter"] == 9
      @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
      employment = params[:Body].strip.downcase
      
-     # Data Storage
+
      if employment == "yes"
        @user.employment == true
+       # RESPONSE MESSAGE
+       @user.completed = true
+
      elsif employment == "no"
        @user.employment == false
+       session["page"] = "tanf_special_needs"
+       message = "Does your family receive TANF or do you care for a special needs child? Enter yes or no"
+       @user.completed = false
+
      else
        message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
        session["counter"] = 1
+       @user.completed = false
      end
-
-     session["page"] = "tanf_special_needs"
-     message = "Does your family receive TANF or do you care for a special needs child? Enter yes or no"
-
-     @user.completed = false
+    
+     
      @user.save
     end
    end
 
    # Tanf and special needs question
    if session["page"] == "tanf_special_needs"
-    if session["counter"] == 8 || session["counter"] == 9
+    if session["counter"] == 8 || session["counter"] == 10
      @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
      tanf_special_needs = params[:Body].strip.downcase
      
      # Data Storage
      if tanf_special_needs == "yes"
        @user.tanf_special_needs == true
+       # RESPONSE MESSAGE 
+       @user.completed = true
+
      elsif tanf_special_needs == "no"
        @user.tanf_special_needs == false
+       session["page"] = "teen_parent"
+       message = "Are you a teen parent who is enrolled full-time in school or GED classes or its equivalent? Enter yes or no"
+       @user.completed = false
      else
        message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
        session["counter"] = 1
+       @user.completed = false
      end
-
-     session["page"] = "teen_parent"
-     message = "Are you a teen parent who is enrolled full-time in school or GED classes or its equivalent? Enter yes or no"
-
-     @user.completed = false
+     
      @user.save
     end
    end
@@ -267,7 +275,7 @@ class TwilioTestingController < ApplicationController
 
    # Teen parent question
    if session["page"] == "teen_parent"
-    if session["counter"] == 8 || session["counter"] == 9
+    if session["counter"] == 9 || session["counter"] == 11
      @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
      teen_parent = params[:Body].strip.downcase
      
