@@ -26,7 +26,7 @@ class TwilioTestingController < ApplicationController
     session["counter"] = 0
   end
    if session["counter"] == 0
-    message = "Welcome to mRelief! We help you check your eligibility for public assistance. For foodstamps, text 'food'. For RTA ride free, text 'ride.' For Medicaid, text 'medicaid.' For early learning programs, text 'kids' If you make a mistake, send the message 'reset'."
+    message = "Welcome to mRelief! We help you check your eligibility for public assistance. For foodstamps, text 'food'. For RTA ride free, text 'ride.' For Medicaid, text 'medicaid.' For early learning programs, text 'kids'. If you make a mistake, send the message 'reset'."
    end
 
    if params[:Body].strip.downcase == "menu"
@@ -181,15 +181,43 @@ class TwilioTestingController < ApplicationController
       @eligible_early_learning_programs = correct_age_programs.where(income_type: @user_income_type)
 
       message = "Are all adults in your household currently employed? Enter yes or no"
-      session["page"] = 
+      session["page"] = "employment"
       @s.completed = false
       @s.save
    end
 
+   # Employment question
+   if session["page"] == "employment" && session["counter"] == 3
+     @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
+     @user.employment = params[:Body].strip.downcase
+     
+     # Data Storage
+     if employment == "yes"
+       @user.employment == true
+     elsif employment == "no"
+       @user.employment == false
+     else
+       message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
+       session["counter"] = 1
+     end
+
+     session["page"] = "tanf_special_needs"
+     message = "Does your family receive TANF or do you care for a special needs child? Enter yes or no"
+
+     @user.completed = false
+     @user.save
+   end
+
+   # Tanf and special needs question
+
+   # Teen parent question
+
    twiml = Twilio::TwiML::Response.new do |r|
        r.Message message
    end
+
     session["counter"] += 1
+    puts "I made it to the counter"
 
     respond_to do |format|
      format.xml {render xml: twiml.text}
