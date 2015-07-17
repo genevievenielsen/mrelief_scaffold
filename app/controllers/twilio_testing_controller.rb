@@ -7,8 +7,7 @@ class TwilioTestingController < ApplicationController
   def text
 
   session["counter"] ||= 0
-  puts session["counter"]
-  puts session["page"]
+
 
   if params[:Body].include?('"')
     params[:Body] = params[:Body].tr('"', '')
@@ -161,7 +160,7 @@ class TwilioTestingController < ApplicationController
       end
       @user.household_size = household_size_cleaned.to_i
       @user.save
-      puts "Household size: #{@user.household}"
+      puts "Household size: #{@user.household_size}"
 
       message = "What is your gross monthly income? Example - 1000"
       session["page"] = "income"
@@ -305,7 +304,6 @@ class TwilioTestingController < ApplicationController
    end
 
     session["counter"] += 1
-    puts "I made it to the counter"
 
     respond_to do |format|
      format.xml {render xml: twiml.text}
