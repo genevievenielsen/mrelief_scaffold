@@ -155,11 +155,11 @@ class TwilioTestingController < ApplicationController
     household_size = params[:Body].strip
       # Convert to an integer
       if household_size !~ /\D/  # returns true if all numbers
-        household_size = household_size.to_i
+        household_size_cleaned = household_size.to_i
       else
-        household_size = household_size.in_numbers
+        household_size_cleaned = household_size.in_numbers
       end
-      @user.household_size = household_size
+      @user.household_size = household_size_cleaned.to_i
 
       message = "What is your gross monthly income? Example - 1000"
       session["page"] = "income"
@@ -176,11 +176,11 @@ class TwilioTestingController < ApplicationController
     income = params[:Body].strip
       # Convert to an integer
       if income !~ /\D/  # returns true if all numbers
-        income = income.to_i
+        income_cleaned = income.to_i
       else
-        income = income.in_numbers
+        income_cleaned = income.in_numbers
       end
-      @user.gross_monthly_income = income
+      @user.gross_monthly_income = income_cleaned.to_f
       # Determine income eligible programs
       puts "This is the #{@user.household_size}"
       income_row = EarlyLearningIncomeCutoff.find_by(household_size: @user.household_size.to_i)
