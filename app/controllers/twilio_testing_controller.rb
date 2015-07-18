@@ -38,7 +38,7 @@ class TwilioTestingController < ApplicationController
       session["counter"] = 0
    end
    if params[:Body].strip.downcase == "kids"
-      message = "Text the letter(s) that applies to your child by 9/1/15. I care for a child ages: a. 0-2  b. 3-5 c. 6-12. d. none of these Ex: ‘a’ or ‘ab’"
+      message = "Text the letter(s) that applies to your child by 9/1/15. I care for a child ages: a. 0-2 b. 3-5 c. 6-12. d. none of these Ex: ‘a’ or ‘ab’"
       session["page"] = "age_of_children"
       session["counter"] = 1
    end
