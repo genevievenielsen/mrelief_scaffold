@@ -214,7 +214,7 @@ class EarlyLearningProgramsController < ApplicationController
     end
 
     # LOOKS UP IN DATA PORTAL
-    if @eligibile == false
+    if @eligible == false
     else
       url = "https://data.cityofchicago.org/resource/ck29-hb9r.json"
       raw_data = open(url).read
