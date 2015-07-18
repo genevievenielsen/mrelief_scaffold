@@ -30,11 +30,11 @@ class TwilioTestingController < ApplicationController
     session["counter"] = 0
   end
    if session["counter"] == 0
-    message = "Welcome to mRelief! We help you check your eligibility for public assistance. For foodstamps, text 'food'. For RTA ride free, text 'ride.' For Medicaid, text 'medicaid.' For early learning programs, text 'kids'. If you make a mistake, send the message 'reset'."
+    message = "Welcome to mRelief! We help you check your eligibility for public assistance. For early learning programs and child care, text 'kids'. For foodstamps, text 'food'. For RTA ride free, text 'ride.' For Medicaid, text 'medicaid.' If you make a mistake, send the message 'reset'."
    end
 
    if params[:Body].strip.downcase == "menu"
-      message = "For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.' For Early Learning Programs, text the word 'kids'. If you make a mistake, send the message 'reset'."
+      message = "For early learning programs and child care, text 'kids'. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.' If you make a mistake, send the message 'reset'."
       session["counter"] = 0
    end
    if params[:Body].strip.downcase == "kids"
@@ -200,8 +200,14 @@ class TwilioTestingController < ApplicationController
         income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
         if @user.gross_monthly_income < income_row.income_type4
           @user.ccap_eligible = true
+          # child is ineligibe for early learning but eligible is ccap
+          if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
+          message = "You may be in luck for the Child Care Assistance Program! Based on your child's age and other factors you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at  312-299-1690 for more information."
+          # child is eligible for early learning and ccap
+          else
           message = "You may be in luck, and likely qualify for Chicago early learning programs. You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/XXX for info."
-          @user.completed = true
+          end
+           @user.completed = true
         else
           session["page"] = "tanf_special_needs"
           message = "Does your family receive TANF or do you care for a special needs child? Enter yes or no"
@@ -233,10 +239,15 @@ class TwilioTestingController < ApplicationController
      # Data Storage
      if tanf_special_needs == "yes"
        @user.tanf_special_needs == true
-       # RESPONSE MESSAGE 
-       # eligible for CCAP
-       message = "You may be in luck, and likely qualify for Chicago early learning programs. You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/XXX for info."
-       @user.completed = true
+       # Eligible for CCAP
+       # Child is ineligibe for early learning but eligible is CCAP
+       if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
+        message = "You may be in luck for the Child Care Assistance Program! Based on your child's age and other factors you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at  312-299-1690 for more information."
+       # child is eligible for early learning and ccap
+       else
+        message = "You may be in luck, and likely qualify for Chicago early learning programs. You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/XXX for info."
+       end
+        @user.completed = true
 
      elsif tanf_special_needs == "no"
        @user.tanf_special_needs == false
@@ -263,21 +274,31 @@ class TwilioTestingController < ApplicationController
      if teen_parent == "yes"
        # RESPONSE MESSAGE
        # eligible for CCAP
+       if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
+       message = "You may be in luck for the Child Care Assistance Program! Based on your child's age and other factors you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at  312-299-1690 for more information."
+       # child is eligible for early learning and ccap
+       else
        message = "You may be in luck, and likely qualify for Chicago early learning programs. You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/XXX for info."
+       end
        @user.teen_parent == true
        @user.ccap_eligible = true
        @user.completed = true
      elsif teen_parent == "no"
-       # eligible for early learning 
        @user.teen_parent == false
-        # eligble with co-pay
-       if @user.income_type == "[\"Greater than Type 2\"]" 
-        message = "You may be in luck, and likely qualify for Chicago early learning programs. Call (312) 229-1690 or visit bit.ly/XXX for info. Note: Based on your income, you may have some additional fees. Calculate your estimated co-pay here."
-       # eligible with no co-pay
-       else
-         message = "You may be in luck, and likely qualify for Chicago early learning programs. Call (312) 229-1690 or visit bit.ly/XXX for info."
-       end
+        
+        if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
+          message = "Based on your child's age and other factors, you do not qualify for early learning programs and child care assistance at this time.  Call 312-299-1690 for information on other opportunities."
+        # eligible for early learning 
+        else  
+          # eligble for early learning with co-pay
+          if @user.income_type == "[\"Greater than Type 2\"]"
+           message = "You may be in luck, and likely qualify for Chicago early learning programs. Call (312) 229-1690 or visit bit.ly/XXX for info. Note: Based on your income, you may have some additional fees. Calculate your estimated co-pay here."
+          # eligible for early learning with no co-pay
+          else
+            message = "You may be in luck, and likely qualify for Chicago early learning programs. Call (312) 229-1690 or visit bit.ly/XXX for info."
+          end
         @user.completed = true
+        end
      else
        message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
        session["counter"] = 1
