@@ -305,7 +305,6 @@ class TwilioTestingController < ApplicationController
        @user.completed = false
      end
 
-     message = "You may be in luck, and likely qualify for Chicago early learning programs. Call (312) 229-1690 or visit bit.ly/XXX for info."
      @user.save
     end
    end
