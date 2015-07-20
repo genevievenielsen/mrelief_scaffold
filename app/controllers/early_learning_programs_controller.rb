@@ -339,8 +339,6 @@ class EarlyLearningProgramsController < ApplicationController
         @eligible_locations_in_zip = @eligible_locations_in_zip.uniq
       end
 
-
-
       if @eligible_locations_in_zip.length == 3
         @referral_centers = @eligible_locations_in_zip
       else
@@ -482,14 +480,12 @@ class EarlyLearningProgramsController < ApplicationController
         @ccap_eligible = false
       end
              
- 
     if @ccap_eligible == true
       @user.ccap_eligible = true
     else
       @user.ccap_eligible = false
     end
     @user.save 
-
 
     if params[:employment].present? && params[:other_zipcode] && params[:preferred_duration]
       if params[:zero_to_three].present? || params[:three_to_five].present? || params[:six_to_twelve].present? || params[:pregnant].present? || params[:no_children].present?

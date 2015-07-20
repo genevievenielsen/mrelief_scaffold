@@ -4050,7 +4050,6 @@ chicago_eligible_zipcodes = [
 "60641",
 "60642",
 "60643",
-"60643",
 "60644",
 "60645",
 "60646",
@@ -4067,7 +4066,6 @@ chicago_eligible_zipcodes = [
 "60660",
 "60661",
 "60666",
-"60707",
 "60707",
 "60827"]
 chicago_eligible_zipcodes.each do |zipcode|
