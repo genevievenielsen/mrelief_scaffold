@@ -4,7 +4,7 @@
 	
 			<% if @user.ccap_eligible == true %>
 			  <h1>You Likely Qualify for CCAP</h1>
-			 	<p>To calculate your co-pay <%= link_to "click here", "http://www.dhs.state.il.us/applications/ChildCareEligCalc/eligcalc.html", target: "_blank" %></p>
+			 	<p>You can calculate your estimated co-pay <%= link_to "here", "http://www.dhs.state.il.us/applications/ChildCareEligCalc/eligcalc.html", target: "_blank" %>. For more information, please call Illinois Action For Children Community Referral Team at  312-299-1690.</p>
 			<% else %>
 			  <h1>You Likely Do Not Qualify for CCAP</h1>
         		<div class="resources">

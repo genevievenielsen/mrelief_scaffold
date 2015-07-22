@@ -795,7 +795,7 @@ p.location = "chicago"
 p.save
 
 p = Program.new
-p.name_en = "Child Care Voucher"
+p.name_en = "Child Care Assistance Program"
 p.url = "/child_care_vouchers/new"
 p.description_en = "Quality, affordable child care for low-income families"
 p.description_es = ""
