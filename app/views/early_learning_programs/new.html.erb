@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-md-12">
       <h1>All Early Learning Programs</h1>
-      <p>If you are the primary caregiver of a child, you may be eligible for some of Chicago’s All Early Learnings offerings.</p>
+      <p>If you are the primary caregiver of a child, you may be eligible for Chicago’s Early Learning Offerings.</p>
     </div>
   </div>
 </section>
@@ -45,7 +45,9 @@
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
         <label for="household_size">What is the number of people living in your household including yourself?</label>
+          <p type="button" data-toggle="popover" data-content="A household consists of all the people, related family and unrelated, who occupy a housing unit (house, apartment, condo, etc.)." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
           <input type="text" id="household_size" name="household_size" placeholder="For example: 3" class="form-field" value="<%= @user.try(:household_size) %>" required>
+          </p>
       </div>
     </div>
   
@@ -53,9 +55,9 @@
   <!-- Form for gross monthly income -->
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
-        <label for="gross_monthly_income">What is your gross monthly income?</label>
-        <%= render "programs/popover_calculator" %>
-          <p type="button" data-toggle="popover" data-content="Gross Income of All Family Members (Income means gross cash income and includes earned income, military income (including pay and allowances), veterans’ benefits, Social Security benefits, unemployment compensation, and public assistance benefits.)" data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
+        <label for="gross_monthly_income">What is your gross monthly income?</label><br>
+        <%= render "programs/popover_calculator_early_learning" %>
+          <p type="button" data-toggle="popover" data-content="Gross Income means cash income and includes earned income, military income (including pay and allowances), veterans’ benefits, Social Security benefits, unemployment compensation, child support, alimony, retirement, pension, and public assistance benefits before taxes." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
            <input type="text" id="gross_monthly_income" name="gross_monthly_income" placeholder="For example: 1000" class="form-field" value="<%= number_with_precision(@user.try(:gross_monthly_income), precision: 0) %>" required>
           </p>
       </div>
@@ -158,7 +160,7 @@
   <!-- Form for bilingual question -->
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12" >
-        <label for="bilingual" id="bilingual">Would you prefer to enroll your child in a bilingual early learning program?</label>
+        <label for="bilingual" id="bilingual">Does your child need a program with bilingual instruction?</label>
         <div class="radio-button">
           <% [ 'yes', 'no'].each do |bilingual| %>
             <%= radio_button_tag 'bilingual', bilingual, @user.bilingual == bilingual %>
@@ -174,7 +176,7 @@
     <div class="row">
        <div class="col-md-9 col-sm-10 col-xs-12">
          <label for="phone_number">What is your cell phone number?</label>
-            <p type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
+            <p type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process. If you don’t have a phone please submit an e-mail for you or a relative." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
               <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-field" value="<%= @user.phone_number %>" required>
             </p>
        </div>
@@ -189,9 +191,6 @@
 
   </form>
   </div>
-
-  <%= render "programs/calculator" %>
-
 
   </div>
   </section>
