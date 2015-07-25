@@ -119,7 +119,7 @@ class TwilioTestingController < ApplicationController
     @user.zipcode = params[:Body].strip
 
     if ChicagoEligibleZipcode.all.pluck(:zipcode).include?(@user.zipcode)
-      message = "Are you a foster parent, in a temporary living situation or does your family receive SSI? Enter Yes or No"
+      message = "Are you a foster parent, in a temporary living situation or does your family receive SSI? Enter yes or no"
       session["page"] = "categorical_income_eligibility" 
       @user.completed = false
       @user.save
@@ -136,7 +136,7 @@ class TwilioTestingController < ApplicationController
    # Categorial Income Eligibility 
    if session["page"] == "categorical_income_eligibility" 
     if session["counter"] == 4 || session["counter"] == 6
-    @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
+    @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
     foster_temporary_ssi = params[:Body].strip.downcase
 
       if foster_temporary_ssi == "yes"
@@ -160,7 +160,7 @@ class TwilioTestingController < ApplicationController
    # Household size question
    if session["page"] == "household_size" 
     if session["counter"] == 5 || session["counter"] == 7
-    @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
+    @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
     household_size = params[:Body].strip
       # Convert to an integer
       if household_size !~ /\D/  # returns true if all numbers
@@ -181,7 +181,7 @@ class TwilioTestingController < ApplicationController
    # Income question
    if session["page"] == "income" 
     if session["counter"] == 6 || session["counter"] == 8
-    @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
+    @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
     income = params[:Body].strip
       # Convert to an integer
       if income !~ /\D/  # returns true if all numbers
@@ -214,7 +214,7 @@ class TwilioTestingController < ApplicationController
    # Employment question
    if session["page"] == "employment" 
     if session["counter"] == 7 || session["counter"] == 9
-     @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
+     @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
      employment = params[:Body].strip.downcase
      
      if employment == "yes"
@@ -257,7 +257,7 @@ class TwilioTestingController < ApplicationController
    # Tanf and special needs question
    if session["page"] == "tanf_special_needs"
     if session["counter"] == 8 || session["counter"] == 10
-     @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
+     @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
      tanf_special_needs = params[:Body].strip.downcase
      
      # Data Storage
@@ -291,7 +291,7 @@ class TwilioTestingController < ApplicationController
    # Teen parent question
    if session["page"] == "teen_parent"
     if session["counter"] == 9 || session["counter"] == 11
-     @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
+     @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
      teen_parent = params[:Body].strip.downcase
      
      # Data Storage
