@@ -225,8 +225,11 @@ es:
     other_zipcode: Le mostraremos programas donde usted vive, pero ¿preferiría que le mostremos programas cerca de donde asiste a la escuela, trabaja, etc?
     preferred_zipcode: ¿En qué código postal preferiría asistir al aprendizaje temprano?
 
-
     preferred_language: ¿Qué idioma prefiere?
 
     cell_phone: ¿Cuál es el número de su teléfono celular?
     see_if: Ver si califico
+
+    ineligible_title: Resultados- ¡Usted puede calificar!
+
+    eligible_ccap: 

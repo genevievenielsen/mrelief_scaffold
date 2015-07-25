@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   resources :all_city_program_data
 
+
+
   get 'set_language/english'
 
   get 'set_language/spanish'
@@ -10,6 +12,13 @@ Rails.application.routes.draw do
 
   get ':controller/:action'
   get ':locale/:controller/:action'
+
+ 
+
+  post ':controller/:action'
+  post ':locale/:controller/:action'
+
+
 
   # twilio english 
   get("/twilio", { :controller => "send_text", :action => "send_text_message"})
@@ -38,7 +47,7 @@ Rails.application.routes.draw do
   post("/community_resources", { :controller => "pages", :action => "community_resources" })
 
   get "early_learning_programs", to: "early_learning_programs#new"
-  post "early_learning_programs", to: "early_learning_programs#create"
+  post "early_learning_programs_results", to: "early_learning_programs#create", as: "early_learning_programs_results"
   get "early_learning_more_results/:id", to: "early_learning_programs#more_results", as: "more_results"
 
   # print

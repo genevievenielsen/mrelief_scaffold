@@ -7,7 +7,7 @@
   %section.content-section
     .row
       .col-md-10.col-sm-8.col-xs-12
-        %form.form-horizontal{:action => "/early_learning_programs", :method => "post", :role => "form"}
+        %form.form-horizontal{:action => "/early_learning_programs_results", :method => "post", :role => "form"}
           / Form for child age question
           .row
             .col-md-9.col-sm-10.col-xs-12
@@ -58,7 +58,7 @@
               %br
                 = render "programs/popover_calculator_early_learning"
                 %p.popover-body{"data-content" => "Ingresos brutos de todos los miembros de la familia (ingresos significa los ingresos brutos en efectivo e incluye ingresos percibidos, ingresos militares (incluyendo pagos y prestaciones), beneficios para veteranos, beneficios del Seguro Social, compensación por desempleo y beneficios de asistencia pública).", "data-placement" => "right", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec;", :type => "button"}
-                  %input#gross_monthly_income.form-field{:name => "gross_monthly_income", :placeholder => "Por ejemplo: 1000", :required => "", :type => "text", :value => number_with_precision(@user.try(:gross_monthly_income), precision: 0)}
+                %input#gross_monthly_income.form-field{:name => "gross_monthly_income", :placeholder => "Por ejemplo: 1000", :required => "", :type => "text", :value => number_with_precision(@user.try(:gross_monthly_income), precision: 0)}
           / Form for additional criteria question
           .row
             .col-md-9.col-sm-10.col-xs-12
@@ -220,7 +220,7 @@
           / Submit button
           .row
             .col-md-5
-              %button= t.elp.see_if | "See if I qualify"
+              %button{:type => "submit"}= t.elp.see_if | "See if I qualify"
 :javascript
     $(document).ready(function() {
 
