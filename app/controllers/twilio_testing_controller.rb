@@ -53,7 +53,7 @@ class TwilioTestingController < ApplicationController
       # no children
       if @user.children_ages.include?("d")
         @user.no_children = true
-        message = "You may not be eligible for Chicago: Ready to Learn! early learning programs at this time.  Call 312-299-1690 for info on other opportunities."
+        message = "You likely qualify for Chicago early learning programs! Call (312) 229-1690 or visit bit.ly/XXX for info."
         @user.completed = true
         @user.save
       # children
@@ -125,7 +125,7 @@ class TwilioTestingController < ApplicationController
       @user.save
     else
       # INELIGIBLE
-      message = "You may not be eligible for Chicago: Ready to Learn! early learning programs at this time.  Call 312-299-1690 for info on other opportunities."
+      message = "You likely qualify for Chicago early learning programs! Call (312) 229-1690 or visit bit.ly/XXX for info."
       @user.completed = true
       @user.save
     end

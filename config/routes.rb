@@ -2,8 +2,6 @@ Rails.application.routes.draw do
 
   resources :all_city_program_data
 
-
-
   get 'set_language/english'
 
   get 'set_language/spanish'
@@ -13,12 +11,8 @@ Rails.application.routes.draw do
   get ':controller/:action'
   get ':locale/:controller/:action'
 
- 
-
   post ':controller/:action'
   post ':locale/:controller/:action'
-
-
 
   # twilio english 
   get("/twilio", { :controller => "send_text", :action => "send_text_message"})
@@ -33,7 +27,6 @@ Rails.application.routes.draw do
   get("/twilio_test", { :controller => "send_text", :action => "send_test_text_message"})
   post('/twilio_test', { :controller => 'twilio_testing', :action => 'text'})
    
-
   #static pages 
   root to: "pages#homepage"
   get('/about_us', { :controller => 'pages', :action => 'about_us' })
