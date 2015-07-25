@@ -32,7 +32,7 @@
             I care for a child that is between the ages of 6-12<br>
           <input type="checkbox" name="pregnant" value="pregnant" id="pregnant"
             <% if @user.pregnant != nil && @user.pregnant == true %>checked<% end %>> 
-            I am pregnant<br>
+            I am, or my partner is, pregnant<br>
           <input type="checkbox" name="no_children" value="no_children" id="no_children"
             <% if @user.no_children != nil && @user.no_children == true %>checked<% end %>> 
             I care for no children in these age groups<br>
@@ -134,28 +134,30 @@
   <!-- Form for duration preference -->
     <div class="row">
       <div class="col-md-9 col-sm-10 col-xs-12">
-        <label for="preferred_duration" id="preferred_duration">Do you have a preference for how long your child will participate in an early learning program in a given day?</label>
-        <div class="radio-button">
-          <% [ 'Half Day (2 or 3 hours)', 'Full Day (6 hours or more)', 'Home Visiting', 'No Preference'].each do |preferred_duration| %>
-            <%= radio_button_tag 'preferred_duration', preferred_duration, @user.preferred_duration == preferred_duration  %>
-            <%= preferred_duration.humanize %><br>
-          <% end %>
+        <label class="allthatapply"> Select all that apply to your preference for an early learning program:</label>
+        <div class="radio-button" id="preferred_duration">
+          <input type="checkbox" name="half_day" value="half_day" id="half_day"
+            <% if @user.three_and_under != nil && @user.three_and_under == true %>checked<% end %>>  
+            Half Day (2 or 3 hours)<br>
+          <input type="checkbox" name="full_day" value="full_day" id="full_day"
+            <% if @user.three_to_five != nil && @user.three_to_five == true %>checked<% end %>> 
+            Full Day (6 hours or more)<br>
+          <input type="checkbox" name="part_week" value="part_week" id="part_week"
+            <% if @user.six_to_twelve != nil && @user.six_to_twelve == true %>checked<% end %>> 
+            Part-week (2 to 3 days)<br>
+          <input type="checkbox" name="full_week" value="full_week" id="full_week"
+            <% if @user.pregnant != nil && @user.pregnant == true %>checked<% end %>> 
+            Full-week (4 to 5 days)<br>
+          <input type="checkbox" name="home_visiting" value="home_visiting" id="home_visiting"
+            <% if @user.no_children != nil && @user.no_children == true %>checked<% end %>> 
+            Home Visiting<p type="button" data-toggle="popover" data-content="Licensed educators who weekly visit your home to support your child’s social-emotional, physical, and cognitive development." data-placement="right" style="border: 0px; color: #4582ec; display: inline" class="popover-body">  Learn More</p><br>
+          <input type="checkbox" name="no_duration_preference" value="no_duration_preference" id="no_duration_preference"
+            <% if @user.no_children != nil && @user.no_children == true %>checked<% end %>> 
+            No Preference<br>
         </div>
       </div>
     </div>
 
-  <!-- Form for frequency preference -->
-    <div class="row">
-      <div class="col-md-9 col-sm-10 col-xs-12">
-        <label for="preferred_frequency" id="preferred_frequency">Do you have a preference for part-week or full-week programs?</label>
-        <div class="radio-button">
-          <% [ 'Part-week (2 to 3 days)', 'Full-week (4 to 5 days)', 'No Preference'].each do |preferred_frequency| %>
-            <%= radio_button_tag 'preferred_frequency', preferred_frequency, @user.preferred_frequency == preferred_frequency %>
-            <%= preferred_frequency.humanize %><br>
-          <% end %>
-        </div>
-      </div>
-    </div>
 
   <!-- Form for bilingual question -->
     <div class="row">
