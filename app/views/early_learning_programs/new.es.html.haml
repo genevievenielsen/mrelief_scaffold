@@ -50,7 +50,7 @@
             .col-md-9.col-sm-10.col-xs-12
               %label{:for => "household_size"}=t.elp.household_size | "What is the number of people living in your household including yourself?"
               %p.popover-body{"data-content" => "A household consists of all the people, related family and unrelated, who occupy a housing unit (house, apartment, condo, etc.).", "data-placement" => "right", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec;", :type => "button"}
-                %input#household_size.form-field{:name => "household_size", :placeholder => "For example: 3", :required => "", :type => "text", :value => @user.try(:household_size)}
+                %input#household_size.form-field{:name => "household_size", :placeholder => "Por ejemplo: 3", :required => "", :type => "text", :value => @user.try(:household_size)}
           / Form for gross monthly income
           .row
             .col-md-9.col-sm-10.col-xs-12
@@ -58,7 +58,7 @@
               %br
                 = render "programs/popover_calculator_early_learning"
                 %p.popover-body{"data-content" => "Ingresos brutos de todos los miembros de la familia (ingresos significa los ingresos brutos en efectivo e incluye ingresos percibidos, ingresos militares (incluyendo pagos y prestaciones), beneficios para veteranos, beneficios del Seguro Social, compensación por desempleo y beneficios de asistencia pública).", "data-placement" => "right", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec;", :type => "button"}
-                  %input#gross_monthly_income.form-field{:name => "gross_monthly_income", :placeholder => "For example: 1000", :required => "", :type => "text", :value => number_with_precision(@user.try(:gross_monthly_income), precision: 0)}
+                  %input#gross_monthly_income.form-field{:name => "gross_monthly_income", :placeholder => "Por ejemplo: 1000", :required => "", :type => "text", :value => number_with_precision(@user.try(:gross_monthly_income), precision: 0)}
           / Form for additional criteria question
           .row
             .col-md-9.col-sm-10.col-xs-12
@@ -148,11 +148,11 @@
           .row
             .col-md-9.col-sm-10.col-xs-12
               %label{:for => "zipcode"}=t.elp.zipcode | "In which zipcode do you live?"
-              %input#zipcode.form-field{:name => "zipcode", :placeholder => "For example: 60615", :required => "", :type => "text", :value => @user.try(:zipcode)}
+              %input#zipcode.form-field{:name => "zipcode", :placeholder => "Por ejemplo: 60615", :required => "", :type => "text", :value => @user.try(:zipcode)}
           / Form for preferred zipcode
           .row
             .col-md-9.col-sm-10.col-xs-12
-              %label#other_zipcode{:for => "other_zipcode"}=t.elp.preferred_zipcode | "We will show you programs where you live, but would you prefer for us to show you programs near where you go to school, work etc.?"
+              %label#other_zipcode{:for => "other_zipcode"}=t.elp.other_zipcode | "We will show you programs where you live, but would you prefer for us to show you programs near where you go to school, work etc.?"
               .radio-button
                 - [ 'sí', 'no'].each do |other_zipcode|
                   = radio_button_tag 'other_zipcode', other_zipcode, @user.other_zipcode == other_zipcode
@@ -214,107 +214,89 @@
           / Form for cellphone question
           .row
             .col-md-9.col-sm-10.col-xs-12
-              %label{:for => "phone_number"} What is your cell phone number?
-              %p.popover-body{"data-content" => "We will use this number to send you reminders throughout the application process. If you don’t have a phone please submit an e-mail for you or a relative.", "data-placement" => "right", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec;", :type => "button"}
-                %input#phone_number.form-field{:name => "phone_number", :placeholder => "For example: 3125555555", :required => "", :type => "text", :value => @user.phone_number}
+              %label{:for => "phone_number"}= t.elp.cell_phone | "What is your cell phone number?"
+              %p.popover-body{"data-content" => "Utilizaremos este número para enviarle recordatorios durante el proceso de solicitud.", "data-placement" => "right", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec;", :type => "button"}
+                %input#phone_number.form-field{:name => "phone_number", :placeholder => "Por ejemplo: 3125555555", :required => "", :type => "text", :value => @user.phone_number}
           / Submit button
           .row
             .col-md-5
-              %button See if I qualify
+              %button= t.elp.see_if | "See if I qualify"
 :javascript
-  $(document).ready(function() {
-      //education hover mechanism
-       $( "#education_question" ).hover(
-         function() {
-             $( this ).append( $( "Eligible schools include: a business, technical, trade, or vocational school that normally requires a high school diploma or the equivalent for enrollment in the course of study; or regular courses, including internet, mail, self-study, or correspondence courses, at an accredited college or university that offers degree programs. Enrolled means currently attending school." ) );
-           },
-         function() {
-           $( this ).find( "p:last" ).remove();
-         }
-       );
-  
-       //employment hover mechanism
-        $( "#employment_question" ).hover(
-          function() {
-              $( this ).append( $( "Aplica si trabaja por su cuenta o en un trabajo no declarado, si se puede verificar con un tercero o un estado de cuenta mensual." ) );
-            },
-          function() {
-            $( this ).find( "p:last" ).remove();
-          }
-        );
-  
-        //employment hover mechanism
-         $( "#health_question" ).hover(
-           function() {
-               $( this ).append( $( "Examples of medical-based conditions include anemia (low blood levels), underweight, or history of poor pregnancy outcome.  A dietary-based condition includes, for example, a poor diet." ) );
-             },
-           function() {
-             $( this ).find( "p:last" ).remove();
-           }
-         );
-  
-         // select all that apply
-         $("#select_all_questions").click(function() {
-          if($("#foster_parent").is(':checked') || $("#homeless").is(':checked') || $("#ssi").is(':checked') || $("#tanf").is(':checked') || $("#teen_parent").is(':checked')|| $("#special_needs").is(':checked')) {
-            if($("#none_of_the_above").is(':checked')) {
-              alert("None of the above cannot be selected with any of the other options to this question.");
+    $(document).ready(function() {
+
+          // employment hover
+          $( "#employment_question" ).hover(
+            function() {
+                $( this ).append( $( "<p class=\"hover_explanation\">Aplica si trabaja por su cuenta o en un trabajo no declarado, si se puede verificar con un tercero o un estado de cuenta mensual.</p>" ) );
+              },
+            function() {
+              $( this ).find( "p:last" ).remove();
             }
-          }
-         });
-         
-        // children question
-        $("#children_questions").click(function() {
-          if($("#zero_to_three").is(':checked') || $("#three_to_five").is(':checked') || $("#six_to_twelve").is(':checked') || $("#pregnant").is(':checked')) {
-            if($("#no_children").is(':checked')) {
-             alert("No children cannot be selected with any of the other options to this question.");
-           }
-         }
-        });
-  
-        // homeless question
-        $("#homeless_questions").click(function() {
-          if($("#homeless_fixed_residence").is(':checked') || $("#homeless_hotels").is(':checked') || $("#homeless_public_place").is(':checked') || $("#homeless_shelters").is(':checked')) {
-            if($("#not_homeless").is(':checked')) {
-             alert("None of the above cannot be selected with any of the other options to this question.");
-           }
-         }
-        });
-  
-        // preferred duration question
-        $("#preferred_duration").click(function() {
-          if($("#half_day").is(':checked') || $("#full_day").is(':checked') || $("#part_week").is(':checked') || $("#full_week").is(':checked') || $("#home_visiting").is(':checked')) {
-            if($("#no_duration_preference").is(':checked')) {
-             alert("No preference cannot be selected with any of the other options to this question.");
-           }
-         }
-        });
-  
-        // preferred zipcode
-        $("input:radio[name=other_zipcode]").click(function() {
-        var value = $(this).val();
-          if (value == "yes") {
-            $('.place_for_preferred_zipcode').empty().append(" escape_javascript(render "early_learning_programs/preferred_zipcode", :user => @user ) ");
-          }
-          if (value == "no") {
-            $('.preferred_zipcode_questions').remove();
-          }
-        });
-        if($('input:radio[name=other_zipcode][value="yes"]').prop('checked')){
-            $('.place_for_preferred_zipcode').append(" escape_javascript(render "early_learning_programs/preferred_zipcode", :user => @user ) ");
-        }
-  
-        // bilingual language
-        $("input:radio[name=bilingual]").click(function() {
-        var value = $(this).val();
-          if (value == "yes") {
-            $('.place_for_bilingual_language').empty().append(" escape_javascript(render "early_learning_programs/bilingual_language", :user => @user ) ");
-          }
-          if (value == "no") {
-            $('.bilingual_language_question').remove();
-          }
-        });
-        if($('input:radio[name=bilingual][value="yes"]').prop('checked')){
-            $('.place_for_bilingual_language').append(" escape_javascript(render "early_learning_programs/bilingual_language", :user => @user ) ");
-        }
+          );
     
-  });
+           // select all that apply
+           $("#select_all_questions").click(function() {
+            if($("#foster_parent").is(':checked') || $("#homeless").is(':checked') || $("#ssi").is(':checked') || $("#tanf").is(':checked') || $("#teen_parent").is(':checked')|| $("#special_needs").is(':checked')) {
+              if($("#none_of_the_above").is(':checked')) {
+                alert("None of the above cannot be selected with any of the other options to this question.");
+              }
+            }
+           });
+           
+          // children question
+          $("#children_questions").click(function() {
+            if($("#zero_to_three").is(':checked') || $("#three_to_five").is(':checked') || $("#six_to_twelve").is(':checked') || $("#pregnant").is(':checked')) {
+              if($("#no_children").is(':checked')) {
+               alert("No children cannot be selected with any of the other options to this question.");
+             }
+           }
+          });
+    
+          // homeless question
+          $("#homeless_questions").click(function() {
+            if($("#homeless_fixed_residence").is(':checked') || $("#homeless_hotels").is(':checked') || $("#homeless_public_place").is(':checked') || $("#homeless_shelters").is(':checked')) {
+              if($("#not_homeless").is(':checked')) {
+               alert("None of the above cannot be selected with any of the other options to this question.");
+             }
+           }
+          });
+    
+          // preferred duration question
+          $("#preferred_duration").click(function() {
+            if($("#half_day").is(':checked') || $("#full_day").is(':checked') || $("#part_week").is(':checked') || $("#full_week").is(':checked') || $("#home_visiting").is(':checked')) {
+              if($("#no_duration_preference").is(':checked')) {
+               alert("No preference cannot be selected with any of the other options to this question.");
+             }
+           }
+          });
+    
+          // preferred zipcode
+          $("input:radio[name=other_zipcode]").click(function() {
+          var value = $(this).val();
+            if (value == "sí") {
+              $('.place_for_preferred_zipcode').empty().append("#{escape_javascript(render "early_learning_programs/preferred_zipcode", :user => @user )}");
+            }
+            if (value == "no") {
+              $('.preferred_zipcode_questions').remove();
+            }
+          });
+          if($('input:radio[name=other_zipcode][value="yes"]').prop('checked')){
+              $('.place_for_preferred_zipcode').append("#{escape_javascript(render "early_learning_programs/preferred_zipcode", :user => @user )}");
+          }
+    
+          // bilingual language
+          $("input:radio[name=bilingual]").click(function() {
+          var value = $(this).val();
+            if (value == "sí") {
+              $('.place_for_bilingual_language').empty().append("#{escape_javascript(render  "early_learning_programs/bilingual_language", :user => @user )}");
+            }
+            if (value == "no") {
+              $('.bilingual_language_question').remove();
+            }
+          });
+          if($('input:radio[name=bilingual][value="yes"]').prop('checked')) {
+              $('.place_for_bilingual_language').append("#{escape_javascript(render "early_learning_programs/bilingual_language", :user => @user )}");
+          }
+      
+    });
+

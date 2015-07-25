@@ -220,17 +220,8 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    //education hover mechanism
-     $( "#education_question" ).hover(
-       function() {
-           $( this ).append( $( "<p class=\"hover_explanation\">Eligible schools include: a business, technical, trade, or vocational school that normally requires a high school diploma or the equivalent for enrollment in the course of study; or regular courses, including internet, mail, self-study, or correspondence courses, at an accredited college or university that offers degree programs. Enrolled means currently attending school.</p>" ) );
-         },
-       function() {
-         $( this ).find( "p:last" ).remove();
-       }
-     );
-
-     //employment hover mechanism
+ 
+     // //employment hover mechanism
       $( "#employment_question" ).hover(
         function() {
             $( this ).append( $( "<p class=\"hover_explanation\">Self-employment and cash-employment applies if it can be verified by a third party or a monthly statement.</p>" ) );
@@ -240,16 +231,6 @@ $(document).ready(function() {
         }
       );
 
-      //employment hover mechanism
-       $( "#health_question" ).hover(
-         function() {
-             $( this ).append( $( "<p class=\"hover_explanation\">Examples of medical-based conditions include anemia (low blood levels), underweight, or history of poor pregnancy outcome.  A dietary-based condition includes, for example, a poor diet.</p>" ) );
-           },
-         function() {
-           $( this ).find( "p:last" ).remove();
-         }
-       );
-
        // select all that apply
        $("#select_all_questions").click(function() {
         if($("#foster_parent").is(':checked') || $("#homeless").is(':checked') || $("#ssi").is(':checked') || $("#tanf").is(':checked') || $("#teen_parent").is(':checked')|| $("#special_needs").is(':checked')) {
@@ -258,61 +239,76 @@ $(document).ready(function() {
           }
         }
        });
-       
-      // children question
-      $("#children_questions").click(function() {
-        if($("#zero_to_three").is(':checked') || $("#three_to_five").is(':checked') || $("#six_to_twelve").is(':checked') || $("#pregnant").is(':checked')) {
-          if($("#no_children").is(':checked')) {
-           alert("No children cannot be selected with any of the other options to this question.");
+        
+       // children question
+       $("#children_questions").click(function() {
+         if($("#zero_to_three").is(':checked') || $("#three_to_five").is(':checked') || $("#six_to_twelve").is(':checked') || $("#pregnant").is(':checked')) {
+           if($("#no_children").is(':checked')) {
+            alert("No children cannot be selected with any of the other options to this question.");
+          }
+        }
+       });
+
+       // homeless question
+       $("#homeless_questions").click(function() {
+         if($("#homeless_fixed_residence").is(':checked') || $("#homeless_hotels").is(':checked') || $("#homeless_public_place").is(':checked') || $("#homeless_shelters").is(':checked')) {
+           if($("#not_homeless").is(':checked')) {
+            alert("None of the above cannot be selected with any of the other options to this question.");
+          }
+        }
+       });   
+
+        // preferred duration question
+        $("#preferred_duration").click(function() {
+          if($("#half_day").is(':checked') || $("#full_day").is(':checked') || $("#part_week").is(':checked') || $("#full_week").is(':checked') || $("#home_visiting").is(':checked')) {
+            if($("#no_duration_preference").is(':checked')) {
+             alert("No preference cannot be selected with any of the other options to this question.");
+           }
          }
-       }
-      });
+        });
 
-      // homeless question
-      $("#homeless_questions").click(function() {
-        if($("#homeless_fixed_residence").is(':checked') || $("#homeless_hotels").is(':checked') || $("#homeless_public_place").is(':checked') || $("#homeless_shelters").is(':checked')) {
-          if($("#not_homeless").is(':checked')) {
-           alert("None of the above cannot be selected with any of the other options to this question.");
-         }
-       }
-      });
+         // preferred zipcode
+         $("input:radio[name=other_zipcode]").click(function() {
+         var value = $(this).val();
+           if (value == "yes") {
+             $('.place_for_preferred_zipcode').empty().append("<%= escape_javascript(render "early_learning_programs/preferred_zipcode", :user => @user ) %>");
+           }
+           if (value == "no") {
+             $('.preferred_zipcode_questions').remove();
+           };
+         });
 
-      // preferred duration question
-      $("#preferred_duration").click(function() {
-        if($("#half_day").is(':checked') || $("#full_day").is(':checked') || $("#part_week").is(':checked') || $("#full_week").is(':checked') || $("#home_visiting").is(':checked')) {
-          if($("#no_duration_preference").is(':checked')) {
-           alert("No preference cannot be selected with any of the other options to this question.");
-         }
-       }
-      });
+         if($('input:radio[name=other_zipcode][value="yes"]').prop('checked')){
+             $('.place_for_preferred_zipcode').append("<%= escape_javascript(render "early_learning_programs/preferred_zipcode", :user => @user ) %>");
+         };
 
-      // preferred zipcode
-      $("input:radio[name=other_zipcode]").click(function() {
-      var value = $(this).val();
-        if (value == "yes") {
-          $('.place_for_preferred_zipcode').empty().append("<%= escape_javascript(render "early_learning_programs/preferred_zipcode", :user => @user ) %>");
-        }
-        if (value == "no") {
-          $('.preferred_zipcode_questions').remove();
-        }
-      });
-      if($('input:radio[name=other_zipcode][value="yes"]').prop('checked')){
-          $('.place_for_preferred_zipcode').append("<%= escape_javascript(render "early_learning_programs/preferred_zipcode", :user => @user ) %>");
-      }
 
-      // bilingual language
-      $("input:radio[name=bilingual]").click(function() {
-      var value = $(this).val();
-        if (value == "yes") {
-          $('.place_for_bilingual_language').empty().append("<%= escape_javascript(render "early_learning_programs/bilingual_language", :user => @user ) %>");
-        }
-        if (value == "no") {
-          $('.bilingual_language_question').remove();
-        }
-      });
-      if($('input:radio[name=bilingual][value="yes"]').prop('checked')){
-          $('.place_for_bilingual_language').append("<%= escape_javascript(render "early_learning_programs/bilingual_language", :user => @user ) %>");
-      }
+          // bilingual language
+          $("input:radio[name=bilingual]").click(function() {
+          var value = $(this).val();
+            if (value == "yes") {
+              $('.place_for_bilingual_language').empty().append("<%= escape_javascript(render "early_learning_programs/bilingual_language", :user => @user ) %>");
+            };
+            if (value == "no") {
+              $('.bilingual_language_question').remove();
+            };
+          });
+          if($('input:radio[name=bilingual][value="yes"]').prop('checked')){
+              $('.place_for_bilingual_language').append("<%= escape_javascript(render "early_learning_programs/bilingual_language", :user => @user ) %>");
+          };
+         
+
+
+
+
+  });
+
+
+
+ 
   
-});
+
+
+
+
 </script>
