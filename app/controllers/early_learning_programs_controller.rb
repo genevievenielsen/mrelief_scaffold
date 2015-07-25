@@ -97,6 +97,10 @@ class EarlyLearningProgramsController < ApplicationController
       @user.not_homeless = true
     end
 
+    if @user.homeless_fixed_residence == true || @user.homeless_hotels == true || @user.homeless_public_place == true || @user.homeless_shelters == true
+      @homeless = true
+    end
+
     # duration preference select all
     if params[:half_day].present?
       @user.half_day = true
@@ -160,9 +164,9 @@ class EarlyLearningProgramsController < ApplicationController
               end 
 
                 # Eligible prgrams based on criteria and income - returns @eligible_early_learning_programs
-                if @user.foster_parent == true || @user.homeless == true || @user.ssi == true || @user.tanf == true
+                if @user.foster_parent == true || @homeless == true || @user.ssi == true || @user.tanf == true
         
-                  if @user.foster_parent == true || @user.homeless == true
+                  if @user.foster_parent == true || @homeless == true
                     additional_criteria = ["foster care, homeless, ssi or tanf", "foster care or homeless"]
                     @eligible_early_learning_programs = correct_age_programs.where(additional_criteria: additional_criteria)
 
@@ -253,7 +257,7 @@ class EarlyLearningProgramsController < ApplicationController
       @user.save
     end
 
-    # LOOKS UP IN DATA PORTAL
+    # LOOK CENTERS IN DATA PORTAL
     if @eligible == false
     else
       url = "https://data.cityofchicago.org/resource/ck29-hb9r.json"
@@ -493,7 +497,6 @@ class EarlyLearningProgramsController < ApplicationController
                 @eligible_locations_ages_day_zip_language_quality_week == @eligible_locations_ages_day_zip_language_quality
               else
                 
-               
                 if @user.no_duration_preference == true
                   @eligible_locations_ages_day_zip_language_quality_week = @eligible_locations_ages_day_zip_language_quality
                 else
@@ -511,7 +514,6 @@ class EarlyLearningProgramsController < ApplicationController
                 end
               end
 
-              
               if @eligible_locations_ages_day_zip_language_quality_week.length == 3
                 @referral_centers = @eligible_locations_ages_day_zip_language_quality_week
 
@@ -528,7 +530,6 @@ class EarlyLearningProgramsController < ApplicationController
               else
                 @referral_centers = @eligible_locations_ages_day_zip_language_quality_week
               end
-
 
             
           end # ends the quality if statement 
