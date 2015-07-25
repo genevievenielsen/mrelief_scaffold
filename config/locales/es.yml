@@ -211,4 +211,17 @@ es:
     additional_resources: >-
       A continuación algunos recursos adicionales, cortesía de Purple Binder:
 
+  elp:
+    title: Todos los programas de aprendizaje temprano
+    subtitle: Si usted es el encargado primario del cuidado de un menor, puede ser elegible para obtener algunas de las ofertas de Todos los programas de aprendizaje temprano de Chicago.
+    select_all_parent: Seleccione todas las que apliquen para usted como padre/madre o tutor
+    age_note:  Nota - esta pregunta aplica para la edad de su hijo a partir del 1º de septiembre de 2015
+    household_size: ¿Cuántas personas viven en su grupo familiar, incluyéndole a usted?
+    gross_income: ¿Cuáles son sus ingresos mensuales brutos?
+    select_all: Seleccione todos los que apliquen para usted
+    employed: ¿Actualmente todos los adultos de su grupo familiar tienen empleo?
 
+    zipcode: ¿En qué zona postal vive? 
+    preferred_zipcode: Le mostraremos programas donde usted vive, pero ¿preferiría que le mostremos programas cerca de donde asiste a la escuela, trabaja, etc?
+
+    preferred_language: ¿Qué idioma prefiere?

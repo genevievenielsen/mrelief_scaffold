@@ -2,17 +2,14 @@
 %html{:lang => "es"}
   %head
     %meta{:charset => "utf-8"}/
-    %title Mrelief
+    %title mRelief
+    %script{:src => "//use.typekit.net/jay0smv.js"}
+    :javascript
+      try{Typekit.load();}catch(e){}
     %link{:href => "//netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css", :rel => "stylesheet"}/
     %link{:href => "//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css", :rel => "stylesheet"}/
     %link{:href => "http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "assets/sitestyles.css", :rel => "stylesheet", :type => "text/css"}/
-    :css
-      /* Only necessary if you are using navbar-fixed-top */
-         /* body {
-            padding-top: 50px;
-          }
-      */
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.9.3/typeahead.min.js"
@@ -62,16 +59,6 @@
       = yield
     %footer.navbar-default.footer{:role => "navigation"}
       .container
-        .col-md-2
-          .row
-            %a.navbar-brand.logo{:href => "/"} mRelief
-          %div
-            %a{:href => "https://www.facebook.com/mRelief"}
-              %i.fa.fa-facebook-square.pull-left.fa-2x
-            %a{:href => "https://twitter.com/mrelief_form"}
-              %i.fa.fa-twitter-square.pull-left.fa-2x
-            %a{:href => "https://plus.google.com/117049110248209318421 "}
-              %i.fa.fa-google-plus-square.pull-left.fa-2x
         .col-md-10.col-sm-12.col-xs-12
           %p#disclaimer= t.layouts.disclaimer | "*mRelief does not predict with 100% accuracy whether users will definitely be approved for benefits; but instead provides users with information about whether it is worth it to invest the time required for the application process. However, we are working to make our forms more inclusive everyday. If you are undocumented, a legal permanent resident, or have a very specific case, our system refers you to paralegals who can help. Stay tuned for more updates!"
     = render "layouts/google_analytics"

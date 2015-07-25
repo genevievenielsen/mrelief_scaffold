@@ -122,13 +122,28 @@ class EarlyLearningProgramsController < ApplicationController
     end
 
     # yes or no questions
-    @user.employed = params[:employment] 
+    if params[:employment] == "yes" || params[:employment] == "sí"
+      @user.employed = "yes"
+    elsif params[:employment] == "no" 
+      @user.employed = "no"
+    end
+
+    if params[:preferred_zipcode] == "yes" || params[:preferred_zipcode] == "sí"
+      @user.preferred_zipcode = "yes"
+    elsif params[:preferred_zipcode] == "no" 
+      @user.preferred_zipcode = "no"
+    end
+
+    if params[:bilingual_language] == "yes" || params[:bilingual_language] == "sí"
+      @user.bilingual_language = "yes"
+    elsif params[:bilingual_language] == "no" 
+      @user.bilingual_language = "no"
+    end
+
     @user.other_zipcode = params[:other_zipcode]
     @user.bilingual = params[:bilingual]
-    @user.bilingual_language = params[:bilingual_language]
 
     @user.zipcode = params[:zipcode]
-    @user.preferred_zipcode = params[:preferred_zipcode]
     @user.phone_number = params[:phone_number] if params[:phone_number].present?
     @user.save
 

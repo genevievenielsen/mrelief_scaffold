@@ -1,0 +1,82 @@
+.container.marquee
+  = render "layouts/print_button"
+  - if @eligible == false
+    .row
+      .col-md-7
+        %h1 Results: Something else in mind!
+        %p You likely do not qualify for Early Learning Programs.
+        .resources
+          %h3 Resources
+          %p If you live in Illinois, call the Illinois Action For Children Community Referral Team at 312-299-1690 for info on other opportunities.
+  - else
+    .row
+      .col-md-7
+        %h1 Results: You may be in luck!
+        %p Below are Early Learning Programs that you are eligible for near you.
+    .row
+      .col-md-12
+        %h1 Early Learning Centers Near You
+        %br
+    - if @referral_centers.length > 3
+      - @top_referrals = @referral_centers.sample(3)
+    - else
+      - @top_referrals = @referral_centers
+    .row
+      - @top_referral_keys
+      - @top_referrals.each do |center|
+        .col-md-12.col-sm-12.col-lg-4
+          %ul
+            %li.laf-headline
+              = center["site_name"]
+              = render "early_learning_programs/asterisk", center: center
+            %li
+              = center["address"]
+            %li
+              = center["city"].strip
+              , #{center["state"]} #{center["zip"]}
+            %li
+              Phone Number: #{center["phone_number"]}
+            - if center["weekday_availability"].present?
+              %li
+                Weekday Availability: #{center["weekday_availability"]}
+            - if center["program_information"].present?
+              %li
+                Program Information: #{center["program_information"]}
+            - if center["languages_other_than_english"].present? && center["languages_other_than_english"] != "English"
+              %li
+                Languages other than English: #{center["languages_other_than_english"]}
+            - if center["quality_rating"].present?
+              %li
+                Quality Rating: #{center["quality_rating"]}
+            - if center["url"].present?
+              %li= link_to "Center Website", center["url"], target: "_blank"
+            - if center["ages_0_3"] == true || center["ages_3_5"] == true
+              - if center["ages_0_3"] == true && center["ages_3_5"] == true
+                %li Ages Served: 0 to 5 years old
+              - elsif center["ages_0_3"] == true
+                %li Ages Served: 0 to 2
+              - elsif center["ages_3_5"] == true
+                %li Ages Served: 3 to 5
+            - if center["program_information"].include?("CPS Based") || center["program_information"].include?("CPS Based, Head Start")
+              - if @user.income_type == "[\"Greater than Type 2\"]"
+                %p
+                  You may have a required co-pay for this program. Use #{link_to "this CPS calculator", "http://cps.edu/Schools/EarlyChildhood/Pages/EarlyChildhoodCalculator.aspx", target: "_blank"} to estimate your families co-pay.
+            - @top_referral_keys = "#{@top_referral_keys}" + center["key"] + ","
+    .row
+      .col-md-12
+        - if @eligible_asterisk == true
+          %p ** This program provides full day care supported by the state Child Care Assistance Program (CCAP). Based on the information you provided, you may qualify for CCAP. Please contact the agency for more information.
+        - elsif @ineligible_asterisk == true
+          %p ** This program provides full day care supported by the state Child Care Assistance Program (CCAP). Based on the information you provided, you may not qualify for CCAP. Please contact the agency for more information.
+    %br
+      %br
+        %br
+          .row
+            .col-md-12
+              %a.button{:href => "http://chicagoearlylearning.org/starred/#{@top_referral_keys.chop}/", :target => "_blank"} Learn more about these centers on the Early Learning Portal →
+          %br
+            %br
+              %br
+                .row
+                  .col-md-12
+                    = link_to  "More Results: CCAP Eligibility →", more_results_url(@user)

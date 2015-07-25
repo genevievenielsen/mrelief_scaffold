@@ -1,0 +1,5 @@
+.bilingual_language_question
+  .row
+    .col-md-9.col-sm-10.col-xs-12
+      %label{:for => "bilingual_language"} Which language would you prefer?
+      = select_tag(:bilingual_language, options_for_select([  ["African dialects", "African dialects"], ["Arabic", "Arabic"], ["Assyrian", "Assyrian"], ["Bosnian", "Bosnian"], ["Chinese", "Chinese"], ["Filipino", "Filipino"], ["Igbo", "Igbo"], ["Italian", "Italian"], ["Korean", "Korean"], ["Mandarin", "Mandarin"], ["Nepali", "Nepali"], ["Polish", "Polish"], ["Spanish", "Spanish"], ["Tagalog", "Tagalog"], ["Ukrainian", "Ukrainian"], ["Yoruba", "Yoruba"], ["Urdu", "Urdu"] ], @user.try(:bilingual_language)), :class => "form-field drop-down", :prompt => "Select a language")

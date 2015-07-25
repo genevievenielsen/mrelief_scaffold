@@ -1,17 +1,12 @@
-<div class="container marquee">
-	<div class="row">
-		<div class="col-md-12">
-			<% if @user.ccap_eligible == true %>
-			  <h1>You Likely Qualify for CCAP</h1>
-			 	<p>You can calculate your estimated co-pay <%= link_to "here", "http://www.dhs.state.il.us/applications/ChildCareEligCalc/eligcalc.html", target: "_blank" %>. For more information, please call Illinois Action For Children Community Referral Team at  312-299-1690.</p>
-			<% else %>
-			  <h1>You Likely Do Not Qualify for CCAP</h1>
-        		<div class="resources">
-        			<h3>Resources</h3>
-			  		<p> If you live in Illinois, please call the Illinois Action Referral for Children Community Referrals Hotline number, 312-823-1100 or the community email - referrals@actforchildren.org.</p>
-			 	</div>
-			<% end %>
-		</div>
-	</div>
-</div>
-
+.container.marquee
+  .row
+    .col-md-12
+      - if @user.ccap_eligible == true
+        %h1 You Likely Qualify for CCAP
+        %p
+          You can calculate your estimated co-pay #{link_to "here", "http://www.dhs.state.il.us/applications/ChildCareEligCalc/eligcalc.html", target: "_blank"}. For more information, please call Illinois Action For Children Community Referral Team at  312-299-1690.
+      - else
+        %h1 You Likely Do Not Qualify for CCAP
+        .resources
+          %h3 Resources
+          %p If you live in Illinois, please call the Illinois Action Referral for Children Community Referrals Hotline number, 312-823-1100 or the community email - referrals@actforchildren.org.
