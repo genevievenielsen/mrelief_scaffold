@@ -147,7 +147,7 @@ class TwilioTestingController < ApplicationController
       @user.household_size = household_size_cleaned.to_i
       @user.save
 
-      message = "What is your gross monthly income? Example - 1000"
+      message = "What is your total monthly income before taxes? Example - 1000"
       session["page"] = "income"
       @user.completed = false
       @user.save
@@ -210,14 +210,14 @@ class TwilioTestingController < ApplicationController
            @user.completed = true
         else
           session["page"] = "tanf_special_needs"
-          message = "Does your family receive TANF or do you care for a special needs child? Enter yes or no"
+          message = " Does your family receive TANF or do you care for a child with special needs or an individualized education plan (IEP)? Enter yes or no."
           @user.completed = false
         end
         
      elsif employment == "no"
        @user.employment == false
        session["page"] = "tanf_special_needs"
-       message = "Does your family receive TANF or do you care for a special needs child? Enter yes or no"
+       message = " Does your family receive TANF or do you care for a child with special needs or an individualized education plan (IEP)? Enter yes or no."
        @user.completed = false
 
      else
