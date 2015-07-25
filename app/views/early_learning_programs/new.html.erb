@@ -90,127 +90,126 @@
       </div>
     </div>
 
-    <!-- Homelessnes question -->
+    <!-- Homelessness question -->
       <div class="row">
         <div class="col-md-9 col-sm-10 col-xs-12">
           <label class="allthatapply">Does your family often find itself in any of the following living situations?</label>
-          <div class="radio-button" id="select_all_questions">
-            <input type="checkbox" name="foster_parent" value="foster_parent" id="foster_parent"
-              <% if @user.foster_parent != nil && @user.foster_parent == true %>checked<% end %>>  
+          <div class="radio-button" id="homeless_questions">
+            <input type="checkbox" name="homeless_fixed_residence" value="homeless_fixed_residence" id="homeless_fixed_residence"
+              <% if @user.homeless_fixed_residence != nil && @user.homeless_fixed_residence == true %>checked<% end %>>  
               We lack a fixed, regular nighttime residence and may be sharing a residence with a family in a similar situation<br>
-            <input type="checkbox" name="ssi" value="ssi" id="ssi"
-              <% if @user.ssi != nil && @user.ssi == true %>checked<% end %>> 
+            <input type="checkbox" name="homeless_hotels" value="homeless_hotels" id="homeless_hotels"
+              <% if @user.homeless_hotels != nil && @user.homeless_hotels == true %>checked<% end %>> 
               We have recently been living in motels, hotels, trailer parks or camping grounds due to lack of alternative accommodations<br>
-            <input type="checkbox" name="tanf" value="tanf" id="tanf"
-              <% if @user.tanf != nil && @user.tanf == true %>checked<% end %>> 
+            <input type="checkbox" name="homeless_public_place" value="homeless_public_place" id="homeless_public_place"
+              <% if @user.homeless_public_place != nil && @user.homeless_public_place == true %>checked<% end %>> 
               We have lived in a private or public place not designed for or ordinarily used as a regular sleeping accommodation<br>
-            <input type="checkbox" name="teen_parent" value="teen_parent" id="teen_parent"
-              <% if @user.teen_parent != nil && @user.teen_parent == true %>checked<% end %>>  
+            <input type="checkbox" name="homeless_shelters" value="homeless_shelters" id="homeless_shelters"
+              <% if @user.homeless_shelters != nil && @user.homeless_shelters == true %>checked<% end %>>  
               We are living in emergency or transitional shelters or abandoned in hospitals<br>
-            <input type="checkbox" name="none_of_the_above" value="none_of_the_above" id="none_of_the_above"
-              <% if @user.none_of_the_above != nil && @user.none_of_the_above == true %>checked<% end %>> 
+            <input type="checkbox" name="not_homeless" value="not_homeless" id="not_homeless"
+              <% if @user.not_homeless != nil && @user.not_homeless == true %>checked<% end %>> 
               None of the Above<br>
           </div>
         </div>
       </div>
    
-
-  <!-- Form for employment -->
-    <div class="row">
-      <div class="col-md-9 col-sm-10 col-xs-12" id="employment_question">
-        <label for="employment" id="employment">Are all adults in your household currently employed?</label>
-        <div class="radio-button">
-          <% [ 'yes', 'no'].each do |employment| %>
-            <%= radio_button_tag 'employment', employment, @user.employed == employment %>
-            <%= employment.humanize %><br>
-          <% end %>
+    <!-- Form for employment -->
+      <div class="row">
+        <div class="col-md-9 col-sm-10 col-xs-12" id="employment_question">
+          <label for="employment" id="employment">Are all adults in your household currently employed?</label>
+          <div class="radio-button">
+            <% [ 'yes', 'no'].each do |employment| %>
+              <%= radio_button_tag 'employment', employment, @user.employed == employment %>
+              <%= employment.humanize %><br>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
 
 
-  <!-- Form for zipcode -->
-    <div class="row">
-      <div class="col-md-9 col-sm-10 col-xs-12">
-        <label for="zipcode">In which zipcode do you live? </label>
-          <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-field" value="<%= @user.try(:zipcode) %>" required>
-      </div>
-    </div>
-
-  <!-- Form for preferred zipcode -->
-    <div class="row">
-      <div class="col-md-9 col-sm-10 col-xs-12" >
-        <label for="other_zipcode" id="other_zipcode">We will show you programs where you live, but would you prefer for us to show you programs near where you go to school, work etc.?</label>
-        <div class="radio-button">
-          <% [ 'yes', 'no'].each do |other_zipcode| %>
-            <%= radio_button_tag 'other_zipcode', other_zipcode, @user.other_zipcode == other_zipcode %>
-            <%= other_zipcode.humanize %><br>
-          <% end %>
+    <!-- Form for zipcode -->
+      <div class="row">
+        <div class="col-md-9 col-sm-10 col-xs-12">
+          <label for="zipcode">In which zipcode do you live? </label>
+            <input type="text" id="zipcode" name="zipcode" placeholder="For example: 60615" class="form-field" value="<%= @user.try(:zipcode) %>" required>
         </div>
       </div>
-    </div>
 
-    <div class="place_for_preferred_zipcode"></div>
-
-  <!-- Form for duration preference -->
-    <div class="row">
-      <div class="col-md-9 col-sm-10 col-xs-12">
-        <label class="allthatapply"> Select all that apply to your preference for an early learning program:</label>
-        <div class="radio-button" id="preferred_duration">
-          <input type="checkbox" name="half_day" value="half_day" id="half_day"
-            <% if @user.three_and_under != nil && @user.three_and_under == true %>checked<% end %>>  
-            Half Day (2 or 3 hours)<br>
-          <input type="checkbox" name="full_day" value="full_day" id="full_day"
-            <% if @user.three_to_five != nil && @user.three_to_five == true %>checked<% end %>> 
-            Full Day (6 hours or more)<br>
-          <input type="checkbox" name="part_week" value="part_week" id="part_week"
-            <% if @user.six_to_twelve != nil && @user.six_to_twelve == true %>checked<% end %>> 
-            Part-week (2 to 3 days)<br>
-          <input type="checkbox" name="full_week" value="full_week" id="full_week"
-            <% if @user.pregnant != nil && @user.pregnant == true %>checked<% end %>> 
-            Full-week (4 to 5 days)<br>
-          <input type="checkbox" name="home_visiting" value="home_visiting" id="home_visiting"
-            <% if @user.no_children != nil && @user.no_children == true %>checked<% end %>> 
-            Home Visiting<p type="button" data-toggle="popover" data-content="Licensed educators who weekly visit your home to support your child’s social-emotional, physical, and cognitive development." data-placement="right" style="border: 0px; color: #4582ec; display: inline" class="popover-body">  Learn More</p><br>
-          <input type="checkbox" name="no_duration_preference" value="no_duration_preference" id="no_duration_preference"
-            <% if @user.no_children != nil && @user.no_children == true %>checked<% end %>> 
-            No Preference<br>
+    <!-- Form for preferred zipcode -->
+      <div class="row">
+        <div class="col-md-9 col-sm-10 col-xs-12" >
+          <label for="other_zipcode" id="other_zipcode">We will show you programs where you live, but would you prefer for us to show you programs near where you go to school, work etc.?</label>
+          <div class="radio-button">
+            <% [ 'yes', 'no'].each do |other_zipcode| %>
+              <%= radio_button_tag 'other_zipcode', other_zipcode, @user.other_zipcode == other_zipcode %>
+              <%= other_zipcode.humanize %><br>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
 
+      <div class="place_for_preferred_zipcode"></div>
 
-  <!-- Form for bilingual question -->
-    <div class="row">
-      <div class="col-md-9 col-sm-10 col-xs-12" >
-        <label for="bilingual" id="bilingual">Does your child need a program with bilingual instruction?</label>
-        <div class="radio-button">
-          <% [ 'yes', 'no'].each do |bilingual| %>
-            <%= radio_button_tag 'bilingual', bilingual, @user.bilingual == bilingual %>
-            <%= bilingual.humanize %><br>
-          <% end %>
+    <!-- Form for duration preference -->
+      <div class="row">
+        <div class="col-md-9 col-sm-10 col-xs-12">
+          <label class="allthatapply"> Select all that apply to your preference for an early learning program:</label>
+          <div class="radio-button" id="preferred_duration">
+            <input type="checkbox" name="half_day" value="half_day" id="half_day"
+              <% if @user.half_day != nil && @user.half_day == true %>checked<% end %>>  
+              Half Day (2 or 3 hours)<br>
+            <input type="checkbox" name="full_day" value="full_day" id="full_day"
+              <% if @user.full_day != nil && @user.full_day == true %>checked<% end %>> 
+              Full Day (6 hours or more)<br>
+            <input type="checkbox" name="part_week" value="part_week" id="part_week"
+              <% if @user.part_week != nil && @user.part_week == true %>checked<% end %>> 
+              Part-week (2 to 3 days)<br>
+            <input type="checkbox" name="full_week" value="full_week" id="full_week"
+              <% if @user.full_week != nil && @user.full_week == true %>checked<% end %>> 
+              Full-week (4 to 5 days)<br>
+            <input type="checkbox" name="home_visiting" value="home_visiting" id="home_visiting"
+              <% if @user.home_visiting != nil && @user.home_visiting == true %>checked<% end %>> 
+              Home Visiting<p type="button" data-toggle="popover" data-content="Licensed educators who weekly visit your home to support your child’s social-emotional, physical, and cognitive development." data-placement="right" style="border: 0px; color: #4582ec; display: inline" class="popover-body">  Learn More</p><br>
+            <input type="checkbox" name="no_duration_preference" value="no_duration_preference" id="no_duration_preference"
+              <% if @user.no_duration_preference != nil && @user.no_duration_preference == true %>checked<% end %>> 
+              No Preference<br>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="place_for_bilingual_language"></div>
 
-  <!-- Form for cellphone question -->
-    <div class="row">
-       <div class="col-md-9 col-sm-10 col-xs-12">
-         <label for="phone_number">What is your cell phone number?</label>
-            <p type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process. If you don’t have a phone please submit an e-mail for you or a relative." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
-              <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-field" value="<%= @user.phone_number %>" required>
-            </p>
-       </div>
-    </div>
-
-  <!-- Submit button -->
-    <div class="row">
-      <div class="col-md-5">
-        <button >See if I qualify</button>
+    <!-- Form for bilingual question -->
+      <div class="row">
+        <div class="col-md-9 col-sm-10 col-xs-12" >
+          <label for="bilingual" id="bilingual">Does your child need a program with bilingual instruction?</label>
+          <div class="radio-button">
+            <% [ 'yes', 'no'].each do |bilingual| %>
+              <%= radio_button_tag 'bilingual', bilingual, @user.bilingual == bilingual %>
+              <%= bilingual.humanize %><br>
+            <% end %>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <div class="place_for_bilingual_language"></div>
+
+    <!-- Form for cellphone question -->
+      <div class="row">
+         <div class="col-md-9 col-sm-10 col-xs-12">
+           <label for="phone_number">What is your cell phone number?</label>
+              <p type="button" data-toggle="popover" data-content="We will use this number to send you reminders throughout the application process. If you don’t have a phone please submit an e-mail for you or a relative." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
+                <input type="text" id="phone_number" name="phone_number" placeholder="For example: 3125555555" class="form-field" value="<%= @user.phone_number %>" required>
+              </p>
+         </div>
+      </div>
+
+    <!-- Submit button -->
+      <div class="row">
+        <div class="col-md-5">
+          <button >See if I qualify</button>
+        </div>
+      </div>
 
   </form>
   </div>
@@ -265,6 +264,24 @@ $(document).ready(function() {
         if($("#zero_to_three").is(':checked') || $("#three_to_five").is(':checked') || $("#six_to_twelve").is(':checked') || $("#pregnant").is(':checked')) {
           if($("#no_children").is(':checked')) {
            alert("No children cannot be selected with any of the other options to this question.");
+         }
+       }
+      });
+
+      // homeless question
+      $("#homeless_questions").click(function() {
+        if($("#homeless_fixed_residence").is(':checked') || $("#homeless_hotels").is(':checked') || $("#homeless_public_place").is(':checked') || $("#homeless_shelters").is(':checked')) {
+          if($("#not_homeless").is(':checked')) {
+           alert("None of the above cannot be selected with any of the other options to this question.");
+         }
+       }
+      });
+
+      // preferred duration question
+      $("#preferred_duration").click(function() {
+        if($("#half_day").is(':checked') || $("#full_day").is(':checked') || $("#part_week").is(':checked') || $("#full_week").is(':checked') || $("#home_visiting").is(':checked')) {
+          if($("#no_duration_preference").is(':checked')) {
+           alert("No preference cannot be selected with any of the other options to this question.");
          }
        }
       });

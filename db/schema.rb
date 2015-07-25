@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150717232907) do
+ActiveRecord::Schema.define(version: 20150725154805) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -192,11 +192,9 @@ ActiveRecord::Schema.define(version: 20150717232907) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "income_type"
-    t.boolean  "snap_or_medicaid",                              default: false
     t.boolean  "teen_parent",                                   default: false
     t.boolean  "six_to_twelve",                                 default: false
     t.boolean  "special_needs",                                 default: false
-    t.string   "preferred_duration"
     t.boolean  "head_start_childcare_collaboration",            default: false
     t.boolean  "head_start_preschool_childcare_collaboration",  default: false
     t.boolean  "preschool_for_all_childcare_collaboration",     default: false
@@ -216,12 +214,21 @@ ActiveRecord::Schema.define(version: 20150717232907) do
     t.boolean  "wic_eligible",                                  default: false
     t.boolean  "ccap_eligible",                                 default: false
     t.string   "employed"
-    t.string   "health_status"
     t.string   "other_zipcode"
     t.boolean  "none_of_the_above"
     t.string   "bilingual_language"
-    t.string   "preferred_frequency"
     t.string   "bilingual"
+    t.boolean  "homeless_fixed_residence",                      default: false
+    t.boolean  "homeless_hotels",                               default: false
+    t.boolean  "homeless_public_place",                         default: false
+    t.boolean  "homeless_shelters",                             default: false
+    t.boolean  "not_homeless",                                  default: false
+    t.boolean  "half_day",                                      default: false
+    t.boolean  "full_day",                                      default: false
+    t.boolean  "part_week",                                     default: false
+    t.boolean  "full_week",                                     default: false
+    t.boolean  "home_visiting",                                 default: false
+    t.boolean  "no_duration_preference",                        default: false
   end
 
   create_table "early_learning_data_twilios", force: true do |t|

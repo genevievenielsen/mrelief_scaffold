@@ -34,6 +34,12 @@ class EarlyLearningProgramsController < ApplicationController
     @user.gross_monthly_income = gross_income_clean
 
     # Data Storage
+    # age_options = ["zero_to_three", "three_to_five", "six_to_twelve", "pregnant", "no_children"]
+    # age_options.each do |option|
+    #   if params[":#{option}"].present?
+    #     @user."#{option}" = true
+    #   end
+    # end
     # age 
     if params[:zero_to_three].present?
       @user.three_and_under = true
@@ -51,7 +57,7 @@ class EarlyLearningProgramsController < ApplicationController
       @user.no_children = true
     end
 
-    # select all
+    # categorical select all
     if params[:foster_parent].present?
       @user.foster_parent = true
     end
@@ -64,9 +70,6 @@ class EarlyLearningProgramsController < ApplicationController
     if params[:tanf].present?
       @user.tanf = true
     end
-    if params[:snap_or_medicaid].present?
-      @user.snap_or_medicaid = true
-    end
     if params[:teen_parent].present?
       @user.teen_parent = true
     end
@@ -77,86 +80,123 @@ class EarlyLearningProgramsController < ApplicationController
       @user.none_of_the_above = true
     end
 
+    # homeless select all
+    if params[:homeless_fixed_residence].present?
+      @user.homeless_fixed_residence = true
+    end 
+    if params[:homeless_hotels].present?
+      @user.homeless_hotels = true
+    end 
+    if params[:homeless_public_place].present?
+      @user.homeless_public_place = true
+    end 
+    if params[:homeless_shelters].present?
+      @user.homeless_shelters = true
+    end 
+    if params[:not_homeless].present?
+      @user.not_homeless = true
+    end
+
+    # duration preference select all
+    if params[:half_day].present?
+      @user.half_day = true
+    end 
+    if params[:full_day].present?
+      @user.full_day = true
+    end 
+    if params[:part_week].present?
+      @user.part_week = true
+    end 
+    if params[:full_week].present?
+      @user.full_week = true
+    end 
+    if params[:home_visiting].present?
+      @user.home_visiting = true
+    end
+    if params[:no_duration_preference].present?
+      @user.no_duration_preference = true
+    end
+
     # yes or no questions
     @user.employed = params[:employment] 
-    # remove this
-    # @user.health_status = params[:health_status]
     @user.other_zipcode = params[:other_zipcode]
     @user.bilingual = params[:bilingual]
     @user.bilingual_language = params[:bilingual_language]
-    @user.preferred_frequency = params[:preferred_frequency]
 
     @user.zipcode = params[:zipcode]
     @user.preferred_zipcode = params[:preferred_zipcode]
     @user.phone_number = params[:phone_number] if params[:phone_number].present?
-    @user.preferred_duration = params[:preferred_duration]
     @user.save
 
     # ELIGIBILITY DETERMINATION
-    if @user.no_children == true
+    if @user.no_children == true 
       # user has no children
       @eligible = false
     else
-      if @user.household_size == 1 && @user.pregnant == false
-        # user has a household size of 1 and is not pregant
+      if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false
         @eligible = false
       else
-        # determine if user lives in correct zipcode
-        if ChicagoEligibleZipcode.all.pluck(:zipcode).include?(@user.zipcode)
-          if @user.three_and_under == true || @user.pregnant == true || @user.three_to_five == true
-            
-            # determine correct ages - returns correct_age_programs
-            if @user.three_and_under == true || @user.pregnant == true 
-              three_and_under_programs = EarlyLearningProgram.where(ages_served: '0 - 2')
-              correct_age_programs = three_and_under_programs 
-            end        
+        if @user.household_size == 1 && @user.pregnant == false
+          # user has a household size of 1 and is not pregant
+          @eligible = false
+        else
+          # determine if user lives in correct zipcode
+          if ChicagoEligibleZipcode.all.pluck(:zipcode).include?(@user.zipcode)
+            if @user.three_and_under == true || @user.pregnant == true || @user.three_to_five == true
+              
+              # determine correct ages - returns correct_age_programs
+              if @user.three_and_under == true || @user.pregnant == true 
+                three_and_under_programs = EarlyLearningProgram.where(ages_served: '0 - 2')
+                correct_age_programs = three_and_under_programs 
+              end        
 
-            if @user.three_to_five == true
-              three_to_five_programs = EarlyLearningProgram.where(ages_served: '3 - 5')
-              correct_age_programs = three_to_five_programs 
-            end
-          
-            if three_and_under_programs.present? && three_to_five_programs.present?
-              correct_age_programs = EarlyLearningProgram.all
-            end 
-
-              # Eligible prgrams based on criteria and income - returns @eligible_early_learning_programs
-              if @user.foster_parent == true || @user.homeless == true || @user.ssi == true || @user.tanf == true
-      
-                if @user.foster_parent == true || @user.homeless == true
-                  additional_criteria = ["foster care, homeless, ssi or tanf", "foster care or homeless"]
-                  @eligible_early_learning_programs = correct_age_programs.where(additional_criteria: additional_criteria)
-
-                else
-                  @eligible_early_learning_programs = correct_age_programs.where(additional_criteria: "foster care, homeless, ssi or tanf")
-                end
-            
-              else
-              # User is not automatically income eligible 
-                income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
-
-                @user_income_type = []
-                  if @user.gross_monthly_income > income_row.income_type2 # Is there a cap?
-                    @user_income_type = ['Greater than Type 2']
-                  elsif @user.gross_monthly_income <= income_row.income_type2 && @user.gross_monthly_income > income_row.income_type1
-                    @user_income_type = ['Less than Type 2']
-                  elsif @user.gross_monthly_income <= income_row.income_type1
-                    # Type 1 and Type 2 
-                    @user_income_type = ['Less than Type 1', 'Less than Type 2']
-                  end
-
-                  @eligible_early_learning_programs = correct_age_programs.where(income_type: @user_income_type)
+              if @user.three_to_five == true
+                three_to_five_programs = EarlyLearningProgram.where(ages_served: '3 - 5')
+                correct_age_programs = three_to_five_programs 
               end
+            
+              if three_and_under_programs.present? && three_to_five_programs.present?
+                correct_age_programs = EarlyLearningProgram.all
+              end 
 
+                # Eligible prgrams based on criteria and income - returns @eligible_early_learning_programs
+                if @user.foster_parent == true || @user.homeless == true || @user.ssi == true || @user.tanf == true
+        
+                  if @user.foster_parent == true || @user.homeless == true
+                    additional_criteria = ["foster care, homeless, ssi or tanf", "foster care or homeless"]
+                    @eligible_early_learning_programs = correct_age_programs.where(additional_criteria: additional_criteria)
+
+                  else
+                    @eligible_early_learning_programs = correct_age_programs.where(additional_criteria: "foster care, homeless, ssi or tanf")
+                  end
+              
+                else
+                # User is not automatically income eligible 
+                  income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
+
+                  @user_income_type = []
+                    if @user.gross_monthly_income > income_row.income_type2 # Is there a cap?
+                      @user_income_type = ['Greater than Type 2']
+                    elsif @user.gross_monthly_income <= income_row.income_type2 && @user.gross_monthly_income > income_row.income_type1
+                      @user_income_type = ['Less than Type 2']
+                    elsif @user.gross_monthly_income <= income_row.income_type1
+                      # Type 1 and Type 2 
+                      @user_income_type = ['Less than Type 1', 'Less than Type 2']
+                    end
+
+                    @eligible_early_learning_programs = correct_age_programs.where(income_type: @user_income_type)
+                end
+
+            else
+              # user does not have a child of the correct age
+              @eligible = false
+            end
           else
-            # user does not have a child of the correct age
+            # user does not live in Chicago zipcodes
             @eligible = false
           end
-        else
-          # user does not live in Chicago zipcodes
-          @eligible = false
-        end
-      end # ends household size 1 and not pregnant
+        end # ends household size 1 and not pregnant
+      end # end user only has a 6 to 12 year old
     end # ends user has no children
 
     # ADDITIONAL DATA STORAGE
@@ -221,102 +261,131 @@ class EarlyLearningProgramsController < ApplicationController
       parsed_data = JSON.parse(raw_data)
       @all_eligible_locations = []
 
-      # ADD AGE FILERS HERE 
-
-      # Eligible Programs
+      # Filter by Eligibility
       parsed_data.each do |location|
         if @user.head_start_childcare_collaboration == true || @user.head_start_preschool_childcare_collaboration == true 
           if location["program_information"].include?("Head Start") && location["program_information"].exclude?("CPS Based") && location["weekday_availability"].include?("Full Day")
             @all_eligible_locations.push(location)
           end
         end
-
         if @user.preschool_for_all_childcare_collaboration == true 
           if location["program_information"].exclude?("Head Start") && location["program_information"].exclude?("CPS Based") && location["weekday_availability"].include?("Full Day")
             @all_eligible_locations.push(location)
           end
         end
-
         if @user.prevention_initiative_home_visiting_0to2 == true 
           if location["program_information"].include?("Home Visiting") && location["program_information"].exclude?("Head Start") && location["program_information"].exclude?("Early Head Start") 
             @all_eligible_locations.push(location)
           end
         end
-
         if @user.school_based_no_co_pay_full_day == true || @user.school_based_co_pay_full_day == true
           if location["program_information"].include?("CPS Based") && location["program_information"].include?("CPS Based, Head Start") && location["weekday_availability"].include?("Full Day")
             @all_eligible_locations.push(location)
           end
         end 
-
         if @user.school_based_no_co_pay_half_day == true || @user.school_based_co_pay_half_day == true
           if location["program_information"].include?("CPS Based") || location["program_information"].include?("CPS Based, Head Start") && location["weekday_availability"].include?("Part Day")
              @all_eligible_locations.push(location)
           end
         end
-
         if @user.head_start_center_based_half_day_3to5 == true 
           if location["program_information"].include?("Head Start") && location["program_information"].exclude?("CPS Based") && location["weekday_availability"].include?("Full Day")
             @all_eligible_locations.push(location)
           end
         end
-
         if @user.early_head_start_childcare_collaboration == true 
           if location["program_information"].include?("Early Head Start") && location["weekday_availability"].include?("Full Day")
             @all_eligible_locations.push(location)
           end
         end
-
         if @user.prevention_initiative_childcare_collaboration == true 
           if location["program_information"].include?("Community Based") && location["program_information"].exclude?("Head Start")&& location["program_information"].exclude?("Early Head Start") && location["weekday_availability"].include?("Full Day")
             @all_eligible_locations.push(location)
           end
         end
-
         if @user.early_head_start_home_visiting_0to2 == true
           if location["program_information"].include?("Early Head Start") && location["program_information"].include?("Home Visiting") 
             @all_eligible_locations.push(location)
           end
         end
-
         if @user.head_start_home_visting_3to5 == true
           if location["program_information"].include?("Head Start") && location["program_information"].include?("Home Visiting")
             @all_eligible_locations.push(location)
           end 
         end
-
         if @user.head_start_school_based_half_day_3to5 == true
           if location["program_information"].include?("CPS Based") && location["program_information"].include?("Head Start") && location["weekday_availability"].include?("Part Day")
             @all_eligible_locations.push(location)
           end
         end
-
         if @user.head_start_school_based_full_day_3to5 == true
           if location["program_information"].include?("CPS Based") && location["program_information"].include?("Head Start") && location["weekday_availability"].include?("Full Day")
             @all_eligible_locations.push(location)
           end
         end
       end
-
       @eligible_locations = @all_eligible_locations.uniq
 
-
-      # Filter by Zipcode
-      @eligible_locations_in_zip = []
+      # Filter by Age
+      @eligible_locations_ages = []
       @eligible_locations.each do |location|
-        if @user.preferred_zipcode.present?
-          if location["zip"].include?(@user.preferred_zipcode)
-            @eligible_locations_in_zip.push(location)
+        if @user.three_and_under == true && @user.three_to_five == true
+          if location["ages_0_3"] == true && location["ages_3_5"] == true
+            @eligible_locations_ages.push(location)
           end
-        else
-          if location["zip"].include?(@user.zipcode)
-            @eligible_locations_in_zip.push(location)
+        elsif @user.pregnant == true && @user.three_to_five == true
+          if location["ages_0_3"] == true && location["ages_3_5"] == true
+            @eligible_locations_ages.push(location)
+          end
+        elsif @user.three_and_under == true || @user.pregnant == true
+          if location["ages_0_3"] == true
+            @eligible_locations_ages.push(location)
+          end
+        elsif @user.three_to_five == true
+          if location["ages_3_5"] == true
+            @eligible_locations_ages.push(location)
           end
         end
       end
 
-      # If there are not 3 locations in zipcode
-      if @eligible_locations_in_zip.length < 3
+      # Filter by Length of Day 
+      @eligible_locations_ages_day = []
+      @eligible_locations_ages.each do |location|
+        if @user.no_duration_preference == true 
+          @eligible_locations_ages_day = @eligible_locations_ages
+        elsif @user.full_day == true
+          if location["weekday_availability"].include?("Full Day")
+            @eligible_locations_ages_day.push(location)
+          end
+        elsif @user.half_day == true
+          if location["weekday_availability"].include?("Part Day")
+            @eligible_locations_ages_day.push(location)
+          end
+        elsif @user.home_visiting == true
+          if location["program_information"].include?("Home Visiting")
+            @eligible_locations_ages_day.push(location)
+          end
+        else
+          @eligible_locations_ages_day = @eligible_locations_ages
+        end    
+      end
+
+      # Filter by Zipcode
+      @eligible_locations_ages_day_zip = []
+      @eligible_locations_ages_day.each do |location|
+        if @user.preferred_zipcode.present?
+          if location["zip"].include?(@user.preferred_zipcode)
+            @eligible_locations_ages_day_zip.push(location)
+          end
+        else
+          if location["zip"].include?(@user.zipcode)
+            @eligible_locations_ages_day_zip.push(location)
+          end
+        end
+      end
+
+      # Filter by nearby zipcodes if there are not 3 locations in zipcode
+      if @eligible_locations_ages_day_zip.length < 3
         if @user.preferred_zipcode.present?
           eligible_zipcode = ChicagoEligibleZipcode.find_by(zipcode: @user.preferred_zipcode)
         else
@@ -326,138 +395,144 @@ class EarlyLearningProgramsController < ApplicationController
         nearby_zipcodes = ChicagoEligibleZipcode.near([eligible_zipcode.latitude, eligible_zipcode.longitude], 10, :order => "distance")
 
         nearby_zipcodes.each do |nearby_zipcode|
-          @eligible_locations.each_with_index do |location, index|
+          @eligible_locations_ages_day.each_with_index do |location, index|
             if index == 0
             else
               if location["zip"].include?(nearby_zipcode.zipcode)
-                @eligible_locations_in_zip.push(location)
+                @eligible_locations_ages_day_zip.push(location)
               end
-              break if @eligible_locations_in_zip.uniq.count >= 3
+              break if @eligible_locations_ages_day_zip.uniq.count >= 3
             end
           end
         end  
-        @eligible_locations_in_zip = @eligible_locations_in_zip.uniq
+        @eligible_locations_ages_day_zip = @eligible_locations_ages_day_zip.uniq
       end
 
-      if @eligible_locations_in_zip.length == 3
-        @referral_centers = @eligible_locations_in_zip
+      if @eligible_locations_ages_day_zip.length == 3
+        @referral_centers = @eligible_locations_ages_day_zip
       else
-        # Filter by Day 
-        @eligible_locations_in_zip_preferred_duration = []
-        if @user.preferred_duration == "No Preference"
-          @eligible_locations_in_zip_preferred_duration = @eligible_locations_in_zip
-        else
-          @eligible_locations_in_zip.each do |location|
-            if @user.preferred_duration == "Half Day (2 or 3 hours)"
-              if location["weekday_availability"].include?("Part Day")
-                @eligible_locations_in_zip_preferred_duration.push(location)
-              end
-            elsif @user.preferred_duration == "Full Day (6 hours or more)"
-              if location["weekday_availability"].include?("Full Day")
-                @eligible_locations_in_zip_preferred_duration.push(location)
-              end
-            elsif @user.preferred_duration == "Home Visiting"
-              if location["program_information"].include?("Home Visiting")
-                @eligible_locations_in_zip_preferred_duration.push(location)
-              end
-            end
-          end
-        end
 
-        if @eligible_locations_in_zip_preferred_duration.length == 3
-          @referral_centers = @eligible_locations_in_zip_preferred_duration
-        elsif @eligible_locations_in_zip_preferred_duration.length < 3
-          # find locations nearby that are not in the preferred duration
-          @referral_centers = @eligible_locations_in_zip_preferred_duration
-
-          difference = 3 - @eligible_locations_in_zip_preferred_duration.length.to_i 
-          non_duplicate_centers = @eligible_locations_in_zip - @eligible_locations_in_zip_preferred_duration
-          random_additional_centers =  non_duplicate_centers.sample(difference)
-         
-          @referral_centers = @referral_centers + random_additional_centers
-         
-        else
-
-          # Filter by language
-          @eligible_locations_in_zip_preferred_duration_language = []
-
+        # Filter by language
+        @eligible_locations_ages_day_zip_language = []
           if @user.bilingual_language == nil
-            @eligible_locations_in_zip_preferred_duration_language = @eligible_locations_in_zip_preferred_duration
+            @eligible_locations_ages_day_zip_language = @eligible_locations_ages_day_zip
           else
-            @eligible_locations_in_zip_preferred_duration.each do |location|
+            @eligible_locations_ages_day_zip.each do |location|
               if @user.bilingual_language == "Spanish"
                 if location["languages_other_than_english"].present? && location["languages_other_than_english"].include?("Spanish")
-                  @eligible_locations_in_zip_preferred_duration_language.push(location)
+                  @eligible_locations_ages_day_zip_language.push(location)
                 end
               elsif @user.bilingual_language == "Mandarin"
                 if location["languages_other_than_english"].present? 
                   if location["languages_other_than_english"].include?("Chinese") || location["languages_other_than_english"].include?("Cantonese") || location["languages_other_than_english"].include?("Cantinese")
-                    @eligible_locations_in_zip_preferred_duration_language.push(location)
+                    @eligible_locations_ages_day_zip_language.push(location)
                   end
                 end
               elsif @user.bilingual_language == "Yoruba"
                 if location["languages_other_than_english"].present? && location["languages_other_than_english"].include?("Uraba")
-                  @eligible_locations_in_zip_preferred_duration_language.push(location)
+                  @eligible_locations_ages_day_zip_language.push(location)
                 end
               else
                 if location["languages_other_than_english"].present? && location["languages_other_than_english"].include?(@user.bilingual_language)
-                   @eligible_locations_in_zip_preferred_duration_language.push(location)
+                   @eligible_locations_ages_day_zip_language.push(location)
                 end
               end
             end
           end
 
-          if @eligible_locations_in_zip_preferred_duration_language.length == 3
-            @referral_centers = @eligible_locations_in_zip_preferred_duration_language
-          elsif @eligible_locations_in_zip_preferred_duration_language.length < 3
+          if @eligible_locations_ages_day_zip_language.length == 3
+            @referral_centers = @eligible_locations_ages_day_zip_language
+          elsif @eligible_locations_ages_day_zip_language.length < 3
             # find locations nearby that are not in the preferred duration
-            @referral_centers = @eligible_locations_in_zip_preferred_duration_language
+            @referral_centers = @eligible_locations_ages_day_zip_language
 
-            difference = 3 - @eligible_locations_in_zip_preferred_duration_language.length.to_i 
-            non_duplicate_centers = @eligible_locations_in_zip_preferred_duration - @eligible_locations_in_zip_preferred_duration_language
+            difference = 3 - @eligible_locations_ages_day_zip_language.length.to_i 
+            non_duplicate_centers = @eligible_locations_ages_day_zip - @eligible_locations_ages_day_zip_language
             random_additional_centers =  non_duplicate_centers.sample(difference)
 
             @referral_centers = @referral_centers + random_additional_centers
-            
+
           else
 
-            # Filter by frequency
-            @eligible_locations_in_zip_preferred_duration_language_frequency = []
-            if @user.preferred_frequency == "No Preference"
-              @eligible_locations_in_zip_preferred_duration_language_frequency = @eligible_locations_in_zip_preferred_duration_language
-            else
-              @eligible_locations_in_zip_preferred_duration_language.each do |location|
-                if @user.preferred_frequency == "Part-week (2 to 3 days)"
-                  if location["weekday_availability"].include?("Part Week")
-                    @eligible_locations_in_zip_preferred_duration_language_frequency.push(location)
-                  end
-                elsif @user.preferred_frequency == "Full-week (4 to 5 days)"
-                  if location["weekday_availability"].include?("Full Week")
-                    @eligible_locations_in_zip_preferred_duration_language_frequency.push(location)
+            # Filter by Quality
+            @eligible_locations_ages_day_zip_language_quality = []
+            puts "I made it to quality"
+              gold_locations = []
+              silver_locations = [] 
+              bronze_locations = []
+
+              @eligible_locations_ages_day_zip_language.each do |location|
+                if location["quality_rating"].present? && location["quality_rating"] == "Gold"
+                  gold_locations.push(location)
+                end
+                if location["quality_rating"].present? && location["quality_rating"] == "Silver"
+                  silver_locations.push(location)
+                end
+                if location["quality_rating"].present? && location["quality_rating"] == "Bronze"
+                  bronze_locations.push(location)
+                end
+              end
+
+              puts "gold: #{gold_locations.length}"
+              puts "silver: #{silver_locations.length}"
+              puts "bronze: #{bronze_locations.length}"
+
+              if gold_locations.length >= 3
+                @eligible_locations_ages_day_zip_language_quality = gold_locations
+              elsif (gold_locations.length + silver_locations.length) >= 3
+                @eligible_locations_ages_day_zip_language_quality = gold_locations + silver_locations
+              elsif (gold_locations.length + silver_locations.length + bronze_locations.length) >= 3
+                @eligible_locations_ages_day_zip_language_quality = gold_locations + silver_locations + bronze_locations
+              else
+                @eligible_locations_ages_day_zip_language_quality = @eligible_locations_ages_day_zip_language
+              end
+
+              # Filter by Length of Week
+              @eligible_locations_ages_day_zip_language_quality_week = []
+              if @eligible_locations_ages_day_zip_language_quality.length == 3
+                @eligible_locations_ages_day_zip_language_quality_week == @eligible_locations_ages_day_zip_language_quality
+              else
+                
+               
+                if @user.no_duration_preference == true
+                  @eligible_locations_ages_day_zip_language_quality_week = @eligible_locations_ages_day_zip_language_quality
+                else
+                  @eligible_locations_ages_day_zip_language_quality.each do |location|
+                    if @user.part_week == true
+                      if location["weekday_availability"].include?("Part Week")
+                        @eligible_locations_ages_day_zip_language_quality_week.push(location)
+                      end
+                    elsif @user.full_week == true
+                      if location["weekday_availability"].include?("Full Week")
+                        @eligible_locations_ages_day_zip_language_quality_week.push(location)
+                      end
+                    end
                   end
                 end
               end
-            end
 
-            if @eligible_locations_in_zip_preferred_duration_language_frequency == 3
-              @referral_centers = @eligible_locations_in_zip_preferred_duration_language_frequency
-            elsif @eligible_locations_in_zip_preferred_duration_language_frequency.length < 3
-              # find locations nearby that are not in the preferred duration
-              @referral_centers = @eligible_locations_in_zip_preferred_duration_language_frequency
               
-              difference = 3 - @eligible_locations_in_zip_preferred_duration_language_frequency.length.to_i 
-              non_duplicate_centers = @eligible_locations_in_zip_preferred_duration_language - @eligible_locations_in_zip_preferred_duration_language_frequency
-              random_additional_centers =  non_duplicate_centers.sample(difference)
+              if @eligible_locations_ages_day_zip_language_quality_week.length == 3
+                @referral_centers = @eligible_locations_ages_day_zip_language_quality_week
 
-              @referral_centers = referral_centers + random_additional_centers
+              elsif @eligible_locations_ages_day_zip_language_quality_week.length < 3
+                # find locations nearby that are not in the preferred duration
+                @referral_centers = @eligible_locations_ages_day_zip_language_quality_week
+                
+                difference = 3 - @eligible_locations_ages_day_zip_language_quality_week.length.to_i 
+                non_duplicate_centers = @eligible_locations_ages_day_zip_language_quality - @eligible_locations_ages_day_zip_language_quality_week
+                random_additional_centers =  non_duplicate_centers.sample(difference)
 
-            else
-              @referral_centers = @eligible_locations_in_zip_preferred_duration_language_frequency
-              
-            end # end preferred frequency
-          end # ends language
-        end # ends the eligibile locations in zip with preferred duration if statement
-      end # ends the eligible locations in zip if statement
+                @referral_centers = @referral_centers + random_additional_centers
+
+              else
+                @referral_centers = @eligible_locations_ages_day_zip_language_quality_week
+              end
+
+
+            
+          end # ends the quality if statement 
+      end # ends the language if statement
     end # ends the eligible if statement
 
     # CCAP ELIGIBILITY
@@ -487,9 +562,24 @@ class EarlyLearningProgramsController < ApplicationController
     end
     @user.save 
 
-    if params[:employment].present? && params[:other_zipcode] #&& params[:preferred_duration]
+    if params[:employment].present? && params[:other_zipcode] 
+      # age questions
       if params[:zero_to_three].present? || params[:three_to_five].present? || params[:six_to_twelve].present? || params[:pregnant].present? || params[:no_children].present?
-        if params[:foster_parent].present? || params[:homeless].present? || params[:ssi].present? || params[:tanf].present? || params[:snap_or_medicaid].present? || params[:teen_parent].present? || params[:special_needs].present? || params[:none_of_the_above].present?
+        # categorical eligibility questions
+        if params[:foster_parent].present? || params[:homeless].present? || params[:ssi].present? || params[:tanf].present? || params[:teen_parent].present? || params[:special_needs].present? || params[:none_of_the_above].present?
+          # homeless questions
+          if params[:homeless_fixed_residence].present? || params[:homeless_hotels].present? || params[:homeless_public_place].present? || params[:homeless_shelters].present? || params[:not_homeless].present?
+            # preferred duration questions
+            if params[:half_day].present? || params[:full_day].present? || params[:part_week].present? || params[:full_week].present? || params[:home_visiting].present? || params[:no_duration_preference].present?
+
+            else
+              flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
+              render "new"
+            end
+          else
+            flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
+            render "new"
+          end
         else
           flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
           render "new"
