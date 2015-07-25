@@ -487,7 +487,7 @@ class EarlyLearningProgramsController < ApplicationController
     end
     @user.save 
 
-    if params[:employment].present? && params[:other_zipcode] && params[:preferred_duration]
+    if params[:employment].present? && params[:other_zipcode] #&& params[:preferred_duration]
       if params[:zero_to_three].present? || params[:three_to_five].present? || params[:six_to_twelve].present? || params[:pregnant].present? || params[:no_children].present?
         if params[:foster_parent].present? || params[:homeless].present? || params[:ssi].present? || params[:tanf].present? || params[:snap_or_medicaid].present? || params[:teen_parent].present? || params[:special_needs].present? || params[:none_of_the_above].present?
         else

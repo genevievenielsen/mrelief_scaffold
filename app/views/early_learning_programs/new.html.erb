@@ -71,9 +71,6 @@
           <input type="checkbox" name="foster_parent" value="foster_parent" id="foster_parent"
             <% if @user.foster_parent != nil && @user.foster_parent == true %>checked<% end %>>  
             I am a foster parent<br>
-          <input type="checkbox" name="homeless" value="homeless" id="homeless"
-            <% if @user.homeless != nil && @user.homeless == true %>checked<% end %>> 
-            I am homeless<br>
           <input type="checkbox" name="ssi" value="ssi" id="ssi"
             <% if @user.ssi != nil && @user.ssi == true %>checked<% end %>> 
             My family receives SSI<br>
@@ -82,16 +79,40 @@
             My family receives TANF<br>
           <input type="checkbox" name="teen_parent" value="teen_parent" id="teen_parent"
             <% if @user.teen_parent != nil && @user.teen_parent == true %>checked<% end %>>  
-            I am a teen parent who is enrolled full-time in elementary, high school or GED classes to obtain a high school degree or its equivalent <!-- <a data-toggle="popover" data-content="A teen is from 13 through 19" data-placement="right" style="border: 0px; color: #4582ec;" >Learn More</a> --><br>
+            I am a teen parent who is enrolled full-time in elementary, high school or GED classes to obtain a high school degree or its equivalent<br>
           <input type="checkbox" name="special_needs" value="special_needs" id="special_needs"
             <% if @user.special_needs != nil && @user.special_needs == true %>checked<% end %>> 
-            I care for a special needs child<br>
+            I care for a child with special needs, an Individualized Education Plan (IEP), or Individualized Family Service Plan (IFSP)<br>
           <input type="checkbox" name="none_of_the_above" value="none_of_the_above" id="none_of_the_above"
             <% if @user.none_of_the_above != nil && @user.none_of_the_above == true %>checked<% end %>> 
             None of the Above<br>
         </div>
       </div>
     </div>
+
+    <!-- Homelessnes question -->
+      <div class="row">
+        <div class="col-md-9 col-sm-10 col-xs-12">
+          <label class="allthatapply">Does your family often find itself in any of the following living situations?</label>
+          <div class="radio-button" id="select_all_questions">
+            <input type="checkbox" name="foster_parent" value="foster_parent" id="foster_parent"
+              <% if @user.foster_parent != nil && @user.foster_parent == true %>checked<% end %>>  
+              We lack a fixed, regular nighttime residence and may be sharing a residence with a family in a similar situation<br>
+            <input type="checkbox" name="ssi" value="ssi" id="ssi"
+              <% if @user.ssi != nil && @user.ssi == true %>checked<% end %>> 
+              We have recently been living in motels, hotels, trailer parks or camping grounds due to lack of alternative accommodations<br>
+            <input type="checkbox" name="tanf" value="tanf" id="tanf"
+              <% if @user.tanf != nil && @user.tanf == true %>checked<% end %>> 
+              We have lived in a private or public place not designed for or ordinarily used as a regular sleeping accommodation<br>
+            <input type="checkbox" name="teen_parent" value="teen_parent" id="teen_parent"
+              <% if @user.teen_parent != nil && @user.teen_parent == true %>checked<% end %>>  
+              We are living in emergency or transitional shelters or abandoned in hospitals<br>
+            <input type="checkbox" name="none_of_the_above" value="none_of_the_above" id="none_of_the_above"
+              <% if @user.none_of_the_above != nil && @user.none_of_the_above == true %>checked<% end %>> 
+              None of the Above<br>
+          </div>
+        </div>
+      </div>
    
 
   <!-- Form for employment -->
