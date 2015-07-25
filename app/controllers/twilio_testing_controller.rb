@@ -81,7 +81,7 @@ class TwilioTestingController < ApplicationController
       # error 
       else
          message = "Oops looks like there is a typo! Please type a, b, c, d or a cominbation that describes your household."
-         session["counter"] = 1
+         session["counter"] = session["counter"] - 1
          @user.completed = false
          @user.save
       end
@@ -105,7 +105,7 @@ class TwilioTestingController < ApplicationController
 
       else
         message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
-        session["counter"] = 1
+        session["counter"] = session["counter"] - 1
       end
 
       @user.completed = false
@@ -137,7 +137,7 @@ class TwilioTestingController < ApplicationController
    if session["page"] == "categorical_income_eligibility" 
     if session["counter"] == 4 || session["counter"] == 6
     @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
-    foster_temporary_ssi = params[:Body].strip 
+    foster_temporary_ssi = params[:Body].strip.downcase
 
       if foster_temporary_ssi == "yes"
        @user.foster_temporary_ssi == true
@@ -151,7 +151,7 @@ class TwilioTestingController < ApplicationController
 
       else
         message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
-        session["counter"] = 1
+        session["counter"] = session["counter"] - 1
       end
       @user.completed = false
     end
@@ -246,7 +246,7 @@ class TwilioTestingController < ApplicationController
 
      else
        message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
-       session["counter"] = 1
+       session["counter"] = session["counter"] - 1
        @user.completed = false
      end
     
@@ -280,7 +280,7 @@ class TwilioTestingController < ApplicationController
        @user.completed = false
      else
        message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
-       session["counter"] = 1
+       session["counter"] = session["counter"] - 1
        @user.completed = false
      end
 
@@ -325,7 +325,7 @@ class TwilioTestingController < ApplicationController
         end
      else
        message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
-       session["counter"] = 1
+       session["counter"] = session["counter"] - 1
        @user.completed = false
      end
 
