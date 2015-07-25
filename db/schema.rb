@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150725154805) do
+ActiveRecord::Schema.define(version: 20150725181929) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -252,6 +252,7 @@ ActiveRecord::Schema.define(version: 20150725154805) do
     t.datetime "updated_at"
     t.boolean  "early_learning_eligible", default: false
     t.boolean  "ccap_eligible",           default: false
+    t.boolean  "foster_temporary_ssi",    default: false
   end
 
   create_table "early_learning_income_cutoffs", force: true do |t|
