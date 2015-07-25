@@ -169,7 +169,6 @@ class EarlyLearningProgramsController < ApplicationController
                   if @user.foster_parent == true || @homeless == true
                     additional_criteria = ["foster care, homeless, ssi or tanf", "foster care or homeless"]
                     @eligible_early_learning_programs = correct_age_programs.where(additional_criteria: additional_criteria)
-
                   else
                     @eligible_early_learning_programs = correct_age_programs.where(additional_criteria: "foster care, homeless, ssi or tanf")
                   end
@@ -187,7 +186,6 @@ class EarlyLearningProgramsController < ApplicationController
                       # Type 1 and Type 2 
                       @user_income_type = ['Less than Type 1', 'Less than Type 2']
                     end
-
                     @eligible_early_learning_programs = correct_age_programs.where(income_type: @user_income_type)
                 end
 
@@ -460,7 +458,6 @@ class EarlyLearningProgramsController < ApplicationController
 
             # Filter by Quality
             @eligible_locations_ages_day_zip_language_quality = []
-            puts "I made it to quality"
               gold_locations = []
               silver_locations = [] 
               bronze_locations = []

@@ -54,7 +54,7 @@
           <li>Program Information: <%= center["program_information"] %></li>
         <% end %>
 
-        <% if center["languages_other_than_english"].present? %>
+        <% if center["languages_other_than_english"].present? && center["languages_other_than_english"] != "English" %>
           <li>Languages other than English: <%= center["languages_other_than_english"] %></li>
         <% end %>
 
