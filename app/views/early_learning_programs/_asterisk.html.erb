@@ -1,0 +1,30 @@
+<% if @ccap_eligible == true %>
+  <% if center["program_information"].include?("Head Start") && center["program_information"].exclude?("CPS Based") && center["weekday_availability"].include?("Full Day") %>
+      **
+      <% @eligible_asterisk = true %>
+  <% elsif center["program_information"].exclude?("Head Start") && center["program_information"].exclude?("CPS Based") && center["weekday_availability"].include?("Full Day") %>
+      **
+      <% @eligible_asterisk = true %>
+  <% elsif center["program_information"].include?("Early Head Start") && center["weekday_availability"].include?("Full Day") %>
+      **
+      <% @eligible_asterisk = true %>
+  <% elsif center["program_information"].include?("Community Based") && center["program_information"].exclude?("Head Start")&& center["program_information"].exclude?("Early Head Start") && center["weekday_availability"].include?("Full Day") %>
+      **
+      <% @eligible_asterisk = true %>
+  <% end %>
+
+<% elsif @user.ccap_eligible == false %>
+  <% if center["program_information"].include?("Head Start") && center["program_information"].exclude?("CPS Based") && center["weekday_availability"].include?("Full Day") %>
+       **
+      <% @ineligible_asterisk = true %>
+  <% elsif center["program_information"].exclude?("Head Start") && center["program_information"].exclude?("CPS Based") && center["weekday_availability"].include?("Full Day") %>
+       **
+      <% @ineligible_asterisk = true %>
+  <% elsif center["program_information"].include?("Early Head Start") && center["weekday_availability"].include?("Full Day") %>
+     **
+      <% @ineligible_asterisk = true %>
+  <% elsif center["program_information"].include?("Community Based") && center["program_information"].exclude?("Head Start")&& center["program_information"].exclude?("Early Head Start") && center["weekday_availability"].include?("Full Day") %>
+     **
+      <% @ineligible_asterisk = true %>
+  <% end %>
+<% end %>

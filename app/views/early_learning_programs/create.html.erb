@@ -39,8 +39,9 @@
     <% @top_referrals.each do |center| %>
     <div class="col-md-12 col-sm-12 col-lg-4">
       <ul>
-        <li class="laf-headline"><%= center["site_name"] %></li>
-        <li><%#= center["program_information"] %></li>
+        <li class="laf-headline"><%= center["site_name"] %> 
+          <%= render "early_learning_programs/asterisk", center: center %>
+        </li>
         <li> <%= center["address"] %></li>
         <li><%= center["city"].strip %>, <%= center["state"] %> <%= center["zip"] %></li>
         <li>Phone Number: <%= center["phone_number"] %></li>
@@ -67,42 +68,27 @@
           <% end %>
         <% end %>
 
-        <% if @ccap_eligible == true %>
-          <% if center["program_information"].include?("Head Start") && center["program_information"].exclude?("CPS Based") && center["weekday_availability"].include?("Full Day") %>
-              <li>This is a CCAP Compatible Program, and our results show that you also may qualify for CCAP.</li>
-          <% elsif center["program_information"].exclude?("Head Start") && center["program_information"].exclude?("CPS Based") && center["weekday_availability"].include?("Full Day") %>
-              <li>This is a CCAP Compatible Program, and our results show that you also may qualify for CCAP.</li>
-          <% elsif center["program_information"].include?("Early Head Start") && center["weekday_availability"].include?("Full Day") %>
-            <li>This is a CCAP Compatible Program, and our results show that you also may qualify for CCAP.</li>
-          <% elsif center["program_information"].include?("Community Based") && center["program_information"].exclude?("Head Start")&& center["program_information"].exclude?("Early Head Start") && center["weekday_availability"].include?("Full Day") %>
-            <li>This is a CCAP Compatible Program, and our results show that you also may qualify for CCAP.</li>
-          <% end %>
-
-        <% elsif @user.ccap_eligible == false %>
-        <%= puts "I made it here" %>
-          <% if center["program_information"].include?("Head Start") && center["program_information"].exclude?("CPS Based") && center["weekday_availability"].include?("Full Day") %>
-              <li>This is a CCAP Compatible Program, and our results show that you also may not qualify for CCAP.</li>
-          <% elsif center["program_information"].exclude?("Head Start") && center["program_information"].exclude?("CPS Based") && center["weekday_availability"].include?("Full Day") %>
-              <li>This is a CCAP Compatible Program, and our results show that you also may not qualify for CCAP.</li>
-          <% elsif center["program_information"].include?("Early Head Start") && center["weekday_availability"].include?("Full Day") %>
-            <li>This is a CCAP Compatible Program, and our results show that you also may not qualify for CCAP.</li>
-          <% elsif center["program_information"].include?("Community Based") && center["program_information"].exclude?("Head Start")&& center["program_information"].exclude?("Early Head Start") && center["weekday_availability"].include?("Full Day") %>
-            <li>This is a CCAP Compatible Program, and our results show that you also may not qualify for CCAP.</li>
-          <% end %>
-
-        <% end %>
 
         <% @top_referral_keys = "#{@top_referral_keys}" + center["key"] + "," %>
       </ul>
       </div>
     <% end %>
   </div>
+  <div class="row">
+    <div class="col-md-12">
+      <% if @eligible_asterisk == true %>
+        <p>** This program provides full day care supported by the state Child Care Assistance Program (CCAP). Based on the information you provided, you may qualify for CCAP. Please contact the agency for more information.</p>
+      <% elsif @ineligible_asterisk == true %>
+      <p>** This program provides full day care supported by the state Child Care Assistance Program (CCAP). Based on the information you provided, you may not qualify for CCAP. Please contact the agency for more information.</p>
+      <% end %>
+    </div>
+  </div>
    <br>
    <br>
    <br>  
    <div class="row">
      <div class="col-md-12">
-       <a href="http://chicagoearlylearning.org/starred/<%= @top_referral_keys %>/" target="_blank" class="button">Learn more about these centers on the Early Learning Portal →</a>
+       <a href="http://chicagoearlylearning.org/starred/<%= @top_referral_keys.chop %>/" target="_blank" class="button">Learn more about these centers on the Early Learning Portal →</a>
      </div>
    </div>
    <br>
