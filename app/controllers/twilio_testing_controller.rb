@@ -89,7 +89,7 @@ class TwilioTestingController < ApplicationController
 
     # Pregnancy question
     if session["page"] == "pregnant" && session["counter"] == 3
-      @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
+      @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
       pregnant = params[:Body].strip.downcase
       session["counter"] += 1 # +1 to optional questions
       # Data Storage
@@ -115,7 +115,7 @@ class TwilioTestingController < ApplicationController
    # Zipcode question
    if session["page"] == "zipcode" 
     if session["counter"] == 3 || session["counter"] == 5
-    @user = EarlyLearningDataTwilio.find_or_create_by(:phone_number => params[:From], :completed => false)
+    @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
     @user.zipcode = params[:Body].strip
 
     if ChicagoEligibleZipcode.all.pluck(:zipcode).include?(@user.zipcode)
