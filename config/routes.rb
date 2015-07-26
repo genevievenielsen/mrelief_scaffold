@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   get ':controller/:action'
   get ':locale/:controller/:action'
 
-  post ':controller/:action'
-  post ':locale/:controller/:action'
+  # post ':controller/:action'
+  # post ':locale/:controller/:action'
 
   # twilio english 
   get("/twilio", { :controller => "send_text", :action => "send_text_message"})
