@@ -4,15 +4,15 @@
     .row
       .col-md-7
         %h1= t.elp.ineligible_title | "Results: Something else in mind!"
-        %p You likely do not qualify for Early Learning Programs.
+        %p= t.elp.ineligible_subtitle |  "You likely do not qualify for Early Learning Programs."
         .resources
           %h3 Resources
           %p If you live in Illinois, call the Illinois Action For Children Community Referral Team at 312-299-1690 for info on other opportunities.
   - else
     .row
       .col-md-7
-        %h1 Results: You may be in luck!
-        %p Below are Early Learning Programs that you are eligible for near you.
+        %h1= t.elp.eligible_title | "Results: You may be in luck!"
+        %p= t.elp.eligible_subtitle | "Below are Early Learning Programs that you are eligible for near you."
     .row
       .col-md-12
         %h1 Early Learning Centers Near You

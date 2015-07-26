@@ -231,5 +231,9 @@ es:
     see_if: Ver si califico
 
     ineligible_title: Resultados- ¡Usted puede calificar!
+    ineligible_subtitle: Usted posiblemente no califica para Programas de aprendizaje temprano de Chicago- Listo Para Aprender
+
+    eligible_title: Resultados- ¡Usted puede ser elegible!
+    eligible_subtitle: A continuación encontrará los Programas de aprendizaje temprano para los que es elegible y que se imparten cerca de donde está.
 
     eligible_ccap: 
