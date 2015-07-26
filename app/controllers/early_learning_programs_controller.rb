@@ -1,4 +1,4 @@
-class EarlyLearningProgramsController < ApplicationController
+  class EarlyLearningProgramsController < ApplicationController
   require 'open-uri'
   require 'json'  
 
@@ -493,57 +493,71 @@ class EarlyLearningProgramsController < ApplicationController
               puts "silver: #{silver_locations.length}"
               puts "bronze: #{bronze_locations.length}"
 
-              if gold_locations.length >= 3
-                @eligible_locations_ages_day_zip_language_quality = gold_locations
-              elsif (gold_locations.length + silver_locations.length) >= 3
-                @eligible_locations_ages_day_zip_language_quality = gold_locations + silver_locations
-              elsif (gold_locations.length + silver_locations.length + bronze_locations.length) >= 3
-                @eligible_locations_ages_day_zip_language_quality = gold_locations + silver_locations + bronze_locations
-              else
-                @eligible_locations_ages_day_zip_language_quality = @eligible_locations_ages_day_zip_language
+              if gold_locations.length > 0
+                @eligible_locations_ages_day_zip_language_quality = @eligible_locations_ages_day_zip_language_quality + gold_locations
               end
 
-              # Filter by Length of Week
-              @eligible_locations_ages_day_zip_language_quality_week = []
-              if @eligible_locations_ages_day_zip_language_quality.length == 3
-                @eligible_locations_ages_day_zip_language_quality_week == @eligible_locations_ages_day_zip_language_quality
+              if @eligible_locations_ages_day_zip_language_quality.length < 3 && silver_locations.length > 0
+                @eligible_locations_ages_day_zip_language_quality = @eligible_locations_ages_day_zip_language_quality + silver_locations
+              end
+
+              if @eligible_locations_ages_day_zip_language_quality.length < 3 && bronze_locations.length > 0
+                @eligible_locations_ages_day_zip_language_quality = @eligible_locations_ages_day_zip_language_quality + bronze_locations
+              end
+
+              if @eligible_locations_ages_day_zip_language_quality.length < 3 
+                # find locations nearby that are licensed
+                @referral_centers = @eligible_locations_ages_day_zip_language_quality
+
+                difference = 3 - @eligible_locations_ages_day_zip_language_quality.length.to_i 
+                non_duplicate_centers = @eligible_locations_ages_day_zip_language - @eligible_locations_ages_day_zip_language_quality
+                random_additional_centers =  non_duplicate_centers.sample(difference)
+
+                @referral_centers = @referral_centers + random_additional_centers
+          
               else
-                
-                if @user.no_duration_preference == true
-                  @eligible_locations_ages_day_zip_language_quality_week = @eligible_locations_ages_day_zip_language_quality
+
+                # Filter by Length of Week
+                @eligible_locations_ages_day_zip_language_quality_week = []
+                if @eligible_locations_ages_day_zip_language_quality.length == 3
+                  @eligible_locations_ages_day_zip_language_quality_week == @eligible_locations_ages_day_zip_language_quality
                 else
-                  @eligible_locations_ages_day_zip_language_quality.each do |location|
-                    if @user.part_week == true
-                      if location["weekday_availability"].include?("Part Week")
-                        @eligible_locations_ages_day_zip_language_quality_week.push(location)
-                      end
-                    elsif @user.full_week == true
-                      if location["weekday_availability"].include?("Full Week")
-                        @eligible_locations_ages_day_zip_language_quality_week.push(location)
+                  
+                  if @user.no_duration_preference == true
+                    @eligible_locations_ages_day_zip_language_quality_week = @eligible_locations_ages_day_zip_language_quality
+                  else
+                    @eligible_locations_ages_day_zip_language_quality.each do |location|
+                      if @user.part_week == true
+                        if location["weekday_availability"].include?("Part Week")
+                          @eligible_locations_ages_day_zip_language_quality_week.push(location)
+                        end
+                      elsif @user.full_week == true
+                        if location["weekday_availability"].include?("Full Week")
+                          @eligible_locations_ages_day_zip_language_quality_week.push(location)
+                        end
                       end
                     end
                   end
                 end
+
+                if @eligible_locations_ages_day_zip_language_quality_week.length == 3
+                  @referral_centers = @eligible_locations_ages_day_zip_language_quality_week
+
+                elsif @eligible_locations_ages_day_zip_language_quality_week.length < 3
+                  # find locations nearby that are not in the preferred duration
+                  @referral_centers = @eligible_locations_ages_day_zip_language_quality_week
+                  
+                  difference = 3 - @eligible_locations_ages_day_zip_language_quality_week.length.to_i 
+                  non_duplicate_centers = @eligible_locations_ages_day_zip_language_quality - @eligible_locations_ages_day_zip_language_quality_week
+                  random_additional_centers =  non_duplicate_centers.sample(difference)
+
+                  @referral_centers = @referral_centers + random_additional_centers
+
+                else
+                  @referral_centers = @eligible_locations_ages_day_zip_language_quality_week
+                end
+
               end
-
-              if @eligible_locations_ages_day_zip_language_quality_week.length == 3
-                @referral_centers = @eligible_locations_ages_day_zip_language_quality_week
-
-              elsif @eligible_locations_ages_day_zip_language_quality_week.length < 3
-                # find locations nearby that are not in the preferred duration
-                @referral_centers = @eligible_locations_ages_day_zip_language_quality_week
-                
-                difference = 3 - @eligible_locations_ages_day_zip_language_quality_week.length.to_i 
-                non_duplicate_centers = @eligible_locations_ages_day_zip_language_quality - @eligible_locations_ages_day_zip_language_quality_week
-                random_additional_centers =  non_duplicate_centers.sample(difference)
-
-                @referral_centers = @referral_centers + random_additional_centers
-
-              else
-                @referral_centers = @eligible_locations_ages_day_zip_language_quality_week
-              end
-
-            
           end # ends the quality if statement 
       end # ends the language if statement
     end # ends the eligible if statement
