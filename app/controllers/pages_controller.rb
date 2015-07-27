@@ -279,7 +279,7 @@ class PagesController < ApplicationController
     end
 
     if @illinois_programs.length > 0 
-      @all_programs = @programs 
+      @all_programs = @programs + @illinois_programs
     else 
       @all_programs = @programs 
     end
