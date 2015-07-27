@@ -137,11 +137,11 @@
     if params[:bilingual] == "yes" || params[:bilingual] == "sí"
       @user.bilingual = "yes"
     elsif params[:bilingual] == "no" 
-      @user.bilingual_language = "no"
+      @user.bilingual = "no"
     end
 
     @user.other_zipcode = params[:other_zipcode]
-    @user.bilingual = params[:bilingual]
+    @user.bilingual_language = params[:bilingual_language]
 
     @user.zipcode = params[:zipcode]
     @user.phone_number = params[:phone_number] if params[:phone_number].present?
