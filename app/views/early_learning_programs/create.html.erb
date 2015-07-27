@@ -43,22 +43,22 @@
         </li>
         <li> <%= center["address"] %></li>
         <li><%= center["city"].strip %>, <%= center["state"] %> <%= center["zip"] %></li>
-        <li> Phone Number: <%= center["phone_number"] %></li>
+        <li> <b>Phone Number: </b><%= center["phone_number"] %></li>
 
          <% if center["weekday_availability"].present? %>
-          <li>Weekday Availability: <%= center["weekday_availability"] %></li>
+          <li><b>Weekday Availability:</b> <%= center["weekday_availability"] %></li>
         <% end %>
 
          <% if center["program_information"].present? %>
-          <li>Program Information: <%= center["program_information"] %></li>
+          <li><b>Program Information:</b> <%= center["program_information"] %></li>
         <% end %>
 
         <% if center["languages_other_than_english"].present? && center["languages_other_than_english"] != "English" %>
-          <li>Languages other than English: <%= center["languages_other_than_english"] %></li>
+          <li><b>Languages other than English:</b> <%= center["languages_other_than_english"] %></li>
         <% end %>
 
         <% if center["quality_rating"].present? %>
-          <li>Quality Rating: <%= center["quality_rating"] %></li>
+          <li><b>Quality Rating:</b> <%= center["quality_rating"] %></li>
         <% end %>
 
         <% if center["url"].present? %>
@@ -67,11 +67,11 @@
 
         <% if center["ages_0_3"] == true || center["ages_3_5"] == true %>
           <% if center["ages_0_3"] == true && center["ages_3_5"] == true %>
-            <li>Ages Served: 0 to 5 years old</li>
+            <li><b>Ages Served:</b> 0 to 5 years old</li>
           <% elsif center["ages_0_3"] == true%>
-            <li>Ages Served: 0 to 2 </li>
+            <li><b>Ages Served:</b> 0 to 2 </li>
           <% elsif center["ages_3_5"] == true %>
-            <li>Ages Served: 3 to 5 </li>
+            <li><b>Ages Served:</b> 3 to 5 </li>
           <% end %>
         <% end %>
 

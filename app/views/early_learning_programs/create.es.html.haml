@@ -35,28 +35,39 @@
               = center["city"].strip
               , #{center["state"]} #{center["zip"]}
             %li
-              Phone Number: #{center["phone_number"]}
+              %b Phone Number:
+              = center["phone_number"]
             - if center["weekday_availability"].present?
               %li
-                Weekday Availability: #{center["weekday_availability"]}
+                %b Weekday Availability:
+                = center["weekday_availability"]
             - if center["program_information"].present?
               %li
-                Program Information: #{center["program_information"]}
+                %b Program Information:
+                = center["program_information"]
             - if center["languages_other_than_english"].present? && center["languages_other_than_english"] != "English"
               %li
-                Languages other than English: #{center["languages_other_than_english"]}
+                %b Languages other than English:
+                = center["languages_other_than_english"]
             - if center["quality_rating"].present?
               %li
-                Quality Rating: #{center["quality_rating"]}
+                %b Quality Rating:
+                = center["quality_rating"]
             - if center["url"].present?
               %li= link_to "Center Website", center["url"], target: "_blank"
             - if center["ages_0_3"] == true || center["ages_3_5"] == true
               - if center["ages_0_3"] == true && center["ages_3_5"] == true
-                %li Ages Served: 0 to 5 years old
+                %li
+                  %b Ages Served:
+                  0 to 5 years old
               - elsif center["ages_0_3"] == true
-                %li Ages Served: 0 to 2
+                %li
+                  %b Ages Served:
+                  0 to 2
               - elsif center["ages_3_5"] == true
-                %li Ages Served: 3 to 5
+                %li
+                  %b Ages Served:
+                  3 to 5
             - if center["program_information"].include?("CPS Based") || center["program_information"].include?("CPS Based, Head Start")
               - if @user.income_type == "[\"Greater than Type 2\"]"
                 %p

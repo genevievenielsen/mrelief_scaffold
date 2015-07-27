@@ -134,9 +134,9 @@
       @user.preferred_zipcode = "no"
     end
 
-    if params[:bilingual_language] == "yes" || params[:bilingual_language] == "sí"
-      @user.bilingual_language = "yes"
-    elsif params[:bilingual_language] == "no" 
+    if params[:bilingual] == "yes" || params[:bilingual] == "sí"
+      @user.bilingual = "yes"
+    elsif params[:bilingual] == "no" 
       @user.bilingual_language = "no"
     end
 
