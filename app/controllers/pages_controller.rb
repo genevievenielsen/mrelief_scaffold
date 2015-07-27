@@ -213,7 +213,7 @@ class PagesController < ApplicationController
     # ILLINOIS PROGRAMS
     @illinois_programs = []
 
-    @child_care = Program.find_by(:name_en => "Child Care Voucher")
+    @child_care = Program.find_by(:name_en => "Child Care Assistance Program")
     if params[:child_care_vouchers].present?
       @community_resources.push("child care")
       @ineligible_or_receiving_programs.push(@child_care)
@@ -278,7 +278,12 @@ class PagesController < ApplicationController
       @ineligible_or_receiving_programs_names.push(program.name_en)
     end
 
-    @all_programs = @programs + @illinois_programs
+    if @illinois_programs.length > 0 
+      @all_programs = @programs 
+    else 
+      @all_programs = @programs 
+    end
+    
   end
 
   def community_resources
