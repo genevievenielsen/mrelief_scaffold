@@ -278,11 +278,10 @@ class PagesController < ApplicationController
       @ineligible_or_receiving_programs_names.push(program.name_en)
     end
 
-    if @illinois_programs.length > 0 
+    
       @all_programs = @programs + @illinois_programs
-    else 
-      @all_programs = @programs 
-    end
+  
+    
     
   end
 
