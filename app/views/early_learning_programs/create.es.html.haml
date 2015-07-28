@@ -3,26 +3,21 @@
   - if @eligible == false
     .row
       .col-md-7
-        %h1= t.elp.ineligible_title | "Results: Something else in mind!"
-        %p= t.elp.ineligible_subtitle |  "You likely do not qualify for Early Learning Programs."
+        %h1= t.elp.ineligible_title | "Results: You may not be eligible."
+        %p= t.elp.ineligible_subtitle |  "You likely do not qualify for Chicago: Ready to Learn! early learning programs."
         .resources
           %h3 Resources
-          %p If you live in Illinois, call the Illinois Action For Children Community Referral Team at 312-299-1690 for info on other opportunities.
+          %p If you live in Illinois, call the Illinois Action For Children Community Referral Team at 312-823-1100 for info on other opportunities.
   - else
     .row
       .col-md-7
-        %h1= t.elp.eligible_title | "Results: You may be in luck!"
-        %p= t.elp.eligible_subtitle | "Below are Early Learning Programs that you are eligible for near you."
+        %h1= t.elp.eligible_title | "Results: You may be eligible!"
+        %p= t.elp.eligible_subtitle | "Your family may qualify for these early learning programs."
     .row
       .col-md-12
         %h1 Early Learning Centers Near You
         %br
-    - if @referral_centers.length > 3
-      - @top_referrals = @referral_centers.sample(3)
-    - else
-      - @top_referrals = @referral_centers
     .row
-      - @top_referral_keys
       - @top_referrals.each do |center|
         .col-md-12.col-sm-12.col-lg-4
           %ul
