@@ -511,7 +511,6 @@
                 @referral_centers = @referral_centers + random_additional_centers
           
               else
-
                 # Filter by Length of Week
                 @eligible_locations_ages_day_zip_language_quality_week = []
                 if @eligible_locations_ages_day_zip_language_quality.length == 3
@@ -566,9 +565,7 @@
        @user.referral_key2 = @top_referrals.second["key"]
        @user.referral_key3 = @top_referrals.third["key"]
        @user.save
-       puts "I made it to the end"
-
-      # put data storage here
+   
     end # ends the eligible if statement
 
 

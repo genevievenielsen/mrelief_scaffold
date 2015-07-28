@@ -55,7 +55,7 @@
         <% end %>
 
         <% if center["url"].present? %>
-          <li><%= link_to "Center Website", center["url"], target: "_blank" %></li>
+          <li><%= link_to "Center Website", center["url"], target: "_blank", onclick: "ga('send', 'event', 'button', 'early_learning', 'center_website_#{center["site_name"]}', 1)" %></li>
         <% end %>
 
         <% if center["ages_0_3"] == true || center["ages_3_5"] == true %>
@@ -93,7 +93,7 @@
    <br>  
    <div class="row">
      <div class="col-md-12">
-       <a href="http://chicagoearlylearning.org/starred/<%= @top_referral_keys.chop %>/" target="_blank" class="button">Learn more about these centers on the Early Learning Portal →</a>
+       <a href="http://chicagoearlylearning.org/starred/<%= @top_referral_keys.chop %>/" target="_blank" onclick="ga('send', 'event', 'button', 'early_learning', 'link_to_portal', 1);" class="button">Learn more about these centers on the Early Learning Portal →</a>
      </div>
    </div>
    <br>
