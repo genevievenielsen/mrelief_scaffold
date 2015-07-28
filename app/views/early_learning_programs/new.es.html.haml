@@ -187,7 +187,7 @@
                   checked
                 >
                 Visitas en el hogar
-                %p.popover-body{"data-content" => "Licensed educators who weekly visit your home to support your child’s social-emotional, physical, and cognitive development.", "data-placement" => "right", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; display: inline", :type => "button"} Learn More
+                %p.popover-body{"data-content" => "Licensed educators who weekly visit your home to support your child’s social-emotional, physical, and cognitive development.", "data-placement" => "right", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; display: inline", :type => "button", :onclick => "ga('send', 'event', 'button', 'early_learning', 'learn_more_home_visiting_es', 1)"} Learn More
                 %br
                 <input type="checkbox" name="no_duration_preference" value="no_duration_preference" id="no_duration_preference"
                 - if @user.no_duration_preference != nil && @user.no_duration_preference == true

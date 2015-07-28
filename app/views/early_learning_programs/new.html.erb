@@ -166,7 +166,7 @@
               Full-week (4 to 5 days)<br>
             <input type="checkbox" name="home_visiting" value="home_visiting" id="home_visiting"
               <% if @user.home_visiting != nil && @user.home_visiting == true %>checked<% end %>> 
-              Home Visiting<p type="button" data-toggle="popover" data-content="Licensed educators who weekly visit your home to support your child’s social-emotional, physical, and cognitive development." data-placement="right" style="border: 0px; color: #4582ec; display: inline" class="popover-body">  Learn More</p><br>
+              Home Visiting<p type="button" data-toggle="popover" data-content="Licensed educators who weekly visit your home to support your child’s social-emotional, physical, and cognitive development." data-placement="right" style="border: 0px; color: #4582ec; display: inline" class="popover-body" onclick="ga('send', 'event', 'button', 'early_learning', 'learn_more_home_visiting', 1)">  Learn More</p><br>
             <input type="checkbox" name="no_duration_preference" value="no_duration_preference" id="no_duration_preference"
               <% if @user.no_duration_preference != nil && @user.no_duration_preference == true %>checked<% end %>> 
               No Preference<br>

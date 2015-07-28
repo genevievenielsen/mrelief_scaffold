@@ -1,0 +1,38 @@
+%a.secondary-link{"data-target" => "#calculator", "data-toggle" => "modal", :href => "#", :onclick => "ga('send', 'event', 'button', 'early_learning', 'view_calculator_es', 1)"} View Calculator
+/ All City Programs Modal
+#calculator.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close.close_modal{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} &times;
+      .modal-body
+        .row
+          .text-center
+            %p Need help calculating your income? Use this calculator.
+            .calculator-wrapper
+              / calculator
+              .pull-left{:style => "padding-left:10px"}
+                #js-calculator-popover.calculator
+                  / Screen and clear key
+                  .cf.top
+                    %span.btn-calc.clear C
+                    #screen-popover.screen
+                  / operators and other keys
+                  .cf.keys
+                    %span.btn-calc 7
+                    %span.btn-calc 8
+                    %span.btn-calc 9
+                    %span.btn-calc.operator +
+                    %span.btn-calc 4
+                    %span.btn-calc 5
+                    %span.btn-calc 6
+                    %span.btn-calc.operator -
+                    %span.btn-calc 1
+                    %span.btn-calc 2
+                    %span.btn-calc 3
+                    %span.btn-calc.operator ÷
+                    %span.btn-calc 0
+                    %span.btn-calc .
+                    %span.btn-calc.eval =
+                    %span.btn-calc.operator x
