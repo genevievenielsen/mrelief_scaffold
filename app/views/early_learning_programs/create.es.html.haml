@@ -49,7 +49,7 @@
                 %b Quality Rating:
                 = center["quality_rating"]
             - if center["url"].present?
-              %li= link_to "Center Website", center["url"], target: "_blank", onclick: "ga('send', 'event', 'button', 'early_learning', 'center_website_#{center["site_name"]}_es', 1)" 
+              %li= link_to "Center Website", center["url"], target: "_blank", onclick: "ga('send', 'event', 'button', 'early_learning', 'center_website_#{center["site_name"]}', 1)"
             - if center["ages_0_3"] == true || center["ages_3_5"] == true
               - if center["ages_0_3"] == true && center["ages_3_5"] == true
                 %li
@@ -66,7 +66,7 @@
             - if center["program_information"].include?("CPS Based") || center["program_information"].include?("CPS Based, Head Start")
               - if @user.income_type == "[\"Greater than Type 2\"]"
                 %p
-                  You may have a required co-pay for this program. Use #{link_to "this CPS calculator", "http://cps.edu/Schools/EarlyChildhood/Pages/EarlyChildhoodCalculator.aspx", target: "_blank"} to estimate your families co-pay.
+                  You may have a required co-pay for this program. Use #{link_to "this CPS calculator", "http://cps.edu/Schools/EarlyChildhood/Pages/EarlyChildhoodCalculator.aspx", target: "_blank", onclick: "ga('send', 'event', 'button', 'early_learning', 'cps_calculator', 1)"} to estimate your families co-pay.
             - @top_referral_keys = "#{@top_referral_keys}" + center["key"] + ","
     .row
       .col-md-12
@@ -79,7 +79,7 @@
         %br
           .row
             .col-md-12
-              %a.button{:href => "http://chicagoearlylearning.org/starred/#{@top_referral_keys.chop}/", :target => "_blank", :onclick =>"ga('send', 'event', 'button', 'early_learning', 'early_learning_portal_es', 1);" class="button"} Learn more about these centers on the Early Learning Portal →
+              %a.button{:href => "http://chicagoearlylearning.org/starred/#{@top_referral_keys.chop}/", :onclick => "ga('send', 'event', 'button', 'early_learning', 'early_learning_portal_es', 1);", :target => "_blank"} Learn more about these centers on the Early Learning Portal →
           %br
             %br
               %br
