@@ -70,7 +70,7 @@
 
         <% if center["program_information"].include?("CPS Based") || center["program_information"].include?("CPS Based, Head Start") %>
           <% if @user.income_type == "[\"Greater than Type 2\"]" %>
-            <p>You may have a required co-pay for this program. Use <%= link_to "this CPS calculator", "http://cps.edu/Schools/EarlyChildhood/Pages/EarlyChildhoodCalculator.aspx", target: "_blank" %> to estimate your families co-pay.</p>
+            <p>You may have a required co-pay for this program. Use <%= link_to "this CPS calculator", "http://cps.edu/Schools/EarlyChildhood/Pages/EarlyChildhoodCalculator.aspx", target: "_blank", onclick: "ga('send', 'event', 'button', 'early_learning', 'cps_calculator', 1)" %> to estimate your families co-pay.</p>
           <% end %>
         <% end %>
 
@@ -93,7 +93,7 @@
    <br>  
    <div class="row">
      <div class="col-md-12">
-       <a href="http://chicagoearlylearning.org/starred/<%= @top_referral_keys.chop %>/" target="_blank" onclick="ga('send', 'event', 'button', 'early_learning', 'link_to_portal', 1);" class="button">Learn more about these centers on the Early Learning Portal →</a>
+       <a href="http://chicagoearlylearning.org/starred/<%= @top_referral_keys.chop %>/" target="_blank" onclick="ga('send', 'event', 'button', 'early_learning', 'early_learning_portal', 1);" class="button">Learn more about these centers on the Early Learning Portal →</a>
      </div>
    </div>
    <br>
@@ -101,7 +101,7 @@
    <br>  
    <div class="row">
      <div class="col-md-12">
-       <%= link_to  "More Results: CCAP Eligibility →", more_results_url(@user) %>
+       <%= link_to  "More Results: CCAP Eligibility →", more_results_url(@user), onclick: "ga('send', 'event', 'button', 'early_learning', 'ccap_eligibility', 1)" %>
      </div>
     </div>
 
