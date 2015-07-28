@@ -7,11 +7,9 @@
 	end
 
 	def create
-    # TO DO 
-    # - save center keys that we refer people to 
     @user = EarlyLearningData.new
 
-    # Clean Data
+    # DATA STORAGE
 		household_size = params[:household_size].strip
     # this is the words into numbers logic
     if household_size !~ /\D/  # returns true if all numbers
@@ -20,7 +18,6 @@
       household_size_clean = household_size.in_numbers
     end
     @user.household_size = household_size_clean
-
 
     gross_income = params[:gross_monthly_income].strip
     if gross_income !~ /\D/
@@ -40,6 +37,7 @@
     #     @user."#{option}" = true
     #   end
     # end
+
     # age 
     if params[:zero_to_three].present?
       @user.three_and_under = true
@@ -87,9 +85,6 @@
     if params[:homeless_hotels].present?
       @user.homeless_hotels = true
     end 
-    if params[:homeless_public_place].present?
-      @user.homeless_public_place = true
-    end 
     if params[:homeless_shelters].present?
       @user.homeless_shelters = true
     end 
@@ -97,7 +92,7 @@
       @user.not_homeless = true
     end
 
-    if @user.homeless_fixed_residence == true || @user.homeless_hotels == true || @user.homeless_public_place == true || @user.homeless_shelters == true
+    if @user.homeless_fixed_residence == true || @user.homeless_hotels == true || @user.homeless_shelters == true
       @homeless = true
     end
 
@@ -595,7 +590,7 @@
         # categorical eligibility questions
         if params[:foster_parent].present? || params[:homeless].present? || params[:ssi].present? || params[:tanf].present? || params[:teen_parent].present? || params[:special_needs].present? || params[:none_of_the_above].present?
           # homeless questions
-          if params[:homeless_fixed_residence].present? || params[:homeless_hotels].present? || params[:homeless_public_place].present? || params[:homeless_shelters].present? || params[:not_homeless].present?
+          if params[:homeless_fixed_residence].present? || params[:homeless_hotels].present? || params[:homeless_shelters].present? || params[:not_homeless].present?
             # preferred duration questions
             if params[:half_day].present? || params[:full_day].present? || params[:part_week].present? || params[:full_week].present? || params[:home_visiting].present? || params[:no_duration_preference].present?
 
