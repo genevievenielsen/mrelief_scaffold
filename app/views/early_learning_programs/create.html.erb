@@ -27,14 +27,7 @@
     </div> 
   </div>
 
-  <% if @referral_centers.length > 3 %>
-    <% @top_referrals = @referral_centers.sample(3) %>
-  <% else %>
-    <% @top_referrals = @referral_centers %>
-  <% end %>
-
   <div class="row">
-  <% @top_referral_keys %>
     <% @top_referrals.each do |center| %>
     <div class="col-md-12 col-sm-12 col-lg-4">
       <ul>

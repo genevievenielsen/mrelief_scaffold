@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150725181929) do
+ActiveRecord::Schema.define(version: 20150728183422) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -220,7 +220,6 @@ ActiveRecord::Schema.define(version: 20150725181929) do
     t.string   "bilingual"
     t.boolean  "homeless_fixed_residence",                      default: false
     t.boolean  "homeless_hotels",                               default: false
-    t.boolean  "homeless_public_place",                         default: false
     t.boolean  "homeless_shelters",                             default: false
     t.boolean  "not_homeless",                                  default: false
     t.boolean  "half_day",                                      default: false
@@ -229,6 +228,9 @@ ActiveRecord::Schema.define(version: 20150725181929) do
     t.boolean  "full_week",                                     default: false
     t.boolean  "home_visiting",                                 default: false
     t.boolean  "no_duration_preference",                        default: false
+    t.string   "referral_key1"
+    t.string   "referral_key2"
+    t.string   "referral_key3"
   end
 
   create_table "early_learning_data_twilios", force: true do |t|

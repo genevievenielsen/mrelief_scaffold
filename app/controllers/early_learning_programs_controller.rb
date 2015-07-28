@@ -555,7 +555,23 @@
               end
           end # ends the quality if statement 
       end # ends the language if statement
+
+       if @referral_centers.length > 3 
+         @top_referrals = @referral_centers.sample(3) 
+       else 
+         @top_referrals = @referral_centers 
+       end 
+
+       @user.referral_key1 = @top_referrals.first["key"]
+       @user.referral_key2 = @top_referrals.second["key"]
+       @user.referral_key3 = @top_referrals.third["key"]
+       @user.save
+       puts "I made it to the end"
+
+      # put data storage here
     end # ends the eligible if statement
+
+
 
     # CCAP ELIGIBILITY
       if @user.three_and_under == true || @user.pregnant == true || @user.three_to_five == true || @user.six_to_twelve == true
