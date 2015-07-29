@@ -55,7 +55,12 @@
         <% end %>
 
         <% if center["url"].present? %>
-          <li><%= link_to "Center Website", center["url"], target: "_blank", onclick: "ga('send', 'event', 'button', 'early_learning', 'center_website_#{center["site_name"]}', 1)" %></li>
+          <li>
+          <% if center["url"].include?("http://") %>
+            <%= link_to "Center Website", center["url"], target: "_blank", onclick: "ga('send', 'event', 'button', 'early_learning', 'center_website_#{center["site_name"]}', 1)" %></li>
+          <% else %>
+            <%= link_to "Center Website", "http://#{center["url"]}", target: "_blank", onclick: "ga('send', 'event', 'button', 'early_learning', 'center_website_#{center["site_name"]}', 1)" %></li>
+          <% end %>
         <% end %>
 
         <% if center["ages_0_3"] == true || center["ages_3_5"] == true %>
