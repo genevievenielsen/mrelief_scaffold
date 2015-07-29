@@ -46,8 +46,7 @@
               - elsif I18n.locale = :en
                 = link_to "Español", set_language_spanish_path
             %li
-              %a.btn-donate{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "https://goodcitychicago.org/donation/", :title => I18n.t("layouts.please_select", :default => "Please select &ldquo;mRelief&rdquo; on the program section")}= t.layouts.donate | "Donate"
-    
+              %a.btn-donate{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "https://goodcitychicago.org/donate/", :title => I18n.t("layouts.please_select", :default => "Please select &ldquo;mRelief&rdquo; on the program section")}= t.layouts.donate | "Donate"
       - if notice.present?
         .alert.alert-dismissable.alert-success
           %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} &times;
@@ -64,3 +63,42 @@
           %p#disclaimer= t.layouts.disclaimer | "*mRelief does not predict with 100% accuracy whether users will definitely be approved for benefits; but instead provides users with information about whether it is worth it to invest the time required for the application process. However, we are working to make our forms more inclusive everyday. If you are undocumented, a legal permanent resident, or have a very specific case, our system refers you to paralegals who can help. Stay tuned for more updates!"
     = render "layouts/google_analytics"
 
+
+:css
+  @media (max-width: 1200px) {
+      .navbar-header {
+          float: none;
+      }
+      .navbar-toggle {
+          display: block;
+      }
+      .navbar-collapse {
+          border-top: 1px solid transparent;
+          box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+      }
+      .navbar-collapse.collapse {
+          display: none!important;
+      }
+      .navbar-nav {
+          float: none!important;
+          margin: 7.5px -15px;
+      }
+      .navbar-nav>li {
+          float: none;
+      }
+      .navbar-nav>li>a {
+          padding-top: 10px;
+          padding-bottom: 10px;
+      }
+      .navbar-text {
+          float: none;
+          margin: 15px 0;
+      }
+      /* since 3.1.0 */
+      .navbar-collapse.collapse.in { 
+          display: block!important;
+      }
+      .collapsing {
+          overflow: hidden!important;
+      }
+  }

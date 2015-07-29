@@ -1,4 +1,4 @@
-.container.marquee
+.marquee
   = render "layouts/print_button"
   - if @eligible == false
     .row
@@ -79,7 +79,7 @@
         %br
           .row
             .col-md-12
-              %a.button{:href => "http://chicagoearlylearning.org/starred/#{@top_referral_keys.chop}/", :onclick => "ga('send', 'event', 'button', 'early_learning', 'early_learning_portal_es', 1);", :target => "_blank"} Learn more about these centers on the Early Learning Portal →
+              %a#link_to_portal.button{:href => "http://chicagoearlylearning.org/starred/#{@top_referral_keys.chop}/", :onclick => "ga('send', 'event', 'button', 'early_learning', 'early_learning_portal_es', 1);", :target => "_blank"} Learn more about these centers on the Early Learning Portal →
           %br
             %br
               %br
