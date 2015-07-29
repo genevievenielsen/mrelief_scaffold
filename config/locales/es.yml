@@ -214,11 +214,11 @@ es:
   elp:
     title: Todos los Programas de Aprendizaje Temprano
     subtitle: Si usted es el encargado principal del cuidado de un menor, usted puede ser elegible para algunos de Todos los Programas de Aprendizaje Temprano de Chicago.
-    select_all_parent: Seleccione todas las que correspondan a usted como padre/madre o tutor
+    select_all_parent: Seleccione todas las que correspondan a usted como padre/madre o tutor-
     age_note:  Tome en cuenta - Esta pregunta corresponde a la edad de su hijo(a) a partir del 1º de Septiembre 2015
     household_size: ¿Cuántas personas viven en su grupo familiar, incluyendo usted?
     gross_income: ¿Cuál es su ingreso bruto mensual?
-    select_all: Seleccione todos las que apliquen a usted
+    select_all: Seleccione todos las que apliquen a usted - 
     employed: ¿Están todos los adultos en su hogar actualmente empleados?
 
     zipcode: ¿En qué zona postal vive? 
