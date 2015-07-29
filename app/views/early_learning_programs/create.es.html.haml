@@ -66,14 +66,14 @@
             - if center["program_information"].include?("CPS Based") || center["program_information"].include?("CPS Based, Head Start")
               - if @user.income_type == "[\"Greater than Type 2\"]"
                 %p
-                  You may have a required co-pay for this program. Use #{link_to "this CPS calculator", "http://cps.edu/Schools/EarlyChildhood/Pages/EarlyChildhoodCalculator.aspx", target: "_blank", onclick: "ga('send', 'event', 'button', 'early_learning', 'cps_calculator', 1)"} to estimate your families co-pay.
+                  Usted posiblemente tendrá un copago requerido para este programa. Tenemos una cuota requerida basada en los ingresos de los padres o tutores. Utilice #{link_to "la calculadora", "http://cps.edu/Schools/EarlyChildhood/Pages/EarlyChildhoodCalculator.aspx", target: "_blank", onclick: "ga('send', 'event', 'button', 'early_learning', 'cps_calculator', 1)"} para estimar el copago de su familia.
             - @top_referral_keys = "#{@top_referral_keys}" + center["key"] + ","
     .row
       .col-md-12
         - if @eligible_asterisk == true
-          %p ** This program provides full day care supported by the state Child Care Assistance Program (CCAP). Based on the information you provided, you may qualify for CCAP. Please contact the agency for more information.
+          %p ** Algunos programas pueden requerir que se inscriba en la asistencia de cuidado de niños CCAP, y nuestros resultados muestran que usted también podría calificar para CCAP.
         - elsif @ineligible_asterisk == true
-          %p ** This program provides full day care supported by the state Child Care Assistance Program (CCAP). Based on the information you provided, you may not qualify for CCAP. Please contact the agency for more information.
+          %p ** Algunos programas pueden requerir que se inscriba en la asistencia de cuidado de niños (CCAP), y nuestros resultados muestran que usted podría no califique para CCAP.
     %br
       %br
         %br

@@ -212,28 +212,28 @@ es:
       A continuación algunos recursos adicionales, cortesía de Purple Binder:
 
   elp:
-    title: Todos los programas de aprendizaje temprano
-    subtitle: Si usted es el encargado primario del cuidado de un menor, puede ser elegible para obtener algunas de las ofertas de Todos los programas de aprendizaje temprano de Chicago.
-    select_all_parent: Seleccione todas las que apliquen para usted como padre/madre o tutor
-    age_note:  Nota - esta pregunta aplica para la edad de su hijo a partir del 1º de septiembre de 2015
-    household_size: ¿Cuántas personas viven en su grupo familiar, incluyéndole a usted?
-    gross_income: ¿Cuáles son sus ingresos mensuales brutos?
-    select_all: Seleccione todos los que apliquen para usted
-    employed: ¿Actualmente todos los adultos de su grupo familiar tienen empleo?
+    title: Todos los Programas de Aprendizaje Temprano
+    subtitle: Si usted es el encargado principal del cuidado de un menor, usted puede ser elegible para algunos de Todos los Programas de Aprendizaje Temprano de Chicago.
+    select_all_parent: Seleccione todas las que correspondan a usted como padre/madre o tutor
+    age_note:  Tome en cuenta - Esta pregunta corresponde a la edad de su hijo(a) a partir del 1º de Septiembre 2015
+    household_size: ¿Cuántas personas viven en su grupo familiar, incluyendo usted?
+    gross_income: ¿Cuál es su ingreso bruto mensual?
+    select_all: Seleccione todos las que apliquen a usted
+    employed: ¿Están todos los adultos en su hogar actualmente empleados?
 
     zipcode: ¿En qué zona postal vive? 
     other_zipcode: Le mostraremos programas donde usted vive, pero ¿preferiría que le mostremos programas cerca de donde asiste a la escuela, trabaja, etc?
     preferred_zipcode: ¿En qué código postal preferiría asistir al aprendizaje temprano?
 
+    bilingual: ¿Preferiría inscribir a su hijo en un programa bilingüe de aprendizaje temprano?
     preferred_language: ¿Qué idioma prefiere?
 
     cell_phone: ¿Cuál es el número de su teléfono celular?
     see_if: Ver si califico
 
-    ineligible_title: Resultados- ¡Usted puede calificar!
-    ineligible_subtitle: Usted posiblemente no califica para Programas de aprendizaje temprano de Chicago- Listo Para Aprender
+    ineligible_title: Resultados - ¡Usted puede calificar!
+    ineligible_subtitle: Usted posiblemente no califica para Programas de aprendizaje temprano de Chicago - Listo Para Aprender
 
-    eligible_title: Resultados- ¡Usted puede ser elegible!
+    eligible_title: Resultados - ¡Usted puede ser elegible!
     eligible_subtitle: A continuación encontrará los Programas de aprendizaje temprano para los que es elegible y que se imparten cerca de donde está.
 
-    eligible_ccap: 
