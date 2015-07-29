@@ -156,44 +156,44 @@
           / Form for duration preference
           .row
             .col-md-9.col-sm-10.col-xs-12
-              %label.allthatapply Select all that apply to your preference for an early learning program:
+              %label.allthatapply=t.elp.preference | "Select all that apply to your preference for an early learning program:"
               #preferred_duration.radio-button
                 <input type="checkbox" name="half_day" value="half_day" id="half_day"
                 - if @user.half_day != nil && @user.half_day == true
                   checked
                 >
-                Medio día (2 o 3 horas)
+                Medio día (3 a 4 horas)
                 %br
                 <input type="checkbox" name="full_day" value="full_day" id="full_day"
                 - if @user.full_day != nil && @user.full_day == true
                   checked
                 >
-                Todo el día (6 horas o más)
+                Día completo (6 horas o más)
                 %br
                 <input type="checkbox" name="part_week" value="part_week" id="part_week"
                 - if @user.part_week != nil && @user.part_week == true
                   checked
                 >
-                Media semana (2 a 3 días)
+                Parte de una semana (2 o 3 días)
                 %br
                 <input type="checkbox" name="full_week" value="full_week" id="full_week"
                 - if @user.full_week != nil && @user.full_week == true
                   checked
                 >
-                Semana completa (4 a 5 días)
+                Semana completa (4 o 5 días)
                 %br
                 <input type="checkbox" name="home_visiting" value="home_visiting" id="home_visiting"
                 - if @user.home_visiting != nil && @user.home_visiting == true
                   checked
                 >
-                Visitas en el hogar
-                %p.popover-body{"data-content" => "Licensed educators who weekly visit your home to support your child’s social-emotional, physical, and cognitive development.", "data-placement" => "right", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; display: inline", :type => "button", :onclick => "ga('send', 'event', 'button', 'early_learning', 'learn_more_home_visiting_es', 1)"} Learn More
+                Visitas al hogar de Aprende Más
+                %p.popover-body{"data-content" => "Educadores licenciados que semanalmente visitan su casa para apoyar el desarrollo social-emocional, físico, y cognitivo de su hijo(a).", "data-placement" => "right", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; display: inline", :type => "button", :onclick => "ga('send', 'event', 'button', 'early_learning', 'learn_more_home_visiting_es', 1)"} Learn More
                 %br
                 <input type="checkbox" name="no_duration_preference" value="no_duration_preference" id="no_duration_preference"
                 - if @user.no_duration_preference != nil && @user.no_duration_preference == true
                   checked
                 >
-                No tiene preferencia
+                Ninguna preferencia
                 %br
           / Form for bilingual question
           .row
@@ -221,7 +221,7 @@
           // employment hover
           $( "#employment_question" ).hover(
             function() {
-                $( this ).append( $( "<p class=\"hover_explanation\">Aplica si trabaja por su cuenta o en un trabajo no declarado, si se puede verificar con un tercero o un estado de cuenta mensual.</p>" ) );
+                $( this ).append( $( "<p class=\"hover_explanation\">Se aplica el autoempleo e ingresos en efectivosi se puede verificar con un tercero o un estado de cuenta mensual.</p>" ) );
               },
             function() {
               $( this ).find( "p:last" ).remove();

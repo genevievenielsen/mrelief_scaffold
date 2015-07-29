@@ -221,9 +221,11 @@ es:
     select_all: Seleccione todos las que apliquen a usted - 
     employed: ¿Están todos los adultos en su hogar actualmente empleados?
 
-    zipcode: ¿En qué zona postal vive? 
-    other_zipcode: Le mostraremos programas donde usted vive, pero ¿preferiría que le mostremos programas cerca de donde asiste a la escuela, trabaja, etc?
-    preferred_zipcode: ¿En qué código postal preferiría asistir al aprendizaje temprano?
+    zipcode: ¿En qué código postal vive usted? 
+    other_zipcode: Le mostraremos programas donde usted vive, pero ¿preferiría que le mostremos programas cerca de donde asiste a la escuela, trabaja, etc.?
+    preferred_zipcode: ¿En qué código postal preferiría asistencia con aprendizaje temprano?
+
+    preference: Seleccione todas las que correspondan a su preferencia por un programa de aprendizaje temprano - 
 
     bilingual: ¿Preferiría inscribir a su hijo en un programa bilingüe de aprendizaje temprano?
     preferred_language: ¿Qué idioma prefiere?

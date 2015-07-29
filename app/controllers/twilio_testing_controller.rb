@@ -361,7 +361,7 @@ class TwilioTestingController < ApplicationController
         end
 
         if @user.three_and_under != true
-          message = "Are you or your partner pregnant? Enter yes or no. " 
+          message = "Are you or your partner pregnant? Enter yes or no." 
           session["page"] = "pregnant_es"
         else
           message = "In which zipcode do you live? Example: 60615"
