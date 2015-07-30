@@ -8,7 +8,6 @@
 
 	def create
     @user = EarlyLearningData.new
-
     # DATA STORAGE
 		household_size = params[:household_size].strip
     # this is the words into numbers logic
@@ -29,14 +28,6 @@
       gross_income_clean = gross_income.in_numbers
     end
     @user.gross_monthly_income = gross_income_clean
-
-    # Data Storage
-    # age_options = ["zero_to_three", "three_to_five", "six_to_twelve", "pregnant", "no_children"]
-    # age_options.each do |option|
-    #   if params[":#{option}"].present?
-    #     @user."#{option}" = true
-    #   end
-    # end
 
     # age 
     if params[:zero_to_three].present?
@@ -141,6 +132,11 @@
     @user.zipcode = params[:zipcode]
     @user.phone_number = params[:phone_number] if params[:phone_number].present?
     @user.save
+
+    # spanish translation 
+    if I18n.locale == :es
+      @user.spanish = true
+    end
 
     # ELIGIBILITY DETERMINATION
     if @user.no_children == true 
@@ -262,7 +258,7 @@
         @user.head_start_school_based_full_day_3to5 = true 
       end 
       @user.eligible_count = @eligible_early_learning_programs.count
-      @user.save
+      # @user.save
     end
 
     # LOOK CENTERS IN DATA PORTAL
@@ -484,10 +480,6 @@
                 end
               end
 
-              puts "gold: #{gold_locations.length}"
-              puts "silver: #{silver_locations.length}"
-              puts "bronze: #{bronze_locations.length}"
-
               if gold_locations.length > 0
                 @eligible_locations_ages_day_zip_language_quality = @eligible_locations_ages_day_zip_language_quality + gold_locations
               end
@@ -564,11 +556,9 @@
        @user.referral_key1 = @top_referrals.first["key"]
        @user.referral_key2 = @top_referrals.second["key"]
        @user.referral_key3 = @top_referrals.third["key"]
-       @user.save
+       # @user.save
    
     end # ends the eligible if statement
-
-
 
     # CCAP ELIGIBILITY
       if @user.three_and_under == true || @user.pregnant == true || @user.three_to_five == true || @user.six_to_twelve == true
@@ -576,13 +566,12 @@
           @ccap_eligible = true
           
         elsif @user.employed == "yes" 
-            income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
-            if @user.gross_monthly_income < income_row.income_type4
-              @ccap_eligible = true
-            else
-               @ccap_eligible = false
-            end
-    
+          income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
+          if @user.gross_monthly_income < income_row.income_type4
+            @ccap_eligible = true
+          else
+             @ccap_eligible = false
+          end
         else
           @ccap_eligible = false
         end
@@ -595,7 +584,7 @@
     else
       @user.ccap_eligible = false
     end
-    @user.save 
+    # @user.save 
 
     if params[:employment].present? && params[:other_zipcode] 
       # age questions
@@ -606,7 +595,7 @@
           if params[:homeless_fixed_residence].present? || params[:homeless_hotels].present? || params[:homeless_shelters].present? || params[:not_homeless].present?
             # preferred duration questions
             if params[:half_day].present? || params[:full_day].present? || params[:part_week].present? || params[:full_week].present? || params[:home_visiting].present? || params[:no_duration_preference].present?
-
+              @user.complete = true
             else
               flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
               render "new"
@@ -626,7 +615,10 @@
     else
       flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
       render "new"
-    end       
+    end
+
+    
+    @user.save       
 	end # closes the method
 
   def more_results

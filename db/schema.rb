@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728183422) do
+ActiveRecord::Schema.define(version: 20150730002055) do
 
   create_table "aabd_cash_data", force: true do |t|
     t.string   "household_size"
@@ -231,6 +231,8 @@ ActiveRecord::Schema.define(version: 20150728183422) do
     t.string   "referral_key1"
     t.string   "referral_key2"
     t.string   "referral_key3"
+    t.boolean  "complete",                                      default: false
+    t.boolean  "spanish",                                       default: false
   end
 
   create_table "early_learning_data_twilios", force: true do |t|
@@ -255,6 +257,7 @@ ActiveRecord::Schema.define(version: 20150728183422) do
     t.boolean  "early_learning_eligible", default: false
     t.boolean  "ccap_eligible",           default: false
     t.boolean  "foster_temporary_ssi",    default: false
+    t.boolean  "spanish",                 default: false
   end
 
   create_table "early_learning_income_cutoffs", force: true do |t|
