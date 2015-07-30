@@ -385,12 +385,12 @@ class TwilioTestingController < ApplicationController
       pregnant = params[:Body].strip.downcase
       session["counter"] += 1 # +1 to optional questions
       # Data Storage
-      if pregnant == "Sí"
+      if pregnant == "sí"
         @user.pregnant == true
         message = "¿En qué código postal vive? Ejemplo: 60615"
         session["page"] = "zipcode_es"
 
-      elsif pregnant == "No"
+      elsif pregnant == "no"
         @user.pregnant == false
         message = "¿En qué código postal vive? Ejemplo: 60615"
         session["page"] = "zipcode_es"
@@ -431,7 +431,7 @@ class TwilioTestingController < ApplicationController
     @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
     foster_temporary_ssi = params[:Body].strip.downcase
 
-      if foster_temporary_ssi == "yes"
+      if foster_temporary_ssi == "sí"
        @user.foster_temporary_ssi == true
        session["page"] = "household_size_es" 
        message = "¿Cuántas personas viven en su hogar, incluyendo  usted? Ejemplo: 2"
@@ -509,7 +509,7 @@ class TwilioTestingController < ApplicationController
      @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
      employment = params[:Body].strip.downcase
      
-     if employment == "Sí"
+     if employment == "sí"
        @user.employment == true
        # RESPONSE MESSAGE
        # CCAP eligible if below income cutoff 
@@ -553,7 +553,7 @@ class TwilioTestingController < ApplicationController
      tanf_special_needs = params[:Body].strip.downcase
      
      # Data Storage
-     if tanf_special_needs == "Sí"
+     if tanf_special_needs == "sí"
        @user.tanf_special_needs == true
        # Eligible for CCAP
        # Child is ineligibe for early learning but eligible for CCAP
@@ -587,7 +587,7 @@ class TwilioTestingController < ApplicationController
      teen_parent = params[:Body].strip.downcase
      
      # Data Storage
-     if teen_parent == "Sí "
+     if teen_parent == "sí"
        # RESPONSE MESSAGE
        # eligible for CCAP
        if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
@@ -624,8 +624,6 @@ class TwilioTestingController < ApplicationController
      @user.save
     end
    end
-
-
 
 
 
