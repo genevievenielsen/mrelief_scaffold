@@ -72,7 +72,7 @@ class TwilioTestingController < ApplicationController
         end
 
         if @user.three_and_under != true
-          message = "Are you or your partner pregnant? Enter yes or no. " 
+          message = "Are you or your partner pregnant? Enter yes or no." 
           session["page"] = "pregnant"
         else
           message = "In which zipcode do you live? Example: 60615"
@@ -95,12 +95,12 @@ class TwilioTestingController < ApplicationController
       pregnant = params[:Body].strip.downcase
       session["counter"] += 1 # +1 to optional questions
       # Data Storage
-      if pregnant == "yes"
+      if pregnant == "yes" || pregnant == "y"
         @user.pregnant == true
         message = "In which zipcode do you live? Example: 60615"
         session["page"] = "zipcode"
 
-      elsif pregnant == "no"
+      elsif pregnant == "no" || pregnant == "n"
         @user.pregnant == false
         message = "In which zipcode do you live? Example: 60615"
         session["page"] = "zipcode"
@@ -141,12 +141,12 @@ class TwilioTestingController < ApplicationController
     @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
     foster_temporary_ssi = params[:Body].strip.downcase
 
-      if foster_temporary_ssi == "yes"
+      if foster_temporary_ssi == "yes" || foster_temporary_ssi == "y"
        @user.foster_temporary_ssi == true
        session["page"] = "household_size" 
        message = "What is the number of people living in your household including yourself?"
     
-      elsif foster_temporary_ssi == "no"
+      elsif foster_temporary_ssi == "no" || foster_temporary_ssi == "n"
         @user.foster_temporary_ssi == false
         session["page"] = "household_size" 
         message = "What is the number of people living in your household including yourself?"
@@ -219,7 +219,7 @@ class TwilioTestingController < ApplicationController
      @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
      employment = params[:Body].strip.downcase
      
-     if employment == "yes"
+     if employment == "yes" || employment == "y"
        @user.employment == true
        # RESPONSE MESSAGE
        # CCAP eligible if below income cutoff 
@@ -240,7 +240,7 @@ class TwilioTestingController < ApplicationController
           @user.completed = false
         end
         
-     elsif employment == "no"
+     elsif employment == "no" || employment == "n"
        @user.employment == false
        session["page"] = "tanf_special_needs"
        message = "Does your family receive TANF or do you care for a child with special needs or an individualized education plan (IEP)? Enter yes or no."
@@ -263,7 +263,7 @@ class TwilioTestingController < ApplicationController
      tanf_special_needs = params[:Body].strip.downcase
      
      # Data Storage
-     if tanf_special_needs == "yes"
+     if tanf_special_needs == "yes" || tanf_special_needs == "y"
        @user.tanf_special_needs == true
        # Eligible for CCAP
        # Child is ineligibe for early learning but eligible is CCAP
@@ -275,7 +275,7 @@ class TwilioTestingController < ApplicationController
        end
         @user.completed = true
 
-     elsif tanf_special_needs == "no"
+     elsif tanf_special_needs == "no" || tanf_special_needs == "n"
        @user.tanf_special_needs == false
        session["page"] = "teen_parent"
        message = "Are you a teen parent who is enrolled full-time in school or GED classes or its equivalent? Enter yes or no"
@@ -297,7 +297,7 @@ class TwilioTestingController < ApplicationController
      teen_parent = params[:Body].strip.downcase
      
      # Data Storage
-     if teen_parent == "yes"
+     if teen_parent == "yes" || teen_parent == "y"
        # RESPONSE MESSAGE
        # eligible for CCAP
        if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
@@ -309,7 +309,7 @@ class TwilioTestingController < ApplicationController
        @user.teen_parent == true
        @user.ccap_eligible = true
        @user.completed = true
-     elsif teen_parent == "no"
+     elsif teen_parent == "no" || teen_parent == "n"
        @user.teen_parent == false
         
         if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
