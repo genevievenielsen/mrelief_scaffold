@@ -341,6 +341,7 @@ class TwilioTestingController < ApplicationController
       @user = EarlyLearningDataTwilio.new
       @user.phone_number = params[:From]
       @user.children_ages = params[:Body].strip.downcase
+      @user.spanish = true
       # no children
       if @user.children_ages.include?("d")
         @user.no_children = true
