@@ -370,12 +370,11 @@ class TwilioTestingController < ApplicationController
         end
         @user.completed = false
         @user.save
-      # error 
-      # else
-      #    message = "Oops looks like there is a typo! Please type a, b, c, d or a combination that describes your household."
-      #    session["counter"] = session["counter"] - 1
-      #    @user.completed = false
-      #    @user.save
+      else
+         message = "Yo cuido a un(os) menor(es) entre las edades de: a. 0 a 2  b. 3 a 5 c. 6 a 12. d. Ninguno de estos. Ejemplo: ‘a’ o ‘ab’"
+         session["counter"] = session["counter"] - 1
+         @user.completed = false
+         @user.save
       end
     end
 
@@ -395,9 +394,9 @@ class TwilioTestingController < ApplicationController
         message = "¿En qué código postal vive? Ejemplo: 60615"
         session["page"] = "zipcode_es"
 
-      # else
-      #   message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
-      #   session["counter"] = session["counter"] - 1
+      else
+        message = "Ingrese Sí o No"
+        session["counter"] = session["counter"] - 1
       end
 
       @user.completed = false
@@ -441,9 +440,9 @@ class TwilioTestingController < ApplicationController
         session["page"] = "household_size_es" 
         message = "¿Cuántas personas viven en su hogar, incluyendo usted? Ejemplo: 2"
 
-      # else
-      #   message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
-      #   session["counter"] = session["counter"] - 1
+      else
+        message = "Ingrese Sí o No"
+        session["counter"] = session["counter"] - 1
       end
       @user.completed = false
     end
@@ -536,10 +535,10 @@ class TwilioTestingController < ApplicationController
        message = "¿Recibe su familia TANF o cuidan a un menor con necesidades especiales o un plan de educación individualizado? Ingrese Sí o No"
        @user.completed = false
 
-     # else
-     #   message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
-     #   session["counter"] = session["counter"] - 1
-     #   @user.completed = false
+     else
+       message = "Ingrese Sí o No"
+       session["counter"] = session["counter"] - 1
+       @user.completed = false
      end
     
      @user.save
@@ -570,10 +569,10 @@ class TwilioTestingController < ApplicationController
        session["page"] = "teen_parent_es"
        message = "¿Es usted un padre/madre adolescente inscrito(a) tiempo completo en escuela o clases de GED o su equivalente? Ingrese Sí o No"
        @user.completed = false
-     # else
-     #   message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
-     #   session["counter"] = session["counter"] - 1
-     #   @user.completed = false
+     else
+       message = "Ingrese Sí o No"
+       session["counter"] = session["counter"] - 1
+       @user.completed = false
      end
 
      @user.save
@@ -616,10 +615,10 @@ class TwilioTestingController < ApplicationController
           end
         @user.completed = true
         end
-     # else
-     #   message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
-     #   session["counter"] = session["counter"] - 1
-     #   @user.completed = false
+     else
+       message = "Ingrese Sí o No"
+       session["counter"] = session["counter"] - 1
+       @user.completed = false
      end
      @user.save
     end
