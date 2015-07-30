@@ -385,7 +385,7 @@ class TwilioTestingController < ApplicationController
       pregnant = params[:Body].strip.downcase
       session["counter"] += 1 # +1 to optional questions
       # Data Storage
-      if pregnant == "sí"
+      if pregnant == "sí" || pregnant == "si"
         @user.pregnant == true
         message = "¿En qué código postal vive? Ejemplo: 60615"
         session["page"] = "zipcode_es"
@@ -411,7 +411,7 @@ class TwilioTestingController < ApplicationController
     @user.zipcode = params[:Body].strip
 
     if ChicagoEligibleZipcode.all.pluck(:zipcode).include?(@user.zipcode)
-      message = "¿Es usted un padre/madre de crianza temporal, en una situación de vida temporal, o su familia recibe SSI? Ingrese sí o no."
+      message = "¿Es usted un padre/madre de crianza temporal, en una situación de vida temporal, o su familia recibe SSI? Ingrese Sí o No."
       session["page"] = "categorical_income_eligibility_es" 
       @user.completed = false
       @user.save
@@ -431,7 +431,7 @@ class TwilioTestingController < ApplicationController
     @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
     foster_temporary_ssi = params[:Body].strip.downcase
 
-      if foster_temporary_ssi == "sí"
+      if foster_temporary_ssi == "sí" || foster_temporary_ssi == "si"
        @user.foster_temporary_ssi == true
        session["page"] = "household_size_es" 
        message = "¿Cuántas personas viven en su hogar, incluyendo  usted? Ejemplo: 2"
@@ -509,7 +509,7 @@ class TwilioTestingController < ApplicationController
      @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
      employment = params[:Body].strip.downcase
      
-     if employment == "sí"
+     if employment == "sí" || employment == "si"
        @user.employment == true
        # RESPONSE MESSAGE
        # CCAP eligible if below income cutoff 
@@ -553,7 +553,7 @@ class TwilioTestingController < ApplicationController
      tanf_special_needs = params[:Body].strip.downcase
      
      # Data Storage
-     if tanf_special_needs == "sí"
+     if tanf_special_needs == "sí" || tanf_special_needs == "si"
        @user.tanf_special_needs == true
        # Eligible for CCAP
        # Child is ineligibe for early learning but eligible for CCAP
@@ -587,7 +587,7 @@ class TwilioTestingController < ApplicationController
      teen_parent = params[:Body].strip.downcase
      
      # Data Storage
-     if teen_parent == "sí"
+     if teen_parent == "sí" || tanf_special_needs == "si"
        # RESPONSE MESSAGE
        # eligible for CCAP
        if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
