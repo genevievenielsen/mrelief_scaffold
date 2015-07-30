@@ -72,7 +72,7 @@ class TwilioTestingController < ApplicationController
         end
 
         if @user.three_and_under != true
-          message = "Are you or your partner pregnant? Enter yes or no." 
+          message = "Are you or your partner pregnant? Enter yes or no" 
           session["page"] = "pregnant"
         else
           message = "In which zipcode do you live? Example: 60615"
@@ -236,14 +236,14 @@ class TwilioTestingController < ApplicationController
            @user.completed = true
         else
           session["page"] = "tanf_special_needs"
-          message = "Does your family receive TANF or do you care for a child with special needs or an individualized education plan (IEP)? Enter yes or no."
+          message = "Does your family receive TANF or do you care for a child with special needs or an individualized education plan (IEP)? Enter yes or no"
           @user.completed = false
         end
         
      elsif employment == "no"
        @user.employment == false
        session["page"] = "tanf_special_needs"
-       message = "Does your family receive TANF or do you care for a child with special needs or an individualized education plan (IEP)? Enter yes or no."
+       message = "Does your family receive TANF or do you care for a child with special needs or an individualized education plan (IEP)? Enter yes or no"
        @user.completed = false
 
      else
@@ -623,7 +623,6 @@ class TwilioTestingController < ApplicationController
      @user.save
     end
    end
-
 
 
    twiml = Twilio::TwiML::Response.new do |r|

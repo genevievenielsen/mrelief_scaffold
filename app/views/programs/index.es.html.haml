@@ -1,6 +1,6 @@
-.container
+%div
   .row
-    .col-md-10.col-md-offset-1.marquee
+    .col-md-10.col-md-offset-1
       %br/
       %br/
       %h1.page-header= t.programs.programs_for | "Programs for Chicago & Illinois"
@@ -28,54 +28,18 @@
           %span.caption
             %h3= program.name
             %p= program.description
-  /
-    <div class="row">
-    <div class="col-md-12">
-    <div class="text-center">
-    <a href="/all_city_programs/new" class="btn btn-success btn-full">Find Out If You Qualify for All City Programs</a>
-    </div>
-    </div>
-    </div>
+
   / %hr/
-  / / Illinois Programs
   / .row
   /   .col-md-12
-  /     %h3.program-heading= t.programs.state_of | "STATE OF ILLINOIS PROGRAMS"
+  /     %h3.program-heading= t.programs.state_of | "EARLY CHILDHOOD PROGRAMS"
   / %div
   /   .row
-  /     - chicago_programs = Program.where(:location => "illinois")
-  /     - chicago_programs.each_with_index do |program|
-  /       .col-md-4
-  /         %a.thumbnail{:href => program.url}
+  /     - illinois_programs = Program.where(:location => "illinois")
+  /     - illinois_programs.where(:name_es => "Early Learning Programs").each_with_index do |program|
+  /       .text-center
+  /         %a.thumbnail{:href => program.url, :style => "padding:0 20px 20px 20px; width:350px; height:200px; margin:auto"}
   /           %span.caption
   /             %h3= program.name
   /             %p= program.description
-  / %br/
-  / %br/
-  / %br/
-  /
-    <div class="row">
-    <div class="col-md-12" style="text-align:center; padding-bottom:20px">
-    <h3>Programs Accessible in Suburban Cook County</h3>
-    </div>
-    </div>
-    <haml:silent>
-    </haml:silent>  <div class="row" style="padding: 0 0 40px 0">
-    <haml:silent>
-    </haml:silent><haml:silent>
-    </haml:silent>      <div class="row">
-    <haml:silent>
-    </haml:silent>      <div class="col-md-4">
-    <div class="thumbnail" style="min-height:230px">
-    <div class="caption" style="text-align:center; padding:0 0 20px 0">
-    <h3></haml:block><haml:silent></haml:silent><haml:block></h3>
-    <p style="padding:0 30px 0 30px"></haml:block><haml:silent></haml:silent><haml:block></p>
-    <p><a href="</haml:block><haml:silent></haml:silent><haml:block>" class="btn btn-primary" role="button">Find Out If You Qualify</a></p>
-    </div>
-    </div>
-    </div>
-    <haml:silent>
-    </haml:silent>      </div>
-    <haml:silent>
-    </haml:silent><haml:silent>
-    </haml:silent></div>
+

@@ -795,6 +795,15 @@ p.location = "chicago"
 p.save
 
 p = Program.new
+p.name_en = "Early Learning Programs"
+p.name_es = "Early Learning Programs"
+p.url = "/early_learning_programs"
+p.description_en = "Early Childhood Programs and Child Care"
+p.description_es = "Early Childhood Programs and Child Care"
+p.location = "illinois"
+p.save
+
+p = Program.new
 p.name_en = "Child Care Assistance Program"
 p.url = "/child_care_vouchers/new"
 p.description_en = "Quality, affordable child care for low-income families"

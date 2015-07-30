@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   get("/filtered_programs", { :controller => "pages", :action => "filtered_programs" })
   post("/community_resources", { :controller => "pages", :action => "community_resources" })
 
-  get "early_learning_programs", to: "early_learning_programs#new"
+  get "early_learning_programs", to: "early_learning_programs#new", as: "early_learning"
   post "early_learning_programs_results", to: "early_learning_programs#create", as: "early_learning_programs_results"
   get "early_learning_more_results/:id", to: "early_learning_programs#more_results", as: "more_results"
 
