@@ -586,7 +586,7 @@ class TwilioTestingController < ApplicationController
      teen_parent = params[:Body].strip.downcase
      
      # Data Storage
-     if teen_parent == "sí" || tanf_special_needs == "si"
+     if teen_parent == "sí" || teen_parent == "si"
        # RESPONSE MESSAGE
        # eligible for CCAP
        if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
