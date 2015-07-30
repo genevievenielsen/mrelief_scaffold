@@ -82,7 +82,7 @@ class TwilioTestingController < ApplicationController
         @user.save
       # error 
       else
-         message = "Oops looks like there is a typo! Please type a, b, c, d or a cominbation that describes your household."
+         message = "Oops looks like there is a typo! Please type a, b, c, d or a combination that describes your household."
          session["counter"] = session["counter"] - 1
          @user.completed = false
          @user.save
@@ -318,7 +318,7 @@ class TwilioTestingController < ApplicationController
         else  
           # eligble for early learning with co-pay
           if @user.income_type == "[\"Greater than Type 2\"]"
-           message = "You likely qualify for Chicago early learning programs! Call (312) 229-1690 or visit bit.ly/learnearly for info. Note: Based on your income, you may have some additional fees. Calculate your estimated co-pay here."
+           message = "You likely qualify for Chicago early learning programs! Call (312) 229-1690 or visit bit.ly/learnearly for info. Note: Based on your income, you may have some additional fees."
           # eligible for early learning with no co-pay
           else
             message = "You likely qualify for Chicago early learning programs! Call (312) 229-1690 or visit bit.ly/learnearly for info."
@@ -345,7 +345,7 @@ class TwilioTestingController < ApplicationController
       # no children
       if @user.children_ages.include?("d")
         @user.no_children = true
-        message = "You may not be eligible for Chicago: Ready to Learn! early learning programs at this time.  Call 312-823-1100 for info on other opportunities."
+        message = "Usted posiblemente no califica para programas de aprendizaje temprano de Chicago: ¡Listo Para Aprender! Llame al 312-823-1100 para información sobre otras oportunidades."
         @user.completed = true
         @user.save
       # children
@@ -362,17 +362,17 @@ class TwilioTestingController < ApplicationController
         end
 
         if @user.three_and_under != true
-          message = "Are you or your partner pregnant? Enter yes or no." 
+          message = "¿Está usted o su pareja embarazada? Ingrese Sí o No." 
           session["page"] = "pregnant_es"
         else
-          message = "In which zipcode do you live? Example: 60615"
+          message = "¿En qué código postal vive? Ejemplo: 60615"
           session["page"] = "zipcode_es"
         end
         @user.completed = false
         @user.save
       # error 
       else
-         message = "Oops looks like there is a typo! Please type a, b, c, d or a cominbation that describes your household."
+         message = "Oops looks like there is a typo! Please type a, b, c, d or a combination that describes your household."
          session["counter"] = session["counter"] - 1
          @user.completed = false
          @user.save
@@ -385,14 +385,14 @@ class TwilioTestingController < ApplicationController
       pregnant = params[:Body].strip.downcase
       session["counter"] += 1 # +1 to optional questions
       # Data Storage
-      if pregnant == "yes"
+      if pregnant == "Sí"
         @user.pregnant == true
-        message = "In which zipcode do you live? Example: 60615"
+        message = "¿En qué código postal vive? Ejemplo: 60615"
         session["page"] = "zipcode_es"
 
-      elsif pregnant == "no"
+      elsif pregnant == "No"
         @user.pregnant == false
-        message = "In which zipcode do you live? Example: 60615"
+        message = "¿En qué código postal vive? Ejemplo: 60615"
         session["page"] = "zipcode_es"
 
       else
@@ -411,13 +411,13 @@ class TwilioTestingController < ApplicationController
     @user.zipcode = params[:Body].strip
 
     if ChicagoEligibleZipcode.all.pluck(:zipcode).include?(@user.zipcode)
-      message = "Are you a foster parent, in a temporary living situation or does your family receive SSI? Enter yes or no"
+      message = "¿Es usted un padre/madre de crianza temporal, en una situación de vida temporal, o su familia recibe SSI? Ingrese sí o no."
       session["page"] = "categorical_income_eligibility_es" 
       @user.completed = false
       @user.save
     else
       # INELIGIBLE
-      message = "You may not be eligible for Chicago: Ready to Learn! early learning programs at this time.  Call 312-823-1100 for info on other opportunities."
+      message = "Usted probablemente no califica en este momento para programas de aprendizaje temprano de Chicago: ¡Listo Para Aprender! .  Llame al 312-823-1100 para obtener información sobre otras oportunidades."
       @user.completed = true
       @user.save
     end
@@ -425,7 +425,7 @@ class TwilioTestingController < ApplicationController
     end
    end
 
-   # Categorial Income Eligibility 
+   # Categorical Income Eligibility 
    if session["page"] == "categorical_income_eligibility_es" 
     if session["counter"] == 4 || session["counter"] == 6
     @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
@@ -434,12 +434,12 @@ class TwilioTestingController < ApplicationController
       if foster_temporary_ssi == "yes"
        @user.foster_temporary_ssi == true
        session["page"] = "household_size_es" 
-       message = "What is the number of people living in your household including yourself?"
+       message = "¿Cuántas personas viven en su hogar, incluyendo  usted? Ejemplo: 2"
     
       elsif foster_temporary_ssi == "no"
         @user.foster_temporary_ssi == false
         session["page"] = "household_size_es" 
-        message = "What is the number of people living in your household including yourself?"
+        message = "¿Cuántas personas viven en su hogar, incluyendo  usted? Ejemplo: 2"
 
       else
         message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
@@ -463,7 +463,7 @@ class TwilioTestingController < ApplicationController
       @user.household_size = household_size_cleaned.to_i
       @user.save
 
-      message = "What is your gross total monthly income before taxes? Example - 1000"
+      message = "¿Cuál es su ingreso mensual total antes de impuestos? Ejemplo: 1000" 
       session["page"] = "income_es"
       @user.completed = false
       @user.save
@@ -495,7 +495,7 @@ class TwilioTestingController < ApplicationController
       end
       @user.income_type = @user_income_type.try(:to_s)
 
-      message = "Are all adults in your household currently employed? Enter yes or no"
+      message = "¿Están todos los adultos  en su hogar actualmente empleados? Ingrese Sí o No."
       session["page"] = "employment_es"
       @user.early_learning_eligible = true
       @user.completed = false
@@ -509,31 +509,31 @@ class TwilioTestingController < ApplicationController
      @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
      employment = params[:Body].strip.downcase
      
-     if employment == "yes"
+     if employment == "Sí"
        @user.employment == true
        # RESPONSE MESSAGE
        # CCAP eligible if below income cutoff 
         income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
         if @user.gross_monthly_income < income_row.income_type4
           @user.ccap_eligible = true
-          # child is ineligibe for early learning but eligible is ccap
+          # child is ineligibe for early learning but eligible for ccap
           if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
-          message = "You likely qualify for the Child Care Assistance Program! Based on your child's age and other factors you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at 312-823-1100 for more information."
+          message = "¡Usted posiblemente califica para el Programa de Asistencia de Cuidado Infantil! Basado en la edad de su hijo/a y otros factores, no califica para programas de aprendizaje temprano, pero por favor llame al Equipo de Referencia de la Comunidad de Acción para los Niños de Illinois al (312) 229-1690 o visite bit.ly/learnearly para información."
           # child is eligible for early learning and ccap
           else
-          message = "You likely qualify for Chicago early learning programs. You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/learnearly for info."
+          message = "Usted posiblemente califica para programas de aprendizaje temprano de Chicago. También puede ser elegible para el Programa de Asistencia de Cuidado Infantil. Para inscribirse llame al (312) 229-1690 o visite bit.ly/learnearly para información."
           end
            @user.completed = true
         else
           session["page"] = "tanf_special_needs_es"
-          message = "Does your family receive TANF or do you care for a child with special needs or an individualized education plan (IEP)? Enter yes or no."
+          message = "¿Recibe su familia TANF o cuidan a un menor con necesidades especiales o un plan de educación individualizado? Ingrese Sí o No."
           @user.completed = false
         end
         
      elsif employment == "no"
        @user.employment == false
        session["page"] = "tanf_special_needs_es"
-       message = "Does your family receive TANF or do you care for a child with special needs or an individualized education plan (IEP)? Enter yes or no."
+       message = "¿Recibe su familia TANF o cuidan a un menor con necesidades especiales o un plan de educación individualizado? Ingrese Sí o No."
        @user.completed = false
 
      else
@@ -553,22 +553,22 @@ class TwilioTestingController < ApplicationController
      tanf_special_needs = params[:Body].strip.downcase
      
      # Data Storage
-     if tanf_special_needs == "yes"
+     if tanf_special_needs == "Sí"
        @user.tanf_special_needs == true
        # Eligible for CCAP
-       # Child is ineligibe for early learning but eligible is CCAP
+       # Child is ineligibe for early learning but eligible for CCAP
        if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
-        message = "You likely qualify for the Child Care Assistance Program! Based on your child's age and other factors you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at 312-299-1690 for more information."
+        message = "¡Usted posiblemente califica para el Programa de Asistencia de Cuidado Infantil! Basado en la edad de su hijo/a y otros factores, no califica para programas de aprendizaje temprano, pero por favor llame al Equipo de Referencia de la Comunidad de Acción para los Niños de Illinois al (312) 229-1100 o visite bit.ly/learnearly para información."
        # child is eligible for early learning and ccap
        else
-        message = "You likely qualify for Chicago early learning programs. You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/learnearly for info."
+        message = "Usted posiblemente califica para programas de aprendizaje temprano de Chicago. También puede ser elegible para el Programa de Asistencia de Cuidado Infantil. Para inscribirse llame al (312) 229-1690 o visite bit.ly/learnearly para información."
        end
         @user.completed = true
 
      elsif tanf_special_needs == "no"
        @user.tanf_special_needs == false
        session["page"] = "teen_parent_es"
-       message = "Are you a teen parent who is enrolled full-time in school or GED classes or its equivalent? Enter yes or no"
+       message = "¿Es usted un padre/madre adolescente inscrito(a) tiempo completo en escuela o clases de GED o su equivalente? Ingrese Sí o No."
        @user.completed = false
      else
        message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
@@ -587,14 +587,15 @@ class TwilioTestingController < ApplicationController
      teen_parent = params[:Body].strip.downcase
      
      # Data Storage
-     if teen_parent == "yes"
+     if teen_parent == "Sí "
        # RESPONSE MESSAGE
        # eligible for CCAP
        if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
-       message = "You likely qualify for the Child Care Assistance Program! Based on your child's age and other factors you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at 312-823-1100 for more information."
+       message = "¡Usted posiblemente califica para el Programa de Asistencia de Cuidado Infantil! Basado en la edad de su hijo/a y otros factores, no califica para programas de aprendizaje temprano, pero por favor llame al Equipo de Referencia de la Comunidad de Acción para los Niños de Illinois al (312) 229-1100 o visite bit.ly/learnearly para información."
+
        # child is eligible for early learning and ccap
        else
-       message = "You likely qualify for Chicago early learning programs! You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/learnearly for info."
+       message = "Usted posiblemente califica para programas de aprendizaje temprano de Chicago. También puede ser elegible para el Programa de Asistencia de Cuidado Infantil. Para inscribirse llame al (312) 229-1690 o visite bit.ly/learnearly para información."
        end
        @user.teen_parent == true
        @user.ccap_eligible = true
@@ -603,15 +604,15 @@ class TwilioTestingController < ApplicationController
        @user.teen_parent == false
         
         if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
-          message = "Based on your child's age and other factors, you do not qualify for early learning programs and child care assistance at this time.  Call 312-823-1100 for information on other opportunities."
+          message = "Usted posiblemente no califica para programas de aprendizaje temprano de Chicago: ¡Listo Para Aprender! Llame al 312-823-1100 para información sobre otras oportunidades."
         # eligible for early learning 
         else  
           # eligble for early learning with co-pay
           if @user.income_type == "[\"Greater than Type 2\"]"
-           message = "You likely qualify for Chicago early learning programs! Call (312) 229-1690 or visit bit.ly/learnearly for info. Note: Based on your income, you may have some additional fees. Calculate your estimated co-pay here."
+           message = "Usted posiblemente no califica para programas de aprendizaje temprano de Chicago. Llame al (312) 229-1690 o visite bit.ly/learnearly  para información. Tenga en cuenta: Basado en sus ingresos, usted puede tener algunos cargos adicionales."
           # eligible for early learning with no co-pay
           else
-            message = "You likely qualify for Chicago early learning programs! Call (312) 229-1690 or visit bit.ly/learnearly for info."
+            message = "Usted probablemente califica para programas de de Chicago de aprendizaje temprano. Llame al (312) 229-1690 o visite bit.ly/learnearly para obtener información." 
           end
         @user.completed = true
         end
