@@ -586,7 +586,27 @@
     end
     # @user.save 
 
-    if params[:employment].present? && params[:other_zipcode] 
+    if params[:half_day].present? && params[:full_day].present? 
+      if I18n.locale == :es
+        flash.now[:alert] = "“Medio día” y “día completo” no se pueden seleccionar juntos. Por favor seleccione una de las dos opciones."
+      else
+        flash.now[:alert] = "Half Day and Full Day cannot be selected together. Please choose one of these two options."
+      end
+      render 'new'
+      return
+    end
+
+    if params[:part_week].present? && params[:full_week].present? 
+      if I18n.locale == :es
+        flash.now[:alert] = "Part Week and Full Week cannot be selected together. Please choose one of these two options."
+      else
+        flash.now[:alert] = "Part Week and Full Week cannot be selected together. Please choose one of these two options."
+      end
+      render 'new'
+      return
+    end
+
+    if params[:employment].present? && params[:other_zipcode].present? && params[:bilingual].present?
       # age questions
       if params[:zero_to_three].present? || params[:three_to_five].present? || params[:six_to_twelve].present? || params[:pregnant].present? || params[:no_children].present?
         # categorical eligibility questions
