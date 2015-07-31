@@ -598,7 +598,7 @@
 
     if params[:part_week].present? && params[:full_week].present? 
       if I18n.locale == :es
-        flash.now[:alert] = "Part Week and Full Week cannot be selected together. Please choose one of these two options."
+        flash.now[:alert] = "No se puede escoger ‘Semana parcial’ y ‘Semana completa’. Por favor escoja una de estas dos opciones."
       else
         flash.now[:alert] = "Part Week and Full Week cannot be selected together. Please choose one of these two options."
       end

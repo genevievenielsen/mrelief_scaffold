@@ -103,31 +103,31 @@
           / Homelessness question
           .row
             .col-md-9.col-sm-10.col-xs-12
-              %label.allthatapply Select all that apply to your family’s living situation:
+              %label.allthatapply=t.elp.homeless | "Select all that apply to your family’s living situation:"
               #homeless_questions.radio-button
                 <input type="checkbox" name="homeless_fixed_residence" value="homeless_fixed_residence" id="homeless_fixed_residence"
                 - if @user.homeless_fixed_residence != nil && @user.homeless_fixed_residence == true
                   checked
                 >
-                We lack a regular nighttime place for living and share with another family or friends
+                No tenemos un lugar regular donde pasar la noche y compartimos espacio con otra familia o con amigos
                 %br
                 <input type="checkbox" name="homeless_hotels" value="homeless_hotels" id="homeless_hotels"
                 - if @user.homeless_hotels != nil && @user.homeless_hotels == true
                   checked
                 >
-                We regularly stay in motels, hotels, a car, or other public place
+                A menudo nos quedamos en moteles, hoteles, un carro u otro espacio público
                 %br
                 <input type="checkbox" name="homeless_shelters" value="homeless_shelters" id="homeless_shelters"
                 - if @user.homeless_shelters != nil && @user.homeless_shelters == true
                   checked
                 >
-                We are living in a shelter
+                Vivimos en un albergue
                 %br
                 <input type="checkbox" name="not_homeless" value="not_homeless" id="not_homeless"
                 - if @user.not_homeless != nil && @user.not_homeless == true
                   checked
                 >
-                None of the Above
+                Ninguno de los anteriores
                 %br
           / Form for employment
           .row
@@ -271,7 +271,7 @@
 
            if($("#part_week").is(':checked')) {
              if($("#full_week").is(':checked')) {
-              alert("Part Week and Full Week cannot be selected together. Please chooose one of these two options.");
+              alert("No se puede escoger ‘Semana parcial’ y ‘Semana completa’. Por favor escoja una de estas dos opciones.");
              }
            }
           });

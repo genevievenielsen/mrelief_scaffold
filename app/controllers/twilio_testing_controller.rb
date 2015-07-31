@@ -371,7 +371,7 @@ class TwilioTestingController < ApplicationController
         @user.completed = false
         @user.save
       else
-         message = "Yo cuido a un(os) menor(es) entre las edades de: a. 0 a 2  b. 3 a 5 c. 6 a 12. d. Ninguno de estos. Ejemplo: ‘a’ o ‘ab’"
+         message = "¡Parece que oprimió la letra equivocada! Por favor oprima, ‘a’, ‘b’, ‘c’, ‘d’ o una combinación de éstas para describir a su hogar."
          session["counter"] = session["counter"] - 1
          @user.completed = false
          @user.save
@@ -395,7 +395,7 @@ class TwilioTestingController < ApplicationController
         session["page"] = "zipcode_es"
 
       else
-        message = "Ingrese Sí o No"
+        message = "¡Parece que oprimió la letra equivocada! Por favor seleccione Sí o No"
         session["counter"] = session["counter"] - 1
       end
 
@@ -441,7 +441,7 @@ class TwilioTestingController < ApplicationController
         message = "¿Cuántas personas viven en su hogar, incluyendo usted? Ejemplo: 2"
 
       else
-        message = "Ingrese Sí o No"
+        message = "¡Parece que oprimió la letra equivocada! Por favor seleccione Sí o No"
         session["counter"] = session["counter"] - 1
       end
       @user.completed = false
@@ -536,7 +536,7 @@ class TwilioTestingController < ApplicationController
        @user.completed = false
 
      else
-       message = "Ingrese Sí o No"
+       message = "¡Parece que oprimió la letra equivocada! Por favor seleccione Sí o No"
        session["counter"] = session["counter"] - 1
        @user.completed = false
      end
@@ -570,7 +570,7 @@ class TwilioTestingController < ApplicationController
        message = "¿Es usted un padre/madre adolescente inscrito(a) tiempo completo en escuela o clases de GED o su equivalente? Ingrese Sí o No"
        @user.completed = false
      else
-       message = "Ingrese Sí o No"
+       message = "¡Parece que oprimió la letra equivocada! Por favor seleccione Sí o No"
        session["counter"] = session["counter"] - 1
        @user.completed = false
      end
@@ -616,7 +616,7 @@ class TwilioTestingController < ApplicationController
         @user.completed = true
         end
      else
-       message = "Ingrese Sí o No"
+       message = "¡Parece que oprimió la letra equivocada! Por favor seleccione Sí o No"
        session["counter"] = session["counter"] - 1
        @user.completed = false
      end

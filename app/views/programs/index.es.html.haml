@@ -29,17 +29,17 @@
             %h3= program.name
             %p= program.description
 
-  / %hr/
-  / .row
-  /   .col-md-12
-  /     %h3.program-heading= t.programs.state_of | "EARLY CHILDHOOD PROGRAMS"
-  / %div
-  /   .row
-  /     - illinois_programs = Program.where(:location => "illinois")
-  /     - illinois_programs.where(:name_es => "Programas de Aprendizaje Temprano").each_with_index do |program|
-  /       .text-center
-  /         %a.thumbnail{:href => program.url, :style => "padding:0 20px 20px 20px; width:350px; height:200px; margin:auto"}
-  /           %span.caption
-  /             %h3= program.name
-  /             %p= program.description
+  %hr/
+  .row
+    .col-md-12
+      %h3.program-heading= t.programs.state_of | "EARLY CHILDHOOD PROGRAMS"
+  %div
+    .row
+      - illinois_programs = Program.where(:location => "illinois")
+      - illinois_programs.where(:name_es => "Programas de Aprendizaje Temprano").each_with_index do |program|
+        .text-center
+          %a.thumbnail{:href => program.url, :style => "padding:0 20px 20px 20px; width:350px; height:200px; margin:auto"}
+            %span.caption
+              %h3= program.name
+              %p= program.description
 

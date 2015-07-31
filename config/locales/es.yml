@@ -142,7 +142,7 @@ es:
     chicago_programs: PROGRAMAS DE CHICAGO
     accessible_in: Accesible en Centros Comunitarios
     click_on: Haga clic en un beneficio a continuación para comenzar el proceso de pre-calificación.
-    state_of: PROGRAMAS DEL ESTADO DE ILLINOIS
+    state_of: PROGRAMAS DE EDUCACION TEMPRANA
 
 
 
@@ -219,6 +219,8 @@ es:
     household_size: ¿Cuántas personas viven en su grupo familiar, incluyendo usted?
     gross_income: ¿Cuál es su ingreso bruto mensual?
     select_all: Seleccione todos las que apliquen a usted - 
+    homeless: Seleccione todas las opciones que se aplican a la situación de vivienda para su familia -
+
     employed: ¿Están todos los adultos en su hogar actualmente empleados?
 
     zipcode: ¿En qué código postal vive usted? 
