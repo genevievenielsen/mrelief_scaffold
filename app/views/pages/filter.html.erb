@@ -29,7 +29,7 @@
       <div class="row">
         <div class=" col-md-9 col-sm-10 col-xs-12">
           <label for="gross_income">What is your gross monthly income?</label>
-          <%= render "programs/popover_calculator" %>
+          <br><%= render "programs/calculator_modal" %>
              <p type="button" data-toggle="popover" data-content="This includes the monthly income of all people living in your household including yourself. This includes income from all sources, such as   Social Security, child support, and unemployment insurance before any deductions." data-placement="right" style="border: 0px; color: #4582ec;" class="popover-body">
               <input type="text" id="gross_income" name="gross_income" placeholder="For example: 1000"class="form-field" value="<%= number_with_precision(@current_user.try(:gross_income), precision: 0) %>" required>
             </p>
@@ -63,9 +63,6 @@
 
     </form>
   </div>
-
-  <%= render "programs/calculator" %>
-
 
 </div>
 </section>
