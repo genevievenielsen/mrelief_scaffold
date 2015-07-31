@@ -26,7 +26,7 @@ class TwilioController < ApplicationController
     session["counter"] = 0
   end
    if session["counter"] == 0
-    message = "Welcome to mRelief! We help you check your eligibility for public assistance. For foodstamps, text 'food'. For RTA ride free, text 'ride.' For Medicaid, text 'medicaid.' For Medicare Cost Sharing, text 'medicare.' If you make a mistake, send the message 'reset'."
+    message = "Welcome to mRelief! We help you check your eligibility for public assistance. For foodstamps, text 'food'. For early learning programs and child care, text 'kids'. For RTA ride free, text 'ride.' For Medicaid, text 'medicaid.' If you make a mistake, send the message 'reset'."
    end
 
    if params[:Body].strip.downcase == "menu"
@@ -48,31 +48,20 @@ class TwilioController < ApplicationController
       session["page"] = "medicaid_citizen_question"
       session["counter"] = 1
    end
-   if params[:Body].strip.downcase == "medicare"
-      message = "What is your household size? Please include yourself, your spouse, your children under 18 who live with you."
-      session["page"] = "medicare_household_question"
-      session["counter"] = 1
-   end
+   # if params[:Body].strip.downcase == "medicare"
+   #    message = "What is your household size? Please include yourself, your spouse, your children under 18 who live with you."
+   #    session["page"] = "medicare_household_question"
+   #    session["counter"] = 1
+   # end
    if params[:Body].strip.downcase == "med"
-      message = "For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
+      message = "For Medicaid, text the word 'medicaid.'"
       session["counter"] = 1
    end
-   # if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("medicaid")
-   #    message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
-   #    session["counter"] = 1
-   # end
-   # if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("ride")
-   #    message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
-   #    session["counter"] = 1
-   # end
-   # if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("medicaid") && params[:Body].strip.downcase.include?("ride")
-   #    message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
-   #    session["counter"] = 1
-   # end
-   # if params[:Body].strip.downcase.include?("food") && params[:Body].strip.downcase.include?("medicaid") && params[:Body].strip.downcase.include?("ride") && params[:Body].strip.downcase.include?("medicare")
-   #    message = "You can only check your eligibility for one form at a time. For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.'"
-   #    session["counter"] = 1
-   # end
+   if params[:Body].strip.downcase == "kids"
+      message = "Text the letter(s) that applies to your child by 9/1/15. I care for a child ages: a. 0-2 b. 3-5 c. 6-12. d. none of these Ex: ‘a’ or ‘ab’"
+      session["page"] = "age_of_children"
+      session["counter"] = 1
+   end
 
    if params[:Body].strip.downcase == "cash" || params[:Body].strip.downcase == "cash assistance"
       message = "Thanks for texting mRelief! Currently, we only help check eligibility for cash assistance at www.mrelief.com Please visit us online."
@@ -85,9 +74,9 @@ class TwilioController < ApplicationController
    end
 
    if session["counter"] == 1
-      if params[:Body].strip.downcase == "food" || params[:Body].strip.downcase == "ride" || params[:Body].strip.downcase == "medicaid" || params[:Body].strip.downcase == "medicare"|| params[:Body].strip.downcase == "med" || params[:Body].strip.downcase == "cash" || params[:Body].strip.downcase == "cash assistance" || params[:Body].strip.downcase == "rent" || params[:Body].strip.downcase == "rental assistance"
+      if params[:Body].strip.downcase == "food" || params[:Body].strip.downcase == "ride" || params[:Body].strip.downcase == "medicaid" || params[:Body].strip.downcase == "medicare"|| params[:Body].strip.downcase == "med" || params[:Body].strip.downcase == "cash" || params[:Body].strip.downcase == "cash assistance" || params[:Body].strip.downcase == "rent" || params[:Body].strip.downcase == "rental assistance" || params[:Body].strip.downcase == "kids"
       else
-        message = "Oops looks like there is a typo! For foodstamps, text 'food'. For RTA ride free, text 'ride.' For Medicaid, text 'medicaid.' For Medicare Cost Sharing, text 'medicare.' "
+        message = "Oops looks like there is a typo! For foodstamps, text 'food'. For early learning programs and child care, text 'kids'. For RTA ride free, text 'ride.' For Medicaid, text 'medicaid.'"
       end
    end
 
@@ -871,194 +860,483 @@ class TwilioController < ApplicationController
      @m.save
    end
 
-   # HERE IS THE MEDICARE COST SHARING LOGIC
-   if session["page"] == "medicare_household_question" && session["counter"] == 2
-    @mc = MedicareCostSharingDataTwilio.new
-    @mc.phone_number = params[:From]
-    session["household"] = params[:Body].strip
-    if session["household"] !~ /\D/  # returns true if all numbers
-      session["household"] = session["household"].to_i
-    else
-      session["household"] = session["household"].in_numbers
-    end
-    @mc.household_size = session["household"]
-    message = "How many people in your household receive Medicare? Please enter a number"
-    session["page"] = "medicare_number_question"
-    @mc.completed = "false"
-    @mc.save
-   end
-
-   if session["page"] == "medicare_number_question" && session["counter"] == 3
-    session["medicare_number"] = params[:Body].strip
-    @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
-    if session["medicare_number"] !~ /\D/  # returns true if all numbers
-      session["medicare_number"] = session["medicare_number"].to_i
-    else
-      session["medicare_number"] = session["medicare_number"].in_numbers
-    end
-    @mc.medicare_household_size = session["medicare_number"]
-    if session["medicare_number"] == 0
-      message = "What is your zipcode?"
-      session["page"] = "medicare_ineligible"
-    else
-      message = "What is your gross monthly income? Enter a number. Example - 1000."
-      session["page"] = "medicare_income_question"
-    end
-    @mc.save
-   end
-
-   if session["page"] == "medicare_income_question" && session["counter"] == 4
-     @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
-     session["income"] = params[:Body].strip
-     if session["income"] !~ /\D/
-       session["income"] = session["income"].to_i
-     else
-       if session["income"].include?("dollars")
-         session["income"].slice!"dollars"
-       end
-       if session["income"].include?("$")
-         session["income"].slice!"$"
-       end
-       if session["income"].include?(",")
-         session["income"].slice!","
-       end
-       session["income"] = session["income"].in_numbers
-     end
-     @mc.monthly_gross_income = session["income"]
-     message = "Please estimate the value of your assets.  This includes such items as: money in checking and savings accounts; stocks, bonds, savings certificates, and other securities; farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property. Please exclude the value of your home and car. Enter a number. Example - 10000."
-     session["page"] = "medicare_assests_question"
-     @mc.save
-   end
-
-   if session["page"] == "medicare_assests_question" && session["counter"] == 5
-     @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
-     session["assets"] = params[:Body].strip
-     if session["assets"] !~ /\D/
-       session["assets"] = session["assets"].to_i
-     else
-       if session["assets"].include?("dollars")
-         session["assets"].slice!"dollars"
-       end
-       if session["assets"].include?("$")
-         session["assets"].slice!"$"
-       end
-       if session["assets"].include?(",")
-         session["assets"].slice!","
-       end
-       session["assets"] = session["assets"].in_numbers
-     end
-     @mc.assets = session["assets"]
-     assets = session["assets"]
-     household_size = session["household"]
-     medicare_household_size = session["medicare_number"]
-     monthly_income = session["income"]
-     if medicare_household_size == 0
-      @eligible = "no"
-     elsif household_size == 1 && assets > 7280
-      @eligible = "no"
-     elsif household_size > 1 && assets > 10930
-      @eligible = "no"
-     else
-      if medicare_household_size == 1
-        monthly_income = monthly_income - 25
-      elsif medicare_household_size == 2
-        monthly_income = monthly_income - 50
-      end
-      medicare_sharing_eligibility = MedicareCostSharing.find_by({ :household_size => household_size })
-      if monthly_income < medicare_sharing_eligibility.premium_only
-        @eligible = "yes"
-        if monthly_income < medicare_sharing_eligibility.medicare_cost_sharing
-          @eligible_p_d_c = "yes"
-        elsif monthly_income >= medicare_sharing_eligibility.medicare_cost_sharing
-          @eligible_p = "yes"
+   # HERE IS THE EARLY LEARNING LOGIC
+   # number of children question
+    if session["page"] == "age_of_children" && session["counter"] == 2
+      @user = EarlyLearningDataTwilio.new
+      @user.phone_number = params[:From]
+      @user.children_ages = params[:Body].strip.downcase
+      # no children
+      if @user.children_ages.include?("d")
+        @user.no_children = true
+        message = "You may not be eligible for Chicago: Ready to Learn! early learning programs at this time.  Call 312-823-1100 for info on other opportunities."
+        @user.completed = true
+        @user.save
+      # children
+      elsif @user.children_ages.include?("a") || @user.children_ages.include?("b") || @user.children_ages.include?("c") 
+        # Data storage for children ages
+        if @user.children_ages.include?("a")
+          @user.three_and_under = true
         end
+        if @user.children_ages.include?("b")
+          @user.three_to_five = true
+        end
+        if @user.children_ages.include?("c")
+          @user.six_to_twelve = true
+        end
+
+        if @user.three_and_under != true
+          message = "Are you or your partner pregnant? Enter yes or no" 
+          session["page"] = "pregnant"
+        else
+          message = "In which zipcode do you live? Example: 60615"
+          session["page"] = "zipcode"
+        end
+        @user.completed = false
+        @user.save
+      # error 
+      else
+         message = "Oops looks like there is a typo! Please type a, b, c, d or a combination that describes your household."
+         session["counter"] = session["counter"] - 1
+         @user.completed = false
+         @user.save
       end
+    end
+
+    # Pregnancy question
+    if session["page"] == "pregnant" && session["counter"] == 3
+      @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
+      pregnant = params[:Body].strip.downcase
+      session["counter"] += 1 # +1 to optional questions
+      # Data Storage
+      if pregnant == "yes" 
+        @user.pregnant == true
+        message = "In which zipcode do you live? Example: 60615"
+        session["page"] = "zipcode"
+
+      elsif pregnant == "no" 
+        @user.pregnant == false
+        message = "In which zipcode do you live? Example: 60615"
+        session["page"] = "zipcode"
+
+      else
+        message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
+        session["counter"] = session["counter"] - 1
       end
-     if @eligible == "yes"
-      message = "What is your zipcode?"
-      session["page"] = "medicare_eligible"
-     elsif @eligible == "no"
-      message = "What is your zipcode?"
-      session["page"] = "medicare_ineligible"
-     end
-     @mc.save
+
+      @user.completed = false
+      @user.save
+    end
+
+   # Zipcode question
+   if session["page"] == "zipcode" 
+    if session["counter"] == 3 || session["counter"] == 5
+    @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
+    @user.zipcode = params[:Body].strip
+
+    if ChicagoEligibleZipcode.all.pluck(:zipcode).include?(@user.zipcode)
+      message = "Are you a foster parent, in a temporary living situation or does your family receive SSI? Enter yes or no"
+      session["page"] = "categorical_income_eligibility" 
+      @user.completed = false
+      @user.save
+    else
+      # INELIGIBLE
+      message = "You may not be eligible for Chicago: Ready to Learn! early learning programs at this time.  Call 312-823-1100 for info on other opportunities."
+      @user.completed = true
+      @user.save
+    end
+
+    end
    end
 
-   if session["page"] == "medicare_eligible" && session["counter"] == 6
-    @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
-    session["zipcode"] = params[:Body].strip
-     user_zipcode = session["zipcode"]
-     @zipcode = user_zipcode << ".0"
-     @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
-     if @lafcenter.present?
+   # Categorial Income Eligibility 
+   if session["page"] == "categorical_income_eligibility" 
+    if session["counter"] == 4 || session["counter"] == 6
+    @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
+    foster_temporary_ssi = params[:Body].strip.downcase
+
+      if foster_temporary_ssi == "yes" 
+       @user.foster_temporary_ssi == true
+       session["page"] = "household_size" 
+       message = "What is the number of people living in your household including yourself?"
+    
+      elsif foster_temporary_ssi == "no" 
+        @user.foster_temporary_ssi == false
+        session["page"] = "household_size" 
+        message = "What is the number of people living in your household including yourself?"
+
+      else
+        message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
+        session["counter"] = session["counter"] - 1
+      end
+      @user.completed = false
+    end
+   end
+
+   # Household size question
+   if session["page"] == "household_size" 
+    if session["counter"] == 5 || session["counter"] == 7
+    @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
+    household_size = params[:Body].strip
+      # Convert to an integer
+      if household_size !~ /\D/  # returns true if all numbers
+        household_size_cleaned = household_size.to_i
+      else
+        household_size_cleaned = household_size.in_numbers
+      end
+      @user.household_size = household_size_cleaned.to_i
+      @user.save
+
+      message = "What is your gross total monthly income before taxes? Example - 1000"
+      session["page"] = "income"
+      @user.completed = false
+      @user.save
+    end
+   end
+
+   # Income question
+   if session["page"] == "income" 
+    if session["counter"] == 6 || session["counter"] == 8
+    @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
+    income = params[:Body].strip
+      # Convert to an integer
+      if income !~ /\D/  # returns true if all numbers
+        income_cleaned = income.to_i
+      else
+        income_cleaned = income.in_numbers
+      end
+      @user.gross_monthly_income = income_cleaned.to_f
+      # Determine income eligible programs
+      income_row = EarlyLearningIncomeCutoff.find_by(household_size: @user.household_size.to_i)
+
+      @user_income_type = []
+      if @user.gross_monthly_income > income_row.income_type2 # Notice about co-pay?
+        @user_income_type = ['Greater than Type 2']
+      elsif @user.gross_monthly_income <= income_row.income_type2 && @user.gross_monthly_income > income_row.income_type1
+        @user_income_type = ['Less than Type 2']
+      elsif @user.gross_monthly_income <= income_row.income_type1
+        @user_income_type = ['Less than Type 1', 'Less than Type 2']
+      end
+      @user.income_type = @user_income_type.try(:to_s)
+
+      message = "Are all adults in your household currently employed? Enter yes or no"
+      session["page"] = "employment"
+      @user.early_learning_eligible = true
+      @user.completed = false
+      @user.save
+    end
+   end
+
+   # Employment question
+   if session["page"] == "employment" 
+    if session["counter"] == 7 || session["counter"] == 9
+     @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
+     employment = params[:Body].strip.downcase
+     
+     if employment == "yes" 
+       @user.employment == true
+       # RESPONSE MESSAGE
+       # CCAP eligible if below income cutoff 
+        income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
+        if @user.gross_monthly_income < income_row.income_type4
+          @user.ccap_eligible = true
+          # child is ineligibe for early learning but eligible is ccap
+          if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
+          message = "You likely qualify for the Child Care Assistance Program! Based on your child's age and other factors you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at 312-823-1100 for more information."
+          # child is eligible for early learning and ccap
+          else
+          message = "You likely qualify for Chicago early learning programs. You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/learnearly for info."
+          end
+           @user.completed = true
+        else
+          session["page"] = "tanf_special_needs"
+          message = "Does your family receive TANF or do you care for a child with special needs or an individualized education plan (IEP)? Enter yes or no"
+          @user.completed = false
+        end
+        
+     elsif employment == "no"
+       @user.employment == false
+       session["page"] = "tanf_special_needs"
+       message = "Does your family receive TANF or do you care for a child with special needs or an individualized education plan (IEP)? Enter yes or no"
+       @user.completed = false
+
      else
-       @lafcenter = LafCenter.find_by(:id => 10)
+       message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
+       session["counter"] = session["counter"] - 1
+       @user.completed = false
      end
-    message = "You may be in luck! You likely qualify for Medicare Cost Sharing. To access your Medicare Care Sharing, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
-    @mc.zipcode = user_zipcode
-    @mc.medicare_cost_sharing_eligibility_status = "yes"
-    session["page"] = "mcs_feedback_1"
-    @mc.save
+    
+     @user.save
+    end
    end
 
-   if session["page"] == "medicare_ineligible"
-    session["zipcode"] = params[:Body].strip
-     zipcode = session["zipcode"]
-     primarycare = []
-     ServiceCenter.all.each do |center|
-       if center.description.match("primary care")
-         primarycare.push(center)
+   # Tanf and special needs question
+   if session["page"] == "tanf_special_needs"
+    if session["counter"] == 8 || session["counter"] == 10
+     @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
+     tanf_special_needs = params[:Body].strip.downcase
+     
+     # Data Storage
+     if tanf_special_needs == "yes" 
+       @user.tanf_special_needs == true
+       # Eligible for CCAP
+       # Child is ineligibe for early learning but eligible is CCAP
+       if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
+        message = "You likely qualify for the Child Care Assistance Program! Based on your child's age and other factors you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at 312-299-1690 for more information."
+       # child is eligible for early learning and ccap
+       else
+        message = "You likely qualify for Chicago early learning programs. You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/learnearly for info."
        end
-     end
-     @medical_resources_zip = []
-     primarycare.each do |center|
-       if center.zip.match(zipcode)
-         @medical_resources_zip.push(center)
-       end
-     end
-     if @medical_resources_zip.present?
-      @medical_center = @medical_resources_zip.first
+        @user.completed = true
+
+     elsif tanf_special_needs == "no" 
+       @user.tanf_special_needs == false
+       session["page"] = "teen_parent"
+       message = "Are you a teen parent who is enrolled full-time in school or GED classes or its equivalent? Enter yes or no"
+       @user.completed = false
      else
-      @medical_center = primarycare.first
+       message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
+       session["counter"] = session["counter"] - 1
+       @user.completed = false
      end
-     if session["counter"] == 4
-       @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
-       #NO one in the household is on medicare
-        message = "You likely do not qualify for Medicare Cost Sharing. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
-        @mc.zipcode = zipcode
-        @mc.medicare_cost_sharing_eligibility_status = "no"
-        session["page"] = "mcs_feedback_2"
-        @mc.save
-     elsif session["counter"] == 6
-        @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
-        #Medicare cost sharing user does not meet eligiblty cut offs
-        message = "You likely do not qualify for Medicare Cost Sharing. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
-        @mc.zipcode = zipcode
-        @mc.medicare_cost_sharing_eligibility_status = "no"
-        session["page"] = "mcs_feedback_3"
-        @mc.save
-     end
+
+     @user.save
+    end
    end
 
-   if session["page"] == "mcs_feedback_1" && session["counter"] == 7
-     @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-     message = "Thank you so much for your feedback! \n To check other programs, text 'menu'."
-     @mc.feedback = params[:Body]
-     @mc.completed = "true"
-     @mc.save
-   elsif session["page"] == "mcs_feedback_2" && session["counter"] == 5
-     @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-     message = "Thank you so much for your feedback! \n To check other programs, text 'menu'."
-     @mc.feedback = params[:Body]
-     @mc.completed = "true"
-     @mc.save
-   elsif session["page"] == "mcs_feedback_3" && session["counter"] == 7
-     @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-     message = "Thank you so much for your feedback! \n To check other programs, text 'menu'."
-     @mc.feedback = params[:Body]
-     @mc.completed = "true"
-     @mc.save
+   # Teen parent question
+   if session["page"] == "teen_parent"
+    if session["counter"] == 9 || session["counter"] == 11
+     @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
+     teen_parent = params[:Body].strip.downcase
+     
+     # Data Storage
+     if teen_parent == "yes" 
+       # RESPONSE MESSAGE
+       # eligible for CCAP
+       if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
+       message = "You likely qualify for the Child Care Assistance Program! Based on your child's age and other factors you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at 312-823-1100 for more information."
+       # child is eligible for early learning and ccap
+       else
+       message = "You likely qualify for Chicago early learning programs! You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/learnearly for info."
+       end
+       @user.teen_parent == true
+       @user.ccap_eligible = true
+       @user.completed = true
+     elsif teen_parent == "no" 
+       @user.teen_parent == false
+        
+        if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
+          message = "Based on your child's age and other factors, you do not qualify for early learning programs and child care assistance at this time.  Call 312-823-1100 for information on other opportunities."
+        # eligible for early learning 
+        else  
+          # eligble for early learning with co-pay
+          if @user.income_type == "[\"Greater than Type 2\"]"
+           message = "You likely qualify for Chicago early learning programs! Call (312) 229-1690 or visit bit.ly/learnearly for info. Note: Based on your income, you may have some additional fees."
+          # eligible for early learning with no co-pay
+          else
+            message = "You likely qualify for Chicago early learning programs! Call (312) 229-1690 or visit bit.ly/learnearly for info."
+          end
+        @user.completed = true
+        end
+     else
+       message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
+       session["counter"] = session["counter"] - 1
+       @user.completed = false
+     end
+     @user.save
+    end
    end
+
+
+   # HERE IS THE MEDICARE COST SHARING LOGIC
+   # if session["page"] == "medicare_household_question" && session["counter"] == 2
+   #  @mc = MedicareCostSharingDataTwilio.new
+   #  @mc.phone_number = params[:From]
+   #  session["household"] = params[:Body].strip
+   #  if session["household"] !~ /\D/  # returns true if all numbers
+   #    session["household"] = session["household"].to_i
+   #  else
+   #    session["household"] = session["household"].in_numbers
+   #  end
+   #  @mc.household_size = session["household"]
+   #  message = "How many people in your household receive Medicare? Please enter a number"
+   #  session["page"] = "medicare_number_question"
+   #  @mc.completed = "false"
+   #  @mc.save
+   # end
+
+   # if session["page"] == "medicare_number_question" && session["counter"] == 3
+   #  session["medicare_number"] = params[:Body].strip
+   #  @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
+   #  if session["medicare_number"] !~ /\D/  # returns true if all numbers
+   #    session["medicare_number"] = session["medicare_number"].to_i
+   #  else
+   #    session["medicare_number"] = session["medicare_number"].in_numbers
+   #  end
+   #  @mc.medicare_household_size = session["medicare_number"]
+   #  if session["medicare_number"] == 0
+   #    message = "What is your zipcode?"
+   #    session["page"] = "medicare_ineligible"
+   #  else
+   #    message = "What is your gross monthly income? Enter a number. Example - 1000."
+   #    session["page"] = "medicare_income_question"
+   #  end
+   #  @mc.save
+   # end
+
+   # if session["page"] == "medicare_income_question" && session["counter"] == 4
+   #   @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
+   #   session["income"] = params[:Body].strip
+   #   if session["income"] !~ /\D/
+   #     session["income"] = session["income"].to_i
+   #   else
+   #     if session["income"].include?("dollars")
+   #       session["income"].slice!"dollars"
+   #     end
+   #     if session["income"].include?("$")
+   #       session["income"].slice!"$"
+   #     end
+   #     if session["income"].include?(",")
+   #       session["income"].slice!","
+   #     end
+   #     session["income"] = session["income"].in_numbers
+   #   end
+   #   @mc.monthly_gross_income = session["income"]
+   #   message = "Please estimate the value of your assets.  This includes such items as: money in checking and savings accounts; stocks, bonds, savings certificates, and other securities; farm and small business equipment, unless used for income for self-support, estate bequests; and miscellaneous resources that are not real property. Please exclude the value of your home and car. Enter a number. Example - 10000."
+   #   session["page"] = "medicare_assests_question"
+   #   @mc.save
+   # end
+
+   # if session["page"] == "medicare_assests_question" && session["counter"] == 5
+   #   @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
+   #   session["assets"] = params[:Body].strip
+   #   if session["assets"] !~ /\D/
+   #     session["assets"] = session["assets"].to_i
+   #   else
+   #     if session["assets"].include?("dollars")
+   #       session["assets"].slice!"dollars"
+   #     end
+   #     if session["assets"].include?("$")
+   #       session["assets"].slice!"$"
+   #     end
+   #     if session["assets"].include?(",")
+   #       session["assets"].slice!","
+   #     end
+   #     session["assets"] = session["assets"].in_numbers
+   #   end
+   #   @mc.assets = session["assets"]
+   #   assets = session["assets"]
+   #   household_size = session["household"]
+   #   medicare_household_size = session["medicare_number"]
+   #   monthly_income = session["income"]
+   #   if medicare_household_size == 0
+   #    @eligible = "no"
+   #   elsif household_size == 1 && assets > 7280
+   #    @eligible = "no"
+   #   elsif household_size > 1 && assets > 10930
+   #    @eligible = "no"
+   #   else
+   #    if medicare_household_size == 1
+   #      monthly_income = monthly_income - 25
+   #    elsif medicare_household_size == 2
+   #      monthly_income = monthly_income - 50
+   #    end
+   #    medicare_sharing_eligibility = MedicareCostSharing.find_by({ :household_size => household_size })
+   #    if monthly_income < medicare_sharing_eligibility.premium_only
+   #      @eligible = "yes"
+   #      if monthly_income < medicare_sharing_eligibility.medicare_cost_sharing
+   #        @eligible_p_d_c = "yes"
+   #      elsif monthly_income >= medicare_sharing_eligibility.medicare_cost_sharing
+   #        @eligible_p = "yes"
+   #      end
+   #    end
+   #    end
+   #   if @eligible == "yes"
+   #    message = "What is your zipcode?"
+   #    session["page"] = "medicare_eligible"
+   #   elsif @eligible == "no"
+   #    message = "What is your zipcode?"
+   #    session["page"] = "medicare_ineligible"
+   #   end
+   #   @mc.save
+   # end
+
+   # if session["page"] == "medicare_eligible" && session["counter"] == 6
+   #  @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
+   #  session["zipcode"] = params[:Body].strip
+   #   user_zipcode = session["zipcode"]
+   #   @zipcode = user_zipcode << ".0"
+   #   @lafcenter = LafCenter.find_by(:zipcode => @zipcode)
+   #   if @lafcenter.present?
+   #   else
+   #     @lafcenter = LafCenter.find_by(:id => 10)
+   #   end
+   #  message = "You may be in luck! You likely qualify for Medicare Cost Sharing. To access your Medicare Care Sharing, go to the LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+   #  @mc.zipcode = user_zipcode
+   #  @mc.medicare_cost_sharing_eligibility_status = "yes"
+   #  session["page"] = "mcs_feedback_1"
+   #  @mc.save
+   # end
+
+   # if session["page"] == "medicare_ineligible"
+   #  session["zipcode"] = params[:Body].strip
+   #   zipcode = session["zipcode"]
+   #   primarycare = []
+   #   ServiceCenter.all.each do |center|
+   #     if center.description.match("primary care")
+   #       primarycare.push(center)
+   #     end
+   #   end
+   #   @medical_resources_zip = []
+   #   primarycare.each do |center|
+   #     if center.zip.match(zipcode)
+   #       @medical_resources_zip.push(center)
+   #     end
+   #   end
+   #   if @medical_resources_zip.present?
+   #    @medical_center = @medical_resources_zip.first
+   #   else
+   #    @medical_center = primarycare.first
+   #   end
+   #   if session["counter"] == 4
+   #     @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
+   #     #NO one in the household is on medicare
+   #      message = "You likely do not qualify for Medicare Cost Sharing. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+   #      @mc.zipcode = zipcode
+   #      @mc.medicare_cost_sharing_eligibility_status = "no"
+   #      session["page"] = "mcs_feedback_2"
+   #      @mc.save
+   #   elsif session["counter"] == 6
+   #      @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => "false")
+   #      #Medicare cost sharing user does not meet eligiblty cut offs
+   #      message = "You likely do not qualify for Medicare Cost Sharing. A medical clinic near you is #{@medical_center.name} - #{@medical_center.street} #{@medical_center.city} #{@medical_center.state}, #{@medical_center.zip} #{@medical_center.phone}. If your family doesn't have health coverage, you may have to pay a fee and all health costs. \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+   #      @mc.zipcode = zipcode
+   #      @mc.medicare_cost_sharing_eligibility_status = "no"
+   #      session["page"] = "mcs_feedback_3"
+   #      @mc.save
+   #   end
+   # end
+
+   # if session["page"] == "mcs_feedback_1" && session["counter"] == 7
+   #   @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+   #   message = "Thank you so much for your feedback! \n To check other programs, text 'menu'."
+   #   @mc.feedback = params[:Body]
+   #   @mc.completed = "true"
+   #   @mc.save
+   # elsif session["page"] == "mcs_feedback_2" && session["counter"] == 5
+   #   @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+   #   message = "Thank you so much for your feedback! \n To check other programs, text 'menu'."
+   #   @mc.feedback = params[:Body]
+   #   @mc.completed = "true"
+   #   @mc.save
+   # elsif session["page"] == "mcs_feedback_3" && session["counter"] == 7
+   #   @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
+   #   message = "Thank you so much for your feedback! \n To check other programs, text 'menu'."
+   #   @mc.feedback = params[:Body]
+   #   @mc.completed = "true"
+   #   @mc.save
+   # end
 
    twiml = Twilio::TwiML::Response.new do |r|
        r.Message message
