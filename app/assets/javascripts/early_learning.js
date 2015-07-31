@@ -5,7 +5,7 @@ $(document).ready(function() {
 	        $html = $('#link_to_portal');
 
 	    $window.resize(function resize(){
-	        if ($window.width() < 700) {
+	        if ($window.width() < 1000) {
 	            return $html.removeClass('button');
 	        }
 

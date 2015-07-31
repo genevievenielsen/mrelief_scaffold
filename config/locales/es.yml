@@ -247,3 +247,10 @@ es:
     languages: Idiomas que no Sean Inglés - 
     quality: Calificación de Calidad - 
     ages: Edades Cubiertas -     
+
+    ccap_eligible: Usted Probablemente Califica Para CCAP
+    ccap_eligible_message:  Para más información, por favor llame al Equipo de Referencia de la Comunidad de Acción para los Niños de Illinois al 312-823-1100.
+
+    ccap_ineligible: Usted Probablemente No Califica Para CCAP
+    ccap_resources: Recursos
+    ccap_ineligible_message: Si usted vive en Illinois, por favor llame al Equipo de Referencia de la Comunidad de Acción para los Niños de Illinois al 312-823-1100 o al correo electrónico de ciomunidades – referrals@actforchildren.org.
