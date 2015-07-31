@@ -597,29 +597,33 @@
             if params[:half_day].present? || params[:full_day].present? || params[:part_week].present? || params[:full_week].present? || params[:home_visiting].present? || params[:no_duration_preference].present?
               @user.complete = true
             else
-              flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
-              render "new"
+              forgot_question_message
             end
           else
-            flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
-            render "new"
+            forgot_question_message
           end
         else
-          flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
-          render "new"
+          forgot_question_message
         end
       else
-        flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
-        render "new"
+        forgot_question_message
       end
     else
-      flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
-      render "new"
+      forgot_question_message
     end
 
-    
     @user.save       
 	end # closes the method
+
+  def forgot_question_message
+    if I18n.locale == :es
+      flash.now[:alert] = "¡Parece que usted olvidó contestar una pregunta! Por favor conteste todas las preguntas a continuación."
+    else
+      flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
+    end
+    render "new"
+  end
+
 
   def more_results
     @user = EarlyLearningData.find(params[:id])

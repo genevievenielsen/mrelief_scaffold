@@ -1,0 +1,11 @@
+.row.content-section
+  .col-md-12
+    %a.secondary-link.pull-right{:href => "#", :onclick => "onPrint();"} Imprimir página
+
+:javascript
+  var onPrint = function(){
+  
+    window.print();
+    return false;
+  
+  };

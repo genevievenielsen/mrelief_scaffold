@@ -230,12 +230,20 @@ es:
     bilingual: ¿Preferiría inscribir a su hijo en un programa bilingüe de aprendizaje temprano?
     preferred_language: ¿Qué idioma prefiere?
 
-    cell_phone: ¿Cuál es el número de su teléfono celular?
+    cell_phone: ¿Cuál es su número de teléfono celular?
     see_if: Ver si califico
 
-    ineligible_title: Resultados - ¡Usted puede calificar!
-    ineligible_subtitle: Usted posiblemente no califica para Programas de aprendizaje temprano de Chicago - Listo Para Aprender
+    ineligible_title: Resultados - ¡Usted posiblemente no califica!
+    ineligible_subtitle: Usted posiblemente no califica para programas de aprendizaje temprano de Chicago - ¡Listo Para Aprender!
+    resources: Recursos
+    ineligible_resource: Si usted vive en Illinois, llame al Equipo de Referencia de la Comunidad de Acción para los Niños de Illinois al 312-823-1100 para obtener información sobre otras oportunidades.
 
     eligible_title: Resultados - ¡Usted puede ser elegible!
-    eligible_subtitle: A continuación encontrará los Programas de aprendizaje temprano para los que es elegible y que se imparten cerca de donde está.
-
+    eligible_subtitle: A continuación encontrará los Programas de Aprendizaje Temprano para los que esta elegible y cerca de usted.
+    centers_near_you: Centros de Aprendizaje Temprano Cerca de Usted
+    phone_number: Número de Teléfono -
+    weekday_availability: Disponibilidad Días Laborables - 
+    program_information: Información sobre Programa -
+    languages: Idiomas que no Sean Inglés - 
+    quality: Calificación de Calidad - 
+    ages: Edades Cubiertas -     

@@ -6,8 +6,8 @@
         %h1= t.elp.ineligible_title | "Results: You may not be eligible."
         %p= t.elp.ineligible_subtitle |  "You likely do not qualify for Chicago: Ready to Learn! early learning programs."
         .resources
-          %h3 Resources
-          %p If you live in Illinois, call the Illinois Action For Children Community Referral Team at 312-823-1100 for info on other opportunities.
+          %h3= t.elp.resources | "Resources"
+          %p= t.elp.ineligible_resource | "If you live in Illinois, call the Illinois Action For Children Community Referral Team at 312-823-1100 for info on other opportunities."
   - else
     .row
       .col-md-7
@@ -15,7 +15,7 @@
         %p= t.elp.eligible_subtitle | "Your family may qualify for these early learning programs."
     .row
       .col-md-12
-        %h1 Early Learning Centers Near You
+        %h1= t.elp.centers_near_you | "Early Learning Centers Near You"
         %br
     .row
       - @top_referrals.each do |center|
@@ -30,43 +30,43 @@
               = center["city"].strip
               , #{center["state"]} #{center["zip"]}
             %li
-              %b Phone Number:
+              %b= t.elp.phone_number | "Phone Number:"
               = center["phone_number"]
             - if center["weekday_availability"].present?
               %li
-                %b Weekday Availability:
+                %b= t.elp.weekday_availability | "Weekday Availability:"
                 = center["weekday_availability"]
             - if center["program_information"].present?
               %li
-                %b Program Information:
+                %b= t.elp.program_information | "Program Information:"
                 = center["program_information"]
             - if center["languages_other_than_english"].present? && center["languages_other_than_english"] != "English"
               %li
-                %b Languages other than English:
+                %b= t.elp.languages | "Languages other than English:"
                 = center["languages_other_than_english"]
             - if center["quality_rating"].present?
               %li
-                %b Quality Rating:
+                %b= t.elp.quality | "Quality Rating:"
                 = center["quality_rating"]
             - if center["url"].present?
-              %li= link_to "Center Website", center["url"], target: "_blank", onclick: "ga('send', 'event', 'button', 'early_learning', 'center_website_#{center["site_name"]}', 1)"
+              %li= link_to "Sitio de Web del Centro", center["url"], target: "_blank", onclick: "ga('send', 'event', 'button', 'early_learning', 'center_website_#{center["site_name"]}', 1)"
             - if center["ages_0_3"] == true || center["ages_3_5"] == true
               - if center["ages_0_3"] == true && center["ages_3_5"] == true
                 %li
-                  %b Ages Served:
-                  0 to 5 years old
+                  %b= t.elp.ages | "Ages Served:"
+                  0 a 5 años de edad
               - elsif center["ages_0_3"] == true
                 %li
-                  %b Ages Served:
-                  0 to 2
+                  %b= t.elp.ages | "Ages Served:"
+                  0 a 2 años de edad
               - elsif center["ages_3_5"] == true
                 %li
-                  %b Ages Served:
-                  3 to 5
+                  %b= t.elp.ages | "Ages Served:"
+                  3 a 5 años de edad
             - if center["program_information"].include?("CPS Based") || center["program_information"].include?("CPS Based, Head Start")
               - if @user.income_type == "[\"Greater than Type 2\"]"
                 %p
-                  Usted posiblemente tendrá un copago requerido para este programa. Tenemos una cuota requerida basada en los ingresos de los padres o tutores. Utilice #{link_to "la calculadora", "http://cps.edu/Schools/EarlyChildhood/Pages/EarlyChildhoodCalculator.aspx", target: "_blank", onclick: "ga('send', 'event', 'button', 'early_learning', 'cps_calculator', 1)"} para estimar el copago de su familia.
+                Usted posiblemente tendrá un copago requerido para este programa. Tenemos una cuota requerida basada en los ingresos de los padres o tutores. Utilice #{link_to "la calculadora", "http://cps.edu/Schools/EarlyChildhood/Pages/EarlyChildhoodCalculator.aspx", target: "_blank", onclick: "ga('send', 'event', 'button', 'early_learning', 'cps_calculator', 1)"}  para estimar el copago de su familia.
             - @top_referral_keys = "#{@top_referral_keys}" + center["key"] + ","
     .row
       .col-md-12

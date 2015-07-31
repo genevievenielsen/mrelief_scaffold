@@ -209,7 +209,7 @@
           .row
             .col-md-9.col-sm-10.col-xs-12
               %label{:for => "phone_number"}= t.elp.cell_phone | "What is your cell phone number?"
-              %p.popover-body{"data-content" => "Utilizaremos este número para enviarle recordatorios durante el proceso de solicitud.", "data-placement" => "right", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec;", :type => "button"}
+              %p.popover-body{"data-content" => "Utilizaremos este número para enviarle recordatorios durante el proceso de solicitud. Si usted no tiene un teléfono, por favor proporcione un correo electrónico para usted o un pariente.", "data-placement" => "right", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec;", :type => "button"}
                 %input#phone_number.form-field{:name => "phone_number", :placeholder => "Por ejemplo: 3125555555", :required => "", :type => "text", :value => @user.phone_number}
           / Submit button
           .row
@@ -232,7 +232,7 @@
            $("#select_all_questions").click(function() {
             if($("#foster_parent").is(':checked') || $("#homeless").is(':checked') || $("#ssi").is(':checked') || $("#tanf").is(':checked') || $("#teen_parent").is(':checked')|| $("#special_needs").is(':checked')) {
               if($("#none_of_the_above").is(':checked')) {
-                alert("None of the above cannot be selected with any of the other options to this question.");
+                alert("“Ninguna de las anteriores” no se puede seleccionar con ninguna de las otras opciones en esta pregunta.");
               }
             }
            });
@@ -241,7 +241,7 @@
           $("#children_questions").click(function() {
             if($("#zero_to_three").is(':checked') || $("#three_to_five").is(':checked') || $("#six_to_twelve").is(':checked') || $("#pregnant").is(':checked')) {
               if($("#no_children").is(':checked')) {
-               alert("No children cannot be selected with any of the other options to this question.");
+               alert(" “No cuido a ningún menor en estos grupos de edad” no se puede seleccionar con ninguna de las otras opciones en esta pregunta.");
              }
            }
           });
@@ -259,13 +259,13 @@
           $("#preferred_duration").click(function() {
             if($("#half_day").is(':checked') || $("#full_day").is(':checked') || $("#part_week").is(':checked') || $("#full_week").is(':checked') || $("#home_visiting").is(':checked')) {
               if($("#no_duration_preference").is(':checked')) {
-               alert("No preference cannot be selected with any of the other options to this question.");
+               alert("“Sin preferencia no se puede seleccionar cualquiera de las otras opciones a esta pregunta.");
              }
            }
 
            if($("#full_day").is(':checked')) {
              if($("#half_day").is(':checked')) {
-              alert("Half Day and Full Day cannot be selected together. Please chooose one of these two options.");
+              alert("“Medio día” y “día completo” no se pueden seleccionar juntos. Por favor seleccione una de las dos opciones.");
              }
            }
 
