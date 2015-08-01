@@ -30,7 +30,7 @@ class TwilioController < ApplicationController
    end
 
    if params[:Body].strip.downcase == "menu"
-      message = "For foodstamps, text the word 'food'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' For Medicare Cost Sharing, text the word 'medicare.' If you make a mistake, send the message 'reset'."
+      message = "For foodstamps, text the word 'food'. For early learning programs and child care, text 'kids'. For RTA ride free, text the word 'ride.' For Medicaid, text the word 'medicaid.' If you make a mistake, send the message 'reset'."
       session["counter"] = 0
    end
    if params[:Body].strip.downcase == "food"

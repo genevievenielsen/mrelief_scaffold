@@ -12,6 +12,8 @@
     .row
       %h1{:style => "text-align:center;"}= t.homepage.check_your | "Check your eligibility for benefits in Chicago & Illinois"
       %p.subhead= t.homepage.elegibility_requirements | "Eligibility requirements can be difficult to find, we've created a process that makes it easy"
+      %p.subhead
+        Nuevo – Revise si su familia califica para #{link_to "programas de educación temprana →", early_learning_url}
       %div{:style => "text-align:center;"}
         = link_to(I18n.t('homepage.get_started', :default => "Get Started"), "/programs", :class => "btn btn-primary btn-lg", :role => "button")
 %hr{:style => "margin-top:10px"}/
