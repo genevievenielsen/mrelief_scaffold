@@ -38,7 +38,7 @@ class TwilioSpanishController < ApplicationController
       session["counter"] = 1
     end
 
-    if params[:Body].strip.downcase == "ninos"
+    if params[:Body].strip.downcase == "ninos" || params[:Body].strip.downcase == "kids"
        message = "Escriba las letras que aplican a su hijo antes del 1º de Septiembre de 2015. Yo cuido a un(os) menor(es) entre las edades de: a. 0 a 2  b. 3 a 5 c. 6 a 12. d. Ninguno de estos. Ejemplo: ‘a’ o ‘ab’"
        session["page"] = "age_of_children_es"
        session["counter"] = 1
