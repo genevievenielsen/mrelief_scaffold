@@ -28,7 +28,7 @@ class TwilioSpanishController < ApplicationController
     end
 
     if session["counter"] == 0
-      message = "¡Bienvenido a mRelief! Le ayudamos a confirmar su elegibilidad para servicios como beneficios SNAP. Por favor, responda al texto con la palabra 'comida'. Si cometa un error, envíe texto con la palabra 'reset' o 'inicio'."
+      message = "¡Bienvenido a mRelief! Cupones de Alimentos - responda al texto con la palabra 'comida'. Programas de Educación Temprana - responda al texto con la palabra 'ninos'. Si cometa un error, envíe texto con la palabra 'reset' o 'inicio'."
     end
 
   
