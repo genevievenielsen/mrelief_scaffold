@@ -293,7 +293,7 @@ class TwilioSpanishController < ApplicationController
          end
 
          if @user.three_and_under != true
-           message = "¿Está usted o su pareja embarazada? Ingrese Sí o No" 
+           message = "¿Está usted o su pareja embarazada? Ingrese si o no" 
            session["page"] = "pregnant_es"
          else
            message = "¿En qué código postal vive? Ejemplo: 60615"
@@ -326,7 +326,7 @@ class TwilioSpanishController < ApplicationController
          session["page"] = "zipcode_es"
 
        else
-         message = "¡Parece que oprimió la letra equivocada! Por favor seleccione Sí o No"
+         message = "¡Parece que oprimió la letra equivocada! Por favor seleccione si o no"
          session["counter"] = session["counter"] - 1
        end
 
@@ -341,7 +341,7 @@ class TwilioSpanishController < ApplicationController
      @user.zipcode = params[:Body].strip
 
      if ChicagoEligibleZipcode.all.pluck(:zipcode).include?(@user.zipcode)
-       message = "¿Es usted un padre/madre de crianza temporal, en una situación de vida temporal, o su familia recibe SSI? Ingrese Sí o No"
+       message = "¿Es usted un padre/madre de crianza temporal, en una situación de vida temporal, o su familia recibe SSI? Ingrese si o no"
        session["page"] = "categorical_income_eligibility_es" 
        @user.completed = false
        @user.save
@@ -372,7 +372,7 @@ class TwilioSpanishController < ApplicationController
          message = "¿Cuántas personas viven en su hogar, incluyendo usted? Ejemplo: 2"
 
        else
-         message = "¡Parece que oprimió la letra equivocada! Por favor seleccione Sí o No"
+         message = "¡Parece que oprimió la letra equivocada! Por favor seleccione si o no"
          session["counter"] = session["counter"] - 1
        end
        @user.completed = false
@@ -425,7 +425,7 @@ class TwilioSpanishController < ApplicationController
        end
        @user.income_type = @user_income_type.try(:to_s)
 
-       message = "¿Están todos los adultos  en su hogar actualmente empleados? Ingrese Sí o No"
+       message = "¿Están todos los adultos  en su hogar actualmente empleados? Ingrese si o no"
        session["page"] = "employment_es"
        @user.early_learning_eligible = true
        @user.completed = false
@@ -456,18 +456,18 @@ class TwilioSpanishController < ApplicationController
             @user.completed = true
          else
            session["page"] = "tanf_special_needs_es"
-           message = "¿Recibe su familia TANF o cuidan a un menor con necesidades especiales o un plan de educación individualizado? Ingrese Sí o No"
+           message = "¿Recibe su familia TANF o cuidan a un menor con necesidades especiales o un plan de educación individualizado? Ingrese si o no"
            @user.completed = false
          end
          
       elsif employment == "no"
         @user.employment == false
         session["page"] = "tanf_special_needs_es"
-        message = "¿Recibe su familia TANF o cuidan a un menor con necesidades especiales o un plan de educación individualizado? Ingrese Sí o No"
+        message = "¿Recibe su familia TANF o cuidan a un menor con necesidades especiales o un plan de educación individualizado? Ingrese si o no"
         @user.completed = false
 
       else
-        message = "¡Parece que oprimió la letra equivocada! Por favor seleccione Sí o No"
+        message = "¡Parece que oprimió la letra equivocada! Por favor seleccione si o no"
         session["counter"] = session["counter"] - 1
         @user.completed = false
       end
@@ -498,10 +498,10 @@ class TwilioSpanishController < ApplicationController
       elsif tanf_special_needs == "no"
         @user.tanf_special_needs == false
         session["page"] = "teen_parent_es"
-        message = "¿Es usted un padre/madre adolescente inscrito(a) tiempo completo en escuela o clases de GED o su equivalente? Ingrese Sí o No"
+        message = "¿Es usted un padre/madre adolescente inscrito(a) tiempo completo en escuela o clases de GED o su equivalente? Ingrese si o no"
         @user.completed = false
       else
-        message = "¡Parece que oprimió la letra equivocada! Por favor seleccione Sí o No"
+        message = "¡Parece que oprimió la letra equivocada! Por favor seleccione si o no"
         session["counter"] = session["counter"] - 1
         @user.completed = false
       end
@@ -547,7 +547,7 @@ class TwilioSpanishController < ApplicationController
          @user.completed = true
          end
       else
-        message = "¡Parece que oprimió la letra equivocada! Por favor seleccione Sí o No"
+        message = "¡Parece que oprimió la letra equivocada! Por favor seleccione si o no"
         session["counter"] = session["counter"] - 1
         @user.completed = false
       end
