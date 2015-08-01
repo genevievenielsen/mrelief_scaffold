@@ -28,8 +28,10 @@ class TwilioSpanishController < ApplicationController
     end
 
     if session["counter"] == 0
-      message = "¡Bienvenido a mRelief! Cupones de Alimentos - responda al texto con la palabra 'comida'. Programas de Educación Temprana - responda al texto con la palabra 'ninos'. Si cometa un error, envíe texto con la palabra 'reset' o 'inicio'."
+      message = "¡Bienvenido a mRelief! Nosotros le ayudamos a averiguar si califica para asistencia pública. Para estampillas de comida (food stamps) envíe un texto con la palabra ‘comida’. Para programas de educación temprana y cuidado de niños, envíe un text con la palabra ‘ninos’. Si cometa un error, envíe texto con la palabra 'reset' o 'inicio'."
     end
+
+
 
   
     if params[:Body].strip.downcase == "food" || params[:Body].strip.downcase == "comida"
