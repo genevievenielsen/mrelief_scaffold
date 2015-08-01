@@ -18,7 +18,6 @@
   .row
     .col-md-12
       %h3.program-heading{:style => "padding-bottom:0px"}= t.programs.chicago_programs | "CHICAGO PROGRAMS"
-      %h4{:style => "text-align:center"}= t.programs.accessible_in | "Accessible in Community Service Centers"
   %br/
   .row
     - chicago_programs = Program.where(:location => "chicago")
@@ -28,7 +27,7 @@
           %span.caption
             %h3= program.name
             %p= program.description
-
+  %br/
   %hr/
   .row
     .col-md-12

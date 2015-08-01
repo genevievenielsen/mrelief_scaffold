@@ -777,7 +777,7 @@ r.save
 
 p = Program.new
 p.name_en = "Food Stamps"
-p.name_es = "Cupones de Alimentos"
+p.name_es = "Cupones de Alimentos"	
 p.url = "/snap_eligibilities/new"
 p.description_en = "Nutrition assistance to low-income people and families"
 p.description_es = "Asistencia nutricional a personas y familias de bajos ingresos"
