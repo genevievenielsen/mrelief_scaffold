@@ -531,8 +531,6 @@ class TwilioController < ApplicationController
 
 
 
-
-
    # HERE IS THE LOGIC FOR RTA RIDE FREE
    if session["page"] == "rta_age_question" && session["counter"] == 2
       @r = RtaFreeRideDataTwilio.new
@@ -859,6 +857,7 @@ class TwilioController < ApplicationController
      @m.completed = "true"
      @m.save
    end
+
 
    # HERE IS THE EARLY LEARNING LOGIC
    # number of children question
