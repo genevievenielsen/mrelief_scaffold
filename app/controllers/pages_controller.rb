@@ -543,6 +543,9 @@ class PagesController < ApplicationController
   def press_release
   end
 
+  def privacy_policy
+  end
+
   def session_clear
     session[:user_id ] = nil
         session[:EsignDisclosureAccepted] = nil

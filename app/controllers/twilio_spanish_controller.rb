@@ -31,8 +31,6 @@ class TwilioSpanishController < ApplicationController
       message = "¡Bienvenido a mRelief! Nosotros le ayudamos a averiguar si califica para asistencia pública. Para estampillas de comida (food stamps) envíe un texto con la palabra ‘comida’. Para programas de educación temprana y cuidado de niños, envíe un text con la palabra ‘ninos’. Si cometa un error, envíe texto con la palabra 'reset' o 'inicio'."
     end
 
-
-
   
     if params[:Body].strip.downcase == "food" || params[:Body].strip.downcase == "comida"
       message = "¿Está inscrito en una universidad o institución de educación superior? Ingrese 'si' o 'no'"

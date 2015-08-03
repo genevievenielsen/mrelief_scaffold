@@ -114,10 +114,10 @@
       @user.employed = "no"
     end
 
-    if params[:preferred_zipcode] == "yes" || params[:preferred_zipcode] == "sí"
-      @user.preferred_zipcode = "yes"
-    elsif params[:preferred_zipcode] == "no" 
-      @user.preferred_zipcode = "no"
+    if params[:other_zipcode] == "yes" || params[:other_zipcode] == "sí"
+      @user.other_zipcode = "yes"
+    elsif params[:other_zipcode] == "no" 
+      @user.other_zipcode = "no"
     end
 
     if params[:bilingual] == "yes" || params[:bilingual] == "sí"
@@ -126,7 +126,7 @@
       @user.bilingual = "no"
     end
 
-    @user.other_zipcode = params[:other_zipcode]
+    @user.preferred_zipcode = params[:preferred_zipcode]
     @user.bilingual_language = params[:bilingual_language]
 
     @user.zipcode = params[:zipcode]

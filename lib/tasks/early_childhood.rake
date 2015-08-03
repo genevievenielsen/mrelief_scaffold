@@ -3,7 +3,7 @@ task :early_childhood => :environment do
 	require 'open-uri'
 	require 'json'
 
-	url = "http://data.cityofchicago.org/resource/kj5t-b3ii.json"
+	url = "https://data.cityofchicago.org/resource/ck29-hb9r.json"
 	raw_data = open(url).read
 	parsed_data = JSON.parse(raw_data)
 
@@ -34,7 +34,7 @@ task :early_childhood => :environment do
 			ages_3_to_5.push(location)
 		end
 
-		if location["ages_0_3"] == true
+		if location["ages_0_3"] == true && location["zip"] == "60610"
 			ages_0_3.push(location)
 		end
 

@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   get('/how_mrelief_works', { :controller => 'pages', :action => 'how_mrelief_works' })
   get('/press_release', { :controller => 'pages', :action => 'press_release' })
   get('/public-template', { :controller => 'pages', :action => 'public_template' })
+  get('/privacy_policy', { :controller => 'pages', :action => 'privacy_policy' })
 
   # all programs at once
   get("/filter", { :controller => "pages", :action => "filter" })
