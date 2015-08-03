@@ -133,6 +133,8 @@
     @user.phone_number = params[:phone_number] if params[:phone_number].present?
     @user.save
 
+    # @d_json = @user.attributes.to_json
+
     # spanish translation 
     if I18n.locale == :es
       @user.spanish = true
@@ -193,6 +195,11 @@
                       @user_income_type = ['Less than Type 1', 'Less than Type 2']
                     end
                     @eligible_early_learning_programs = correct_age_programs.where(income_type: @user_income_type)
+
+                    puts "MADE IT TO ELIGIBLE PROGRAMS "
+                    puts "Correct age programs: #{correct_age_programs.count}"
+                    puts "Income type: #{@eligible_early_learning_programs.count}"
+                    puts "#{@user_income_type}"
                 end
 
             else
@@ -356,6 +363,21 @@
         end
       end
 
+        # If a parent has children between 0 and 5 and there are no matches, find matches for the 3 to 5 group
+        if @user.three_and_under == true && @user.three_to_five == true && @eligible_locations_ages.length == 0
+          @eligible_locations.each do |location|
+            if location["ages_3_5"] == true
+              @eligible_locations_ages.push(location)
+            end
+          end
+        elsif @user.pregnant == true && @user.three_to_five == true && @eligible_locations_ages.length == 0
+          @eligible_locations.each do |location|
+            if location["ages_3_5"] == true
+              @eligible_locations_ages.push(location)
+            end
+          end
+        end
+
       # Filter by Length of Day 
       @eligible_locations_ages_day = []
       @eligible_locations_ages.each do |location|
@@ -399,9 +421,7 @@
         else
           eligible_zipcode = ChicagoEligibleZipcode.find_by(zipcode: @user.zipcode)
         end
-
         nearby_zipcodes = ChicagoEligibleZipcode.near([eligible_zipcode.latitude, eligible_zipcode.longitude], 10, :order => "distance")
-
         nearby_zipcodes.each do |nearby_zipcode|
           @eligible_locations_ages_day.each_with_index do |location, index|
             if index == 0
@@ -419,7 +439,6 @@
       if @eligible_locations_ages_day_zip.length == 3
         @referral_centers = @eligible_locations_ages_day_zip
       else
-
         # Filter by language
         @eligible_locations_ages_day_zip_language = []
           if @user.bilingual_language == nil

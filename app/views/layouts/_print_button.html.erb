@@ -40,6 +40,10 @@
   <% elsif request.path == "/head_starts" %>
     <a><%= link_to "← Back", new_head_start_path(data: @d_json), :class => "previous pull-left", onclick: "onClick()" %></a> 
 
+  <% elsif request.path == "/early_learning_programs_results" %>
+   <!--  <a><%#= link_to "← Back", early_learning_url(data: @d_json), :class => "previous pull-left", onclick: "onClick()" %></a> 
+ -->
+ 
   <% else %>
 <!--     <a><%#= link_to "← Back", :back, :class => "previous pull-left", onclick: "onClick()" %></a> 
  -->  <% end %>
