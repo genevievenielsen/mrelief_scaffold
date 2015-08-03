@@ -56,6 +56,7 @@ class TwilioTestingController < ApplicationController
       if @user.children_ages.include?("d")
         @user.no_children = true
         message = "You may not be eligible for Chicago: Ready to Learn! early learning programs at this time.  Call 312-823-1100 for info on other opportunities."
+        @user.early_learning_eligible = false
         @user.completed = true
         @user.save
       # children
@@ -128,6 +129,7 @@ class TwilioTestingController < ApplicationController
     else
       # INELIGIBLE
       message = "You may not be eligible for Chicago: Ready to Learn! early learning programs at this time.  Call 312-823-1100 for info on other opportunities."
+      @user.early_learning_eligible = false
       @user.completed = true
       @user.save
     end
@@ -205,10 +207,16 @@ class TwilioTestingController < ApplicationController
       end
       @user.income_type = @user_income_type.try(:to_s)
 
-      message = "Are all adults in your household currently employed? Enter yes or no"
-      session["page"] = "employment"
-      @user.early_learning_eligible = true
-      @user.completed = false
+      if @user.income_type == ['Greater than Type 2'] && @user.three_and_under == true
+        message = "Based on your household size and income you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at 312-823-1100 for more information."
+        @user.early_learning_eligible = false
+        @user.ccap_eligible = false
+        @user.completed = true
+      else
+        message = "Are all adults in your household currently employed? Enter yes or no"
+        session["page"] = "employment"
+        @user.completed = false
+      end
       @user.save
     end
    end
@@ -228,10 +236,12 @@ class TwilioTestingController < ApplicationController
           @user.ccap_eligible = true
           # child is ineligibe for early learning but eligible is ccap
           if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
-          message = "You likely qualify for the Child Care Assistance Program! Based on your child's age and other factors you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at 312-823-1100 for more information."
+            message = "You likely qualify for the Child Care Assistance Program! Based on your child's age and other factors you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at 312-823-1100 for more information."
+            @user.early_learning_eligible = false
           # child is eligible for early learning and ccap
           else
-          message = "You likely qualify for Chicago early learning programs. You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/learnearly for info."
+            message = "You likely qualify for Chicago early learning programs. You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/learnearly for info."
+            @user.early_learning_eligible = true
           end
            @user.completed = true
         else
@@ -265,13 +275,16 @@ class TwilioTestingController < ApplicationController
      # Data Storage
      if tanf_special_needs == "yes" 
        @user.tanf_special_needs == true
+       @user.ccap_eligible = true
        # Eligible for CCAP
        # Child is ineligibe for early learning but eligible is CCAP
        if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
         message = "You likely qualify for the Child Care Assistance Program! Based on your child's age and other factors you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at 312-299-1690 for more information."
-       # child is eligible for early learning and ccap
+        @user.early_learning_eligible = false
+        # child is eligible for early learning and ccap
        else
         message = "You likely qualify for Chicago early learning programs. You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/learnearly for info."
+        @user.early_learning_eligible = true
        end
         @user.completed = true
 
@@ -285,7 +298,6 @@ class TwilioTestingController < ApplicationController
        session["counter"] = session["counter"] - 1
        @user.completed = false
      end
-
      @user.save
     end
    end
@@ -301,19 +313,23 @@ class TwilioTestingController < ApplicationController
        # RESPONSE MESSAGE
        # eligible for CCAP
        if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
-       message = "You likely qualify for the Child Care Assistance Program! Based on your child's age and other factors you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at 312-823-1100 for more information."
+        message = "You likely qualify for the Child Care Assistance Program! Based on your child's age and other factors you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at 312-823-1100 for more information."
+        @user.early_learning_eligible = false
        # child is eligible for early learning and ccap
        else
-       message = "You likely qualify for Chicago early learning programs! You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/learnearly for info."
+        message = "You likely qualify for Chicago early learning programs! You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/learnearly for info."
+        @user.early_learning_eligible = true
        end
        @user.teen_parent == true
        @user.ccap_eligible = true
        @user.completed = true
      elsif teen_parent == "no" 
        @user.teen_parent == false
-        
         if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
           message = "Based on your child's age and other factors, you do not qualify for early learning programs and child care assistance at this time.  Call 312-823-1100 for information on other opportunities."
+          @user.teen_parent == false
+          @user.ccap_eligible = false
+          @user.early_learning_eligible = false
         # eligible for early learning 
         else  
           # eligble for early learning with co-pay
@@ -323,6 +339,7 @@ class TwilioTestingController < ApplicationController
           else
             message = "You likely qualify for Chicago early learning programs! Call (312) 229-1690 or visit bit.ly/learnearly for info."
           end
+        @user.early_learning_eligible = true
         @user.completed = true
         end
      else

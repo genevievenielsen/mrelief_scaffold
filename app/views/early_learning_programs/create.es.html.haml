@@ -1,6 +1,14 @@
 .marquee
   = render "layouts/print_button"
-  - if @eligible == false
+  - if @no_programs_available == true
+    .row
+      .col-md-7
+        %h1= t.elp.ineligible_title |  "Results: You may not be eligible."
+        %p Based on your household size and income, you likely do not qualify for Early Learning Programs in Chicago geared at low-income families in the 0-2 age bracket.
+        .resources
+          %h3= t.elp.resources | "Resources"
+          %p= t.elp.ineligible_resource |  "Please call the Illinois Action Referral for Children Community Referrals Hotline number at 312-823-1100 or email them at referrals@actforchildren.org."
+  - elsif @eligible == false
     .row
       .col-md-7
         %h1= t.elp.ineligible_title | "Results: You may not be eligible."
