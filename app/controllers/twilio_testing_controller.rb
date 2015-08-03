@@ -207,7 +207,7 @@ class TwilioTestingController < ApplicationController
       end
       @user.income_type = @user_income_type.try(:to_s)
 
-      if @user.income_type == ['Greater than Type 2'] && @user.three_and_under == true
+      if @user_income_type == ['Greater than Type 2'] && @user.three_and_under == true
         message = "Based on your household size and income you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at 312-823-1100 for more information."
         @user.early_learning_eligible = false
         @user.ccap_eligible = false
