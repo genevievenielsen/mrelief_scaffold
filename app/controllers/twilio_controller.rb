@@ -1139,14 +1139,13 @@ class TwilioController < ApplicationController
         message = "You likely qualify for Chicago early learning programs! You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/learnearly for info."
         @user.early_learning_eligible = true
        end
-       @user.teen_parent == true
+       @user.teen_parent = true
        @user.ccap_eligible = true
        @user.completed = true
      elsif teen_parent == "no" 
-       @user.teen_parent == false
+       @user.teen_parent = false
         if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
           message = "Based on your child's age and other factors, you do not qualify for early learning programs and child care assistance at this time.  Call 312-823-1100 for information on other opportunities."
-          @user.teen_parent == false
           @user.ccap_eligible = false
           @user.early_learning_eligible = false
         # eligible for early learning 
