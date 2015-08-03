@@ -911,12 +911,12 @@ class TwilioController < ApplicationController
       session["counter"] += 1 # +1 to optional questions
       # Data Storage
       if pregnant == "yes" 
-        @user.pregnant == true
+        @user.pregnant = true
         message = "In which zipcode do you live? Example: 60615"
         session["page"] = "zipcode"
 
       elsif pregnant == "no" 
-        @user.pregnant == false
+        @user.pregnant = false
         message = "In which zipcode do you live? Example: 60615"
         session["page"] = "zipcode"
 
@@ -958,12 +958,12 @@ class TwilioController < ApplicationController
     foster_temporary_ssi = params[:Body].strip.downcase
 
       if foster_temporary_ssi == "yes" 
-       @user.foster_temporary_ssi == true
+       @user.foster_temporary_ssi = true
        session["page"] = "household_size" 
        message = "What is the number of people living in your household including yourself?"
     
       elsif foster_temporary_ssi == "no" 
-        @user.foster_temporary_ssi == false
+        @user.foster_temporary_ssi = false
         session["page"] = "household_size" 
         message = "What is the number of people living in your household including yourself?"
 
@@ -1047,7 +1047,7 @@ class TwilioController < ApplicationController
      employment = params[:Body].strip.downcase
      
      if employment == "yes" 
-       @user.employment == true
+       @user.employment = true
        # RESPONSE MESSAGE
        # CCAP eligible if below income cutoff 
         income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
@@ -1068,9 +1068,9 @@ class TwilioController < ApplicationController
           message = "Does your family receive TANF or do you care for a child with special needs or an individualized education plan (IEP)? Enter yes or no"
           @user.completed = false
         end
-        
+
      elsif employment == "no"
-       @user.employment == false
+       @user.employment = false
        session["page"] = "tanf_special_needs"
        message = "Does your family receive TANF or do you care for a child with special needs or an individualized education plan (IEP)? Enter yes or no"
        @user.completed = false
@@ -1093,7 +1093,7 @@ class TwilioController < ApplicationController
      
      # Data Storage
      if tanf_special_needs == "yes" 
-       @user.tanf_special_needs == true
+       @user.tanf_special_needs = true
        @user.ccap_eligible = true
        # Eligible for CCAP
        # Child is ineligibe for early learning but eligible is CCAP
@@ -1108,7 +1108,7 @@ class TwilioController < ApplicationController
         @user.completed = true
 
      elsif tanf_special_needs == "no" 
-       @user.tanf_special_needs == false
+       @user.tanf_special_needs = false
        session["page"] = "teen_parent"
        message = "Are you a teen parent who is enrolled full-time in school or GED classes or its equivalent? Enter yes or no"
        @user.completed = false

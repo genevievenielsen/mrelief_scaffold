@@ -408,12 +408,12 @@ class TwilioTestingController < ApplicationController
       session["counter"] += 1 # +1 to optional questions
       # Data Storage
       if pregnant == "sí" || pregnant == "si"
-        @user.pregnant == true
+        @user.pregnant = true
         message = "¿En qué código postal vive? Ejemplo: 60615"
         session["page"] = "zipcode_es"
 
       elsif pregnant == "no"
-        @user.pregnant == false
+        @user.pregnant = false
         message = "¿En qué código postal vive? Ejemplo: 60615"
         session["page"] = "zipcode_es"
 
@@ -455,12 +455,12 @@ class TwilioTestingController < ApplicationController
     foster_temporary_ssi = params[:Body].strip.downcase
 
       if foster_temporary_ssi == "sí" || foster_temporary_ssi == "si"
-       @user.foster_temporary_ssi == true
+       @user.foster_temporary_ssi = true
        session["page"] = "household_size_es" 
        message = "¿Cuántas personas viven en su hogar, incluyendo usted? Ejemplo: 2"
     
       elsif foster_temporary_ssi == "no"
-        @user.foster_temporary_ssi == false
+        @user.foster_temporary_ssi = false
         session["page"] = "household_size_es" 
         message = "¿Cuántas personas viven en su hogar, incluyendo usted? Ejemplo: 2"
 
@@ -544,7 +544,7 @@ class TwilioTestingController < ApplicationController
      employment = params[:Body].strip.downcase
      
      if employment == "sí" || employment == "si"
-       @user.employment == true
+       @user.employment = true
        # RESPONSE MESSAGE
        # CCAP eligible if below income cutoff 
         income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
@@ -567,7 +567,7 @@ class TwilioTestingController < ApplicationController
         end
         
      elsif employment == "no"
-       @user.employment == false
+       @user.employment = false
        session["page"] = "tanf_special_needs_es"
        message = "¿Recibe su familia TANF o cuidan a un menor con necesidades especiales o un plan de educación individualizado? Ingrese Sí o No"
        @user.completed = false
@@ -590,7 +590,7 @@ class TwilioTestingController < ApplicationController
      
      # Data Storage
      if tanf_special_needs == "sí" || tanf_special_needs == "si"
-       @user.tanf_special_needs == true
+       @user.tanf_special_needs = true
        @user.ccap_eligible = true
        # Eligible for CCAP
        # Child is ineligibe for early learning but eligible for CCAP
@@ -605,7 +605,7 @@ class TwilioTestingController < ApplicationController
         @user.completed = true
 
      elsif tanf_special_needs == "no"
-       @user.tanf_special_needs == false
+       @user.tanf_special_needs = false
        session["page"] = "teen_parent_es"
        message = "¿Es usted un padre/madre adolescente inscrito(a) tiempo completo en escuela o clases de GED o su equivalente? Ingrese Sí o No"
        @user.completed = false
