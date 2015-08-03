@@ -126,6 +126,10 @@
       @user.bilingual = "no"
     end
 
+    if params[:data_sharing] == "true"
+      @user.data_sharing = true
+    end
+
     @user.preferred_zipcode = params[:preferred_zipcode]
     @user.bilingual_language = params[:bilingual_language]
 
