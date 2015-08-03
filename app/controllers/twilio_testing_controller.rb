@@ -97,12 +97,12 @@ class TwilioTestingController < ApplicationController
       session["counter"] += 1 # +1 to optional questions
       # Data Storage
       if pregnant == "yes" 
-        @user.pregnant == true
+        @user.pregnant = true
         message = "In which zipcode do you live? Example: 60615"
         session["page"] = "zipcode"
 
       elsif pregnant == "no" 
-        @user.pregnant == false
+        @user.pregnant = false
         message = "In which zipcode do you live? Example: 60615"
         session["page"] = "zipcode"
 
@@ -144,12 +144,12 @@ class TwilioTestingController < ApplicationController
     foster_temporary_ssi = params[:Body].strip.downcase
 
       if foster_temporary_ssi == "yes" 
-       @user.foster_temporary_ssi == true
+       @user.foster_temporary_ssi = true
        session["page"] = "household_size" 
        message = "What is the number of people living in your household including yourself?"
     
       elsif foster_temporary_ssi == "no" 
-        @user.foster_temporary_ssi == false
+        @user.foster_temporary_ssi = false
         session["page"] = "household_size" 
         message = "What is the number of people living in your household including yourself?"
 
@@ -233,7 +233,7 @@ class TwilioTestingController < ApplicationController
      employment = params[:Body].strip.downcase
      
      if employment == "yes" 
-       @user.employment == true
+       @user.employment = true
        # RESPONSE MESSAGE
        # CCAP eligible if below income cutoff 
         income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
@@ -254,9 +254,9 @@ class TwilioTestingController < ApplicationController
           message = "Does your family receive TANF or do you care for a child with special needs or an individualized education plan (IEP)? Enter yes or no"
           @user.completed = false
         end
-        
+
      elsif employment == "no"
-       @user.employment == false
+       @user.employment = false
        session["page"] = "tanf_special_needs"
        message = "Does your family receive TANF or do you care for a child with special needs or an individualized education plan (IEP)? Enter yes or no"
        @user.completed = false
@@ -279,7 +279,7 @@ class TwilioTestingController < ApplicationController
      
      # Data Storage
      if tanf_special_needs == "yes" 
-       @user.tanf_special_needs == true
+       @user.tanf_special_needs = true
        @user.ccap_eligible = true
        # Eligible for CCAP
        # Child is ineligibe for early learning but eligible is CCAP
@@ -294,7 +294,7 @@ class TwilioTestingController < ApplicationController
         @user.completed = true
 
      elsif tanf_special_needs == "no" 
-       @user.tanf_special_needs == false
+       @user.tanf_special_needs = false
        session["page"] = "teen_parent"
        message = "Are you a teen parent who is enrolled full-time in school or GED classes or its equivalent? Enter yes or no"
        @user.completed = false
@@ -325,14 +325,13 @@ class TwilioTestingController < ApplicationController
         message = "You likely qualify for Chicago early learning programs! You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/learnearly for info."
         @user.early_learning_eligible = true
        end
-       @user.teen_parent == true
+       @user.teen_parent = true
        @user.ccap_eligible = true
        @user.completed = true
      elsif teen_parent == "no" 
-       @user.teen_parent == false
+       @user.teen_parent = false
         if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
           message = "Based on your child's age and other factors, you do not qualify for early learning programs and child care assistance at this time.  Call 312-823-1100 for information on other opportunities."
-          @user.teen_parent == false
           @user.ccap_eligible = false
           @user.early_learning_eligible = false
         # eligible for early learning 

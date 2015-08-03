@@ -795,7 +795,7 @@ p.location = "chicago"
 p.save
 
 p = Program.new
-p.name_en = "Early Learning Programs"
+p.name_en = "Chicago Early Learning Finder"
 p.name_es = "Programas de Aprendizaje Temprano"
 p.url = "/early_learning_programs"
 p.description_en = "Early Childhood Programs and Child Care"
