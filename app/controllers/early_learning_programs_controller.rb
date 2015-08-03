@@ -196,10 +196,11 @@
                     end
                     @eligible_early_learning_programs = correct_age_programs.where(income_type: @user_income_type)
 
+                    if @eligible_early_learning_programs.length == 0
+                      @no_programs_available = true
+                    end
                     puts "MADE IT TO ELIGIBLE PROGRAMS "
-                    puts "Correct age programs: #{correct_age_programs.count}"
-                    puts "Income type: #{@eligible_early_learning_programs.count}"
-                    puts "#{@user_income_type}"
+                    
                 end
 
             else
@@ -269,7 +270,7 @@
     end
 
     # LOOK CENTERS IN DATA PORTAL
-    if @eligible == false
+    if @eligible == false || @no_programs_available == true
     else
       url = "https://data.cityofchicago.org/resource/ck29-hb9r.json"
       raw_data = open(url).read
