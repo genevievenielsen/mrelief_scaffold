@@ -543,7 +543,7 @@ class PagesController < ApplicationController
   def press_release
   end
 
-  def privacy_policy
+  def early_learning_privacy_policy
   end
 
   def session_clear
