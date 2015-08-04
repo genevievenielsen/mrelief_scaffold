@@ -33,7 +33,6 @@ Rails.application.routes.draw do
   get('/how_mrelief_works', { :controller => 'pages', :action => 'how_mrelief_works' })
   get('/press_release', { :controller => 'pages', :action => 'press_release' })
   get('/public-template', { :controller => 'pages', :action => 'public_template' })
-  get('/early_learning_privacy_policy', { :controller => 'pages', :action => 'early_learning_privacy_policy' })
 
   # all programs at once
   get("/filter", { :controller => "pages", :action => "filter" })
@@ -43,6 +42,7 @@ Rails.application.routes.draw do
   get "early_learning_programs", to: "early_learning_programs#new", as: "early_learning"
   post "early_learning_programs_results", to: "early_learning_programs#create", as: "early_learning_programs_results"
   get "early_learning_more_results/:id", to: "early_learning_programs#more_results", as: "more_results"
+  get "early_learning_privacy_policy", to: "early_learning_programs#early_learning_privacy_policy"
 
   # print
   get('/snap_eligibilities/print/:id', :controller => 'snap_eligibilities', :action => 'print')
