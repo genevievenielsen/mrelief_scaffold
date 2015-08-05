@@ -61,7 +61,7 @@ class TwilioTestingController < ApplicationController
         @user.no_children = true
         @user.early_learning_eligible = false
         message = data_sharing_question
-        session["page"] = data_sharing_question
+        session["page"] = "data_sharing_question"
       # children
       elsif @user.children_ages.include?("a") || @user.children_ages.include?("b") || @user.children_ages.include?("c") 
         # Data storage for children ages
