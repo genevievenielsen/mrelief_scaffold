@@ -60,6 +60,7 @@ class TwilioTestingController < ApplicationController
       # no children
       if @user.children_ages.include?("d")
         data_sharing_question 
+        puts "I made it here"
         @user.no_children = true
         # INELIGIBLE
         # data sharing question
