@@ -126,11 +126,36 @@ class TwilioTestingController < ApplicationController
         # INELIGIBLE
         message = data_sharing_question
         session["page"] = "data_sharing_question"
+        session["counter"] += 1 
       end
       @user.early_learning_eligible = false
       @user.save
     end
    end
+
+   
+   if session["page"] == "data_sharing_question"
+    if session["counter"] == 3 || session["counter"] == 5 || session["counter"] == 7
+      @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
+      data_sharing = params[:Body].strip.downcase
+
+      if data_sharing == "yes" 
+        @user.data_sharing = true
+      elsif data_sharing == "no" 
+        @user.data_sharing = false
+      else
+        message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
+        session["counter"] = session["counter"] - 1
+      end
+
+      message = "You may not be eligible for Chicago: Ready to Learn! early learning programs at this time.  Call 312-823-1100 for info on other opportunities."
+
+
+      @user.completed = true
+      @user.save
+    end
+   end
+
 
    # Categorial Income Eligibility 
    if session["page"] == "categorical_income_eligibility" 
@@ -357,27 +382,6 @@ class TwilioTestingController < ApplicationController
     end
    end
 
-   if session["page"] == "data_sharing_question"
-    if session["counter"] == 3 || session["counter"] == 4 || session["counter"] == 6
-      @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
-      data_sharing = params[:Body].strip.downcase
-
-      if data_sharing == "yes" 
-        @user.data_sharing = true
-      elsif data_sharing == "no" 
-        @user.data_sharing = false
-      else
-        message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
-        session["counter"] = session["counter"] - 1
-      end
-
-      message = "You may not be eligible for Chicago: Ready to Learn! early learning programs at this time.  Call 312-823-1100 for info on other opportunities."
-
-
-      @user.completed = true
-      @user.save
-    end
-   end
 
 
 
