@@ -46,7 +46,8 @@ class TwilioTestingController < ApplicationController
       session["page"] = "age_of_children_es"
       session["counter"] = 1
    end
-  
+    
+  data_sharing_question = "Do you consent to mRelief using your inputs for today's early learning eligibility, following-up with information and sharing with City of Chicago and other stakeholders to promote easier ways to sign up for benefits? Enter Yes or No"
    
    # HERE IS THE EARLY LEARNING LOGIC
    # number of children question
@@ -56,16 +57,11 @@ class TwilioTestingController < ApplicationController
       @user.children_ages = params[:Body].strip.downcase
       # no children
       if @user.children_ages.include?("d")
-        data_sharing_question 
-        puts "I made it here"
-        @user.no_children = true
         # INELIGIBLE
-        # data sharing question
-        # message = "You may not be eligible for Chicago: Ready to Learn! early learning programs at this time.  Call 312-823-1100 for info on other opportunities."
+        @user.no_children = true
         @user.early_learning_eligible = false
-        @user.completed = true
-        @user.save
- 
+        message = data_sharing_question
+        session["page"] = data_sharing_question
       # children
       elsif @user.children_ages.include?("a") || @user.children_ages.include?("b") || @user.children_ages.include?("c") 
         # Data storage for children ages
@@ -78,7 +74,6 @@ class TwilioTestingController < ApplicationController
         if @user.children_ages.include?("c")
           @user.six_to_twelve = true
         end
-
         if @user.three_and_under != true
           message = "Are you or your partner pregnant? Enter yes or no" 
           session["page"] = "pregnant"
@@ -86,14 +81,12 @@ class TwilioTestingController < ApplicationController
           message = "In which zipcode do you live? Example: 60615"
           session["page"] = "zipcode"
         end
-        @user.completed = false
-        @user.save
       else
          message = "Oops looks like there is a typo! Please type a, b, c, d or a combination that describes your household."
-         session["counter"] = session["counter"] - 1
-         @user.completed = false
-         @user.save
+         session["counter"] = session["counter"] - 1 
       end
+      @user.completed = false
+      @user.save
     end
 
     # Pregnancy question
@@ -124,23 +117,19 @@ class TwilioTestingController < ApplicationController
    # Zipcode question
    if session["page"] == "zipcode" 
     if session["counter"] == 3 || session["counter"] == 5
-    @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
-    @user.zipcode = params[:Body].strip
+      @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
+      @user.zipcode = params[:Body].strip
 
-    if ChicagoEligibleZipcode.all.pluck(:zipcode).include?(@user.zipcode)
-      message = "Are you a foster parent, in a temporary living situation or does your family receive SSI? Enter yes or no"
-      session["page"] = "categorical_income_eligibility" 
-      @user.completed = false
-      @user.save
-    else
-      # INELIGIBLE
-      # data sharing question
-      message = "You may not be eligible for Chicago: Ready to Learn! early learning programs at this time.  Call 312-823-1100 for info on other opportunities."
+      if ChicagoEligibleZipcode.all.pluck(:zipcode).include?(@user.zipcode)
+        message = "Are you a foster parent, in a temporary living situation or does your family receive SSI? Enter yes or no"
+        session["page"] = "categorical_income_eligibility" 
+      else
+        # INELIGIBLE
+        message = data_sharing_question
+        session["page"] = data_sharing_question
+      end
       @user.early_learning_eligible = false
-      @user.completed = true
       @user.save
-    end
-
     end
    end
 
@@ -365,6 +354,32 @@ class TwilioTestingController < ApplicationController
        @user.completed = false
      end
      @user.save
+    end
+   end
+
+   
+   if session["page"] == "data_sharing_question"
+    if session["counter"] == 3 || session["counter"] == 4 || session["counter"] == 6
+
+    @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
+    data_sharing = params[:Body].strip.downcase
+
+      if data_sharing == "yes" 
+        @user.data_sharing = true
+      elsif data_sharing == "no" 
+        @user.data_sharing = false
+      else
+        message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
+        session["counter"] = session["counter"] - 1
+      end
+
+      if session["counter"] == 3 || session["counter"] == 4 || session["counter"] == 6
+        message = "You may not be eligible for Chicago: Ready to Learn! early learning programs at this time.  Call 312-823-1100 for info on other opportunities."
+      else
+
+      end
+      @user.completed = true
+      @user.save
     end
    end
 
@@ -689,12 +704,6 @@ class TwilioTestingController < ApplicationController
     respond_to do |format|
      format.xml {render xml: twiml.text}
    end
-  end
-
-  def data_sharing_question 
-    puts "I made it inside the data sharing method"
-    message = "Do you consent to mRelief using your inputs for today's early learning eligibility, following-up with information and sharing with City of Chicago and other stakeholders to promote easier ways to sign up for benefits? Enter Yes or No"
-    session["page"] = "data_sharing_question"
   end
 
 
