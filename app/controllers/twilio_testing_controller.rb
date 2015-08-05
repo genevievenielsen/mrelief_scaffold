@@ -357,12 +357,11 @@ class TwilioTestingController < ApplicationController
     end
    end
 
-   
+
    if session["page"] == "data_sharing_question"
     if session["counter"] == 3 || session["counter"] == 4 || session["counter"] == 6
-
-    @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
-    data_sharing = params[:Body].strip.downcase
+      @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
+      data_sharing = params[:Body].strip.downcase
 
       if data_sharing == "yes" 
         @user.data_sharing = true
@@ -373,9 +372,9 @@ class TwilioTestingController < ApplicationController
         session["counter"] = session["counter"] - 1
       end
 
-      if session["counter"] == 3 || session["counter"] == 4 || session["counter"] == 6
+      # if session["counter"] == 3 || session["counter"] == 4 || session["counter"] == 6
         message = "You may not be eligible for Chicago: Ready to Learn! early learning programs at this time.  Call 312-823-1100 for info on other opportunities."
-      else
+      # else
 
       end
       @user.completed = true
