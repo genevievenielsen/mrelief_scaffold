@@ -376,7 +376,7 @@ class TwilioTestingController < ApplicationController
         message = "You may not be eligible for Chicago: Ready to Learn! early learning programs at this time.  Call 312-823-1100 for info on other opportunities."
       # else
 
-      end
+      # end
       @user.completed = true
       @user.save
     end
