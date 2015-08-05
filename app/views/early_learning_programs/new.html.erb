@@ -202,7 +202,7 @@
 
       <div class="row">
         <div class="col-md-9 col-sm-10 col-xs-12">
-        <input type="checkbox" name="data_sharing" value="true" id="data_sharing" checked> I consent to the use and disclosure of my personal information in accordance with mRelief’s <%= link_to "privacy and data sharing policy.", early_learning_privacy_policy_url %>
+        <input type="checkbox" name="data_sharing" value="true" id="data_sharing" checked> I consent to the use and disclosure of my personal information in accordance with mRelief’s <%= link_to "privacy and data sharing policy.", early_learning_privacy_policy_url, onclick: "ga('send', 'event', 'button', 'early_learning', 'privacy_policy', 1)" %>
         </div>
       </div>
       <br>
