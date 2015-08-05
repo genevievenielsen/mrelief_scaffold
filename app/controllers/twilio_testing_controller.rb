@@ -4,6 +4,11 @@ class TwilioTestingController < ApplicationController
   require 'numbers_in_words'
   require 'numbers_in_words/duck_punch' #see why later
 
+  def data_sharing_question 
+    message = "Do you consent to mRelief using your inputs for today's early learning eligibility, following-up with information and sharing with City of Chicago and other stakeholders to promote easier ways to sign up for benefits? Enter Yes or No"
+    session["page"] = "data_sharing_question"
+  end
+
   def text
   session["counter"] ||= 0
 
@@ -54,6 +59,7 @@ class TwilioTestingController < ApplicationController
       @user.children_ages = params[:Body].strip.downcase
       # no children
       if @user.children_ages.include?("d")
+        data_sharing_question 
         @user.no_children = true
         # INELIGIBLE
         # data sharing question
@@ -61,8 +67,7 @@ class TwilioTestingController < ApplicationController
         @user.early_learning_eligible = false
         @user.completed = true
         @user.save
-        
-        data_sharing_question 
+ 
       # children
       elsif @user.children_ages.include?("a") || @user.children_ages.include?("b") || @user.children_ages.include?("c") 
         # Data storage for children ages
@@ -686,11 +691,6 @@ class TwilioTestingController < ApplicationController
     respond_to do |format|
      format.xml {render xml: twiml.text}
    end
-  end
-
-  def data_sharing_question 
-    message = "Do you consent to mRelief using your inputs for today's early learning eligibility, following-up with information and sharing with City of Chicago and other stakeholders to promote easier ways to sign up for benefits? Enter Yes or No"
-    session["page"] = "data_sharing_question"
   end
 
 
