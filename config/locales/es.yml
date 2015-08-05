@@ -211,8 +211,8 @@ es:
       A continuación algunos recursos adicionales, cortesía de Purple Binder:
 
   elp:
-    title: Todos los Programas de Aprendizaje Temprano
-    subtitle: Si usted es el encargado principal del cuidado de un menor, usted puede ser elegible para algunos de Todos los Programas de Aprendizaje Temprano de Chicago.
+    title: Búsqueda de Programas de Educación Temprana de Chicago
+    subtitle: Si usted es la persona principal que se encarga de un menor, es posible que califique para los programas de Educación Temprana que ofrece Chicago.
     select_all_parent: Seleccione todas las que correspondan a usted como padre/madre o tutor-
     age_note:  Tome en cuenta - Esta pregunta corresponde a la edad de su hijo(a) a partir del 1º de Septiembre 2015
     household_size: ¿Cuántas personas viven en su grupo familiar, incluyendo usted?
@@ -233,11 +233,15 @@ es:
 
     cell_phone: ¿Cuál es su número de teléfono celular?
     see_if: Ver si califico
+    partnership: El sistema de Búsqueda de Programas de Educación Temprana es una iniciativa colaborativa entre la Ciudad de Chicago y mRelief.
 
     ineligible_title: Resultados - ¡Usted posiblemente no califica!
     ineligible_subtitle: Usted posiblemente no califica para programas de aprendizaje temprano de Chicago - ¡Listo Para Aprender!
     resources: Recursos
     ineligible_resource: Si usted vive en Illinois, llame al Equipo de Referencia de la Comunidad de Acción para los Niños de Illinois al 312-823-1100 para obtener información sobre otras oportunidades.
+
+    ineligible_age: Basado en su ingreso y el tamaño de su hogar, es probable que usted no califique para los Programas de Educación Temprana de Chicago que están orientados a las familias de escasos recursos con niños entre 0 y 2 años.
+    ineligible_age_resource: Por favor llame a la línea de información del Equipo de Referencias Comunitarias del Illinois Action for Children al 312-823-1100 o envíe un correo a referrals@actforchildren.org.
 
     eligible_title: Resultados - ¡Usted puede ser elegible!
     eligible_subtitle: A continuación encontrará los Programas de Aprendizaje Temprano para los que esta elegible y cerca de usted.
@@ -256,6 +260,7 @@ es:
     ccap_resources: Recursos
     ccap_ineligible_message: Si usted vive en Illinois, por favor llame al Equipo de Referencia de la Comunidad de Acción para los Niños de Illinois al 312-823-1100 o al correo electrónico de ciomunidades – referrals@actforchildren.org.
 
+    privacy_title: Política de Privacidad e Intercambio de Datos
     privacy_policy_paragraph: En mRelief valoramos la privacidad de las personas que necesitan de servicios humanos y nos esforzamos para hacer el mínimo número de preguntas necesario para determinar si alguien califica para estos programas. Aunque nuestras herramientas que evalúan si usted califica para beneficios públicos nunca le pedirán su nombre completo ni ninguna otra información personal con la cual se le pueda identificar, mRelief se interesa en ayudar a que el proceso de registración sea exitoso y por ello se compromete a asegurar que los datos que determinan si alguien califica puedan ayudar a los prestadores de servicios a entender cómo las respuestas a las preguntas afectan los resultados. A continuación le damos una explicación sobre cómo utilizamos los datos que usted comparte con nosotros y qué nos está autorizando usted cuando oprime el botón “Ver si califico” en la página de Educación Temprana.
     privacy_policy_consent: Por este medio, yo autorizo a que mRelief utilice y comparta información que yo he registrado en sus herramientas para evaluar si califico para beneficios públicos con el siguiente propósito - 
     privacy_policy_1: Usar mi información personal para determinar si califico para los programas de Educación Temprana que ofrece Chicago**

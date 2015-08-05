@@ -266,295 +266,316 @@ class TwilioSpanishController < ApplicationController
       message = "No podemos determinar su elegibilidad en este momento. Para hablar con un experto sobre su situación con LAF #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i } or call #{@lafcenter.telephone}."
     end
 
-    # HERE IS THE EARLY LEARNING SPANISH LOGIC
-    # number of children question
-     if session["page"] == "age_of_children_es" && session["counter"] == 2
-       @user = EarlyLearningDataTwilio.new
-       @user.phone_number = params[:From]
-       @user.children_ages = params[:Body].strip.downcase
-       @user.spanish = true
-       # no children
-       if @user.children_ages.include?("d")
-         @user.no_children = true
-         message = "Usted posiblemente no califica para programas de aprendizaje temprano de Chicago: ¡Listo Para Aprender! Llame al 312-823-1100 para información sobre otras oportunidades."
-         @user.completed = true
-         @user.save
-       # children
-       elsif @user.children_ages.include?("a") || @user.children_ages.include?("b") || @user.children_ages.include?("c") 
-         # Data storage for children ages
-         if @user.children_ages.include?("a")
-           @user.three_and_under = true
-         end
-         if @user.children_ages.include?("b")
-           @user.three_to_five = true
-         end
-         if @user.children_ages.include?("c")
-           @user.six_to_twelve = true
-         end
+   # HERE IS THE EARLY LEARNING SPANISH LOGIC
+   # number of children question
+    if session["page"] == "age_of_children_es" && session["counter"] == 2
+      @user = EarlyLearningDataTwilio.new
+      @user.phone_number = params[:From]
+      @user.children_ages = params[:Body].strip.downcase
+      @user.spanish = true
+      # no children
+      if @user.children_ages.include?("d")
+        @user.no_children = true
+        message = "Usted posiblemente no califica para programas de aprendizaje temprano de Chicago: ¡Listo Para Aprender! Llame al 312-823-1100 para información sobre otras oportunidades."
+        @user.early_learning_eligible = false
+        @user.completed = true
+        @user.save
+      # children
+      elsif @user.children_ages.include?("a") || @user.children_ages.include?("b") || @user.children_ages.include?("c") 
+        # Data storage for children ages
+        if @user.children_ages.include?("a")
+          @user.three_and_under = true
+        end
+        if @user.children_ages.include?("b")
+          @user.three_to_five = true
+        end
+        if @user.children_ages.include?("c")
+          @user.six_to_twelve = true
+        end
 
-         if @user.three_and_under != true
-           message = "¿Está usted o su pareja embarazada? Ingrese si o no" 
-           session["page"] = "pregnant_es"
-         else
-           message = "¿En qué código postal vive? Ejemplo: 60615"
-           session["page"] = "zipcode_es"
-         end
+        if @user.three_and_under != true
+          message = "¿Está usted o su pareja embarazada? Ingrese Sí o No" 
+          session["page"] = "pregnant_es"
+        else
+          message = "¿En qué código postal vive? Ejemplo: 60615"
+          session["page"] = "zipcode_es"
+        end
+        @user.completed = false
+        @user.save
+      else
+         message = "¡Parece que oprimió la letra equivocada! Por favor oprima, ‘a’, ‘b’, ‘c’, ‘d’ o una combinación de éstas para describir a su hogar."
+         session["counter"] = session["counter"] - 1
          @user.completed = false
          @user.save
-       else
-          message = "¡Parece que oprimió la letra equivocada! Por favor oprima, ‘a’, ‘b’, ‘c’, ‘d’ o una combinación de éstas para describir a su hogar."
-          session["counter"] = session["counter"] - 1
-          @user.completed = false
-          @user.save
-       end
-     end
-
-     # Pregnancy question
-     if session["page"] == "pregnant_es" && session["counter"] == 3
-       @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
-       pregnant = params[:Body].strip.downcase
-       session["counter"] += 1 # +1 to optional questions
-       # Data Storage
-       if pregnant == "sí" || pregnant == "si"
-         @user.pregnant == true
-         message = "¿En qué código postal vive? Ejemplo: 60615"
-         session["page"] = "zipcode_es"
-
-       elsif pregnant == "no"
-         @user.pregnant == false
-         message = "¿En qué código postal vive? Ejemplo: 60615"
-         session["page"] = "zipcode_es"
-
-       else
-         message = "¡Parece que oprimió la letra equivocada! Por favor seleccione si o no"
-         session["counter"] = session["counter"] - 1
-       end
-
-       @user.completed = false
-       @user.save
-     end
-
-    # Zipcode question
-    if session["page"] == "zipcode_es" 
-     if session["counter"] == 3 || session["counter"] == 5
-     @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
-     @user.zipcode = params[:Body].strip
-
-     if ChicagoEligibleZipcode.all.pluck(:zipcode).include?(@user.zipcode)
-       message = "¿Es usted un padre/madre de crianza temporal, en una situación de vida temporal, o su familia recibe SSI? Ingrese si o no"
-       session["page"] = "categorical_income_eligibility_es" 
-       @user.completed = false
-       @user.save
-     else
-       # INELIGIBLE
-       message = "Usted probablemente no califica en este momento para programas de aprendizaje temprano de Chicago: ¡Listo Para Aprender! Llame al 312-823-1100 para obtener información sobre otras oportunidades."
-       @user.completed = true
-       @user.save
-     end
-
-     end
+      end
     end
 
-    # Categorical Income Eligibility 
-    if session["page"] == "categorical_income_eligibility_es" 
-     if session["counter"] == 4 || session["counter"] == 6
-     @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
-     foster_temporary_ssi = params[:Body].strip.downcase
+    # Pregnancy question
+    if session["page"] == "pregnant_es" && session["counter"] == 3
+      @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
+      pregnant = params[:Body].strip.downcase
+      session["counter"] += 1 # +1 to optional questions
+      # Data Storage
+      if pregnant == "sí" || pregnant == "si"
+        @user.pregnant = true
+        message = "¿En qué código postal vive? Ejemplo: 60615"
+        session["page"] = "zipcode_es"
 
-       if foster_temporary_ssi == "sí" || foster_temporary_ssi == "si"
-        @user.foster_temporary_ssi == true
+      elsif pregnant == "no"
+        @user.pregnant = false
+        message = "¿En qué código postal vive? Ejemplo: 60615"
+        session["page"] = "zipcode_es"
+
+      else
+        message = "¡Parece que oprimió la letra equivocada! Por favor seleccione Sí o No"
+        session["counter"] = session["counter"] - 1
+      end
+
+      @user.completed = false
+      @user.save
+    end
+
+   # Zipcode question
+   if session["page"] == "zipcode_es" 
+    if session["counter"] == 3 || session["counter"] == 5
+    @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
+    @user.zipcode = params[:Body].strip
+
+    if ChicagoEligibleZipcode.all.pluck(:zipcode).include?(@user.zipcode)
+      message = "¿Es usted un padre/madre de crianza temporal, en una situación de vida temporal, o su familia recibe SSI? Ingrese Sí o No"
+      session["page"] = "categorical_income_eligibility_es" 
+      @user.completed = false
+      @user.save
+    else
+      # INELIGIBLE
+      message = "Usted probablemente no califica en este momento para programas de aprendizaje temprano de Chicago: ¡Listo Para Aprender! Llame al 312-823-1100 para obtener información sobre otras oportunidades."
+      @user.early_learning_eligible = false
+      @user.completed = true
+      @user.save
+    end
+
+    end
+   end
+
+   # Categorical Income Eligibility 
+   if session["page"] == "categorical_income_eligibility_es" 
+    if session["counter"] == 4 || session["counter"] == 6
+    @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
+    foster_temporary_ssi = params[:Body].strip.downcase
+
+      if foster_temporary_ssi == "sí" || foster_temporary_ssi == "si"
+       @user.foster_temporary_ssi = true
+       session["page"] = "household_size_es" 
+       message = "¿Cuántas personas viven en su hogar, incluyendo usted? Ejemplo: 2"
+    
+      elsif foster_temporary_ssi == "no"
+        @user.foster_temporary_ssi = false
         session["page"] = "household_size_es" 
         message = "¿Cuántas personas viven en su hogar, incluyendo usted? Ejemplo: 2"
-     
-       elsif foster_temporary_ssi == "no"
-         @user.foster_temporary_ssi == false
-         session["page"] = "household_size_es" 
-         message = "¿Cuántas personas viven en su hogar, incluyendo usted? Ejemplo: 2"
-
-       else
-         message = "¡Parece que oprimió la letra equivocada! Por favor seleccione si o no"
-         session["counter"] = session["counter"] - 1
-       end
-       @user.completed = false
-     end
-    end
-
-    # Household size question
-    if session["page"] == "household_size_es" 
-     if session["counter"] == 5 || session["counter"] == 7
-     @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
-     household_size = params[:Body].strip
-       # Convert to an integer
-       if household_size !~ /\D/  # returns true if all numbers
-         household_size_cleaned = household_size.to_i
-       else
-         household_size_cleaned = household_size.in_numbers
-       end
-       @user.household_size = household_size_cleaned.to_i
-       @user.save
-
-       message = "¿Cuál es su ingreso mensual total antes de impuestos? Ejemplo: 1000" 
-       session["page"] = "income_es"
-       @user.completed = false
-       @user.save
-     end
-    end
-
-    # Income question
-    if session["page"] == "income_es" 
-     if session["counter"] == 6 || session["counter"] == 8
-     @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
-     income = params[:Body].strip
-       # Convert to an integer
-       if income !~ /\D/  # returns true if all numbers
-         income_cleaned = income.to_i
-       else
-         income_cleaned = income.in_numbers
-       end
-       @user.gross_monthly_income = income_cleaned.to_f
-       # Determine income eligible programs
-       income_row = EarlyLearningIncomeCutoff.find_by(household_size: @user.household_size.to_i)
-
-       @user_income_type = []
-       if @user.gross_monthly_income > income_row.income_type2 # Notice about co-pay?
-         @user_income_type = ['Greater than Type 2']
-       elsif @user.gross_monthly_income <= income_row.income_type2 && @user.gross_monthly_income > income_row.income_type1
-         @user_income_type = ['Less than Type 2']
-       elsif @user.gross_monthly_income <= income_row.income_type1
-         @user_income_type = ['Less than Type 1', 'Less than Type 2']
-       end
-       @user.income_type = @user_income_type.try(:to_s)
-
-       message = "¿Están todos los adultos  en su hogar actualmente empleados? Ingrese si o no"
-       session["page"] = "employment_es"
-       @user.early_learning_eligible = true
-       @user.completed = false
-       @user.save
-     end
-    end
-
-    # Employment question
-    if session["page"] == "employment_es" 
-     if session["counter"] == 7 || session["counter"] == 9
-      @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
-      employment = params[:Body].strip.downcase
-      
-      if employment == "sí" || employment == "si"
-        @user.employment == true
-        # RESPONSE MESSAGE
-        # CCAP eligible if below income cutoff 
-         income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
-         if @user.gross_monthly_income < income_row.income_type4
-           @user.ccap_eligible = true
-           # child is ineligibe for early learning but eligible for ccap
-           if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
-           message = "¡Usted posiblemente califica para el Programa de Asistencia de Cuidado Infantil! Basado en la edad de su hijo/a y otros factores, no califica para programas de aprendizaje temprano, pero por favor llame al Equipo de Referencia de la Comunidad de Acción para los Niños de Illinois al (312) 229-1690 o visite bit.ly/learnearly para información."
-           # child is eligible for early learning and ccap
-           else
-           message = "Usted posiblemente califica para programas de aprendizaje temprano de Chicago. También puede ser elegible para el Programa de Asistencia de Cuidado Infantil. Para inscribirse llame al (312) 229-1690 o visite bit.ly/learnearly para información."
-           end
-            @user.completed = true
-         else
-           session["page"] = "tanf_special_needs_es"
-           message = "¿Recibe su familia TANF o cuidan a un menor con necesidades especiales o un plan de educación individualizado? Ingrese si o no"
-           @user.completed = false
-         end
-         
-      elsif employment == "no"
-        @user.employment == false
-        session["page"] = "tanf_special_needs_es"
-        message = "¿Recibe su familia TANF o cuidan a un menor con necesidades especiales o un plan de educación individualizado? Ingrese si o no"
-        @user.completed = false
 
       else
-        message = "¡Parece que oprimió la letra equivocada! Por favor seleccione si o no"
+        message = "¡Parece que oprimió la letra equivocada! Por favor seleccione Sí o No"
         session["counter"] = session["counter"] - 1
-        @user.completed = false
       end
-     
-      @user.save
-     end
+      @user.completed = false
     end
+   end
 
-    # Tanf and special needs question
-    if session["page"] == "tanf_special_needs_es"
-     if session["counter"] == 8 || session["counter"] == 10
-      @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
-      tanf_special_needs = params[:Body].strip.downcase
-      
-      # Data Storage
-      if tanf_special_needs == "sí" || tanf_special_needs == "si"
-        @user.tanf_special_needs == true
-        # Eligible for CCAP
-        # Child is ineligibe for early learning but eligible for CCAP
-        if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
-         message = "¡Usted posiblemente califica para el Programa de Asistencia de Cuidado Infantil! Basado en la edad de su hijo/a y otros factores, no califica para programas de aprendizaje temprano, pero por favor llame al Equipo de Referencia de la Comunidad de Acción para los Niños de Illinois al (312) 229-1100 o visite bit.ly/learnearly para información."
-        # child is eligible for early learning and ccap
-        else
-         message = "Usted posiblemente califica para programas de aprendizaje temprano de Chicago. También puede ser elegible para el Programa de Asistencia de Cuidado Infantil. Para inscribirse llame al (312) 229-1690 o visite bit.ly/learnearly para información."
-        end
-         @user.completed = true
-
-      elsif tanf_special_needs == "no"
-        @user.tanf_special_needs == false
-        session["page"] = "teen_parent_es"
-        message = "¿Es usted un padre/madre adolescente inscrito(a) tiempo completo en escuela o clases de GED o su equivalente? Ingrese si o no"
-        @user.completed = false
+   # Household size question
+   if session["page"] == "household_size_es" 
+    if session["counter"] == 5 || session["counter"] == 7
+    @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
+    household_size = params[:Body].strip
+      # Convert to an integer
+      if household_size !~ /\D/  # returns true if all numbers
+        household_size_cleaned = household_size.to_i
       else
-        message = "¡Parece que oprimió la letra equivocada! Por favor seleccione si o no"
-        session["counter"] = session["counter"] - 1
-        @user.completed = false
+        household_size_cleaned = household_size.in_numbers
       end
-
+      @user.household_size = household_size_cleaned.to_i
       @user.save
-     end
+
+      message = "¿Cuál es su ingreso mensual total antes de impuestos? Ejemplo: 1000" 
+      session["page"] = "income_es"
+      @user.completed = false
+      @user.save
     end
+   end
 
-    # Teen parent question
-    if session["page"] == "teen_parent_es"
-     if session["counter"] == 9 || session["counter"] == 11
-      @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
-      teen_parent = params[:Body].strip.downcase
-      
-      # Data Storage
-      if teen_parent == "sí" || teen_parent == "si"
-        # RESPONSE MESSAGE
-        # eligible for CCAP
-        if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
-        message = "¡Usted posiblemente califica para el Programa de Asistencia de Cuidado Infantil! Basado en la edad de su hijo/a y otros factores, no califica para programas de aprendizaje temprano, pero por favor llame al Equipo de Referencia de la Comunidad de Acción para los Niños de Illinois al (312) 229-1100 o visite bit.ly/learnearly para información."
+   # Income question
+   if session["page"] == "income_es" 
+    if session["counter"] == 6 || session["counter"] == 8
+    @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
+    income = params[:Body].strip
+      # Convert to an integer
+      if income !~ /\D/  # returns true if all numbers
+        income_cleaned = income.to_i
+      else
+        income_cleaned = income.in_numbers
+      end
+      @user.gross_monthly_income = income_cleaned.to_f
+      # Determine income eligible programs
+      income_row = EarlyLearningIncomeCutoff.find_by(household_size: @user.household_size.to_i)
 
-        # child is eligible for early learning and ccap
-        else
-        message = "Usted posiblemente califica para programas de aprendizaje temprano de Chicago. También puede ser elegible para el Programa de Asistencia de Cuidado Infantil. Para inscribirse llame al (312) 229-1690 o visite bit.ly/learnearly para información."
-        end
-        @user.teen_parent == true
-        @user.ccap_eligible = true
+      @user_income_type = []
+      if @user.gross_monthly_income > income_row.income_type2 # Notice about co-pay?
+        @user_income_type = ['Greater than Type 2']
+      elsif @user.gross_monthly_income <= income_row.income_type2 && @user.gross_monthly_income > income_row.income_type1
+        @user_income_type = ['Less than Type 2']
+      elsif @user.gross_monthly_income <= income_row.income_type1
+        @user_income_type = ['Less than Type 1', 'Less than Type 2']
+      end
+      @user.income_type = @user_income_type.try(:to_s)
+
+      if @user_income_type == ['Greater than Type 2'] && @user.three_and_under == true && @user.three_to_five == false
+        message = "Basado en su ingreso y el tamaño de su hogar, usted no califica para los Programas de Educación Temprana, pero por favor llame a la línea de información del Equipo de Referencias Comunitarias del Illinois Action for Children al 312-823-1100 o envíe un correo a referrals@actforchildren.org, para recibir más información."
+        @user.early_learning_eligible = false
+        @user.ccap_eligible = false
         @user.completed = true
-      elsif teen_parent == "no"
-        @user.teen_parent == false
-         
-         if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
-           message = "Usted posiblemente no califica para programas de aprendizaje temprano de Chicago: ¡Listo Para Aprender! Llame al 312-823-1100 para información sobre otras oportunidades."
-         # eligible for early learning 
-         else  
-           # eligble for early learning with co-pay
-           if @user.income_type == "[\"Greater than Type 2\"]"
-            message = "Usted posiblemente no califica para programas de aprendizaje temprano de Chicago. Llame al (312) 229-1690 o visite bit.ly/learnearly para información. Tenga en cuenta: Basado en sus ingresos, usted puede tener algunos cargos adicionales."
-           # eligible for early learning with no co-pay
-           else
-             message = "Usted probablemente califica para programas de de Chicago de aprendizaje temprano. Llame al (312) 229-1690 o visite bit.ly/learnearly para obtener información." 
-           end
-         @user.completed = true
-         end
+      elsif @user_income_type == ['Greater than Type 2'] && @user.pregnant == true && @user.three_to_five == false
+        message = "Basado en su ingreso y el tamaño de su hogar, usted no califica para los Programas de Educación Temprana, pero por favor llame a la línea de información del Equipo de Referencias Comunitarias del Illinois Action for Children al 312-823-1100 o envíe un correo a referrals@actforchildren.org, para recibir más información."
+        @user.early_learning_eligible = false
+        @user.ccap_eligible = false
+        @user.completed = true
       else
-        message = "¡Parece que oprimió la letra equivocada! Por favor seleccione si o no"
-        session["counter"] = session["counter"] - 1
+        message = "¿Están todos los adultos  en su hogar actualmente empleados? Ingrese Sí o No"
+        session["page"] = "employment_es"
         @user.completed = false
       end
       @user.save
-     end
     end
+   end
 
+   # Employment question
+   if session["page"] == "employment_es" 
+    if session["counter"] == 7 || session["counter"] == 9
+     @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
+     employment = params[:Body].strip.downcase
+     
+     if employment == "sí" || employment == "si"
+       @user.employment = true
+       # RESPONSE MESSAGE
+       # CCAP eligible if below income cutoff 
+        income_row = EarlyLearningIncomeCutoff.find_by({ :household_size => @user.household_size})
+        if @user.gross_monthly_income < income_row.income_type4
+          @user.ccap_eligible = true
+          # child is ineligibe for early learning but eligible for ccap
+          if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
+            message = "¡Usted posiblemente califica para el Programa de Asistencia de Cuidado Infantil! Basado en la edad de su hijo/a y otros factores, no califica para programas de aprendizaje temprano, pero por favor llame al Equipo de Referencia de la Comunidad de Acción para los Niños de Illinois al (312) 229-1690 o visite bit.ly/learnearly para información."
+            @user.early_learning_eligible = false
+          # child is eligible for early learning and ccap
+          else
+            message = "Usted posiblemente califica para programas de aprendizaje temprano de Chicago. También puede ser elegible para el Programa de Asistencia de Cuidado Infantil. Para inscribirse llame al (312) 229-1690 o visite bit.ly/learnearly para información."
+            @user.early_learning_eligible = true
+          end
+           @user.completed = true
+        else
+          session["page"] = "tanf_special_needs_es"
+          message = "¿Recibe su familia TANF o cuidan a un menor con necesidades especiales o un plan de educación individualizado? Ingrese Sí o No"
+          @user.completed = false
+        end
+        
+     elsif employment == "no"
+       @user.employment = false
+       session["page"] = "tanf_special_needs_es"
+       message = "¿Recibe su familia TANF o cuidan a un menor con necesidades especiales o un plan de educación individualizado? Ingrese Sí o No"
+       @user.completed = false
+
+     else
+       message = "¡Parece que oprimió la letra equivocada! Por favor seleccione Sí o No"
+       session["counter"] = session["counter"] - 1
+       @user.completed = false
+     end
+    
+     @user.save
+    end
+   end
+
+   # Tanf and special needs question
+   if session["page"] == "tanf_special_needs_es"
+    if session["counter"] == 8 || session["counter"] == 10
+     @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
+     tanf_special_needs = params[:Body].strip.downcase
+     
+     # Data Storage
+     if tanf_special_needs == "sí" || tanf_special_needs == "si"
+       @user.tanf_special_needs = true
+       @user.ccap_eligible = true
+       # Eligible for CCAP
+       # Child is ineligibe for early learning but eligible for CCAP
+       if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
+        message = "¡Usted posiblemente califica para el Programa de Asistencia de Cuidado Infantil! Basado en la edad de su hijo/a y otros factores, no califica para programas de aprendizaje temprano, pero por favor llame al Equipo de Referencia de la Comunidad de Acción para los Niños de Illinois al (312) 229-1100 o visite bit.ly/learnearly para información."
+        @user.early_learning_eligible = false
+       # child is eligible for early learning and ccap
+       else
+        message = "Usted posiblemente califica para programas de aprendizaje temprano de Chicago. También puede ser elegible para el Programa de Asistencia de Cuidado Infantil. Para inscribirse llame al (312) 229-1690 o visite bit.ly/learnearly para información."
+        @user.early_learning_eligible = true
+       end
+        @user.completed = true
+
+     elsif tanf_special_needs == "no"
+       @user.tanf_special_needs = false
+       session["page"] = "teen_parent_es"
+       message = "¿Es usted un padre/madre adolescente inscrito(a) tiempo completo en escuela o clases de GED o su equivalente? Ingrese Sí o No"
+       @user.completed = false
+     else
+       message = "¡Parece que oprimió la letra equivocada! Por favor seleccione Sí o No"
+       session["counter"] = session["counter"] - 1
+       @user.completed = false
+     end
+
+     @user.save
+    end
+   end
+
+   # Teen parent question
+   if session["page"] == "teen_parent_es"
+    if session["counter"] == 9 || session["counter"] == 11
+     @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
+     teen_parent = params[:Body].strip.downcase
+     
+     # Data Storage
+     if teen_parent == "sí" || teen_parent == "si"
+       # RESPONSE MESSAGE
+       # eligible for CCAP
+       if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
+        message = "¡Usted posiblemente califica para el Programa de Asistencia de Cuidado Infantil! Basado en la edad de su hijo/a y otros factores, no califica para programas de aprendizaje temprano, pero por favor llame al Equipo de Referencia de la Comunidad de Acción para los Niños de Illinois al (312) 229-1100 o visite bit.ly/learnearly para información."
+        @user.early_learning_eligible = false
+       # child is eligible for early learning and ccap
+       else
+        message = "Usted posiblemente califica para programas de aprendizaje temprano de Chicago. También puede ser elegible para el Programa de Asistencia de Cuidado Infantil. Para inscribirse llame al (312) 229-1690 o visite bit.ly/learnearly para información."
+        @user.early_learning_eligible = true
+       end
+       @user.teen_parent = true
+       @user.ccap_eligible = true
+       @user.completed = true
+     elsif teen_parent == "no"
+       @user.teen_parent = false
+        if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
+          message = "Usted posiblemente no califica para programas de aprendizaje temprano de Chicago: ¡Listo Para Aprender! Llame al 312-823-1100 para información sobre otras oportunidades."
+          @user.ccap_eligible = false
+          @user.early_learning_eligible = false
+        # eligible for early learning 
+        else  
+          # eligble for early learning with co-pay
+          if @user.income_type == "[\"Greater than Type 2\"]"
+           message = "Usted posiblemente no califica para programas de aprendizaje temprano de Chicago. Llame al (312) 229-1690 o visite bit.ly/learnearly para información. Tenga en cuenta: Basado en sus ingresos, usted puede tener algunos cargos adicionales."
+          # eligible for early learning with no co-pay
+          else
+            message = "Usted probablemente califica para programas de de Chicago de aprendizaje temprano. Llame al (312) 229-1690 o visite bit.ly/learnearly para obtener información." 
+          end
+        @user.early_learning_eligible = true
+        @user.completed = true
+        end
+     else
+       message = "¡Parece que oprimió la letra equivocada! Por favor seleccione Sí o No"
+       session["counter"] = session["counter"] - 1
+       @user.completed = false
+     end
+     @user.save
+    end
+   end
+   
     twiml = Twilio::TwiML::Response.new do |r|
       r.Message message
     end

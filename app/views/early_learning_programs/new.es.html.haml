@@ -211,10 +211,18 @@
               %label{:for => "phone_number"}= t.elp.cell_phone | "What is your cell phone number?"
               %p.popover-body{"data-content" => "Utilizaremos este número para enviarle recordatorios durante el proceso de solicitud. Si usted no tiene un teléfono, por favor proporcione un correo electrónico para usted o un pariente.", "data-placement" => "right", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec;", :type => "button"}
                 %input#phone_number.form-field{:name => "phone_number", :placeholder => "Por ejemplo: 3125555555", :required => "", :type => "text", :value => @user.phone_number}
+          .row
+            .col-md-9.col-sm-10.col-xs-12
+              %input#data_sharing{:checked => "", :name => "data_sharing", :type => "checkbox", :value => "true"}
+                Yo autorizo el uso y la divulgación de mi información personal según se establece en  #{link_to "la política de privacidad e intercambio de datos de mRelief.", early_learning_privacy_policy_url} 
+          %br/
           / Submit button
           .row
             .col-md-5
               %button{:type => "submit"}= t.elp.see_if | "See if I qualify"
+          .row
+            .col-md-10.marquee
+              %p= t.elp.partnership | "The Early Learning Finder is a partnership between the City of Chicago and mRelief."
 :javascript
     $(document).ready(function() {
 

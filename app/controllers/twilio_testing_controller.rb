@@ -518,12 +518,12 @@ class TwilioTestingController < ApplicationController
       @user.income_type = @user_income_type.try(:to_s)
 
       if @user_income_type == ['Greater than Type 2'] && @user.three_and_under == true && @user.three_to_five == false
-        message = "Based on your household size and income you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at 312-823-1100 for more information."
+        message = "Basado en su ingreso y el tamaño de su hogar, usted no califica para los Programas de Educación Temprana, pero por favor llame a la línea de información del Equipo de Referencias Comunitarias del Illinois Action for Children al 312-823-1100 o envíe un correo a referrals@actforchildren.org, para recibir más información."
         @user.early_learning_eligible = false
         @user.ccap_eligible = false
         @user.completed = true
       elsif @user_income_type == ['Greater than Type 2'] && @user.pregnant == true && @user.three_to_five == false
-        message = "Based on your household size and income you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at 312-823-1100 for more information."
+        message = "Basado en su ingreso y el tamaño de su hogar, usted no califica para los Programas de Educación Temprana, pero por favor llame a la línea de información del Equipo de Referencias Comunitarias del Illinois Action for Children al 312-823-1100 o envíe un correo a referrals@actforchildren.org, para recibir más información."
         @user.early_learning_eligible = false
         @user.ccap_eligible = false
         @user.completed = true
