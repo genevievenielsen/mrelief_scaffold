@@ -55,10 +55,14 @@ class TwilioTestingController < ApplicationController
       # no children
       if @user.children_ages.include?("d")
         @user.no_children = true
-        message = "You may not be eligible for Chicago: Ready to Learn! early learning programs at this time.  Call 312-823-1100 for info on other opportunities."
+        # INELIGIBLE
+        # data sharing question
+        # message = "You may not be eligible for Chicago: Ready to Learn! early learning programs at this time.  Call 312-823-1100 for info on other opportunities."
         @user.early_learning_eligible = false
         @user.completed = true
         @user.save
+        
+        data_sharing_question 
       # children
       elsif @user.children_ages.include?("a") || @user.children_ages.include?("b") || @user.children_ages.include?("c") 
         # Data storage for children ages
@@ -81,7 +85,6 @@ class TwilioTestingController < ApplicationController
         end
         @user.completed = false
         @user.save
-      # error 
       else
          message = "Oops looks like there is a typo! Please type a, b, c, d or a combination that describes your household."
          session["counter"] = session["counter"] - 1
@@ -128,6 +131,7 @@ class TwilioTestingController < ApplicationController
       @user.save
     else
       # INELIGIBLE
+      # data sharing question
       message = "You may not be eligible for Chicago: Ready to Learn! early learning programs at this time.  Call 312-823-1100 for info on other opportunities."
       @user.early_learning_eligible = false
       @user.completed = true
@@ -142,17 +146,14 @@ class TwilioTestingController < ApplicationController
     if session["counter"] == 4 || session["counter"] == 6
     @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
     foster_temporary_ssi = params[:Body].strip.downcase
-
       if foster_temporary_ssi == "yes" 
        @user.foster_temporary_ssi = true
        session["page"] = "household_size" 
        message = "What is the number of people living in your household including yourself?"
-    
       elsif foster_temporary_ssi == "no" 
         @user.foster_temporary_ssi = false
         session["page"] = "household_size" 
         message = "What is the number of people living in your household including yourself?"
-
       else
         message = "Oops looks like there is a typo! Please enter 'yes' or 'no'"
         session["counter"] = session["counter"] - 1
@@ -174,7 +175,6 @@ class TwilioTestingController < ApplicationController
       end
       @user.household_size = household_size_cleaned.to_i
       @user.save
-
       message = "What is your gross total monthly income before taxes? Example - 1000"
       session["page"] = "income"
       @user.completed = false
@@ -196,7 +196,6 @@ class TwilioTestingController < ApplicationController
       @user.gross_monthly_income = income_cleaned.to_f
       # Determine income eligible programs
       income_row = EarlyLearningIncomeCutoff.find_by(household_size: @user.household_size.to_i)
-
       @user_income_type = []
       if @user.gross_monthly_income > income_row.income_type2 # Notice about co-pay?
         @user_income_type = ['Greater than Type 2']
@@ -206,13 +205,14 @@ class TwilioTestingController < ApplicationController
         @user_income_type = ['Less than Type 1', 'Less than Type 2']
       end
       @user.income_type = @user_income_type.try(:to_s)
-
       if @user_income_type == ['Greater than Type 2'] && @user.three_and_under == true && @user.three_to_five == false
+        # data sharing question
         message = "Based on your household size and income you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at 312-823-1100 for more information."
         @user.early_learning_eligible = false
         @user.ccap_eligible = false
         @user.completed = true
       elsif @user_income_type == ['Greater than Type 2'] && @user.pregnant == true && @user.three_to_five == false
+        # data sharing question
         message = "Based on your household size and income you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at 312-823-1100 for more information."
         @user.early_learning_eligible = false
         @user.ccap_eligible = false
@@ -241,13 +241,16 @@ class TwilioTestingController < ApplicationController
           @user.ccap_eligible = true
           # child is ineligibe for early learning but eligible is ccap
           if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
+            # data sharing question
             message = "You likely qualify for the Child Care Assistance Program! Based on your child's age and other factors you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at 312-823-1100 for more information."
             @user.early_learning_eligible = false
           # child is eligible for early learning and ccap
           else
+            # data sharing question
             message = "You likely qualify for Chicago early learning programs. You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/learnearly for info."
             @user.early_learning_eligible = true
           end
+          # data sharing question
            @user.completed = true
         else
           session["page"] = "tanf_special_needs"
@@ -284,10 +287,12 @@ class TwilioTestingController < ApplicationController
        # Eligible for CCAP
        # Child is ineligibe for early learning but eligible is CCAP
        if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
+        # data sharing question
         message = "You likely qualify for the Child Care Assistance Program! Based on your child's age and other factors you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at 312-299-1690 for more information."
         @user.early_learning_eligible = false
         # child is eligible for early learning and ccap
        else
+        # data sharing question
         message = "You likely qualify for Chicago early learning programs. You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/learnearly for info."
         @user.early_learning_eligible = true
        end
@@ -318,10 +323,12 @@ class TwilioTestingController < ApplicationController
        # RESPONSE MESSAGE
        # eligible for CCAP
        if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
+        # data sharing question
         message = "You likely qualify for the Child Care Assistance Program! Based on your child's age and other factors you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at 312-823-1100 for more information."
         @user.early_learning_eligible = false
        # child is eligible for early learning and ccap
        else
+        # data sharing question
         message = "You likely qualify for Chicago early learning programs! You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/learnearly for info."
         @user.early_learning_eligible = true
        end
@@ -331,6 +338,7 @@ class TwilioTestingController < ApplicationController
      elsif teen_parent == "no" 
        @user.teen_parent = false
         if @user.six_to_twelve == true && @user.three_and_under == false && @user.three_to_five == false && @user.pregnant == false
+          # data sharing question
           message = "Based on your child's age and other factors, you do not qualify for early learning programs and child care assistance at this time.  Call 312-823-1100 for information on other opportunities."
           @user.ccap_eligible = false
           @user.early_learning_eligible = false
@@ -338,9 +346,11 @@ class TwilioTestingController < ApplicationController
         else  
           # eligble for early learning with co-pay
           if @user.income_type == "[\"Greater than Type 2\"]"
+            # data sharing question
            message = "You likely qualify for Chicago early learning programs! Call (312) 229-1690 or visit bit.ly/learnearly for info. Note: Based on your income, you may have some additional fees."
           # eligible for early learning with no co-pay
           else
+            # data sharing question
             message = "You likely qualify for Chicago early learning programs! Call (312) 229-1690 or visit bit.ly/learnearly for info."
           end
         @user.early_learning_eligible = true
@@ -676,6 +686,11 @@ class TwilioTestingController < ApplicationController
     respond_to do |format|
      format.xml {render xml: twiml.text}
    end
+  end
+
+  def data_sharing_question 
+    message = "Do you consent to mRelief using your inputs for today's early learning eligibility, following-up with information and sharing with City of Chicago and other stakeholders to promote easier ways to sign up for benefits? Enter Yes or No"
+    session["page"] = "data_sharing_question"
   end
 
 
