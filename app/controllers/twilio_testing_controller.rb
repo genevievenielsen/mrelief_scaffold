@@ -4,10 +4,7 @@ class TwilioTestingController < ApplicationController
   require 'numbers_in_words'
   require 'numbers_in_words/duck_punch' #see why later
 
-  def data_sharing_question 
-    message = "Do you consent to mRelief using your inputs for today's early learning eligibility, following-up with information and sharing with City of Chicago and other stakeholders to promote easier ways to sign up for benefits? Enter Yes or No"
-    session["page"] = "data_sharing_question"
-  end
+ 
 
   def text
   session["counter"] ||= 0
@@ -692,6 +689,12 @@ class TwilioTestingController < ApplicationController
     respond_to do |format|
      format.xml {render xml: twiml.text}
    end
+  end
+
+  def data_sharing_question 
+    puts "I made it inside the data sharing method"
+    message = "Do you consent to mRelief using your inputs for today's early learning eligibility, following-up with information and sharing with City of Chicago and other stakeholders to promote easier ways to sign up for benefits? Enter Yes or No"
+    session["page"] = "data_sharing_question"
   end
 
 
