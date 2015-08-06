@@ -42,7 +42,7 @@ class TwilioTestingController < ApplicationController
    end
 
    if params[:Body].strip.downcase == "ninos"
-      message = "Escriba las letras que aplican a su hijo antes del 1º de Septiembre de 2015. Yo cuido a un(os) menor(es) entre las edades de: a. 0 a 2  b. 3 a 5 c. 6 a 12. d. Ninguno de estos. Ejemplo: ‘a’ o ‘ab’"
+      message = "Escriba las letras que aplican a su niño antes del 1º de Septiembre de 2015. Yo cuido a un(os) menor(es) entre las edades de: a. 0 a 2  b. 3 a 5 c. 6 a 12. d. Ninguno de estos. Ejemplo: ‘a’ o ‘ab’"
       session["page"] = "age_of_children_es"
       session["counter"] = 1
    end
@@ -497,7 +497,7 @@ class TwilioTestingController < ApplicationController
         end
 
         if @user.three_and_under != true
-          message = "¿Está usted o su pareja embarazada? Ingrese Sí o No" 
+          message = "¿Está usted o su pareja embarazada? Ingrese Si o No" 
           session["page"] = "pregnant_es"
         else
           message = "¿En qué código postal vive? Ejemplo: 60615"
@@ -674,14 +674,14 @@ class TwilioTestingController < ApplicationController
            @user.completed = true
         else
           session["page"] = "tanf_special_needs_es"
-          message = "¿Recibe su familia TANF o cuidan a un menor con necesidades especiales o un plan de educación individualizado? Ingrese Sí o No"
+          message = "¿Recibe su familia TANF o cuidan a un menor con necesidades especiales o un Plan de Educación Individualizado? Ingrese Sí o No"
           @user.completed = false
         end
         
      elsif employment == "no"
        @user.employment = false
        session["page"] = "tanf_special_needs_es"
-       message = "¿Recibe su familia TANF o cuidan a un menor con necesidades especiales o un plan de educación individualizado? Ingrese Sí o No"
+       message = "¿Recibe su familia TANF o cuidan a un menor con necesidades especiales o un Plan de Educación Individualizado? Ingrese Sí o No"
        @user.completed = false
 
      else
