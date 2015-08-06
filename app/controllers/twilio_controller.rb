@@ -858,9 +858,10 @@ class TwilioController < ApplicationController
      @m.save
    end
 
-
    
    # HERE IS THE EARLY LEARNING LOGIC
+   data_sharing_question = "Do you consent to mRelief using your inputs for today's early learning eligibility, following-up with information and sharing with City of Chicago and other stakeholders to promote easier ways to sign up for benefits? Enter Yes or No"
+
    # number of children question
     if session["page"] == "age_of_children" && session["counter"] == 2
       @user = EarlyLearningDataTwilio.new
@@ -1160,8 +1161,6 @@ class TwilioController < ApplicationController
      @user.save
     end
    end
-
-    data_sharing_question = "Do you consent to mRelief using your inputs for today's early learning eligibility, following-up with information and sharing with City of Chicago and other stakeholders to promote easier ways to sign up for benefits? Enter Yes or No"
 
     # Early Childhood Data Sharing Logic
     if session["page"] == "data_sharing_question1"
