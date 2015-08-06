@@ -1161,6 +1161,8 @@ class TwilioController < ApplicationController
     end
    end
 
+    data_sharing_question = "Do you consent to mRelief using your inputs for today's early learning eligibility, following-up with information and sharing with City of Chicago and other stakeholders to promote easier ways to sign up for benefits? Enter Yes or No"
+
     # Early Childhood Data Sharing Logic
     if session["page"] == "data_sharing_question1"
      if session["counter"] == 3 || session["counter"] == 5 || session["counter"] == 7
