@@ -333,11 +333,11 @@ class TwilioTestingController < ApplicationController
           # eligble for early learning with co-pay
           if @user.income_type == "[\"Greater than Type 2\"]"
             message = data_sharing_question
-            session["page"] = "data_sharing_question4"
+            session["page"] = "data_sharing_question5"
           # eligible for early learning with no co-pay
           else
             message = data_sharing_question
-            session["page"] = "data_sharing_question4"
+            session["page"] = "data_sharing_question5"
           end
           @user.early_learning_eligible = true
         end
