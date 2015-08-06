@@ -422,7 +422,8 @@ class TwilioTestingController < ApplicationController
           end
           if @user.early_learning_eligible == false
            message = "You likely qualify for the Child Care Assistance Program! Based on your child's age and other factors you do not qualify for early learning programs, but please call Illinois Action For Children Community Referral Team at 312-823-1100 for more information."
-          else
+          end
+          if @user.early_learning_eligible == true
            message = "You likely qualify for Chicago early learning programs. You also may be eligible for the Child Care Assistance Program. To enroll call (312) 229-1690 or visit bit.ly/learnearly for info."
           end
           @user.completed = true
