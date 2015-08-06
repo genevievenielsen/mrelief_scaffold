@@ -213,16 +213,16 @@ es:
   elp:
     title: Búsqueda de Programas de Educación Temprana de Chicago
     subtitle: Si usted es la persona principal que se encarga de un menor, es posible que califique para los programas de Educación Temprana que ofrece Chicago.
-    select_all_parent: Seleccione todas las que correspondan a usted como padre/madre o tutor-
+    select_all_parent: Seleccione todas las opciones que aplican a usted como padre/madre o tutor-
     age_note:  Tome en cuenta - Esta pregunta corresponde a la edad de su hijo(a) a partir del 1º de Septiembre 2015
-    household_size: ¿Cuántas personas viven en su grupo familiar, incluyendo usted?
+    household_size: ¿Cuántas personas viven en su hogar, incluyendo usted?
     gross_income: ¿Cuál es su ingreso bruto mensual?
-    select_all: Seleccione todos las que apliquen a usted - 
-    homeless: Seleccione todas las opciones que se aplican a la situación de vivienda para su familia -
+    select_all: Seleccione todos opciones que aplican a usted - 
+    homeless: Seleccione todas las opciones que aplican a la situación de vivienda para su familia -
 
     employed: ¿Están todos los adultos en su hogar actualmente empleados?
 
-    zipcode: ¿En qué código postal vive usted? 
+    zipcode: ¿En qué código postal vive? 
     other_zipcode: Le mostraremos programas donde usted vive, pero ¿preferiría que le mostremos programas cerca de donde asiste a la escuela, trabaja, etc.?
     preferred_zipcode: ¿En qué código postal preferiría asistencia con aprendizaje temprano?
 

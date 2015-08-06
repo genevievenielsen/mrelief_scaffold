@@ -37,7 +37,7 @@
                 - if @user.pregnant != nil && @user.pregnant == true
                   checked
                 >
-                Estoy embarazada
+                Yo estoy o mi pareja esta embarazada
                 %br
                 <input type="checkbox" name="no_children" value="no_children" id="no_children"
                 - if @user.no_children != nil && @user.no_children == true
@@ -86,13 +86,13 @@
                 - if @user.teen_parent != nil && @user.teen_parent == true
                   checked
                 >
-                Soy un(a) padre/madre adolescente inscrito(a) en primaria a tiempo completo, secundaria o clases de GED para obtener un diploma de secundaria o su equivalente 
+                Soy un(a) padre/madre adolescente inscrito(a) tiempo completo en la primaria, secundaria o clases de GED con la metade obtener un diploma de secundaria o su equivalente
                 %br
                 <input type="checkbox" name="special_needs" value="special_needs" id="special_needs"
                 - if @user.special_needs != nil && @user.special_needs == true
                   checked
                 >
-                Cuido a un menor con necesidades especiales, un plan de educación individualizado (IEP), o un plan de servicio familiar (IFSP)
+                Cuido a un menor con necesidades especiales, un plan de Educación Individualizado (IEP), o un Plan de Servicio  Individualizado Para la Familia (IFSP)
                 %br
                 <input type="checkbox" name="none_of_the_above" value="none_of_the_above" id="none_of_the_above"
                 - if @user.none_of_the_above != nil && @user.none_of_the_above == true
@@ -162,7 +162,7 @@
                 - if @user.half_day != nil && @user.half_day == true
                   checked
                 >
-                Medio día (3 a 4 horas)
+                Medio día (2 a 3 horas)
                 %br
                 <input type="checkbox" name="full_day" value="full_day" id="full_day"
                 - if @user.full_day != nil && @user.full_day == true
@@ -174,13 +174,13 @@
                 - if @user.part_week != nil && @user.part_week == true
                   checked
                 >
-                Parte de una semana (2 o 3 días)
+                Parte de una semana (2 a 3 días)
                 %br
                 <input type="checkbox" name="full_week" value="full_week" id="full_week"
                 - if @user.full_week != nil && @user.full_week == true
                   checked
                 >
-                Semana completa (4 o 5 días)
+                Semana completa (4 a 5 días)
                 %br
                 <input type="checkbox" name="home_visiting" value="home_visiting" id="home_visiting"
                 - if @user.home_visiting != nil && @user.home_visiting == true
