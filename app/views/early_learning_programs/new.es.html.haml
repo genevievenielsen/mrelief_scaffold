@@ -68,7 +68,7 @@
                 - if @user.foster_parent != nil && @user.foster_parent == true
                   checked
                 >
-                Soy un padre/madre sustituto
+                Soy madre/padre de crianza
                 %br
                 <input type="checkbox" name="ssi" value="ssi" id="ssi"
                 - if @user.ssi != nil && @user.ssi == true
@@ -229,7 +229,7 @@
           // employment hover
           $( "#employment_question" ).hover(
             function() {
-                $( this ).append( $( "<p class=\"hover_explanation\">Se aplica el autoempleo e ingresos en efectivosi se puede verificar con un tercero o un estado de cuenta mensual.</p>" ) );
+                $( this ).append( $( "<p class=\"hover_explanation\">Autoempleo e ingresos en efectivo aplican si pueden ser verificados por un tercero o por un estado de cuenta mensual.</p>" ) );
               },
             function() {
               $( this ).find( "p:last" ).remove();
