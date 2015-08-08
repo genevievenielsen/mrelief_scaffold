@@ -71,13 +71,13 @@
         <div class="radio-button" id="select_all_questions">
           <input type="checkbox" name="foster_parent" value="foster_parent" id="foster_parent"
             <% if @user.foster_parent != nil && @user.foster_parent == true %>checked<% end %>>  
-            I am a foster parent<br>
+            <label for="foster_parent" class="checkbox-question">I am a foster parent</label><br>
           <input type="checkbox" name="ssi" value="ssi" id="ssi"
             <% if @user.ssi != nil && @user.ssi == true %>checked<% end %>> 
-            My family receives SSI<br>
+            <label for="ssi" class="checkbox-question">My family receives SSI</label><br>
           <input type="checkbox" name="tanf" value="tanf" id="tanf"
             <% if @user.tanf != nil && @user.tanf == true %>checked<% end %>> 
-            My family receives TANF<br>
+            <label for="tanf" class="checkbox-question">My family receives TANF</label><br>
           <input type="checkbox" name="teen_parent" value="teen_parent" id="teen_parent"
             <% if @user.teen_parent != nil && @user.teen_parent == true %>checked<% end %>>  
             I am a teen parent who is enrolled full-time in elementary, high school or GED classes to obtain a high school degree or its equivalent<br>

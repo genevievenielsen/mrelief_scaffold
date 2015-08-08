@@ -564,7 +564,6 @@ class PagesController < ApplicationController
         @press = PressEmail.create(publication_name: publication, author_name: author, email: email)
       end
    
-      redirect_to :back, notice: "Emails successfully added"
   end
 
 
