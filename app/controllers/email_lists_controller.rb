@@ -1,4 +1,13 @@
 class EmailListsController < ApplicationController
+require 'mailgun'
+
+	def send_journalist_emails
+		PressEmail.all.each do |press|
+			EmailListMailer.send_journalist_emails(press.publication_name, press.author_name, press.email).deliver
+		end
+
+		redirect_to root_url, notice: "Emails successfully sent"
+	end
   
 	def opt_in
 		email = params[:email]

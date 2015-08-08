@@ -553,6 +553,20 @@ class PagesController < ApplicationController
        render :text => "session cleared"
   end
 
+  def press_emails
+       ex = Roo::Excel.new("public/marketing_emails.xls")
+       ex.default_sheet = ex.sheets[0]
+       2.upto(4) do | line |
+       publication = ex.cell(line,'A')
+       author = ex.cell(line,'B')
+       email = ex.cell(line,'C')
+      
+        @press = PressEmail.create(publication_name: publication, author_name: author, email: email)
+      end
+   
+      redirect_to :back, notice: "Emails successfully added"
+  end
+
 
 
 end

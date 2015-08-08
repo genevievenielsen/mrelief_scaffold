@@ -1,12 +1,13 @@
 class EmailListMailer < ApplicationMailer
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.email_list_mailer.opt_in.subject
-  #
+  def send_journalist_emails(publication, author, email)
+    @publication = publication
+    @author = author
+    @email = email
+    mail to: @email, from: 'rose@mrelief.com', subject: 'City of Chicago and mRelief Launch Early Learning Finder!'
+  end
+
   def opt_in(recipient_address, generated_hash)
-		
     @email = recipient_address
     @generated_hash = generated_hash
 

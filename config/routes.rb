@@ -33,6 +33,8 @@ Rails.application.routes.draw do
   get('/how_mrelief_works', { :controller => 'pages', :action => 'how_mrelief_works' })
   get('/press_release', { :controller => 'pages', :action => 'press_release' })
   get('/public-template', { :controller => 'pages', :action => 'public_template' })
+  get('/press_emails', { :controller => 'pages', :action => 'press_emails' })
+
 
   # all programs at once
   get("/filter", { :controller => "pages", :action => "filter" })
@@ -57,6 +59,7 @@ Rails.application.routes.draw do
   # email list
   get 'email_lists/opt_in', to: 'email_lists#opt_in'
   get 'email_lists/confirm_email', to: 'email_lists#confirm_email'
+  get 'email_lists/send_journalist_emails', to: 'email_lists#send_journalist_emails'
 
   resources :contact, only: [:index, :create]
 

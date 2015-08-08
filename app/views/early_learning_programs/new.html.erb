@@ -23,19 +23,20 @@
         <div class="radio-button" id="children_questions">
           <input type="checkbox" name="zero_to_three" value="zero_to_three" id="zero_to_three"
             <% if @user.three_and_under != nil && @user.three_and_under == true %>checked<% end %>>  
-            I care for a child that is between the ages of 0-2<br>
+            <label for="zero_to_three" class="checkbox-question">I care for a child that is between the ages of 0-2
+            </label><br>
           <input type="checkbox" name="three_to_five" value="three_to_five" id="three_to_five"
             <% if @user.three_to_five != nil && @user.three_to_five == true %>checked<% end %>> 
-            I care for a child that is between the ages of 3-5<br>
+            <label for="three_to_five" class="checkbox-question">I care for a child that is between the ages of 3-5 </label><br>
           <input type="checkbox" name="six_to_twelve" value="six_to_twelve" id="six_to_twelve"
             <% if @user.six_to_twelve != nil && @user.six_to_twelve == true %>checked<% end %>> 
-            I care for a child that is between the ages of 6-12<br>
+            <label for="six_to_twelve" class="checkbox-question">I care for a child that is between the ages of 6-12</label><br>
           <input type="checkbox" name="pregnant" value="pregnant" id="pregnant"
             <% if @user.pregnant != nil && @user.pregnant == true %>checked<% end %>> 
-            I am, or my partner is, pregnant<br>
+            <label for="pregnant" class="checkbox-question">I am, or my partner is, pregnant </label><br>
           <input type="checkbox" name="no_children" value="no_children" id="no_children"
             <% if @user.no_children != nil && @user.no_children == true %>checked<% end %>> 
-            I care for no children in these age groups<br>
+            <label for="no_children" class="checkbox-question">I care for no children in these age groups</label><br>
         </div>
       </div>
     </div>
