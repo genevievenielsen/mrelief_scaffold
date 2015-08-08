@@ -78,9 +78,10 @@
           <input type="checkbox" name="tanf" value="tanf" id="tanf"
             <% if @user.tanf != nil && @user.tanf == true %>checked<% end %>> 
             <label for="tanf" class="checkbox-question">My family receives TANF</label><br>
-          <input type="checkbox" name="teen_parent" value="teen_parent" id="teen_parent"
+            <label for="teen_parent" class="checkbox-question"><input type="checkbox" name="teen_parent" value="teen_parent" id="teen_parent"
             <% if @user.teen_parent != nil && @user.teen_parent == true %>checked<% end %>>  
-            I am a teen parent who is enrolled full-time in elementary, high school or GED classes to obtain a high school degree or its equivalent<br>
+            I am a teen parent who is enrolled full-time in elementary, high school or GED classes to obtain a high school degree or its equivalent</label><br>
+
           <input type="checkbox" name="special_needs" value="special_needs" id="special_needs"
             <% if @user.special_needs != nil && @user.special_needs == true %>checked<% end %>> 
             I care for a child with special needs, an Individualized Education Plan (IEP), or Individualized Family Service Plan (IFSP)<br>
