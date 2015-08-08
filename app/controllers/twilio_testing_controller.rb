@@ -773,7 +773,7 @@ class TwilioTestingController < ApplicationController
      if session["counter"] == 3 || session["counter"] == 5 || session["counter"] == 7
        @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
        data_sharing = params[:Body].strip.downcase
-       if data_sharing == "yes" 
+       if data_sharing == "sí" || data_sharing == "si"
          @user.data_sharing = true
        elsif data_sharing == "no" 
          @user.data_sharing = false
@@ -792,7 +792,7 @@ class TwilioTestingController < ApplicationController
      if session["counter"] == 7 || session["counter"] == 9
        @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
        data_sharing = params[:Body].strip.downcase
-       if data_sharing == "yes" 
+       if data_sharing == "sí" || data_sharing == "si"
          @user.data_sharing = true
        elsif data_sharing == "no" 
          @user.data_sharing = false
@@ -810,7 +810,7 @@ class TwilioTestingController < ApplicationController
       if session["counter"] == 8 || session["counter"] == 10
         @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
         data_sharing = params[:Body].strip.downcase
-        if data_sharing == "yes" 
+        if data_sharing == "sí" || data_sharing == "si"
           @user.data_sharing = true
         elsif data_sharing == "no" 
           @user.data_sharing = false
@@ -832,7 +832,7 @@ class TwilioTestingController < ApplicationController
        if session["counter"] == 9 || session["counter"] == 11
          @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
          data_sharing = params[:Body].strip.downcase
-         if data_sharing == "yes" 
+         if data_sharing == "sí" || data_sharing == "si"
            @user.data_sharing = true
          elsif data_sharing == "no" 
            @user.data_sharing = false
@@ -855,7 +855,7 @@ class TwilioTestingController < ApplicationController
         if session["counter"] == 10 || session["counter"] == 12
           @user = EarlyLearningDataTwilio.find_by(:phone_number => params[:From], :completed => false)
           data_sharing = params[:Body].strip.downcase
-          if data_sharing == "yes" 
+          if data_sharing == "sí" || data_sharing == "si"
             @user.data_sharing = true
           elsif data_sharing == "no" 
             @user.data_sharing = false
