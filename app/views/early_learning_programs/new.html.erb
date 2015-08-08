@@ -66,24 +66,18 @@
         <div class="radio-button" id="select_all_questions">
             <label for="foster_parent" class="checkbox-question"><input type="checkbox" name="foster_parent" value="foster_parent" id="foster_parent"
             <% if @user.foster_parent != nil && @user.foster_parent == true %>checked<% end %>>  I am a foster parent</label><br>
-
             <label for="ssi" class="checkbox-question"><input type="checkbox" name="ssi" value="ssi" id="ssi"
             <% if @user.ssi != nil && @user.ssi == true %>checked<% end %>> My family receives SSI</label><br>
-
-
-
-          <input type="checkbox" name="tanf" value="tanf" id="tanf"
-            <% if @user.tanf != nil && @user.tanf == true %>checked<% end %>> 
-            <label for="tanf" class="checkbox-question">My family receives TANF</label><br>
+            <label for="tanf" class="checkbox-question"><input type="checkbox" name="tanf" value="tanf" id="tanf"
+            <% if @user.tanf != nil && @user.tanf == true %>checked<% end %>> My family receives TANF</label><br>
             <label for="teen_parent" class="checkbox-question"><input type="checkbox" name="teen_parent" value="teen_parent" id="teen_parent"
             <% if @user.teen_parent != nil && @user.teen_parent == true %>checked<% end %>>  
             I am a teen parent who is enrolled full-time in elementary, high school or GED classes to obtain a high school degree or its equivalent</label><br>
             <label for="special_needs" class="checkbox-question"><input type="checkbox" name="special_needs" value="special_needs" id="special_needs"
             <% if @user.special_needs != nil && @user.special_needs == true %>checked<% end %>> I care for a child with special needs, an Individualized Education Plan (IEP), or Individualized Family Service Plan (IFSP)
             </label><br>
-            <input type="checkbox" name="none_of_the_above" value="none_of_the_above" id="none_of_the_above"
-            <% if @user.none_of_the_above != nil && @user.none_of_the_above == true %>checked<% end %>> 
-            <label for="none_of_the_above" class="checkbox-question">None of the Above</label><br>
+            <label for="none_of_the_above" class="checkbox-question"><input type="checkbox" name="none_of_the_above" value="none_of_the_above" id="none_of_the_above"
+            <% if @user.none_of_the_above != nil && @user.none_of_the_above == true %>checked<% end %>> None of the Above</label><br>
         </div>
       </div>
     </div>
@@ -93,18 +87,17 @@
         <div class="col-md-9 col-sm-10 col-xs-12">
           <label class="allthatapply">Select all that apply to your family’s living situation:</label>
           <div class="radio-button" id="homeless_questions">
-            <input type="checkbox" name="homeless_fixed_residence" value="homeless_fixed_residence" id="homeless_fixed_residence"
-              <% if @user.homeless_fixed_residence != nil && @user.homeless_fixed_residence == true %>checked<% end %>>  
-              We lack a regular nighttime place for living and share with another family or friends<br>
-            <input type="checkbox" name="homeless_hotels" value="homeless_hotels" id="homeless_hotels"
+            <label for="homeless_fixed_residence" class="checkbox-question"> <input type="checkbox" name="homeless_fixed_residence" value="homeless_fixed_residence" id="homeless_fixed_residence"<% if @user.homeless_fixed_residence != nil && @user.homeless_fixed_residence == true %>checked<% end %>>  
+              We lack a regular nighttime place for living and share with another family or friends</label><br>
+            <label for="homeless_hotels" class="checkbox-question"><input type="checkbox" name="homeless_hotels" value="homeless_hotels" id="homeless_hotels"
               <% if @user.homeless_hotels != nil && @user.homeless_hotels == true %>checked<% end %>> 
-              We regularly stay in motels, hotels, a car, or other public place<br>
-            <input type="checkbox" name="homeless_shelters" value="homeless_shelters" id="homeless_shelters"
+              We regularly stay in motels, hotels, a car, or other public place</label><br>
+            <label for="homeless_shelters" class="checkbox-question"><input type="checkbox" name="homeless_shelters" value="homeless_shelters" id="homeless_shelters"
               <% if @user.homeless_shelters != nil && @user.homeless_shelters == true %>checked<% end %>>  
-              We are living in a shelter<br>
-            <input type="checkbox" name="not_homeless" value="not_homeless" id="not_homeless"
+              We are living in a shelter</label><br>
+            <label for="not_homeless" class="checkbox-question"><input type="checkbox" name="not_homeless" value="not_homeless" id="not_homeless"
               <% if @user.not_homeless != nil && @user.not_homeless == true %>checked<% end %>> 
-              None of the Above<br>
+              None of the Above</label><br>
           </div>
         </div>
       </div>
@@ -115,8 +108,9 @@
           <label for="employment" id="employment">Are all adults in your household currently employed?</label>
           <div class="radio-button">
             <% [ 'yes', 'no'].each do |employment| %>
+              <label for="employment_<%= employment %>" class="checkbox-question">
               <%= radio_button_tag 'employment', employment, @user.employed == employment %>
-              <%= employment.humanize %><br>
+              <%= employment.humanize %></label><br>
             <% end %>
           </div>
         </div>
@@ -136,8 +130,9 @@
           <label for="other_zipcode" id="other_zipcode">We will show you programs where you live, but would you prefer for us to show you programs near where you go to school, work etc.?</label>
           <div class="radio-button">
             <% [ 'yes', 'no'].each do |other_zipcode| %>
+              <label for="other_zipcode_<%= other_zipcode %>" class="checkbox-question">
               <%= radio_button_tag 'other_zipcode', other_zipcode, @user.other_zipcode == other_zipcode %>
-              <%= other_zipcode.humanize %><br>
+              <%= other_zipcode.humanize %></label><br>
             <% end %>
           </div>
         </div>
@@ -150,24 +145,27 @@
         <div class="col-md-9 col-sm-10 col-xs-12">
           <label class="allthatapply"> Select all that apply to your preference for an early learning program:</label>
           <div class="radio-button" id="preferred_duration">
-            <input type="checkbox" name="half_day" value="half_day" id="half_day"
+            <label for="half_day" class="checkbox-question"><input type="checkbox" name="half_day" value="half_day" id="half_day"
               <% if @user.half_day != nil && @user.half_day == true %>checked<% end %>>  
-              Half Day (2 or 3 hours)<br>
-            <input type="checkbox" name="full_day" value="full_day" id="full_day"
+              Half Day (2 or 3 hours)</label><br>
+            <label for="full_day" class="checkbox-question"><input type="checkbox" name="full_day" value="full_day" id="full_day"
               <% if @user.full_day != nil && @user.full_day == true %>checked<% end %>> 
-              Full Day (6 hours or more)<br>
-            <input type="checkbox" name="part_week" value="part_week" id="part_week"
+              Full Day (6 hours or more)</label><br>
+            <label for="part_week" class="checkbox-question"><input type="checkbox" name="part_week" value="part_week" id="part_week"
               <% if @user.part_week != nil && @user.part_week == true %>checked<% end %>> 
-              Part-week (2 to 3 days)<br>
-            <input type="checkbox" name="full_week" value="full_week" id="full_week"
+              Part-week (2 to 3 days)</label><br>
+            <label for="full_week" class="checkbox-question"><input type="checkbox" name="full_week" value="full_week" id="full_week"
               <% if @user.full_week != nil && @user.full_week == true %>checked<% end %>> 
-              Full-week (4 to 5 days)<br>
-            <input type="checkbox" name="home_visiting" value="home_visiting" id="home_visiting"
+              Full-week (4 to 5 days)</label><br>
+            <label for="home_visiting" class="checkbox-question" ><input type="checkbox" name="home_visiting" value="home_visiting" id="home_visiting"
               <% if @user.home_visiting != nil && @user.home_visiting == true %>checked<% end %>> 
-              Home Visiting<p type="button" data-toggle="popover" data-content="Licensed educators who weekly visit your home to support your child’s social-emotional, physical, and cognitive development." data-placement="right" style="border: 0px; color: #4582ec; display: inline" class="popover-body" onclick="ga('send', 'event', 'button', 'early_learning', 'learn_more_home_visiting', 1)">  Learn More</p><br>
-            <input type="checkbox" name="no_duration_preference" value="no_duration_preference" id="no_duration_preference"
-              <% if @user.no_duration_preference != nil && @user.no_duration_preference == true %>checked<% end %>> 
-              No Preference<br>
+              Home Visiting </label><p type="button" data-toggle="popover" data-content="Licensed educators who weekly visit your home to support your child’s social-emotional, physical, and cognitive development." data-placement="right" style="border: 0px; color: #4582ec; display: inline" class="popover-body" onclick="ga('send', 'event', 'button', 'early_learning', 'learn_more_home_visiting', 1)">  Learn More</p><br>
+            <label for="no_duration_preference" class="checkbox-questions">
+              <input type="checkbox" name="no_duration_preference" value="no_duration_preference" id="no_duration_preference"
+                <% if @user.no_duration_preference != nil && @user.no_duration_preference == true %>checked<% end %>> 
+                No Preference
+            </label>
+            <br>
           </div>
         </div>
       </div>
@@ -179,8 +177,9 @@
           <label for="bilingual" id="bilingual">Does your child need a program with bilingual instruction?</label>
           <div class="radio-button">
             <% [ 'yes', 'no'].each do |bilingual| %>
-              <%= radio_button_tag 'bilingual', bilingual, @user.bilingual == bilingual %>
-              <%= bilingual.humanize %><br>
+              <label for="bilingual_<%= bilingual %>" class="checkbox-question">
+                <%= radio_button_tag 'bilingual', bilingual, @user.bilingual == bilingual %>
+                <%= bilingual.humanize %></label><br>
             <% end %>
           </div>
         </div>
