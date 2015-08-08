@@ -15,36 +15,31 @@
               %label
                 %i= t.elp.age_note | "Note - This question applies to the age of your child as of September 1st, 2015"
               #children_questions.radio-button
-                <input type="checkbox" name="zero_to_three" value="zero_to_three" id="zero_to_three"
-                - if @user.three_and_under != nil && @user.three_and_under == true
-                  checked
-                >
-                Cuido a un menor que tiene entre 0 y 2 años de edad
-                %br
-                <input type="checkbox" name="three_to_five" value="three_to_five" id="three_to_five"
-                - if @user.three_to_five != nil && @user.three_to_five == true
-                  checked
-                >
-                Cuido a un menor que tiene entre 3 y 5 años de edad
-                %br
-                <input type="checkbox" name="six_to_twelve" value="six_to_twelve" id="six_to_twelve"
-                - if @user.six_to_twelve != nil && @user.six_to_twelve == true
-                  checked
-                >
-                Cuido a un menor que tiene entre 6 y 12 años de edad
-                %br
-                <input type="checkbox" name="pregnant" value="pregnant" id="pregnant"
-                - if @user.pregnant != nil && @user.pregnant == true
-                  checked
-                >
-                Yo estoy o mi pareja esta embarazada
-                %br
-                <input type="checkbox" name="no_children" value="no_children" id="no_children"
-                - if @user.no_children != nil && @user.no_children == true
-                  checked
-                >
-                No cuido a ningún menor en estos grupos de edad
-                        
+                %label.checkbox-question{:for => "zero_to_three"}
+                  <input type="checkbox" name="zero_to_three" value="zero_to_three" id="zero_to_three"
+                  - if @user.three_and_under != nil && @user.three_and_under == true
+                    checked
+                  > Cuido a un menor que tiene entre 0 y 2 años de edad
+                  %label.checkbox-question{:for => "three_to_five"}
+                    <input type="checkbox" name="three_to_five" value="three_to_five" id="three_to_five"
+                    - if @user.three_to_five != nil && @user.three_to_five == true
+                      checked
+                    > Cuido a un menor que tiene entre 3 y 5 años de edad
+                    %label.checkbox-question{:for => "six_to_twelve"}
+                      <input type="checkbox" name="six_to_twelve" value="six_to_twelve" id="six_to_twelve"
+                      - if @user.six_to_twelve != nil && @user.six_to_twelve == true
+                        checked
+                      > Cuido a un menor que tiene entre 6 y 12 años de edad
+                      %label.checkbox-question{:for => "pregnant"}
+                        <input type="checkbox" name="pregnant" value="pregnant" id="pregnant"
+                        - if @user.pregnant != nil && @user.pregnant == true
+                          checked
+                        > Yo estoy o mi pareja esta embarazada
+                        %label.checkbox-question{:for => "no_children"}
+                          <input type="checkbox" name="no_children" value="no_children" id="no_children"
+                          - if @user.no_children != nil && @user.no_children == true
+                            checked
+                          > No cuido a ningún menor en estos grupos de edad
           / Form for household size
           .row
             .col-md-9.col-sm-10.col-xs-12
@@ -64,79 +59,81 @@
             .col-md-9.col-sm-10.col-xs-12
               %label.allthatapply=t.elp.select_all | "Select all that apply to you:"
               #select_all_questions.radio-button
-                <input type="checkbox" name="foster_parent" value="foster_parent" id="foster_parent"
-                - if @user.foster_parent != nil && @user.foster_parent == true
-                  checked
-                >
-                Soy madre/padre de crianza
-                %br
-                <input type="checkbox" name="ssi" value="ssi" id="ssi"
-                - if @user.ssi != nil && @user.ssi == true
-                  checked
-                >
-                Mi familia recibe SSI
-                %br
-                <input type="checkbox" name="tanf" value="tanf" id="tanf"
-                - if @user.tanf != nil && @user.tanf == true
-                  checked
-                >
-                Mi familia recibe TANF
-                %br
-                <input type="checkbox" name="teen_parent" value="teen_parent" id="teen_parent"
-                - if @user.teen_parent != nil && @user.teen_parent == true
-                  checked
-                >
-                Soy un(a) padre/madre adolescente inscrito(a) tiempo completo en la primaria, secundaria o clases de GED con la metade obtener un diploma de secundaria o su equivalente
-                %br
-                <input type="checkbox" name="special_needs" value="special_needs" id="special_needs"
-                - if @user.special_needs != nil && @user.special_needs == true
-                  checked
-                >
-                Cuido a un menor con necesidades especiales, un plan de Educación Individualizado (IEP), o un Plan de Servicio  Individualizado Para la Familia (IFSP)
-                %br
-                <input type="checkbox" name="none_of_the_above" value="none_of_the_above" id="none_of_the_above"
-                - if @user.none_of_the_above != nil && @user.none_of_the_above == true
-                  checked
-                >
-                Ninguna de las anteriores
-                %br
+                %label.checkbox-question{:for => "foster_parent"}
+                  <input type="checkbox" name="foster_parent" value="foster_parent" id="foster_parent"
+                  - if @user.foster_parent != nil && @user.foster_parent == true
+                    checked
+                  >  Soy madre/padre de crianza
+                  %label.checkbox-question{:for => "ssi"}
+                    <input type="checkbox" name="ssi" value="ssi" id="ssi"
+                    - if @user.ssi != nil && @user.ssi == true
+                      checked
+                    > Mi familia recibe SSI
+                    %label.checkbox-question{:for => "tanf"}
+                      <input type="checkbox" name="tanf" value="tanf" id="tanf"
+                      - if @user.tanf != nil && @user.tanf == true
+                        checked
+                      > Mi familia recibe TANF
+                      %label.checkbox-question{:for => "teen_parent"}
+                        <input type="checkbox" name="teen_parent" value="teen_parent" id="teen_parent"
+                        - if @user.teen_parent != nil && @user.teen_parent == true
+                          checked
+                        >
+                        Soy un(a) padre/madre adolescente inscrito(a) tiempo completo en la primaria, secundaria o clases de GED con la metade obtener un diploma de secundaria o su equivalente
+                        %label.checkbox-question{:for => "special_needs"}
+                          <input type="checkbox" name="special_needs" value="special_needs" id="special_needs"
+                          - if @user.special_needs != nil && @user.special_needs == true
+                            checked
+                          > 
+                          Cuido a un menor con necesidades especiales, un plan de Educación Individualizado (IEP), o un Plan de Servicio  Individualizado Para la Familia (IFSP)
+                          %br
+                          %label.checkbox-question{:for => "none_of_the_above"}
+                            <input type="checkbox" name="none_of_the_above" value="none_of_the_above" id="none_of_the_above"
+                            - if @user.none_of_the_above != nil && @user.none_of_the_above == true
+                              checked
+                            > Ninguna de las anteriores
           / Homelessness question
           .row
             .col-md-9.col-sm-10.col-xs-12
               %label.allthatapply=t.elp.homeless | "Select all that apply to your family’s living situation:"
+
               #homeless_questions.radio-button
-                <input type="checkbox" name="homeless_fixed_residence" value="homeless_fixed_residence" id="homeless_fixed_residence"
-                - if @user.homeless_fixed_residence != nil && @user.homeless_fixed_residence == true
-                  checked
-                >
-                No tenemos un lugar regular donde pasar la noche y compartimos espacio con otra familia o con amigos
-                %br
-                <input type="checkbox" name="homeless_hotels" value="homeless_hotels" id="homeless_hotels"
-                - if @user.homeless_hotels != nil && @user.homeless_hotels == true
-                  checked
-                >
-                A menudo nos quedamos en moteles, hoteles, un carro u otro espacio público
-                %br
-                <input type="checkbox" name="homeless_shelters" value="homeless_shelters" id="homeless_shelters"
-                - if @user.homeless_shelters != nil && @user.homeless_shelters == true
-                  checked
-                >
-                Vivimos en un albergue
-                %br
-                <input type="checkbox" name="not_homeless" value="not_homeless" id="not_homeless"
-                - if @user.not_homeless != nil && @user.not_homeless == true
-                  checked
-                >
-                Ninguno de los anteriores
-                %br
+                %label.checkbox-question{:for => "homeless_fixed_residence"}
+                  <input type="checkbox" name="homeless_fixed_residence" value="homeless_fixed_residence" id="homeless_fixed_residence"
+                  - if @user.homeless_fixed_residence != nil && @user.homeless_fixed_residence == true
+                    checked
+                  >
+                  No tenemos un lugar regular donde pasar la noche y compartimos espacio con otra familia o con amigos
+                  %br
+                  %label.checkbox-question{:for => "homeless_hotels"}
+                    <input type="checkbox" name="homeless_hotels" value="homeless_hotels" id="homeless_hotels"
+                    - if @user.homeless_hotels != nil && @user.homeless_hotels == true
+                      checked
+                    >
+                    A menudo nos quedamos en moteles, hoteles, un carro u otro espacio público
+                    %br
+                    %label.checkbox-question{:for => "homeless_shelters"}
+                      <input type="checkbox" name="homeless_shelters" value="homeless_shelters" id="homeless_shelters"
+                      - if @user.homeless_shelters != nil && @user.homeless_shelters == true
+                        checked
+                      >
+                      Vivimos en un albergue
+                      %br
+                      %label.checkbox-question{:for => "not_homeless"}
+                        <input type="checkbox" name="not_homeless" value="not_homeless" id="not_homeless"
+                        - if @user.not_homeless != nil && @user.not_homeless == true
+                          checked
+                        >
+                        Ninguno de los anteriores
           / Form for employment
           .row
             #employment_question.col-md-9.col-sm-10.col-xs-12
               %label#employment{:for => "employment"}=t.elp.employed | "Are all adults in your household currently employed?"
               .radio-button
                 - [ 'sí', 'no'].each do |employment|
-                  = radio_button_tag 'employment', employment, @user.employed == employment
-                  = employment.humanize
+                  %label.checkbox-question{:for => "employment_#{employment}"}
+                    = radio_button_tag 'employment', employment, @user.employed == employment, id: "employment_#{employment}"
+                    = employment.humanize
                   %br
           / Form for zipcode
           .row
@@ -149,8 +146,9 @@
               %label#other_zipcode{:for => "other_zipcode"}=t.elp.other_zipcode | "We will show you programs where you live, but would you prefer for us to show you programs near where you go to school, work etc.?"
               .radio-button
                 - [ 'sí', 'no'].each do |other_zipcode|
-                  = radio_button_tag 'other_zipcode', other_zipcode, @user.other_zipcode == other_zipcode
-                  = other_zipcode.humanize
+                  %label.checkbox-question{:for => "other_zipcode_#{other_zipcode}"}
+                    = radio_button_tag 'other_zipcode', other_zipcode, @user.other_zipcode == other_zipcode, id: "other_zipcode_#{other_zipcode}"
+                    = other_zipcode.humanize
                   %br
           .place_for_preferred_zipcode
           / Form for duration preference
@@ -158,42 +156,48 @@
             .col-md-9.col-sm-10.col-xs-12
               %label.allthatapply=t.elp.preference | "Select all that apply to your preference for an early learning program:"
               #preferred_duration.radio-button
-                <input type="checkbox" name="half_day" value="half_day" id="half_day"
-                - if @user.half_day != nil && @user.half_day == true
-                  checked
-                >
-                Medio día (2 a 3 horas)
+                %label.checkbox-question{:for => "half_day"}
+                  <input type="checkbox" name="half_day" value="half_day" id="half_day"
+                  - if @user.half_day != nil && @user.half_day == true
+                    checked
+                  >
+                  Medio día (2 a 3 horas)
                 %br
-                <input type="checkbox" name="full_day" value="full_day" id="full_day"
-                - if @user.full_day != nil && @user.full_day == true
-                  checked
-                >
-                Día completo (6 horas o más)
+                %label.checkbox-question{:for => "full_day"}
+                  <input type="checkbox" name="full_day" value="full_day" id="full_day"
+                  - if @user.full_day != nil && @user.full_day == true
+                    checked
+                  >
+                  Día completo (6 horas o más)
                 %br
-                <input type="checkbox" name="part_week" value="part_week" id="part_week"
-                - if @user.part_week != nil && @user.part_week == true
-                  checked
-                >
-                Parte de una semana (2 a 3 días)
+                %label.checkbox-question{:for => "part_week"}
+                  <input type="checkbox" name="part_week" value="part_week" id="part_week"
+                  - if @user.part_week != nil && @user.part_week == true
+                    checked
+                  >
+                  Parte de una semana (2 a 3 días)
                 %br
-                <input type="checkbox" name="full_week" value="full_week" id="full_week"
-                - if @user.full_week != nil && @user.full_week == true
-                  checked
-                >
-                Semana completa (4 a 5 días)
+                %label.checkbox-question{:for => "full_week"}
+                  <input type="checkbox" name="full_week" value="full_week" id="full_week"
+                  - if @user.full_week != nil && @user.full_week == true
+                    checked
+                  >
+                  Semana completa (4 a 5 días)
                 %br
-                <input type="checkbox" name="home_visiting" value="home_visiting" id="home_visiting"
-                - if @user.home_visiting != nil && @user.home_visiting == true
-                  checked
-                >
-                Visitas al hogar
-                %p.popover-body{"data-content" => "Educadores licenciados que semanalmente visitan su casa para apoyar el desarrollo social-emocional, físico, y cognitivo de su hijo(a).", "data-placement" => "right", "data-toggle" => "popover", :style => "border: 0px; color: #4582ec; display: inline", :type => "button", :onclick => "ga('send', 'event', 'button', 'early_learning', 'learn_more_home_visiting_es', 1)"} Aprende Más
+                %label.checkbox-question{:for => "home_visiting"}
+                  <input type="checkbox" name="home_visiting" value="home_visiting" id="home_visiting"
+                  - if @user.home_visiting != nil && @user.home_visiting == true
+                    checked
+                  >
+                  Visitas al hogar
+                %p.popover-body{"data-content" => "Educadores licenciados que semanalmente visitan su casa para apoyar el desarrollo social-emocional, físico, y cognitivo de su hijo(a).", "data-placement" => "right", "data-toggle" => "popover", :onclick => "ga('send', 'event', 'button', 'early_learning', 'learn_more_home_visiting', 1)", :style => "border: 0px; color: #4582ec; display: inline", :type => "button"} Aprende Más
                 %br
-                <input type="checkbox" name="no_duration_preference" value="no_duration_preference" id="no_duration_preference"
-                - if @user.no_duration_preference != nil && @user.no_duration_preference == true
-                  checked
-                >
-                Ninguna preferencia
+                %label.checkbox-questions{:for => "no_duration_preference"}
+                  <input type="checkbox" name="no_duration_preference" value="no_duration_preference" id="no_duration_preference"
+                  - if @user.no_duration_preference != nil && @user.no_duration_preference == true
+                    checked
+                  >
+                  Ninguna preferencia
                 %br
           / Form for bilingual question
           .row
@@ -201,8 +205,9 @@
               %label#bilingual{:for => "bilingual"}=t.elp.bilingual | "Does your child need a program with bilingual instruction?"
               .radio-button
                 - [ 'sí', 'no'].each do |bilingual|
-                  = radio_button_tag 'bilingual', bilingual, @user.bilingual == bilingual
-                  = bilingual.humanize
+                  %label.checkbox-question{:for => "bilingual_#{bilingual}"}
+                    = radio_button_tag 'bilingual', bilingual, @user.bilingual == bilingual, id: "bilingual_#{bilingual}"
+                    = bilingual.humanize
                   %br
           .place_for_bilingual_language
           / Form for cellphone question

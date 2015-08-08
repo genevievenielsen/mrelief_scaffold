@@ -109,7 +109,7 @@
           <div class="radio-button">
             <% [ 'yes', 'no'].each do |employment| %>
               <label for="employment_<%= employment %>" class="checkbox-question">
-              <%= radio_button_tag 'employment', employment, @user.employed == employment %>
+              <%= radio_button_tag 'employment', employment, @user.employed == employment, id: "employment_#{employment}" %>
               <%= employment.humanize %></label><br>
             <% end %>
           </div>
@@ -131,7 +131,7 @@
           <div class="radio-button">
             <% [ 'yes', 'no'].each do |other_zipcode| %>
               <label for="other_zipcode_<%= other_zipcode %>" class="checkbox-question">
-              <%= radio_button_tag 'other_zipcode', other_zipcode, @user.other_zipcode == other_zipcode %>
+              <%= radio_button_tag 'other_zipcode', other_zipcode, @user.other_zipcode == other_zipcode, id: "other_zipcode_#{other_zipcode}" %>
               <%= other_zipcode.humanize %></label><br>
             <% end %>
           </div>
@@ -178,7 +178,7 @@
           <div class="radio-button">
             <% [ 'yes', 'no'].each do |bilingual| %>
               <label for="bilingual_<%= bilingual %>" class="checkbox-question">
-                <%= radio_button_tag 'bilingual', bilingual, @user.bilingual == bilingual %>
+                <%= radio_button_tag 'bilingual', bilingual, @user.bilingual == bilingual, id: "bilingual_#{bilingual}" %>
                 <%= bilingual.humanize %></label><br>
             <% end %>
           </div>
