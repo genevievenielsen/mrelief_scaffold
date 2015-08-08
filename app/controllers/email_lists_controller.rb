@@ -3,7 +3,9 @@ require 'mailgun'
 
 	def send_journalist_emails
 		PressEmail.all.each do |press|
-			EmailListMailer.send_journalist_emails(press.publication_name, press.author_name, press.email).deliver
+			if press.email.present?
+				EmailListMailer.send_journalist_emails(press.publication_name, press.author_name, press.email).deliver
+			end
 		end
 	end
   
