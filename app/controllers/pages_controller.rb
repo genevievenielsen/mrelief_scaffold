@@ -556,7 +556,7 @@ class PagesController < ApplicationController
   def press_emails
        ex = Roo::Excel.new("public/parent_marketing_emails.xls")
        ex.default_sheet = ex.sheets[0]
-       2.upto(18) do | line |
+       2.upto(15) do | line |
        publication = ex.cell(line,'A')
        author = nil
        email = ex.cell(line,'C')
