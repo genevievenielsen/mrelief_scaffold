@@ -558,7 +558,7 @@ class PagesController < ApplicationController
        ex.default_sheet = ex.sheets[0]
        2.upto(18) do | line |
        publication = ex.cell(line,'A')
-       # author = ex.cell(line,'B')
+       author = nil
        email = ex.cell(line,'C')
       
         @press = PressEmail.create(publication_name: publication, author_name: author, email: email)
