@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   get('/press_release', { :controller => 'pages', :action => 'press_release' })
   get('/public-template', { :controller => 'pages', :action => 'public_template' })
   get('/press_emails', { :controller => 'pages', :action => 'press_emails' })
+  get('/chihacknight', { :controller => 'pages', :action => 'chihacknight' })
 
 
   # all programs at once

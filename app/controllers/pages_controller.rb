@@ -543,6 +543,9 @@ class PagesController < ApplicationController
   def press_release
   end
 
+  def chihacknight
+  end
+
   def early_learning_privacy_policy
   end
 
