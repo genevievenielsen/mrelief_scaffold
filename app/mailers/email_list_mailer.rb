@@ -4,7 +4,7 @@ class EmailListMailer < ApplicationMailer
     @publication = publication
     @author = author
     @email = email
-    mail to: @email, from: ENV['genevieve_mrelief_email'], subject: 'City of Chicago and mRelief Launch Early Learning Finder!'
+    mail to: @email, from: ENV['genevieve_mrelief_email'], subject: 'Attend Live Presentation of Early Learning Finder!'
   end
 
   def opt_in(recipient_address, generated_hash)

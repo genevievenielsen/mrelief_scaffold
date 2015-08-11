@@ -10,17 +10,36 @@
  	<p>Hi there!</p>
  	<% end %>
 
- 	<p>I was reading <%= @publication %> and wanted to reach out with some news that I thought might be relevant to your writing.</p>
+ 	<% if @publication == "Freelance" %>
+ 		<p>Iwanted to reach out with some news that I thought might be relevant to your writing.</p>
+ 	<% else %>
+ 		<p>I was reading <%= @publication %> and wanted to reach out with some news that I thought might be relevant to your writing.</p>
+ 	<% end %>
 
- 	<p>Today mRelief and the City of Chicago launched a new tool, the Early Learning Finder. This online and text messaging-based screening tool helps families identify which early learning programs work best for them. The new screener incorporates early learning programs funded by Head Start, Early Head Start, Preschool for All and the Child Care Assistance Program. Catered towards the 0-5 cohort, the screener will empower each parent with three results based on various eligibility criteria including location, age of children, and economic factors.</p>
+ 	<p>Today mRelief, City of Chicago, and Smart Chicago Collaborative’s Early Learning Portal will be presenting the Early Learning Finder live at Chi Hack Night in the Merchandise Mart. The recently launched finder is an online and text messaging-based screening tool which uses open data and efficient screening to help low-income parents navigate the 10 unique early learning program types and 731 early learning sites in the City of Chicago. Catered towards the 0-5 cohort, the screener will empower each parent with three results based on various eligibility criteria, including location, age of children, and quality ratings as well as preferences regarding bilingual instruction and duration of care needed in a day and week.</p>
 
- 	<p>Would you consider writing about our tool for your audience? Sharing this to your readers would be really helpful for Chicago parents as we try to extend awareness of a new way for parents to enroll their children in early childhood education programs.</p> 
+ 	<p><% if @publication == "Freelance" %>
+ 		Would you be interested in attending and writing about this?
+ 	<% else %> 
+ 		Would you be interested in attending and writing about this in <%= @publication %>?
+ 	<% end %>
+ 	I’d be happy to follow up with you to discuss this new tool in greater depth. Sharing this to your readers would be really helpful for us as we try to extend awareness of a new way for parents to enroll their children in early childhood education programs.</p> 
 
- 	<p>You can find the link to the Early Learning Finder here: http://www.mrelief.com/early_learning_programs<br>
- 	You can find the SMS screener by texting “Hello” to 773-377-8946. <br>
- 	You can find the press release on the Early Learning Finder here: http://www.mrelief.com/press_release<br>
+ 	<p>You can RSVP to attend here: <br>
+ 	http://chihacknight.org/events/2015/08/11/the-chicago-early-learning-finder.html<br><br>
+
+	You can find the press release on the Early Learning Finder here:<br>
+ 	http://www.mrelief.com/chichacknight<br><br>
+
+	You can find the link to the Early Learning Finder here: <br>
+	http://www.mrelief.com/early_learning_programs <br><br>
+
+	You can find the SMS screener by texting “Hello” to 773-377-8946.<br>
  	</p>
- 	<p>Thanks so much for all you do for children!<br>
+
+
+
+ 	<p>Thanks so much for all you are doing in the journalism industry!<br><br>
  	Genevieve Nielsen<br>
  	Co-Founder of mRelief <br>
  	genevieve@mrelief.com <br>
