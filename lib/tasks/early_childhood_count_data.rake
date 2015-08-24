@@ -28,10 +28,10 @@ task :early_childhood_count_data => :environment do
 	puts "Sms Data Sharing: #{sms_data_sharing}"
 
 	# Total Spanish
-	web_spanish = all_web_after_launch.where(data_sharing: true).count
+	web_spanish = all_web_after_launch.where(spanish: true).count
 	puts "Web Spanish: #{web_spanish}"
 
-	sms_spanish = all_sms_after_launch.where(data_sharing: true).count
+	sms_spanish = all_sms_after_launch.where(spanish: true).count
 	puts "Sms Spanish: #{sms_spanish}"
 
 end
