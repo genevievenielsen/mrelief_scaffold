@@ -16,8 +16,8 @@ class TwilioSpanishController < ApplicationController
       params[:Body] = params[:Body].tr("'", "")
     end
     #check here to see if a signature is included
-    if params[:Body].strip.match(" ")
-      params[:Body] = params[:Body].split(/ /).first
+    if params[:Body].strip.include?(" ")
+      params[:Body] = params[:Body].split(" ").first
     end
 
     if params[:Body].strip.downcase == "reset" ||  params[:Body].strip.downcase == "inicio"
