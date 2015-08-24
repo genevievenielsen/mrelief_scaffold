@@ -15,7 +15,7 @@ task :early_childhood_count_data => :environment do
 	puts "All Web: #{all_web_after_launch.count}"
 
 	all_sms_after_launch = EarlyLearningDataTwilio.where("created_at > ?", "2015-08-08")
-	puts "All Web: #{all_sms_after_launch.count}"
+	puts "All SMS: #{all_sms_after_launch.count}"
 
 	total_after_launch = all_web_after_launch.count + all_sms_after_launch.count
 	puts "Early Learning Total: #{total_after_launch}"

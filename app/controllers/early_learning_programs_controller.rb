@@ -203,7 +203,6 @@
                     if @eligible_early_learning_programs.length == 0
                       @no_programs_available = true
                     end
-                    puts "MADE IT TO ELIGIBLE PROGRAMS "
                     
                 end
 
