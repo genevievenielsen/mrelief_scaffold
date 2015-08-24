@@ -272,7 +272,7 @@ class AllCityProgramsController < ApplicationController
 
         if @lafcenter.present?
         else
-          @lafcenter = LafCenter.find_by(:id => 10)
+          @lafcenter = LafCenter.find_by(:center => "King Community Service Center")
           @laf_disclaimer = "We do not have an estimation of the nearest center that is in range for you at this time. But we recommend going to the center below."
         end
 

@@ -82,7 +82,7 @@ class RtaFreeRidesController < ApplicationController
 
      if @lafcenter.present?
      else
-       @lafcenter = LafCenter.find_by(:id => 10)
+       @lafcenter = LafCenter.find_by(:center => "King Community Service Center")
      end
 
      transportation = []
