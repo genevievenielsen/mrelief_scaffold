@@ -145,6 +145,14 @@ task :early_childhood_count_data => :environment do
 	web_none_of_the_above = web_data_sharing.pluck(:none_of_the_above).count(true)
 	puts "None of the Above: #{web_none_of_the_above}"
 
+	puts "SMS CATEGORICAL ELIGIBILITY"
+	sms_foster_homeless_ssi = sms_data_sharing.pluck(:foster_homeless_ssi).count(true)
+	puts "Foster Parent, Homeless, SSI: #{sms_foster_homeless_ssi}"
+	sms_tanf_special_needs = sms_data_sharing.pluck(:tanf_special_needs).count(true)
+	puts "TANF, Special Needs: #{sms_tanf_special_needs}"
+	sms_teen_parent = sms_data_sharing.pluck(:teen_parent).count(true)
+	puts "Teen Parent: #{sms_teen_parent}"
+
 
 	# Homeless Question
 	puts "WEB HOMELESSNESS QUESTION"
@@ -159,19 +167,35 @@ task :early_childhood_count_data => :environment do
 
 
 	# Employed Question
-	puts "EMPLOYED QUESTION"
+	puts "WEB EMPLOYED QUESTION"
 	web_employed = web_data_sharing.pluck(:employed).count("yes")
-	puts "Employed : #{web_employed}"
+	puts "Web Employed : #{web_employed}"
+
+	puts "SMS EMPLOYED QUESTION"
+	sms_employed = sms_data_sharing.pluck(:employment).count(true)
+	puts "SMS Employed : #{sms_employed}"
 
 
 	# Zipcode Question
 	web_zipcodes = web_data_sharing.pluck(:zipcode) 
 	sms_zipcodes = sms_data_sharing.pluck(:zipcode) 
+
+	puts "WEB ZIPCODES"
+	freq = web_zipcodes.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
+	freq.sort_by {|h, v| v}.reverse.each do |zipcode, frequency| 
+		puts "#{zipcode}: #{frequency}" 
+	end 
+
+	puts "SMS ZIPCODES"
+	freq = sms_zipcodes.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
+	freq.sort_by {|h, v| v}.reverse.each do |zipcode, frequency| 
+		puts "#{zipcode}: #{frequency}" 
+	end 
+
+	puts "TOTAL ZIPCODES"
 	total_zipcodes = web_zipcodes + sms_zipcodes
 	freq = total_zipcodes.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
-
-	puts "ZIPCODES"
-	freq.each do |zipcode, frequency| 
+	freq.sort_by {|h, v| v}.reverse.each do |zipcode, frequency| 
 		puts "#{zipcode}: #{frequency}" 
 	end 
 
@@ -187,7 +211,7 @@ task :early_childhood_count_data => :environment do
 	freq = web_preferred_zipcodes.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
 
 	puts "PREFERRED ZIPCODES"
-	freq.each do |zipcode, frequency|
+	freq.sort_by {|h, v| v}.reverse.each do |zipcode, frequency|
 		if zipcode.present? 
 			puts "#{zipcode}: #{frequency}" 
 		end
@@ -216,6 +240,7 @@ task :early_childhood_count_data => :environment do
 	puts "Bilingual : #{web_bilingual}"
 
 
+
 	# Bilingual Language
 	web_bilingual_languages = web_data_sharing.pluck(:bilingual_language) 
 	freq = web_bilingual_languages.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
@@ -227,7 +252,7 @@ task :early_childhood_count_data => :environment do
 		end
 	end 
 
-	puts "OUTCOMES"
+	puts "WEB OUTCOMES"
 	web_ccap_eligible = web_data_sharing.pluck(:ccap_eligible).count(true)
 	puts "CCAP Eligible: #{web_ccap_eligible}"
 
@@ -278,7 +303,7 @@ task :early_childhood_count_data => :environment do
 	puts "head_start_school_based_full_day_3to5 : #{web_head_start_school_based_full_day_3to5}"
        
 	           
-	puts "ELIGIBLE COUNT"
+	puts "WEB ELIGIBLE COUNT"
 	eligible_counts = web_data_sharing.pluck(:eligible_count).map(&:to_i)
 	eligible_count_average = (eligible_counts.sum / eligible_counts.size.to_f).round(2)
 	puts "Average: #{eligible_count_average}"
@@ -292,11 +317,13 @@ task :early_childhood_count_data => :environment do
 	eligible_count_mode = eligible_counts.max_by { |v| freq[v] }
 	puts "Mode: #{eligible_count_mode}"     
 	              
-	     
-	  
 	
-	       
-	             
+	puts "SMS COUNT"	       
+	sms_ccap_eligible = sms_data_sharing.pluck(:ccap_eligible).count(true)
+	puts "CCAP Eligible: #{sms_ccap_eligible}"
+
+	sms_early_learning_eligible = sms_data_sharing.pluck(:early_learning_eligible).count(true)
+	puts "Early Learning Eligible: #{sms_early_learning_eligible}"        
 	     
 	     
 
