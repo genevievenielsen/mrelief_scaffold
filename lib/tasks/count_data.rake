@@ -36,6 +36,9 @@ task :count_data => :environment do
   snap_count = SnapEligibilityData.all.count
   puts "SNAP: #{snap_count}"
 
+  snap_disabled_count = SnapEligibilityData.where.not(disabled_status: "No").count
+  puts "SNAP disability count: #{snap_disabled_count}"
+
   tanf_count = TanfData.all.count
   puts "TANF: #{tanf_count}"
 
@@ -61,6 +64,9 @@ task :count_data => :environment do
 
   snap_twilio_count = SnapEligibilityDataTwilio.all.count
   puts "SNAP Twilio: #{snap_twilio_count}"
+
+  snap_disabled_twilio_count = SnapEligibilityDataTwilio.where(disabled: "yes", disabled_receiving_payment: "yes").count
+  puts "SNAP Twilio disability count: #{snap_disabled_twilio_count}"
 
   twilio_count = medicaid_count_twilio + medicare_twilio_count + rta_free_ride_twilio_count + snap_twilio_count
   puts "Twilio Count: #{twilio_count}"
