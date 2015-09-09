@@ -13,25 +13,25 @@ task :early_childhood_count_data => :environment do
 	# Totals after launch
 	invalid_phone_numbers = ["5555555555", "7777777777", "3125555555"]
 	all_web_after_launch = EarlyLearningData.where(complete: true).where.not(phone_number: invalid_phone_numbers).where("created_at > ?", "2015-08-08")
-	puts "All Web: #{all_web_after_launch.count}"
+	puts "All Web After Launch: #{all_web_after_launch.count}"
 
 	all_sms_after_launch = EarlyLearningDataTwilio.where("created_at > ?", "2015-08-08").where(completed: true)
-	puts "All SMS: #{all_sms_after_launch.count}"
+	puts "All SMS After Launch: #{all_sms_after_launch.count}"
 
 	total_after_launch = all_web_after_launch.count + all_sms_after_launch.count
-	puts "Early Learning Total: #{total_after_launch}"
+	puts "Early Learning Total After Launch: #{total_after_launch}"
 
 	# Total Spanish
 	web_spanish = all_web_after_launch.where(spanish: true).count
-	puts "Web Spanish: #{web_spanish}"
+	puts "Web Spanish After Launch: #{web_spanish}"
 	sms_spanish = all_sms_after_launch.where(spanish: true).count
-	puts "SMS Spanish: #{sms_spanish}"
+	puts "SMS Spanish After Launch: #{sms_spanish}"
 
 	# Total data sharing
 	web_data_sharing = all_web_after_launch.where(data_sharing: true)
-	puts "Web Data Sharing: #{web_data_sharing.count}"
+	puts "Web Data Sharing After Launch: #{web_data_sharing.count}"
 	sms_data_sharing = all_sms_after_launch.where(data_sharing: true)
-	puts "SMS Data Sharing: #{sms_data_sharing.count}"
+	puts "SMS Data Sharing Launch: #{sms_data_sharing.count}"
 
 
 
