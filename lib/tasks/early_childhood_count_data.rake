@@ -12,6 +12,7 @@ task :early_childhood_count_data => :environment do
 
 	# Totals after launch
 	invalid_phone_numbers = ["5555555555", "7777777777", "3125555555"]
+	#"555-555-5555"
 	all_web_after_launch = EarlyLearningData.where(complete: true).where.not(phone_number: invalid_phone_numbers).where("created_at > ?", "2015-08-08")
 	puts "All Web After Launch: #{all_web_after_launch.count}"
 
@@ -325,11 +326,15 @@ task :early_childhood_count_data => :environment do
 	sms_early_learning_eligible = sms_data_sharing.pluck(:early_learning_eligible).count(true)
 	puts "Early Learning Eligible: #{sms_early_learning_eligible}"        
 	     
-	     
+	puts "WEB PHONE NUMBER"  
+	web_data_sharing.pluck(:phone_number).uniq.each do |phone_number|
+		puts phone_number
+	end
 
-
-
-
+	puts "SMS PHONE NUMBER"
+	sms_data_sharing.pluck(:phone_number).uniq.each do |phone_number|
+		puts phone_number
+	end
 
 
 
