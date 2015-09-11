@@ -52,9 +52,6 @@ class MedicaidsController < ApplicationController
       end
     end
 
-    
-
-
    #RESOURCE LOOKUP
    @user_zipcode = params[:zipcode]
    @zipcode = @user_zipcode << ".0"
