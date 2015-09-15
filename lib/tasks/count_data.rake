@@ -45,7 +45,10 @@ task :count_data => :environment do
   wic_count = WicData.all.count
   puts "WIC: #{wic_count}"
 
-  web_count = all_city_count + aabd_count + all_kids_count + child_care_voucher_count + early_head_start_count + head_start_count + medicaid_count + medicare_count +  rental_assistance_count + rta_free_ride_count + snap_count + tanf_count + wic_count
+  early_learning_count = EarlyLearningData.all.count
+  puts "Early Learning: #{early_learning_count}"
+
+  web_count = all_city_count + aabd_count + all_kids_count + child_care_voucher_count + early_head_start_count + head_start_count + medicaid_count + medicare_count +  rental_assistance_count + rta_free_ride_count + snap_count + tanf_count + wic_count + early_learning_count
   puts "Web Count: #{web_count}"
 
 
@@ -62,13 +65,16 @@ task :count_data => :environment do
   rta_free_ride_twilio_count = RtaFreeRideDataTwilio.all.count
   puts "RTA Ride Free Twilio: #{rta_free_ride_twilio_count}"
 
+  early_learning_twilio_count = EarlyLearningDataTwilio.all.count
+  puts "early_learning Twilio: #{early_learning_twilio_count}"
+
   snap_twilio_count = SnapEligibilityDataTwilio.all.count
   puts "SNAP Twilio: #{snap_twilio_count}"
 
   snap_disabled_twilio_count = SnapEligibilityDataTwilio.where(disabled: "yes", disabled_receiving_payment: "yes").count
   puts "SNAP Twilio disability count: #{snap_disabled_twilio_count}"
 
-  twilio_count = medicaid_count_twilio + medicare_twilio_count + rta_free_ride_twilio_count + snap_twilio_count
+  twilio_count = medicaid_count_twilio + medicare_twilio_count + rta_free_ride_twilio_count + snap_twilio_count + early_learning_twilio_count
   puts "Twilio Count: #{twilio_count}"
 
   puts "####"
