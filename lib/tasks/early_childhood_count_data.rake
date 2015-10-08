@@ -11,12 +11,11 @@ task :early_childhood_count_data => :environment do
 	puts "Early Learning Total: #{total}"
 
 	# Totals after launch
-	invalid_phone_numbers = ["5555555555", "7777777777", "3125555555"]
-	#"555-555-5555"
-	all_web_after_launch = EarlyLearningData.where(complete: true).where.not(phone_number: invalid_phone_numbers).where("created_at > ?", "2015-08-08")
+	invalid_phone_numbers = ["5555555555", "7777777777", "3125555555", "555-555-5555"]
+	all_web_after_launch = EarlyLearningData.where(complete: true).where.not(phone_number: invalid_phone_numbers).where("created_at > ?", "2015-09-09")
 	puts "All Web After Launch: #{all_web_after_launch.count}"
 
-	all_sms_after_launch = EarlyLearningDataTwilio.where("created_at > ?", "2015-08-08").where(completed: true)
+	all_sms_after_launch = EarlyLearningDataTwilio.where("created_at > ?", "2015-09-09").where(completed: true)
 	puts "All SMS After Launch: #{all_sms_after_launch.count}"
 
 	total_after_launch = all_web_after_launch.count + all_sms_after_launch.count
