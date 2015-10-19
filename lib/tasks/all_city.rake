@@ -33,6 +33,8 @@ task :all_city => :environment do
   	puts "YES : #{yes}"
   	no = valid_all_city.where("#{variable}" => "no").count
   	puts "NO : #{no}"
+  	maybe = valid_all_city.where("#{variable}" => "maybe").count
+  	puts "maybe : #{maybe}"
   end
 
 

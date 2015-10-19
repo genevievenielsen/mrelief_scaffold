@@ -12,6 +12,9 @@ task :rental => :environment do
 	ineligible_count = valid_rental_assistance.where(rental_eligibility_status: "no").count
 	puts "Ineligible Count #{ineligible_count}"
 
+	maybe_count = valid_rental_assistance.where(rental_eligibility_status: "maybe").count
+	puts "Maybe Count #{maybe_count}"
+
 
 	puts "NAME ON LEASE"
 	lease = valid_rental_assistance.where(name_on_lease: "yes").count
