@@ -1,7 +1,7 @@
 task :rental => :environment do
 
-	# invalid_phone_numbers = ["5555555555", "7777777777", "3125555555", "555-555-5555"]
-	valid_rental_assistance = RentalAssistanceData.all
+	invalid_phone_numbers = ["5555555555", "7777777777", "3125555555", "555-555-5555"]
+	valid_rental_assistance = RentalAssistanceData.where.not(phone_number: invalid_phone_numbers)
 
 	rental_count = valid_rental_assistance.count
 	puts "Rental Count #{rental_count}"
