@@ -6,10 +6,10 @@ task :rental => :environment do
 	rental_count = valid_rental_assistance.count
 	puts "Rental Count #{rental_count}"
 
-	eligible_count = valid_rental_assistance.where(rental_eligibility_status: "yes")
+	eligible_count = valid_rental_assistance.where(rental_eligibility_status: "yes").count
 	puts "Eligible Count #{eligible_count}"
 
-	ineligible_count = valid_rental_assistance.where(rental_eligibility_status: "yes")
+	ineligible_count = valid_rental_assistance.where(rental_eligibility_status: "yes").count
 	puts "Ineligible Count #{ineligible_count}"
 
 
