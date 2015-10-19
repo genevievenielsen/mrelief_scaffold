@@ -59,6 +59,7 @@ task :all_city => :environment do
   # FREQUENCY
   variables = ["zipcode", "user_location", "rental_status", "student_status", "child_health_insurance_state", "disabled_status"]
   variables.each do |variable|
+  	values = valid_all_city.pluck("#{variable}") 
   	freq = values.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
   	freq.sort_by {|h, v| v}.reverse.each do |value, frequency| 
   		puts "#{value}: #{frequency}" 
