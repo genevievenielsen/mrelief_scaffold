@@ -36,7 +36,7 @@ task :rental => :environment do
 
 	sorted = incomes.sort
 	len = sorted.length 
-	income_median = (sorted[(len - 1) / 2] + sorted[len / 2]) / 2.0 
+	income_median = (sorted[(len - 1) / 2] + sorted[len / 2]).to_i  / 2.0 
 	puts "Median: #{income_median}"
 
 	freq = incomes.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
