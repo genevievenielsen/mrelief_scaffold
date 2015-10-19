@@ -11,7 +11,8 @@ task :all_city => :environment do
 		value_average = (values.map(&:to_i).sum / values.size.to_f).round(2)
 		puts "Average: #{value_average}"
 
-		sorted = values.delete(nil).sort
+		values.delete(nil)
+		sorted = values.sort
 		len = sorted.length 
 		value_median = (sorted[(len - 1) / 2] + sorted[len / 2]).to_i / 2.0 
 		puts "Median: #{value_median}"
