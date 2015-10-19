@@ -1,4 +1,4 @@
-task :rental => :environment do
+task :all_city => :environment do
 
 	invalid_phone_numbers = ["5555555555", "7777777777", "3125555555", "555-555-5555"]
 	valid_all_city = AllCityProgramDatum.where.not(phone_number: invalid_phone_numbers)
