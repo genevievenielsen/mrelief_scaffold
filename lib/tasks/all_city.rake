@@ -1,7 +1,7 @@
 task :all_city => :environment do
 
-	invalid_phone_numbers = ["5555555555", "7777777777", "3125555555", "555-555-5555"]
-	valid_all_city = AllCityProgramDatum.where.not(phone_number: invalid_phone_numbers)
+	# invalid_phone_numbers = ["5555555555", "7777777777", "3125555555", "555-555-5555"]
+	valid_all_city = AllCityProgramDatum.all
 
 	all_city_count = valid_all_city.count
 	puts "All City Count #{all_city_count}"
