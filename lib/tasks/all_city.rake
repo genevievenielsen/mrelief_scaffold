@@ -3,6 +3,9 @@ task :all_city => :environment do
 	invalid_phone_numbers = ["5555555555", "7777777777", "3125555555", "555-555-5555"]
 	valid_all_city = AllCityProgramDatum.where.not(phone_number: invalid_phone_numbers)
 
+	all_city_count = valid_all_city.count
+	puts "All City Count #{all_city_count}"
+
 	# INTEGERS
 	variables = ["dependent_no", "medicare_household_size", "age", "monthly_gross_income", "thirty_day_net_income", "child_support", "ssi", "monthly_benefits", "ninety_day_gross_income", "annual_gross_income", "assets", "number_of_children"]
 	variables.each do |variable|
@@ -23,7 +26,7 @@ task :all_city => :environment do
   end
 
   # YES NO
-  variables = ["enrolled_in_education", "citizen", "disabled_status", "name_on_lease", "rental_status", "pregnant", "child_health_insurance_state", "pregnant_or_caring_for_child", "relationship_to_child", "pregnant_with_first_child", "tanif_sixty_months", "anticipate_other_income", "teen_parent", "child_in_school", "snap_eligibility_status", "all_kids_eligibility_status", "rta_eligibility_status", "medicaid_eligibility_status", "medicare_cost_sharing_eligibility_status", "rental_eligibility_status", "aabd_eligibility_status", "tanf_eligibility_status", "next_month_rent", "work_status", "student_status"]
+  variables = ["enrolled_in_education", "citizen", "disabled_status", "name_on_lease", "pregnant", "child_health_insurance_state", "pregnant_or_caring_for_child", "relationship_to_child", "pregnant_with_first_child", "tanif_sixty_months", "anticipate_other_income", "teen_parent", "child_in_school", "snap_eligibility_status", "all_kids_eligibility_status", "rta_eligibility_status", "medicaid_eligibility_status", "medicare_cost_sharing_eligibility_status", "rental_eligibility_status", "aabd_eligibility_status", "tanf_eligibility_status", "next_month_rent", "work_status"]
   variables.each do |variable|
   	puts "#{variable}"
   	yes = valid_all_city.where("#{variable}" => "yes").count
@@ -34,7 +37,7 @@ task :all_city => :environment do
 
 
   # FREQUENCY
-  variables = ["zipcode", "user_location", "rental_status"]
+  variables = ["zipcode", "user_location", "rental_status", "student_status"]
   variables.each do |variable|
   	values = valid_all_city.pluck("#{variable}") 
   	freq = values.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
