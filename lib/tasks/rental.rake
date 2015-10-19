@@ -9,7 +9,7 @@ task :rental => :environment do
 	eligible_count = valid_rental_assistance.where(rental_eligibility_status: "yes").count
 	puts "Eligible Count #{eligible_count}"
 
-	ineligible_count = valid_rental_assistance.where(rental_eligibility_status: "yes").count
+	ineligible_count = valid_rental_assistance.where(rental_eligibility_status: "no").count
 	puts "Ineligible Count #{ineligible_count}"
 
 
@@ -75,12 +75,14 @@ task :rental => :environment do
 		puts "#{zipcode}: #{frequency}" 
 	end
 
+
 	puts "LOCATIONS"
 	locations = valid_rental_assistance.pluck(:user_location) 
 	freq = locations.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
 	freq.sort_by {|h, v| v}.reverse.each do |location, frequency| 
 		puts "#{location}: #{frequency}" 
 	end
+
 
 	puts "WEB PHONE NUMBER"  
 	valid_rental_assistance.pluck(:phone_number).uniq.each do |phone_number|
