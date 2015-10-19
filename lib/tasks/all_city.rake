@@ -24,9 +24,27 @@ task :all_city => :environment do
 		value_mode = values.max_by { |v| freq[v] }
 		puts "Mode: #{value_mode}"
   end
+ 
+		pregnant = valid_all_city.where("pregnant_or_caring_for_child like ?", "%pregnant%").count
+  	puts "pregnant : #{pregnant}"
+
+  	pregnant_with_first_child = valid_all_city.where.not(pregnant_with_first_child: nil).count
+  	puts "pregnant_with_first_child : #{pregnant_with_first_child}"
+
+  	teen_parent = valid_all_city.where.not(teen_parent: nil).count
+  	puts "teen_parent : #{teen_parent}"
+
+  	child_in_school = valid_all_city.where.not(child_in_school: nil).count
+  	puts "child_in_school : #{child_in_school}"
+
+  	care_for_child = valid_all_city.where("pregnant_or_caring_for_child like ?", "%care_for_child%").count
+  	puts "care_for_child : #{care_for_child}"
+
+  	no_children = valid_all_city.where("pregnant_or_caring_for_child like ?", "%no_children%").count
+  	puts "no_children : #{no_children}"
 
   # YES NO
-  variables = ["enrolled_in_education", "citizen", "disabled_status", "name_on_lease", "pregnant", "child_health_insurance_state", "pregnant_or_caring_for_child", "relationship_to_child", "pregnant_with_first_child", "tanif_sixty_months", "anticipate_other_income", "teen_parent", "child_in_school", "snap_eligibility_status", "all_kids_eligibility_status", "rta_eligibility_status", "medicaid_eligibility_status", "medicare_cost_sharing_eligibility_status", "rental_eligibility_status", "aabd_eligibility_status", "tanf_eligibility_status", "next_month_rent", "work_status"]
+  variables = ["enrolled_in_education", "citizen", "name_on_lease", "next_month_rent", "tanif_sixty_months", "anticipate_other_income",  "snap_eligibility_status", "all_kids_eligibility_status", "rta_eligibility_status", "medicaid_eligibility_status", "medicare_cost_sharing_eligibility_status", "rental_eligibility_status", "aabd_eligibility_status", "tanf_eligibility_status",  "work_status"]
   variables.each do |variable|
   	puts "#{variable}"
   	yes = valid_all_city.where("#{variable}" => "yes").count
@@ -39,8 +57,9 @@ task :all_city => :environment do
 
 
   # FREQUENCY
-  variables = ["zipcode", "user_location", "rental_status", "student_status"]
+  variables = ["zipcode", "user_location", "rental_status", "student_status", "child_health_insurance_state", "disabled_status"]
   variables.each do |variable|
+  	variable = variable.tr(',', '').strip
   	values = valid_all_city.pluck("#{variable}") 
   	freq = values.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
   	freq.sort_by {|h, v| v}.reverse.each do |value, frequency| 
