@@ -298,8 +298,6 @@ class AllCityProgramsController < ApplicationController
 
 
       #HERE IS THE LOGIC FOR RENTAL ASSISTANCE
-      
-
       if @current_user.rental_assistance == "checked"
         puts "I made it here"
         @rental_eligible = "already receiving"
