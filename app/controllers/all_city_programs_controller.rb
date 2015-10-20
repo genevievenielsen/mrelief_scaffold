@@ -510,8 +510,8 @@ class AllCityProgramsController < ApplicationController
         @eligible_all_kids = "already receiving"
       else
         
-      if children != 0 
-        if @d.pregnant.include?("pregnant")
+      if children != 0 || params[:pregnant].present?
+        if params[:pregnant].present?
            dependent_no_kids = children + 1
            dependent_no_kids = dependent_no_kids.to_i
            kids_eligibility = AllKid.find_by({ :kids_household_size => dependent_no_kids })
