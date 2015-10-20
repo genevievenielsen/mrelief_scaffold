@@ -215,6 +215,11 @@ class AllCityProgramsController < ApplicationController
       @d.disabled_status = params[:disabled]
       @user_zipcode = params[:zipcode]
 
+      if @d.user_location == 'king_community_service_center' || @d.user_location == 'garfield' || @d.user_location == 'north_area' || @d.user_location == 'englewood' || @d.user_location == 'south_chicago' || @d.user_location == 'trina_davila'
+        @community_service_center = true
+      else
+        @community_service_center = false
+      end
 
     #LOGIC FOR FOOD STAMPS
      if @current_user.food_stamps == "checked"
@@ -505,8 +510,8 @@ class AllCityProgramsController < ApplicationController
         @eligible_all_kids = "already receiving"
       else
         
-      if children != 0 && params[:pregnant] == nil
-        if params[:pregnant].present?
+      if children != 0 
+        if @d.pregnant.include?("pregnant")
            dependent_no_kids = children + 1
            dependent_no_kids = dependent_no_kids.to_i
            kids_eligibility = AllKid.find_by({ :kids_household_size => dependent_no_kids })
@@ -547,7 +552,7 @@ class AllCityProgramsController < ApplicationController
           if dependent_no == 1
             @eligible_all_kids = "no"
           end
-          if params[:status] == "no_children"
+          if params[:status] == "none"
             @eligible_all_kids = "no"
           end
         #no children

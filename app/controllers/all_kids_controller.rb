@@ -58,7 +58,7 @@ class AllKidsController < ApplicationController
        if @eligible ==  true
         # now find out which version they are eligible for
         if kids_gross_income <= kids_eligibility.assist_gross_income
-          @dssist_eligible = true
+          @assist_eligible = true
           @d.assist_eligibility = "yes"
         elsif kids_gross_income <= kids_eligibility.share_gross_income && kids_gross_income > kids_eligibility.assist_gross_income
           @share_eligible = true

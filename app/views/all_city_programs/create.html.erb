@@ -22,20 +22,25 @@
             <% if @age <= 22 %>
               <p>However, make sure you accounted for your parents income, if you are still living in the same household</p>
             <% end %>
-            <% if @laf_disclaimer.present?  %>
-              <p><%= @laf_disclaimer %></p>
-            <% else %>
-            <p>To access your nearest Community Service Center: </p>
-            <% end %>
-            <ul>
-              <li class="laf-headline"><%= @lafcenter.center %></li>
-              <li><%=  @lafcenter.address %> <%= @lafcenter.city %> <%= @lafcenter.zipcode.to_i %></li>
-              <li><%= @lafcenter.telephone %></li>
-              <li>Days that Spanish is spoken - <%= @lafcenter.spanish %></li>
-            </ul>
+
+            <% if @community_service_center == false %>
+              <% if @laf_disclaimer.present?  %>
+                <p><%= @laf_disclaimer %></p>
+              <% else %>
+              <p>To access your nearest Community Service Center: </p>
+              <% end %>
+              <ul>
+                <li class="laf-headline"><%= @lafcenter.center %></li>
+                <li><%=  @lafcenter.address %> <%= @lafcenter.city %> <%= @lafcenter.zipcode.to_i %></li>
+                <li><%= @lafcenter.telephone %></li>
+                <li>Days that Spanish is spoken - <%= @lafcenter.spanish %></li>
+              </ul>
             <p>Apply online before you visit <%= link_to "here", "https://abe.illinois.gov/abe/access/", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'food_stamps_all_city_program', 'abe', 1);" %>.</p>
+            
+            <% end %>
             <p>See the documents you will need <%= link_to "here", snap_documents_url, :class => "secondary-link" %>.</p>
           </div>
+           
         <% end %>
 
 
@@ -79,17 +84,20 @@
           <div class="all-city-results">
             <h3>Medicare Cost Sharing </h3>
             <p>Important Note:  If you previously opted out of Medicare part B, the Medicare cost sharing program, you may be able to get your Medicare premium paid now. Please contact or visit your LAF paralegal to re-enroll for Medicare Part B. You can see the nearest Community Service Center near you.</p>
-            <% if @laf_disclaimer.present?  %>
-                <p><%= @laf_disclaimer %></p>
-            <% else %>
-              <p>The LAF expert nearest you:</p>
+
+            <% if @community_service_center == false %>
+              <% if @laf_disclaimer.present?  %>
+                  <p><%= @laf_disclaimer %></p>
+              <% else %>
+                <p>The LAF expert nearest you:</p>
+              <% end %>
+              <ul>
+                <li class="laf-headline"><%= @lafcenter.center %></li>
+                <li><%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %></li>
+                <li><%= @lafcenter.telephone %></li>
+                <li>Days that Spanish is spoken - <%= @lafcenter.spanish %></li>
+              </ul>
             <% end %>
-            <ul>
-              <li class="laf-headline"><%= @lafcenter.center %></li>
-              <li><%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %></li>
-              <li><%= @lafcenter.telephone %></li>
-              <li>Days that Spanish is spoken - <%= @lafcenter.spanish %></li>
-            </ul>
           </div>
         <% end %>
 
@@ -117,18 +125,20 @@
 
              <p>The final decision will be made one-on-one by the case manager.</p>
 
-            <% if @laf_disclaimer.present?  %>
-                <p><%= @laf_disclaimer %></p>
-            <% else %>
-              <p>Your nearest Community Service Center:</p>
+            <% if @community_service_center == false %>
+              <% if @laf_disclaimer.present?  %>
+                  <p><%= @laf_disclaimer %></p>
+              <% else %>
+                <p>Your nearest Community Service Center:</p>
+              <% end %>
+              <ul>
+                <li><%= @lafcenter.center %></li>
+                <li><%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %></li>
+                <li><%= @lafcenter.telephone %><li>
+                <li>Days that Spanish is spoken - <%= @lafcenter.spanish %></li>
+              </ul>
+              <p>or call 3-1-1.</p>
             <% end %>
-            <ul>
-              <li><%= @lafcenter.center %></li>
-              <li><%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %></li>
-              <li><%= @lafcenter.telephone %><li>
-              <li>Days that Spanish is spoken - <%= @lafcenter.spanish %></li>
-            </ul>
-            <p>or call 3-1-1.</p>
 
             <%= form_tag rental_documents_url, method: :get do %>
               
@@ -148,17 +158,20 @@
         <% if @aabd_eligible == "yes" %>
           <div class="all-city-results">
             <h3>AABD Cash Assistance</h3>
-            <% if @laf_disclaimer.present?  %>
-               <p><%= @laf_disclaimer %></p>
-            <% else %>
-              <p>Your nearest Community Service Center to access your AABD Cash Assistance: </p>
+
+            <% if @community_service_center == false %>
+              <% if @laf_disclaimer.present?  %>
+                 <p><%= @laf_disclaimer %></p>
+              <% else %>
+                <p>Your nearest Community Service Center to access your AABD Cash Assistance: </p>
+              <% end %>
+              <ul>
+                <li><%= @lafcenter.center %></li>
+                <li><%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %></li>
+                <li><%= @lafcenter.telephone %></li>
+                <li>Days that Spanish is spoken - <%= @lafcenter.spanish %></li>
+              </ul>
             <% end %>
-            <ul>
-              <li><%= @lafcenter.center %></li>
-              <li><%=  @lafcenter.address %> <%= @lafcenter.city %>, <%= @lafcenter.zipcode.to_i %></li>
-              <li><%= @lafcenter.telephone %></li>
-              <li>Days that Spanish is spoken - <%= @lafcenter.spanish %></li>
-            </ul>
           </div>
         <% end %>
 
