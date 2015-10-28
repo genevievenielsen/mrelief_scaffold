@@ -2,7 +2,7 @@ task :snap => :environment do
 
 		invalid_phone_numbers = ["5555555555", "7777777777", "3125555555", "555-555-5555", "8477672332", "8477672332 "]
 		snap_web_eligible = SnapEligibilityData.where.not(phone_number: invalid_phone_numbers).where(snap_eligibility_status: "yes").last(5)
-		snap_web_eligible = SnapEligibilityData.where.not(phone_number: invalid_phone_numbers).where(snap_eligibility_status: "no").last(5)
+		snap_web_ineligible = SnapEligibilityData.where.not(phone_number: invalid_phone_numbers).where(snap_eligibility_status: "no").last(5)
 
 		snap_web_eligible.each do |snap|
 			puts "phone_number: #{snap.phone_number}"
