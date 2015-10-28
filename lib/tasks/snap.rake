@@ -11,6 +11,7 @@ task :snap => :environment do
 			puts "disabled_status: #{snap.disabled_status}"
 			puts "zipcode: #{snap.zipcode}"
 			puts "amount_in_account: #{snap.amount_in_account}"
+			puts "snap_eligibility_status: #{snap.snap_eligibility_status}"
 			puts "#3333"
 		end
 
@@ -22,9 +23,10 @@ task :snap => :environment do
 			puts "dependent_no: #{snap.dependent_no}"
 			puts "monthly_gross_income: #{snap.monthly_gross_income}"
 			puts "age: #{snap.age}"
-			puts "disabled_status: #{snap.disabled_status}"
+			puts "disabled: #{snap.	disabled}"
 			puts "zipcode: #{snap.zipcode}"
 			puts "amount_in_account: #{snap.amount_in_account}"
+			puts "snap_eligibility_status: #{snap.snap_eligibility_status}"
 			puts "#3333"
 		end
 
