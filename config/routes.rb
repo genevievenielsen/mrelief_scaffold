@@ -29,12 +29,19 @@ Rails.application.routes.draw do
    
   #static pages 
   root to: "pages#homepage"
+  get('/our_story', { :controller => 'pages', :action => 'our_story' })
   get('/about_us', { :controller => 'pages', :action => 'about_us' })
   get('/how_mrelief_works', { :controller => 'pages', :action => 'how_mrelief_works' })
   get('/press_release', { :controller => 'pages', :action => 'press_release' })
   get('/public-template', { :controller => 'pages', :action => 'public_template' })
   get('/press_emails', { :controller => 'pages', :action => 'press_emails' })
   get('/chihacknight', { :controller => 'pages', :action => 'chihacknight' })
+  get('/press_release/mrelief_espagnol', { :controller => 'pages', :action => 'mrelief_espagnol', as:  'mrelief_espagnol_press_release'})
+  get('/press_release/students', { :controller => 'pages', :action => 'students', as: 'students_press_release'})
+  get('/press_release/snap_transparency', { :controller => 'pages', :action => 'snap_transparency', as: 'snap_transparency_press_release' })
+  get('/press_release/early_learning_finder', { :controller => 'pages', :action => 'early_learning_finder', as: 'early_learning_finder_press_release' })
+
+
 
 
   # all programs at once

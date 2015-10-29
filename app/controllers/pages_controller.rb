@@ -546,7 +546,22 @@ class PagesController < ApplicationController
   def chihacknight
   end
 
+  def mrelief_espagnol
+  end
+
+  def students
+  end
+
+  def snap_transparency
+  end
+
+  def early_learning_finder
+  end
+
   def early_learning_privacy_policy
+  end
+
+  def our_story
   end
 
   def session_clear
