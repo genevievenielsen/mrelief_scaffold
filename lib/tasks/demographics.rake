@@ -43,7 +43,15 @@ task :demographics => :environment do
 
   web_size = all_city_size + aabd_size  + all_kids_size + child_care_voucher_size + early_head_start_size + head_start_size + medicaid_size + medicare_size + rental_assistance_size + rta_free_ride_size + snap_size + tanf_size + wic_size
   web_size_integer = web_size.map(&:to_i)
-  web_average = web_size_integer.sum / web_size_integer.size.to_f
+
+  web_size_clean = []
+  web_size_integer.each do |size|
+    if size <= 20
+      web_size_clean.push(size.to_i)
+    end
+  end
+
+  web_average = web_size_clean.sum / web_size_clean.size.to_f
   puts "Web household size - #{web_average}"
 
   puts "TWILIO"
