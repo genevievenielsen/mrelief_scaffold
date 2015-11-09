@@ -49,17 +49,18 @@ task :early_childhood_count_data => :environment do
 	puts "No children: #{web_no_children}"
 
 	puts "SMS AGES"
-	sms_three_and_under = sms_data_sharing.pluck(:three_and_under).count(true)
-	puts "Three and under: #{sms_three_and_under}"
-	sms_three_to_five = sms_data_sharing.pluck(:three_to_five).count(true)
-	puts "Three to Five: #{sms_three_to_five}"
-	sms_six_to_twelve = sms_data_sharing.pluck(:six_to_twelve).count(true)
-	puts "Six to twelve: #{sms_six_to_twelve}"
-	sms_pregnant = sms_data_sharing.pluck(:pregnant).count(true)
-	puts "Pregant: #{sms_pregnant}"
-	sms_no_children = sms_data_sharing.pluck(:no_children).count(true)
-	puts "No children: #{sms_no_children}"
-
+	if sms_data_sharing.count > 0
+		sms_three_and_under = sms_data_sharing.pluck(:three_and_under).count(true)
+		puts "Three and under: #{sms_three_and_under}"
+		sms_three_to_five = sms_data_sharing.pluck(:three_to_five).count(true)
+		puts "Three to Five: #{sms_three_to_five}"
+		sms_six_to_twelve = sms_data_sharing.pluck(:six_to_twelve).count(true)
+		puts "Six to twelve: #{sms_six_to_twelve}"
+		sms_pregnant = sms_data_sharing.pluck(:pregnant).count(true)
+		puts "Pregant: #{sms_pregnant}"
+		sms_no_children = sms_data_sharing.pluck(:no_children).count(true)
+		puts "No children: #{sms_no_children}"
+	end
 
 	# Household Size Question
 	puts "WEB HOUSEHOLD SIZE"
@@ -77,18 +78,20 @@ task :early_childhood_count_data => :environment do
 	puts "Mode: #{household_size_mode}"
 
 	puts "SMS HOUSEHOLD SIZE"
-	household_sizes = sms_data_sharing.pluck(:household_size) 
-	household_size_average = (household_sizes.sum / household_sizes.size.to_f).round(2)
-	puts "Average: #{household_size_average}"
+	if sms_data_sharing.count > 0
+		household_sizes = sms_data_sharing.pluck(:household_size) 
+		household_size_average = (household_sizes.sum / household_sizes.size.to_f).round(2)
+		puts "Average: #{household_size_average}"
 
-	sorted = household_sizes.sort
-	len = sorted.length 
-	household_size_median = (sorted[(len - 1) / 2] + sorted[len / 2]) / 2.0 
-	puts "Median: #{household_size_median}"
+		sorted = household_sizes.sort
+		len = sorted.length 
+		household_size_median = (sorted[(len - 1) / 2] + sorted[len / 2]) / 2.0 
+		puts "Median: #{household_size_median}"
 
-	freq = household_sizes.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
-	household_size_mode = household_sizes.max_by { |v| freq[v] }
-	puts "Mode: #{household_size_mode}"
+		freq = household_sizes.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
+		household_size_mode = household_sizes.max_by { |v| freq[v] }
+		puts "Mode: #{household_size_mode}"
+	end
 
 
 	# Income Question
@@ -116,19 +119,20 @@ task :early_childhood_count_data => :environment do
 	puts "Mode: #{gross_monthly_income_mode}"
 
 	puts "SMS INCOME"
-	gross_monthly_incomes = sms_data_sharing.pluck(:gross_monthly_income) 
-	gross_monthly_income_average = (gross_monthly_incomes.sum / gross_monthly_incomes.size.to_f).round(2)
-	puts "Average: #{gross_monthly_income_average}"
+	if sms_data_sharing.count > 0
+		gross_monthly_incomes = sms_data_sharing.pluck(:gross_monthly_income) 
+		gross_monthly_income_average = (gross_monthly_incomes.sum / gross_monthly_incomes.size.to_f).round(2)
+		puts "Average: #{gross_monthly_income_average}"
 
-	sorted = gross_monthly_incomes.sort
-	len = sorted.length 
-	gross_monthly_income_median = (sorted[(len - 1) / 2] + sorted[len / 2]) / 2.0 
-	puts "Median: #{gross_monthly_income_median}"
+		sorted = gross_monthly_incomes.sort
+		len = sorted.length 
+		gross_monthly_income_median = (sorted[(len - 1) / 2] + sorted[len / 2]) / 2.0 
+		puts "Median: #{gross_monthly_income_median}"
 
-	freq = gross_monthly_incomes.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
-	gross_monthly_income_mode = gross_monthly_incomes.max_by { |v| freq[v] }
-	puts "Mode: #{gross_monthly_income_mode}"
-
+		freq = gross_monthly_incomes.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
+		gross_monthly_income_mode = gross_monthly_incomes.max_by { |v| freq[v] }
+		puts "Mode: #{gross_monthly_income_mode}"
+	end
 
 	# Categorical Eligibility Question
 	puts "WEB CATEGORICAL ELIGIBILITY"
@@ -146,12 +150,14 @@ task :early_childhood_count_data => :environment do
 	puts "None of the Above: #{web_none_of_the_above}"
 
 	puts "SMS CATEGORICAL ELIGIBILITY"
-	sms_foster_homeless_ssi = sms_data_sharing.pluck(:foster_homeless_ssi).count(true)
-	puts "Foster Parent, Homeless, SSI: #{sms_foster_homeless_ssi}"
-	sms_tanf_special_needs = sms_data_sharing.pluck(:tanf_special_needs).count(true)
-	puts "TANF, Special Needs: #{sms_tanf_special_needs}"
-	sms_teen_parent = sms_data_sharing.pluck(:teen_parent).count(true)
-	puts "Teen Parent: #{sms_teen_parent}"
+	if sms_data_sharing.count > 0
+		sms_foster_homeless_ssi = sms_data_sharing.pluck(:foster_homeless_ssi).count(true)
+		puts "Foster Parent, Homeless, SSI: #{sms_foster_homeless_ssi}"
+		sms_tanf_special_needs = sms_data_sharing.pluck(:tanf_special_needs).count(true)
+		puts "TANF, Special Needs: #{sms_tanf_special_needs}"
+		sms_teen_parent = sms_data_sharing.pluck(:teen_parent).count(true)
+		puts "Teen Parent: #{sms_teen_parent}"
+	end
 
 
 	# Homeless Question
@@ -172,9 +178,10 @@ task :early_childhood_count_data => :environment do
 	puts "Web Employed : #{web_employed}"
 
 	puts "SMS EMPLOYED QUESTION"
-	sms_employed = sms_data_sharing.pluck(:employment).count(true)
-	puts "SMS Employed : #{sms_employed}"
-
+	if sms_data_sharing.count > 0
+		sms_employed = sms_data_sharing.pluck(:employment).count(true)
+		puts "SMS Employed : #{sms_employed}"
+	end
 
 	# Zipcode Question
 	web_zipcodes = web_data_sharing.pluck(:zipcode) 
@@ -187,10 +194,12 @@ task :early_childhood_count_data => :environment do
 	end 
 
 	puts "SMS ZIPCODES"
-	freq = sms_zipcodes.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
-	freq.sort_by {|h, v| v}.reverse.each do |zipcode, frequency| 
-		puts "#{zipcode}: #{frequency}" 
-	end 
+	if sms_data_sharing.count > 0
+		freq = sms_zipcodes.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
+		freq.sort_by {|h, v| v}.reverse.each do |zipcode, frequency| 
+			puts "#{zipcode}: #{frequency}" 
+		end 
+	end
 
 	puts "TOTAL ZIPCODES"
 	total_zipcodes = web_zipcodes + sms_zipcodes
@@ -318,12 +327,14 @@ task :early_childhood_count_data => :environment do
 	puts "Mode: #{eligible_count_mode}"     
 	              
 	
-	puts "SMS COUNT"	       
-	sms_ccap_eligible = sms_data_sharing.pluck(:ccap_eligible).count(true)
-	puts "CCAP Eligible: #{sms_ccap_eligible}"
+	puts "SMS COUNT"	
+	if sms_data_sharing.count > 0       
+		sms_ccap_eligible = sms_data_sharing.pluck(:ccap_eligible).count(true)
+		puts "CCAP Eligible: #{sms_ccap_eligible}"
 
-	sms_early_learning_eligible = sms_data_sharing.pluck(:early_learning_eligible).count(true)
-	puts "Early Learning Eligible: #{sms_early_learning_eligible}"        
+		sms_early_learning_eligible = sms_data_sharing.pluck(:early_learning_eligible).count(true)
+		puts "Early Learning Eligible: #{sms_early_learning_eligible}"  
+	end      
 	     
 	puts "WEB PHONE NUMBER"  
 	web_data_sharing.pluck(:phone_number).uniq.each do |phone_number|
@@ -331,8 +342,10 @@ task :early_childhood_count_data => :environment do
 	end
 
 	puts "SMS PHONE NUMBER"
-	sms_data_sharing.pluck(:phone_number).uniq.each do |phone_number|
-		puts phone_number
+	if sms_data_sharing.count > 0       
+		sms_data_sharing.pluck(:phone_number).uniq.each do |phone_number|
+			puts phone_number
+		end
 	end
 
 
