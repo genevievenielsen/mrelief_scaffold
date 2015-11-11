@@ -7,13 +7,13 @@
   <div class="row">
     <div class="col-md-7">
       <h1>Results: You may be in luck!</h1>
-      <p>Based on your household size and income, you likely qualify for Medicaid</p>
+      <p>Based on your household size and income, you likely qualify for Medicaid.</p>
 
       <div class="resources">
         <h3>Apply for benefits</h3>
-        <p>You can call 1 (866) 311-1119 for your coverage options.</p>
-        <p>To apply online, <%= link_to "Click Here", "https://abe.illinois.gov/abe/access/jsp/access/Home.jsp", :class => "  secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicaid', 'abe', 1);" %>. </p>
-        <p>To further pursue your Medicaid application you can also call the county care line (312-864-8200). If you already have a doctor, be sure to confirm they transfer over.</p>
+        <p>To submit an application on the phone, call 1-800-843-6154.</p>
+        <p>To submit an application online, <%= link_to "Click Here.", "https://abe.illinois.gov/abe/access/jsp/access/Home.jsp", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicaid', 'abe', 1);" %> </p>
+        <p>To receive Medicaid application assistance, you can can also call the Cook County Health and Hospitals System at 312-864-8200 to get help with the Medicaid application by phone. The phone lines are open Monday – Friday, 8am-8pm and Saturday 8am – 5pm. </p>
       </div>
 
     </div>
@@ -24,7 +24,9 @@
     <div class="row">
       <div class="col-md-7">
         <h1>Results: Something else in mind!</h1>
-        <p>Based on the information received, we cannot determine your eligibility at this time.  Please note immigration status is not necessarily a barrier for enrolling in this program.  You can discuss your situation with a Medicaid expert that can share more information on your probable eligibility.  A Legal Assistance Foundation (LAF) Paralegal available at your local Community Service Center can discuss your Medicaid eligibility with you. Please call and learn more about your options.</p>
+        <p>Based on the information received, we cannot estimate your Medicaid eligibility at this time. Some immigrants may qualify for these programs, but we need more information.  Contact an LAF paralegal at your local Community Service Center below to find out more. </p>
+
+        <p>You can also call 1-866-223-2817 to see if you can qualify for CareLink, a free or low-cost care plan  at the Cook County Health and Hospitals System (CCHHS).  The phone lines are open Monday – Friday, 8am-8pm and Saturday 8am – 5pm.  To talk to a financial counselor in person about the available financial assistance programs or to find the closest CCHHS health center you can also log on to <%= link_to "www.cookcountyhhs.org.", "http://www.cookcountyhhs.org", :class => "  secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicaid', 'cookcountyhhs', 1);" %>  </p>
 
         <section class="content-section resources">
           <h3>Resources</h3>
@@ -44,16 +46,13 @@
     <div class="row">
       <div class="col-md-7">
         <h1>Results: Something else in mind!</h1>
-        <p>Based on your household size and income, you likely do not qualify for Medicaid.</p>
-        <p>However, if you and your family don't have health coverage in 2014, you may have to pay a fee -- and all of your health care.</p>
 
-        <div class="resources">
-          <h3>Resources</h3>
-          <p><%= link_to "Click Here", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "secondary-link", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'medicaid', 'health_care_fees', 1);" %> to learn more about fees.</p>
-           <p>Get Covered Illinois is a resource that helps families register for insurance at in-person events.</p>
-           <p><%= link_to "Click Here", "http://getcoveredillinois.gov/events", :class => "secondary-link", :target => "_blank", :onclick => "ga('send', 'event', 'button', 'medicaid', 'get_covered_illinois', 1);" %> to find Get Covered Illinois events in your area.</p>
-           <p>You can also call 1 (866) 311-1119: (Open Monday - Saturday, 8am - 8pm) to discuss your next steps.</p>
-        </div>
+          <p>Based on your household size and income, you likely do not qualify for Medicaid. But you may qualify for help paying for private health insurance on the Marketplace. Call Get Covered Illinois at 1-866-311-1119 to find out more. The call is free, and they are open Monday – Saturday, 8am-8pm. </p>
+
+          <p>Some families who don’t have health insurance may have to pay a fine to the federal government for being uninsured. <%= link_to "Click Here", "https://www.healthcare.gov/what-if-i-dont-have-health-coverage/", :class => "secondary-link", :target => "_blank",:onclick => "ga('send', 'event', 'button', 'medicaid', 'health_care_fees', 1);" %> to learn more about the fines for not having healthcare coverage.</p>
+
+          <p>If you need a free to low-cost clinic near you, see resources near you below:</p>
+      
 
         <%= render "layouts/purple_binder_resources" %>
       </div>
