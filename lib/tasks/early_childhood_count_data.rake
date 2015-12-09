@@ -11,7 +11,7 @@ task :early_childhood_count_data => :environment do
 	puts "Early Learning Total: #{total}"
 
 	# Totals after launch
-	invalid_phone_numbers = ["5555555555", "7777777777", "3125555555", "555-555-5555"]
+	invalid_phone_numbers = ["5555555555", "7777777777", "3125555555", "555-555-5555", "777-777-7777"]
 	all_web_after_launch = EarlyLearningData.where(complete: true).where.not(phone_number: invalid_phone_numbers).where("created_at > ?", "2015-11-09")
 	puts "All Web After Launch: #{all_web_after_launch.count}"
 
