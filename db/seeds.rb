@@ -242,234 +242,234 @@
 
 s = SnapEligibility.new
 s.snap_dependent_no = 1
-s.snap_gross_income = 1265
+s.snap_gross_income = 1619
 s.save
 
 s = SnapEligibility.new
 s.snap_dependent_no = 2
-s.snap_gross_income = 1705
+s.snap_gross_income = 2191
 s.save
 
 
 s = SnapEligibility.new
 s.snap_dependent_no = 3
-s.snap_gross_income = 2144
+s.snap_gross_income = 2763
 s.save
 
 
 s = SnapEligibility.new
 s.snap_dependent_no = 4
-s.snap_gross_income = 2584
+s.snap_gross_income = 3335
 s.save
 
 
 s = SnapEligibility.new
 s.snap_dependent_no = 5
-s.snap_gross_income = 3024
+s.snap_gross_income = 3907
 s.save
 
 s = SnapEligibility.new
 s.snap_dependent_no = 6
-s.snap_gross_income = 3464
+s.snap_gross_income = 4479
 s.save
 
 s = SnapEligibility.new
 s.snap_dependent_no = 7
-s.snap_gross_income = 3904
+s.snap_gross_income = 5051
 s.save
 
 s = SnapEligibility.new
 s.snap_dependent_no = 8
-s.snap_gross_income = 4344
+s.snap_gross_income = 5623
 s.save
 
 s = SnapEligibility.new
 s.snap_dependent_no = 9
-s.snap_gross_income = 4784
+s.snap_gross_income = 6195
 s.save
 
 s = SnapEligibility.new
 s.snap_dependent_no = 10
-s.snap_gross_income = 5224
+s.snap_gross_income = 6767
 s.save
 
 s = SnapEligibility.new
 s.snap_dependent_no = 11
-s.snap_gross_income = 5664
+s.snap_gross_income = 7339
 s.save
 
 
 s = SnapEligibility.new
 s.snap_dependent_no = 12
-s.snap_gross_income = 6104
+s.snap_gross_income = 7911
 s.save
 
 
 s = SnapEligibility.new
 s.snap_dependent_no = 13
-s.snap_gross_income = 6544
+s.snap_gross_income = 8483
 s.save
 
 
 s = SnapEligibility.new
 s.snap_dependent_no = 14
-s.snap_gross_income = 6984
+s.snap_gross_income = 9055
 s.save
 
 
 s = SnapEligibility.new
 s.snap_dependent_no = 15
-s.snap_gross_income = 7424
+s.snap_gross_income = 9627
 s.save
 
 
 s = SnapEligibility.new
 s.snap_dependent_no = 16
-s.snap_gross_income = 7864
+s.snap_gross_income = 10199
 s.save
 
 
 s = SnapEligibility.new
 s.snap_dependent_no = 17
-s.snap_gross_income = 8304
+s.snap_gross_income = 10771
 s.save
 
 
 s = SnapEligibility.new
 s.snap_dependent_no = 18
-s.snap_gross_income = 8744
+s.snap_gross_income = 11343
 s.save
 
 
 s = SnapEligibility.new
 s.snap_dependent_no = 19
-s.snap_gross_income = 9184
+s.snap_gross_income = 11915
 s.save
 
 
 s = SnapEligibility.new
 s.snap_dependent_no = 20
-s.snap_gross_income = 9624
+s.snap_gross_income = 12487
 s.save
 
 #Seniors
 
 s = SnapEligibilitySenior.new
 s.snap_dependent_no = 1
-s.snap_gross_income = 1945.0
+s.snap_gross_income = 1962
 s.save
 
 
 s = SnapEligibilitySenior.new
 s.snap_dependent_no = 2
-s.snap_gross_income = 2622.0
+s.snap_gross_income = 2655
 s.save
 
 
 s = SnapEligibilitySenior.new
 s.snap_dependent_no = 3
-s.snap_gross_income = 3298.0
+s.snap_gross_income = 3348
 s.save
 
 
 s = SnapEligibilitySenior.new
 s.snap_dependent_no = 4
-s.snap_gross_income = 3975.0
+s.snap_gross_income = 4042
 s.save
 
 
 s = SnapEligibilitySenior.new
 s.snap_dependent_no = 5
-s.snap_gross_income = 4652.0
+s.snap_gross_income = 4735
 s.save
 
 
 s = SnapEligibilitySenior.new
 s.snap_dependent_no = 6
-s.snap_gross_income = 5328.0
+s.snap_gross_income = 5428
 s.save
 
 
 s = SnapEligibilitySenior.new
 s.snap_dependent_no = 7
-s.snap_gross_income = 6005.0
+s.snap_gross_income = 6122
 s.save
 
 
 s = SnapEligibilitySenior.new
 s.snap_dependent_no = 8
-s.snap_gross_income = 6682.0
+s.snap_gross_income = 6815
 s.save
 
 
 s = SnapEligibilitySenior.new
 s.snap_dependent_no = 9
-s.snap_gross_income = 7359.0
+s.snap_gross_income = 7508
 s.save
 
 
 s = SnapEligibilitySenior.new
 s.snap_dependent_no = 10
-s.snap_gross_income = 8036.0
+s.snap_gross_income = 8201
 s.save
 
 
 s = SnapEligibilitySenior.new
 s.snap_dependent_no = 11
-s.snap_gross_income = 8713.0
+s.snap_gross_income = 8894
 s.save
 
 
 s = SnapEligibilitySenior.new
 s.snap_dependent_no = 12
-s.snap_gross_income = 9390.0
+s.snap_gross_income = 9587
 s.save
 
 
 s = SnapEligibilitySenior.new
 s.snap_dependent_no = 13
-s.snap_gross_income = 10067.0
+s.snap_gross_income = 10280
 s.save
 
 
 s = SnapEligibilitySenior.new
 s.snap_dependent_no = 14
-s.snap_gross_income = 10744.0
+s.snap_gross_income = 10973
 s.save
 
 
 s = SnapEligibilitySenior.new
 s.snap_dependent_no = 15
-s.snap_gross_income = 11421.0
+s.snap_gross_income = 11666
 s.save
 
 
 s = SnapEligibilitySenior.new
 s.snap_dependent_no = 16
-s.snap_gross_income = 12098.0
+s.snap_gross_income = 12359
 s.save
 
 s = SnapEligibilitySenior.new
 s.snap_dependent_no = 17
-s.snap_gross_income = 12775.0
+s.snap_gross_income = 13052
 s.save
 
 
 s = SnapEligibilitySenior.new
 s.snap_dependent_no = 18
-s.snap_gross_income = 13452.0
+s.snap_gross_income = 13745
 s.save
 
 
 s = SnapEligibilitySenior.new
 s.snap_dependent_no = 19
-s.snap_gross_income = 14129.0
+s.snap_gross_income = 14438
 s.save
 
 
 s = SnapEligibilitySenior.new
 s.snap_dependent_no = 20
-s.snap_gross_income = 14806.0
+s.snap_gross_income = 15131
 s.save
 #Transit Benefits
 
