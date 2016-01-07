@@ -950,12 +950,20 @@ p.save
 
 p = Program.new
 p.url = "https://build.mrelief.com/catholic-charities-of-the-archdiocese-of-chicago/utility-assistance-program/new"
-p.name_en = "Utility Assistance Program"
+p.name_en = "Utility Assistance"
 p.description_en = "Utility assistance for low-income families"
 p.description_es = ""
 p.location = "catholic_charities"
 p.save
 
+# employment assistance
+p = Program.new
+p.url = "https://build.mrelief.com/the-cara-program/the-cara-program-employment-assistance-program-1/new"
+p.name_en = "Cara Program Employment Assistance"
+p.description_en = "Four week employment assistance program"
+p.description_es = ""
+p.location = "employment"
+p.save
 
 
 a = AutoRepairAssistance.new
