@@ -931,6 +931,7 @@ p.description_es = ""
 p.location = "chicago"
 p.save
 
+# catholic charities
 p = Program.new
 p.url = "https://build.mrelief.com/catholic-charities-of-the-archdiocese-of-chicago/rental-assistance-18/new"
 p.name_en = "Rental Assistance"
@@ -950,7 +951,7 @@ p.save
 p = Program.new
 p.url = "https://build.mrelief.com/catholic-charities-of-the-archdiocese-of-chicago/utility-assistance-program/new"
 p.name_en = "Utility Assistance Program"
-p.description_en = "Security deposit to prevent homelessness"
+p.description_en = "Utility assistance for low-income families"
 p.description_es = ""
 p.location = "catholic_charities"
 p.save
