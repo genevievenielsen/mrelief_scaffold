@@ -185,6 +185,10 @@ button, .button {
   margin-top: 20px;
   height: 110px;
 
+    @media (max-width: 991px) {
+      height: 140px;
+    }
+
   h4 {
     margin-bottom: 7px;
     font-weight: bolder;

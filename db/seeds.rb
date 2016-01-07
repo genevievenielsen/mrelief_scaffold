@@ -931,6 +931,32 @@ p.description_es = ""
 p.location = "chicago"
 p.save
 
+p = Program.new
+p.url = "https://build.mrelief.com/catholic-charities-of-the-archdiocese-of-chicago/rental-assistance-18/new"
+p.name_en = "Rental Assistance"
+p.description_en = "Financial assistance to prevent homelessness"
+p.description_es = ""
+p.location = "catholic_charities"
+p.save
+
+p = Program.new
+p.url = "https://build.mrelief.com/catholic-charities-of-the-archdiocese-of-chicago/security-deposit-assistance/new"
+p.name_en = "Security Deposit Assistance"
+p.description_en = "Security deposit assistance to prevent homelessness"
+p.description_es = ""
+p.location = "catholic_charities"
+p.save
+
+p = Program.new
+p.url = "https://build.mrelief.com/catholic-charities-of-the-archdiocese-of-chicago/utility-assistance-program/new"
+p.name_en = "Utility Assistance Program"
+p.description_en = "Security deposit to prevent homelessness"
+p.description_es = ""
+p.location = "catholic_charities"
+p.save
+
+
+
 a = AutoRepairAssistance.new
 a.auto_household_size = 1
 a.auto_gross_income = 3646.88
