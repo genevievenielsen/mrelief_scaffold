@@ -965,6 +965,14 @@ p.description_es = ""
 p.location = "employment"
 p.save
 
+p = Program.new
+p.url = "https://build.mrelief.com/chicago-commons/employment-assistance-program/new"
+p.name_en = "Chicago Commons Employment Assistance"
+p.description_en = "One-on-one job preparation assistance"
+p.description_es = ""
+p.location = "employment"
+p.save
+
 
 a = AutoRepairAssistance.new
 a.auto_household_size = 1
