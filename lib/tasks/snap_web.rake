@@ -5,18 +5,18 @@ task :snap_web => :environment do
 		snap_ineligible = SnapEligibilityData.where.not(phone_number: invalid_phone_numbers).where(snap_eligibility_status: "no").where("created_at < ?", "2015-12-31")
 		all_city_ineligible = AllCityProgramDatum.where.not(phone_number: invalid_phone_numbers).where(snap_eligibility_status: "no").where("created_at < ?", "2015-12-31")
 
-		puts "WEB INELIGIBLE"
+		puts "WEB INELIGIBLE - #{snap_ineligible.count}"
 		phone_numbers = []
 		snap_ineligible.each do |snap|
 			phone_numbers.push(snap.phone_number.strip)
 		end
 
-		puts "ALL CITY PROGRAM WEB ELIGIBLE"
+		puts "ALL CITY PROGRAM WEB ELIGIBLE - #{all_city_ineligible.count}"
 		all_city_ineligible.each do |snap|
 			phone_numbers.push(snap.phone_number.strip)
 		end
 
-
+		puts "PHONE NUMBER COUNT = #{phone_numbers.count}"
 		phone_numbers.uniq.each do |phone_number|
 			puts "PHONE NUMBER - #{phone_number}"
 		end
