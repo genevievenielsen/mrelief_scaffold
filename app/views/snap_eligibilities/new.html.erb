@@ -48,8 +48,8 @@
         <label for="education" id="education">Are you enrolled in college/institution of higher education?</label>
         <div class="radio-button">
           <% [ 'yes', 'no'].each do |education| %>
-            <%= radio_button_tag 'education', education, @d.enrolled_in_education == education %>
-            <%= education.humanize %><br>
+            <label for="education_<%= education %>" class="checkbox-question"> <%= radio_button_tag 'education', education, @d.enrolled_in_education == education, id: "education_#{education}" %>
+            <%= education.humanize %></label><br>
           <% end %>
         </div>
       </div>
@@ -66,8 +66,10 @@
         <label for="amount_in_account" id="amount_in_account">Do you have $100 or less in cash or in a checking or savings account?</label>
         <div class="radio-button">
           <% [ 'yes', 'no'].each do |amount_in_account| %>
-            <%= radio_button_tag 'amount_in_account', amount_in_account, @d.amount_in_account == amount_in_account %>
-            <%= amount_in_account.humanize %><br>
+            <label for="amount_in_account_<%= amount_in_account %>" class="checkbox-question">
+              <%= radio_button_tag 'amount_in_account', amount_in_account, @d.amount_in_account == amount_in_account, id: "amount_in_account_#{amount_in_account}"  %>
+              <%= amount_in_account.humanize %>
+            </label><br>
           <% end %>
         </div>
       </div>

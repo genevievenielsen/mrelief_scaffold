@@ -1,13 +1,13 @@
 <div class="student_questions">
   <div class="row">
     <div class="col-md-9 col-sm-10 col-xs-12" id="student_status_question">
-        <label for="student" id="student">Describe your current student status:</label>
-           <!-- <button type="button" data-toggle="popover" data-content="Enrollment status (part time/full time) may vary by school. Students should check their status as described by their particular school." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
+      <label for="student" id="student">Describe your current student status:</label>
       <div class="radio-button">
       <% [ 'I am not a student', 'I am currently enrolled half time or more', 'I am currently enrolled LESS than half time' ].each do |student| %>
-        <%= radio_button_tag 'student', student, student_status == student %>
-        <%= student.humanize %>
-        <br>
+        <label for="student_<%= student %>" class="checkbox-question">
+          <%= radio_button_tag 'student', student, student_status == student, id: "student_#{student}" %>
+          <%= student.humanize %>
+        </label><br>
       <% end %>
       </div>
     </div>
@@ -16,12 +16,12 @@
   <div class="row">
     <div class="col-md-9 col-sm-10 col-xs-12" id="student_work_question">
       <label for="work" id="work"> Are you currently working an average of 20 hours a week OR are in a work study program? </label>
-       <!-- <button type="button" data-toggle="popover" data-content="If self-employed, students must be working an average of 20 hours per week and earn at least $7.25, OR approved to participate in a state or federal workstudy program for the school term and expecting to work in a state or federal workstudy program during the school year." data-placement="top" style="border: 0px; color: #4582ec; background-color: #FAFAFA"><i class="fa fa-info-circle"></i></button> -->
         <div class="radio-button">
         <% [ 'yes', 'no'].each do |work| %>
-          <%= radio_button_tag 'work', work, work_status == work %>
-          <%= work.humanize %>
-          <br>
+          <label for="work_<%= work %>" class="checkbox-question">
+            <%= radio_button_tag 'work', work, work_status == work, id: "work_#{work}" %>
+            <%= work.humanize %>
+          </label><br>
         <% end %>
         </div>
     </div>
