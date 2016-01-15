@@ -72,3 +72,4 @@ task :forms_completed => :environment do
   puts "Total Count: #{total_count}"
 
 end
+
