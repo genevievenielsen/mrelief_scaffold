@@ -1,5 +1,7 @@
 task :rta_twilio => :environment do
 
+		invalid_phone_numbers = ["+18477672332"]
+
 		sms_rta = RtaFreeRideDataTwilio.where(completed: true).where.not(phone_number: invalid_phone_numbers).where("created_at < ?", "2015-12-31")
 
 		phone_numbers = []
