@@ -471,7 +471,7 @@ class TwilioController < ApplicationController
    if session["page"] == "snap_feedback_1"
       if session["counter"] == 9 || session["counter"] == 11
         @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-        message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+        message = "Thank you so much for your feedback! To check your eligibility for other services, text 'menu'."
         @s.feedback = params[:Body]
         @s.completed = true
         @s.save
@@ -480,7 +480,7 @@ class TwilioController < ApplicationController
    elsif session["page"] == "snap_feedback_2"
       if session["counter"] == 10 || session["counter"] == 12
         @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-        message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+        message = "Thank you so much for your feedback! To check your eligibility for other services, text 'menu'."
         @s.feedback = params[:Body]
         @s.completed = true
         @s.save
@@ -488,42 +488,42 @@ class TwilioController < ApplicationController
 
    elsif session["page"] == "snap_feedback_2" && session["counter"] == 5
       @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-      message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+      message = "Thank you so much for your feedback! To check your eligibility for other services, text 'menu'."
       @s.feedback = params[:Body]
       @s.completed = true
       @s.save
 
     elsif session["page"] == "snap_feedback_3" && session["counter"] == 5
       @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-      message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+      message = "Thank you so much for your feedback! To check your eligibility for other services, text 'menu'."
       @s.feedback = params[:Body]
       @s.completed = true
       @s.save
 
     elsif session["page"] == "snap_feedback_3.5" && session["counter"] == 6
       @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-      message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+      message = "Thank you so much for your feedback! To check your eligibility for other services, text 'menu'."
       @s.feedback = params[:Body]
       @s.completed = true
       @s.save
 
    elsif session["page"] == "snap_feedback_4" && session["counter"] == 5
       @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-      message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+      message = "Thank you so much for your feedback! To check your eligibility for other services, text 'menu'."
       @s.feedback = params[:Body]
       @s.completed = true
       @s.save
 
     elsif session["page"] == "snap_feedback_4.5" && session["counter"] == 7
       @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-      message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+      message = "Thank you so much for your feedback! To check your eligibility for other services, text 'menu'."
       @s.feedback = params[:Body]
       @s.completed = true
       @s.save
 
    elsif session["page"] == "snap_feedback_5" && session["counter"] == 6
       @s = SnapEligibilityDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-      message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+      message = "Thank you so much for your feedback! To check your eligibility for other services, text 'menu'."
       @s.feedback = params[:Body]
       @s.completed = true
       @s.save
@@ -700,14 +700,14 @@ class TwilioController < ApplicationController
    # RTA FEEDBACK QUESTIONS
   if session["page"] == "rta_feedback_1" && session["counter"] == 5
     @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-     message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+     message = "Thank you so much for your feedback! To check your eligibility for other services, text 'menu'."
      @r.feedback = params[:Body]
      @r.completed = true
      @r.save
 
   elsif session["page"] == "rta_feedback_2" && session["counter"] == 7
     @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-     message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+     message = "Thank you so much for your feedback! To check your eligibility for other services, text 'menu'."
      @r.feedback = params[:Body]
      @r.completed = true
      @r.save
@@ -715,7 +715,7 @@ class TwilioController < ApplicationController
   elsif session["page"] == "rta_feedback_ineligible"
    if session["counter"] == 5 || session["counter"] == 6 || session["counter"] == 7 || session["counter"] == 8
      @r = RtaFreeRideDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-     message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+     message = "Thank you so much for your feedback! To check your eligibility for other services, text 'menu'."
      @r.feedback = params[:Body]
      @r.completed = true
      @r.save
@@ -840,19 +840,19 @@ class TwilioController < ApplicationController
    # MEDICAID FEEDBACK QUESTIONS
    if session["page"] == "medicaid_feedback_1" && session["counter"] == 5
     @m = MedicaidDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-    message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+    message = "Thank you so much for your feedback! To check your eligibility for other services, text 'menu'."
     @m.feedback = params[:Body]
     @m.completed = "true"
     @m.save
    elsif session["page"] == "medicaid_feedback_2" && session["counter"] == 6
     @m = MedicaidDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-    message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+    message = "Thank you so much for your feedback! To check your eligibility for other services, text 'menu'."
     @m.feedback = params[:Body]
     @m.completed = "true"
     @m.save
    elsif session["page"] == "medicaid_feedback_3" && session["counter"] == 4
      @m = MedicaidDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-     message = "Thank you so much for your feedback! To check other programs, text 'menu'."
+     message = "Thank you so much for your feedback! To check your eligibility for other services, text 'menu'."
      @m.feedback = params[:Body]
      @m.completed = "true"
      @m.save
@@ -1451,19 +1451,19 @@ class TwilioController < ApplicationController
 
    # if session["page"] == "mcs_feedback_1" && session["counter"] == 7
    #   @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-   #   message = "Thank you so much for your feedback! \n To check other programs, text 'menu'."
+   #   message = "Thank you so much for your feedback! \n To check your eligibility for other services, text 'menu'."
    #   @mc.feedback = params[:Body]
    #   @mc.completed = "true"
    #   @mc.save
    # elsif session["page"] == "mcs_feedback_2" && session["counter"] == 5
    #   @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-   #   message = "Thank you so much for your feedback! \n To check other programs, text 'menu'."
+   #   message = "Thank you so much for your feedback! \n To check your eligibility for other services, text 'menu'."
    #   @mc.feedback = params[:Body]
    #   @mc.completed = "true"
    #   @mc.save
    # elsif session["page"] == "mcs_feedback_3" && session["counter"] == 7
    #   @mc = MedicareCostSharingDataTwilio.find_or_create_by(:phone_number => params[:From].strip, :completed => false)
-   #   message = "Thank you so much for your feedback! \n To check other programs, text 'menu'."
+   #   message = "Thank you so much for your feedback! \n To check your eligibility for other services, text 'menu'."
    #   @mc.feedback = params[:Body]
    #   @mc.completed = "true"
    #   @mc.save
