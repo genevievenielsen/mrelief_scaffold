@@ -1,7 +1,7 @@
 task :medicaid_twilio => :environment do
 
 		invalid_phone_numbers = ["+18477672332"]
-		sms_medicaid = MedicaidDataTwilio.where(completed: true).where.not(phone_number: invalid_phone_numbers)
+		sms_medicaid = MedicaidDataTwilio.where(completed: "true").where.not(phone_number: invalid_phone_numbers)
 
 		sent_phone_numbers = 
 		["+17737109009",
@@ -102,6 +102,7 @@ task :medicaid_twilio => :environment do
 					phone_numbers.push(phone_number)
 				end
 			end
+
 		end
 
 		puts "PHONE NUMBER COUNT = #{phone_numbers.count}"
