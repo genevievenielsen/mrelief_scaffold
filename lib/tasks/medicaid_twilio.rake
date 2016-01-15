@@ -89,21 +89,21 @@ task :medicaid_twilio => :environment do
 
 		phone_numbers = []
 		sms_medicaid.each do |medicaid|
-			income = medicaid.monthly_gross_income.to_i
-			household_size = medicaid.household_size.to_i
+			# income = medicaid.monthly_gross_income.to_i
+			# household_size = medicaid.household_size.to_i
 
-			if household_size > 0
-				snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => household_size })
+			# if household_size > 0
+			# 	snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => household_size })
 
-				if income < snap_eligibility.snap_gross_income
-					phone_number = medicaid.phone_number.strip
+			# 	if income < snap_eligibility.snap_gross_income
+			# 		phone_number = medicaid.phone_number.strip
 					if sent_phone_numbers.include?(phone_number)
 					else
 						phone_numbers.push(phone_number)
 					end
-				end
+			# 	end
 
-			end
+			# end
 		end
 
 		puts "PHONE NUMBER COUNT = #{phone_numbers.count}"
