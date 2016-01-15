@@ -96,7 +96,7 @@ task :medicaid_twilio => :environment do
 			# 	snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => household_size })
 
 			# 	if income < snap_eligibility.snap_gross_income
-			# 		phone_number = medicaid.phone_number.strip
+					phone_number = medicaid.phone_number.strip
 					if sent_phone_numbers.include?(phone_number)
 					else
 						phone_numbers.push(phone_number)
