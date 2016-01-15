@@ -1,7 +1,7 @@
 task :medicaid_twilio => :environment do
 
-		
 		sms_medicaid = MedicaidDataTwilio.where(completed: "true").where.not(phone_number: invalid_phone_numbers).where("created_at < ?", "2015-12-31")
+
 
 		phone_numbers = []
 		sms_medicaid.each do |medicaid|
