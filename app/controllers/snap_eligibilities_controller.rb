@@ -191,7 +191,7 @@ class SnapEligibilitiesController < ApplicationController
           @d.save
         else
            flash.now[:alert] = 'Looks like you forgot to answer a question! Please answer all questions below.'
-          render "new2"
+          render "new"
         end
 
       def print
