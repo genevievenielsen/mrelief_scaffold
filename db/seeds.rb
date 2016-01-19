@@ -582,96 +582,48 @@ c.save
 
 c = ChildCareVoucher.new
 c.ccdf_dependent_no = 2
-c.ccdf_gross_income = 2392.0
+c.ccdf_gross_income = 2151.0
 c.save
 
 c = ChildCareVoucher.new
 c.ccdf_dependent_no = 3
-c.ccdf_gross_income = 3011.0
+c.ccdf_gross_income = 2713.0
 c.save
 
 c = ChildCareVoucher.new
 c.ccdf_dependent_no = 4
-c.ccdf_gross_income = 3631.0
+c.ccdf_gross_income = 3274.0
 c.save
 
 c = ChildCareVoucher.new
 c.ccdf_dependent_no = 5
-c.ccdf_gross_income = 4251.0
+c.ccdf_gross_income = 3836.0
 c.save
 
 c = ChildCareVoucher.new
 c.ccdf_dependent_no = 6
-c.ccdf_gross_income = 4871.0
+c.ccdf_gross_income = 4397.0
 c.save
 
 c = ChildCareVoucher.new
 c.ccdf_dependent_no = 7
-c.ccdf_gross_income = 5490.0
+c.ccdf_gross_income = 4959.0
 c.save
 
 c = ChildCareVoucher.new
 c.ccdf_dependent_no = 8
-c.ccdf_gross_income = 6110.0
+c.ccdf_gross_income = 5521.0
 c.save
 
 c = ChildCareVoucher.new
 c.ccdf_dependent_no = 9
-c.ccdf_gross_income = 6110.0
+c.ccdf_gross_income = 6082.0
 c.save
 c = ChildCareVoucher.new
 c.ccdf_dependent_no = 10
-c.ccdf_gross_income = 6110.0
+c.ccdf_gross_income = 6644.0
 c.save
 
-c = ChildCareVoucher.new
-c.ccdf_dependent_no = 11
-c.ccdf_gross_income = 6110.0
-c.save
-
-c = ChildCareVoucher.new
-c.ccdf_dependent_no = 12
-c.ccdf_gross_income = 6110.0
-c.save
-
-c = ChildCareVoucher.new
-c.ccdf_dependent_no = 13
-c.ccdf_gross_income = 6110.0
-c.save
-c = ChildCareVoucher.new
-c.ccdf_dependent_no = 14
-c.ccdf_gross_income = 6110.0
-c.save
-
-c = ChildCareVoucher.new
-c.ccdf_dependent_no = 15
-c.ccdf_gross_income = 6110.0
-c.save
-
-c = ChildCareVoucher.new
-c.ccdf_dependent_no = 16
-c.ccdf_gross_income = 6110.0
-c.save
-
-c = ChildCareVoucher.new
-c.ccdf_dependent_no = 17
-c.ccdf_gross_income = 6110.0
-c.save
-
-c = ChildCareVoucher.new
-c.ccdf_dependent_no = 18
-c.ccdf_gross_income = 6110.0
-c.save
-
-c = ChildCareVoucher.new
-c.ccdf_dependent_no = 19
-c.ccdf_gross_income = 6110.0
-c.save
-
-c = ChildCareVoucher.new
-c.ccdf_dependent_no = 20
-c.ccdf_gross_income = 6110.0
-c.save
 
 # Rental assistance
 
@@ -3941,121 +3893,121 @@ EarlyLearningIncomeCutoff.create(household_size: 1,
 	income_type1: 981,
 	income_type2: 1815,
 	income_type3: 3923,
-	income_type4: 490
+	income_type4: 1589
 	)
 EarlyLearningIncomeCutoff.create(household_size: 2,
 	income_type1: 1328,
 	income_type2: 2456,
 	income_type3: 5310,
-	income_type4: 664
+	income_type4: 2151
 	)
 EarlyLearningIncomeCutoff.create(household_size: 3,
 	income_type1: 1674,
 	income_type2: 3097,
 	income_type3: 6697,
-	income_type4: 837
+	income_type4: 2713
 	)
 EarlyLearningIncomeCutoff.create(household_size: 4,
 	income_type1: 2021,
 	income_type2: 3739,
 	income_type3: 8083,
-	income_type4: 1010
+	income_type4: 3274
 	)
 EarlyLearningIncomeCutoff.create(household_size: 5,
 	income_type1: 2368,
 	income_type2: 4380,
 	income_type3: 9470,
-	income_type4: 1184
+	income_type4: 3836
 	)
 EarlyLearningIncomeCutoff.create(household_size: 6,
 	income_type1: 2714,
 	income_type2: 5021,
 	income_type3: 10857,
-	income_type4: 1357
+	income_type4: 4397
 	)
 EarlyLearningIncomeCutoff.create(household_size: 7,
 	income_type1: 3061,
 	income_type2: 5663,
 	income_type3: 12243,
-	income_type4: 1530
+	income_type4: 4959
 	)
 EarlyLearningIncomeCutoff.create(household_size: 8,
 	income_type1: 3408,
 	income_type2: 6304,
 	income_type3: 13630,
-	income_type4: 1704
+	income_type4: 5521
 	)
 EarlyLearningIncomeCutoff.create(household_size: 9,
 	income_type1: 3754,
 	income_type2: 6945,
 	income_type3: 15017,
-	income_type4: 1877
+	income_type4: 6082
 	)
 EarlyLearningIncomeCutoff.create(household_size: 10,
 	income_type1: 4101,
 	income_type2: 7587,
 	income_type3: 16403,
-	income_type4: 2050
+	income_type4: 6644
 	)
 EarlyLearningIncomeCutoff.create(household_size: 11,
 	income_type1: 4448,
 	income_type2: 8228,
 	income_type3: 17790,
-	income_type4: 2224
+	income_type4: 7205
 	)
 EarlyLearningIncomeCutoff.create(household_size: 12,
 	income_type1: 4794,
 	income_type2: 8869,
 	income_type3: 19177,
-	income_type4: 2397
+	income_type4: 7767
 	)
 EarlyLearningIncomeCutoff.create(household_size: 13,
 	income_type1: 5141,
 	income_type2: 9511,
 	income_type3: 20563,
-	income_type4: 2570
+	income_type4: 8328
 	)
 EarlyLearningIncomeCutoff.create(household_size: 14,
 	income_type1: 5488,
 	income_type2: 10152,
 	income_type3: 21950,
-	income_type4: 2744
+	income_type4: 8890
 	)
 EarlyLearningIncomeCutoff.create(household_size: 15,
 	income_type1: 5834,
 	income_type2: 10793,
 	income_type3: 23337,
-	income_type4: 2917
+	income_type4: 9451
 	)
 EarlyLearningIncomeCutoff.create(household_size: 16,
 	income_type1: 6181,
 	income_type2: 11435,
 	income_type3: 24723,
-	income_type4: 3090
+	income_type4: 10013
 	)
 EarlyLearningIncomeCutoff.create(household_size: 17,
 	income_type1: 6528,
 	income_type2: 12076,
 	income_type3: 26110,
-	income_type4: 3264
+	income_type4: 10575
 	)
 EarlyLearningIncomeCutoff.create(household_size: 18,
 	income_type1: 6874,
 	income_type2: 12717,
 	income_type3: 27497,
-	income_type4: 3437
+	income_type4: 11136
 	)
 EarlyLearningIncomeCutoff.create(household_size: 19,
 	income_type1: 7221,
 	income_type2: 13359,
 	income_type3: 28883,
-	income_type4: 3610
+	income_type4: 11698
 	)
 EarlyLearningIncomeCutoff.create(household_size: 20,
 	income_type1: 7568,
 	income_type2: 14000,
 	income_type3: 30270,
-	income_type4: 3784
+	income_type4: 12259
 	)
 
 
