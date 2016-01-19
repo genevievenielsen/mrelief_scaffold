@@ -116,6 +116,6 @@ Rails.application.routes.draw do
   resources :laf_centers
 
   get "/cara", to: "organizations#cara"
-  get "/anchorage", to: "organizations#anchorage"
+  get "/alaskasnap", to: "organizations#alaskasnap"
   get "/catholic_charities", to: "organizations#catholic_charities"
 end

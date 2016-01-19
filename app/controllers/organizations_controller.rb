@@ -5,7 +5,7 @@ class OrganizationsController < ApplicationController
     redirect_to "https://build.mrelief.com/the-cara-program/the-cara-program-employment-assistance-program-1/new"
   end
 
-  def anchorage
+  def alaskasnap
     redirect_to "https://build.mrelief.com/code-for-anchorage/alaska-food-stamp-program/new"
   end
 
