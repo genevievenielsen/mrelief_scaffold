@@ -33,14 +33,15 @@ class SnapEligibilitiesController < ApplicationController
           @d.dependent_no = @snap_dependent_no
         end
 
-        age = params[:age].strip
-        if age !~ /\D/
-          @age = age.to_i
-          @d.age = @age
-        else
-          @age = age.in_numbers
-          @d.age = @age
-        end
+        @d.age = params[:age].strip
+        @age = @d.age
+        # if age !~ /\D/
+        #   @age = age.to_i
+        #   @d.age = @age
+        # else
+        #   @age = age.in_numbers
+        #   @d.age = @age
+        # end
 
         @snap_gross_income = params[:snap_gross_income].strip
         if @snap_gross_income !~ /\D/
@@ -75,9 +76,9 @@ class SnapEligibilitiesController < ApplicationController
           if params[:education]  == 'no'
              if  @disabled == true
                 @snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => @snap_dependent_no})
-             elsif @age <= 59
+             elsif @age == "no"
                @snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => @snap_dependent_no })
-             elsif @age > 59
+             elsif @age == "yes"
                @snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => @snap_dependent_no})
              end
              if @snap_gross_income < @snap_eligibility.snap_gross_income
@@ -85,12 +86,12 @@ class SnapEligibilitiesController < ApplicationController
                @d.snap_eligibility_status = @eligible
                #200 for seniors and elderly
                #20 for everyone else
-             elsif @age > 59 && @snap_gross_income < @snap_eligibility.snap_gross_income + 200
+             elsif @age == "yes" && (@snap_gross_income < @snap_eligibility.snap_gross_income + 200)
               @income_range = 200
               @eligible = "maybe"
               @hundred_dollar_range = true
 
-             elsif @disabled == true && @snap_gross_income < @snap_eligibility.snap_gross_income + 200
+             elsif @disabled == true && (@snap_gross_income < @snap_eligibility.snap_gross_income + 2000)
               @income_range = 200
               @eligible = "maybe"
               @hundred_dollar_range = true
@@ -111,9 +112,9 @@ class SnapEligibilitiesController < ApplicationController
               if params[:work] == 'yes'
                 if  @disabled == true
                    @snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => @snap_dependent_no})
-                elsif @age <= 59
+                elsif @age == "no"
                   @snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => @snap_dependent_no })
-                elsif @age > 59
+                elsif @age == "yes"
                   @snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => @snap_dependent_no})
                 end
                 if @snap_gross_income < @snap_eligibility.snap_gross_income
@@ -142,10 +143,10 @@ class SnapEligibilitiesController < ApplicationController
             @d.snap_eligibility_status = @eligible
           end
 
-          if @age.to_i < 18
-            @eligible = "no"
-            @d.snap_eligibility_status = @eligible
-          end
+          # if @age.to_i < 18
+          #   @eligible = "no"
+          #   @d.snap_eligibility_status = @eligible
+          # end
 
           if @snap_gross_income < 150 && params[:amount_in_account] == "yes"
             @expedited = true
@@ -199,9 +200,9 @@ class SnapEligibilitiesController < ApplicationController
 
         if @snap_data.disabled_status != "No"
            @snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => @snap_dependent_no})
-        elsif @snap_data.age <= 59
+        elsif @snap_data.age  == "no"
           @snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => @snap_dependent_no })
-        elsif @snap_data.age > 59
+        elsif @snap_data.age == "yes"
           @snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => @snap_dependent_no})
         end
       end

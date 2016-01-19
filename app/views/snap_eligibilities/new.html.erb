@@ -16,7 +16,20 @@
   <form action="/snap_eligibilities" role="form" method="post">
 
   <!-- Form for age question -->
-    <%= render "programs/age_question" %>
+    <%#= render "programs/age_question" %>
+
+    <div class="row">
+      <div class="col-md-9 col-sm-10 col-xs-12">
+        <label for="age">Does your household include a member who is age 60 or older? </label>
+        <div class="radio-button">
+          <% [ 'yes', 'no'].each do |age| %>
+            <label for="age_<%= age %>" class="checkbox-question"> <%= radio_button_tag 'age', age, @d.age == age, id: "age_#{age}" %>
+            <%= age.humanize %></label><br>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
 
   <!-- Form for household size -->
     <div class="row">
