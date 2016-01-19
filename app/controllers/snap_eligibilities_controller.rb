@@ -33,7 +33,7 @@ class SnapEligibilitiesController < ApplicationController
           @d.dependent_no = @snap_dependent_no
         end
 
-        @d.age = params[:age].strip
+        @d.age = params[:age].try(:strip)
         @age = @d.age
         # if age !~ /\D/
         #   @age = age.to_i
@@ -186,7 +186,7 @@ class SnapEligibilitiesController < ApplicationController
             end
 
 
-        if params[:citizen].present? && params[:disabled].present? && params[:education] == "no"
+        if params[:citizen].present? && params[:disabled].present? && params[:age].present?  && params[:education] == "no"
           @d.save
         elsif params[:citizen].present? && params[:disabled].present? && params[:education] == "yes" && params[:student].present? && params[:work].present?
           @d.save

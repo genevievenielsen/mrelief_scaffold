@@ -14,6 +14,7 @@
             <td><i class="fa fa-check fa-2x"></i></td>
             <td><p>Gross Monthly Income</p></td>
           <% else %>
+            <td><i class="fa fa-check fa-2x"></i></td>
             <td><p>Gross Monthly Income and Age</p></td>
           <% end %>
             <td><a href="#" class="secondary-link" data-toggle="modal" data-target="#income_explanation">Read More</a></td>
@@ -95,7 +96,7 @@
            </div>
 
 
-        <% elsif @d.age == "ye"  %>
+        <% elsif @d.age == "yes"  %>
           <div class="modal fade" id="income_explanation" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
