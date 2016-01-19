@@ -1,0 +1,22 @@
+
+<div class="container">
+	<div class="row">
+	  <div class="col-md-12 resources">
+	      <h3>Accessible at The Catholic Charities in Chicago</h3>
+	  </div>
+	</div>
+
+	<div class="row">
+	  <% chicago_programs = Program.where(:location => "catholic_charities") %>
+	  <% chicago_programs.each_with_index do |program| %>
+	
+	    <div class="col-md-4 programs">
+	      <h4><%= program.name %></h4>
+	      <p><%= program.description %></p>
+	      <a href="<%= program.url %>">Continue &rarr;</a>
+	    </div>
+	  <% end %>
+	</div>
+</div>
+
+
