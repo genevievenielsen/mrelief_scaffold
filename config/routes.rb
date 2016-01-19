@@ -42,8 +42,6 @@ Rails.application.routes.draw do
   get('/press_release/early_learning_finder', { :controller => 'pages', :action => 'early_learning_finder', as: 'early_learning_finder_press_release' })
 
 
-
-
   # all programs at once
   get("/filter", { :controller => "pages", :action => "filter" })
   get("/filtered_programs", { :controller => "pages", :action => "filtered_programs" })
@@ -117,5 +115,6 @@ Rails.application.routes.draw do
 
   resources :laf_centers
 
-
+  get "/cara", to: "organizations#cara"
+  get "/catholic_charities", to: "organizations#catholic_charities"
 end

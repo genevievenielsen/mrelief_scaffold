@@ -1,6 +1,14 @@
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: [:show, :edit, :update, :destroy]
 
+  def cara
+    redirect_to "https://build.mrelief.com/the-cara-program/the-cara-program-employment-assistance-program-1/new"
+  end
+
+  def catholic_charities
+    
+  end
+
   # GET /organizations
   # GET /organizations.json
   def index
