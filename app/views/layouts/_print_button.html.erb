@@ -65,6 +65,11 @@ var onSnapPrint = function(){
   $('.place_for_documents').empty();
   $('.place_for_documents').append("<%= escape_javascript(render "snap_eligibilities/snap_documents") %>");
 
+
+  $('.place-for-print-info').empty();
+  $('.place-for-print-info').append("<%= escape_javascript(render "layouts/print_info") %>");
+
+
   //incase the user is printing for the second time
   $('.income_explanation_row').remove();
   $('.citizenship_explanation_row').remove();
@@ -91,8 +96,12 @@ var onSnapPrint = function(){
 
 };
 
-var onPrint = function () {
-    window.print();
+var onPrint = function(){
+
+  $('.place-for-print-info').empty();
+  $('.place-for-print-info').append("<%= escape_javascript(render "layouts/print_info") %>");
+
+  window.print();
   return false;
 };
 </script>
