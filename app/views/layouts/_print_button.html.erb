@@ -48,7 +48,11 @@
 <!--     <a><%#= link_to "← Back", :back, :class => "previous pull-left", onclick: "onClick()" %></a> 
  -->  <% end %>
 
+  <% if controller_name == "snap_eligibilities" && (action_name == "create") %>
+    <a href="#" class="secondary-link pull-right" onclick="onSnapPrint();">Print this page</a>
+  <% else %>
     <a href="#" class="secondary-link pull-right" onclick="onPrint();">Print this page</a>
+ <% end %>
   </div>
 </div>
 
@@ -56,7 +60,10 @@
 
 <script type="text/javascript">
 
-var onPrint = function(){
+var onSnapPrint = function(){
+
+  $('.place_for_documents').empty();
+  $('.place_for_documents').append("<%= escape_javascript(render "snap_eligibilities/snap_documents") %>");
 
   //incase the user is printing for the second time
   $('.income_explanation_row').remove();
@@ -82,5 +89,10 @@ var onPrint = function(){
   window.print();
   return false;
 
+};
+
+var onPrint = function () {
+    window.print();
+  return false;
 };
 </script>
