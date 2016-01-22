@@ -19,7 +19,7 @@ gem 'nokogiri', '~> 1.6.3.1'
 gem 'geocoder'
 gem 'underscore-rails'
 
-gem "rack-cors", group: :development
+gem 'rack-cors', :require => 'rack/cors'
 
 gem "rest-client"
 
