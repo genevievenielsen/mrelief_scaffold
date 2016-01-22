@@ -1,7 +1,8 @@
 class Discovery::ProgramsController < ApplicationController
 
 	def index
-		@programs = Program.all
+		location = ["chicago", "illinois"]
+		@programs = Program.where(location: location)
 		render json: @programs
 	end
 
