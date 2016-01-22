@@ -925,6 +925,14 @@ p.description_es = ""
 p.location = "employment"
 p.save
 
+p = Program.new
+p.url = "https://build.mrelief.com/master-organization/safelink-wireless/new"
+p.name_en = "SafeLink Wireless"
+p.description_en = "Free Cell Phone"
+p.description_es = ""
+p.location = "general"
+p.save
+
 
 a = AutoRepairAssistance.new
 a.auto_household_size = 1
