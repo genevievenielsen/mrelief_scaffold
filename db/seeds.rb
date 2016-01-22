@@ -771,13 +771,13 @@ p.description_es = ""
 p.location = "chicago"
 p.save
 
-p = Program.new
-p.name_en =  "Auto Repair Assistance"
-p.url = "/auto_repair_assistances/new"
-p.description_en = "Financial auto assistance to remove employment barriers"
-p.description_es = ""
-p.location = "cook county"
-p.save
+# p = Program.new
+# p.name_en =  "Auto Repair Assistance"
+# p.url = "/auto_repair_assistances/new"
+# p.description_en = "Financial auto assistance to remove employment barriers"
+# p.description_es = ""
+# p.location = "cook county"
+# p.save
 
 p = Program.new
 p.name_en =  "Women, Infants and Children (WIC)"
@@ -787,29 +787,29 @@ p.description_es = ""
 p.location = "illinois"
 p.save
 
-p = Program.new
-p.name_en =  "Vision Assistance"
-p.url = "/visions/new"
-p.description_en = "Eye exams and glasses to remove employment barriers"
-p.description_es = ""
-p.location = "cook county"
-p.save
+# p = Program.new
+# p.name_en =  "Vision Assistance"
+# p.url = "/visions/new"
+# p.description_en = "Eye exams and glasses to remove employment barriers"
+# p.description_es = ""
+# p.location = "cook county"
+# p.save
 
-p = Program.new
-p.name_en = "Family Nutrition"
-p.url = "/family_nutritions/new"
-p.description_en = "Fresh Produce for Families"
-p.description_es = ""
-p.location = "cook county"
-p.save
+# p = Program.new
+# p.name_en = "Family Nutrition"
+# p.url = "/family_nutritions/new"
+# p.description_en = "Fresh Produce for Families"
+# p.description_es = ""
+# p.location = "cook county"
+# p.save
 
-p = Program.new
-p.name_en = "Dental Assistance"
-p.url = "/dentals/new"
-p.description_en = "Financial dental assistance to remove employment barriers"
-p.description_es = ""
-p.location = "cook county"
-p.save
+# p = Program.new
+# p.name_en = "Dental Assistance"
+# p.url = "/dentals/new"
+# p.description_en = "Financial dental assistance to remove employment barriers"
+# p.description_es = ""
+# p.location = "cook county"
+# p.save
 
 p = Program.new
 p.name_en = "Head Start"
@@ -827,13 +827,13 @@ p.description_es = ""
 p.location = "illinois"
 p.save
 
-p = Program.new
-p.name_en = "Housing Counseling and Referral Information"
-p.url = "/housing_assistances/new"
-p.description_en = "Counseling, household budgeting and financial assistance"
-p.description_es = ""
-p.location = "cook county"
-p.save
+# p = Program.new
+# p.name_en = "Housing Counseling and Referral Information"
+# p.url = "/housing_assistances/new"
+# p.description_en = "Counseling, household budgeting and financial assistance"
+# p.description_es = ""
+# p.location = "cook county"
+# p.save
 
 p = Program.new
 p.name_en = "All Kids"

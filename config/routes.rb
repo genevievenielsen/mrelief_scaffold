@@ -115,6 +115,10 @@ Rails.application.routes.draw do
 
   resources :laf_centers
 
+  namespace :discovery do
+    get 'programs', to: 'programs#index'
+  end
+
   get "/cara", to: "organizations#cara"
   get "/alaskasnap", to: "organizations#alaskasnap"
   get "/catholic_charities", to: "organizations#catholic_charities"
