@@ -727,50 +727,6 @@ r.rental_dependent_no = 20
 r.rental_gross_income = 28378.13
 r.save
 
-p = Program.new
-p.name_en = "Food Stamps"
-p.name_es = "Cupones de Alimentos"	
-p.url = "/snap_eligibilities/new"
-p.description_en = "Nutrition assistance to low-income people and families"
-p.description_es = "Asistencia nutricional a personas y familias de bajos ingresos"
-p.location = "chicago"
-p.save
-
-p = Program.new
-p.name_en = "RTA Ride Free"
-#p.name_es = "RTA Ride Free (Transito Gratuito)"
-p.url = "/rta_free_rides/new"
-p.description_en = "Free Transit for the Aging and Disabled"
-#p.description_es = "Transito gratuito para personas mayores y discapacitados (Aging and Disabled)"
-p.description_es = ""
-p.location = "chicago"
-p.save
-
-p = Program.new
-p.name_en = "Chicago Early Learning Finder"
-p.name_es = "Búsqueda de Programas de Educación Temprana de Chicago"
-p.url = "/early_learning_programs"
-p.description_en = "Early Childhood Programs and Child Care"
-p.description_es = "Programas de Aprendizaje Temprano y Guardería Infantil"
-p.location = "illinois"
-p.save
-
-p = Program.new
-p.name_en = "Child Care Assistance Program"
-p.url = "/child_care_vouchers/new"
-p.description_en = "Quality, affordable child care for low-income families"
-p.description_es = ""
-p.location = "illinois"
-p.save
-
-p = Program.new
-p.name_en = "Rental Assistance"
-p.url = "/rental_assistances/new"
-p.description_en = "Emergency Rental Assistance during financial hardship"
-p.description_es = ""
-p.location = "chicago"
-p.save
-
 # p = Program.new
 # p.name_en =  "Auto Repair Assistance"
 # p.url = "/auto_repair_assistances/new"
@@ -778,14 +734,6 @@ p.save
 # p.description_es = ""
 # p.location = "cook county"
 # p.save
-
-p = Program.new
-p.name_en =  "Women, Infants and Children (WIC)"
-p.url = "/wics/new"
-p.description_en = "Nutrition education, counseling, and food for families"
-p.description_es = ""
-p.location = "illinois"
-p.save
 
 # p = Program.new
 # p.name_en =  "Vision Assistance"
@@ -810,23 +758,6 @@ p.save
 # p.description_es = ""
 # p.location = "cook county"
 # p.save
-
-p = Program.new
-p.name_en = "Head Start"
-p.url = "/head_starts/new"
-p.description_en = "Promote school readiness for children ages 3-5"
-p.description_es = ""
-p.location = "illinois"
-p.save
-
-p = Program.new
-p.name_en = "Early Head Start"
-p.url = "/early_head_starts/new"
-p.description_en = "Promote school readiness for babies infants and toddlers"
-p.description_es = ""
-p.location = "illinois"
-p.save
-
 # p = Program.new
 # p.name_en = "Housing Counseling and Referral Information"
 # p.url = "/housing_assistances/new"
@@ -835,12 +766,95 @@ p.save
 # p.location = "cook county"
 # p.save
 
+
+p = Program.new
+p.name_en = "Food Stamps"
+p.name_es = "Cupones de Alimentos"	
+p.url = "/snap_eligibilities/new"
+p.description_en = "Nutrition assistance to low-income people and families"
+p.description_es = "Asistencia nutricional a personas y familias de bajos ingresos"
+p.location = "chicago"
+p.category = "Food"
+p.save
+
+p = Program.new
+p.name_en = "RTA Ride Free"
+#p.name_es = "RTA Ride Free (Transito Gratuito)"
+p.url = "/rta_free_rides/new"
+p.description_en = "Free Transit for the Aging and Disabled"
+#p.description_es = "Transito gratuito para personas mayores y discapacitados (Aging and Disabled)"
+p.description_es = ""
+p.location = "chicago"
+p.category = "Transportation"
+p.save
+
+p = Program.new
+p.name_en = "Chicago Early Learning Finder"
+p.name_es = "Búsqueda de Programas de Educación Temprana de Chicago"
+p.url = "/early_learning_programs"
+p.description_en = "Early Childhood Programs and Child Care"
+p.description_es = "Programas de Aprendizaje Temprano y Guardería Infantil"
+p.location = "illinois"
+p.category = "Child Wellness"
+p.save
+
+p = Program.new
+p.name_en = "Child Care Assistance Program"
+p.url = "/child_care_vouchers/new"
+p.description_en = "Quality, affordable child care for low-income families"
+p.description_es = ""
+p.location = "illinois"
+p.category = "Child Wellness"
+p.save
+
+p = Program.new
+p.name_en = "Rental Assistance"
+p.url = "/rental_assistances/new"
+p.description_en = "Emergency Rental Assistance during financial hardship"
+p.description_es = ""
+p.location = "chicago"
+p.category = "Housing"
+p.save
+
+
+
+p = Program.new
+p.name_en =  "Women, Infants and Children (WIC)"
+p.url = "/wics/new"
+p.description_en = "Nutrition education, counseling, and food for families"
+p.description_es = ""
+p.location = "illinois"
+p.category = "Child Wellness"
+p.save
+
+
+p = Program.new
+p.name_en = "Head Start"
+p.url = "/head_starts/new"
+p.description_en = "Promote school readiness for children ages 3-5"
+p.description_es = ""
+p.location = "illinois"
+p.category = "Child Wellness"
+p.save
+
+p = Program.new
+p.name_en = "Early Head Start"
+p.url = "/early_head_starts/new"
+p.description_en = "Promote school readiness for babies infants and toddlers"
+p.description_es = ""
+p.location = "illinois"
+p.category = "Child Wellness"
+p.save
+
+
+
 p = Program.new
 p.name_en = "All Kids"
 p.url = "/all_kids/new"
 p.description_en = "Healthcare for Kids"
 p.description_es = ""
 p.location = "chicago"
+p.category = "Health"
 p.save
 
 p = Program.new
@@ -849,6 +863,7 @@ p.name_en = "Medicaid"
 p.description_en = "Healthcare for families and individuals"
 p.description_es = ""
 p.location = "chicago"
+p.category = "Health"
 p.save
 
 p = Program.new
@@ -857,6 +872,7 @@ p.name_en = "Medicare Cost Sharing"
 p.description_en = "Medicare Assistance"
 p.description_es = ""
 p.location = "chicago"
+p.category = "Health"
 p.save
 
 p = Program.new
@@ -865,6 +881,7 @@ p.name_en = "AABD Cash Assistance"
 p.description_en = "Cash Assistance for the Elderly and Disabled"
 p.description_es = ""
 p.location = "chicago"
+p.category = "Cash"
 p.save
 
 p = Program.new
@@ -873,6 +890,7 @@ p.name_en = "All City Programs"
 p.description_en = "All Chicago Programs within mRelief"
 p.description_es = ""
 p.location = "chicago"
+p.category = "General"
 p.save
 
 p = Program.new
@@ -881,6 +899,7 @@ p.name_en = "TANF"
 p.description_en = "Cash Assistance Program"
 p.description_es = ""
 p.location = "chicago"
+p.category = "Cash"
 p.save
 
 # catholic charities
