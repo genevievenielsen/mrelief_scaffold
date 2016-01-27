@@ -20,7 +20,7 @@ class ContactController < ApplicationController
         @advertising_options, @request, @feedback).deliver
       NotificationsMailer.send_simple_message_to_rose(@contact_first_name, @contact_last_name, @contact_email,
         @advertising_options, @request, @feedback).deliver
-      redirect_to( "/", :notice => "Feedback was successfully sent. Thank you!")
+      redirect_to :back, :notice => "Feedback was successfully sent. Thank you!"
     else
       flash.now.alert = "Please fill all fields."
       render :index
