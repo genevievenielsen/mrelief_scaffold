@@ -257,9 +257,9 @@ class TwilioController < ApplicationController
       end
       if snap_gross_income < snap_eligibility.snap_gross_income
         if age <= 22
-          message = "You may be in luck! You likely qualify for foodstamps. However make sure you accounted for your parents income, if you are still living in the same household.  To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+          message = "You may be in luck! You likely qualify for foodstamps. However make sure you accounted for your parents income, if you are still living in the same household.  To access application assistance, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
         else
-          message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+          message = "You may be in luck! You likely qualify for foodstamps. To access application assistance, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
         end
         @s.snap_eligibility_status = "yes"
       else
@@ -314,9 +314,9 @@ class TwilioController < ApplicationController
       end
       if snap_gross_income < snap_eligibility.snap_gross_income
         if age <= 22
-          message = "You may be in luck! You likely qualify for foodstamps. However make sure you accounted for your parents income, if you are still living in the same household.  To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+          message = "You may be in luck! You likely qualify for foodstamps. However make sure you accounted for your parents income, if you are still living in the same household.  To access application assistance, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
         else
-          message = "You may be in luck! You likely qualify for foodstamps. To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
+          message = "You may be in luck! You likely qualify for foodstamps. To access application assistance, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}.  \n How satisfied are you with your mRelief experience on a scale of 5 (very satisfied) to 1 (very dissatisfied)?"
         end
         @s.snap_eligibility_status = "yes"
       else
