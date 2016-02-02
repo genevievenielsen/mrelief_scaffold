@@ -927,6 +927,14 @@ p.description_es = ""
 p.location = "catholic_charities"
 p.save
 
+p = Program.new
+p.url = "https://build.mrelief.com/catholic-charities-of-the-archdiocese-of-chicago/women-infants-and-children-wic/new"
+p.name_en = "Women, Infants and Children (WIC)"
+p.description_en = "Nutrition education, counseling, and food for families"
+p.description_es = ""
+p.location = "catholic_charities"
+p.save
+
 # employment assistance
 p = Program.new
 p.url = "https://build.mrelief.com/the-cara-program/the-cara-program-employment-assistance-program-1/new"
