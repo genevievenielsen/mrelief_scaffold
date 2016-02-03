@@ -50,7 +50,7 @@ class RtaFreeRidesController < ApplicationController
     if rta_gross_income.present? && rta_dependent_no.present?
       rta_eligibility = RtaFreeRide.find_by({ :rta_dependent_no => rta_dependent_no })
 
-      if params[:disabled] != 'none' || age > 65
+      if params[:disabled] != 'No' || age > 65
         if rta_gross_income < rta_eligibility.rta_gross_income
           @eligible = "yes"
           @d.rta_eligibility_status = "yes"
