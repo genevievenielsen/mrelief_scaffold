@@ -54,6 +54,7 @@ Rails.application.routes.draw do
 
   # print
   get('/snap_eligibilities/print/:id', :controller => 'snap_eligibilities', :action => 'print')
+  get('/ilsnap_spanish', :controller => 'snap_eligibilities', :action => 'set_spanish')
 
   # documents
   get("/snap_documents", { :controller => "snap_eligibilities", :action => "documents" })

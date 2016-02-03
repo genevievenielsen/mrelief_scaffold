@@ -51,7 +51,7 @@
         <li>
           <% if I18n.locale == :es %>
             <%= link_to "EN", set_language_english_path %>
-          <% elsif I18n.locale = :en %>
+          <% elsif I18n.locale == :en %>
             <%= link_to "Espanol", set_language_spanish_path %>
           <% end %>
         </li>
