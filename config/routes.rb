@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   post "early_learning_programs_results", to: "early_learning_programs#create", as: "early_learning_programs_results"
   get "early_learning_more_results/:id", to: "early_learning_programs#more_results", as: "more_results"
   get "early_learning_privacy_policy", to: "early_learning_programs#early_learning_privacy_policy"
+  get "educación_temprana", to: "early_learning_programs#set_spanish"
 
   # print
   get('/snap_eligibilities/print/:id', :controller => 'snap_eligibilities', :action => 'print')

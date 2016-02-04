@@ -1,6 +1,12 @@
   class EarlyLearningProgramsController < ApplicationController
   require 'open-uri'
-  require 'json'  
+  require 'json' 
+
+  def set_spanish
+     I18n.locale = :es
+     session[:locale] = I18n.locale
+     redirect_to early_learning_url
+   end 
 
 	def new
 		@user = EarlyLearningData.new
