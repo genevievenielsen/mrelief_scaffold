@@ -935,6 +935,14 @@ p.description_es = ""
 p.location = "catholic_charities"
 p.save
 
+p = Program.new
+p.url = "https://build.mrelief.com/catholic-charities-of-the-archdiocese-of-chicago/illinois-food-stamps-program-18/new"
+p.name_en = "Food Stamps"
+p.description_en = "Nutrition assistance to low-income people and families"
+p.description_es = ""
+p.location = "catholic_charities"
+p.save
+
 # employment assistance
 p = Program.new
 p.url = "https://build.mrelief.com/the-cara-program/the-cara-program-employment-assistance-program-1/new"
