@@ -34,7 +34,7 @@ class TwilioController < ApplicationController
       session["counter"] = 0
    end
    if params[:Body].strip.downcase == "food"
-      message = "Are you currently enrolled in a college, technical, or vacational school that requires a high school diploma or the equivalent? Enter 'yes' or 'no'"
+      message = "Are you currently enrolled in a college, technical, or vocational school that requires a high school diploma or the equivalent? Enter 'yes' or 'no'"
       session["page"] = "snap_college_question"
       session["counter"] = 1
    end
