@@ -43,5 +43,7 @@ task :phone_numbers => :environment do
 	 end
 
 
+	 puts "#{phone_numbers}"
+
 end
 
