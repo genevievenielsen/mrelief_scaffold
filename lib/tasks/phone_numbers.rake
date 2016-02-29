@@ -3,11 +3,16 @@ task :phone_numbers => :environment do
 	invalid_phone_numbers = ["+18477672332"]
 	phone_numbers = []
 
-	sms_rta = RtaFreeRideDataTwilio.where(completed: true).where.not(phone_number: invalid_phone_numbers)
+	# sms_snap = SnapEligibilityDataTwilio.where(completed: true).where.not(phone_number: invalid_phone_numbers)
+	# sms_snap.each do |snap|
+	# 	phone_number = snap.phone_number.strip
+	# 	phone_numbers.push(phone_number)
+	# end
 
+	sms_rta = RtaFreeRideDataTwilio.where(completed: true).where.not(phone_number: invalid_phone_numbers)
 	sms_rta.each do |rta|
 		phone_number = rta.phone_number.strip
-			phone_numbers.push(phone_number)
+		phone_numbers.push(phone_number)
 	end
 
 

@@ -26,9 +26,12 @@ gem "rest-client"
 gem 'figaro'
 gem 'pusher'
 
+# import gem file 
 gem 'roo'
 gem "spreadsheet"
 gem 'rails_12factor', group: :production
+
+# export gem file
 
 gem 'numbers_in_words'
 
