@@ -40,6 +40,8 @@ gem 'twilio-ruby'
 gem 'dotenv-rails'
 gem 'sinatra'
 
+gem 'area'
+
 gem 'jquery-ui-rails'
 
 gem 'starter_generators', :git => "git://github.com/rbetina/starter_generators.git", :branch => "kiei925"

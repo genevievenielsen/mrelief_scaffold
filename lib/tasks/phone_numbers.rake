@@ -36,8 +36,13 @@ task :phone_numbers => :environment do
 			phone_numbers.push(phone_number)
 	end
 
-
-	 puts "#{phone_numbers}"
+	chicago_numbers = []
+	phone_numbers.uniq.each do |number|
+		if number.tr("+1", "").first(3).to_region == "IL"
+			chicago_numbers.push(number)
+		end
+	end
+	 puts "#{chicago_phone_numbers}"
 
 end
 

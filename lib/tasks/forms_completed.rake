@@ -71,5 +71,13 @@ task :forms_completed => :environment do
   total_count = web_count + twilio_count
   puts "Total Count: #{total_count}"
 
+  # snap_count = SnapEligibilityData.where.not(phone_number: invalid_phone_numbers).where("created_at >= ?", "2016-01-04").where("created_at < ?", "2016-01-11").count
+  # snap_twilio_count = SnapEligibilityDataTwilio.where.not(phone_number: invalid_phone_numbers).where("created_at >= ?", "2016-01-04").where("created_at < ?", "2016-01-11").count
+
+
+  snap_twilio_count = SnapEligibilityDataTwilio.where(completed: true, snap_eligibility_status: "yes").where.not(phone_number: invalid_phone_numbers).where("created_at <= ?", 30.days.ago).count
+
+
 end
+
 
