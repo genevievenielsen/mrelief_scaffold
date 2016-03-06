@@ -40,9 +40,13 @@ task :phone_numbers => :environment do
 	phone_numbers.uniq.each do |number|
 		if number.tr("+1", "").first(3).to_region == "IL"
 			chicago_numbers.push(number)
+		else
+			non_chicago_numbers.push(number)
 		end
 	end
-	 puts "#{chicago_numbers}"
+	puts "NON CHICAGO NUMBERS: #{non_chicago_numbers}"
+
+	 puts "CHICAGO NUMBERS: #{chicago_numbers}"
 
 end
 
