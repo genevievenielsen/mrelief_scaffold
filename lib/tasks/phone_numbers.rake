@@ -42,7 +42,7 @@ task :phone_numbers => :environment do
 			chicago_numbers.push(number)
 		end
 	end
-	 puts "#{chicago_phone_numbers}"
+	 puts "#{chicago_numbers}"
 
 end
 
