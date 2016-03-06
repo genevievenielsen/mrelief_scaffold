@@ -39,7 +39,7 @@ task :phone_numbers => :environment do
 	chicago_numbers = []
 	non_chicago_numbers = []
 	phone_numbers.uniq.each do |number|
-		if number.tr("+1", "").first(3).to_region == "IL"
+		if number.gsub("+1", "").first(3).to_region == "IL"
 			chicago_numbers.push(number)
 		else
 			non_chicago_numbers.push(number)
