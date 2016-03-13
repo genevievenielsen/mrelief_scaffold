@@ -18,14 +18,6 @@ Rails.application.routes.draw do
   get("/twilio", { :controller => "send_text", :action => "send_text_message"})
   post('/', { :controller => 'twilio', :action => 'text'})
   post 'twilio/voice', defaults: { format: 'xml' }
-
-  # twilio spanish 
-  get("/twilio_spanish", { :controller => "send_text", :action => "send_spanish_text_message"})
-  post('/twilio_spanish', { :controller => 'twilio_spanish', :action => 'text'})
-  
-  #twilio test
-  get("/twilio_test", { :controller => "send_text", :action => "send_test_text_message"})
-  post('/twilio_test', { :controller => 'twilio_testing', :action => 'text'})
    
   #static pages 
   root to: "pages#homepage"
